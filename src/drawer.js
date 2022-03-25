@@ -11,9 +11,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
 // local icon
 import {Bell as BellIcon} from './assets/icons/bell';
 import {UserCircle as UserCircleIcon} from './assets/icons/user-circle';
@@ -93,7 +90,6 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 }));
 
 export default function MiniDrawer() {
-	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
 
 	const handleDrawerOpen = () => {
