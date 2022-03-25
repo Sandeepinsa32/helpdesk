@@ -1,29 +1,23 @@
 import * as React from 'react';
 import {styled, useTheme} from '@mui/material/styles';
+import {Avatar, Badge, Box, Divider, IconButton, Toolbar, Tooltip, Typography, CssBaseline, List, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
+
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
+
+// material icon
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
-// import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-// import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CloseIcon from '@mui/icons-material/Close';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-// import {DashboardNavbar} from './dashboard-navbar';
 
-import {Avatar, Badge, Box, IconButton, Toolbar, Tooltip} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
+// local icon
 import {Bell as BellIcon} from './assets/icons/bell';
 import {UserCircle as UserCircleIcon} from './assets/icons/user-circle';
 import {Users as UsersIcon} from './assets/icons/users';
-
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {ChartBar as ChartBarIcon} from './assets/icons/chart-bar';
 import {Cog as CogIcon} from './assets/icons/cog';
 import {Lock as LockIcon} from './assets/icons/lock';
@@ -31,9 +25,7 @@ import {Selector as SelectorIcon} from './assets/icons/selector';
 import {ShoppingBag as ShoppingBagIcon} from './assets/icons/shopping-bag';
 import {User as UserIcon} from './assets/icons/user';
 import {UserAdd as UserAddIcon} from './assets/icons/user-add';
-
 import {XCircle as XCircleIcon} from './assets/icons/x-circle';
-// import {Users as UsersIcon} from './assets/icons/users';
 
 const drawerWidth = 240;
 
@@ -117,6 +109,7 @@ export default function MiniDrawer() {
 			<CssBaseline />
 
 			{/*  custom navabar  */}
+
 			<AppBar
 				sx={{
 					// left: open ? 240 : 0,
@@ -131,6 +124,8 @@ export default function MiniDrawer() {
 						left: 0,
 						px: 2,
 					}}>
+					{/*  hamburger menu icon  */}
+
 					<IconButton
 						onClick={open ? handleDrawerClose : handleDrawerOpen}
 						sx={{
@@ -141,6 +136,7 @@ export default function MiniDrawer() {
 						{open ? <CloseIcon /> : <MenuIcon fontSize='small' />}
 						{/* <MenuIcon fontSize='small' /> */}
 					</IconButton>
+
 					{/*  search icon  */}
 					<Tooltip title='Search'>
 						<IconButton sx={{ml: 1}}>
@@ -153,13 +149,15 @@ export default function MiniDrawer() {
 					{/* <Box sx={{flexGrow: 1}} /> */}
 
 					{/* user icon  */}
-					{/* <Tooltip title='Contacts'>  
+
+					<Tooltip title='Contacts'>
 						<IconButton sx={{ml: 1}}>
 							<UsersIcon fontSize='small' />
 						</IconButton>
-					</Tooltip> */}
+					</Tooltip>
 
 					{/* notification icon  */}
+
 					<Tooltip title='Notifications'>
 						<IconButton sx={{ml: 1}}>
 							<Badge badgeContent={4} color='primary' variant='dot'>
@@ -167,6 +165,7 @@ export default function MiniDrawer() {
 							</Badge>
 						</IconButton>
 					</Tooltip>
+					<Typography color='#000'>John Doe</Typography>
 					{/* avatar/user  icon  */}
 					<Avatar
 						sx={{
@@ -181,8 +180,8 @@ export default function MiniDrawer() {
 			</AppBar>
 
 			<Drawer variant='permanent' open={open}>
-				<DrawerHeader> </DrawerHeader>
-				<List>
+				{/* <DrawerHeader> </DrawerHeader> */}
+				{/* <List>
 					<ListItemButton
 						key='Agent'
 						sx={{
@@ -208,7 +207,7 @@ export default function MiniDrawer() {
 						</ListItemIcon>
 						<ListItemText primary='John Doe' sx={{opacity: open ? 1 : 0}} />
 					</ListItemButton>
-				</List>
+				</List> */}
 				{/* <Divider /> */}
 				<List>
 					{items.map((item, index) => (
