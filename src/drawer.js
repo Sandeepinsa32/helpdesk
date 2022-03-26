@@ -255,10 +255,11 @@ export default function MiniDrawer() {
 				sx={{
 					flexGrow: 1,
 					p: 3,
-					background: 'rgb(227, 242, 253) !Important',
+					// background: 'rgb(227, 242, 253) !Important',
 					borderRadius: '2rem',
 					margin: '9vh 0.5rem 0',
-					height: '90vh',
+					minHeight: '90vh',
+					height: 'auto',
 					boxShadow: 'inset rgb(0 0 0 / 7%) 0px 0px 21px 1px',
 				}}>
 				<DrawerHeader />

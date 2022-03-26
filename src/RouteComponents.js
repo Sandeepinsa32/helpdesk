@@ -1,6 +1,9 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import MainComponent from './MainComponet';
+import Login from './views/login';
+import Member from './views/Member';
+import {Account} from './views/Account';
 import {Typography} from '@mui/material';
 export default function RouteComponents() {
 	return (
@@ -8,12 +11,12 @@ export default function RouteComponents() {
 			<Routes>
 				<Route path='/' element={<h1>dashboard navlink</h1>}></Route>
 				<Route path='/home' element={<h1>home</h1>}></Route>
-				<Route path='/customers' element={<h1>customers</h1>}></Route>
+				<Route path='/customers' element={<Member />}></Route>
 				<Route path='/products' element={<h1>products</h1>}></Route>
-				<Route path='/account' element={<h1>account</h1>}></Route>
+				<Route path='/account' element={<Account />}></Route>
 				<Route path='/setting' element={<h1>setting</h1>}></Route>
-				<Route path='/login' element={<h1>login</h1>}></Route>
-				<Route path='/register' element={<h1>register</h1>}></Route>
+				<Route path='/login' element={<Login />}></Route>
+				<Route path='/register' element={<Login />}></Route>
 				<Route path='/404' element={<TypoText />}></Route>
 			</Routes>
 		</>
