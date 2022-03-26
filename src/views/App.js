@@ -1,4 +1,4 @@
-import RootNode from './views/RootNode';
+import RootNode from './RootNode';
 import {StyledEngineProvider} from '@mui/material/styles';
 import {BrowserRouter as Router} from 'react-router-dom';
 

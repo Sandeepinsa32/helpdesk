@@ -1,6 +1,6 @@
 import {react, useState} from 'react';
 import {NavLink} from 'react-router-dom';
-import RouteComponent from './routes/index';
+import RouteComponent from '../routes/index';
 
 //  Material UI
 import {styled, useTheme} from '@mui/material/styles';
@@ -15,17 +15,17 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 
 // local icon
-import {Bell as BellIcon} from './assets/icons/bell';
-import {UserCircle as UserCircleIcon} from './assets/icons/user-circle';
-import {Users as UsersIcon} from './assets/icons/users';
-import {ChartBar as ChartBarIcon} from './assets/icons/chart-bar';
-import {Cog as CogIcon} from './assets/icons/cog';
-import {Lock as LockIcon} from './assets/icons/lock';
-import {Selector as SelectorIcon} from './assets/icons/selector';
-import {ShoppingBag as ShoppingBagIcon} from './assets/icons/shopping-bag';
-import {User as UserIcon} from './assets/icons/user';
-import {UserAdd as UserAddIcon} from './assets/icons/user-add';
-import {XCircle as XCircleIcon} from './assets/icons/x-circle';
+import {Bell as BellIcon} from '../assets/icons/bell';
+import {UserCircle as UserCircleIcon} from '../assets/icons/user-circle';
+import {Users as UsersIcon} from '../assets/icons/users';
+import {ChartBar as ChartBarIcon} from '../assets/icons/chart-bar';
+import {Cog as CogIcon} from '../assets/icons/cog';
+import {Lock as LockIcon} from '../assets/icons/lock';
+import {Selector as SelectorIcon} from '../assets/icons/selector';
+import {ShoppingBag as ShoppingBagIcon} from '../assets/icons/shopping-bag';
+import {User as UserIcon} from '../assets/icons/user';
+import {UserAdd as UserAddIcon} from '../assets/icons/user-add';
+import {XCircle as XCircleIcon} from '../assets/icons/x-circle';
 
 const drawerWidth = 240;
 
