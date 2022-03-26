@@ -215,21 +215,18 @@ export default function MiniDrawer() {
 								return {
 									display: 'block',
 									margin: '1rem 0',
-
 									minHeight: 48,
 									justifyContent: open ? 'initial' : 'center',
 									px: 2.5,
 									color: isActive ? '#000' : '',
 									background: isActive ? ' rgb(227, 242, 253)' : '',
 									borderRadius: '5px',
+									textDecoration: 'none !important',
+									color: `unset !important`,
 								};
 							}}
-							to={item.href}
-							sx={{
-								minHeight: 48,
-								justifyContent: open ? 'initial' : 'center',
-								px: 2.5,
-							}}>
+							className='navlink-decoration'
+							to={item.href}>
 							<ListItemButton
 								key={item.title}
 								sx={{
@@ -253,7 +250,17 @@ export default function MiniDrawer() {
 			</Drawer>
 
 			{/* MAIN - child conotain */}
-			<Box component='main' sx={{flexGrow: 1, p: 3, background: 'rgb(227, 242, 253) !Important', borderRadius: '2rem', mt: '9vh', height: '90vh'}}>
+			<Box
+				component='main'
+				sx={{
+					flexGrow: 1,
+					p: 3,
+					background: 'rgb(227, 242, 253) !Important',
+					borderRadius: '2rem',
+					margin: '9vh 0.5rem 0',
+					height: '90vh',
+					boxShadow: 'inset rgb(0 0 0 / 7%) 0px 0px 21px 1px',
+				}}>
 				<DrawerHeader />
 
 				<RouteComponents />
