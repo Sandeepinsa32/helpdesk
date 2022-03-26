@@ -1,13 +1,8 @@
 //  NavBar dashboard -- sidebar
-
-import {useEffect} from 'react';
-import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-// import NextLink from 'next/link';
-import PropTypes from 'prop-types';
-import {Box, Button, Avatar, Divider, Drawer, Typography, useMediaQuery} from '@mui/material';
+import {Box, Avatar, Divider, Drawer, Typography} from '@mui/material';
 import {styled, useTheme} from '@mui/material/styles';
 import {UserCircle as UserCircleIcon} from './assets/icons/user-circle';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+// import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {ChartBar as ChartBarIcon} from './assets/icons/chart-bar';
 import {Cog as CogIcon} from './assets/icons/cog';
 import {Lock as LockIcon} from './assets/icons/lock';
@@ -34,29 +29,8 @@ const items = [
 	},
 ];
 
-export const DashboardSidebar = (props) => {
+export const DashboardSidebar = () => {
 	const theme = useTheme();
-	const {open, onClose} = props;
-
-	// const router = Router();
-	// const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
-	// 	defaultMatches: true,
-	// 	noSsr: false,
-	// });
-
-	// useEffect(
-	// 	() => {
-	// 		if (!router.isReady) {
-	// 			return;
-	// 		}
-
-	// 		if (open) {
-	// 			onClose?.();
-	// 		}
-	// 	},
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// 	[router.asPath]
-	// );
 
 	if (theme.breakpoints.up('lg')) {
 		return (
@@ -79,9 +53,8 @@ export const DashboardSidebar = (props) => {
 	return (
 		<Drawer
 			anchor='left'
-			onClose={onClose}
+			// onClose={console.log('close')}
 			open
-			// open={open}
 			PaperProps={{
 				sx: {
 					backgroundColor: 'neutral.900',

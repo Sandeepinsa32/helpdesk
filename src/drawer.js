@@ -1,6 +1,6 @@
-import * as React from 'react';
-import {Routes, Route, NavLink} from 'react-router-dom';
-import RouteComponents from './RouteComponents';
+import {react, useState} from 'react';
+import {NavLink} from 'react-router-dom';
+import RouteComponent from './routes/index';
 
 //  Material UI
 import {styled, useTheme} from '@mui/material/styles';
@@ -93,7 +93,7 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 }));
 
 export default function MiniDrawer() {
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -264,7 +264,7 @@ export default function MiniDrawer() {
 				}}>
 				<DrawerHeader />
 
-				<RouteComponents />
+				<RouteComponent />
 			</Box>
 		</Box>
 	);

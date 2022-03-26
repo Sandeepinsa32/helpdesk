@@ -1,17 +1,13 @@
-import MainComponent from './MainComponet';
-import Login from './views/login';
-import {Account} from './views/Account';
+import RootNode from './views/RootNode';
 import {StyledEngineProvider} from '@mui/material/styles';
-import RouteComponents from './RouteComponents';
+import {BrowserRouter as Router} from 'react-router-dom';
 
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 function App() {
 	return (
 		<>
 			<StyledEngineProvider>
 				<Router>
-					<MainComponent />
-					{/* <Account /> */}
+					<RootNode />
 				</Router>
 			</StyledEngineProvider>
 		</>
