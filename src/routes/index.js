@@ -3,7 +3,7 @@ import {Routes, Route} from 'react-router-dom';
 import {Typography} from '@mui/material';
 
 // importing components
-import Login from '../views/login';
+import Login from '../views/Login';
 import Member from '../views/Member';
 import {Account} from '../views/Account';
 
