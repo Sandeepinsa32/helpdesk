@@ -1,11 +1,12 @@
 import {react, useState} from 'react';
+import {Detail} from './components/account/Details';
 import {NavLink} from 'react-router-dom';
 
 import RouteComponent from '../routes/index';
 
 //  Material UI
 import {styled, useTheme} from '@mui/material/styles';
-import {Avatar, Badge, Box, Divider, IconButton, Toolbar, Tooltip, Typography, CssBaseline, List, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
+import {Avatar, Badge, Box, Divider, IconButton, Toolbar, Tooltip, Typography, CssBaseline, List, Modal, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 
@@ -95,6 +96,12 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 
 export default function MiniDrawer() {
 	const [open, setOpen] = useState(false);
+	const [modalopen, setModalopen] = useState(false);
+
+	const handleModalOpen = () => {
+		setModalopen(true);
+	};
+	const handleModalClose = () => setModalopen(false);
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -167,19 +174,30 @@ export default function MiniDrawer() {
 						</IconButton>
 					</Tooltip>
 					<Typography color='#000'>John Doe</Typography>
+
 					{/* avatar/user  icon  */}
-					<Avatar
-						sx={{
-							height: 40,
-							width: 40,
-							ml: 1,
-						}}
-						src='/static/images/avatars/avatar_1.png'>
-						<UserCircleIcon fontSize='small' />
-					</Avatar>
+
+					<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
+						<Avatar
+							sx={{
+								height: 40,
+								width: 40,
+								ml: 1,
+							}}
+							src='/static/images/avatars/avatar_1.png'>
+							<UserCircleIcon fontSize='small' />
+						</Avatar>
+					</IconButton>
 				</Toolbar>
 			</AppBar>
-
+			<Modal open={modalopen} onClose={handleModalClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box sx={style}>
+					<IconButton onClick={handleModalClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<Detail />
+				</Box>
+			</Modal>
 			<Drawer variant='permanent' open={open}>
 				<DrawerHeader> </DrawerHeader>
 				{/* <List>
@@ -213,6 +231,7 @@ export default function MiniDrawer() {
 				<List>
 					{items.map((item, index) => (
 						<NavLink
+							key={item.title}
 							style={({isActive}) => {
 								return {
 									display: 'block',
@@ -314,3 +333,17 @@ const items = [
 		title: 'Error',
 	},
 ];
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	minWidth: '40vw',
+	minHeight: '50vh',
+	bgcolor: 'background.paper',
+	// border: '2px solid #000',
+	boxShadow: 24,
+	borderRadius: '1rem',
+	p: 4,
+};

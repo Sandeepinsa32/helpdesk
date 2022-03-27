@@ -35,7 +35,10 @@ export const Detail = () => {
 
 	return (
 		<form autoComplete='off' noValidate>
-			<Card>
+			<Card
+				sx={{
+					boxShadow: 'none',
+				}}>
 				<CardHeader subheader='The information can be edited' title='Profile' />
 				<Divider />
 				<CardContent>
