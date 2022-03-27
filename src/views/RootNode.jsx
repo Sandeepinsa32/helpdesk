@@ -138,11 +138,12 @@ export default function MiniDrawer() {
 					</IconButton>
 
 					{/*  search icon  */}
-					<Tooltip title='Search'>
+
+					{/* <Tooltip title='Search'>
 						<IconButton sx={{ml: 1}}>
 							<SearchIcon fontSize='small' />
 						</IconButton>
-					</Tooltip>
+					</Tooltip> */}
 
 					<Box sx={{flexGrow: 1}} />
 
@@ -256,7 +257,7 @@ export default function MiniDrawer() {
 				sx={{
 					flexGrow: 1,
 					p: 3,
-					// background: 'rgb(227, 242, 253) !Important',
+					background: 'rgb(227, 242, 253) !Important',
 					borderRadius: '2rem',
 					margin: '9vh 0.5rem 0',
 					minHeight: '90vh',
