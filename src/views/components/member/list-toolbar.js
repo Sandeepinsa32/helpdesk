@@ -62,7 +62,7 @@ export const ListToolbar = (props) => {
 					*/}
 					{props.btn == 'show' ? (
 						<Button color='primary' onClick={handleOpen} variant='contained'>
-							Add Customers
+							{props.btnTitle}
 						</Button>
 					) : null}
 				</Box>
