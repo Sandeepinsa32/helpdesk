@@ -1,6 +1,6 @@
 import {react, useState} from 'react';
 import {Detail} from './components/account/Details';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useNavigate} from 'react-router-dom';
 
 import RouteComponent from '../routes/index';
 
@@ -15,6 +15,8 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 // local icon
 import {Bell as BellIcon} from '../assets/icons/bell';
@@ -95,21 +97,24 @@ const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== 'open'})
 }));
 
 export default function MiniDrawer() {
+	const navigate = useNavigate();
+	const goToCustomer = () => {
+		navigate('/customers');
+	};
 	const [open, setOpen] = useState(false);
 	const [modalopen, setModalopen] = useState(false);
+	const [modalNotiopen, setModalNotiopen] = useState(false);
 
-	const handleModalOpen = () => {
-		setModalopen(true);
-	};
+	const handleNotiModalOpen = () => setModalNotiopen(true);
+
+	const handleNotiModalClose = () => setModalNotiopen(false);
+
+	const handleModalOpen = () => setModalopen(true);
 	const handleModalClose = () => setModalopen(false);
 
-	const handleDrawerOpen = () => {
-		setOpen(true);
-	};
+	const handleDrawerOpen = () => setOpen(true);
 
-	const handleDrawerClose = () => {
-		setOpen(false);
-	};
+	const handleDrawerClose = () => setOpen(false);
 
 	return (
 		<Box sx={{display: 'flex'}}>
@@ -132,7 +137,6 @@ export default function MiniDrawer() {
 						px: 2,
 					}}>
 					{/*  hamburger menu icon  */}
-
 					<IconButton
 						onClick={open ? handleDrawerClose : handleDrawerOpen}
 						sx={{
@@ -143,30 +147,22 @@ export default function MiniDrawer() {
 						{open ? <CloseIcon /> : <MenuIcon fontSize='small' />}
 						{/* <MenuIcon fontSize='small' /> */}
 					</IconButton>
-
 					{/*  search icon  */}
-
 					{/* <Tooltip title='Search'>
 						<IconButton sx={{ml: 1}}>
 							<SearchIcon fontSize='small' />
 						</IconButton>
 					</Tooltip> */}
-
 					<Box sx={{flexGrow: 1}} />
-
 					{/* <Box sx={{flexGrow: 1}} /> */}
-
 					{/* user icon  */}
-
-					<Tooltip title='Contacts'>
+					<Tooltip title='Contacts' onClick={goToCustomer}>
 						<IconButton sx={{ml: 1}}>
 							<UsersIcon fontSize='small' />
 						</IconButton>
 					</Tooltip>
-
 					{/* notification icon  */}
-
-					<Tooltip title='Notifications'>
+					<Tooltip title='Notifications' onClick={handleNotiModalOpen}>
 						<IconButton sx={{ml: 1}}>
 							<Badge badgeContent={4} color='primary' variant='dot'>
 								<BellIcon fontSize='small' />
@@ -174,9 +170,7 @@ export default function MiniDrawer() {
 						</IconButton>
 					</Tooltip>
 					<Typography color='#000'>John Doe</Typography>
-
 					{/* avatar/user  icon  */}
-
 					<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
 						<Avatar
 							sx={{
@@ -190,6 +184,7 @@ export default function MiniDrawer() {
 					</IconButton>
 				</Toolbar>
 			</AppBar>
+			{/* Account Details */}
 			<Modal open={modalopen} onClose={handleModalClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style}>
 					<IconButton onClick={handleModalClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
@@ -198,6 +193,17 @@ export default function MiniDrawer() {
 					<Detail />
 				</Box>
 			</Modal>
+
+			{/* notification pannel */}
+			<Modal open={modalNotiopen} onClose={handleNotiModalClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box sx={style}>
+					<IconButton onClick={handleNotiModalClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<h1>Notifications Pannel</h1>
+				</Box>
+			</Modal>
+
 			<Drawer variant='permanent' open={open}>
 				<DrawerHeader> </DrawerHeader>
 				{/* <List>
@@ -297,41 +303,47 @@ const items = [
 		icon: <ChartBarIcon fontSize='small' />,
 		title: 'Dashboard',
 	},
+
 	{
-		href: '/customers',
-		icon: <UsersIcon fontSize='small' />,
-		title: 'Customers',
+		href: '/Transaction',
+		icon: <ReceiptIcon fontSize='small' />,
+		title: 'Transaction',
 	},
 	{
-		href: '/products',
-		icon: <ShoppingBagIcon fontSize='small' />,
-		title: 'Products',
+		href: '/find-records',
+		icon: <SearchIcon fontSize='small' />,
+		title: 'Records',
 	},
+	// {
+	// 	href: '/account',
+	// 	icon: <UserIcon fontSize='small' />,
+	// 	title: 'Account',
+	// },
+	// {
+	// 	href: '/settings',
+	// 	icon: <CogIcon fontSize='small' />,
+	// 	title: 'Settings',
+	// },
+	// {
+	// 	href: '/login',
+	// 	icon: <LockIcon fontSize='small' />,
+	// 	title: 'Login',
+	// },
 	{
-		href: '/account',
-		icon: <UserIcon fontSize='small' />,
-		title: 'Account',
+		href: '/logout',
+		icon: <LogoutIcon fontSize='small' />,
+		title: 'Log Out',
 	},
-	{
-		href: '/settings',
-		icon: <CogIcon fontSize='small' />,
-		title: 'Settings',
-	},
-	{
-		href: '/login',
-		icon: <LockIcon fontSize='small' />,
-		title: 'Login',
-	},
-	{
-		href: '/register',
-		icon: <UserAddIcon fontSize='small' />,
-		title: 'Register',
-	},
-	{
-		href: '/404',
-		icon: <XCircleIcon fontSize='small' />,
-		title: 'Error',
-	},
+	// {
+	// 	href: '/register',
+	// 	icon: <UserAddIcon fontSize='small' />,
+	// 	title: 'Register',
+	// },
+	// {
+	// 	href: '/404',
+	// 	icon: <XCircleIcon fontSize='small' />,
+	// 	title: 'Error',
+	// },
 ];
 
 const style = {

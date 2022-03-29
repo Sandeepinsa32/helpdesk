@@ -5,6 +5,7 @@ import {Typography} from '@mui/material';
 // importing components
 import Login from '../views/Login';
 import Member from '../views/Member';
+import SearchRecord from '../views/SearchRecords';
 import {Account} from '../views/Account';
 
 export default function RouteComponent() {
@@ -19,6 +20,7 @@ export default function RouteComponent() {
 			<Route path='/login' element={<Login />}></Route>
 			<Route path='/register' element={<Login />}></Route>
 			<Route path='/404' element={<TypoText />}></Route>
+			<Route path='/find-records' element={<SearchRecord />}></Route>
 		</Routes>
 	);
 }

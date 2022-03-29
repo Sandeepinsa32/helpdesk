@@ -40,7 +40,7 @@ export const ListToolbar = (props) => {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 	return (
-		<Box {...props}>
+		<Box>
 			<Box
 				sx={{
 					alignItems: 'center',
@@ -50,7 +50,7 @@ export const ListToolbar = (props) => {
 					m: -1,
 				}}>
 				<Typography sx={{m: 1}} variant='h4'>
-					Members
+					{props.title}
 				</Typography>
 				<Box sx={{m: 1}}>
 					{/* <Button startIcon={<UploadIcon fontSize='small' />} sx={{mr: 1}}>
@@ -60,9 +60,11 @@ export const ListToolbar = (props) => {
 									Export
 								</Button> 
 					*/}
-					<Button color='primary' onClick={handleOpen} variant='contained'>
-						Add Customers
-					</Button>
+					{props.btn == 'show' ? (
+						<Button color='primary' onClick={handleOpen} variant='contained'>
+							Add Customers
+						</Button>
+					) : null}
 				</Box>
 			</Box>
 			<Box sx={{mt: 3}}>
