@@ -56,12 +56,12 @@ export const ListResult = () => {
 						<TableHead>
 							<TableRow>
 								<TableCell padding='checkbox'>
-									<Checkbox
+									{/* <Checkbox
 										checked={selectedCustomerIds.length === customers.length}
 										color='primary'
 										indeterminate={selectedCustomerIds.length > 0 && selectedCustomerIds.length < customers.length}
 										onChange={handleSelectAll}
-									/>
+									/> */}
 								</TableCell>
 								<TableCell>Name</TableCell>
 								<TableCell>Email</TableCell>
@@ -82,9 +82,9 @@ export const ListResult = () => {
 												alignItems: 'center',
 												display: 'flex',
 											}}>
-											<Avatar src={customer.avatarUrl} sx={{mr: 2}}>
-												{/* {getInitials(customer.name)} */}
-											</Avatar>
+											{/* <Avatar src={customer.avatarUrl} sx={{mr: 2}}>
+												{getInitials(customer.name)}
+											</Avatar> */}
 											<Typography color='textPrimary' variant='body1'>
 												{customer.name}
 											</Typography>

@@ -9,11 +9,12 @@ import SearchRecord from '../views/SearchRecords';
 import {Account} from '../views/Account';
 import {Transaction} from '../views/Transaction';
 import Login from '../views/Login';
+import Checkout from '../views/Checkout';
 
 export default function RouteComponent() {
 	return (
 		<Routes>
-			<Route path='/' element={<h1>Sandee's </h1>}></Route>
+			<Route path='/' element={<Checkout />}></Route>
 			<Route path='/home' element={<h1>home</h1>}></Route>
 			<Route path='/customers' element={<Member />}></Route>
 			<Route path='/products' element={<h1>products</h1>}></Route>

@@ -289,7 +289,7 @@ export default function MiniDrawer() {
 					height: 'auto',
 					boxShadow: 'inset rgb(0 0 0 / 7%) 0px 0px 21px 1px',
 				}}>
-				<DrawerHeader />
+				{/* <DrawerHeader /> */}
 
 				<RouteComponent />
 			</Box>
