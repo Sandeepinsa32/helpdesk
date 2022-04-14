@@ -80,11 +80,9 @@ export default function Checkout() {
 						{activeStep === steps.length ? (
 							<React.Fragment>
 								<Typography variant='h5' gutterBottom>
-									Thank you for your order.
+									Thank you for your Time .
 								</Typography>
-								<Typography variant='subtitle1'>
-									Your order number is #2001539. We have emailed your order confirmation, and will send you an update when your order has shipped.
-								</Typography>
+								<Typography variant='subtitle1'>Your Record number is John-001000.</Typography>
 							</React.Fragment>
 						) : (
 							<React.Fragment>
@@ -97,7 +95,7 @@ export default function Checkout() {
 									)}
 
 									<Button variant='contained' onClick={handleNext} sx={{mt: 3, ml: 1}}>
-										{activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+										{activeStep === steps.length - 1 ? 'Confirm' : 'Next'}
 									</Button>
 								</Box>
 							</React.Fragment>

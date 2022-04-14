@@ -2,11 +2,11 @@ import {Avatar, Box, Button, Card, CardActions, CardContent, Divider, Typography
 
 const user = {
 	avatar: '/static/images/avatars/avatar_6.png',
-	city: 'Los Angeles',
-	country: 'USA',
+	city: 'BLR',
+	country: 'IND',
 	jobTitle: 'Senior Developer',
-	name: 'Katarina Smith',
-	timezone: 'GTM-7',
+	name: 'John Doe',
+	timezone: 'GTM+5:30',
 };
 
 export const Profile = () => (

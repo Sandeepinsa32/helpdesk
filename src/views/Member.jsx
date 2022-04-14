@@ -13,7 +13,7 @@ export const Member = () => (
 				pt: 2,
 			}}>
 			<Container maxWidth={false}>
-				<ListToolbar title='Members' btn='show' />
+				<ListToolbar title='Members' btn='show' btnTitle='add new customer' />
 				<Box sx={{mt: 3}}>
 					<ListResult />
 				</Box>

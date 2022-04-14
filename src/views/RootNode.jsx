@@ -162,13 +162,15 @@ export default function MiniDrawer() {
 						</IconButton>
 					</Tooltip>
 					{/* notification icon  */}
-					<Tooltip title='Notifications' onClick={handleNotiModalOpen}>
+
+					{/* <Tooltip title='Notifications' onClick={handleNotiModalOpen}>
 						<IconButton sx={{ml: 1}}>
 							<Badge badgeContent={4} color='primary' variant='dot'>
 								<BellIcon fontSize='small' />
 							</Badge>
 						</IconButton>
-					</Tooltip>
+					</Tooltip> */}
+
 					<Typography color='#000'>John Doe</Typography>
 					{/* avatar/user  icon  */}
 					<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
@@ -195,14 +197,14 @@ export default function MiniDrawer() {
 			</Modal>
 
 			{/* notification pannel */}
-			<Modal open={modalNotiopen} onClose={handleNotiModalClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+			{/* <Modal open={modalNotiopen} onClose={handleNotiModalClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style}>
 					<IconButton onClick={handleNotiModalClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
 					<h1>Notifications Pannel</h1>
 				</Box>
-			</Modal>
+			</Modal> */}
 
 			<Drawer variant='permanent' open={open}>
 				<DrawerHeader> </DrawerHeader>

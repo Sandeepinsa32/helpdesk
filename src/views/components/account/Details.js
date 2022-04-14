@@ -3,8 +3,8 @@ import {Box, Button, Card, CardContent, CardHeader, Divider, Grid, TextField} fr
 
 const states = [
 	{
-		value: 'alabama',
-		label: 'Alabama',
+		value: 'PB',
+		label: 'Punjab',
 	},
 	{
 		value: 'new-york',
@@ -18,12 +18,12 @@ const states = [
 
 export const Detail = () => {
 	const [values, setValues] = useState({
-		firstName: 'Katarina',
-		lastName: 'Smith',
-		email: 'demo@devias.io',
-		phone: '',
-		state: 'Alabama',
-		country: 'USA',
+		firstName: 'John',
+		lastName: 'Deo',
+		email: 'John@deo.test',
+		phone: '+1 8427175003',
+		state: 'PB',
+		country: 'IND',
 	});
 
 	const handleChange = (event) => {

@@ -7,26 +7,17 @@ import Grid from '@mui/material/Grid';
 
 const products = [
 	{
-		name: 'Product 1',
-		desc: 'A nice thing',
-		price: '$9.99',
+		name: 'John doe',
+		desc: '8427175003',
 	},
 	{
-		name: 'Product 2',
-		desc: 'Another thing',
-		price: '$3.45',
+		name: 'Airline Code',
+		desc: 'PNR No.',
 	},
 	{
-		name: 'Product 3',
-		desc: 'Something else',
-		price: '$6.51',
+		name: 'Booking Type',
+		desc: 'Number of Passenger',
 	},
-	{
-		name: 'Product 4',
-		desc: 'Best thing of all',
-		price: '$14.11',
-	},
-	{name: 'Shipping', desc: '', price: 'Free'},
 ];
 
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
@@ -41,16 +32,28 @@ export default function Review() {
 	return (
 		<React.Fragment>
 			<Typography variant='h6' gutterBottom>
-				Order summary
+				Preview
 			</Typography>
+
+			{/*  product Price details */}
+
 			<List disablePadding>
 				{products.map((product) => (
 					<ListItem key={product.name} sx={{py: 1, px: 0}}>
-						<ListItemText primary={product.name} secondary={product.desc} />
-						<Typography variant='body2'>{product.price}</Typography>
+						<ListItemText
+							primary={product.name}
+							// secondary={product.desc}
+						/>
+						<Typography variant='body2'>{product.desc}</Typography>
 					</ListItem>
 				))}
 
+				<ListItem sx={{py: 1, px: 0}}>
+					<ListItemText primary='PerPax' />
+					<Typography variant='subtitle1' sx={{fontWeight: 700}}>
+						$4.06
+					</Typography>
+				</ListItem>
 				<ListItem sx={{py: 1, px: 0}}>
 					<ListItemText primary='Total' />
 					<Typography variant='subtitle1' sx={{fontWeight: 700}}>
@@ -58,14 +61,16 @@ export default function Review() {
 					</Typography>
 				</ListItem>
 			</List>
+
 			<Grid container spacing={2}>
-				<Grid item xs={12} sm={6}>
+				{/* <Grid item xs={12} sm={6}>
 					<Typography variant='h6' gutterBottom sx={{mt: 2}}>
 						Shipping
 					</Typography>
 					<Typography gutterBottom>John Smith</Typography>
 					<Typography gutterBottom>{addresses.join(', ')}</Typography>
-				</Grid>
+				</Grid> */}
+
 				<Grid item container direction='column' xs={12} sm={6}>
 					<Typography variant='h6' gutterBottom sx={{mt: 2}}>
 						Payment details

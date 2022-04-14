@@ -14,7 +14,8 @@ import Checkout from '../views/Checkout';
 export default function RouteComponent() {
 	return (
 		<Routes>
-			<Route path='/' element={<Checkout />}></Route>
+			{/* <Route path='/' element={<Checkout />}></Route> */}
+			<Route path='/' element={<h1>Welcome </h1>}></Route>
 			<Route path='/home' element={<h1>home</h1>}></Route>
 			<Route path='/customers' element={<Member />}></Route>
 			<Route path='/products' element={<h1>products</h1>}></Route>
