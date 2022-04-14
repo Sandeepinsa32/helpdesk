@@ -284,7 +284,8 @@ export default function MiniDrawer() {
 				sx={{
 					flexGrow: 1,
 					p: 3,
-					background: 'rgb(227, 242, 253) !Important',
+					// background: 'rgb(227, 242, 253) !Important',
+					background: 'rgba(0, 0, 0, 0.04) !Important',
 					borderRadius: '2rem',
 					margin: '9vh 0.5rem 0',
 					minHeight: '90vh',
