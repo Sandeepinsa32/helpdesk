@@ -313,9 +313,9 @@ const items = [
 		title: 'Transaction',
 	},
 	{
-		href: '/find-records',
+		href: '/Search',
 		icon: <SearchIcon fontSize='small' />,
-		title: 'Records',
+		title: 'Search',
 	},
 	// {
 	// 	href: '/account',

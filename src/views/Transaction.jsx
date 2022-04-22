@@ -4,7 +4,8 @@ import {ListToolbar} from './components/member/list-toolbar';
 import Checkout from './Checkout';
 
 //@material-ui
-import {Box, Container, Button, Card, CardContent, TextField, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+
+import {Box, Button, Card, Container, CardContent, TextField, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
@@ -71,7 +72,7 @@ export const Transaction = () => {
 					</Box>
 
 					<Box sx={{mt: 3}}>
-						<ListResult />
+						<ListResult rowFields={Row} ResultData={ResultData} />
 					</Box>
 				</Container>
 			</Box>
@@ -102,3 +103,10 @@ const style = {
 	borderRadius: '1rem',
 	p: 4,
 };
+
+const Row = ['Email', 'Date', 'Agent Name', 'Booking ID', 'CCH Name', 'Phone', 'Total G.P', 'Airline	No.of PAX', 'Fare Type', 'Dep Date', 'Return Date'];
+
+const ResultData = [
+	// [20655, 'john Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
+	['JaneDoe@Customer.co', '22/04/2022', 'john Doe', 1555016400000, 'jane Doe', 1555016400000, 550, 9, 'private', '22/04/2022', '22/04/2022'],
+];

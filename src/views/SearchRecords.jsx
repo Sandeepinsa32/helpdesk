@@ -14,12 +14,19 @@ export default function SearchRecord() {
 					pt: 2,
 				}}>
 				<Container maxWidth={false}>
-					<ListToolbar title='Search Records' />
+					<ListToolbar />
 					<Box sx={{mt: 3}}>
-						<ListResult />
+						<ListResult rowFields={Row} ResultData={ResultData} />
 					</Box>
 				</Container>
 			</Box>
 		</>
 	);
 }
+
+const Row = ['Email', 'Date', 'Agent Name', 'Booking ID', 'CCH Name', 'Phone', 'Total G.P', 'Airline	No.of PAX', 'Fare Type', 'Dep Date', 'Return Date'];
+
+const ResultData = [
+	// [20655, 'john Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
+	['JaneDoe@Customer.co', '22/04/2022', 'john Doe', 1555016400000, 'jane Doe', 1555016400000, 550, 9, 'private', '22/04/2022', '22/04/2022'],
+];

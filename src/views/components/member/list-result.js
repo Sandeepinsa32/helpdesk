@@ -6,7 +6,7 @@ import {Avatar, Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, Tab
 // import {getInitials} from '../../utils/get-initials';
 import {v4 as uuid} from 'uuid';
 
-export const ListResult = () => {
+export const ListResult = (props) => {
 	const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
 	const [limit, setLimit] = useState(10);
 	const [page, setPage] = useState(0);
@@ -63,37 +63,35 @@ export const ListResult = () => {
 										onChange={handleSelectAll}
 									/> */}
 								</TableCell>
-								<TableCell>Name</TableCell>
-								<TableCell>Email</TableCell>
-								<TableCell>Location</TableCell>
-								<TableCell>Phone</TableCell>
-								<TableCell>Registration date</TableCell>
+								{props.rowFields.map((fieldName) => (
+									<TableCell>{fieldName}</TableCell>
+								))}
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{customers.slice(0, limit).map((customer) => (
-								<TableRow hover key={customer.id} selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
+							{props.ResultData.map((customer) => (
+								<TableRow hover key='x' selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
 									<TableCell padding='checkbox'>
 										<Checkbox checked={selectedCustomerIds.indexOf(customer.id) !== -1} onChange={(event) => handleSelectOne(event, customer.id)} value='true' />
 									</TableCell>
-									<TableCell>
+									{customer.map((details) => (
+										<TableCell>{details}</TableCell>
+									))}
+									{/* <TableCell>
 										<Box
 											sx={{
 												alignItems: 'center',
 												display: 'flex',
 											}}>
-											{/* <Avatar src={customer.avatarUrl} sx={{mr: 2}}>
-												{getInitials(customer.name)}
-											</Avatar> */}
 											<Typography color='textPrimary' variant='body1'>
-												{customer.name}
+												{customer.id}
 											</Typography>
 										</Box>
 									</TableCell>
+									<TableCell>{customer.name}</TableCell>
 									<TableCell>{customer.email}</TableCell>
-									<TableCell>{`${customer.address.city}, ${customer.address.state}, ${customer.address.country}`}</TableCell>
-									<TableCell>{customer.phone}</TableCell>
-									<TableCell>{format(customer.createdAt, 'dd/MM/yyyy')}</TableCell>
+									<TableCell>{customer.alias}</TableCell>
+									<TableCell>{format(customer.createdAt, 'dd/MM/yyyy')}</TableCell> */}
 								</TableRow>
 							))}
 						</TableBody>

@@ -23,7 +23,7 @@ export default function RouteComponent() {
 			<Route path='/setting' element={<h1>setting</h1>}></Route>
 			<Route path='/Transaction' element={<Transaction />}></Route>
 			<Route path='/404' element={<TypoText />}></Route>
-			<Route path='/find-records' element={<SearchRecord />}></Route>
+			<Route path='/search' element={<SearchRecord />}></Route>
 		</Routes>
 	);
 }
