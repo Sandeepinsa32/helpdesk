@@ -104,9 +104,33 @@ const style = {
 	p: 4,
 };
 
-const Row = ['Email', 'Date', 'Agent Name', 'Booking ID', 'CCH Name', 'Phone', 'Total G.P', 'Airline	No.of PAX', 'Fare Type', 'Dep Date', 'Return Date'];
+const Row = [
+	'Email',
+	// 'Date',
+	'Agent Name',
+	'Booking ID',
+	'CCH Name',
+	'Phone',
+	'Total G.P',
+	'Airline	No.of PAX',
+	'Fare Type',
+	'Dep Date',
+	'Return Date',
+];
 
 const ResultData = [
 	// [20655, 'john Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
-	['JaneDoe@Customer.co', '22/04/2022', 'john Doe', 1555016400000, 'jane Doe', 1555016400000, 550, 9, 'private', '22/04/2022', '22/04/2022'],
+	[
+		'JaneDoe@Customer.co',
+		// '22/04/2022',
+		'john Doe',
+		1555016400000,
+		'jane Doe',
+		1555016400000,
+		550,
+		9,
+		'private',
+		'22/04/2022',
+		'22/04/2022',
+	],
 ];

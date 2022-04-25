@@ -23,41 +23,11 @@ const style = {
 export const ListToolbar = (props) => {
 	return (
 		<Box>
-			{/* <Box
-				sx={{
-					alignItems: 'center',
-					display: 'flex',
-					justifyContent: 'space-between',
-					flexWrap: 'wrap',
-					m: -1,
-				}}>
-				{
-					// Title
-				}
-				<Typography variant='h4' sx={{textTransform: 'uppercase', m: 1}}>
-					{props.title}
-				</Typography>
-
-				{
-					// btn
-				}
-				<Box sx={{m: 1}}>
-					{props.btn == 'show' ? (
-						<Button
-							color='primary'
-							// onClick={handleOpen}
-							variant='contained'>
-							{props.btnTitle}
-						</Button>
-					) : null}
-				</Box>
-			</Box> */}
-
 			{/* Search COmponent */}
 			<Box sx={{mt: 3}}>
 				<Card>
 					<CardContent>
-						<Box sx={{maxWidth: 500}}>
+						<Box fullWidth>
 							<TextField
 								fullWidth
 								InputProps={{
@@ -72,6 +42,13 @@ export const ListToolbar = (props) => {
 								placeholder='Search customer'
 								variant='outlined'
 							/>
+
+							<Box sx={{justifyContent: 'flex-end', display: 'flex', py: 2}}>
+								<Button sx={{textTransform: 'capitalize'}}>Reset</Button>
+								<Button sx={{textTransform: 'capitalize'}} variant='contained'>
+									Search
+								</Button>
+							</Box>
 						</Box>
 					</CardContent>
 				</Card>
