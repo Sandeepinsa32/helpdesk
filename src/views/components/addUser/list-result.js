@@ -1,10 +1,15 @@
 import React from 'react';
 import {useState} from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {format} from 'date-fns';
-import {Avatar, Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography} from '@mui/material';
+import {Button, IconButton, Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography} from '@mui/material';
 // import {getInitials} from '../../utils/get-initials';
 import {v4 as uuid} from 'uuid';
+
+//  mui icon
+import CloseIcon from '@mui/icons-material/Close';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import UpgradeIcon from '@mui/icons-material/Upgrade';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 export const ListResult = (props) => {
 	const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -55,43 +60,25 @@ export const ListResult = (props) => {
 					<Table>
 						<TableHead>
 							<TableRow>
-								<TableCell padding='checkbox'>
-									{/* <Checkbox
-										checked={selectedCustomerIds.length === customers.length}
-										color='primary'
-										indeterminate={selectedCustomerIds.length > 0 && selectedCustomerIds.length < customers.length}
-										onChange={handleSelectAll}
-									/> */}
-								</TableCell>
 								{props.rowFields.map((fieldName) => (
 									<TableCell>{fieldName}</TableCell>
 								))}
+								<TableCell sx={{pl: 3.5}}>View</TableCell>
+								<TableCell sx={{pl: 3.5}}>Delete</TableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
 							{props.ResultData.map((customer) => (
-								<TableRow hover key='x' selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
-									<TableCell padding='checkbox'>
-										<Checkbox checked={selectedCustomerIds.indexOf(customer.id) !== -1} onChange={(event) => handleSelectOne(event, customer.id)} value='true' />
-									</TableCell>
+								<TableRow hover key={customer} selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
 									{customer.map((details) => (
 										<TableCell>{details}</TableCell>
 									))}
-									{/* <TableCell>
-										<Box
-											sx={{
-												alignItems: 'center',
-												display: 'flex',
-											}}>
-											<Typography color='textPrimary' variant='body1'>
-												{customer.id}
-											</Typography>
-										</Box>
+									<TableCell sx={{width: `15%`}}>
+										<Button sx={{textTransform: 'capitalize'}}>View</Button>
 									</TableCell>
-									<TableCell>{customer.name}</TableCell>
-									<TableCell>{customer.email}</TableCell>
-									<TableCell>{customer.alias}</TableCell>
-									<TableCell>{format(customer.createdAt, 'dd/MM/yyyy')}</TableCell> */}
+									<TableCell sx={{width: `15%`}}>
+										<Button sx={{textTransform: 'capitalize'}}>Delete</Button>
+									</TableCell>
 								</TableRow>
 							))}
 						</TableBody>

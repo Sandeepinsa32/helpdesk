@@ -16,3 +16,5 @@ main - usd
 booking id - thd + 4 digit unique code
 
 additional email additional phone
+
+view button, delete button, modal on view button clicked , add card functionality add multiple card\* validation on all fields usestate and useeffects remove checkbox inn list remove buttons search field on agents list,

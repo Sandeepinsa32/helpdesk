@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 // components
-import {ListResult} from './components/member/list-result';
-import {ListToolbar} from './components/member/list-toolbar';
+import {ListResult} from './components/addUser/list-result';
+import {ListToolbar} from './components/addUser/list-toolbar';
 
 //@material-ui
 import {Box, Container, Button, Card, CardContent, TextField, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
@@ -13,7 +13,7 @@ import UpgradeIcon from '@mui/icons-material/Upgrade';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-export const Member = () => {
+export const AddUser = () => {
 	const [values, setValues] = useState({
 		firstName: 'John',
 		lastName: 'Doe',
@@ -43,6 +43,7 @@ export const Member = () => {
 					pt: 2,
 				}}>
 				<Container maxWidth={false}>
+					{/* External Btn  */}
 					<Box
 						sx={{
 							alignItems: 'center',
@@ -56,7 +57,7 @@ export const Member = () => {
 						</Typography>
 
 						<Box sx={{m: 1}}>
-							<Button startIcon={<VisibilityIcon fontSize='small' />} sx={{mr: 1}}>
+							{/* <Button startIcon={<VisibilityIcon fontSize='small' />} sx={{mr: 1}}>
 								View
 							</Button>
 							<Button startIcon={<UpgradeIcon fontSize='small' />} sx={{mr: 1}}>
@@ -67,7 +68,7 @@ export const Member = () => {
 							</Button>
 							<Button startIcon={<FilterAltIcon fontSize='small' />} sx={{mr: 1}}>
 								Filter
-							</Button>
+							</Button> */}
 
 							<Button color='primary' onClick={handleOpen} variant='contained'>
 								Add New Agent
@@ -76,7 +77,8 @@ export const Member = () => {
 					</Box>
 
 					{/*  External Component */}
-					{/* <ListToolbar title='Sales Agent' btn='show' btnTitle='add new customer' /> */}
+					<ListToolbar title='Sales Agent' btn='show' btnTitle='add new customer' />
+
 					<Box sx={{mt: 3}}>
 						<ListResult rowFields={Row} ResultData={ResultData} />
 					</Box>
@@ -188,7 +190,7 @@ const ResultData = [
 	[20654, 'jane Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
 	[20653, 'Wazir ', 'JohnDoe@dev.co', 'JODO', 1555016400000],
 	[20652, 'joe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
-	[20651, ' Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
+	[20651, ' Doe', 'Jo', 'JO', 1555],
 	[20650, 'sam Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
 	[20649, 'San Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
 	[20648, 'DDee Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
@@ -209,4 +211,4 @@ const ResultData = [
 	// 	createdAt: 1555016400000,
 	// },
 ];
-export default Member;
+export default AddUser;

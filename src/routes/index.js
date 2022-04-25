@@ -4,7 +4,7 @@ import {Typography} from '@mui/material';
 
 // importing components
 // import Login from "../views/Login";
-import Member from '../views/Member';
+import AddUser from '../views/AddUser';
 import SearchRecord from '../views/SearchRecords';
 import {Account} from '../views/Account';
 import {Transaction} from '../views/Transaction';
@@ -17,7 +17,7 @@ export default function RouteComponent() {
 			{/* <Route path='/' element={<Checkout />}></Route> */}
 			<Route path='/' element={<h1>Welcome </h1>}></Route>
 			<Route path='/home' element={<h1>home</h1>}></Route>
-			<Route path='/customers' element={<Member />}></Route>
+			<Route path='/customers' element={<AddUser />}></Route>
 			<Route path='/products' element={<h1>products</h1>}></Route>
 			<Route path='/account' element={<Account />}></Route>
 			<Route path='/setting' element={<h1>setting</h1>}></Route>
