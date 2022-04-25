@@ -18,19 +18,6 @@ import AddressForm from './components/Form/AddressForm';
 import PaymentForm from './components/Form/PaymentForm';
 import Review from './components/Form/Review';
 
-function Copyright() {
-	return (
-		<Typography variant='body2' color='text.secondary' align='center'>
-			{'Copyright © '}
-			<Link color='inherit' href='https://mui.com/'>
-				Your Website
-			</Link>{' '}
-			{new Date().getFullYear()}
-			{'.'}
-		</Typography>
-	);
-}
-
 const steps = ['Personal Detail ', 'Payment', 'Review'];
 
 function getStepContent(step) {
@@ -78,15 +65,16 @@ export default function Checkout() {
 
 					<React.Fragment>
 						{activeStep === steps.length ? (
-							<React.Fragment>
+							<>
 								<Typography variant='h5' gutterBottom>
-									Thank you for your Time .
+									{' '}
+									Thank you for your Time .{' '}
 								</Typography>
 								<Typography variant='subtitle1'>Your Record number is John-001000.</Typography>
-							</React.Fragment>
+							</>
 						) : (
-							<React.Fragment>
-								{getStepContent(activeStep)}
+							<>
+								<Box sx={{}}>{getStepContent(activeStep)}</Box>
 								<Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
 									{activeStep !== 0 && (
 										<Button onClick={handleBack} sx={{mt: 3, ml: 1}}>
@@ -98,12 +86,10 @@ export default function Checkout() {
 										{activeStep === steps.length - 1 ? 'Confirm' : 'Next'}
 									</Button>
 								</Box>
-							</React.Fragment>
+							</>
 						)}
 					</React.Fragment>
 				</Paper>
-
-				{/* <Copyright /> */}
 			</Container>
 		</ThemeProvider>
 	);

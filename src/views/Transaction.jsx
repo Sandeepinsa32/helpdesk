@@ -77,7 +77,7 @@ export const Transaction = () => {
 				</Container>
 			</Box>
 
-			{/* notification pannel */}
+			{/* Add new Record MOdal*/}
 			<Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style}>
 					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
