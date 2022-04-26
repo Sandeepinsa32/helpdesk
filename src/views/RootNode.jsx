@@ -150,12 +150,6 @@ export default function MiniDrawer() {
 					</IconButton>
 					{/*  search icon  */}
 
-					{/* <Tooltip title='Search'>
-						<IconButton sx={{ml: 1}}>
-							<SearchIcon fontSize='small' />
-						</IconButton>
-					</Tooltip> */}
-
 					<Box sx={{flexGrow: 1}} />
 
 					{/* user icon  */}
@@ -166,14 +160,6 @@ export default function MiniDrawer() {
 					</Tooltip>
 					{/* notification icon  */}
 
-					{/* <Tooltip title='Notifications' onClick={handleNotiModalOpen}>
-						<IconButton sx={{ml: 1}}>
-							<Badge badgeContent={4} color='primary' variant='dot'>
-								<BellIcon fontSize='small' />
-							</Badge>
-						</IconButton>
-					</Tooltip> */}
-
 					{/* avatar/user  icon  */}
 					<Tooltip title='User Details'>
 						<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
@@ -181,10 +167,12 @@ export default function MiniDrawer() {
 						</IconButton>
 					</Tooltip>
 
-					<Tooltip title='User Details'>
-						<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
-							<LogoutIcon fontSize='large' />
-						</IconButton>
+					<Tooltip title='Logout'>
+						<NavLink className='navlink-decoration' to='/logout'>
+							<IconButton sx={{ml: 1}}>
+								<LogoutIcon fontSize='large' />
+							</IconButton>
+						</NavLink>
 					</Tooltip>
 				</Toolbar>
 			</AppBar>
@@ -198,46 +186,9 @@ export default function MiniDrawer() {
 				</Box>
 			</Modal>
 
-			{/* notification pannel */}
-			{/* <Modal open={modalNotiopen} onClose={handleNotiModalClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={style}>
-					<IconButton onClick={handleNotiModalClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
-					<h1>Notifications Pannel</h1>
-				</Box>
-			</Modal> */}
-
 			<Drawer variant='permanent' open={open}>
 				<DrawerHeader> </DrawerHeader>
-				{/* <List>
-					<ListItemButton
-						key='Agent'
-						sx={{
-							minHeight: 48,
-							justifyContent: open ? 'initial' : 'center',
-							// px: 2.5,
-						}}>
-						<ListItemIcon
-							sx={{
-								minWidth: 0,
-								mr: open ? 1.35 : 'auto',
-								// justifyContent: 'center',
-							}}>
-							<Avatar
-								sx={{
-									height: 40,
-									width: 40,
-									ml: -0.5,
-								}}
-								src='/static/images/avatars/avatar_1.png'>
-								<UserCircleIcon fontSize='small' />
-							</Avatar>
-						</ListItemIcon>
-						<ListItemText primary='John Doe' sx={{opacity: open ? 1 : 0}} />
-					</ListItemButton>
-				</List> */}
-				{/* <Divider /> */}
+
 				<List>
 					{items.map((item, index) => (
 						<NavLink
