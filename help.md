@@ -15,10 +15,8 @@ main - usd
 
 booking id - thd + 4 digit unique code
 
-additional email additional phone
+26/04/22
 
-view button, delete button, , add card functionality add multiple card\* , remove checkbox inn list remove buttons search field on agents list,
+#1.feat -> 1.useState and onchange handler to transaction fields 2.validation on agent and add transaction 3. functionality onClick View in list
 
-validation on all fields usestate and useeffects
-
-modal on view button clicked
+#2.issue -> 1. add multiple card model size issue

@@ -1,21 +1,13 @@
 import React, {useState} from 'react';
 import {ListResult} from './components/addUser/list-result';
 import {ListToolbar} from './components/addUser/list-toolbar';
-import Checkout from './Checkout';
+import Checkout from './components/Checkout';
 
 //@material-ui
 
 import {Box, Button, Card, Container, CardContent, TextField, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import UpgradeIcon from '@mui/icons-material/Upgrade';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
-
-//  local icon
-import {Search as SearchIcon} from '../assets/icons/search';
-import {Upload as UploadIcon} from '../assets/icons/upload';
-import {Download as DownloadIcon} from '../assets/icons/download';
 
 export const Transaction = () => {
 	const [open, setOpen] = useState(false);
@@ -52,25 +44,17 @@ export const Transaction = () => {
 							{currentDate()}
 						</Typography>
 						<Box sx={{m: 1}}>
-							<Button startIcon={<VisibilityIcon fontSize='small' />} sx={{mr: 1}}>
-								View
-							</Button>
-							<Button startIcon={<UpgradeIcon fontSize='small' />} sx={{mr: 1}}>
-								Update
-							</Button>
-							<Button startIcon={<DeleteOutlineIcon fontSize='small' />} sx={{mr: 1}}>
-								Delete
-							</Button>
 							<Button startIcon={<FilterAltIcon fontSize='small' />} sx={{mr: 1}}>
 								Filter
 							</Button>
-
 							<Button color='primary' onClick={handleOpen} variant='contained'>
 								Add New Record
 							</Button>
 						</Box>
 					</Box>
 
+					{/*  External Component */}
+					<ListToolbar />
 					<Box sx={{mt: 3}}>
 						<ListResult rowFields={Row} ResultData={ResultData} />
 					</Box>

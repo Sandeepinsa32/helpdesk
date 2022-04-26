@@ -3,18 +3,16 @@ import {Routes, Route} from 'react-router-dom';
 import {Typography} from '@mui/material';
 
 // importing components
-// import Login from "../views/Login";
+
 import AddUser from '../views/AddUser';
 import SearchRecord from '../views/SearchRecords';
 import {Account} from '../views/Account';
 import {Transaction} from '../views/Transaction';
 import Login from '../views/Login';
-import Checkout from '../views/Checkout';
 
 export default function RouteComponent() {
 	return (
 		<Routes>
-			{/* <Route path='/' element={<Checkout />}></Route> */}
 			<Route path='/' element={<h1>Welcome </h1>}></Route>
 			<Route path='/home' element={<h1>home</h1>}></Route>
 			<Route path='/customers' element={<AddUser />}></Route>
