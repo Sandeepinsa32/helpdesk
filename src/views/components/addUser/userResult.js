@@ -11,7 +11,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-export const ListResult = (props) => {
+export const Result = (props) => {
 	const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
 	const [limit, setLimit] = useState(10);
 	const [page, setPage] = useState(0);

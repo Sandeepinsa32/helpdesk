@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {ListResult} from './components/addUser/list-result';
-import {ListToolbar} from './components/addUser/list-toolbar';
+import {Result} from './components/transaction/transResult';
+import {Search} from './components/transaction/transSearch';
 import Checkout from './components/Checkout';
 
 //@material-ui
@@ -53,10 +53,11 @@ export const Transaction = () => {
 						</Box>
 					</Box>
 
-					{/*  External Component */}
-					<ListToolbar />
+					{/*  Search  Component */}
+					<Search />
+
 					<Box sx={{mt: 3}}>
-						<ListResult rowFields={Row} ResultData={ResultData} />
+						<Result rowFields={Row} ResultData={ResultData} />
 					</Box>
 				</Container>
 			</Box>

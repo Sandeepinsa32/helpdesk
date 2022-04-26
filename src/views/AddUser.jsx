@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
 // components
-import {ListResult} from './components/addUser/list-result';
-import {ListToolbar} from './components/addUser/list-toolbar';
+import {Result} from './components/addUser/userResult';
+import {Search} from './components/addUser/userSearch';
 
 //@material-ui
 import {Box, Container, Button, Card, CardContent, TextField, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
@@ -64,30 +64,17 @@ export const AddUser = () => {
 						</Typography>
 
 						<Box sx={{m: 1}}>
-							{/* <Button startIcon={<VisibilityIcon fontSize='small' />} sx={{mr: 1}}>
-								View
-							</Button>
-							<Button startIcon={<UpgradeIcon fontSize='small' />} sx={{mr: 1}}>
-								Update
-							</Button>
-							<Button startIcon={<DeleteOutlineIcon fontSize='small' />} sx={{mr: 1}}>
-								Delete
-							</Button>
-							<Button startIcon={<FilterAltIcon fontSize='small' />} sx={{mr: 1}}>
-								Filter
-							</Button> */}
-
 							<Button color='primary' onClick={handleOpen} variant='contained'>
 								Add New Agent
 							</Button>
 						</Box>
 					</Box>
 
-					{/*  External Component */}
-					<ListToolbar title='Sales Agent' btn='show' btnTitle='add new customer' />
+					{/*  search bar Component */}
+					<Search />
 
 					<Box sx={{mt: 3}}>
-						<ListResult rowFields={Row} ResultData={ResultData} />
+						<Result rowFields={Row} ResultData={ResultData} />
 					</Box>
 				</Container>
 			</Box>

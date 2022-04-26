@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Container} from '@mui/material';
-import {ListResult} from './components/addUser/list-result';
-import {ListToolbar} from './components/addUser/list-toolbar';
+import {Result} from './components/globalSearch/Result';
+import {Search} from './components/globalSearch/Search';
 
 export default function SearchRecord() {
 	return (
@@ -14,9 +14,9 @@ export default function SearchRecord() {
 					pt: 2,
 				}}>
 				<Container maxWidth={false}>
-					<ListToolbar />
+					<Search />
 					<Box sx={{mt: 3}}>
-						<ListResult rowFields={Row} ResultData={ResultData} />
+						<Result rowFields={Row} ResultData={ResultData} />
 					</Box>
 				</Container>
 			</Box>

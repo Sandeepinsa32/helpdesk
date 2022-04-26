@@ -20,7 +20,7 @@ const style = {
 	borderRadius: '1rem',
 	p: 4,
 };
-export const ListToolbar = (props) => {
+export const Search = (props) => {
 	return (
 		<Box>
 			{/* Search COmponent */}
