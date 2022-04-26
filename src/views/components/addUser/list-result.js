@@ -68,8 +68,8 @@ export const ListResult = (props) => {
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{props.ResultData.map((customer) => (
-								<TableRow hover key={customer} selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
+							{props.ResultData.map((customer, i) => (
+								<TableRow hover key={customer[i]} selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
 									{customer.map((details) => (
 										<TableCell>{details}</TableCell>
 									))}

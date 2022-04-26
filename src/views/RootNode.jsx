@@ -17,6 +17,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import LogoutIcon from '@mui/icons-material/Logout';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 // local icon
 import {Bell as BellIcon} from '../assets/icons/bell';
@@ -156,9 +158,9 @@ export default function MiniDrawer() {
 					<Box sx={{flexGrow: 1}} />
 					{/* <Box sx={{flexGrow: 1}} /> */}
 					{/* user icon  */}
-					<Tooltip title='Contacts' onClick={goToCustomer}>
+					<Tooltip title='Add new agent ' onClick={goToCustomer}>
 						<IconButton sx={{ml: 1}}>
-							<UsersIcon fontSize='small' />
+							<GroupAddIcon fontSize='large' />
 						</IconButton>
 					</Tooltip>
 					{/* notification icon  */}
@@ -171,19 +173,19 @@ export default function MiniDrawer() {
 						</IconButton>
 					</Tooltip> */}
 
-					<Typography color='#000'>John Doe</Typography>
+					{/* <Typography color='#000'>John Doe</Typography> */}
 					{/* avatar/user  icon  */}
-					<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
-						<Avatar
-							sx={{
-								height: 40,
-								width: 40,
-								ml: 1,
-							}}
-							src='/static/images/avatars/avatar_1.png'>
-							<UserCircleIcon fontSize='small' />
-						</Avatar>
-					</IconButton>
+					<Tooltip title='User Details'>
+						<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
+							<ManageAccountsIcon fontSize='large' />
+						</IconButton>
+					</Tooltip>
+
+					<Tooltip title='User Details'>
+						<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
+							<LogoutIcon fontSize='large' />
+						</IconButton>
+					</Tooltip>
 				</Toolbar>
 			</AppBar>
 			{/* Account Details */}

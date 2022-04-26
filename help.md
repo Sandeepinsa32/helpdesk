@@ -17,6 +17,8 @@ booking id - thd + 4 digit unique code
 
 additional email additional phone
 
-view button, delete button, , add card functionality add multiple card\* validation on all fields usestate and useeffects remove checkbox inn list remove buttons search field on agents list,
+view button, delete button, , add card functionality add multiple card\* , remove checkbox inn list remove buttons search field on agents list,
+
+validation on all fields usestate and useeffects
 
 modal on view button clicked

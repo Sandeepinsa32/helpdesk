@@ -18,9 +18,10 @@ export const AddUser = () => {
 		firstName: 'John',
 		lastName: 'Doe',
 		email: 'John@helpdesk.com',
-		phone: '0123456789',
-		role: 'manager',
-		country: 'USA',
+		Password: 'pass@123',
+		empId: 20080,
+		alias: 'johnDoe',
+		role: 'agent',
 	});
 
 	const handleChange = (event) => {
@@ -29,6 +30,12 @@ export const AddUser = () => {
 			[event.target.name]: event.target.value,
 		});
 	};
+
+	const SaveDetail = () => {
+		alert(JSON.stringify(values));
+		console.log(values);
+	};
+
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -123,15 +130,15 @@ export const AddUser = () => {
 									</Grid> */}
 
 									<Grid item md={6} xs={12}>
-										<TextField fullWidth label='Emp ID' name='empId' onChange={handleChange} type='string' variant='outlined' />
+										<TextField fullWidth label='Emp ID' name='empId' onChange={handleChange} value={values.empId} type='string' variant='outlined' />
 									</Grid>
 
 									<Grid item md={6} xs={12}>
-										<TextField fullWidth label='alias' name='alias' required variant='outlined' />
+										<TextField fullWidth label='alias' name='alias' required variant='outlined' onChange={handleChange} value={values.alias} />
 									</Grid>
 
 									<Grid item md={6} xs={12}>
-										<TextField fullWidth label='Password' name='Password' required variant='outlined' />
+										<TextField fullWidth label='Password' name='Password' type='password' required variant='outlined' onChange={handleChange} value={values.Password} />
 									</Grid>
 
 									{/* <Grid item md={6} xs={12}>
@@ -157,7 +164,7 @@ export const AddUser = () => {
 										</TextField>
 									</Grid> */}
 									<Grid item md={6} xs={12}>
-										<Button color='primary' variant='contained' sx={{right: '2rem', position: 'absolute'}}>
+										<Button color='primary' variant='contained' sx={{right: '2rem', position: 'absolute'}} onClick={SaveDetail}>
 											Save details
 										</Button>
 									</Grid>
