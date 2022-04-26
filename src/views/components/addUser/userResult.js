@@ -1,7 +1,29 @@
 import React from 'react';
 import {useState} from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {Button, IconButton, Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography} from '@mui/material';
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TablePagination,
+	TableRow,
+	Box,
+	Container,
+	Button,
+	Card,
+	CardContent,
+	TextField,
+	Modal,
+	InputAdornment,
+	SvgIcon,
+	Typography,
+	CardHeader,
+	Divider,
+	Grid,
+	IconButton,
+} from '@mui/material';
+
 // import {getInitials} from '../../utils/get-initials';
 import {v4 as uuid} from 'uuid';
 
@@ -10,6 +32,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import UpgradeIcon from '@mui/icons-material/Upgrade';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import EditIcon from '@mui/icons-material/Edit';
 
 export const Result = (props) => {
 	const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
@@ -53,48 +76,202 @@ export const Result = (props) => {
 		setPage(newPage);
 	};
 
+	// modal change handler
+	const [values, setValues] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: '',
+		employeeCode: '',
+		employeeAlias: '',
+	});
+
+	const handleChange = (event) => {
+		setValues({
+			...values,
+			[event.target.name]: event.target.value,
+		});
+	};
+
+	const SaveDetail = () => {
+		alert(JSON.stringify(values));
+		console.log(values);
+	};
+
+	const [open, setOpen] = useState(false);
+	const [readOnly, setReadOnly] = useState(true);
+	const handleOpen = (details) => {
+		console.log(details);
+		// (5)[(20655, 'john Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000)];
+		setValues({
+			firstName: details[1],
+			lastName: details[1],
+			email: details[2],
+			password: details[4],
+			employeeCode: details[0],
+			employeeAlias: details[3],
+		});
+		setOpen(true);
+	};
+	const handleClose = () => setOpen(false);
+
+	const updateHandler = () => setReadOnly(false);
+
 	return (
-		<Card>
-			<PerfectScrollbar>
-				<Box sx={{minWidth: 1050}}>
-					<Table>
-						<TableHead>
-							<TableRow>
-								{props.rowFields.map((fieldName) => (
-									<TableCell>{fieldName}</TableCell>
-								))}
-								<TableCell sx={{pl: 3.5}}>View</TableCell>
-								<TableCell sx={{pl: 3.5}}>Delete</TableCell>
-							</TableRow>
-						</TableHead>
-						<TableBody>
-							{props.ResultData.map((customer, i) => (
-								<TableRow hover key={customer[i]} selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
-									{customer.map((details) => (
-										<TableCell>{details}</TableCell>
+		<>
+			<Card>
+				<PerfectScrollbar>
+					<Box sx={{minWidth: 1050}}>
+						<Table>
+							<TableHead>
+								<TableRow>
+									{props.rowFields.map((fieldName) => (
+										<TableCell>{fieldName}</TableCell>
 									))}
-									<TableCell sx={{width: `15%`}}>
-										<Button sx={{textTransform: 'capitalize'}}>View</Button>
-									</TableCell>
-									<TableCell sx={{width: `15%`}}>
-										<Button sx={{textTransform: 'capitalize'}}>Delete</Button>
-									</TableCell>
+									<TableCell sx={{pl: 3.5}}>View</TableCell>
+									<TableCell sx={{pl: 3.5}}>Delete</TableCell>
 								</TableRow>
-							))}
-						</TableBody>
-					</Table>
+							</TableHead>
+							<TableBody>
+								{props.ResultData.map((customer, i) => (
+									<TableRow hover key={customer[i]} selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
+										{customer.map((details) => (
+											<TableCell>{details}</TableCell>
+										))}
+										<TableCell sx={{width: `15%`}}>
+											<Button sx={{textTransform: 'capitalize'}} onClick={() => handleOpen(customer)}>
+												View
+											</Button>
+										</TableCell>
+										<TableCell sx={{width: `15%`}}>
+											<Button sx={{textTransform: 'capitalize'}}>Delete</Button>
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</Box>
+				</PerfectScrollbar>
+				<TablePagination
+					component='div'
+					count={customers.length}
+					onPageChange={handlePageChange}
+					onRowsPerPageChange={handleLimitChange}
+					page={page}
+					rowsPerPage={limit}
+					rowsPerPageOptions={[5, 10, 25]}
+				/>
+			</Card>
+
+			<Modal open={open} onClose={handleClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box sx={style}>
+					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<form autoComplete='off' noValidate>
+						<Card
+							sx={{
+								boxShadow: 'none',
+							}}>
+							<CardHeader
+								// subheader='you can only add Sales-agent'
+								title='Agent Detail '
+								sx={{textTransform: 'uppercase'}}
+							/>
+
+							<CardContent>
+								<Grid container spacing={3}>
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											helperText='Please specify the first name'
+											label='First name'
+											name='firstName'
+											onChange={handleChange}
+											required
+											value={values.firstName}
+											variant='outlined'
+											InputProps={{
+												readOnly: readOnly ? true : false,
+											}}
+										/>
+									</Grid>
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											label='Last name'
+											name='lastName'
+											onChange={handleChange}
+											required
+											value={values.lastName}
+											variant='outlined'
+											InputProps={{
+												readOnly: readOnly ? true : false,
+											}}
+										/>
+									</Grid>
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											label='Email Address'
+											name='email'
+											onChange={handleChange}
+											required
+											value={values.email}
+											variant='outlined'
+											InputProps={{
+												readOnly: readOnly ? true : false,
+											}}
+										/>
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											label='Emp ID'
+											name='employeeCode'
+											onChange={handleChange}
+											value={values.employeeCode}
+											type='string'
+											variant='outlined'
+											InputProps={{
+												readOnly: readOnly ? true : false,
+											}}
+										/>
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<TextField fullWidth label='alias' name='employeeAlias' required variant='outlined' onChange={handleChange} value={values.employeeAlias} />
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											label='Password'
+											name='password'
+											type='password'
+											required
+											variant='outlined'
+											onChange={handleChange}
+											value={values.password}
+											InputProps={{
+												readOnly: readOnly ? true : false,
+											}}
+										/>
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<Button color='primary' variant='contained' sx={{right: '2rem', position: 'absolute'}} onClick={readOnly ? updateHandler : SaveDetail}>
+											{readOnly ? `update` : `Save details`}
+										</Button>
+									</Grid>
+								</Grid>
+							</CardContent>
+						</Card>
+					</form>
 				</Box>
-			</PerfectScrollbar>
-			<TablePagination
-				component='div'
-				count={customers.length}
-				onPageChange={handlePageChange}
-				onRowsPerPageChange={handleLimitChange}
-				page={page}
-				rowsPerPage={limit}
-				rowsPerPageOptions={[5, 10, 25]}
-			/>
-		</Card>
+			</Modal>
+		</>
 	);
 };
 
@@ -240,3 +417,17 @@ const customers = [
 		phone: '801-301-7894',
 	},
 ];
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 'auto',
+	height: 'auto',
+	bgcolor: 'background.paper',
+	// border: '2px solid #000',
+	boxShadow: 24,
+	borderRadius: '1rem',
+	p: 4,
+};

@@ -18,10 +18,9 @@ export const AddUser = () => {
 		firstName: 'John',
 		lastName: 'Doe',
 		email: 'John@helpdesk.com',
-		Password: 'pass@123',
-		empId: 20080,
-		alias: 'johnDoe',
-		role: 'agent',
+		password: 'pass@123',
+		employeeCode: '20080',
+		employeeAlias: 'johnDoe',
 	});
 
 	const handleChange = (event) => {
@@ -88,8 +87,12 @@ export const AddUser = () => {
 							sx={{
 								boxShadow: 'none',
 							}}>
-							<CardHeader subheader='you can only add Sales-agent' title='Add New Agent ' style={{textTransform: 'uppercase'}} />
-							{/* <Divider /> */}
+							<CardHeader
+								// subheader='you can only add Sales-agent'
+								title='Add New Agent '
+								sx={{textTransform: 'uppercase'}}
+							/>
+
 							<CardContent>
 								<Grid container spacing={3}>
 									<Grid item md={6} xs={12}>
@@ -110,46 +113,19 @@ export const AddUser = () => {
 									<Grid item md={6} xs={12}>
 										<TextField fullWidth label='Email Address' name='email' onChange={handleChange} required value={values.email} variant='outlined' />
 									</Grid>
-									{/* phone no */}
-
-									{/* <Grid item md={6} xs={12}>
-										<TextField fullWidth label='Phone Number' name='phone' onChange={handleChange} type='number' value={values.phone} variant='outlined' />
-									</Grid> */}
 
 									<Grid item md={6} xs={12}>
-										<TextField fullWidth label='Emp ID' name='empId' onChange={handleChange} value={values.empId} type='string' variant='outlined' />
+										<TextField fullWidth label='Emp ID' name='employeeCode' onChange={handleChange} value={values.employeeCode} type='string' variant='outlined' />
 									</Grid>
 
 									<Grid item md={6} xs={12}>
-										<TextField fullWidth label='alias' name='alias' required variant='outlined' onChange={handleChange} value={values.alias} />
+										<TextField fullWidth label='alias' name='employeeAlias' required variant='outlined' onChange={handleChange} value={values.employeeAlias} />
 									</Grid>
 
 									<Grid item md={6} xs={12}>
-										<TextField fullWidth label='Password' name='Password' type='password' required variant='outlined' onChange={handleChange} value={values.Password} />
+										<TextField fullWidth label='Password' name='password' type='password' required variant='outlined' onChange={handleChange} value={values.password} />
 									</Grid>
 
-									{/* <Grid item md={6} xs={12}>
-										<TextField fullWidth label='Country' name='country' onChange={handleChange} required value={values.country} variant='outlined' />
-									</Grid> */}
-
-									{/* <Grid item md={6} xs={12}>
-										<TextField
-											fullWidth
-											label='Select Role'
-											name='role'
-											onChange={handleChange}
-											required
-											select
-											SelectProps={{native: true}}
-											value={values.state}
-											variant='outlined'>
-											{role.map((option) => (
-												<option key={option.value} value={option.value}>
-													{option.label}
-												</option>
-											))}
-										</TextField>
-									</Grid> */}
 									<Grid item md={6} xs={12}>
 										<Button color='primary' variant='contained' sx={{right: '2rem', position: 'absolute'}} onClick={SaveDetail}>
 											Save details

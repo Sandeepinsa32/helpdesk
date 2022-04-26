@@ -147,16 +147,17 @@ export default function MiniDrawer() {
 							},
 						}}>
 						{open ? <CloseIcon /> : <MenuIcon fontSize='small' />}
-						{/* <MenuIcon fontSize='small' /> */}
 					</IconButton>
 					{/*  search icon  */}
+
 					{/* <Tooltip title='Search'>
 						<IconButton sx={{ml: 1}}>
 							<SearchIcon fontSize='small' />
 						</IconButton>
 					</Tooltip> */}
+
 					<Box sx={{flexGrow: 1}} />
-					{/* <Box sx={{flexGrow: 1}} /> */}
+
 					{/* user icon  */}
 					<Tooltip title='Add new agent ' onClick={goToCustomer}>
 						<IconButton sx={{ml: 1}}>
@@ -173,7 +174,6 @@ export default function MiniDrawer() {
 						</IconButton>
 					</Tooltip> */}
 
-					{/* <Typography color='#000'>John Doe</Typography> */}
 					{/* avatar/user  icon  */}
 					<Tooltip title='User Details'>
 						<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
