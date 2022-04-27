@@ -110,6 +110,18 @@ export const Transaction = () => {
 		setActiveStep(activeStep - 1);
 	};
 
+	function getStepContent(step) {
+		switch (step) {
+			case 0:
+				return `cssc`;
+			case 1:
+				return `scsx`;
+			case 2:
+				return `ssc`;
+			default:
+				throw new Error('Unknown step');
+		}
+	}
 	// ==================================================================================
 
 	return (
