@@ -27,9 +27,10 @@ export const Search = (props) => {
 			<Box sx={{mt: 3}}>
 				<Card>
 					<CardContent>
-						<Box fullWidth>
+						<Box fullWidth sx={{display: 'flex'}}>
 							<TextField
-								fullWidth
+								size='small'
+								sx={{width: `26vw`, height: `2rem`}}
 								InputProps={{
 									startAdornment: (
 										<InputAdornment position='start'>
@@ -42,8 +43,7 @@ export const Search = (props) => {
 								placeholder='Search customer'
 								variant='outlined'
 							/>
-
-							<Box sx={{justifyContent: 'flex-end', display: 'flex', py: 2}}>
+							<Box>
 								<Button sx={{textTransform: 'capitalize'}}>Reset</Button>
 								<Button sx={{textTransform: 'capitalize'}} variant='contained'>
 									Search
