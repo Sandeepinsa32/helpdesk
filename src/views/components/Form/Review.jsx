@@ -24,7 +24,7 @@ const payments = [
 	{name: 'Expiry date', detail: '04/2024'},
 ];
 
-export default function Review() {
+export default function Review(props) {
 	return (
 		<React.Fragment>
 			<Typography variant='h6' gutterBottom>
@@ -34,28 +34,25 @@ export default function Review() {
 			{/*  product Price details */}
 
 			<List disablePadding>
-				{products.map((product) => (
-					<ListItem key={product.name} sx={{py: 1, px: 0}}>
-						<ListItemText
-							primary={product.name}
-							// secondary={product.desc}
-						/>
-						<Typography variant='body2'>{product.desc}</Typography>
-					</ListItem>
-				))}
-
-				<ListItem sx={{py: 1, px: 0}}>
-					<ListItemText primary='PerPax' />
-					<Typography variant='subtitle1' sx={{fontWeight: 700}}>
-						$4.06
-					</Typography>
-				</ListItem>
-				<ListItem sx={{py: 1, px: 0}}>
-					<ListItemText primary='Total' />
-					<Typography variant='subtitle1' sx={{fontWeight: 700}}>
-						$34.06
-					</Typography>
-				</ListItem>
+				{console.log(props.formik.values)}
+				{/* {.map((product) => (
+					<>
+						<ListItem key={product.firstname} sx={{py: 1, px: 0}}>
+							<ListItemText
+								primary={product.firstname}
+								// secondary={product.desc}
+							/>
+							<Typography variant='body2'>{product.lastname}</Typography>
+						</ListItem>
+						<ListItem key={product.email} sx={{py: 1, px: 0}}>
+							<ListItemText
+								primary={product.email}
+								// secondary={product.desc}
+							/>
+							<Typography variant='body2'>{product.email}</Typography>
+						</ListItem>
+					</>
+				))} */}
 			</List>
 
 			<Grid container spacing={2}>
