@@ -33,3 +33,6 @@ booking id - thd + 4 digit unique code
     						<Button startIcon={<FilterAltIcon fontSize='small' />} sx={{mr: 1}}>
     							Filter
     						</Button> */}
+
+1. in modal height 80vh
+2. paper scrollable
