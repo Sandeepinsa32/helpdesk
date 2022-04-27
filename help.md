@@ -19,9 +19,8 @@ booking id - thd + 4 digit unique code
 
 1. login form inside paper styling with bg-grey -- done
 2. reset btn color -- done
-3. Delete modal (Confirmatino)
+3. Delete modal (Confirmatino) --partily
 4. Remove update nhi hona chahaiye
-5. Remove delete functionality from translation
+5. Remove delete functionality from translation --done
 6. Add modal on view
-7. Remove Delete from agent
-8. Add modal on view
+7. Remove Delete from agent -- done

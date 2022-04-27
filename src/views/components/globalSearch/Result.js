@@ -64,7 +64,7 @@ export const Result = (props) => {
 									<TableCell>{fieldName}</TableCell>
 								))}
 								<TableCell sx={{pl: 3.5}}>View</TableCell>
-								<TableCell sx={{pl: 3.5}}>Delete</TableCell>
+								{/* <TableCell sx={{pl: 3.5}}>Delete</TableCell> */}
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -76,9 +76,9 @@ export const Result = (props) => {
 									<TableCell sx={{width: `15%`}}>
 										<Button sx={{textTransform: 'capitalize'}}>View</Button>
 									</TableCell>
-									<TableCell sx={{width: `15%`}}>
+									{/* <TableCell sx={{width: `15%`}}>
 										<Button sx={{textTransform: 'capitalize'}}>Delete</Button>
-									</TableCell>
+									</TableCell> */}
 								</TableRow>
 							))}
 						</TableBody>

@@ -141,7 +141,14 @@ export const AddUser = () => {
 								<Table sx={{minWidth: 650}} aria-label='simple table'>
 									<TableHead>
 										<TableRow>
-											{['EmpCode', 'Name', 'Email', 'Alias', 'Registration Date', 'Actions'].map((th) => (
+											{[
+												'EmpCode',
+												'Name',
+												'Email',
+												'Alias',
+												'Registration Date',
+												//'Actions'
+											].map((th) => (
 												<TableCell key={th}>{th}</TableCell>
 											))}
 										</TableRow>
@@ -161,15 +168,14 @@ export const AddUser = () => {
 													<TableCell>{row.email}</TableCell>
 													<TableCell>{row.employeeAlias}</TableCell>
 													<TableCell>{row.createdAt?.substring(0, 10)}</TableCell>
-													<TableCell>
+													{/* <TableCell>
 														<IconButton aria-label='delete' color='error' onClick={deleteHandler}>
 															<DeleteIcon />
 														</IconButton>
-
-														{/* <Button variant='contained' color='neutral' size='small' onClick={() => deleteAgent(row._id)}>
+													</TableCell> */}
+													{/* <Button variant='contained' color='neutral' size='small' onClick={() => deleteAgent(row._id)}>
 															Delete
 														</Button> */}
-													</TableCell>
 												</TableRow>
 											))}
 									</TableBody>
