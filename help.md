@@ -17,22 +17,11 @@ booking id - thd + 4 digit unique code
 
 26/04/22
 
-#1.feat -> 1.useState and onchange handler to transaction fields 2.validation on agent and add transaction 3. functionality onClick View in list
-
-#2.issue -> 1. add multiple card model size issue
-
-    {/* <Button startIcon={<VisibilityIcon fontSize='small' />} sx={{mr: 1}}>
-    							View
-    						</Button>
-    						<Button startIcon={<UpgradeIcon fontSize='small' />} sx={{mr: 1}}>
-    							Update
-    						</Button>
-    						<Button startIcon={<DeleteOutlineIcon fontSize='small' />} sx={{mr: 1}}>
-    							Delete
-    						</Button>
-    						<Button startIcon={<FilterAltIcon fontSize='small' />} sx={{mr: 1}}>
-    							Filter
-    						</Button> */}
-
-1. in modal height 80vh
-2. paper scrollable
+1. login form inside paper styling with bg-grey -- done
+2. reset btn color -- done
+3. Delete modal (Confirmatino)
+4. Remove update nhi hona chahaiye
+5. Remove delete functionality from translation
+6. Add modal on view
+7. Remove Delete from agent
+8. Add modal on view

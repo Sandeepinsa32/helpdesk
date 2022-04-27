@@ -1,11 +1,13 @@
 import {React, useState} from 'react';
-import {Box, Button, Card, CardContent, TextField, InputAdornment, SvgIcon, Typography} from '@mui/material';
+import {Box, Button, Card, CardContent, TextField, ThemeProvider, InputAdornment, SvgIcon, Typography} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 //  local icon
 import {Search as SearchIcon} from '../../../assets/icons/search';
 import {Upload as UploadIcon} from '../../../assets/icons/upload';
 import {Download as DownloadIcon} from '../../../assets/icons/download';
+
+import {createTheme} from '@mui/material/styles';
 
 const style = {
 	position: 'absolute',
@@ -20,39 +22,51 @@ const style = {
 	borderRadius: '1rem',
 	p: 4,
 };
+const theme = createTheme({
+	palette: {
+		neutral: {
+			main: '#64748B',
+			contrastText: '#fff',
+		},
+	},
+});
 export const Search = (props) => {
 	return (
 		<Box>
-			{/* Search COmponent */}
-			<Box sx={{mt: 3}}>
-				<Card>
-					<CardContent>
-						<Box fullWidth sx={{display: 'flex'}}>
-							<TextField
-								size='small'
-								sx={{width: `26vw`, height: `2rem`}}
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position='start'>
-											<SvgIcon color='action' fontSize='small'>
-												<SearchIcon />
-											</SvgIcon>
-										</InputAdornment>
-									),
-								}}
-								placeholder='Search customer'
-								variant='outlined'
-							/>
-							<Box>
-								<Button sx={{textTransform: 'capitalize'}}>Reset</Button>
-								<Button sx={{textTransform: 'capitalize'}} variant='contained'>
-									Search
-								</Button>
+			<ThemeProvider theme={theme}>
+				{/* Search COmponent */}
+				<Box sx={{mt: 3}}>
+					<Card>
+						<CardContent>
+							<Box fullWidth sx={{display: 'flex'}}>
+								<TextField
+									size='small'
+									sx={{width: `26vw`, height: `2rem`}}
+									InputProps={{
+										startAdornment: (
+											<InputAdornment position='start'>
+												<SvgIcon color='action' fontSize='small'>
+													<SearchIcon />
+												</SvgIcon>
+											</InputAdornment>
+										),
+									}}
+									placeholder='Search customer'
+									variant='outlined'
+								/>
+								<Box sx={{px: 2, mt: 0.5}}>
+									<Button sx={{textTransform: 'capitalize', mx: 2}} size='small' variant='contained'>
+										Search
+									</Button>
+									<Button sx={{textTransform: 'capitalize', mx: 2}} size='small' variant='contained' color='neutral'>
+										Reset
+									</Button>
+								</Box>
 							</Box>
-						</Box>
-					</CardContent>
-				</Card>
-			</Box>
+						</CardContent>
+					</Card>
+				</Box>
+			</ThemeProvider>
 		</Box>
 	);
 };
