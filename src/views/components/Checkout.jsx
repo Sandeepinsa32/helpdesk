@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 //@ material-UI
 import {Box, Container, Paper, Stepper, Step, StepLabel, Button, Link, Typography} from '@mui/material';
@@ -9,26 +9,16 @@ import AddressForm from './Form/AddressForm';
 import PaymentForm from './Form/PaymentForm';
 import Review from './Form/Review';
 
-const steps = ['Personal Detail ', 'Payment', 'Review'];
+// ===============================//================================//=======================//======================//==========================
 
-function getStepContent(step) {
-	switch (step) {
-		case 0:
-			return <AddressForm />;
-		case 1:
-			return <PaymentForm />;
-		case 2:
-			return <Review />;
-		default:
-			throw new Error('Unknown step');
-	}
-}
+const steps = ['Personal Detail ', 'Payment', 'Review'];
 
 const theme = createTheme();
 
 export default function Checkout() {
 	const [activeStep, setActiveStep] = useState(0);
 
+	const myRef = useRef();
 	const handleNext = () => {
 		setActiveStep(activeStep + 1);
 	};
@@ -37,6 +27,18 @@ export default function Checkout() {
 		setActiveStep(activeStep - 1);
 	};
 
+	function getStepContent(step) {
+		switch (step) {
+			case 0:
+				return <AddressForm ref={myRef} next={() => handleNext()} />;
+			case 1:
+				return <PaymentForm />;
+			case 2:
+				return <Review />;
+			default:
+				throw new Error('Unknown step');
+		}
+	}
 	return (
 		<ThemeProvider theme={theme}>
 			<Container component='main' maxWidth='md' sx={{mb: 4}}>
@@ -71,7 +73,7 @@ export default function Checkout() {
 										</Button>
 									)}
 
-									<Button variant='contained' onClick={handleNext} sx={{mt: 3, ml: 1}}>
+									<Button variant='contained' type='submit' onClick={handleNext} sx={{mt: 3, ml: 1}}>
 										{activeStep === steps.length - 1 ? 'Confirm' : 'Next'}
 									</Button>
 								</Box>
