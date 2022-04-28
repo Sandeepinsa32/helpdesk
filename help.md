@@ -59,4 +59,20 @@ booking id - thd + 4 digit unique code
 10. profile modal update pass
 11. remove filter
 12. agent updatepassword
-13.
+13. modal title {title case }
+
+####################################################
+
+1. Transaction add card thing
+2. Remove filter button.
+3. Disable search button in transaction screen
+4. Login design ui
+5. Validation in agent modal
+6. Validation in transaction modal
+7. Modal Ka heading titlecase
+8. Add all fields in modal
+9. modal view on transaction
+10. functionality of reset button
+11. Dashboard deign Design
+12. Transaction - heading missing
+13. Hide scrollbar

@@ -1,20 +1,5 @@
 import {useState} from 'react';
-import {Box, Button, Card, CardContent, CardHeader, Divider, Grid, TextField} from '@mui/material';
-
-const states = [
-	{
-		value: 'PB',
-		label: 'Punjab',
-	},
-	{
-		value: 'new-york',
-		label: 'New York',
-	},
-	{
-		value: 'san-francisco',
-		label: 'San Francisco',
-	},
-];
+import {Box, Button, Card, CardContent, CardHeader, Divider, Grid, TextField, Avatar, CardActions, Typography} from '@mui/material';
 
 export const Detail = () => {
 	const [values, setValues] = useState({
@@ -38,6 +23,7 @@ export const Detail = () => {
 		});
 	};
 	const matchPassword = (e) => {
+		console.log(password, e.target.value);
 		if (password.newPassword == e.target.value) {
 			setUpdatePass(true);
 			console.log('done');
@@ -53,35 +39,33 @@ export const Detail = () => {
 				<CardHeader subheader='The information cannot be edited' title='Profile' />
 				<Divider />
 				<CardContent>
-					<Grid container spacing={3}>
-						<Grid item md={4} xs={12}>
-							<TextField
-								fullWidth
-								disabled={true}
-								helperText='Please specify the first name'
-								label='First name'
-								name='firstName'
-								onChange={handleChange}
-								required
-								value={values.firstName}
-								variant='outlined'
-							/>
-						</Grid>
-						<Grid item md={4} xs={12}>
-							<TextField fullWidth disabled={true} label='Last name' name='lastName' onChange={handleChange} required value={values.lastName} variant='outlined' />
-						</Grid>
-						<Grid item md={4} xs={12}>
-							<TextField fullWidth disabled={true} label='Email Address' name='email' onChange={handleChange} required value={values.email} variant='outlined' />
-						</Grid>
-
-						<Grid item md={4} xs={12}>
-							<TextField fullWidth disabled={true} label='Emp ID' name='employeeCode' onChange={handleChange} value={values.employeeCode} type='string' variant='outlined' />
-						</Grid>
-
-						<Grid item md={4} xs={12}>
-							<TextField fullWidth disabled={true} label='alias' name='employeeAlias' required variant='outlined' onChange={handleChange} value={values.employeeAlias} />
-						</Grid>
-					</Grid>
+					<Box
+						sx={{
+							alignItems: 'center',
+							display: 'flex',
+							flexDirection: 'column',
+						}}>
+						<Avatar
+							src={'/static/images/avatars/avatar_6.png'}
+							sx={{
+								height: 64,
+								mb: 2,
+								width: 64,
+							}}
+						/>
+						<Typography color='textPrimary' variant='h5'>
+							{`${values.firstName} ${values.lastName}`}
+						</Typography>
+						<Typography color='textSecondary' variant='body2'>
+							{` ${values.email}`}
+						</Typography>
+						<Typography color='textSecondary' variant='body2'>
+							{`Emp Code :  ${values.employeeCode}`}
+						</Typography>
+						<Typography color='textSecondary' variant='body2'>
+							{`Emp alias :  ${values.employeeAlias}`}
+						</Typography>
+					</Box>
 				</CardContent>
 				<Divider />
 
@@ -109,6 +93,7 @@ export const Detail = () => {
 						</Grid>
 					</Grid>
 				</CardContent>
+
 				<Box
 					sx={{
 						display: 'flex',
