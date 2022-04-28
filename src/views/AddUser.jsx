@@ -106,7 +106,7 @@ export const AddUser = () => {
     loadAgents();
   }, []);
 
-  const [agentsList, setAgentsList] = useState(null);
+  const [agentsList, setAgentsList] = useState([]);
   const [open, setOpen] = useState(false);
 
   const [deleteModal, setDeleteModal] = useState(false);
@@ -175,7 +175,7 @@ export const AddUser = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {agentsList &&
+                    {agentsList?.length &&
                       agentsList.map((row, index) => (
                         <TableRow
                           key={index}
