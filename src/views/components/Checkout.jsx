@@ -23,7 +23,7 @@ export default function Checkout() {
 	// const myRef = useRef();
 	const handleNext = () => {
 		setActiveStep(activeStep + 1);
-		console.log(userInfo);
+		console.log(userInfo, cardInfo);
 	};
 
 	const handleBack = () => {
@@ -35,7 +35,7 @@ export default function Checkout() {
 			case 0:
 				return <AddressForm handleSubmit={handleNext} setUserInfo={setUserInfo} />;
 			case 1:
-				return <PaymentForm setCardInfo={setCardInfo} />;
+				return <PaymentForm setCardInfo={setCardInfo} handleBack={handleBack} handleSubmit={handleNext} />;
 			case 2:
 				return <Review />;
 			default:
@@ -71,11 +71,11 @@ export default function Checkout() {
 								<Box sx={{}}>{getStepContent(activeStep)}</Box>
 
 								<Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-									{activeStep !== 0 && (
+									{/* {activeStep !== 0 && (
 										<Button onClick={handleBack} sx={{mt: 3, ml: 1}}>
 											Back
 										</Button>
-									)}
+									)} */}
 
 									{activeStep === steps.length - 1 ? (
 										<Button variant='contained' type='submit' onClick={handleNext} sx={{mt: 3, ml: 1}}>
