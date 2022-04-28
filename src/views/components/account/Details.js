@@ -21,16 +21,27 @@ export const Detail = () => {
 		firstName: 'John',
 		lastName: 'Deo',
 		email: 'John@deo.test',
-		phone: '+1 8427175003',
-		state: 'PB',
-		country: 'IND',
+		employeeCode: 'AGN-88',
+		employeeAlias: 'JohnDoe',
 	});
+	const [password, setPassword] = useState({
+		oldPassword: '',
+		newPassword: '',
+		confirmPassword: '',
+	});
+	const [updatePass, setUpdatePass] = useState(false);
 
 	const handleChange = (event) => {
 		setValues({
 			...values,
 			[event.target.name]: event.target.value,
 		});
+	};
+	const matchPassword = (e) => {
+		if (password.newPassword == e.target.value) {
+			setUpdatePass(true);
+			console.log('done');
+		}
 	};
 
 	return (
@@ -39,13 +50,14 @@ export const Detail = () => {
 				sx={{
 					boxShadow: 'none',
 				}}>
-				<CardHeader subheader='The information can be edited' title='Profile' />
+				<CardHeader subheader='The information cannot be edited' title='Profile' />
 				<Divider />
 				<CardContent>
 					<Grid container spacing={3}>
-						<Grid item md={6} xs={12}>
+						<Grid item md={4} xs={12}>
 							<TextField
 								fullWidth
+								disabled={true}
 								helperText='Please specify the first name'
 								label='First name'
 								name='firstName'
@@ -55,38 +67,56 @@ export const Detail = () => {
 								variant='outlined'
 							/>
 						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField fullWidth label='Last name' name='lastName' onChange={handleChange} required value={values.lastName} variant='outlined' />
+						<Grid item md={4} xs={12}>
+							<TextField fullWidth disabled={true} label='Last name' name='lastName' onChange={handleChange} required value={values.lastName} variant='outlined' />
 						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField fullWidth label='Email Address' name='email' onChange={handleChange} required value={values.email} variant='outlined' />
+						<Grid item md={4} xs={12}>
+							<TextField fullWidth disabled={true} label='Email Address' name='email' onChange={handleChange} required value={values.email} variant='outlined' />
 						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField fullWidth label='Phone Number' name='phone' onChange={handleChange} type='number' value={values.phone} variant='outlined' />
+
+						<Grid item md={4} xs={12}>
+							<TextField fullWidth disabled={true} label='Emp ID' name='employeeCode' onChange={handleChange} value={values.employeeCode} type='string' variant='outlined' />
 						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField fullWidth label='Country' name='country' onChange={handleChange} required value={values.country} variant='outlined' />
-						</Grid>
-						<Grid item md={6} xs={12}>
-							<TextField fullWidth label='Select State' name='state' onChange={handleChange} required select SelectProps={{native: true}} value={values.state} variant='outlined'>
-								{states.map((option) => (
-									<option key={option.value} value={option.value}>
-										{option.label}
-									</option>
-								))}
-							</TextField>
+
+						<Grid item md={4} xs={12}>
+							<TextField fullWidth disabled={true} label='alias' name='employeeAlias' required variant='outlined' onChange={handleChange} value={values.employeeAlias} />
 						</Grid>
 					</Grid>
 				</CardContent>
 				<Divider />
+
+				<CardContent>
+					<Grid container spacing={3}>
+						<Grid item md={4} xs={12}>
+							<TextField fullWidth label='Old Password' name='oldPassword' type='password' required variant='outlined' onChange={handleChange} value={values.password} />
+						</Grid>
+						<Grid item md={4} xs={12}>
+							<TextField fullWidth label='New Password' name='newPassword' type='password' required variant='outlined' onChange={handleChange} value={values.password} />
+						</Grid>
+						<Grid item md={4} xs={12}>
+							<TextField
+								fullWidth
+								label='Confirm Password'
+								name='confirmPassword'
+								type='password'
+								required
+								variant='outlined'
+								onChange={(e) => {
+									matchPassword(e);
+								}}
+								value={values.password}
+							/>
+						</Grid>
+					</Grid>
+				</CardContent>
 				<Box
 					sx={{
 						display: 'flex',
 						justifyContent: 'flex-end',
 						p: 2,
 					}}>
-					<Button color='primary' variant='contained'>
-						Save details
+					<Button color='primary' variant='contained' disabled={updatePass ? false : true}>
+						Update Password
 					</Button>
 				</Box>
 			</Card>
