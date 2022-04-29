@@ -13,7 +13,8 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 	const [fareType, setFareType] = useState(null);
 	const [bookedOn, setBookedOn] = useState(null);
 	//date
-	const [value, setValue] = React.useState(null);
+	const [departureDateValue, setDepartureDateValue] = useState(null);
+	const [returnDateValue, setReturnDateValue] = useState(null);
 
 	const handleBookingChange = (event) => {
 		setBookingType(event.target.value);
@@ -33,47 +34,54 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 		initialValues: {
 			firstname: 'John',
 			lastname: 'doe',
+			phone: '5655656565',
+			email: 'dsnsnn@gmgmg.cmo',
+
 			passengerCount: '2',
 			pnr: 'xssc',
 			mco: '5',
 			airlineCode: 'ss55',
-			productType: '',
-			bookingType: '',
+
 			totalCharge: '55',
 			pricePerPax: '5',
-			phone: '5655656565',
-			email: 'dsnsnn@gmgmg.cmo',
 
-			// cardName: 'Test user',
-			// cardNumber: '555222000222555',
-			// expiryDate: '02/2022',
-			// cvv: '0348',
-			// comments: '',
-			// notes: '',
+			productType: '',
+			bookingType: '',
+			fareType: '',
+			bookedon: '',
+			departureDateValue: '',
+			returnDateValue: '',
+
+			comments: '',
+			notes: '',
 		},
 		validationSchema: Yup.object({
-			firstname: Yup.string().max(255).required('First name is required'),
-			lastname: Yup.string().max(255).required('Last name is required'),
+			firstname: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+			lastname: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+			email: Yup.string().email('Invalid email address').required('Required'),
+
 			passengerCount: Yup.string().matches(phoneRegExp, 'Must be a valid passengerCount').required('passengerCount is nrequired'),
 			password: Yup.string().max(255).required('Password is required'),
 			pnr: Yup.string().max(255).required('pnr is required'),
 			mco: Yup.number().required().positive().integer().required('mco is required'),
 			airlineCode: Yup.string().max(255).required('airlineCode is required'),
-			productType: '',
-			bookingType: '',
 			totalCharge: Yup.number().required().positive().integer().required('totalCharge is required'),
 			pricePerPax: Yup.number().required().positive().integer().required('pricePerPax is required'),
 			phone: Yup.number().required().positive().integer().required('phone is required'),
-			email: Yup.string().email('Invalid email address').required('Required'),
-			// cardName: Yup.string().max(255).required('CardHolder name is required'),
-			// cardNumber: Yup.number(18).required().positive().integer().required('Card Number is required'),
-			// expiryDate: '',
-			// cvv: Yup.number(4).required().positive().integer().required('pricePerPax is required'),
-			// comments: '',
-			// notes: '',
+
+			productType: Yup.string().oneOf(['flight', 'car', 'insurance', 'addon'], 'Product  Type').required('Required'),
+			bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'addon'], 'Product  Type').required('Required'),
+			fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare  Type').required('Required'),
+			bookedon: '',
+			departureDateValue: '',
+			returnDateValue: '',
+			comments: '',
+			notes: '',
 		}),
 		onSubmit: (values) => {
-			alert('done');
+			console.log(formik.values);
+			setUserInfo(formik.values);
+			handleSubmit();
 		},
 	});
 	return (
@@ -171,20 +179,19 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							<Select
 								labelId='Bokking-type-Dropdown-label	'
 								id='Bokking-type-Dropdown'
-								value={bookingType}
-								onChange={handleBookingChange}
+								// value={bookingType}
+								// onChange={handleBookingChange}
 								fullWidth
 								name='bookingType'
 								label='Booking Type'
 								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
 								helperText={formik.touched.bookingType && formik.errors.bookingType}
 								onBlur={formik.handleBlur}
-								// onChange={formik.handleChange}
-								// value={formik.values.bookingType}
-							>
+								onChange={formik.handleChange}
+								value={formik.values.bookingType}>
 								<MenuItem value='new'>New</MenuItem>
-								<MenuItem value='Exchange'>Exchange</MenuItem>
-								<MenuItem value='Refund'>Refund</MenuItem>
+								<MenuItem value='exchange'>Exchange</MenuItem>
+								<MenuItem value='refund'>Refund</MenuItem>
 								<MenuItem value='Void'>Void</MenuItem>
 								<MenuItem value='Add-On'>Add-On</MenuItem>
 							</Select>
@@ -196,21 +203,20 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							<Select
 								labelId='Product-Type-Dropdown-label'
 								id='Product-Type-Dropdown'
-								value={productType}
-								onChange={handleProductChange}
+								// value={productType}
+								// onChange={handleProductChange}
 								fullWidth
 								name='productType'
 								label='Product Type'
-								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
-								helperText={formik.touched.bookingType && formik.errors.bookingType}
+								error={Boolean(formik.touched.productType && formik.errors.productType)}
+								helperText={formik.touched.productType && formik.errors.productType}
 								onBlur={formik.handleBlur}
-								// onChange={formik.handleChange}
-								// value={formik.values.bookingType}
-							>
+								onChange={formik.handleChange}
+								value={formik.values.productType}>
 								<MenuItem value='flight'>flight</MenuItem>
-								<MenuItem value='Car'>Car</MenuItem>
-								<MenuItem value='Insurance'>Insurance</MenuItem>
-								<MenuItem value='Add-On'>Add-On</MenuItem>
+								<MenuItem value='car'>Car</MenuItem>
+								<MenuItem value='insurance'>Insurance</MenuItem>
+								<MenuItem value='addon'>Add-On</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>
@@ -220,17 +226,16 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							<Select
 								labelId='Fare-Type-Dropdown-label'
 								id='Fare-Type-Dropdown'
-								value={fareType}
-								onChange={handleFareChange}
+								// value={fareType}
+								// onChange={handleFareChange}
 								fullWidth
 								name='fareType'
 								label='Fare Type'
-								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
-								helperText={formik.touched.bookingType && formik.errors.bookingType}
+								error={Boolean(formik.touched.fareType && formik.errors.fareType)}
+								helperText={formik.touched.fareType && formik.errors.fareType}
 								onBlur={formik.handleBlur}
-								// onChange={formik.handleChange}
-								// value={formik.values.bookingType}
-							>
+								onChange={formik.handleChange}
+								value={formik.values.fareType}>
 								<MenuItem value='publish'>publish</MenuItem>
 								<MenuItem value='private'>Private</MenuItem>
 								<MenuItem value='fxl'>FXL</MenuItem>
@@ -239,26 +244,23 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						</FormControl>
 					</Grid>
 					<Grid item xs={12} sm={4}>
-						<FormControl required fullWidth>
+						<FormControl required fullWidth error={Boolean(formik.touched.bookedOn && formik.errors.bookedOn)} helperText={formik.touched.bookedOn && formik.errors.bookedOn}>
 							<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
 							<Select
 								labelId='Booked-on-Dropdown-label'
 								id='Booked-on-Dropdown'
-								value={bookedOn}
-								onChange={handleBookedOn}
+								// value={bookedOn}
+								// onChange={handleBookedOn}
 								fullWidth
 								name='bookedOn'
 								label='Booked On'
-								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
-								helperText={formik.touched.bookingType && formik.errors.bookingType}
 								onBlur={formik.handleBlur}
-								// onChange={formik.handleChange}
-								// value={formik.values.bookingType}
-							>
-								<MenuItem value='publish'>publish</MenuItem>
-								<MenuItem value='private'>Private</MenuItem>
-								<MenuItem value='fxl'>FXL</MenuItem>
-								<MenuItem value='dummy'>Dummy</MenuItem>
+								onChange={formik.handleChange}
+								value={formik.values.bookedOn}>
+								<MenuItem value='web'>Web</MenuItem>
+								<MenuItem value='trippro'>trippro</MenuItem>
+								<MenuItem value='skybird'>skybird</MenuItem>
+								<MenuItem value='picasso'>Picasso</MenuItem>
 							</Select>
 						</FormControl>
 					</Grid>
@@ -347,25 +349,26 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 					<Grid item xs={12} sm={4}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DatePicker
-								label='Basic example'
-								value={value}
+								label='Departure Date'
+								value={departureDateValue}
 								onChange={(newValue) => {
-									setValue(newValue);
+									setDepartureDateValue(newValue);
 								}}
 								renderInput={(params) => <TextField {...params} />}
 							/>
 						</LocalizationProvider>
-						{/* <TextField
-							id='totalCharge'
-							name='totalCharge'
-							label='Grand Total'
-							fullWidth
-							error={Boolean(formik.touched.totalCharge && formik.errors.totalCharge)}
-							helperText={formik.touched.totalCharge && formik.errors.totalCharge}
-							onBlur={formik.handleBlur}
-							onChange={formik.handleChange}
-							value={formik.values.totalCharge}
-						/> */}
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<LocalizationProvider dateAdapter={AdapterDateFns}>
+							<DatePicker
+								label='Return Date'
+								value={returnDateValue}
+								onChange={(newValue) => {
+									setReturnDateValue(newValue);
+								}}
+								renderInput={(params) => <TextField {...params} />}
+							/>
+						</LocalizationProvider>
 					</Grid>
 
 					<Grid item xs={8} sm={10}></Grid>
@@ -373,12 +376,12 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						<Button
 							variant='contained'
 							type='submit'
+							sx={{mt: 3, ml: 1}}
 							onClick={() => {
 								console.log(formik.values);
 								setUserInfo(formik.values);
 								handleSubmit();
-							}}
-							sx={{mt: 3, ml: 1}}>
+							}}>
 							submit
 						</Button>
 					</Grid>
