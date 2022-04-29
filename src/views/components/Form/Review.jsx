@@ -1,69 +1,57 @@
 import React from 'react';
-import {Typography, List, ListItem, ListItemText, Grid} from '@mui/material';
+import {Typography, List, ListItem, CardContent, Box, Avatar, ListItemText, Grid} from '@mui/material';
 
-const products = [
-	{
-		name: 'John doe',
-		desc: '8427175003',
-	},
-	{
-		name: 'Airline Code',
-		desc: 'PNR No.',
-	},
-	{
-		name: 'Booking Type',
-		desc: 'Number of Passenger',
-	},
-];
-
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-const payments = [
-	{name: 'Card type', detail: 'Visa'},
-	{name: 'Card holder', detail: 'Mr John Smith'},
-	{name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234'},
-	{name: 'Expiry date', detail: '04/2024'},
-];
-
-export default function Review(props) {
+export default function Review({userInfo, cardInfo}) {
+	const payments = [
+		{name: 'Card type', detail: 'Visa'},
+		{name: 'Card holder', detail: 'Mr John Smith'},
+		{name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234'},
+		{name: 'Expiry date', detail: '04/2024'},
+	];
 	return (
-		<React.Fragment>
+		<>
 			<Typography variant='h6' gutterBottom>
-				Preview
+				Record summary
 			</Typography>
 
-			{/*  product Price details */}
-
-			<List disablePadding>
-				{console.log(props.formik.values)}
-				{/* {.map((product) => (
-					<>
-						<ListItem key={product.firstname} sx={{py: 1, px: 0}}>
-							<ListItemText
-								primary={product.firstname}
-								// secondary={product.desc}
-							/>
-							<Typography variant='body2'>{product.lastname}</Typography>
-						</ListItem>
-						<ListItem key={product.email} sx={{py: 1, px: 0}}>
-							<ListItemText
-								primary={product.email}
-								// secondary={product.desc}
-							/>
-							<Typography variant='body2'>{product.email}</Typography>
-						</ListItem>
-					</>
-				))} */}
-			</List>
+			<CardContent>
+				<Box
+					sx={{
+						alignItems: 'center',
+						display: 'flex',
+						flexDirection: 'column',
+					}}>
+					<Avatar
+						src={'/static/images/avatars/avatar_6.png'}
+						sx={{
+							height: 64,
+							mb: 2,
+							width: 64,
+						}}
+					/>
+					<Typography color='textPrimary' variant='h5'>
+						{`${userInfo.firstname} ${userInfo.lastname}`}
+					</Typography>
+					<Typography color='textSecondary' variant='body2'>
+						{` ${userInfo.email}`}
+					</Typography>
+					<Typography color='textSecondary' variant='body2'>
+						{`Phone  :  ${userInfo.phone}`}
+					</Typography>
+					<Typography color='textSecondary' variant='body2'>
+						{`Emp alias :  ${userInfo.employeeAlias}`}
+					</Typography>
+				</Box>
+			</CardContent>
 
 			<Grid container spacing={2}>
-				{/* <Grid item xs={12} sm={6}>
+				<Grid item xs={12} sm={6}>
 					<Typography variant='h6' gutterBottom sx={{mt: 2}}>
 						Shipping
 					</Typography>
 					<Typography gutterBottom>John Smith</Typography>
-					<Typography gutterBottom>{addresses.join(', ')}</Typography>
-				</Grid> */}
-
+					<Typography gutterBottom>{('addresses.join(', ')')}</Typography>
+				</Grid>
 				<Grid item container direction='column' xs={12} sm={6}>
 					<Typography variant='h6' gutterBottom sx={{mt: 2}}>
 						Payment details
@@ -82,6 +70,6 @@ export default function Review(props) {
 					</Grid>
 				</Grid>
 			</Grid>
-		</React.Fragment>
+		</>
 	);
 }

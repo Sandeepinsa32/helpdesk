@@ -37,7 +37,7 @@ export default function Checkout() {
 			case 1:
 				return <PaymentForm setCardInfo={setCardInfo} handleBack={handleBack} handleSubmit={handleNext} />;
 			case 2:
-				return <Review />;
+				return <Review userInfo={userInfo} cardInfo={cardInfo} />;
 			default:
 				throw new Error('Unknown step');
 		}
@@ -58,7 +58,7 @@ export default function Checkout() {
 				</Stepper>
 
 				<Box>
-					<Paper variant='outlined' sx={{my: {xs: 2, md: 0}, p: {xs: 2, md: 3}, height: `60vh`, overflow: `scroll`}}>
+					<Paper variant='outlined' sx={{my: {xs: 2, md: 0}, p: {xs: 2, md: 2}, height: `60vh`, overflowY: `auto`}}>
 						{activeStep === steps.length ? (
 							<>
 								<Typography variant='h5' gutterBottom>

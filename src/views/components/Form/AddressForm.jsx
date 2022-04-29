@@ -2,13 +2,37 @@ import React, {useState} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-import {Grid, Typography, TextField, FormControlLabel, Checkbox, Button} from '@mui/material';
+import {Grid, Typography, TextField, FormControlLabel, Checkbox, MenuItem, InputLabel, FormControl, Select, Button} from '@mui/material';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
 export default function AddressForm({setUserInfo, handleSubmit}) {
+	const [bookingType, setBookingType] = useState(null);
+	const [productType, setProductType] = useState(null);
+	const [fareType, setFareType] = useState(null);
+	const [bookedOn, setBookedOn] = useState(null);
+	//date
+	const [value, setValue] = React.useState(null);
+
+	const handleBookingChange = (event) => {
+		setBookingType(event.target.value);
+	};
+	const handleProductChange = (event) => {
+		setProductType(event.target.value);
+	};
+	const handleFareChange = (event) => {
+		setFareType(event.target.value);
+	};
+	const handleBookedOn = (event) => {
+		setBookedOn(event.target.value);
+	};
 	const phoneRegExp = `^[1-9]+$`;
 
 	const formik = useFormik({
 		initialValues: {
+			firstname: 'John',
+			lastname: 'doe',
 			passengerCount: '2',
 			pnr: 'xssc',
 			mco: '5',
@@ -20,12 +44,12 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			phone: '5655656565',
 			email: 'dsnsnn@gmgmg.cmo',
 
-			cardName: 'Test user',
-			cardNumber: '555222000222555',
-			expiryDate: '02/2022',
-			cvv: '0348',
-			comments: '',
-			notes: '',
+			// cardName: 'Test user',
+			// cardNumber: '555222000222555',
+			// expiryDate: '02/2022',
+			// cvv: '0348',
+			// comments: '',
+			// notes: '',
 		},
 		validationSchema: Yup.object({
 			firstname: Yup.string().max(255).required('First name is required'),
@@ -41,12 +65,12 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			pricePerPax: Yup.number().required().positive().integer().required('pricePerPax is required'),
 			phone: Yup.number().required().positive().integer().required('phone is required'),
 			email: Yup.string().email('Invalid email address').required('Required'),
-			cardName: Yup.string().max(255).required('CardHolder name is required'),
-			cardNumber: Yup.number(18).required().positive().integer().required('Card Number is required'),
-			expiryDate: '',
-			cvv: Yup.number(4).required().positive().integer().required('pricePerPax is required'),
-			comments: '',
-			notes: '',
+			// cardName: Yup.string().max(255).required('CardHolder name is required'),
+			// cardNumber: Yup.number(18).required().positive().integer().required('Card Number is required'),
+			// expiryDate: '',
+			// cvv: Yup.number(4).required().positive().integer().required('pricePerPax is required'),
+			// comments: '',
+			// notes: '',
 		}),
 		onSubmit: (values) => {
 			alert('done');
@@ -59,7 +83,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			</Typography>
 			<form onSubmit={formik.handleSubmit}>
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={4}>
 						<TextField
 							fullWidth
 							label='First Name'
@@ -68,10 +92,10 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							helperText={formik.touched.firstname && formik.errors.firstname}
 							onBlur={formik.handleBlur}
 							onChange={formik.handleChange}
-							value={formik.values.firstName}
+							value={formik.values.firstname}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={4}>
 						<TextField
 							id='lastname'
 							name='lastname'
@@ -86,15 +110,16 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 					</Grid>
 					<Grid item xs={12} sm={4}>
 						<TextField
-							error={Boolean(formik.touched.passengerCount && formik.errors.passengerCount)}
+							nrequired
+							id='email'
+							name='email'
+							label='email'
 							fullWidth
-							helperText={formik.touched.passengerCount && formik.errors.passengerCount}
-							label='Number of Passenger *'
-							name='passengerCount'
+							error={Boolean(formik.touched.email && formik.errors.email)}
+							helperText={formik.touched.email && formik.errors.email}
 							onBlur={formik.handleBlur}
 							onChange={formik.handleChange}
-							type='number'
-							value={formik.values.passengerCount}
+							value={formik.values.email}
 						/>
 					</Grid>
 
@@ -114,19 +139,19 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 					</Grid>
 					<Grid item xs={12} sm={4}>
 						<TextField
-							nrequired
-							id='email'
-							name='email'
-							label='email'
+							error={Boolean(formik.touched.passengerCount && formik.errors.passengerCount)}
 							fullWidth
-							error={Boolean(formik.touched.email && formik.errors.email)}
-							helperText={formik.touched.email && formik.errors.email}
+							helperText={formik.touched.passengerCount && formik.errors.passengerCount}
+							label='Number of Passenger *'
+							name='passengerCount'
 							onBlur={formik.handleBlur}
 							onChange={formik.handleChange}
-							value={formik.values.email}
+							type='number'
+							value={formik.values.passengerCount}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+
+					<Grid item xs={12} sm={4}>
 						<TextField
 							nrequired
 							id='pnr'
@@ -140,12 +165,109 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.pnr}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={4}>
+						<FormControl required fullWidth>
+							<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
+							<Select
+								labelId='Bokking-type-Dropdown-label	'
+								id='Bokking-type-Dropdown'
+								value={bookingType}
+								onChange={handleBookingChange}
+								fullWidth
+								name='bookingType'
+								label='Booking Type'
+								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
+								helperText={formik.touched.bookingType && formik.errors.bookingType}
+								onBlur={formik.handleBlur}
+								// onChange={formik.handleChange}
+								// value={formik.values.bookingType}
+							>
+								<MenuItem value='new'>New</MenuItem>
+								<MenuItem value='Exchange'>Exchange</MenuItem>
+								<MenuItem value='Refund'>Refund</MenuItem>
+								<MenuItem value='Void'>Void</MenuItem>
+								<MenuItem value='Add-On'>Add-On</MenuItem>
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<FormControl required fullWidth>
+							<InputLabel id='Product-Type-Dropdown-label'>Product Type</InputLabel>
+							<Select
+								labelId='Product-Type-Dropdown-label'
+								id='Product-Type-Dropdown'
+								value={productType}
+								onChange={handleProductChange}
+								fullWidth
+								name='productType'
+								label='Product Type'
+								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
+								helperText={formik.touched.bookingType && formik.errors.bookingType}
+								onBlur={formik.handleBlur}
+								// onChange={formik.handleChange}
+								// value={formik.values.bookingType}
+							>
+								<MenuItem value='flight'>flight</MenuItem>
+								<MenuItem value='Car'>Car</MenuItem>
+								<MenuItem value='Insurance'>Insurance</MenuItem>
+								<MenuItem value='Add-On'>Add-On</MenuItem>
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<FormControl required fullWidth>
+							<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
+							<Select
+								labelId='Fare-Type-Dropdown-label'
+								id='Fare-Type-Dropdown'
+								value={fareType}
+								onChange={handleFareChange}
+								fullWidth
+								name='fareType'
+								label='Fare Type'
+								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
+								helperText={formik.touched.bookingType && formik.errors.bookingType}
+								onBlur={formik.handleBlur}
+								// onChange={formik.handleChange}
+								// value={formik.values.bookingType}
+							>
+								<MenuItem value='publish'>publish</MenuItem>
+								<MenuItem value='private'>Private</MenuItem>
+								<MenuItem value='fxl'>FXL</MenuItem>
+								<MenuItem value='dummy'>Dummy</MenuItem>
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<FormControl required fullWidth>
+							<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
+							<Select
+								labelId='Booked-on-Dropdown-label'
+								id='Booked-on-Dropdown'
+								value={bookedOn}
+								onChange={handleBookedOn}
+								fullWidth
+								name='bookedOn'
+								label='Booked On'
+								error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
+								helperText={formik.touched.bookingType && formik.errors.bookingType}
+								onBlur={formik.handleBlur}
+								// onChange={formik.handleChange}
+								// value={formik.values.bookingType}
+							>
+								<MenuItem value='publish'>publish</MenuItem>
+								<MenuItem value='private'>Private</MenuItem>
+								<MenuItem value='fxl'>FXL</MenuItem>
+								<MenuItem value='dummy'>Dummy</MenuItem>
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item xs={12} sm={4}>
 						<TextField
 							nrequired
 							id='mco'
 							name='mco'
-							label='MCO No.'
+							label='MCO'
 							fullWidth
 							error={Boolean(formik.touched.mco && formik.errors.mco)}
 							helperText={formik.touched.mco && formik.errors.mco}
@@ -154,7 +276,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.mco}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={4}>
 						<TextField
 							id='airlineCode'
 							name='airlineCode'
@@ -167,22 +289,8 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.airlineCode}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
-						<TextField
-							nrequired
-							id='bookingType'
-							name='bookingType'
-							label='Booking Type'
-							fullWidth
-							error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
-							helperText={formik.touched.bookingType && formik.errors.bookingType}
-							onBlur={formik.handleBlur}
-							onChange={formik.handleChange}
-							value={formik.values.bookingType}
-						/>
-					</Grid>
 
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={4}>
 						<TextField
 							nrequired
 							id='pricePerPerson'
@@ -196,7 +304,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.pricePerPerson}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={6}>
+					<Grid item xs={12} sm={4}>
 						<TextField
 							id='totalCharge'
 							name='totalCharge'
@@ -208,6 +316,56 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							onChange={formik.handleChange}
 							value={formik.values.totalCharge}
 						/>
+					</Grid>
+					{/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+					<Grid item xs={12} sm={4}>
+						<TextField
+							id='totalSale'
+							name='totalSale'
+							label='Total Sale'
+							fullWidth
+							error={Boolean(formik.touched.totalSale && formik.errors.totalSale)}
+							helperText={formik.touched.totalSale && formik.errors.totalSale}
+							onBlur={formik.handleBlur}
+							onChange={formik.handleChange}
+							value={formik.values.totalSale}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<TextField
+							id='totalInhouseChargetotalInhouseCharge'
+							name='totalInhouseCharge'
+							label='Total Inhouse Charge'
+							fullWidth
+							error={Boolean(formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge)}
+							helperText={formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge}
+							onBlur={formik.handleBlur}
+							onChange={formik.handleChange}
+							value={formik.values.totalInhouseCharge}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={4}>
+						<LocalizationProvider dateAdapter={AdapterDateFns}>
+							<DatePicker
+								label='Basic example'
+								value={value}
+								onChange={(newValue) => {
+									setValue(newValue);
+								}}
+								renderInput={(params) => <TextField {...params} />}
+							/>
+						</LocalizationProvider>
+						{/* <TextField
+							id='totalCharge'
+							name='totalCharge'
+							label='Grand Total'
+							fullWidth
+							error={Boolean(formik.touched.totalCharge && formik.errors.totalCharge)}
+							helperText={formik.touched.totalCharge && formik.errors.totalCharge}
+							onBlur={formik.handleBlur}
+							onChange={formik.handleChange}
+							value={formik.values.totalCharge}
+						/> */}
 					</Grid>
 
 					<Grid item xs={8} sm={10}></Grid>
