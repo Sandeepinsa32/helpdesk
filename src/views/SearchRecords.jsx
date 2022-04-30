@@ -104,7 +104,18 @@ export default function SearchRecord() {
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
-										{['Email', 'Agent Name', 'Booking ID', 'Phone', 'Total G.P', 'Airline', '	No.of PAX', 'Fare Type', 'Dep Date', 'Return Date', 'action'].map((th) => (
+										{[
+											'Email',
+											'Agent Name',
+											//	'Booking ID',
+											'Phone',
+											'Total G.P',
+											'Airline',
+											'	No.of PAX',
+											'Fare Type',
+											//'Dep Date', 'Return Date',
+											'action',
+										].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
 									</TableRow>
@@ -119,15 +130,15 @@ export default function SearchRecord() {
 												}}>
 												<TableCell>{row.email}</TableCell>
 												<TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>
-												<TableCell>{row._id.substring(0, 8)}...</TableCell>
+												{/* <TableCell>{row._id.substring(0, 8)}...</TableCell> */}
 												{/* <TableCell>{row.cards[0].card}</TableCell> */}
 												<TableCell>{row.phone}</TableCell>
 												<TableCell>{row.grandTotal}</TableCell>
 												<TableCell>{row.airlineCode}</TableCell>
 												<TableCell>{row.passengerCount}</TableCell>
 												<TableCell>{row.fareType}</TableCell>
-												<TableCell>{row.departureDate.substring(0, 10)}</TableCell>
-												<TableCell>{row.returnDate.substring(0, 10)}</TableCell>
+												{/* <TableCell>{row.departureDate.substring(0, 10)}</TableCell>
+												<TableCell>{row.returnDate.substring(0, 10)}</TableCell> */}
 
 												<TableCell>
 													<Button
@@ -135,9 +146,9 @@ export default function SearchRecord() {
 														size='small'
 														onClick={() => {
 															console.log(row);
-															setViewData(true);
-															setUserData(row);
-															handleOpen();
+															// setViewData(true);
+															// setUserData(row);
+															// handleOpen();
 														}}>
 														View
 													</Button>
