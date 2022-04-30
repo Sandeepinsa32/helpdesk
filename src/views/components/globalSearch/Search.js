@@ -31,15 +31,20 @@ const theme = createTheme({
 });
 
 export const Search = (props) => {
-	const [searchValue, setSearchValue] = useState(null);
 	const [searchKey, setSearchKey] = useState({
 		name: '',
 		email: '',
 	});
 
-	function searchHandler(e) {
-		console.log(searchValue);
+	function searchHandler() {
+		alert(JSON.stringify(searchKey));
 	}
+	const handleReset = () => {
+		setSearchKey({
+			name: '',
+			email: '',
+		});
+	};
 	return (
 		<Box>
 			<ThemeProvider theme={theme}>
@@ -62,29 +67,13 @@ export const Search = (props) => {
 													</InputAdornment>
 												),
 											}}
-											onChange={(e) => setSearchValue((prev) => ({...prev, name: e.target.value}))}
+											onChange={(e) => setSearchKey((prev) => ({...prev, name: e.target.value}))}
 											placeholder='Enter Name'
 											variant='outlined'
+											value={searchKey.name}
 										/>
 									</Grid>
-									{/* <Grid item xs={12} md={3}>
-										<TextField
-											size='small'
-											sx={{width: `20vw`, height: `2rem`}}
-											InputProps={{
-												startAdornment: (
-													<InputAdornment position='start'>
-														<SvgIcon color='action' fontSize='small'>
-															<SearchIcon />
-														</SvgIcon>
-													</InputAdornment>
-												),
-											}}
-											onChange={(e) => setSearchValue(e.target.value)}
-											placeholder='Enter '
-											variant='outlined'
-										/>
-									</Grid> */}
+
 									<Grid item xs={12} md={3}>
 										<TextField
 											size='small'
@@ -98,21 +87,22 @@ export const Search = (props) => {
 													</InputAdornment>
 												),
 											}}
-											onChange={(e) => setSearchValue((prev) => ({...prev, email: e.target.value}))}
+											onChange={(e) => setSearchKey((prev) => ({...prev, email: e.target.value}))}
 											placeholder='Enter Email id'
 											variant='outlined'
+											value={searchKey.email}
 										/>
 									</Grid>
 									<Grid item xs={12} md={3} sx={{px: 2, mt: 0.5}}>
 										<Button
 											sx={{textTransform: 'capitalize', mx: 1}}
 											size='small'
-											disabled={searchValue == null || searchValue == '' || searchValue == ' ' ? true : false}
+											disabled={searchKey == null || (searchKey.name == '' && searchKey.email == '') ? true : false}
 											variant='contained'
-											onClick={() => searchHandler()}>
+											onClick={searchHandler}>
 											Search
 										</Button>
-										<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral'>
+										<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral' onClick={handleReset}>
 											Reset
 										</Button>
 									</Grid>

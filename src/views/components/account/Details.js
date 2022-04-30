@@ -36,7 +36,7 @@ export const Detail = () => {
 				sx={{
 					boxShadow: 'none',
 				}}>
-				<CardHeader subheader='The information cannot be edited' title='Profile' />
+				<CardHeader subheader='The information cannot be edited' title='Profile' sx={{py: 0}} />
 				<Divider />
 				<CardContent>
 					<Box

@@ -176,7 +176,7 @@ export const Result = (props) => {
 							<CardHeader
 								// subheader='you can only add Sales-agent'
 								title='Agent Detail '
-								sx={{textTransform: 'uppercase'}}
+								sx={{py: 0}}
 							/>
 
 							<CardContent>

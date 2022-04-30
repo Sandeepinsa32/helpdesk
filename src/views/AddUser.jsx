@@ -223,11 +223,7 @@ export const AddUser = () => {
 							sx={{
 								boxShadow: 'none',
 							}}>
-							<CardHeader
-								// subheader='you can only add Sales-agent'
-								title='Add New Agent '
-								sx={{textTransform: 'uppercase'}}
-							/>
+							<CardHeader subheader='you can only add Sales-agent' title='Add new Agent ' sx={{py: 0}} />
 
 							<CardContent>
 								<Grid container spacing={3}>
@@ -289,7 +285,7 @@ const style = {
 	// border: '2px solid #000',
 	boxShadow: 24,
 	borderRadius: '1rem',
-	p: 4,
+	padding: '24px 8px',
 };
 
 export default AddUser;
