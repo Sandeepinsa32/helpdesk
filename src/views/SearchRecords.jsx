@@ -1,4 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+
+import {BASEURL} from '../utils/Utils';
+import axios from 'axios';
+
 import {Box, Container, Button, Modal, IconButton, Typography} from '@mui/material';
 import {Search} from './components/globalSearch/Search';
 
@@ -65,6 +69,21 @@ export default function SearchRecord() {
 	const [userData, setUserData] = useState({});
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+
+	const loadTransactions = async () => {
+		axios
+			.get(BASEURL + '/ticket/all')
+			.then((response) => {
+				console.log(response.data.data);
+				setRecordData(response.data.data);
+			})
+			.catch((e) => console.log(e));
+	};
+
+	useEffect(() => {
+		loadTransactions();
+	}, []);
+
 	return (
 		<>
 			<Box
@@ -85,7 +104,7 @@ export default function SearchRecord() {
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
-										{['Email', 'Agent Name', 'Booking ID', 'CCH Name', 'Phone', 'Total G.P', 'Airline', '	No.of PAX', 'Fare Type', 'Dep Date', 'Return Date', 'action'].map((th) => (
+										{['Email', 'Agent Name', 'Booking ID', 'Phone', 'Total G.P', 'Airline', '	No.of PAX', 'Fare Type', 'Dep Date', 'Return Date', 'action'].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
 									</TableRow>
@@ -99,16 +118,16 @@ export default function SearchRecord() {
 													'&:last-child td, &:last-child th': {border: 0},
 												}}>
 												<TableCell>{row.email}</TableCell>
-												<TableCell>{`${row.firstname} ${row.lastname}`}</TableCell>
-												<TableCell>{row.bookingId}</TableCell>
-												<TableCell>{row.firstname}</TableCell>
+												<TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>
+												<TableCell>{row._id.substring(0, 8)}...</TableCell>
+												{/* <TableCell>{row.cards[0].card}</TableCell> */}
 												<TableCell>{row.phone}</TableCell>
-												<TableCell>{row.totalCharge}</TableCell>
+												<TableCell>{row.grandTotal}</TableCell>
 												<TableCell>{row.airlineCode}</TableCell>
 												<TableCell>{row.passengerCount}</TableCell>
 												<TableCell>{row.fareType}</TableCell>
-												<TableCell>{row.departureDateValue}</TableCell>
-												<TableCell>{row.returnDateValue}</TableCell>
+												<TableCell>{row.departureDate.substring(0, 10)}</TableCell>
+												<TableCell>{row.returnDate.substring(0, 10)}</TableCell>
 
 												<TableCell>
 													<Button
