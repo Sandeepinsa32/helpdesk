@@ -15,9 +15,11 @@ const steps = ['Personal Detail ', 'Payment', 'Review'];
 
 const theme = createTheme();
 
-export default function Checkout() {
+export default function Checkout({data, isView}) {
 	const [activeStep, setActiveStep] = useState(0);
 	const [userInfo, setUserInfo] = useState({});
+
+	const [userData, setUserData] = useState({});
 	const [cardInfo, setCardInfo] = useState({});
 
 	// const myRef = useRef();
@@ -47,7 +49,7 @@ export default function Checkout() {
 		<ThemeProvider theme={theme}>
 			<Container component='main' maxWidth='md' sx={{mb: 4, p: 0}}>
 				<Typography component='h1' variant='h4' align='center'>
-					Add New Transaction Record
+					{isView ? `Add New Transaction Record` : `Add New Transaction Record`}
 				</Typography>
 				<Stepper activeStep={activeStep} sx={{pt: 3, pb: 3}}>
 					{steps.map((label) => (

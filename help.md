@@ -48,7 +48,7 @@ booking id - thd + 4 digit unique code
 
 1. login form inside paper styling with bg-grey -- done
 2. reset btn color -- done
-3. Delete modal (Confirmatino) --partily
+3. Delete modal (Confirmatino) -- not needed now
 4. Remove update nhi hona chahaiye
 5. Remove delete functionality from translation --done
 6. Add modal on view
@@ -66,13 +66,13 @@ booking id - thd + 4 digit unique code
 1. Transaction add card thing
 2. Remove filter button.
 3. Disable search button in transaction screen
-4. Login design ui
+4. Login design ui -done (comment forget password , center div , bg color )
 5. Validation in agent modal
 6. Validation in transaction modal
 7. Modal Ka heading titlecase
-8. Add all fields in modal
+8. Add all fields in modal -- done
 9. modal view on transaction
 10. functionality of reset button
 11. Dashboard deign Design
 12. Transaction - heading missing
-13. Hide scrollbar
+13. Hide scrollbar - done

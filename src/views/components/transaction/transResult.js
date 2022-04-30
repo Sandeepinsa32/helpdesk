@@ -1,9 +1,10 @@
 import React from 'react';
 import {useState} from 'react';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import {Button, IconButton, Box, Card, Checkbox, Table, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography} from '@mui/material';
+import {Button, IconButton, Box, Card, Checkbox, Table, Modal, TableBody, TableCell, TableHead, TablePagination, TableRow, Typography} from '@mui/material';
 // import {getInitials} from '../../utils/get-initials';
 import {v4 as uuid} from 'uuid';
+import Checkout from '../Checkout';
 
 //  mui icon
 import CloseIcon from '@mui/icons-material/Close';
@@ -15,6 +16,8 @@ export const Result = (props) => {
 	const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
 	const [limit, setLimit] = useState(10);
 	const [page, setPage] = useState(0);
+	const [viewModal, setViewModal] = useState(false);
+	const [userData, setUserData] = useState({});
 
 	const handleSelectAll = (event) => {
 		let newSelectedCustomerIds;
@@ -48,6 +51,10 @@ export const Result = (props) => {
 	const handleLimitChange = (event) => {
 		setLimit(event.target.value);
 	};
+	const HandleViewModal = (data) => {
+		setViewModal(true);
+		setUserData(data);
+	};
 
 	const handlePageChange = (event, newPage) => {
 		setPage(newPage);
@@ -60,28 +67,34 @@ export const Result = (props) => {
 					<Table>
 						<TableHead>
 							<TableRow>
-								{props.rowFields.map((fieldName) => (
+								{['Email', 'Agent Name', 'Booking ID', 'CCH Name', 'Phone', 'Total G.P', 'Airline	No.of PAX', 'Fare Type', 'Dep Date', 'Return Date'].map((fieldName) => (
 									<TableCell>{fieldName}</TableCell>
 								))}
 								<TableCell sx={{pl: 3.5}}>View</TableCell>
 								{/* <TableCell sx={{pl: 3.5}}>Delete</TableCell> */}
 							</TableRow>
 						</TableHead>
-						<TableBody>
-							{props.ResultData.map((customer, i) => (
+						{/* <TableBody>
+							{ResultData.map((customer, i) => (
 								<TableRow hover key={customer[i]} selected={selectedCustomerIds.indexOf(customer.id) !== -1}>
+									// {setUserData(customer)}
+
 									{customer.map((details) => (
-										<TableCell>{details}</TableCell>
+										<>
+											<TableCell>{details}</TableCell>
+										</>
 									))}
 									<TableCell sx={{width: `15%`}}>
-										<Button sx={{textTransform: 'capitalize'}}>View</Button>
+										<Button sx={{textTransform: 'capitalize'}} onClick={(e) => HandleViewModal(customer)}>
+											View
+										</Button>
 									</TableCell>
-									{/* <TableCell sx={{width: `15%`}}>
-										<Button sx={{textTransform: 'capitalize'}}>Delete</Button>
-									</TableCell> */}
+									// <TableCell sx={{width: `15%`}}>
+										//<Button sx={{textTransform: 'capitalize'}}>Delete</Button>
+									// </TableCell> 
 								</TableRow>
 							))}
-						</TableBody>
+						</TableBody> */}
 					</Table>
 				</Box>
 			</PerfectScrollbar>
@@ -94,6 +107,14 @@ export const Result = (props) => {
 				rowsPerPage={limit}
 				rowsPerPageOptions={[5, 10, 25]}
 			/>
+			<Modal open={viewModal} onClose={() => setViewModal(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box sx={style}>
+					<IconButton onClick={() => setViewModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<Checkout data={userData} isView={true} />
+				</Box>
+			</Modal>
 		</Card>
 	);
 };
@@ -238,5 +259,46 @@ const customers = [
 		email: 'merrile.burgett@devias.io',
 		name: 'Merrile Burgett',
 		phone: '801-301-7894',
+	},
+];
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	minWidth: '70vw',
+	minHeight: '60vh',
+	maxHeight: '90vh',
+	overflowX: ' auto',
+	bgcolor: 'background.paper',
+	// border: '2px solid #000',
+	boxShadow: 24,
+	borderRadius: '1rem',
+	p: 4,
+};
+
+const ResultData = [
+	// [20655, 'john Doe', 'JohnDoe@dev.co', 'JODO', 1555016400000],
+	{
+		firstname: 'John',
+		lastname: 'doe',
+		phone: '5655656565',
+		email: 'dsnsnn@gmgmg.cmo',
+
+		passengerCount: '2',
+		pnr: 'xssc',
+		mco: '5',
+		airlineCode: 'ss55',
+
+		totalCharge: '55',
+		pricePerPax: '5',
+
+		productType: 'flight',
+		bookingType: 'new',
+		fareType: 'private',
+		bookedon: 'trippro',
+		departureDateValue: '22/04/2022',
+		returnDateValue: '28/04/2022',
 	},
 ];
