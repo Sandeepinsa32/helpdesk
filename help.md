@@ -66,17 +66,22 @@ booking id - thd + 4 digit unique code
 2. Remove filter button. //(in transaction)
 3. Disable search button /(/in transaction )
 
-4. Validation in agent modal
-5. Validation in transaction modal
-6. Modal Ka heading titlecase
-7. Add all fields in modal -- done
-8. modal view on transaction
-9. functionality of reset button
-10. Dashboard deign Design
-11. Transaction - heading missing
-12. Hide scrollbar - done
+4. Validation in transaction modal
+
+5. modal view on transaction ///partily
+
+6. Validation in agent modal
+
+7. functionality of reset button
+
+8. Dashboard deign Design
+
+9. Transaction - heading missing
+10. Hide scrollbar - done
 
 //done
 
 1. Transaction add card thing // done
 2. Login design ui -done ( , center div , bg color ) //done
+3. Modal Ka heading titlecase
+4. Add all fields in modal -- done
