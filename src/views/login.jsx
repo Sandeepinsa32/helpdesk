@@ -42,10 +42,14 @@ const Login = () => {
 					display: 'flex',
 					flexGrow: 1,
 					minHeight: '100%',
+					height: '100vh',
 					bgcolor: `rgba(0, 0, 0, 0.04)!Important`,
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
 				}}>
 				<Container maxWidth='sm'>
-					<Paper variant='outlined' sx={{my: {xs: 2, md: 16}, p: {xs: 2, md: 3, borderRadius: '10px'}}}>
+					<Paper variant='outlined' sx={{my: {xs: 2, md: 3}, p: {xs: 2, md: 3, borderRadius: '10px'}}}>
 						<form onSubmit={formik.handleSubmit}>
 							<Box sx={{my: 3}}>
 								<Typography color='textPrimary' variant='h4'>
@@ -108,13 +112,13 @@ const Login = () => {
 									Log In
 								</Button>
 							</Box>
-							<Typography color='textSecondary' variant='body2'>
-								Facing any issue While login? {/* <NavLink href='/login' passHref> */}
+							{/* <Typography color='textSecondary' variant='body2'>
+								Facing any issue While login? 
 								<Link variant='subtitle2' underline='hover'>
 									Forget Password
 								</Link>
-								{/* </NavLink> */}
-							</Typography>
+								
+							</Typography> */}
 						</form>
 					</Paper>
 				</Container>
