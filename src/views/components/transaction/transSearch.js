@@ -64,7 +64,7 @@ export const Search = (props) => {
 									<Grid item xs={12} md={3}>
 										<TextField
 											size='small'
-											sx={{width: `20vw`, height: `2rem`}}
+											sx={{width: `19vw`, height: `2rem`}}
 											InputProps={{
 												startAdornment: (
 													<InputAdornment position='start'>
@@ -84,7 +84,7 @@ export const Search = (props) => {
 									<Grid item xs={12} md={3}>
 										<TextField
 											size='small'
-											sx={{width: `20vw`, height: `2rem`}}
+											sx={{width: `19vw`, height: `2rem`}}
 											InputProps={{
 												startAdornment: (
 													<InputAdornment position='start'>
@@ -103,7 +103,7 @@ export const Search = (props) => {
 									<Grid item xs={12} md={3}>
 										<TextField
 											size='small'
-											sx={{width: `20vw`, height: `2rem`}}
+											sx={{width: `19vw`, height: `2rem`}}
 											InputProps={{
 												startAdornment: (
 													<InputAdornment position='start'>

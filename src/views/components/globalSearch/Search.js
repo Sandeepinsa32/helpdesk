@@ -56,10 +56,10 @@ export const Search = (props) => {
 						<CardContent>
 							<Box fullWidth sx={{display: ''}}>
 								<Grid container spacing={3}>
-									<Grid item xs={12} md={3}>
+									<Grid item sm={2} md={3}>
 										<TextField
 											size='small'
-											sx={{width: `20vw`, height: `2rem`}}
+											sx={{width: `19vw`, height: `2rem`}}
 											InputProps={{
 												startAdornment: (
 													<InputAdornment position='start'>
@@ -76,10 +76,10 @@ export const Search = (props) => {
 										/>
 									</Grid>
 
-									<Grid item xs={12} md={3}>
+									<Grid item sm={2} md={3}>
 										<TextField
 											size='small'
-											sx={{width: `20vw`, height: `2rem`}}
+											sx={{width: `19vw`, height: `2rem`}}
 											InputProps={{
 												startAdornment: (
 													<InputAdornment position='start'>
@@ -95,10 +95,10 @@ export const Search = (props) => {
 											value={searchKey.email}
 										/>
 									</Grid>
-									<Grid item xs={12} md={3}>
+									<Grid item sm={2} md={3}>
 										<TextField
 											size='small'
-											sx={{width: `20vw`, height: `2rem`}}
+											sx={{width: `19vw`, height: `2rem`}}
 											InputProps={{
 												startAdornment: (
 													<InputAdornment position='start'>
@@ -114,7 +114,7 @@ export const Search = (props) => {
 											value={searchKey.empId}
 										/>
 									</Grid>
-									<Grid item xs={12} md={3} sx={{px: 2, mt: 0.5}}>
+									<Grid item sm={4} md={3} sx={{px: 2, mt: 0.5}}>
 										<Button
 											sx={{textTransform: 'capitalize', mx: 1}}
 											size='small'
