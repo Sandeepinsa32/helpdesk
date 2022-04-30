@@ -2,18 +2,29 @@ import React, {useState} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import {Typography, Link, Paper, Grid, TextField, Button} from '@mui/material';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
 // mui ICon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
-	const [inputList, setInputList] = useState([{cardName: '', cardNumber: '', expiryDate: '', cvv: ''}]);
+	const [inputList, setInputList] = useState([{cardName: '', cardNumber: '', expiryDate: null, cvv: ''}]);
+	const [expiryDateValue, setExpiryDateValue] = useState(null);
 
 	// handle input change
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
+		list[index][name] = value;
+		setInputList(list);
+	};
+	const handleDateInputChange = (index, value) => {
+		const list = [...inputList];
+		const name = 'expiryDate';
 		list[index][name] = value;
 		setInputList(list);
 	};
@@ -30,7 +41,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList([...inputList, {cardName: '', cardNumber: '', expiryDate: '', cvv: ''}]);
+		setInputList([...inputList, {cardName: '', cardNumber: '', expiryDate: null, cvv: ''}]);
 	};
 
 	return (
@@ -54,7 +65,6 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 										label='Name on card'
 										fullWidth
 										autoComplete='cc-name'
-										variant='standard'
 										onChange={(e) => {
 											handleInputChange(e, i);
 										}}
@@ -68,25 +78,36 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 										label='Card number'
 										fullWidth
 										autoComplete='cc-number'
-										variant='standard'
 										onChange={(e) => handleInputChange(e, i)}
 										value={inputList[i].cardNumber}
 									/>
 								</Grid>
 								<Grid item xs={12} md={6}>
-									<TextField
-										required
-										name='expiryDate'
-										label='Expiry date'
-										fullWidth
-										autoComplete='cc-exp'
-										variant='standard'
-										onChange={(e) => handleInputChange(e, i)}
-										value={inputList[i].expiryDate}
-									/>
+									<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleInputChange(e, i)} value={inputList[i].cvv} />
 								</Grid>
 								<Grid item xs={12} md={6}>
-									<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' variant='standard' onChange={(e) => handleInputChange(e, i)} value={inputList[i].cvv} />
+									<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
+										<DatePicker
+											fullWidth
+											name='expiryDate'
+											label='Expiry date'
+											inputFormat='dd/MM/yyyy'
+											onChange={(newValue) => {
+												handleDateInputChange(
+													i,
+													new Date(newValue).toLocaleDateString('en-US', {
+														day: '2-digit',
+														month: '2-digit',
+														year: 'numeric',
+													})
+												);
+
+												// setExpiryDateValue(newValue);
+											}}
+											value={inputList[i].expiryDate}
+											renderInput={(params) => <TextField {...params} />}
+										/>
+									</LocalizationProvider>
 								</Grid>
 
 								{inputList.length !== 1 && (
@@ -103,7 +124,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 								{inputList.length - 1 === i && (
 									<>
 										<Grid item xs={12} md={8}></Grid>
-										<Grid item xs={12} md={4}>
+										<Grid item xs={12} md={6}>
 											<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
 												Add One More Card
 											</Button>
@@ -139,7 +160,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 					</Button>
 				</Grid>
 			</Grid>
-			<div style={{marginTop: 20}}>{JSON.stringify(inputList)}</div>
+			{console.log(JSON.stringify(inputList))}
 		</>
 	);
 }

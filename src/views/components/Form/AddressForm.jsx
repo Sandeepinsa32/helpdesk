@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
 import {Grid, Typography, TextField, FormControlLabel, Checkbox, MenuItem, InputLabel, FormControl, Select, Button} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {FormatLineSpacing} from '@mui/icons-material';
 
 export default function AddressForm({setUserInfo, handleSubmit}) {
 	const [bookingType, setBookingType] = useState(null);
@@ -13,8 +15,8 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 	const [fareType, setFareType] = useState(null);
 	const [bookedOn, setBookedOn] = useState(null);
 	//date
-	// const [departureDateValue, setDepartureDateValue] = useState(null);
-	// const [returnDateValue, setReturnDateValue] = useState(null);
+	const [departureDateValue, setDepartureDateValue] = useState(null);
+	const [returnDateValue, setReturnDateValue] = useState(null);
 
 	const handleBookingChange = (event) => {
 		setBookingType(event.target.value);
@@ -79,11 +81,13 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			// handleSubmit();
 		},
 	});
+
 	return (
 		<>
 			<Typography variant='h6' gutterBottom>
 				Basic Detail
 			</Typography>
+
 			<form onSubmit={formik.handleSubmit}>
 				<Grid container spacing={3}>
 					<Grid item xs={12} sm={4}>
@@ -342,20 +346,46 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 					<Grid item xs={12} sm={4}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DatePicker
+								inputFormat='dd/MM/yyyy'
 								name='departureDate'
 								label='Departure Date'
-								// onChange={(newValue) => {
-								// 	setDepartureDateValue(newValue);
-								// }}
-								value={formik.values.departureDate}
-								onChange={formik.handleChange}
+								onChange={(newValue) => {
+									setDepartureDateValue(newValue);
+
+									formik.setFieldValue(
+										'departureDate',
+										new Date(newValue).toLocaleDateString('en-US', {
+											day: '2-digit',
+											month: '2-digit',
+											year: 'numeric',
+										})
+									);
+								}}
+								value={departureDateValue}
 								renderInput={(params) => <TextField {...params} />}
 							/>
 						</LocalizationProvider>
 					</Grid>
 					<Grid item xs={12} sm={4}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
-							<DatePicker name='returnDate' label='Return Date' value={formik.values.returnDate} onChange={formik.handleChange} renderInput={(params) => <TextField {...params} />} />
+							<DatePicker
+								name='returnDate'
+								inputFormat='dd/MM/yyyy'
+								label='Return Date'
+								value={formik.values.returnDate}
+								onChange={(newValue) => {
+									setReturnDateValue(newValue);
+									formik.setFieldValue(
+										'returnDate',
+										new Date(newValue).toLocaleDateString('en-US', {
+											day: '2-digit',
+											month: '2-digit',
+											year: 'numeric',
+										})
+									);
+								}}
+								renderInput={(params) => <TextField {...params} />}
+							/>
 						</LocalizationProvider>
 					</Grid>
 
@@ -367,6 +397,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							sx={{mt: 3, ml: 1}}
 							onClick={() => {
 								console.log(formik.values);
+								console.log(departureDateValue);
 								setUserInfo(formik.values);
 								handleSubmit();
 							}}>
