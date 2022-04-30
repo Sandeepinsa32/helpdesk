@@ -1,5 +1,6 @@
 import {React, useState} from 'react';
-import {Box, Button, Card, CardContent, TextField, InputAdornment, SvgIcon, Typography, ThemeProvider} from '@mui/material';
+
+import {Box, Button, Card, Grid, CardContent, TextField, ThemeProvider, InputAdornment, SvgIcon, Typography} from '@mui/material';
 import {blueGrey} from '@mui/material/colors';
 import CloseIcon from '@mui/icons-material/Close';
 
@@ -35,6 +36,22 @@ const theme = createTheme({
 
 const color = blueGrey[100];
 export const Search = (props) => {
+	const [searchKey, setSearchKey] = useState({
+		bookingId: '',
+		email: '',
+		empId: '',
+	});
+
+	function searchHandler() {
+		alert(JSON.stringify(searchKey));
+	}
+	const handleReset = () => {
+		setSearchKey({
+			bookingId: '',
+			email: '',
+			empId: '',
+		});
+	};
 	return (
 		<Box>
 			<ThemeProvider theme={theme}>
@@ -42,30 +59,80 @@ export const Search = (props) => {
 				<Box sx={{mt: 3}}>
 					<Card>
 						<CardContent>
-							<Box fullWidth sx={{display: 'flex'}}>
-								<TextField
-									size='small'
-									sx={{width: `26vw`, height: `2rem`}}
-									InputProps={{
-										startAdornment: (
-											<InputAdornment position='start'>
-												<SvgIcon color='action' fontSize='small'>
-													<SearchIcon />
-												</SvgIcon>
-											</InputAdornment>
-										),
-									}}
-									placeholder='Search customer'
-									variant='outlined'
-								/>
-								<Box sx={{px: 2, mt: 0.5}}>
-									<Button sx={{textTransform: 'capitalize', mx: 2}} size='small' variant='contained'>
-										Search
-									</Button>
-									<Button sx={{textTransform: 'capitalize', mx: 2}} size='small' variant='contained' color='neutral'>
-										Reset
-									</Button>
-								</Box>
+							<Box fullWidth sx={{display: ''}}>
+								<Grid container spacing={3}>
+									<Grid item xs={12} md={3}>
+										<TextField
+											size='small'
+											sx={{width: `20vw`, height: `2rem`}}
+											InputProps={{
+												startAdornment: (
+													<InputAdornment position='start'>
+														<SvgIcon color='action' fontSize='small'>
+															<SearchIcon />
+														</SvgIcon>
+													</InputAdornment>
+												),
+											}}
+											onChange={(e) => setSearchKey((prev) => ({...prev, bookingId: e.target.value}))}
+											placeholder='Enter Booking Id'
+											variant='outlined'
+											value={searchKey.bookingId}
+										/>
+									</Grid>
+
+									<Grid item xs={12} md={3}>
+										<TextField
+											size='small'
+											sx={{width: `20vw`, height: `2rem`}}
+											InputProps={{
+												startAdornment: (
+													<InputAdornment position='start'>
+														<SvgIcon color='action' fontSize='small'>
+															<SearchIcon />
+														</SvgIcon>
+													</InputAdornment>
+												),
+											}}
+											onChange={(e) => setSearchKey((prev) => ({...prev, email: e.target.value}))}
+											placeholder='Enter Email id'
+											variant='outlined'
+											value={searchKey.email}
+										/>
+									</Grid>
+									<Grid item xs={12} md={3}>
+										<TextField
+											size='small'
+											sx={{width: `20vw`, height: `2rem`}}
+											InputProps={{
+												startAdornment: (
+													<InputAdornment position='start'>
+														<SvgIcon color='action' fontSize='small'>
+															<SearchIcon />
+														</SvgIcon>
+													</InputAdornment>
+												),
+											}}
+											onChange={(e) => setSearchKey((prev) => ({...prev, empId: e.target.value}))}
+											placeholder='Enter Emp id'
+											variant='outlined'
+											value={searchKey.empId}
+										/>
+									</Grid>
+									<Grid item xs={12} md={3} sx={{px: 2, mt: 0.5}}>
+										<Button
+											sx={{textTransform: 'capitalize', mx: 1}}
+											size='small'
+											disabled={searchKey == null || (searchKey.bookingId == '' && searchKey.email == '' && searchKey.empId == '') ? true : false}
+											variant='contained'
+											onClick={searchHandler}>
+											Search
+										</Button>
+										<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral' onClick={handleReset}>
+											Reset
+										</Button>
+									</Grid>
+								</Grid>
 							</Box>
 						</CardContent>
 					</Card>

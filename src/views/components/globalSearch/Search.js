@@ -32,8 +32,9 @@ const theme = createTheme({
 
 export const Search = (props) => {
 	const [searchKey, setSearchKey] = useState({
-		name: '',
+		bookingId: '',
 		email: '',
+		empId: '',
 	});
 
 	function searchHandler() {
@@ -41,8 +42,9 @@ export const Search = (props) => {
 	}
 	const handleReset = () => {
 		setSearchKey({
-			name: '',
+			bookingId: '',
 			email: '',
+			empId: '',
 		});
 	};
 	return (
@@ -67,10 +69,10 @@ export const Search = (props) => {
 													</InputAdornment>
 												),
 											}}
-											onChange={(e) => setSearchKey((prev) => ({...prev, name: e.target.value}))}
-											placeholder='Enter Name'
+											onChange={(e) => setSearchKey((prev) => ({...prev, bookingId: e.target.value}))}
+											placeholder='Enter Booking Id'
 											variant='outlined'
-											value={searchKey.name}
+											value={searchKey.bookingId}
 										/>
 									</Grid>
 
@@ -93,11 +95,30 @@ export const Search = (props) => {
 											value={searchKey.email}
 										/>
 									</Grid>
+									<Grid item xs={12} md={3}>
+										<TextField
+											size='small'
+											sx={{width: `20vw`, height: `2rem`}}
+											InputProps={{
+												startAdornment: (
+													<InputAdornment position='start'>
+														<SvgIcon color='action' fontSize='small'>
+															<SearchIcon />
+														</SvgIcon>
+													</InputAdornment>
+												),
+											}}
+											onChange={(e) => setSearchKey((prev) => ({...prev, empId: e.target.value}))}
+											placeholder='Enter Emp id'
+											variant='outlined'
+											value={searchKey.empId}
+										/>
+									</Grid>
 									<Grid item xs={12} md={3} sx={{px: 2, mt: 0.5}}>
 										<Button
 											sx={{textTransform: 'capitalize', mx: 1}}
 											size='small'
-											disabled={searchKey == null || (searchKey.name == '' && searchKey.email == '') ? true : false}
+											disabled={searchKey == null || (searchKey.bookingId == '' && searchKey.email == '' && searchKey.empId == '') ? true : false}
 											variant='contained'
 											onClick={searchHandler}>
 											Search
