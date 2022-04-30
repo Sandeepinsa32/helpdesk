@@ -75,6 +75,10 @@ export default function SearchRecord() {
 					pt: 2,
 				}}>
 				<Container maxWidth={false}>
+					<Typography sx={{m: 1}} variant='h6'>
+						All Transaction
+					</Typography>
+
 					<Search />
 					<Box sx={{mt: 3}}>
 						<TableContainer component={Paper}>

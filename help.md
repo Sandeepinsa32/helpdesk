@@ -63,16 +63,10 @@ booking id - thd + 4 digit unique code
 
 ####################################################
 
-2. Remove filter button. //(in transaction)
-3. Disable search button /(/in transaction )
+5. modal view on transaction //
 
-4. Validation in transaction modal
-
-5. modal view on transaction ///partily
-6. functionality of reset button // in transaction
-7. Transaction - heading missing
-8. Dashboard deign Design
-9. Validation in agent modal
+6. Dashboard deign Design
+7. Validation in agent & transaction modal
 
 //done
 
@@ -81,7 +75,9 @@ booking id - thd + 4 digit unique code
 3. Modal Ka heading titlecase
 4. Add all fields in modal -- done
 5. Hide scrollbar - done
-
-transaction - my records#
+6. Remove filter button. //(in transaction) transaction - my records#
+7. Disable search button /(/in transaction )
+8. functionality of reset button // in transaction
+9. Transaction - heading missing
 
 # search ka transactions##

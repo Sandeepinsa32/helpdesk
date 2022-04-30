@@ -97,12 +97,16 @@ export const Transaction = () => {
 							m: -1,
 						}}>
 						<Typography sx={{m: 1}} variant='h6'>
+							My Records
+						</Typography>
+						<Typography sx={{m: 1}} variant='body2'>
 							{currentDate()}
 						</Typography>
+
 						<Box sx={{m: 1}}>
-							<Button startIcon={<FilterAltIcon fontSize='small' />} sx={{mr: 1}}>
+							{/* <Button startIcon={<FilterAltIcon fontSize='small' />} sx={{mr: 1}}>
 								Filter
-							</Button>
+							</Button> */}
 							<Button
 								color='primary'
 								onClick={() => {
