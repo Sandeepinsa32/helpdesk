@@ -38,14 +38,8 @@ export const Transaction = () => {
 	const handleClose = () => setOpen(false);
 
 	const [page, setPage] = React.useState(1);
-	// const [searchKey, setSearchKey] = useState({
-	// 	bookingId: '',
-	// 	email: '',
-	// 	phoneNo: '',
-	// });
 
 	function searchHandler() {
-		// alert(JSON.stringify(searchKey));
 		setPage(1);
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}
