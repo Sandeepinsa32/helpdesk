@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {Box, Button, Card, CardContent, CardHeader, Divider, Grid, TextField, Avatar, CardActions, Typography} from '@mui/material';
 
-export const Detail = () => {
+export const AgentProfileModal = () => {
 	const [values, setValues] = useState({
 		firstName: 'John',
 		lastName: 'Deo',
