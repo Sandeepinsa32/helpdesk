@@ -12,6 +12,7 @@ import {
   Container,
   CardContent,
   TextField,
+  CircularProgress,
   Modal,
   InputAdornment,
   SvgIcon,
@@ -270,7 +271,28 @@ export const Transaction = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {myRecords?.length &&
+                  {isLoading ? (
+                    <TableRow>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>
+                        <div
+                          style={{
+                            marginLeft: "-3rem",
+                          }}
+                        >
+                          <CircularProgress />
+                        </div>
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  ) : myRecords?.length > 0 ? (
                     myRecords.map((row, index) => (
                       <TableRow
                         key={index}
@@ -307,7 +329,29 @@ export const Transaction = () => {
                           </Button>
                         </TableCell>
                       </TableRow>
-                    ))}
+                    ))
+                  ) : (
+                    <TableRow>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>
+                        <div
+                          style={{
+                            marginLeft: "-3rem",
+                          }}
+                        >
+                          <h2>No data found</h2>
+                        </div>
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -319,11 +363,7 @@ export const Transaction = () => {
                 width: "100%",
               }}
             >
-              <Pagination
-                count={totalRecords != -1 && Math.ceil(totalRecords / size)}
-                page={page}
-                onChange={handleChange}
-              />{" "}
+              <Pagination count={10} page={page} onChange={handleChange} />
             </div>
           </Box>
         </Container>

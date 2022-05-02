@@ -1,15 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Box, Container, Grid } from "@mui/material";
-import { Budget } from "./components/dashboard/budget";
+import { TicketStat } from "./components/dashboard/TicketStatStat";
 import { LatestOrders } from "./components/dashboard/latest-orders";
-import { LatestProducts } from "./components/dashboard/latest-products";
-import { TasksProgress } from "./components/dashboard/tasks-progress";
-import { TotalCustomers } from "./components/dashboard/total-customers";
-import { TotalProfit } from "./components/dashboard/total-profit";
-// import {DashboardLayout} from './components/dashboard-layout';
 
+import axios from "axios";
+import { BASEURL } from "../utils/Utils";
 function Dashboard() {
+  const [todayStats, setTodayStats] = useState(-1);
+  const [weeklyStats, setWeeklyStats] = useState(-1);
+  const [monthlyStats, setMonthlyStats] = useState(-1);
+
+  const loadAgentStats = async (interval) => {
+    axios
+      .get(BASEURL + `/ticket/stats/${interval}`)
+      .then((response) => {
+        console.log(interval, response.data.data);
+        interval === "today"
+          ? setTodayStats(response.data.data.tickets)
+          : interval === "weekly"
+          ? setWeeklyStats(response.data.data.tickets)
+          : setMonthlyStats(response.data.data.tickets);
+      })
+      .catch((e) => console.log(e));
+  };
+
+  useEffect(() => {
+    loadAgentStats("today");
+    loadAgentStats("weekly");
+    loadAgentStats("monthly");
+  }, []);
+
   return (
     <>
       <Box
@@ -22,16 +43,13 @@ function Dashboard() {
         <Container maxWidth={false}>
           <Grid container spacing={3}>
             <Grid item lg={3} sm={6} xl={3} xs={12}>
-              <Budget />
+              <TicketStat tickets={todayStats} interval={"24 Hrs"} />
             </Grid>
-            <Grid item xl={3} lg={3} sm={6} xs={12}>
-              <TotalCustomers />
-            </Grid>
-            <Grid item xl={3} lg={3} sm={6} xs={12}>
-              <TasksProgress />
-            </Grid>
-            <Grid item xl={3} lg={3} sm={6} xs={12}>
-              <TotalProfit sx={{ height: "100%" }} />
+            <Grid item lg={3} sm={6} xl={3} xs={12}>
+              <TicketStat tickets={weeklyStats} interval={"7 Days"} />
+            </Grid>{" "}
+            <Grid item lg={3} sm={6} xl={3} xs={12}>
+              <TicketStat tickets={monthlyStats} interval={"30 Days"} />
             </Grid>
             <Grid item lg={12} md={12} xl={12} xs={12}>
               <LatestOrders />

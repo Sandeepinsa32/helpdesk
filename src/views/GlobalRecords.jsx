@@ -295,7 +295,7 @@ export default function SearchRecord() {
                             size="small"
                             onClick={() => {
                               console.log(row);
-                              // addLog(row._id);
+                              addLog(row._id);
                               // setViewData(true);
                               // setUserData(row);
                               // handleOpen();
