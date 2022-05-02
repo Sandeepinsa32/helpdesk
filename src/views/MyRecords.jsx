@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Checkout from './components/CheckoutStepper';
 
-import {BASEURL} from '../utils/Utils';
+import {BASEURL, createQueryString} from '../utils/Utils';
 import axios from 'axios';
 
 //@material-ui
@@ -28,42 +28,50 @@ export const Transaction = () => {
 	const [searchId, setSearchId] = useState('');
 	const [searchEmail, setSearchEmail] = useState('');
 	const [searchAgentCode, SearchAgentCode] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+
+	const [bookingid, setBookingid] = useState('');
+	const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
+
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
 	const [page, setPage] = React.useState(1);
-	const [searchKey, setSearchKey] = useState({
-		bookingId: '',
-		email: '',
-		phoneNo: '',
-	});
 
 	function searchHandler() {
-		alert(JSON.stringify(searchKey));
+		setPage(1);
+		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}
 	const handleReset = () => {
-		setSearchKey({
-			bookingId: '',
-			email: '',
-			phoneNo: '',
-		});
+		setPhone('');
+		setEmail('');
+		setBookingid('');
 	};
 	const handleChange = (event, value) => {
 		setPage(value);
 	};
-	const loadTransactions = async () => {
+	const loadTransactions = async (search) => {
+		console.log(search);
+		setIsLoading(true);
 		axios
 			.get(BASEURL + '/ticket/all')
 			.then((response) => {
 				console.log(response.data.data);
 				setMyRecords(response.data.data);
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 500);
 			})
-			.catch((e) => console.log(e));
+			.catch((e) => {
+				console.log(e);
+				setIsLoading(false);
+			});
 	};
 
 	useEffect(() => {
-		loadTransactions();
-	}, []);
+		loadTransactions(createQueryString({email, bookingid, phone, page}));
+	}, [page]);
 
 	function currentDate() {
 		let today = new Date();
@@ -143,10 +151,10 @@ export const Transaction = () => {
 																</InputAdornment>
 															),
 														}}
-														onChange={(e) => setSearchKey((prev) => ({...prev, bookingId: e.target.value}))}
+														onChange={(e) => setBookingid(e.target.value)}
 														placeholder='Enter Booking Id'
 														variant='outlined'
-														value={searchKey.bookingId}
+														value={bookingid}
 													/>
 												</Grid>
 
@@ -163,10 +171,10 @@ export const Transaction = () => {
 																</InputAdornment>
 															),
 														}}
-														onChange={(e) => setSearchKey((prev) => ({...prev, email: e.target.value}))}
+														onChange={(e) => setEmail(e.target.value)}
 														placeholder='Enter Email id'
 														variant='outlined'
-														value={searchKey.email}
+														value={email}
 													/>
 												</Grid>
 												<Grid item xs={12} md={3}>
@@ -182,17 +190,17 @@ export const Transaction = () => {
 																</InputAdornment>
 															),
 														}}
-														onChange={(e) => setSearchKey((prev) => ({...prev, phoneNo: e.target.value}))}
+														onChange={(e) => setPhone(e.target.value)}
 														placeholder='Enter Phone Number'
 														variant='outlined'
-														value={searchKey.phoneNo}
+														value={phone}
 													/>
 												</Grid>
 												<Grid item xs={12} md={3} sx={{px: 2, mt: 0.5}}>
 													<Button
 														sx={{textTransform: 'capitalize', mx: 1}}
 														size='small'
-														disabled={searchKey == null || (searchKey.bookingId == '' && searchKey.email == '' && searchKey.phoneNo == '') ? true : false}
+														disabled={!(email || phone || bookingid)}
 														variant='contained'
 														onClick={searchHandler}>
 														Search
