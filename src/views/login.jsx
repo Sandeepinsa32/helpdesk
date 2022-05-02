@@ -59,6 +59,8 @@ const Login = () => {
       .post(BASEURL + "/agent/login", formik.values)
       .then((response) => {
         localStorage.setItem("token", JSON.stringify(response.data.data.token));
+        axios.defaults.headers.common["Authorization"] =
+          "Bearer " + response.data.data.token;
         successToast("Login Successfull");
         navigate("/");
       })
