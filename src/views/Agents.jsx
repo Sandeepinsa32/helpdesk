@@ -43,6 +43,8 @@ export const AddUser = () => {
 	const [open, setOpen] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);
 	const [page, setPage] = React.useState(1);
+
+	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 
@@ -79,13 +81,21 @@ export const AddUser = () => {
 			.catch((e) => console.log(e));
 	};
 	const loadAgents = async (search) => {
+		console.log(search);
+		setIsLoading(true);
 		axios
 			.get(BASEURL + '/agent/all')
 			.then((response) => {
 				console.log(response.data.data);
 				setAgentsList(response.data.data);
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 500);
 			})
-			.catch((e) => console.log(e));
+			.catch((e) => {
+				console.log(e);
+				setIsLoading(false);
+			});
 	};
 
 	useEffect(() => {
