@@ -1,6 +1,11 @@
 import RootNode from "./RootNode";
 import { StyledEngineProvider } from "@mui/material/styles";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Routes,
+  Route,
+} from "react-router-dom";
 import Login from "./Login";
 import { Toaster } from "react-hot-toast";
 
@@ -11,7 +16,17 @@ function App() {
         <Router>
           <Routes>
             <Route path="/login" element={<Login />}></Route>
-            <Route path="/*" element={<RootNode />} />
+
+            <Route
+              path="/*"
+              element={
+                localStorage.getItem("token") ? (
+                  <RootNode />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
           </Routes>
         </Router>
         <Toaster
