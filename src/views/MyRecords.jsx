@@ -244,23 +244,15 @@ export const Transaction = () => {
 								<TableBody>
 									{isLoading ? (
 										<TableRow>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell>
+											<TableCell colSpan={10}>
 												<div
 													style={{
-														marginLeft: '-3rem',
+														display: 'flex',
+														justifyContent: 'center',
 													}}>
 													<CircularProgress />
 												</div>
 											</TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
 										</TableRow>
 									) : myRecords?.length > 0 ? (
 										myRecords.map((row, index) => (
@@ -298,23 +290,15 @@ export const Transaction = () => {
 										))
 									) : (
 										<TableRow>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell>
+											<TableCell colSpan={10}>
 												<div
 													style={{
-														marginLeft: '-3rem',
+														display: 'flex',
+														justifyContent: 'center',
 													}}>
 													<h2>No data found</h2>
 												</div>
 											</TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
 										</TableRow>
 									)}
 								</TableBody>

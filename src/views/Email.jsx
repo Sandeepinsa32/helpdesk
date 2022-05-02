@@ -1,91 +1,66 @@
-import React from 'react';
-import {Avatar, Box, Card, CardContent, Grid, Typography, Button, Container, CardMedia, CardActions} from '@mui/material';
+import React, {useState} from 'react';
+import {Avatar, Box, Card, CardContent, Grid, Typography, Button, Paper, Item, Container, CardMedia, CardActions, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
+import Email1 from './components/email1';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import MoneyIcon from '@mui/icons-material/Money';
 
 const Email = () => {
 	const cards = [1, 2, 3, 4, 5, 6];
+	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState();
+
+	const handleEmailTemplateChange = (e) => {
+		setSelectedEmailTemplate(e.target.value);
+		console.log(selectedEmailTemplate);
+		alert(selectedEmailTemplate);
+	};
 	return (
 		<>
 			<Box sx={{height: '100vh', overflow: 'scroll'}}>
 				<>
-					{/* <Card sx={{height: '100%'}}>
-				<CardContent>
-					<Grid container spacing={3} sx={{justifyContent: 'space-between'}}>
-						<Grid item>
-							<Typography color='textSecondary' gutterBottom variant='overline'>
-								BUDGET
-							</Typography>
-							<Typography color='textPrimary' variant='h4'>
-								$24k
-							</Typography>
-						</Grid>
-						<Grid item>
-							<Avatar
+					<Card sx={{height: '100%'}}>
+						<CardContent>
+							<Box
 								sx={{
-									backgroundColor: 'error.main',
-									height: 56,
-									width: 56,
+									display: 'flex',
+									flexWrap: 'nowrap',
+									p: 1,
+									m: 1,
+									bgcolor: 'background.paper',
+									width: 1,
+									height: 1,
+									borderRadius: 1,
 								}}>
-								<MoneyIcon />
-							</Avatar>
-						</Grid>
-					</Grid>
-					<Box
-						sx={{
-							pt: 2,
-							display: 'flex',
-							alignItems: 'center',
-						}}>
-						<ArrowDownwardIcon color='error' />
-						<Typography
-							color='error'
-							sx={{
-								mr: 1,
-							}}
-							variant='body2'>
-							12%
-						</Typography>
-						<Typography color='textSecondary' variant='caption'>
-							Since last month
-						</Typography>
-					</Box>
-				</CardContent>
-			</Card> */}
+								<Box sx={{width: '50%'}}>
+									<Grid container spacing={3} sx={{justifyContent: 'space-between'}}>
+										<Grid item xs={12} sm={6}>
+											<FormControl required fullWidth>
+												<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
+												<Select
+													labelId='Email-template-Dropdown-label	'
+													id='Email-template-Dropdown'
+													value={selectedEmailTemplate}
+													onChange={handleEmailTemplateChange}
+													fullWidth
+													name='emailTemplate'
+													label='Email Template'>
+													<MenuItem value='1'>1</MenuItem>
+													<MenuItem value='2'>2</MenuItem>
+													<MenuItem value='3'>3</MenuItem>
+													<MenuItem value='4'>4</MenuItem>
+													<MenuItem value='5'>5</MenuItem>
+												</Select>
+											</FormControl>
+										</Grid>
+									</Grid>
+								</Box>
+								<Box sx={{width: '50%'}}>
+									<Paper elevation={3} sx={{height: 1}}>
+										<Email1 name='john' />
+									</Paper>
+								</Box>
+							</Box>
+						</CardContent>
+					</Card>
 				</>
-
-				<Container maxWidth='false'>
-					{/* End hero unit */}
-					<Grid container fullWidth spacing={1}>
-						{cards.map((card) => (
-							<Grid item key={card} xs={12} sm={6} md={2}>
-								<Card sx={{height: '100%', display: 'flex', flexDirection: 'column'}}>
-									<CardMedia
-										component='img'
-										sx={
-											{
-												// 16:9
-												// pt: '56.25%',
-											}
-										}
-										image='https://source.unsplash.com/random'
-										alt='random'
-									/>
-									<CardContent sx={{flexGrow: 1}}>
-										<Typography gutterBottom variant='h5' component='h2'>
-											Heading
-										</Typography>
-										<Typography>This is a media card. You can use this section to describe the content.</Typography>
-									</CardContent>
-									<CardActions>
-										<Button size='small'>View</Button>
-										<Button size='small'>Edit</Button>
-									</CardActions>
-								</Card>
-							</Grid>
-						))}
-					</Grid>
-				</Container>
 			</Box>
 		</>
 	);

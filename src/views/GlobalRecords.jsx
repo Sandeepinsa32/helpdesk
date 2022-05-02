@@ -209,21 +209,15 @@ export default function SearchRecord() {
 								<TableBody>
 									{isLoading ? (
 										<TableRow>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell>
+											<TableCell colSpan={8}>
 												<div
 													style={{
-														marginLeft: '-3rem',
+														display: 'flex',
+														justifyContent: 'center',
 													}}>
 													<CircularProgress />
 												</div>
 											</TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
 										</TableRow>
 									) : recordData?.length > 0 ? (
 										recordData.map((row, index) => (
@@ -261,21 +255,15 @@ export default function SearchRecord() {
 										))
 									) : (
 										<TableRow>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell>
+											<TableCell colSpan={8}>
 												<div
 													style={{
-														marginLeft: '-3rem',
+														display: 'flex',
+														justifyContent: 'center',
 													}}>
 													<h2>No data found</h2>
 												</div>
 											</TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
-											<TableCell></TableCell>
 										</TableRow>
 									)}
 								</TableBody>

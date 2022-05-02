@@ -238,18 +238,15 @@ export const AddUser = () => {
 									<TableBody>
 										{isLoading ? (
 											<TableRow>
-												<TableCell></TableCell>
-												<TableCell></TableCell>
-												<TableCell>
+												<TableCell colSpan={5}>
 													<div
 														style={{
-															marginLeft: '-3rem',
+															display: 'flex',
+															justifyContent: 'center',
 														}}>
 														<CircularProgress />
 													</div>
 												</TableCell>
-												<TableCell></TableCell>
-												<TableCell></TableCell>
 											</TableRow>
 										) : agentsList?.length > 0 ? (
 											agentsList.map((row, index) => (
@@ -279,18 +276,15 @@ export const AddUser = () => {
 											))
 										) : (
 											<TableRow>
-												<TableCell></TableCell>
-												<TableCell></TableCell>
-												<TableCell>
+												<TableCell colSpan={5}>
 													<div
 														style={{
-															marginLeft: '-3rem',
+															display: 'flex',
+															justifyContent: 'center',
 														}}>
 														<h2>No data found</h2>
 													</div>
 												</TableCell>
-												<TableCell></TableCell>
-												<TableCell></TableCell>
 											</TableRow>
 										)}
 									</TableBody>
