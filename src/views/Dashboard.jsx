@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import { Box, Container, Grid } from "@mui/material";
-import { TicketStat } from "./components/dashboard/TicketStatStat";
+import { TicketStat } from "./components/dashboard/TicketStat";
 import { LatestOrders } from "./components/dashboard/latest-orders";
 
 import axios from "axios";

@@ -224,9 +224,6 @@ export default function SearchRecord() {
               </Box>
             </ThemeProvider>
           </Box>
-
-          {/*  End: Search Component */}
-
           <Box sx={{ mt: 3 }}>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -235,39 +232,34 @@ export default function SearchRecord() {
                     {[
                       "Email",
                       "Agent Name",
-                      //	'Booking ID',
+                      "Booking ID",
+                      //   "CCH Name",
                       "Phone",
                       "Total G.P",
                       "Airline",
                       "	No.of PAX",
                       "Fare Type",
-                      //'Dep Date', 'Return Date',
+                      "Dep Date",
+                      "Return Date",
                       "action",
                     ].map((th) => (
                       <TableCell key={th}>{th}</TableCell>
                     ))}
                   </TableRow>
                 </TableHead>
-
                 <TableBody>
                   {isLoading ? (
                     <TableRow>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell>
+                      <TableCell colSpan={10}>
                         <div
                           style={{
-                            marginLeft: "-3rem",
+                            display: "flex",
+                            justifyContent: "center",
                           }}
                         >
                           <CircularProgress />
                         </div>
                       </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
                     </TableRow>
                   ) : recordData?.length > 0 ? (
                     recordData.map((row, index) => (
@@ -279,15 +271,17 @@ export default function SearchRecord() {
                       >
                         <TableCell>{row.email}</TableCell>
                         <TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>
-                        {/* <TableCell>{row._id.substring(0, 8)}...</TableCell> */}
+                        <TableCell>{row._id.substring(0, 8)}...</TableCell>
                         {/* <TableCell>{row.cards[0].card}</TableCell> */}
                         <TableCell>{row.phone}</TableCell>
                         <TableCell>{row.grandTotal}</TableCell>
                         <TableCell>{row.airlineCode}</TableCell>
                         <TableCell>{row.passengerCount}</TableCell>
                         <TableCell>{row.fareType}</TableCell>
-                        {/* <TableCell>{row.departureDate.substring(0, 10)}</TableCell>
-                          <TableCell>{row.returnDate.substring(0, 10)}</TableCell> */}
+                        <TableCell>
+                          {row.departureDate.substring(0, 10)}
+                        </TableCell>
+                        <TableCell>{row.returnDate.substring(0, 10)}</TableCell>
 
                         <TableCell>
                           <Button
@@ -295,10 +289,9 @@ export default function SearchRecord() {
                             size="small"
                             onClick={() => {
                               console.log(row);
-                              addLog(row._id);
-                              // setViewData(true);
-                              // setUserData(row);
-                              // handleOpen();
+                              setViewData(true);
+                              setUserData(row);
+                              handleOpen();
                             }}
                           >
                             View
@@ -308,42 +301,36 @@ export default function SearchRecord() {
                     ))
                   ) : (
                     <TableRow>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell>
+                      <TableCell colSpan={10}>
                         <div
                           style={{
-                            marginLeft: "-3rem",
+                            display: "flex",
+                            justifyContent: "center",
                           }}
                         >
                           <h2>No data found</h2>
                         </div>
                       </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
                     </TableRow>
                   )}
                 </TableBody>
               </Table>
             </TableContainer>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                margin: "20px auto",
-                width: "100%",
-              }}
-            >
-              <Pagination
-                count={totalRecords != -1 && Math.ceil(totalRecords / size)}
-                page={page}
-                onChange={handleChange}
-              />
-            </div>
           </Box>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              margin: "20px auto",
+              width: "100%",
+            }}
+          >
+            <Pagination
+              count={totalRecords != -1 && Math.ceil(totalRecords / size)}
+              page={page}
+              onChange={handleChange}
+            />
+          </div>
         </Container>
       </Box>
       <Modal
