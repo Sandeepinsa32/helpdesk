@@ -3,7 +3,25 @@ import {BASEURL, createQueryString} from '../utils/Utils';
 import axios from 'axios';
 
 //@material-ui
-import {Box, Container, Button, Card, CardContent, Paper, TextField, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton, ThemeProvider} from '@mui/material';
+import {
+	Box,
+	Container,
+	Button,
+	Card,
+	CardContent,
+	CircularProgress,
+	Paper,
+	TextField,
+	Modal,
+	InputAdornment,
+	SvgIcon,
+	Typography,
+	CardHeader,
+	Divider,
+	Grid,
+	IconButton,
+	ThemeProvider,
+} from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -218,7 +236,22 @@ export const AddUser = () => {
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										{agentsList?.length &&
+										{isLoading ? (
+											<TableRow>
+												<TableCell></TableCell>
+												<TableCell></TableCell>
+												<TableCell>
+													<div
+														style={{
+															marginLeft: '-3rem',
+														}}>
+														<CircularProgress />
+													</div>
+												</TableCell>
+												<TableCell></TableCell>
+												<TableCell></TableCell>
+											</TableRow>
+										) : agentsList?.length > 0 ? (
 											agentsList.map((row, index) => (
 												<TableRow
 													key={index}
@@ -241,7 +274,23 @@ export const AddUser = () => {
 															Delete
 														</Button> */}
 												</TableRow>
-											))}
+											))
+										) : (
+											<TableRow>
+												<TableCell></TableCell>
+												<TableCell></TableCell>
+												<TableCell>
+													<div
+														style={{
+															marginLeft: '-3rem',
+														}}>
+														<h2>No data found</h2>
+													</div>
+												</TableCell>
+												<TableCell></TableCell>
+												<TableCell></TableCell>
+											</TableRow>
+										)}
 									</TableBody>
 								</Table>
 							</TableContainer>
