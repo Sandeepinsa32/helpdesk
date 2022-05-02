@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Email1 = ({name}) => {
+const Email1 = ({selectedEmailTemplate, name, bookingDate, TotalAmount, noOfPas}) => {
 	var html = `  <center>
 		
     
@@ -22,7 +22,7 @@ const Email1 = ({name}) => {
                 New Booking	
             </h1>
             <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif";">
-                Confirmation
+                Confirmation 
             </h1>
             <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif";">
                 KFQHMW
@@ -32,6 +32,7 @@ const Email1 = ({name}) => {
 		
 		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
         Mon, May 2, 2022
+        ${bookingDate}
         </h1>
 		<h1 style="font-size:14px; line-height:22px; font-weight:normal; color:#333333;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
         Dear ${name},
@@ -50,7 +51,11 @@ const Email1 = ({name}) => {
           <td>
             <table border="0" cellspacing="0" cellpadding="0">
               <tr>
-             
+             <p> Name is : ${name}</p>
+             <p> Total Number of passengers : ${noOfPas}</p>
+             <p> selected Email Template : ${selectedEmailTemplate}</p>
+             <p> Booking Date: ${bookingDate}</p>
+             <p> Total Amount is : ${TotalAmount}</p>
               </tr>
             </table>
           </td>
