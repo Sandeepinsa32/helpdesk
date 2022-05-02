@@ -5,7 +5,7 @@ import {BASEURL, createQueryString} from '../utils/Utils';
 import axios from 'axios';
 
 //@material-ui
-import {Box, Button, Card, Container, CardContent, TextField, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {Box, Button, Card, Container, CardContent, TextField, CircularProgress, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -242,7 +242,27 @@ export const Transaction = () => {
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{myRecords?.length &&
+									{isLoading ? (
+										<TableRow>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell>
+												<div
+													style={{
+														marginLeft: '-3rem',
+													}}>
+													<CircularProgress />
+												</div>
+											</TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+										</TableRow>
+									) : myRecords?.length > 0 ? (
 										myRecords.map((row, index) => (
 											<TableRow
 												key={index}
@@ -275,7 +295,28 @@ export const Transaction = () => {
 													</Button>
 												</TableCell>
 											</TableRow>
-										))}
+										))
+									) : (
+										<TableRow>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell>
+												<div
+													style={{
+														marginLeft: '-3rem',
+													}}>
+													<h2>No data found</h2>
+												</div>
+											</TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+											<TableCell></TableCell>
+										</TableRow>
+									)}
 								</TableBody>
 							</Table>
 						</TableContainer>

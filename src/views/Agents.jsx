@@ -265,11 +265,13 @@ export const AddUser = () => {
 													<TableCell>{row.email}</TableCell>
 													<TableCell>{row.employeeAlias}</TableCell>
 													<TableCell>{row.createdAt?.substring(0, 10)}</TableCell>
+
 													{/* <TableCell>
 														<IconButton aria-label='delete' color='error' onClick={deleteHandler}>
 															<DeleteIcon />
 														</IconButton>
 													</TableCell> */}
+
 													{/* <Button variant='contained' color='neutral' size='small' onClick={() => deleteAgent(row._id)}>
 															Delete
 														</Button> */}
