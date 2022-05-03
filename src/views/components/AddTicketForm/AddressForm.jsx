@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
-import {Grid, Typography, TextField, FormControlLabel, Checkbox, MenuItem, InputLabel, FormControl, Select, Button} from '@mui/material';
+import {Grid, Typography, TextField, FormControlLabel, Checkbox, InputLabel, MenuItem, FormLabel, FormControl, Select, Button} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
@@ -11,7 +11,13 @@ import {FormatLineSpacing} from '@mui/icons-material';
 
 export default function AddressForm({setUserInfo, handleSubmit}) {
 	const [bookingType, setBookingType] = useState(null);
-	const [productType, setProductType] = useState(null);
+	const [productType, setProductType] = useState({
+		flight: true,
+		hotel: true,
+		car: true,
+		insurance: true,
+		addon: true,
+	});
 	const [fareType, setFareType] = useState(null);
 	const [bookedOn, setBookedOn] = useState(null);
 	//date
@@ -49,8 +55,8 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			comments: '',
 			notes: '',
 			totalInhouseCharge: '',
-			departureDate: '',
-			returnDate: '',
+			departureDate: null,
+			returnDate: null,
 			passengerCount: '',
 			grandTotal: '',
 		},
@@ -82,6 +88,9 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 		},
 	});
 
+	const handleChange = (event) => {
+		setProductType({...productType, [event.target.name]: event.target.checked});
+	};
 	return (
 		<>
 			<Typography variant='h6' gutterBottom>
@@ -90,7 +99,17 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 
 			<form onSubmit={formik.handleSubmit}>
 				<Grid container spacing={3}>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={2}>
+						<Typography sx={{mt: 1}}>Product Type : </Typography>
+					</Grid>
+					<Grid item xs={12} md={8}>
+						<FormControlLabel control={<Checkbox checked={productType.flight} onChange={handleChange} name='flight' color='primary' />} label='Flight' />
+						<FormControlLabel control={<Checkbox checked={productType.hotel} onChange={handleChange} name='hotel' color='primary' />} label='Hotel' />
+						<FormControlLabel control={<Checkbox checked={productType.car} onChange={handleChange} name='car' color='primary' />} label='Car' />
+						<FormControlLabel control={<Checkbox checked={productType.insurance} onChange={handleChange} name='insurance' color='primary' />} label='Insurance' />
+						<FormControlLabel control={<Checkbox checked={productType.addon} onChange={handleChange} name='addon' color='primary' />} label='Add-On' />
+					</Grid>
+					<Grid item xs={12} md={4}>
 						<TextField
 							fullWidth
 							label='First Name'
@@ -102,7 +121,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.firstName}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							id='lastName'
 							name='lastName'
@@ -115,7 +134,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.lastName}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							nrequired
 							id='email'
@@ -130,7 +149,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						/>
 					</Grid>
 
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							nrequired
 							id='phone'
@@ -144,7 +163,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.phone}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							error={Boolean(formik.touched.passengerCount && formik.errors.passengerCount)}
 							fullWidth
@@ -158,7 +177,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						/>
 					</Grid>
 
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							nrequired
 							id='pnrNo'
@@ -172,7 +191,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.pnrNo}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<FormControl required fullWidth>
 							<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
 							<Select
@@ -196,7 +215,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<FormControl required fullWidth>
 							<InputLabel id='Product-Type-Dropdown-label'>Product Type</InputLabel>
 							<Select
@@ -219,7 +238,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<FormControl required fullWidth>
 							<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
 							<Select
@@ -240,7 +259,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<FormControl required fullWidth error={Boolean(formik.touched.bookedOn && formik.errors.bookedOn)} helperText={formik.touched.bookedOn && formik.errors.bookedOn}>
 							<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
 							<Select
@@ -261,7 +280,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							</Select>
 						</FormControl>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							nrequired
 							id='mcoNo'
@@ -275,7 +294,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.mcoNo}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							id='airlineCode'
 							name='airlineCode'
@@ -289,7 +308,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						/>
 					</Grid>
 
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							nrequired
 							id='pricePerPerson'
@@ -303,7 +322,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.pricePerPerson}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							id='grandTotal'
 							name='grandTotal'
@@ -317,7 +336,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						/>
 					</Grid>
 					{/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
-					{/* <Grid item xs={12} sm={4}>
+					{/* <Grid item xs={12} md={4}>
 						<TextField
 							id='totalSale'
 							name='totalSale'
@@ -330,7 +349,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.totalSale}
 						/>
 					</Grid> */}
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<TextField
 							id='totalInhouseChargetotalInhouseCharge'
 							name='totalInhouseCharge'
@@ -343,7 +362,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							value={formik.values.totalInhouseCharge}
 						/>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DatePicker
 								inputFormat='dd/MM/yyyy'
@@ -361,12 +380,12 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 										})
 									);
 								}}
-								value={departureDateValue}
+								value={formik.values.departureDateValue}
 								renderInput={(params) => <TextField {...params} />}
 							/>
 						</LocalizationProvider>
 					</Grid>
-					<Grid item xs={12} sm={4}>
+					<Grid item xs={12} md={4}>
 						<LocalizationProvider dateAdapter={AdapterDateFns}>
 							<DatePicker
 								name='returnDate'
@@ -389,8 +408,11 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						</LocalizationProvider>
 					</Grid>
 
-					<Grid item xs={8} sm={10}></Grid>
-					<Grid item xs={4} sm={2}>
+					{/* EMpty one  */}
+					<Grid item xs={12} md={4}></Grid>
+
+					<Grid item xs={8} md={10}></Grid>
+					<Grid item xs={4} md={2}>
 						<Button
 							variant='contained'
 							type='submit'
