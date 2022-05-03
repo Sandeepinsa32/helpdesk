@@ -40,6 +40,8 @@ export default function SearchRecord() {
   const [recordData, setRecordData] = useState([]);
   const [open, setOpen] = useState(false);
   const [viewData, setViewData] = useState(false);
+  const [oldTotalRecords, setOldTotalRecords] = useState(-1);
+  const [allRecords, setAllRecords] = useState([]);
   const [userData, setUserData] = useState({});
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = useState("");
@@ -62,6 +64,12 @@ export default function SearchRecord() {
       .get(BASEURL + "/ticket/all" + search)
       .then((response) => {
         console.log(response.data);
+        if (search === "?page=1") {
+          setOldTotalRecords(response.data.data.totalDocuments);
+
+          setAllRecords(response.data.data.tickets);
+        }
+
         setRecordData(response.data.data.tickets);
         setTotalRecords(response.data.data.totalDocuments);
         setTimeout(() => {
@@ -97,6 +105,8 @@ export default function SearchRecord() {
     setPhone("");
     setEmail("");
     setBookingid("");
+    setRecordData(allRecords);
+    setTotalRecords(oldTotalRecords);
   };
   useEffect(() => {
     axios.defaults.headers.common["Authorization"] =

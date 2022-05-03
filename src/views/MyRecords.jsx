@@ -50,6 +50,8 @@ export const Transaction = () => {
   const [bookingid, setBookingid] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [oldTotalRecords, setOldTotalRecords] = useState(-1);
+  const [allRecords, setAllRecords] = useState([]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -64,6 +66,8 @@ export const Transaction = () => {
     setPhone("");
     setEmail("");
     setBookingid("");
+    setMyRecords(allRecords);
+    setTotalRecords(oldTotalRecords);
   };
   const handleChange = (event, value) => {
     setPage(value);
@@ -74,10 +78,15 @@ export const Transaction = () => {
     axios
       .get(BASEURL + "/ticket/all" + search)
       .then((response) => {
-        console.log(response.data.data);
+        console.log(response.data);
+        if (search === "?page=1") {
+          setOldTotalRecords(response.data.data.totalDocuments);
+
+          setAllRecords(response.data.data.tickets);
+        }
+
         setMyRecords(response.data.data.tickets);
         setTotalRecords(response.data.data.totalDocuments);
-
         setTimeout(() => {
           setIsLoading(false);
         }, 500);
@@ -288,9 +297,11 @@ export const Transaction = () => {
                     myRecords.map((row, index) => (
                       <TableRow
                         key={index}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
+                        sx={
+                          index % 2 == 0
+                            ? { borderLeft: "8px solid #E0021B" }
+                            : { borderLeft: "8px solid #76DF29" }
+                        }
                       >
                         <TableCell>{row.email}</TableCell>
                         <TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>

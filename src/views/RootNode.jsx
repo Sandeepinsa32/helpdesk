@@ -300,12 +300,12 @@ const items = [
   },
 
   {
-    href: "/Transaction",
+    href: "/my-records",
     icon: <ReceiptIcon fontSize="small" />,
     title: "My Records",
   },
   {
-    href: "/Search",
+    href: "/all",
     icon: <SearchIcon fontSize="small" />,
     title: "All Transaction",
   },

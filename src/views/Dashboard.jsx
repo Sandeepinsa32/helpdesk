@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Box, Container, Grid } from "@mui/material";
 import { TicketStat } from "./components/dashboard/TicketStat";
-import { LatestOrders } from "./components/dashboard/latest-orders";
+import { RecentBookings } from "./components/dashboard/RecentBookings";
 
 import axios from "axios";
 import { BASEURL } from "../utils/Utils";
@@ -52,7 +52,7 @@ function Dashboard() {
               <TicketStat tickets={monthlyStats} interval={"30 Days"} />
             </Grid>
             <Grid item lg={12} md={12} xl={12} xs={12}>
-              <LatestOrders />
+              <RecentBookings />
             </Grid>
           </Grid>
         </Container>
