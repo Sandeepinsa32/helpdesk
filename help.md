@@ -118,3 +118,8 @@ booking id - thd + 4 digit unique code
 						))}
 					</Grid>
 				</Container>
+
+// .catch((e)
+
+1. adding toast in api
+2. email
