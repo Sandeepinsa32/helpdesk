@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
-	const [inputList, setInputList] = useState([{cardName: '', cardNumber: '', expiryDate: null, cvv: ''}]);
+	const [inputList, setInputList] = useState([{cardName: '', cardHolderPhn: '', cardNumber: '', expiryDate: null, cvv: ''}]);
 	const [expiryDateValue, setExpiryDateValue] = useState(null);
 
 	// handle input change
@@ -41,7 +41,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList([...inputList, {cardName: '', cardNumber: '', expiryDate: null, cvv: ''}]);
+		setInputList([...inputList, {cardName: '', cardHolderPhn: '', cardNumber: '', expiryDate: null, cvv: ''}]);
 	};
 
 	return (
@@ -53,12 +53,15 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 				{inputList.map((x, i) => {
 					return (
 						<Paper
+							elevation={3}
 							style={{
 								padding: 12,
-								margin: 8,
+								margin: 18,
+								marginLeft: '21px',
+								marginBorder: '0px',
 							}}>
 							<Grid container spacing={3}>
-								<Grid item xs={12} md={6}>
+								<Grid item xs={12} md={4}>
 									<TextField
 										required
 										name='cardName'
@@ -71,7 +74,10 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 										value={inputList[i].cardName}
 									/>
 								</Grid>
-								<Grid item xs={12} md={6}>
+								<Grid item xs={12} md={4}>
+									<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleInputChange(e, i)} value={inputList[i].cardNumber} />
+								</Grid>
+								<Grid item xs={12} md={4}>
 									<TextField
 										required
 										name='cardNumber'
@@ -82,10 +88,10 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 										value={inputList[i].cardNumber}
 									/>
 								</Grid>
-								<Grid item xs={12} md={6}>
+								<Grid item xs={12} md={3}>
 									<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleInputChange(e, i)} value={inputList[i].cvv} />
 								</Grid>
-								<Grid item xs={12} md={6}>
+								<Grid item xs={12} md={4}>
 									<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 										<DatePicker
 											fullWidth
