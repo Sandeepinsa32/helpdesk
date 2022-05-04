@@ -308,7 +308,7 @@ export const AddUser = () => {
 					<IconButton onClick={handleDeleteClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<form autoComplete='off' noValidate>
+					<form autoComplete='off'>
 						<Card
 							sx={{
 								boxShadow: 'none',

@@ -113,7 +113,7 @@ table.tableoutter th {
         ${bookingDate}
         </h1>
 		<h1 style="font-size:14px; line-height:22px; font-weight:normal; color:#333333;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
-        Dear ${name},
+        Dear Customer	,
         </h1>
       
       
@@ -147,7 +147,7 @@ table.tableoutter th {
       <td data-label="lastname">CHESS</td>
       <td data-label="Ticket">2.72136E+11</td>
       <td data-label="Period">KFQHMW</td>
-      <td data-label="Period">$299.40</td>
+      <td data-label="Period">$ ${TotalAmount}</td>
     </tr>
   </tbody>
 </table>
@@ -160,7 +160,7 @@ table.tableoutter th {
      
            <div class="paymentMessage" style="background: #efefef;"> 
 
-             <p style="font-size: 12px; line-height: 20px; color: #222; margin-bottom:20px; font-weight: 600;font-family: 'sans-serif';">Total amount charged $478.86 in the name of ""ARTHUR MARANTA"" ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
+             <p style="font-size: 12px; line-height: 20px; color: #222; margin-bottom:20px; font-weight: 600;font-family: 'sans-serif';">Total amount charged $ ${TotalAmount} in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
         </p>
               
             </div>
