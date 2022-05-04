@@ -85,3 +85,5 @@ booking id - thd + 4 digit unique code
 //emp id // email
 
 2. email validation
+
+REMOVE EMAIL FROM GLOBAL TICKET TO CONV remove date from input 2 digit input in airline date - 25 aug 22 format table pnrconvertor email open, ip address - first, last, authorize ip

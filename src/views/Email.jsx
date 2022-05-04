@@ -1,14 +1,20 @@
 import React, {useState} from 'react';
 import {Avatar, Box, Card, CardContent, Grid, TextField, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import Email1 from './components/email1';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
+import {createTheme} from '@mui/material/styles';
 
 // mui ICon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const Email = () => {
 	const cards = [1, 2, 3, 4, 5, 6];
@@ -16,7 +22,7 @@ const Email = () => {
 	const [selectedInputCount, setSelectedInputCount] = useState(1);
 	const [inputList, setInputList] = useState([{name: ''}]);
 
-	const [bookingDateValue, setBookingDateValue] = useState(currentDate());
+	const [bookingDateValue, setBookingDateValue] = useState();
 	const [totalAmt, setTotalAmt] = useState(0);
 	const [name, setName] = useState('');
 
@@ -79,15 +85,6 @@ const Email = () => {
 		console.log('totalAmt', totalAmt);
 	};
 
-	function currentDate() {
-		let today = new Date();
-		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		let yyyy = today.getFullYear();
-
-		today = mm + '/' + dd + '/' + yyyy;
-		return today;
-	}
 	return (
 		<>
 			<Box>
@@ -102,12 +99,11 @@ const Email = () => {
 							height: 1,
 							borderRadius: 1,
 						}}>
-						<Box sx={{width: '59%'}}>
-							{/* <form autoComplete='off' noValidate onSubmit={}> */}
+						<Box sx={{width: 1, height: '100vh'}}>
 							<Paper elevation={3} sx={{height: 1}}>
 								<Grid container spacing={1} sx={{m: 0, p: 1}}>
 									{/*  Email template  */}
-									<Grid item md={4}>
+									<Grid item md={3}>
 										<FormControl required fullWidth>
 											<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
 											<Select
@@ -118,44 +114,13 @@ const Email = () => {
 												fullWidth
 												name='emailTemplate'
 												label='Email Template'>
-												<MenuItem value='1'>1</MenuItem>
-												<MenuItem value='2'>2</MenuItem>
-												<MenuItem value='3'>3</MenuItem>
-												<MenuItem value='4'>4</MenuItem>
-												<MenuItem value='5'>5</MenuItem>
+												<MenuItem value='1'>New Booking Confirmation </MenuItem>
+												<MenuItem value='2'>Exchange</MenuItem>
+												<MenuItem value='3'>Refund</MenuItem>
+												<MenuItem value='4'>Void</MenuItem>
+												<MenuItem value='5'>Add On </MenuItem>
 											</Select>
 										</FormControl>
-									</Grid>
-
-									{/*  Date Picker */}
-									<Grid item xs={12} md={4} sx={{mb: 2}}>
-										<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
-											<DatePicker
-												fullWidth
-												name='expiryDate'
-												label='Expiry date'
-												inputFormat='dd/MM/yyyy'
-												minDate={currentDate}
-												onChange={(newValue) => {
-													setBookingDateValue(
-														new Date(newValue).toLocaleDateString('en-US', {
-															day: '2-digit',
-															month: '2-digit',
-															year: 'numeric',
-														})
-													);
-													console.log(
-														new Date(newValue).toLocaleDateString('en-US', {
-															day: '2-digit',
-															month: '2-digit',
-															year: 'numeric',
-														})
-													);
-												}}
-												value={bookingDateValue}
-												renderInput={(params) => <TextField {...params} />}
-											/>
-										</LocalizationProvider>
 									</Grid>
 
 									{/* Total Amount */}
@@ -171,66 +136,148 @@ const Email = () => {
 											value={totalAmt}
 										/>
 									</Grid>
-
-									{inputList.map((x, i) => {
-										return (
-											<Grid container md={6} spacing={2} sx={{my: 1}} key={i}>
-												<Grid item xs={12} md={8}>
-													<TextField
-														required
-														name='name'
-														label='Name'
-														fullWidth
-														autoComplete='name'
-														onChange={(e) => {
-															handleInputChange(e, i);
-														}}
-														value={inputList[i].name}
-													/>
-												</Grid>
-
-												{inputList.length !== 1 && (
-													<>
-														<Grid item xs={12} md={2}>
-															<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1, textTransform: 'capitalize'}}>
-																Remove
-															</Button>
-														</Grid>
-													</>
-												)}
-											</Grid>
-										);
-									})}
-								</Grid>
-								<Grid container>
-									<Grid item xs={12} md={7}></Grid>
+									<Grid item xs={12} md={1} sx={{mr: 1}}>
+										<Button onClick={handleAddClick} variant='contained'>
+											Preview
+										</Button>
+									</Grid>
+									<Grid item xs={12} md={1} sx={{mr: 1}}>
+										<Button onClick={handleAddClick} variant='contained'>
+											Submit
+										</Button>
+									</Grid>
 
 									{inputList.length < 9 && (
-										<Grid item xs={12} md={2} sx={{margin: '8px'}}>
-											<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}} fullWidth={true} variant='outlined'>
+										<Grid item xs={12} md={2}>
+											<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}} variant='outlined'>
 												Add new
 											</Button>
 										</Grid>
 									)}
-									<Grid item xs={12} md={2} sx={{margin: '8px'}}>
-										<Button sx={{mr: 1}} type='submit' fullWidth={true} onClick={handleConfirm} variant='contained'>
-											confirm
-										</Button>
-									</Grid>
 								</Grid>
-							</Paper>
-							{/* </form> */}
-						</Box>
 
-						<Box sx={{width: '1%'}}></Box>
-						<Box sx={{width: '40%'}}>
-							<Paper elevation={3} sx={{height: 1}}>
-								<Email1 selectedEmailTemplate={selectedEmailTemplate} name={inputList} bookingDate={bookingDateValue} TotalAmount={totalAmt} noOfPas={selectedInputCount} />
+								<Box sx={{mt: 3}}>
+									<TableContainer component={Paper}>
+										<Table sx={{minWidth: 650}} aria-label='simple table'>
+											<TableHead>
+												<TableRow>
+													{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Confirmation', 'Price'].map((th) => (
+														<TableCell key={th}>{th}</TableCell>
+													))}
+												</TableRow>
+											</TableHead>
+											<TableBody>
+												{inputList.map((x, i) => {
+													return (
+														<>
+															<TableRow
+																sx={{
+																	'&:last-child td, &:last-child th': {border: 0},
+																}}>
+																<TableCell>
+																	<TextField
+																		required
+																		name='firstName'
+																		label='First Name'
+																		fullWidth
+																		autoComplete='firstName'
+																		onChange={(e) => {
+																			handleInputChange(e, i);
+																		}}
+																		value={inputList[i].name}
+																	/>
+																</TableCell>
+																<TableCell>
+																	<TextField
+																		required
+																		name='middleName'
+																		label='Middle Name'
+																		fullWidth
+																		autoComplete='middleName'
+																		onChange={(e) => {
+																			handleInputChange(e, i);
+																		}}
+																		value={inputList[i].name}
+																	/>
+																</TableCell>
+																<TableCell>
+																	<TextField
+																		required
+																		name='lastName'
+																		label='Last Name'
+																		fullWidth
+																		autoComplete='lastName'
+																		onChange={(e) => {
+																			handleInputChange(e, i);
+																		}}
+																		value={inputList[i].name}
+																	/>
+																</TableCell>
+																<TableCell>
+																	<TextField
+																		required
+																		name='ticket'
+																		label='Ticket'
+																		fullWidth
+																		autoComplete='ticket'
+																		onChange={(e) => {
+																			handleInputChange(e, i);
+																		}}
+																		value={inputList[i].name}
+																	/>
+																</TableCell>
+																<TableCell>
+																	<TextField
+																		required
+																		name='confirmation'
+																		label='Confirmation'
+																		fullWidth
+																		autoComplete='confirmation'
+																		onChange={(e) => {
+																			handleInputChange(e, i);
+																		}}
+																		value={inputList[i].name}
+																	/>
+																</TableCell>
+																<TableCell>
+																	<TextField
+																		required
+																		name='price'
+																		label='Price'
+																		fullWidth
+																		autoComplete='price'
+																		onChange={(e) => {
+																			handleInputChange(e, i);
+																		}}
+																		value={inputList[i].name}
+																	/>
+																</TableCell>
+																{inputList.length !== 1 && (
+																	<Grid container>
+																		<Grid item xs={12} md={2}>
+																			<Button
+																				startIcon={<DeleteOutlineIcon color='error' fontSize='small' />}
+																				onClick={() => handleRemoveClick(i)}
+																				sx={{mr: 1, mt: '1.8rem'}}></Button>
+																		</Grid>
+																	</Grid>
+																)}
+															</TableRow>
+														</>
+													);
+												})}
+											</TableBody>
+										</Table>
+									</TableContainer>
+								</Box>
 							</Paper>
 						</Box>
 					</Box>
-					{/* </CardContent>
-					</Card> */}
+					<Box sx={{width: 1}}>
+						<Paper elevation={3} sx={{height: 1}}>
+							<Email1 selectedEmailTemplate={selectedEmailTemplate} name={inputList} bookingDate={bookingDateValue} TotalAmount={totalAmt} noOfPas={selectedInputCount} />
+						</Paper>
+					</Box>
 				</>
 			</Box>
 		</>

@@ -1,6 +1,15 @@
 import React from 'react';
 
 const Email1 = ({selectedEmailTemplate, name, bookingDate, TotalAmount, noOfPas}) => {
+	function currentDate() {
+		let today = new Date();
+		let dd = String(today.getDate()).padStart(2, '0');
+		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let yyyy = today.getFullYear();
+
+		today = mm + '/' + dd + '/' + yyyy;
+		return today;
+	}
 	var html = `  <center>
 		<style>
     table.tableoutter {
@@ -110,7 +119,7 @@ table.tableoutter th {
 		
 		
 		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
-        ${bookingDate}
+        ${currentDate()}
         </h1>
 		<h1 style="font-size:14px; line-height:22px; font-weight:normal; color:#333333;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
         Dear Customer	,
