@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Email1 = ({selectedEmailTemplate, name, bookingDate, TotalAmount, noOfPas}) => {
+const Email1 = ({selectedEmailTemplate, data, bookingDate, TotalAmount, noOfPas}) => {
 	function currentDate() {
 		let today = new Date();
 		let dd = String(today.getDate()).padStart(2, '0');
@@ -10,6 +10,20 @@ const Email1 = ({selectedEmailTemplate, name, bookingDate, TotalAmount, noOfPas}
 		today = mm + '/' + dd + '/' + yyyy;
 		return today;
 	}
+
+	function userTabelData() {
+		let tableData = data.map((x, i) => {
+			console.log('<tr>');
+			for (var obj in x) {
+				console.log(`<td scope='row' data-label='${obj}'>
+		${data[i][obj]}
+		</td>`);
+			}
+			console.log('</tr>');
+		});
+		return tableData;
+	}
+
 	var html = `  <center>
 		<style>
     table.tableoutter {
@@ -151,13 +165,7 @@ table.tableoutter th {
     
     
    
-    <tr>
-      <td scope="row" data-label="firstname">ALONZO</td>
-      <td data-label="lastname">CHESS</td>
-      <td data-label="Ticket">2.72136E+11</td>
-      <td data-label="Period">KFQHMW</td>
-      <td data-label="Period">$ ${TotalAmount}</td>
-    </tr>
+   ${userTabelData()}
   </tbody>
 </table>
 

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Avatar, Box, Card, CardContent, Grid, TextField, IconButton, Modal, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
+import {Avatar, Box, Card, CardContent, Grid, InputAdornment, TextField, IconButton, Modal, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import Email1 from './components/email1';
 
 import Table from '@mui/material/Table';
@@ -18,9 +18,13 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const Email = () => {
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
-	const [inputList, setInputList] = useState([{firstName: '', middleName: '', lastName: '', ticket: '', confirmation: '', price: ''}]);
+	const [inputList, setInputList] = useState([
+		{firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'},
+		{firstName: 'dee', middleName: 'san', lastName: 'Deeshan', ticket: '2.72', confirmation: 'MSGHMW', price: '100'},
+	]);
 	const [totalAmt, setTotalAmt] = useState(0);
 	const [previewModal, setPreviewModal] = useState(false);
+	const [pnrValue, setPnrValue] = useState('');
 
 	const handleEmailTemplateChange = (e) => {
 		setSelectedEmailTemplate(e.target.value);
@@ -43,7 +47,8 @@ const Email = () => {
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList([...inputList, {firstName: '', middleName: '', lastName: '', ticket: '', confirmation: '', price: ''}]);
+		// setInputList([...inputList, {firstName: '', middleName: '', lastName: '', ticket: '', confirmation: '', price: ''}]);
+		setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
 	};
 	function clean(obj) {
 		obj.map((x, i) => {
@@ -63,7 +68,9 @@ const Email = () => {
 		newArr = newArr.filter((value) => Object.keys(value).length !== 0);
 
 		console.log('selectedEmailTemplate', selectedEmailTemplate);
-		console.log('inputList', newArr);
+
+		console.log('inputList', inputList);
+		console.log('newArr', newArr);
 		console.log('totalAmt', totalAmt);
 	};
 	const handlePreviewClose = () => {
@@ -76,7 +83,7 @@ const Email = () => {
 				<Paper elevation={3}>
 					<Grid container spacing={1} sx={{m: 0, p: 1}}>
 						{/*  Email template  */}
-						<Grid item md={3}>
+						<Grid item md={12} sx={{pr: 1}}>
 							<FormControl required fullWidth>
 								<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
 								<Select
@@ -95,41 +102,21 @@ const Email = () => {
 								</Select>
 							</FormControl>
 						</Grid>
-
-						{/* Total Amount */}
-						<Grid item xs={12} md={3} sx={{pr: 1}}>
+						<Grid item md={12} sx={{pr: 1}}>
 							<TextField
 								required
-								name='totalAmount'
-								label='totalAmount'
-								fullWidth
+								name='PnrConverter'
+								label='PnrConverter'
+								fullWidth={true}
 								onChange={(e) => {
-									setTotalAmt(e.target.value);
+									setPnrValue(e.target.value);
 								}}
-								value={totalAmt}
+								value={pnrValue}
 							/>
 						</Grid>
-						<Grid item xs={12} md={1} sx={{mr: 1}}>
-							<Button onClick={() => setPreviewModal(true)} variant='contained'>
-								Preview
-							</Button>
-						</Grid>
-						<Grid item xs={12} md={1} sx={{mr: 1}}>
-							<Button onClick={handleAddClick} variant='contained'>
-								Submit
-							</Button>
-						</Grid>
-
-						{inputList.length < 9 && (
-							<Grid item xs={12} md={2}>
-								<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}} variant='outlined'>
-									Add new
-								</Button>
-							</Grid>
-						)}
 					</Grid>
 
-					<Box sx={{mt: 3}}>
+					<Box sx={{mt: 3, p: 1}}>
 						<TableContainer component={Paper}>
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
@@ -157,7 +144,7 @@ const Email = () => {
 														onChange={(e) => {
 															handleInputChange(e, i);
 														}}
-														value={inputList[i].name}
+														value={inputList[i].firstName}
 													/>
 												</TableCell>
 												<TableCell>
@@ -170,7 +157,7 @@ const Email = () => {
 														onChange={(e) => {
 															handleInputChange(e, i);
 														}}
-														value={inputList[i].name}
+														value={inputList[i].middleName}
 													/>
 												</TableCell>
 												<TableCell>
@@ -183,7 +170,7 @@ const Email = () => {
 														onChange={(e) => {
 															handleInputChange(e, i);
 														}}
-														value={inputList[i].name}
+														value={inputList[i].lastName}
 													/>
 												</TableCell>
 												<TableCell>
@@ -196,7 +183,7 @@ const Email = () => {
 														onChange={(e) => {
 															handleInputChange(e, i);
 														}}
-														value={inputList[i].name}
+														value={inputList[i].ticket}
 													/>
 												</TableCell>
 												<TableCell>
@@ -209,7 +196,7 @@ const Email = () => {
 														onChange={(e) => {
 															handleInputChange(e, i);
 														}}
-														value={inputList[i].name}
+														value={inputList[i].confirmation}
 													/>
 												</TableCell>
 												<TableCell>
@@ -219,10 +206,13 @@ const Email = () => {
 														label='Price'
 														fullWidth
 														autoComplete='price'
+														InputProps={{
+															startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+														}}
 														onChange={(e) => {
 															handleInputChange(e, i);
 														}}
-														value={inputList[i].name}
+														value={inputList[i].price}
 													/>
 												</TableCell>
 												{inputList.length !== 1 && (
@@ -242,6 +232,41 @@ const Email = () => {
 							</Table>
 						</TableContainer>
 					</Box>
+
+					<Grid container spacing={1} sx={{m: 0, p: 1}}>
+						{inputList.length < 9 && (
+							<Grid item xs={12} md={12} sx={{pr: 1}}>
+								<Button startIcon={<AddIcon fontSize='small' />} fullWidth={true} onClick={handleAddClick} sx={{mr: 1, pr: 1}} variant='outlined'>
+									Add new
+								</Button>
+							</Grid>
+						)}
+						{/* Total Amount */}
+						<Grid item xs={12} md={12} sx={{pr: 1}}>
+							<TextField
+								required
+								name='totalAmount'
+								label='totalAmount'
+								fullWidth={true}
+								onChange={(e) => {
+									setTotalAmt(e.target.value);
+								}}
+								value={totalAmt}
+							/>
+						</Grid>
+
+						<Grid item xs={12} md={10}></Grid>
+						<Grid item xs={12} md={1}>
+							<Button onClick={() => setPreviewModal(true)} variant='contained'>
+								Preview
+							</Button>
+						</Grid>
+						<Grid item xs={12} md={1} sx={{pr: 1}}>
+							<Button onClick={handleConfirm} variant='contained'>
+								Submit
+							</Button>
+						</Grid>
+					</Grid>
 				</Paper>
 			</Box>
 
@@ -251,7 +276,7 @@ const Email = () => {
 						<CloseIcon />
 					</IconButton>
 					<Paper elevation={3} sx={{height: 1}}>
-						<Email1 selectedEmailTemplate={selectedEmailTemplate} name={inputList} TotalAmount={totalAmt} />
+						<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} />
 					</Paper>
 				</Box>
 			</Modal>
