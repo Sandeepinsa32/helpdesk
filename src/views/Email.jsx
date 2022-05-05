@@ -270,7 +270,7 @@ const Email = () => {
 				</Paper>
 			</Box>
 
-			<Modal open={previewModal} onClose={handlePreviewClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+			<Modal keepMounted open={previewModal} onClose={handlePreviewClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style}>
 					<IconButton onClick={handlePreviewClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />

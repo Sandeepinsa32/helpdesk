@@ -12,16 +12,20 @@ const Email1 = ({selectedEmailTemplate, data, bookingDate, TotalAmount, noOfPas}
 	}
 
 	function userTabelData() {
-		let tableData = data.map((x, i) => {
-			console.log('<tr>');
+		var tr, td, node, rootNode;
+		console.log(data);
+		data.map((x, i) => {
+			console.log(x, i);
+			tr = document.createElement('tr');
 			for (var obj in x) {
-				console.log(`<td scope='row' data-label='${obj}'>
-		${data[i][obj]}
-		</td>`);
+				td = document.createElement('td');
+				node = document.createTextNode(data[i][obj]);
+				td.appendChild(node);
+				tr.appendChild(td);
+				rootNode = document.getElementById('appendCHildHere');
+				rootNode.appendChild(tr);
 			}
-			console.log('</tr>');
 		});
-		return tableData;
 	}
 
 	var html = `  <center>
@@ -161,11 +165,13 @@ table.tableoutter th {
       
     </tr>
   </thead>
-  <tbody>
+  <tbody id='appendCHildHere' >
     
-    
+    ${setTimeout(() => {
+		userTabelData();
+	}, 2000)}
    
-   ${userTabelData()}
+  
   </tbody>
 </table>
 
