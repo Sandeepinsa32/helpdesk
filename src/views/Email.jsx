@@ -275,9 +275,7 @@ const Email = () => {
 					<IconButton onClick={handlePreviewClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<Paper elevation={3} sx={{height: 1}}>
-						<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} />
-					</Paper>
+					<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} />
 				</Box>
 			</Modal>
 		</>
@@ -291,11 +289,11 @@ const style = {
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
-	minWidth: '70vw',
-	maxWidth: '90vw',
+	minWidth: '45vw',
+	maxWidth: '60vw',
 	minHeight: '60vh',
 	maxHeight: '90vh',
-	// overflowX: ' auto',
+	overflowX: ' auto',
 	bgcolor: 'background.paper',
 	// border: '2px solid #000',
 	boxShadow: 24,
