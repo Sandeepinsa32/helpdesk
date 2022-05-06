@@ -13,9 +13,9 @@ const Email1 = ({selectedEmailTemplate, data, bookingDate, TotalAmount, noOfPas}
 
 	function userTabelData() {
 		var tr, td, node, rootNode;
-		console.log(data);
+		// console.log(data);
 		data.map((x, i) => {
-			console.log(x, i);
+			// console.log(x, i);
 			tr = document.createElement('tr');
 			for (var obj in x) {
 				td = document.createElement('td');

@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {Avatar, Box, Card, CardContent, Grid, InputAdornment, TextField, IconButton, Modal, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import Email1 from './components/email1';
+import axios from 'axios';
+import qs from 'qs';
 
+import {BASEURL, createQueryString, errorToast, successToast} from '../utils/Utils';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -24,7 +27,7 @@ const Email = () => {
 	]);
 	const [totalAmt, setTotalAmt] = useState(0);
 	const [previewModal, setPreviewModal] = useState(false);
-	const [pnrValue, setPnrValue] = useState('');
+	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
 
 	const handleEmailTemplateChange = (e) => {
 		setSelectedEmailTemplate(e.target.value);
@@ -76,6 +79,41 @@ const Email = () => {
 	const handlePreviewClose = () => {
 		setPreviewModal(false);
 	};
+	// const handlePnrConverter = () => {
+	// 	// setPreviewModal(false);
+	// };
+	let body =
+		// qs.stringify(
+		{
+			pnr: pnrValue,
+		};
+	// );
+
+	const headers = {
+		ContentType: 'application/x-www-form-urlencoded',
+		PUBLIC_APP_KEY: '6e0b98437220f87494a76c81543e941083aa6a4c85a2c87be5820372e87b82c9',
+		PRIVATE_APP_KEY: 'pCPsHMMMZI2J2ZF4GAKB0v9XGxs0Yknxva1',
+	};
+	const handlePnrConverter = async (e) => {
+		e.preventDefault();
+
+		axios
+			.post(
+				`https://api.pnrconverter.com/api`,
+				{
+					pnr: pnrValue,
+				},
+				{
+					headers,
+				}
+			)
+			.then((response) => {
+				console.log(response);
+			})
+			.catch((e) => {
+				console.log(e.response.data.message);
+			});
+	};
 
 	return (
 		<>
@@ -102,7 +140,8 @@ const Email = () => {
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item md={12} sx={{pr: 1}}>
+
+						<Grid item md={10} sx={{pr: 1}}>
 							<TextField
 								required
 								name='PnrConverter'
@@ -113,6 +152,11 @@ const Email = () => {
 								}}
 								value={pnrValue}
 							/>
+						</Grid>
+						<Grid item xs={12} md={2} sx={{pr: 1}}>
+							<Button onClick={handlePnrConverter} variant='contained'>
+								Convert
+							</Button>
 						</Grid>
 					</Grid>
 

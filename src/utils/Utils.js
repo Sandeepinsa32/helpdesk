@@ -14,3 +14,7 @@ export const createQueryString = ({email, phone, name, page}) => {
 
 	return query?.substring(0, query.length - 1);
 };
+
+// Public API Key: 6e0b98437220f87494a76c81543e941083aa6a4c85a2c87be5820372e87b82c9;
+
+// Private API Key: pCPsHMMMZI2J2ZF4GAKB0v9XGxs0Yknxva1
