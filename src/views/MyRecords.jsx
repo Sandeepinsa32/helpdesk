@@ -16,6 +16,9 @@ import {Paper, ThemeProvider} from '@mui/material';
 import {createTheme} from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
 
+import Email from './Email';
+import Email1 from './components/email1';
+
 //  local icon
 import {Search as SearchIcon} from '../assets/icons/search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,6 +26,8 @@ import CloseIcon from '@mui/icons-material/Close';
 export const Transaction = () => {
 	const [myRecords, setMyRecords] = useState([]);
 	const [open, setOpen] = useState(false);
+	const [openEmail, setOpenEmail] = useState(false);
+	const [viewEmail, setViewEmail] = useState(false);
 	const [viewData, setViewData] = useState(false);
 	const [userData, setUserData] = useState({});
 	const [searchId, setSearchId] = useState('');
@@ -38,7 +43,12 @@ export const Transaction = () => {
 	const [allRecords, setAllRecords] = useState([]);
 
 	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const handleClose = () => {
+		setOpen(false);
+	};
+	const handleEmailClose = () => {
+		setOpenEmail(false);
+	};
 
 	const [page, setPage] = React.useState(1);
 
@@ -249,6 +259,7 @@ export const Transaction = () => {
 											'Dep Date',
 											'Return Date',
 											'action',
+											'Email',
 										].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
@@ -295,6 +306,19 @@ export const Transaction = () => {
 														View
 													</Button>
 												</TableCell>
+												<TableCell>
+													<Button
+														variant='contained'
+														size='small'
+														onClick={(e) => {
+															// alert(row.id);
+															setViewEmail(row._id);
+															console.log(row.id);
+															setOpenEmail(true);
+														}}>
+														Send
+													</Button>
+												</TableCell>
 											</TableRow>
 										))
 									) : (
@@ -333,6 +357,31 @@ export const Transaction = () => {
 						<CloseIcon />
 					</IconButton>
 					{viewData ? <Checkout isView={true} data={userData} /> : <Checkout isView={false} />}
+				</Box>
+			</Modal>
+			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						minWidth: '70vw',
+						minHeight: '60vh',
+						maxHeight: '90vh',
+						overflowX: ' auto',
+						bgcolor: 'background.paper',
+						// border: '2px solid #000',
+						boxShadow: 24,
+						borderRadius: '1rem',
+						p: 4,
+					}}>
+					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<Email Ticketid={viewEmail} />
+					<Box sx={{m: 3}}></Box>
+					<Email1 />
 				</Box>
 			</Modal>
 		</>

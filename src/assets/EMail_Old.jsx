@@ -19,7 +19,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-const Email = ({Ticketid}) => {
+const Email = () => {
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
 	const [inputList, setInputList] = useState([
 		{firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'},
@@ -121,7 +121,7 @@ const Email = ({Ticketid}) => {
 				<Paper elevation={3}>
 					<Grid container spacing={1} sx={{m: 0, p: 1}}>
 						{/*  Email template  */}
-						<Grid item md={6} sx={{pr: 1}}>
+						<Grid item md={12} sx={{pr: 1}}>
 							<FormControl required fullWidth>
 								<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
 								<Select
@@ -139,9 +139,6 @@ const Email = ({Ticketid}) => {
 									<MenuItem value='5'>Add On </MenuItem>
 								</Select>
 							</FormControl>
-						</Grid>
-						<Grid item md={6} sx={{pr: 1}}>
-							<TextField required name='ticketId' label='Booking ID' fullWidth={true} value={Ticketid} disabled={true} />
 						</Grid>
 
 						<Grid item md={10} sx={{pr: 1}}>
@@ -303,12 +300,12 @@ const Email = ({Ticketid}) => {
 						</Grid>
 
 						<Grid item xs={12} md={10}></Grid>
-						{/* <Grid item xs={12} md={1}>
+						<Grid item xs={12} md={1}>
 							<Button onClick={() => setPreviewModal(true)} variant='contained'>
 								Preview
 							</Button>
-						</Grid> */}
-						<Grid item xs={12} md={2} sx={{pr: 1}}>
+						</Grid>
+						<Grid item xs={12} md={1} sx={{pr: 1}}>
 							<Button onClick={handleConfirm} variant='contained'>
 								Submit
 							</Button>

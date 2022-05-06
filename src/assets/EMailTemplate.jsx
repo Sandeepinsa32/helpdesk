@@ -12,19 +12,20 @@ const Email1 = ({selectedEmailTemplate, data, bookingDate, TotalAmount, noOfPas}
 	}
 
 	function userTabelData() {
-		// let tr, td, node, rootNode;
-		// data.map((x, i) => {
-		// 	tr = document.createElement('tr');
-		// 	for (var obj in x) {
-		// 		td = document.createElement('td');
-		// 		node = document.createTextNode(data[i][obj]);
-		// 		td.appendChild(node);
-		// 		tr.appendChild(td);
-		// 		rootNode = document.getElementById('appendCHildHere');
-		// 		rootNode.appendChild(tr);
-		// 	}
-		// });
-		return `coming soon`;
+		var tr, td, node, rootNode;
+		// console.log(data);
+		data.map((x, i) => {
+			// console.log(x, i);
+			tr = document.createElement('tr');
+			for (var obj in x) {
+				td = document.createElement('td');
+				node = document.createTextNode(data[i][obj]);
+				td.appendChild(node);
+				tr.appendChild(td);
+				rootNode = document.getElementById('appendCHildHere');
+				rootNode.appendChild(tr);
+			}
+		});
 	}
 
 	var html = `  <center>
