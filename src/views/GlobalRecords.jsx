@@ -15,6 +15,9 @@ import TableRow from '@mui/material/TableRow';
 
 import {createTheme} from '@mui/material/styles';
 
+import Email from './Email';
+import Email1 from './components/email1';
+
 //icon
 import CloseIcon from '@mui/icons-material/Close';
 import {Search as SearchIcon} from '../assets/icons/search';
@@ -34,6 +37,9 @@ export default function SearchRecord() {
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
+
+	const [openEmail, setOpenEmail] = useState(false);
+	const [viewEmail, setViewEmail] = useState(false);
 	//Handler's
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -92,6 +98,9 @@ export default function SearchRecord() {
 		setBookingid('');
 		setRecordData(allRecords);
 		setTotalRecords(oldTotalRecords);
+	};
+	const handleEmailClose = () => {
+		setOpenEmail(false);
 	};
 	useEffect(() => {
 		axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('token'));
@@ -228,6 +237,7 @@ export default function SearchRecord() {
 											'Dep Date',
 											'Return Date',
 											'action',
+											'Email',
 										].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
@@ -236,7 +246,7 @@ export default function SearchRecord() {
 								<TableBody>
 									{isLoading ? (
 										<TableRow>
-											<TableCell colSpan={10}>
+											<TableCell colSpan={11}>
 												<div
 													style={{
 														display: 'flex',
@@ -278,6 +288,20 @@ export default function SearchRecord() {
 														View
 													</Button>
 												</TableCell>
+
+												<TableCell>
+													<Button
+														variant='contained'
+														size='small'
+														onClick={(e) => {
+															// alert(row.id);
+															setViewEmail(row._id);
+															console.log(row.id);
+															setOpenEmail(true);
+														}}>
+														Send
+													</Button>
+												</TableCell>
 											</TableRow>
 										))
 									) : (
@@ -317,6 +341,33 @@ export default function SearchRecord() {
 					<Typography sx={{m: 1}} variant='body2'>
 						{JSON.stringify(userData)}
 					</Typography>
+				</Box>
+			</Modal>
+			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						minWidth: '70vw',
+						minHeight: '60vh',
+						maxHeight: '90vh',
+						overflowX: ' auto',
+						bgcolor: 'background.paper',
+						// border: '2px solid #000',
+						boxShadow: 24,
+						borderRadius: '1rem',
+						p: 4,
+					}}>
+					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<Email Ticketid={viewEmail} />
+					<Box sx={{m: 3}}></Box>
+					<Paper elevation={3}>
+						<Email1 />
+					</Paper>
 				</Box>
 			</Modal>
 		</>
