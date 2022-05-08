@@ -25,6 +25,7 @@ export default function Checkout({data, isView}) {
 
 	// const myRef = useRef();
 	const handleNext = () => {
+		alert('next');
 		setActiveStep(activeStep + 1);
 		console.log(userInfo, cardInfo);
 	};
