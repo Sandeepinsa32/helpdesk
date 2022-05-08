@@ -21,13 +21,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const Email = ({Ticketid}) => {
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
-	const [inputList, setInputList] = useState([
-		{firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'},
-		{firstName: 'dee', middleName: 'san', lastName: 'Deeshan', ticket: '2.72', confirmation: 'MSGHMW', price: '100'},
-	]);
+	const [inputList, setInputList] = useState([{firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
 	const [totalAmt, setTotalAmt] = useState(0);
 	const [previewModal, setPreviewModal] = useState(false);
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
+	const [pnrData, setPnrData] = useState([]);
 
 	useEffect(() => {
 		calculateTotalAmount();
@@ -66,8 +64,8 @@ const Email = ({Ticketid}) => {
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		// setInputList([...inputList, {firstName: '', middleName: '', lastName: '', ticket: '', confirmation: '', price: ''}]);
-		setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
+		setInputList([...inputList, {firstName: '', middleName: '', lastName: '', ticket: '', confirmation: '', price: ''}]);
+		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
 		calculateTotalAmount();
 	};
 	function clean(obj) {
@@ -126,7 +124,9 @@ const Email = ({Ticketid}) => {
 				}
 			)
 			.then((response) => {
-				console.log(response);
+				// console.log(response.data);
+				// console.log(response.data.flightData.flights);
+				setPnrData(response.data.flightData.flights);
 			})
 			.catch((e) => {
 				console.log(e.response.data.message);
@@ -339,7 +339,7 @@ const Email = ({Ticketid}) => {
 
 			<Box sx={{m: 3}}></Box>
 			<Paper elevation={3}>
-				<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} />
+				<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} pnrData={pnrData} />
 			</Paper>
 		</>
 	);

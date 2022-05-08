@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Email1 = ({selectedEmailTemplate, data, bookingDate, TotalAmount, noOfPas}) => {
+const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) => {
 	function currentDate() {
 		let today = new Date();
 		let dd = String(today.getDate()).padStart(2, '0');
@@ -34,12 +34,37 @@ const Email1 = ({selectedEmailTemplate, data, bookingDate, TotalAmount, noOfPas}
 			tableString =
 				tableString +
 				`<tr>
-      <td>${x.firstName}</td>
+      <td >${x.firstName}</td>
       <td>${x.middleName}</td>
       <td>${x.lastName}</td>
       <td>${x.ticket}</td>
       <td>${x.confirmation}</td>
       <td>${x.price}</td>
+    </tr>`;
+		});
+		return tableString;
+	}
+	function PnrDetail(data) {
+		console.log(data);
+		var tableString = '';
+		data.map((x) => {
+			console.log(x);
+			tableString =
+				tableString +
+				`<tr>
+      <td >${new Date(x.flt.departure.string).toLocaleDateString('en-US', {
+			day: '2-digit',
+			weekday: 'short',
+			month: 'short',
+			year: '2-digit',
+		})}</td>
+      <td>${x.flt.aircraft}</td>
+      <td>${x.flt.operated_by}</td>
+      <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(x.flt.departure.string).getMinutes()}</td>
+      <td> ${x.dep.airportname},${x.dep.cityname}( ${x.dep.airportcode})</td>
+      <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes()}</td>
+      <td> ${x.arr.airportname},${x.arr.cityname}( ${x.arr.airportcode})</td>
+      <td>${new Date(x.flt.departure.string).getHours()}H${new Date(x.flt.departure.string).getMinutes()}m </td>
     </tr>`;
 		});
 		return tableString;
@@ -179,7 +204,7 @@ table.tableoutter th {
       <th class="tableHeading" scope="col" name="lastname" >Last Name</th>
       <th  class="tableHeading" scope="col" name="Ticket">Ticket </th>
       <th scope="col"  class="tableHeading" name="confirmation" >Confirmation</th>
-       <th scope="col"  class="tableHeading" name="price">Price</th>
+      <th scope="col"  class="tableHeading" name="price">Price</th>
       
     </tr>
   </thead>
@@ -221,31 +246,41 @@ Changes and Cancellations are subject to airline change fee if any / fare differ
 Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
       </p>
       
-       </div>
+      </div>
 
 
-       <div>
-       <table class="tableoutter">
-  
- 
-    
-       <td scope="row" style="font-size: 11px; text-align:unset;"> 
-       <b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m 
-       </td>
-</table>
-<table class="tableoutter">
-       <td scope="row" style="font-size: 11px; text-align:unset;"> 
-       <b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
-       </td>
-       </table>
-<table class="tableoutter">
-       <td scope="row" style="font-size: 11px; text-align:unset;"> 
-      <b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
-       </td>
-</table>
+      <div>
+
         
-       
-       </div>
+<table class="tableoutter">
+  
+  <thead class=" tableHead ">
+    <tr>
+      <th class="tableHeading" scope="col" name="date">Date</th>
+      <th class="tableHeading" scope="col" name="airline" >Airline</th>
+      <th class="tableHeading" scope="col" name="flightno" >Flight No</th>
+      <th class="tableHeading" scope="col" name="depart">Depart </th>
+      <th scope="col"  class="tableHeading" name="depart-from" >From</th>
+      <th scope="col"  class="tableHeading" name="arrive">Arrive</th>
+      <th scope="col" class="tableHeading"  name="arrive-at">At </th>
+      <th scope="col"  class="tableHeading" name="duration" >Duration</th>
+      
+    </tr>
+  </thead>
+  <tbody >
+    
+    
+		${PnrDetail(pnrData)}
+	
+  
+  
+  </tbody>
+</table>
+
+
+      
+        
+  </div>
 
 
 
