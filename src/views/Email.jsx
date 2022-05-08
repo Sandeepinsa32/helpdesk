@@ -164,7 +164,9 @@ const Email = ({Ticketid}) => {
 
 						<Grid item md={10} sx={{pr: 1}}>
 							<TextField
-								required
+								id='outlined-multiline-flexible'
+								multiline
+								maxRows={4}
 								name='PnrConverter'
 								label='PnrConverter'
 								fullWidth={true}

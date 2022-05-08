@@ -48,7 +48,6 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 		console.log(data);
 		var tableString = '';
 		data.map((x) => {
-			console.log(x);
 			tableString =
 				tableString +
 				`<tr>
@@ -58,12 +57,11 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 			month: 'short',
 			year: '2-digit',
 		})}</td>
-      <td>${x.flt.aircraft}</td>
       <td>${x.flt.operated_by}</td>
       <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(x.flt.departure.string).getMinutes()}</td>
-      <td> ${x.dep.airportname},${x.dep.cityname}( ${x.dep.airportcode})</td>
-      <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes()}</td>
-      <td> ${x.arr.airportname},${x.arr.cityname}( ${x.arr.airportcode})</td>
+      <td> ${x.dep.airportname},  ${x.dep.airportcode}</td>
+      <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes() == '0' ? `00` : new Date(x.flt.arrival.string).getMinutes()}</td>
+      <td> ${x.arr.airportname}, ${x.arr.airportcode}</td>
       <td>${new Date(x.flt.departure.string).getHours()}H${new Date(x.flt.departure.string).getMinutes()}m </td>
     </tr>`;
 		});
@@ -258,7 +256,6 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     <tr>
       <th class="tableHeading" scope="col" name="date">Date</th>
       <th class="tableHeading" scope="col" name="airline" >Airline</th>
-      <th class="tableHeading" scope="col" name="flightno" >Flight No</th>
       <th class="tableHeading" scope="col" name="depart">Depart </th>
       <th scope="col"  class="tableHeading" name="depart-from" >From</th>
       <th scope="col"  class="tableHeading" name="arrive">Arrive</th>
