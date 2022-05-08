@@ -18,7 +18,7 @@ export const TicketStat = ({ tickets, interval }) => (
             {interval}
           </Typography>
           <Typography color="textPrimary" variant="h4">
-            {tickets} Tickets
+            {tickets} Conv.
           </Typography>
         </Grid>
         <Grid item>

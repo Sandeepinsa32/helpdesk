@@ -26,7 +26,11 @@ export const RecentBookings = () => {
   const loadTransactions = async () => {
     setIsLoading(true);
     axios
-      .get(BASEURL + "/ticket/all")
+      .get(BASEURL + "/ticket/my", {
+        headers: {
+          authorization: "Bearer " + JSON.parse(localStorage.getItem("token")),
+        },
+      })
       .then((response) => {
         console.log(response.data);
         setRecordData(response.data.data.tickets);
@@ -41,9 +45,6 @@ export const RecentBookings = () => {
   };
 
   useEffect(() => {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + JSON.parse(localStorage.getItem("token"));
-
     loadTransactions();
   }, []);
 
