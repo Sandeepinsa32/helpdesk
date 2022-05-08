@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Avatar, Box, Card, CardContent, Grid, InputAdornment, TextField, IconButton, Modal, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import Email1 from './components/email1';
 import axios from 'axios';
@@ -29,6 +29,22 @@ const Email = ({Ticketid}) => {
 	const [previewModal, setPreviewModal] = useState(false);
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
 
+	useEffect(() => {
+		calculateTotalAmount();
+	});
+	// handle click event of the Remove button
+	const calculateTotalAmount = () => {
+		let Amount = [];
+		inputList.map((x, i) => {
+			Amount.push(inputList[i].price);
+		});
+
+		var total = 0;
+		for (var i in Amount) {
+			total += Number(Amount[i]);
+		}
+		setTotalAmt(total);
+	};
 	const handleEmailTemplateChange = (e) => {
 		setSelectedEmailTemplate(e.target.value);
 		console.log(selectedEmailTemplate);
@@ -52,6 +68,7 @@ const Email = ({Ticketid}) => {
 	const handleAddClick = () => {
 		// setInputList([...inputList, {firstName: '', middleName: '', lastName: '', ticket: '', confirmation: '', price: ''}]);
 		setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
+		calculateTotalAmount();
 	};
 	function clean(obj) {
 		obj.map((x, i) => {
@@ -67,6 +84,7 @@ const Email = ({Ticketid}) => {
 	}
 
 	const handleConfirm = () => {
+		calculateTotalAmount();
 		let newArr = clean(inputList);
 		newArr = newArr.filter((value) => Object.keys(value).length !== 0);
 
@@ -258,6 +276,7 @@ const Email = ({Ticketid}) => {
 														}}
 														onChange={(e) => {
 															handleInputChange(e, i);
+															calculateTotalAmount();
 														}}
 														value={inputList[i].price}
 													/>
@@ -291,9 +310,10 @@ const Email = ({Ticketid}) => {
 						{/* Total Amount */}
 						<Grid item xs={12} md={12} sx={{pr: 1}}>
 							<TextField
+								disabled
 								required
 								name='totalAmount'
-								label='totalAmount'
+								label='Grand Total'
 								fullWidth={true}
 								onChange={(e) => {
 									setTotalAmt(e.target.value);
@@ -317,14 +337,10 @@ const Email = ({Ticketid}) => {
 				</Paper>
 			</Box>
 
-			<Modal keepMounted open={previewModal} onClose={handlePreviewClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={style}>
-					<IconButton onClick={handlePreviewClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
-					<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} />
-				</Box>
-			</Modal>
+			<Box sx={{m: 3}}></Box>
+			<Paper elevation={3}>
+				<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} />
+			</Paper>
 		</>
 	);
 };

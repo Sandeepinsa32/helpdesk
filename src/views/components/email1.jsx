@@ -11,20 +11,38 @@ const Email1 = ({selectedEmailTemplate, data, bookingDate, TotalAmount, noOfPas}
 		return today;
 	}
 
-	function userTabelData() {
-		// let tr, td, node, rootNode;
-		// data.map((x, i) => {
-		// 	tr = document.createElement('tr');
-		// 	for (var obj in x) {
-		// 		td = document.createElement('td');
-		// 		node = document.createTextNode(data[i][obj]);
-		// 		td.appendChild(node);
-		// 		tr.appendChild(td);
-		// 		rootNode = document.getElementById('appendCHildHere');
-		// 		rootNode.appendChild(tr);
-		// 	}
-		// });
-		return `coming soon`;
+	// function userTabelData() {
+	// 	// let tr, td, node, rootNode;
+	// 	// data.map((x, i) => {
+	// 	// 	tr = document.createElement('tr');
+	// 	// 	for (var obj in x) {
+	// 	// 		td = document.createElement('td');
+	// 	// 		node = document.createTextNode(data[i][obj]);
+	// 	// 		td.appendChild(node);
+	// 	// 		tr.appendChild(td);
+	// 	// 		rootNode = document.getElementById('appendCHildHere');
+	// 	// 		rootNode.appendChild(tr);
+	// 	// 	}
+	// 	// });
+	// }
+
+	function userTabelData(data) {
+		console.log(data);
+		var tableString = '';
+		data.forEach((x) => {
+			console.log(x);
+			tableString =
+				tableString +
+				`<tr>
+      <td>${x.firstName}</td>
+      <td>${x.middleName}</td>
+      <td>${x.lastName}</td>
+      <td>${x.ticket}</td>
+      <td>${x.confirmation}</td>
+      <td>${x.price}</td>
+    </tr>`;
+		});
+		return tableString;
 	}
 
 	var html = `  <center>
@@ -157,6 +175,7 @@ table.tableoutter th {
   <thead class=" tableHead ">
     <tr>
       <th class="tableHeading" scope="col" name="firstname">First Name</th>
+      <th class="tableHeading" scope="col" name="middlename" >Middle Name</th>
       <th class="tableHeading" scope="col" name="lastname" >Last Name</th>
       <th  class="tableHeading" scope="col" name="Ticket">Ticket </th>
       <th scope="col"  class="tableHeading" name="confirmation" >Confirmation</th>
@@ -166,9 +185,9 @@ table.tableoutter th {
   </thead>
   <tbody id='appendCHildHere' >
     
-    ${setTimeout(() => {
-		userTabelData();
-	}, 2000)}
+    
+		${userTabelData(data)}
+	
    
   
   </tbody>
