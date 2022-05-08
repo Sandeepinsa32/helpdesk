@@ -459,7 +459,9 @@ export const Transaction = () => {
           </IconButton>
           <Email Ticketid={viewEmail} />
           <Box sx={{ m: 3 }}></Box>
-          <Email1 />
+          <Paper elevation={3}>
+            <Email1 />
+          </Paper>
         </Box>
       </Modal>
     </>
