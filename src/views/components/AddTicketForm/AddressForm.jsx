@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 
@@ -11,15 +11,22 @@ import {FormatLineSpacing} from '@mui/icons-material';
 
 export default function AddressForm({setUserInfo, handleSubmit}) {
 	const [bookingType, setBookingType] = useState(null);
-	const [productType, setProductType] = useState({
-		flight: true,
-		hotel: true,
-		car: true,
-		insurance: true,
-		addon: true,
-	});
-	const [fareType, setFareType] = useState(null);
+	const [productType, setProductType] = useState([]);
 	const [bookedOn, setBookedOn] = useState(null);
+	// const [productType, setProductType] = useState({
+	// 	flight: true,
+	// 	hotel: true,
+	// 	car: true,
+	// 	insurance: true,
+	// 	addon: true,
+	// });
+	const [fareType, setFareType] = useState(null);
+
+	const [flightChecked, setFlightChecked] = useState(false);
+	const [carChecked, setCarChecked] = useState(false);
+	const [hotelChecked, setHotelChecked] = useState(false);
+	const [insuranceChecked, setInsuranceChecked] = useState(false);
+	const [addonChecked, setAddonChecked] = useState(false);
 	//date
 	const [departureDateValue, setDepartureDateValue] = useState(null);
 	const [returnDateValue, setReturnDateValue] = useState(null);
@@ -51,7 +58,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			bookingType: 'new',
 			bookedOn: 'trippro',
 			pricePerPerson: '200',
-			productType: 'flight',
+			productType: '',
 			comments: '',
 			notes: '',
 			totalInhouseCharge: '',
@@ -87,9 +94,18 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			// handleSubmit();
 		},
 	});
+	useEffect(() => {
+		console.log(productType);
+	});
 
 	const handleChange = (event) => {
-		setProductType({...productType, [event.target.name]: event.target.checked});
+		setProductType([...productType, event.target.name]);
+		let newArray = [...productType, event.target.name];
+		if (productType.includes(event.target.name)) {
+			newArray = newArray.filter((x) => x !== event.target.name);
+		}
+		setProductType(newArray);
+		formik.setFieldValue('productType', productType);
 	};
 	return (
 		<>
@@ -103,11 +119,76 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						<Typography sx={{mt: 1}}>Product Type : </Typography>
 					</Grid>
 					<Grid item xs={12} md={8}>
-						<FormControlLabel control={<Checkbox checked={productType.flight} onChange={handleChange} name='flight' color='primary' />} label='Flight' />
-						<FormControlLabel control={<Checkbox checked={productType.hotel} onChange={handleChange} name='hotel' color='primary' />} label='Hotel' />
-						<FormControlLabel control={<Checkbox checked={productType.car} onChange={handleChange} name='car' color='primary' />} label='Car' />
-						<FormControlLabel control={<Checkbox checked={productType.insurance} onChange={handleChange} name='insurance' color='primary' />} label='Insurance' />
-						<FormControlLabel control={<Checkbox checked={productType.addon} onChange={handleChange} name='addon' color='primary' />} label='Add-On' />
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={flightChecked}
+									onChange={(e) => {
+										setFlightChecked(!flightChecked);
+										handleChange(e);
+									}}
+									name='flight'
+									color='primary'
+								/>
+							}
+							label='Flight'
+						/>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={hotelChecked}
+									onChange={(e) => {
+										setHotelChecked(!hotelChecked);
+										handleChange(e);
+									}}
+									name='hotel'
+									color='primary'
+								/>
+							}
+							label='Hotel'
+						/>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={carChecked}
+									onChange={(e) => {
+										setCarChecked(!carChecked);
+										handleChange(e);
+									}}
+									name='car'
+									color='primary'
+								/>
+							}
+							label='Car'
+						/>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={insuranceChecked}
+									onChange={(e) => {
+										setInsuranceChecked(!insuranceChecked);
+										handleChange(e);
+									}}
+									name='insurance'
+									color='primary'
+								/>
+							}
+							label='Insurance'
+						/>
+						<FormControlLabel
+							control={
+								<Checkbox
+									checked={addonChecked}
+									onChange={(e) => {
+										setAddonChecked(!addonChecked);
+										handleChange(e);
+									}}
+									name='addon'
+									color='primary'
+								/>
+							}
+							label='Add-On'
+						/>
 					</Grid>
 					<Grid item xs={12} md={4}>
 						<TextField
