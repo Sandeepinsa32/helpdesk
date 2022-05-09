@@ -9,6 +9,12 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {FormatLineSpacing} from '@mui/icons-material';
 
+//material-icon
+import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
+import BoyIcon from '@mui/icons-material/Boy';
+import ChildCareIcon from '@mui/icons-material/ChildCare';
+import ElderlyIcon from '@mui/icons-material/Elderly';
+
 export default function AddressForm({setUserInfo, handleSubmit}) {
 	const [productType, setProductType] = useState([]);
 
@@ -26,7 +32,9 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			firstName: 'john',
 			lastName: 'doe',
 			email: 'john@doe.com',
-			phone: '8427175003',
+			phone: '123456789',
+			altEmail: 'jane@doe.com',
+			altPhone: '0987654321',
 			pnrNo: '',
 			fareType: 'publish',
 			mcoNo: '5',
@@ -40,7 +48,13 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			totalInhouseCharge: '4',
 			departureDate: null,
 			returnDate: null,
-			passengerCount: '5',
+
+			totalPassengerCount: '',
+
+			adultCount: '',
+			kidCount: '',
+			elderCount: '',
+
 			grandTotal: '5',
 			//markup
 			flightMarkup: '',
@@ -55,6 +69,8 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 			email: Yup.string().email('Invalid email address').required('Required'),
 			phone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
+			altEmail: Yup.string().email('Invalid email address').required('Required'),
+			altPhone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
 
 			pnrNo: Yup.string().max(255),
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
@@ -111,6 +127,8 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						<Grid item xs={12} md={2}>
 							{/* <Typography sx={{mt: 1}}>Product Type : </Typography> */}
 						</Grid>
+
+						{/*  checkbox label  */}
 						<Grid item xs={12} md={12} sx={{p: `8px !important`, pt: `0px !important`}}>
 							<FormControl sx={{m: 1}} fullWidth error={Boolean(formik.touched.productType && formik.errors.productType)}>
 								<InputLabel variant='outlined'>Product Type :</InputLabel>
@@ -329,6 +347,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 								</Box>
 							</Box>
 						</Grid>
+						{/*  checkbox label  */}
 						<Grid item xs={12} md={4}>
 							<TextField
 								fullWidth
@@ -381,18 +400,119 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 								value={formik.values.phone}
 							/>
 						</Grid>
+
+						{/*  */}
 						<Grid item xs={12} md={4}>
 							<TextField
-								error={Boolean(formik.touched.passengerCount && formik.errors.passengerCount)}
+								name='altEmail'
+								label='Alternative email'
 								fullWidth
-								helperText={formik.touched.passengerCount && formik.errors.passengerCount}
-								label='Number of Passenger *'
-								name='passengerCount'
+								error={Boolean(formik.touched.email && formik.errors.email)}
+								helperText={formik.touched.email && formik.errors.email}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+								value={formik.values.email}
+							/>
+						</Grid>
+
+						<Grid item xs={12} md={4}>
+							<TextField
+								name='altPhone'
+								label='Alternative Phone'
+								fullWidth
+								error={Boolean(formik.touched.phone && formik.errors.phone)}
+								helperText={formik.touched.phone && formik.errors.phone}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+								value={formik.values.phone}
+							/>
+						</Grid>
+
+						{/*
+			adultCount: '',
+			elderCount: '',
+ */}
+
+						<Grid item xs={12} md={2}>
+							<TextField
+								error={Boolean(formik.touched.totalPassengerCount && formik.errors.totalPassengerCount)}
+								fullWidth
+								helperText={formik.touched.totalPassengerCount && formik.errors.totalPassengerCount}
+								label='Total Number  of Passenger'
+								name='totalPassengerCount'
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
 								type='number'
-								value={formik.values.passengerCount}
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<FamilyRestroomIcon />
+										</InputAdornment>
+									),
+								}}
+								value={formik.values.totalPassengerCount}
 							/>
+						</Grid>
+						<Grid item xs={12} md={2}>
+							<TextField
+								error={Boolean(formik.touched.kidCount && formik.errors.kidCount)}
+								fullWidth
+								helperText={formik.touched.kidCount && formik.errors.kidCount}
+								label='Child Count'
+								name='kidCount'
+								value={formik.values.kidCount}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+								type='number'
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<ChildCareIcon />
+										</InputAdornment>
+									),
+								}}
+							/>
+						</Grid>
+						<Grid item xs={12} md={2}>
+							<TextField
+								error={Boolean(formik.touched.adultCount && formik.errors.adultCount)}
+								fullWidth
+								helperText={formik.touched.adultCount && formik.errors.adultCount}
+								label='Total Number  of Passenger'
+								name='totalPassengerCount'
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+								type='number'
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<BoyIcon />
+										</InputAdornment>
+									),
+								}}
+								value={formik.values.adultCount}
+							/>
+						</Grid>
+						<Grid item xs={12} md={2}>
+							<TextField
+								error={Boolean(formik.touched.elderCount && formik.errors.elderCount)}
+								fullWidth
+								helperText={formik.touched.elderCount && formik.errors.elderCount}
+								label='Total Number  of Passenger'
+								name='totalPassengerCount'
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+								type='number'
+								InputProps={{
+									startAdornment: (
+										<InputAdornment position='start'>
+											<ElderlyIcon />
+										</InputAdornment>
+									),
+								}}
+								value={formik.values.elderCount}
+							/>
+							elderCount
 						</Grid>
 
 						<Grid item xs={12} md={4}>

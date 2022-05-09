@@ -12,7 +12,11 @@ import axios from 'axios';
 
 // ===============================//================================//=======================//======================//==========================
 
-const steps = ['Personal Detail ', 'Payment', 'Review'];
+const steps = [
+	'Personal Detail ',
+	'Payment',
+	// , 'Review'
+];
 
 const theme = createTheme();
 
@@ -39,8 +43,8 @@ export default function Checkout({data, isView}) {
 				return <AddressForm handleSubmit={handleNext} setUserInfo={setUserInfo} />;
 			case 1:
 				return <PaymentForm setCardInfo={setCardInfo} handleBack={handleBack} handleSubmit={handleNext} />;
-			case 2:
-				return <Review userInfo={userInfo} cardInfo={cardInfo} />;
+			// case 2:
+			// 	return <Review userInfo={userInfo} cardInfo={cardInfo} />;
 			default:
 				throw new Error('Unknown step');
 		}
@@ -70,7 +74,7 @@ export default function Checkout({data, isView}) {
 				<Typography component='h1' variant='h4' align='center'>
 					{isView ? `view Transaction Record` : `Add New Transaction Record`}
 				</Typography>
-				<Stepper activeStep={activeStep} sx={{pt: 3, pb: 3}}>
+				<Stepper activeStep={activeStep} sx={{pt: 3, pb: 3, width: `50%`, margin: `0 auto`}}>
 					{steps.map((label) => (
 						<Step key={label}>
 							<StepLabel>{label}</StepLabel>
