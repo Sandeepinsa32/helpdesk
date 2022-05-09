@@ -132,7 +132,7 @@ const AddNewRecord = ({
 				.positive('input must consist if positive number')
 				.integer()
 				.when(['adultCount'], (adultCount, schema) => {
-					adultCount > 0 ? schema.required('this field required ') : null;
+					return adultCount > 0 ? schema.required('this field required ') : null;
 				}),
 			elderPrice: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
