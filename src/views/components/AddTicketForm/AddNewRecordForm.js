@@ -154,12 +154,12 @@ export default function AddressForm({
 				<form onSubmit={formik.handleSubmit}>
 					<Grid container spacing={3}>
 						{/*  checkbox label  */}
-						<Grid item xs={12} md={12} sx={{p: `8px !important`, pt: `0px !important`}}>
-							<FormControl sx={{m: 1}} fullWidth error={Boolean(formik.touched.productType && formik.errors.productType)}>
+						<Grid item xs={12} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
+							<FormControl sx={{m: 1, p: 1}} fullWidth error={Boolean(formik.touched.productType && formik.errors.productType)}>
 								<InputLabel variant='outlined'>Product Type :</InputLabel>
 							</FormControl>
-							<Box sx={displayFlexRowStyle}>
-								<Box sx={displayColStyle}>
+							<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', justifyContent: 'space-evenly'}}>
+								<Box sx={displayColStyle} style={{paddingTop: '8px !important'}}>
 									<FormControlLabel
 										control={
 											<Checkbox
@@ -379,7 +379,7 @@ export default function AddressForm({
 						</Grid>
 
 						{/* kidsCount */}
-						<Grid item xs={12} md={1}>
+						<Grid item xs={12} md={2}>
 							<Box sx={displayFlexRowStyle}>
 								<Box sx={displayColStyle}>
 									<TextField
@@ -402,8 +402,9 @@ export default function AddressForm({
 									/>
 									{formik.values.kidCount > 0 ? (
 										<TextField
-											name='flightMarkup'
-											label='Flight Markup'
+											sx={{mt: 2}}
+											name='kidPrice'
+											label='Price Per Person'
 											fullWidth
 											InputProps={{
 												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
@@ -415,68 +416,81 @@ export default function AddressForm({
 						</Grid>
 
 						{/* adult Count */}
-						<Grid item xs={12} md={1}>
-							<TextField
-								error={Boolean(formik.touched.adultCount && formik.errors.adultCount)}
-								fullWidth
-								helperText={formik.touched.adultCount && formik.errors.adultCount}
-								label='Adults'
-								name='adultCount'
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								type='number'
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position='start'>
-											<BoyIcon />
-										</InputAdornment>
-									),
-								}}
-								value={formik.values.adultCount}
-							/>
+						<Grid item xs={12} md={2}>
+							<Box sx={displayFlexRowStyle}>
+								<Box sx={displayColStyle}>
+									<TextField
+										error={Boolean(formik.touched.adultCount && formik.errors.adultCount)}
+										fullWidth
+										helperText={formik.touched.adultCount && formik.errors.adultCount}
+										label='Adults'
+										name='adultCount'
+										onBlur={formik.handleBlur}
+										onChange={formik.handleChange}
+										type='number'
+										InputProps={{
+											startAdornment: (
+												<InputAdornment position='start'>
+													<BoyIcon />
+												</InputAdornment>
+											),
+										}}
+										value={formik.values.adultCount}
+									/>
+									{formik.values.adultCount > 0 ? (
+										<TextField
+											sx={{mt: 2}}
+											name='adultPrice'
+											label='Price Per Person'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+										/>
+									) : null}
+								</Box>
+							</Box>
 						</Grid>
 
 						{/* ellder Count */}
-						<Grid item xs={12} md={1}>
-							<TextField
-								error={Boolean(formik.touched.elderCount && formik.errors.elderCount)}
-								fullWidth
-								helperText={formik.touched.elderCount && formik.errors.elderCount}
-								label='Elder'
-								name='elderCount'
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								type='number'
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position='start'>
-											<ElderlyIcon />
-										</InputAdornment>
-									),
-								}}
-								value={formik.values.elderCount}
-							/>
+						<Grid item xs={12} md={2}>
+							<Box sx={displayFlexRowStyle}>
+								<Box sx={displayColStyle}>
+									<TextField
+										error={Boolean(formik.touched.elderCount && formik.errors.elderCount)}
+										fullWidth
+										helperText={formik.touched.elderCount && formik.errors.elderCount}
+										label='Elder'
+										name='elderCount'
+										onBlur={formik.handleBlur}
+										onChange={formik.handleChange}
+										type='number'
+										InputProps={{
+											startAdornment: (
+												<InputAdornment position='start'>
+													<ElderlyIcon />
+												</InputAdornment>
+											),
+										}}
+										value={formik.values.elderCount}
+									/>
+									{formik.values.elderCount > 0 ? (
+										<TextField
+											sx={{mt: 2}}
+											name='elderPrice'
+											label='Price Per Person'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+										/>
+									) : null}
+								</Box>
+							</Box>
 						</Grid>
 
-						{/* PricePerPerson */}
-						<Grid item xs={12} md={4}>
-							<TextField
-								id='pricePerPerson'
-								name='pricePerPerson'
-								label='Price Per Person'
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-								fullWidth
-								error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
-								helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								value={formik.values.pricePerPerson}
-							/>
-						</Grid>
 						{/* PNR no. */}
-						<Grid item xs={12} md={5}>
+						<Grid item xs={12} md={6}>
 							<TextField
 								id='pnrNo'
 								name='pnrNo'
@@ -491,7 +505,7 @@ export default function AddressForm({
 						</Grid>
 
 						{/* booking type -------Dropdown */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={3}>
 							<FormControl fullWidth>
 								<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
 								<Select
@@ -517,7 +531,7 @@ export default function AddressForm({
 						</Grid>
 
 						{/* Fare type */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={3}>
 							<FormControl fullWidth>
 								<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
 								<Select
@@ -539,7 +553,7 @@ export default function AddressForm({
 							</FormControl>
 						</Grid>
 						{/* Booked On */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={3}>
 							<FormControl fullWidth>
 								<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
 								<Select
@@ -560,25 +574,9 @@ export default function AddressForm({
 								</Select>
 							</FormControl>
 						</Grid>
-						{/* MCO amount */}
-						<Grid item xs={12} md={4}>
-							<TextField
-								id='mcoNo'
-								name='mcoNo'
-								label='MCO'
-								fullWidth
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-								error={Boolean(formik.touched.mcoNo && formik.errors.mcoNo)}
-								helperText={formik.touched.mcoNo && formik.errors.mcoNo}
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								value={formik.values.mcoNo}
-							/>
-						</Grid>
+
 						{/* Airline code */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={3}>
 							<TextField
 								id='airlineCode'
 								name='airlineCode'
@@ -593,7 +591,7 @@ export default function AddressForm({
 						</Grid>
 
 						{/* Grand Total */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={1}>
 							<TextField
 								id='grandTotal'
 								name='grandTotal'
@@ -611,7 +609,7 @@ export default function AddressForm({
 						</Grid>
 
 						{/* Total In-House Charge */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={1}>
 							<TextField
 								id='totalInhouseChargetotalInhouseCharge'
 								name='totalInhouseCharge'
@@ -627,8 +625,25 @@ export default function AddressForm({
 								value={formik.values.totalInhouseCharge}
 							/>
 						</Grid>
+						{/* MCO amount */}
+						<Grid item xs={12} md={1}>
+							<TextField
+								id='mcoNo'
+								name='mcoNo'
+								label='MCO'
+								fullWidth
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+								error={Boolean(formik.touched.mcoNo && formik.errors.mcoNo)}
+								helperText={formik.touched.mcoNo && formik.errors.mcoNo}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+								value={formik.values.mcoNo}
+							/>
+						</Grid>
 						{/* DepartureDate */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={3}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
 									inputFormat='dd/MM/yyyy'
@@ -654,7 +669,7 @@ export default function AddressForm({
 							</LocalizationProvider>
 						</Grid>
 						{/* ReturnDate */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={12} md={3}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
 									name='returnDate'
@@ -708,14 +723,18 @@ const displayColStyle = {
 	alignItems: 'flex-start',
 	flexDirection: 'column',
 	p: 1,
+	paddingTop: '0px !important',
+	paddingLeft: '0px !important',
 
-	bgcolor: 'background.paper',
+	// bgcolor: 'background.paper',
 	borderRadius: 1,
 };
 const displayFlexRowStyle = {
 	display: 'flex',
 	flexDirection: 'row',
 	p: 1,
-	bgcolor: 'background.paper',
+	paddingTop: '0px !important',
+	paddingLeft: '0px !important',
+	// bgcolor: 'background.paper',
 	borderRadius: 1,
 };
