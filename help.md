@@ -86,4 +86,11 @@ booking id - thd + 4 digit unique code
 
 2. email validation
 
-REMOVE EMAIL FROM GLOBAL TICKET TO CONV remove date from input 2 digit input in airline date - 25 aug 22 format table pnrconvertor email open, ip address - first, last, authorize ip
+format table pnrconvertor email open, ip address - first, last, authorize ip
+
+1. mutliple email & phone in address form
+2. change empty checkbox fields to markuo price
+3. card validation and preview
+4. view and update mode
+5. product type filght array isssue
+6. onCLick Back fromik data is not there

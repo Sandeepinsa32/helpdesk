@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {useFormik, Formik} from 'formik';
 import * as Yup from 'yup';
 
-import {Grid, Typography, TextField, FormControlLabel, Box, Alert, FormHelperText, Checkbox, InputLabel, MenuItem, FormLabel, FormControl, Select, Button} from '@mui/material';
+import {Grid, Typography, TextField, FormControlLabel, InputAdornment, Box, Alert, FormHelperText, Checkbox, InputLabel, MenuItem, FormLabel, FormControl, Select, Button} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 
@@ -25,48 +25,66 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 		initialValues: {
 			firstName: 'john',
 			lastName: 'doe',
-			email: 'hjohn@doe.com',
-			phone: '842717555',
-			pnrNo: 'asasas cdd dv dvdv sdv vdv',
-			fareType: 'private',
-			mcoNo: '25',
-			airlineCode: 'A.L',
+			email: 'john@doe.com',
+			phone: '8427175003',
+			pnrNo: '',
+			fareType: 'publish',
+			mcoNo: '5',
+			airlineCode: 'DL',
 			bookingType: 'new',
-			bookedOn: 'trippro',
-			pricePerPerson: '200',
+			bookedOn: 'web',
+			pricePerPerson: '5',
 			productType: '',
 			comments: '',
 			notes: '',
-			totalInhouseCharge: '',
+			totalInhouseCharge: '4',
 			departureDate: null,
 			returnDate: null,
-			passengerCount: '',
-			grandTotal: '',
+			passengerCount: '5',
+			grandTotal: '5',
+			//markup
+			flightMarkup: '',
+			hotelMarkup: '',
+			carMarkup: '',
+			insuranceMarkup: '',
+			addonMarkup: '',
 		},
 		validationSchema: Yup.object({
+			//basic
 			firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 			lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 			email: Yup.string().email('Invalid email address').required('Required'),
-			phone: Yup.number().required().positive().integer().required('phone is required'),
-			pnrNo: Yup.string().max(255).required('pnr is required'),
-			fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('Required'),
-			mcoNo: Yup.number().required().positive().integer().required('This Field is required'),
-			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
-			bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'addon'], 'Product  Type').required('Required'),
+			phone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
 
-			bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'Booked on platform should be one of below value').required('This field is  required'),
-			pricePerPerson: Yup.number().required().positive().integer().required('This field is  Required'),
+			pnrNo: Yup.string().max(255),
+			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
+			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
 			productType: Yup.array().of(Yup.string()).required('Required'),
+			passengerCount: Yup.number('input must consist if number').max(9).positive('input must consist if positive number').integer().required('This field is  Required'),
+			//dropdown
+
+			fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('Required'),
+			bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'addon'], 'input should be one of below value').required('Required'),
+			bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is  required'),
+			//currency
+			pricePerPerson: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+			totalInhouseCharge: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+			grandTotal: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+			//markup
+			flightMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			hotelMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+
 			comments: Yup.string().max(255),
 			notes: '',
-			totalInhouseCharge: Yup.number().required().positive().integer().required('This field is  Required'),
+
+			//date
 			departureDateValue: '',
 			returnDateValue: '',
-			passengerCount: Yup.number().max(9).required().positive().integer().required('This field is  Required'),
-			grandTotal: Yup.number().required().positive().integer().required('This field is  Required'),
 		}),
 		onSubmit: (values) => {
-			alert('formik submit');
 			setUserInfo(formik.values);
 			handleSubmit();
 		},
@@ -130,7 +148,22 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 										}
 										label='Flight'
 									/>
-									{flightChecked ? <TextField name='' /> : null}
+									{flightChecked ? (
+										<TextField
+											name='flightMarkup'
+											label='Flight Markup'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+
+											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
+											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
+											// onBlur={formik.handleBlur}
+											// onChange={formik.handleChange}
+											// value={formik.values.pricePerPerson}
+										/>
+									) : null}
 								</Box>
 								<Box
 									sx={{
@@ -156,7 +189,21 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 										}
 										label='Hotel'
 									/>
-									{hotelChecked ? <TextField name='' /> : null}
+									{hotelChecked ? (
+										<TextField
+											name='hotelMarkup'
+											label='Hotel Markup'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
+											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
+											// onBlur={formik.handleBlur}
+											// onChange={formik.handleChange}
+											// value={formik.values.pricePerPerson}
+										/>
+									) : null}
 								</Box>
 								<Box
 									sx={{
@@ -182,7 +229,21 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 										}
 										label='Car'
 									/>
-									{carChecked ? <TextField name='' /> : null}
+									{carChecked ? (
+										<TextField
+											name='carMarkup'
+											label='Car Markup'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
+											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
+											// onBlur={formik.handleBlur}
+											// onChange={formik.handleChange}
+											// value={formik.values.pricePerPerson}
+										/>
+									) : null}
 								</Box>
 
 								<Box
@@ -209,7 +270,21 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 										}
 										label='Insurance'
 									/>
-									{insuranceChecked ? <TextField name='' /> : null}
+									{insuranceChecked ? (
+										<TextField
+											name='insuranceMarkup'
+											label='Insurance Markup'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
+											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
+											// onBlur={formik.handleBlur}
+											// onChange={formik.handleChange}
+											// value={formik.values.pricePerPerson}
+										/>
+									) : null}
 								</Box>
 
 								<Box
@@ -236,7 +311,21 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 										}
 										label='Add-On'
 									/>
-									{addonChecked ? <TextField name='' /> : null}
+									{addonChecked ? (
+										<TextField
+											name='addonMarkup'
+											label='Add-On Markup'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
+											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
+											// onBlur={formik.handleBlur}
+											// onChange={formik.handleChange}
+											// value={formik.values.pricePerPerson}
+										/>
+									) : null}
 								</Box>
 							</Box>
 						</Grid>
@@ -267,7 +356,6 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						</Grid>
 						<Grid item xs={12} md={4}>
 							<TextField
-								nrequired
 								id='email'
 								name='email'
 								label='email'
@@ -282,7 +370,6 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 
 						<Grid item xs={12} md={4}>
 							<TextField
-								nrequired
 								id='phone'
 								name='phone'
 								label='phone'
@@ -310,7 +397,6 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 
 						<Grid item xs={12} md={4}>
 							<TextField
-								nrequired
 								id='pnrNo'
 								name='pnrNo'
 								label='PNR No.'
@@ -323,7 +409,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 							/>
 						</Grid>
 						<Grid item xs={12} md={4}>
-							<FormControl required fullWidth>
+							<FormControl fullWidth>
 								<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
 								<Select
 									labelId='Bokking-type-Dropdown-label	'
@@ -348,7 +434,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						</Grid>
 
 						<Grid item xs={12} md={4}>
-							<FormControl required fullWidth>
+							<FormControl fullWidth>
 								<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
 								<Select
 									labelId='Fare-Type-Dropdown-label'
@@ -391,11 +477,13 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						</Grid>
 						<Grid item xs={12} md={4}>
 							<TextField
-								nrequired
 								id='mcoNo'
 								name='mcoNo'
 								label='MCO'
 								fullWidth
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
 								error={Boolean(formik.touched.mcoNo && formik.errors.mcoNo)}
 								helperText={formik.touched.mcoNo && formik.errors.mcoNo}
 								onBlur={formik.handleBlur}
@@ -410,7 +498,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 								label='Airline Code *'
 								fullWidth
 								error={Boolean(formik.touched.airlineCode && formik.errors.airlineCode)}
-								helperText={formik.touched.airlineCode && formik.errors.airlineCode}
+								helperText={Boolean(formik.touched.airlineCode && formik.errors.airlineCode) ? formik.touched.airlineCode && formik.errors.airlineCode : `Use Abbrivated Form`}
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
 								value={formik.values.airlineCode}
@@ -419,10 +507,12 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 
 						<Grid item xs={12} md={4}>
 							<TextField
-								nrequired
 								id='pricePerPerson'
 								name='pricePerPerson'
 								label='Price Per Person'
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
 								fullWidth
 								error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
 								helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
@@ -437,6 +527,9 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 								name='grandTotal'
 								label='Grand Total'
 								fullWidth
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
 								error={Boolean(formik.touched.grandTotal && formik.errors.grandTotal)}
 								helperText={formik.touched.grandTotal && formik.errors.grandTotal}
 								onBlur={formik.handleBlur}
@@ -451,6 +544,9 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 								id='totalInhouseChargetotalInhouseCharge'
 								name='totalInhouseCharge'
 								label='Total Inhouse Charge'
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
 								fullWidth
 								error={Boolean(formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge)}
 								helperText={formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge}
@@ -510,15 +606,16 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 						</Grid>
 
 						{/* EMpty one  */}
-						<Grid item xs={12} md={8}>
+						<Grid item xs={12} md={8}></Grid>
+
+						<Grid item xs={8} md={10}>
+							{' '}
 							{formik.errors && formik.errors !== null ? (
 								<Alert variant='outlined' severity='error'>
 									{JSON.stringify(formik.errors)}
 								</Alert>
 							) : null}
 						</Grid>
-
-						<Grid item xs={8} md={10}></Grid>
 						<Grid item xs={4} md={2}>
 							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
 								submit
