@@ -15,8 +15,40 @@ import BoyIcon from '@mui/icons-material/Boy';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import ElderlyIcon from '@mui/icons-material/Elderly';
 
-export default function AddressForm({setUserInfo, handleSubmit}) {
-	const [productType, setProductType] = useState([]);
+export default function AddressForm({
+	setUserInfo,
+	handleSubmit,
+	firstName,
+	lastName,
+	email,
+	phone,
+	altEmail,
+	altPhone,
+	pnrNo,
+	fareType,
+	mcoNo,
+	airlineCode,
+	bookingType,
+	bookedOn,
+	pricePerPerson,
+	productType,
+	comments,
+	notes,
+	totalInhouseCharge,
+	departureDate,
+	returnDate,
+	totalPassengerCount,
+	adultCount,
+	kidCount,
+	elderCount,
+	grandTotal,
+	flightMarkup,
+	hotelMarkup,
+	carMarkup,
+	insuranceMarkup,
+	addonMarkup,
+}) {
+	const [ProductType, setProductType] = useState([]);
 
 	const [flightChecked, setFlightChecked] = useState(false);
 	const [carChecked, setCarChecked] = useState(false);
@@ -29,39 +61,36 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 
 	const formik = useFormik({
 		initialValues: {
-			firstName: 'john',
-			lastName: 'doe',
-			email: 'john@doe.com',
-			phone: '123456789',
-			altEmail: 'jane@doe.com',
-			altPhone: '0987654321',
-			pnrNo: '',
-			fareType: 'publish',
-			mcoNo: '5',
-			airlineCode: 'DL',
-			bookingType: 'new',
-			bookedOn: 'web',
-			pricePerPerson: '5',
-			productType: '',
-			comments: '',
-			notes: '',
-			totalInhouseCharge: '4',
-			departureDate: null,
-			returnDate: null,
-
-			totalPassengerCount: '',
-
-			adultCount: '',
-			kidCount: '',
-			elderCount: '',
-
-			grandTotal: '5',
+			firstName: firstName ? firstName : 'john',
+			lastName: lastName ? lastName : 'doe',
+			email: email ? email : 'john@doe.com',
+			phone: phone ? phone : '9874561230',
+			altEmail: altEmail ? altEmail : 'jane@doe.com',
+			altPhone: altPhone ? altPhone : '0321456987',
+			pnrNo: pnrNo ? pnrNo : '1 ss2 5d5d d5jcjhbdc cncajnhc cscs',
+			fareType: fareType ? fareType : '',
+			mcoNo: mcoNo ? mcoNo : '55',
+			airlineCode: airlineCode ? airlineCode : 'DL',
+			bookingType: bookingType ? bookingType : 'new',
+			bookedOn: bookedOn ? bookedOn : 'trippro',
+			pricePerPerson: pricePerPerson ? pricePerPerson : '5',
+			productType: productType ? productType : '',
+			comments: comments ? comments : '',
+			notes: notes ? notes : '',
+			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '20',
+			departureDate: departureDate ? departureDate : '',
+			returnDate: returnDate ? returnDate : '',
+			totalPassengerCount: totalPassengerCount ? totalPassengerCount : '5',
+			adultCount: adultCount ? adultCount : '2',
+			kidCount: kidCount ? kidCount : '2',
+			elderCount: elderCount ? elderCount : '1',
+			grandTotal: grandTotal ? grandTotal : '100',
 			//markup
-			flightMarkup: '',
-			hotelMarkup: '',
-			carMarkup: '',
-			insuranceMarkup: '',
-			addonMarkup: '',
+			flightMarkup: flightMarkup ? flightMarkup : '5',
+			hotelMarkup: hotelMarkup ? hotelMarkup : '',
+			carMarkup: carMarkup ? carMarkup : '',
+			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
+			addonMarkup: addonMarkup ? addonMarkup : '',
 		},
 		validationSchema: Yup.object({
 			//basic
@@ -76,7 +105,7 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
 			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
 			productType: Yup.array().of(Yup.string()).required('Required'),
-			passengerCount: Yup.number('input must consist if number').max(9).positive('input must consist if positive number').integer().required('This field is  Required'),
+			totalPassengerCount: Yup.number('input must consist if number').max(9).positive('input must consist if positive number').integer().required('This field is  Required'),
 			//dropdown
 
 			fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('Required'),
@@ -109,12 +138,12 @@ export default function AddressForm({setUserInfo, handleSubmit}) {
 	const handleChange = (event) => {
 		// setProductType([...productType, event.target.name]);
 
-		let newArray = [...productType, event.target.name];
-		if (productType.includes(event.target.name)) {
+		let newArray = [...ProductType, event.target.name];
+		if (ProductType.includes(event.target.name)) {
 			newArray = newArray.filter((x) => x !== event.target.name);
 		}
 		setProductType(newArray);
-		formik.setFieldValue('productType', productType);
+		formik.setFieldValue('productType', ProductType);
 	};
 	return (
 		<>

@@ -40,7 +40,7 @@ export default function Checkout({data, isView}) {
 	function getStepContent(step) {
 		switch (step) {
 			case 0:
-				return <AddressForm handleSubmit={handleNext} setUserInfo={setUserInfo} />;
+				return <AddressForm handleSubmit={handleNext} setUserInfo={setUserInfo} data={userInfo} />;
 			case 1:
 				return <PaymentForm setCardInfo={setCardInfo} handleBack={handleBack} handleSubmit={handleNext} />;
 			// case 2:
