@@ -10,7 +10,7 @@ import PaymentForm from './AddTicketForm/PaymentForm';
 import Review from './AddTicketForm/Review';
 import axios from 'axios';
 
-// ===============================//================================//=======================//======================//==========================
+// ======================//================================//=======================//======================//==========================
 
 const steps = [
 	'Personal Detail ',
@@ -35,12 +35,13 @@ export default function Checkout({data, isView}) {
 
 	const handleBack = () => {
 		setActiveStep(activeStep - 1);
+		isView = true;
 	};
 
 	function getStepContent(step) {
 		switch (step) {
 			case 0:
-				return <AddressForm handleSubmit={handleNext} setUserInfo={setUserInfo} data={userInfo} />;
+				return <AddressForm handleSubmit={handleNext} setUserInfo={setUserInfo} data={userInfo} isView={isView} />;
 			case 1:
 				return <PaymentForm setCardInfo={setCardInfo} handleBack={handleBack} handleSubmit={handleNext} />;
 			// case 2:
@@ -109,11 +110,11 @@ export default function Checkout({data, isView}) {
 										</Button>
 									)} */}
 
-									{activeStep === steps.length - 1 ? (
+									{/* {activeStep === steps.length - 1 ? (
 										<Button variant='contained' type='submit' onClick={SaveDetail} sx={{mt: 3, ml: 1}}>
 											save detail checkout
 										</Button>
-									) : null}
+									) : null} */}
 								</Box>
 							</>
 						)}

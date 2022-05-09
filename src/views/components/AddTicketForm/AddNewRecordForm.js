@@ -49,8 +49,8 @@ export default function AddressForm({
 	insuranceMarkup,
 	addonMarkup,
 }) {
+	//for product type & CHECKBOX
 	const [ProductType, setProductType] = useState([]);
-
 	const [flightChecked, setFlightChecked] = useState(false);
 	const [carChecked, setCarChecked] = useState(false);
 	const [hotelChecked, setHotelChecked] = useState(false);
@@ -60,7 +60,7 @@ export default function AddressForm({
 	const [departureDateValue, setDepartureDateValue] = useState(new Date());
 	const [returnDateValue, setReturnDateValue] = useState(new Date());
 
-	console.log(firstName, isView);
+	// formik validation object
 	const formik = useFormik({
 		initialValues: {
 			firstName: firstName ? firstName : 'john',
@@ -137,7 +137,8 @@ export default function AddressForm({
 		},
 	});
 
-	const handleChange = (event) => {
+	//  for Product Selected Checkbox ---> array
+	const handleProductTypeChange = (event) => {
 		// setProductType([...productType, event.target.name]);
 
 		let newArray = [...ProductType, event.target.name];
@@ -149,47 +150,23 @@ export default function AddressForm({
 	};
 	return (
 		<>
-			<Typography variant='h6' gutterBottom>
-				Basic Detail
-			</Typography>
 			<Formik>
 				<form onSubmit={formik.handleSubmit}>
 					<Grid container spacing={3}>
-						<Grid item xs={12} md={2}>
-							{/* <Typography sx={{mt: 1}}>Product Type : </Typography> */}
-						</Grid>
-
 						{/*  checkbox label  */}
 						<Grid item xs={12} md={12} sx={{p: `8px !important`, pt: `0px !important`}}>
 							<FormControl sx={{m: 1}} fullWidth error={Boolean(formik.touched.productType && formik.errors.productType)}>
 								<InputLabel variant='outlined'>Product Type :</InputLabel>
 							</FormControl>
-							<Box
-								sx={{
-									display: 'flex',
-									flexDirection: 'row',
-									p: 1,
-									// m: 1,
-									bgcolor: 'background.paper',
-									borderRadius: 1,
-								}}>
-								<Box
-									sx={{
-										display: 'flex',
-										alignItems: 'flex-start',
-										flexDirection: 'column',
-										p: 1,
-										// m: 1,
-										bgcolor: 'background.paper',
-										borderRadius: 1,
-									}}>
+							<Box sx={displayFlexRowStyle}>
+								<Box sx={displayColStyle}>
 									<FormControlLabel
 										control={
 											<Checkbox
 												checked={flightChecked}
 												onChange={(e) => {
 													setFlightChecked(!flightChecked);
-													handleChange(e);
+													handleProductTypeChange(e);
 												}}
 												name='flight'
 												color='primary'
@@ -205,32 +182,17 @@ export default function AddressForm({
 											InputProps={{
 												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 											}}
-
-											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
-											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
-											// onBlur={formik.handleBlur}
-											// onChange={formik.handleChange}
-											// value={formik.values.pricePerPerson}
 										/>
 									) : null}
 								</Box>
-								<Box
-									sx={{
-										display: 'flex',
-										alignItems: 'flex-start',
-										flexDirection: 'column',
-										p: 1,
-										// m: 1,
-										bgcolor: 'background.paper',
-										borderRadius: 1,
-									}}>
+								<Box sx={displayColStyle}>
 									<FormControlLabel
 										control={
 											<Checkbox
 												checked={hotelChecked}
 												onChange={(e) => {
 													setHotelChecked(!hotelChecked);
-													handleChange(e);
+													handleProductTypeChange(e);
 												}}
 												name='hotel'
 												color='primary'
@@ -246,31 +208,17 @@ export default function AddressForm({
 											InputProps={{
 												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 											}}
-											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
-											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
-											// onBlur={formik.handleBlur}
-											// onChange={formik.handleChange}
-											// value={formik.values.pricePerPerson}
 										/>
 									) : null}
 								</Box>
-								<Box
-									sx={{
-										display: 'flex',
-										alignItems: 'flex-start',
-										flexDirection: 'column',
-										p: 1,
-										// m: 1,
-										bgcolor: 'background.paper',
-										borderRadius: 1,
-									}}>
+								<Box sx={displayColStyle}>
 									<FormControlLabel
 										control={
 											<Checkbox
 												checked={carChecked}
 												onChange={(e) => {
 													setCarChecked(!carChecked);
-													handleChange(e);
+													handleProductTypeChange(e);
 												}}
 												name='car'
 												color='primary'
@@ -286,32 +234,18 @@ export default function AddressForm({
 											InputProps={{
 												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 											}}
-											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
-											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
-											// onBlur={formik.handleBlur}
-											// onChange={formik.handleChange}
-											// value={formik.values.pricePerPerson}
 										/>
 									) : null}
 								</Box>
 
-								<Box
-									sx={{
-										display: 'flex',
-										alignItems: 'flex-start',
-										flexDirection: 'column',
-										p: 1,
-										// m: 1,
-										bgcolor: 'background.paper',
-										borderRadius: 1,
-									}}>
+								<Box sx={displayColStyle}>
 									<FormControlLabel
 										control={
 											<Checkbox
 												checked={insuranceChecked}
 												onChange={(e) => {
 													setInsuranceChecked(!insuranceChecked);
-													handleChange(e);
+													handleProductTypeChange(e);
 												}}
 												name='insurance'
 												color='primary'
@@ -327,32 +261,18 @@ export default function AddressForm({
 											InputProps={{
 												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 											}}
-											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
-											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
-											// onBlur={formik.handleBlur}
-											// onChange={formik.handleChange}
-											// value={formik.values.pricePerPerson}
 										/>
 									) : null}
 								</Box>
 
-								<Box
-									sx={{
-										display: 'flex',
-										alignItems: 'flex-start',
-										flexDirection: 'column',
-										p: 1,
-										// m: 1,
-										bgcolor: 'background.paper',
-										borderRadius: 1,
-									}}>
+								<Box sx={displayColStyle}>
 									<FormControlLabel
 										control={
 											<Checkbox
 												checked={addonChecked}
 												onChange={(e) => {
 													setAddonChecked(!addonChecked);
-													handleChange(e);
+													handleProductTypeChange(e);
 												}}
 												name='addon'
 												color='primary'
@@ -368,18 +288,14 @@ export default function AddressForm({
 											InputProps={{
 												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 											}}
-											// error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
-											// helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
-											// onBlur={formik.handleBlur}
-											// onChange={formik.handleChange}
-											// value={formik.values.pricePerPerson}
 										/>
 									) : null}
 								</Box>
 							</Box>
 						</Grid>
-						{/*  checkbox label  */}
-						<Grid item xs={12} md={4}>
+
+						{/* firstname */}
+						<Grid item xs={12} md={2}>
 							<TextField
 								fullWidth
 								label='First Name'
@@ -391,7 +307,8 @@ export default function AddressForm({
 								value={formik.values.firstName}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						{/* lastname */}
+						<Grid item xs={12} md={2}>
 							<TextField
 								id='lastName'
 								name='lastName'
@@ -404,7 +321,8 @@ export default function AddressForm({
 								value={formik.values.lastName}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						{/*  EMail */}
+						<Grid item xs={12} md={2}>
 							<TextField
 								id='email'
 								name='email'
@@ -417,8 +335,8 @@ export default function AddressForm({
 								value={formik.values.email}
 							/>
 						</Grid>
-
-						<Grid item xs={12} md={4}>
+						{/*  Phone */}
+						<Grid item xs={12} md={2}>
 							<TextField
 								id='phone'
 								name='phone'
@@ -432,8 +350,8 @@ export default function AddressForm({
 							/>
 						</Grid>
 
-						{/*  */}
-						<Grid item xs={12} md={4}>
+						{/* alt EMail */}
+						<Grid item xs={12} md={2}>
 							<TextField
 								name='altEmail'
 								label='Alternative email'
@@ -446,7 +364,8 @@ export default function AddressForm({
 							/>
 						</Grid>
 
-						<Grid item xs={12} md={4}>
+						{/* alt Phone */}
+						<Grid item xs={12} md={2}>
 							<TextField
 								name='altPhone'
 								label='Alternative Phone'
@@ -459,58 +378,50 @@ export default function AddressForm({
 							/>
 						</Grid>
 
-						{/*
-			adultCount: '',
-			elderCount: '',
- */}
+						{/* kidsCount */}
+						<Grid item xs={12} md={1}>
+							<Box sx={displayFlexRowStyle}>
+								<Box sx={displayColStyle}>
+									<TextField
+										error={Boolean(formik.touched.kidCount && formik.errors.kidCount)}
+										fullWidth
+										helperText={formik.touched.kidCount && formik.errors.kidCount}
+										label='Childs'
+										name='kidCount'
+										value={formik.values.kidCount}
+										onBlur={formik.handleBlur}
+										onChange={formik.handleChange}
+										type='number'
+										InputProps={{
+											startAdornment: (
+												<InputAdornment position='start'>
+													<ChildCareIcon />
+												</InputAdornment>
+											),
+										}}
+									/>
+									{formik.values.kidCount > 0 ? (
+										<TextField
+											name='flightMarkup'
+											label='Flight Markup'
+											fullWidth
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+											}}
+										/>
+									) : null}
+								</Box>
+							</Box>
+						</Grid>
 
-						<Grid item xs={12} md={2}>
-							<TextField
-								error={Boolean(formik.touched.totalPassengerCount && formik.errors.totalPassengerCount)}
-								fullWidth
-								helperText={formik.touched.totalPassengerCount && formik.errors.totalPassengerCount}
-								label='Total Number  of Passenger'
-								name='totalPassengerCount'
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								type='number'
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position='start'>
-											<FamilyRestroomIcon />
-										</InputAdornment>
-									),
-								}}
-								value={formik.values.totalPassengerCount}
-							/>
-						</Grid>
-						<Grid item xs={12} md={2}>
-							<TextField
-								error={Boolean(formik.touched.kidCount && formik.errors.kidCount)}
-								fullWidth
-								helperText={formik.touched.kidCount && formik.errors.kidCount}
-								label='Child Count'
-								name='kidCount'
-								value={formik.values.kidCount}
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								type='number'
-								InputProps={{
-									startAdornment: (
-										<InputAdornment position='start'>
-											<ChildCareIcon />
-										</InputAdornment>
-									),
-								}}
-							/>
-						</Grid>
-						<Grid item xs={12} md={2}>
+						{/* adult Count */}
+						<Grid item xs={12} md={1}>
 							<TextField
 								error={Boolean(formik.touched.adultCount && formik.errors.adultCount)}
 								fullWidth
 								helperText={formik.touched.adultCount && formik.errors.adultCount}
-								label='Total Number  of Passenger'
-								name='totalPassengerCount'
+								label='Adults'
+								name='adultCount'
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
 								type='number'
@@ -524,13 +435,15 @@ export default function AddressForm({
 								value={formik.values.adultCount}
 							/>
 						</Grid>
-						<Grid item xs={12} md={2}>
+
+						{/* ellder Count */}
+						<Grid item xs={12} md={1}>
 							<TextField
 								error={Boolean(formik.touched.elderCount && formik.errors.elderCount)}
 								fullWidth
 								helperText={formik.touched.elderCount && formik.errors.elderCount}
-								label='Total Number  of Passenger'
-								name='totalPassengerCount'
+								label='Elder'
+								name='elderCount'
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
 								type='number'
@@ -543,10 +456,27 @@ export default function AddressForm({
 								}}
 								value={formik.values.elderCount}
 							/>
-							elderCount
 						</Grid>
 
+						{/* PricePerPerson */}
 						<Grid item xs={12} md={4}>
+							<TextField
+								id='pricePerPerson'
+								name='pricePerPerson'
+								label='Price Per Person'
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+								fullWidth
+								error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
+								helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+								value={formik.values.pricePerPerson}
+							/>
+						</Grid>
+						{/* PNR no. */}
+						<Grid item xs={12} md={5}>
 							<TextField
 								id='pnrNo'
 								name='pnrNo'
@@ -559,6 +489,8 @@ export default function AddressForm({
 								value={formik.values.pnrNo}
 							/>
 						</Grid>
+
+						{/* booking type -------Dropdown */}
 						<Grid item xs={12} md={4}>
 							<FormControl fullWidth>
 								<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
@@ -584,6 +516,7 @@ export default function AddressForm({
 							</FormControl>
 						</Grid>
 
+						{/* Fare type */}
 						<Grid item xs={12} md={4}>
 							<FormControl fullWidth>
 								<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
@@ -605,6 +538,7 @@ export default function AddressForm({
 								</Select>
 							</FormControl>
 						</Grid>
+						{/* Booked On */}
 						<Grid item xs={12} md={4}>
 							<FormControl fullWidth>
 								<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
@@ -626,6 +560,7 @@ export default function AddressForm({
 								</Select>
 							</FormControl>
 						</Grid>
+						{/* MCO amount */}
 						<Grid item xs={12} md={4}>
 							<TextField
 								id='mcoNo'
@@ -642,6 +577,7 @@ export default function AddressForm({
 								value={formik.values.mcoNo}
 							/>
 						</Grid>
+						{/* Airline code */}
 						<Grid item xs={12} md={4}>
 							<TextField
 								id='airlineCode'
@@ -656,22 +592,7 @@ export default function AddressForm({
 							/>
 						</Grid>
 
-						<Grid item xs={12} md={4}>
-							<TextField
-								id='pricePerPerson'
-								name='pricePerPerson'
-								label='Price Per Person'
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-								fullWidth
-								error={Boolean(formik.touched.pricePerPerson && formik.errors.pricePerPerson)}
-								helperText={formik.touched.pricePerPerson && formik.errors.pricePerPerson}
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								value={formik.values.pricePerPerson}
-							/>
-						</Grid>
+						{/* Grand Total */}
 						<Grid item xs={12} md={4}>
 							<TextField
 								id='grandTotal'
@@ -688,8 +609,8 @@ export default function AddressForm({
 								value={formik.values.grandTotal}
 							/>
 						</Grid>
-						{/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
+						{/* Total In-House Charge */}
 						<Grid item xs={12} md={4}>
 							<TextField
 								id='totalInhouseChargetotalInhouseCharge'
@@ -706,6 +627,7 @@ export default function AddressForm({
 								value={formik.values.totalInhouseCharge}
 							/>
 						</Grid>
+						{/* DepartureDate */}
 						<Grid item xs={12} md={4}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
@@ -731,6 +653,7 @@ export default function AddressForm({
 								/>
 							</LocalizationProvider>
 						</Grid>
+						{/* ReturnDate */}
 						<Grid item xs={12} md={4}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
@@ -759,6 +682,7 @@ export default function AddressForm({
 						{/* EMpty one  */}
 						<Grid item xs={12} md={8}></Grid>
 
+						{/* Formik alert one  */}
 						<Grid item xs={8} md={10}>
 							{' '}
 							{formik.errors && formik.errors !== null ? (
@@ -778,3 +702,20 @@ export default function AddressForm({
 		</>
 	);
 }
+
+const displayColStyle = {
+	display: 'flex',
+	alignItems: 'flex-start',
+	flexDirection: 'column',
+	p: 1,
+
+	bgcolor: 'background.paper',
+	borderRadius: 1,
+};
+const displayFlexRowStyle = {
+	display: 'flex',
+	flexDirection: 'row',
+	p: 1,
+	bgcolor: 'background.paper',
+	borderRadius: 1,
+};
