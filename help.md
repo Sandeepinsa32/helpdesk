@@ -94,3 +94,8 @@ format table pnrconvertor email open, ip address - first, last, authorize ip
 4. view and update mode
 5. product type filght array isssue
 6. onCLick Back fromik data is not there
+
+//issue
+
+1. field dependencies on kid,adult,elder count
+2. requried field dependen on ccompany card checkox

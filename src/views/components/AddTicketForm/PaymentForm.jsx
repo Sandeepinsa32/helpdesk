@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import {useFormik} from 'formik';
-import * as Yup from 'yup';
 import {Typography, Link, Paper, Grid, TextField, Button, FormControlLabel, Checkbox} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -16,7 +14,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 
 	// handle input change
-	const handleInputChange = (e, index) => {
+	const handleCardInput = (e, index) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
 		list[index][name] = value;
@@ -28,9 +26,6 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 		list[index][name] = value;
 		setInputList(list);
 	};
-
-	// handle input change
-	// const handleSubmit = () => {};
 
 	// handle click event of the Remove button
 	const handleRemoveClick = (index) => {
@@ -71,13 +66,13 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 											fullWidth
 											autoComplete='cc-name'
 											onChange={(e) => {
-												handleInputChange(e, i);
+												handleCardInput(e, i);
 											}}
 											value={inputList[i].cardName}
 										/>
 									</Grid>
 									<Grid item xs={12} md={4}>
-										<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleInputChange(e, i)} value={inputList[i].cardNumber} />
+										<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardNumber} />
 									</Grid>
 									<Grid item xs={12} md={4}>
 										<TextField
@@ -86,12 +81,12 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 											label='Card number'
 											fullWidth
 											autoComplete='cc-number'
-											onChange={(e) => handleInputChange(e, i)}
+											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardNumber}
 										/>
 									</Grid>
 									<Grid item xs={12} md={3}>
-										<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleInputChange(e, i)} value={inputList[i].cvv} />
+										<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
 									</Grid>
 									<Grid item xs={12} md={4}>
 										<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
@@ -180,7 +175,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 									fullWidth
 
 									// onChange={(e) => {
-									// 	handleInputChange(e, i);
+									// 	handleCardInput(e, i);
 									// }}
 									// value={inputList[i].cardName}
 								/>
@@ -193,7 +188,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 									fullWidth
 
 									// onChange={(e) => {
-									// 	handleInputChange(e, i);
+									// 	handleCardInput(e, i);
 									// }}
 									// value={inputList[i].cardName}
 								/>
@@ -206,7 +201,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 									fullWidth
 
 									// onChange={(e) => {
-									// 	handleInputChange(e, i);
+									// 	handleCardInput(e, i);
 									// }}
 									// value={inputList[i].cardName}
 								/>
