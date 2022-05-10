@@ -6,7 +6,28 @@ import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Uti
 import axios from 'axios';
 
 //@material-ui
-import {Box, Button, Card, Container, CardContent, TextField, CircularProgress, Modal, InputAdornment, SvgIcon, Typography, CardHeader, Divider, Grid, IconButton} from '@mui/material';
+import {
+	Box,
+	Button,
+	Card,
+	Container,
+	CardContent,
+	TextField,
+	CircularProgress,
+	Modal,
+	InputAdornment,
+	SvgIcon,
+	Typography,
+	CardHeader,
+	Divider,
+	Grid,
+	IconButton,
+	ListItem,
+	ListItemButton,
+	ListItemText,
+	ListItemIcon,
+	List,
+} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,6 +44,7 @@ import Email1 from './components/email1';
 //  local icon
 import {Search as SearchIcon} from '../assets/icons/search';
 import CloseIcon from '@mui/icons-material/Close';
+import Visibility from '@mui/icons-material/Visibility';
 
 export const Transaction = () => {
 	const [myRecords, setMyRecords] = useState([]);
@@ -146,13 +168,7 @@ export const Transaction = () => {
 						{/* </Typography> */}
 
 						<Box sx={{m: 1}}>
-							<Button
-								color='primary'
-								onClick={() => {
-									setViewData(false);
-									handleOpen();
-								}}
-								variant='contained'>
+							<Button color='primary' onClick={() => {}} variant='contained'>
 								Add New Record
 							</Button>
 						</Box>
@@ -267,6 +283,7 @@ export const Transaction = () => {
 											'Return Date',
 											'action',
 											'Email',
+											'logs',
 										].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
@@ -326,6 +343,11 @@ export const Transaction = () => {
 														Send
 													</Button>
 												</TableCell>
+												<TableCell>
+													<Button variant='contained' size='small' onClick={handleOpen}>
+														logs
+													</Button>
+												</TableCell>
 											</TableRow>
 										))
 									) : (
@@ -363,7 +385,29 @@ export const Transaction = () => {
 					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<AddNewRecord isView={true} data={userData} />
+
+					<Paper elevation={3} sx={{mt: 1}}>
+						<List>
+							<ListItem disablePadding>
+								<ListItemButton>
+									<ListItemIcon>
+										<Visibility />
+									</ListItemIcon>
+									<ListItemText primary='text1' />
+								</ListItemButton>
+							</ListItem>
+							<Divider />
+
+							<ListItem disablePadding>
+								<ListItemButton>
+									<ListItemIcon>
+										<Visibility />
+									</ListItemIcon>
+									<ListItemText primary='Drafts' />
+								</ListItemButton>
+							</ListItem>
+						</List>
+					</Paper>
 				</Box>
 			</Modal>
 			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
