@@ -19,6 +19,7 @@ export default function AddressForm({formik, isView}) {
 	//for product type & CHECKBOX
 
 	const [selectedProductType, setSelectedProductType] = useState([]);
+	const [initialProductType, setInitialProductType] = useState([]);
 	const [checkboxType, setCheckboxType] = useState({
 		flight: false,
 		hotel: false,
@@ -55,6 +56,12 @@ export default function AddressForm({formik, isView}) {
 		// setSelectedProductType(newArray);
 		formik.setFieldValue('productType', selectedProductType);
 	};
+
+	useEffect(() => {
+		console.log(initialProductType);
+	});
+
+	const checked = (propertyname) => initialProductType.reduce((obj) => obj.property == propertyname, false);
 	return (
 		<>
 			<Grid container spacing={3} sx={{}}>
@@ -64,186 +71,64 @@ export default function AddressForm({formik, isView}) {
 						<InputLabel variant='outlined'>Product Type :</InputLabel>
 					</FormControl>
 					<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
-						<Box sx={displayColStyle} style={{paddingTop: '8px !important'}}>
-							<FormControlLabel
-								control={
-									<Checkbox
-										checked={checkboxType.flight}
-										onChange={(e) => {
-											setCheckboxType((checkboxType) => ({
-												...checkboxType,
-												flight: !checkboxType.flight,
-											}));
+						{['flight', 'hotel', 'car', 'insurance', 'addon'].map((x, i) => {
+							return (
+								<>
+									<Box sx={displayColStyle} style={{paddingTop: '8px !important'}} key={i}>
+										<FormControlLabel
+											control={
+												<Checkbox
+													checked={checkboxType.x}
+													onChange={(e) => {
+														let object = {
+															property: x,
+															propertyMarkup: '',
+														};
 
-											handleProductTypeChange(e);
-										}}
-										name='flight'
-										color='primary'
-									/>
-								}
-								label='Flight'
-							/>
-							{checkboxType.flight ? (
-								<TextField
-									name='flightMarkup'
-									label='Flight Markup'
-									fullWidth
-									disabled={isView}
-									InputProps={{
-										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-									}}
-									error={Boolean(formik.touched.flightMarkup && formik.errors.flightMarkup)}
-									helperText={formik.touched.flightMarkup && formik.errors.flightMarkup}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									value={formik.values.flightMarkup}
-								/>
-							) : null}
-						</Box>
-						<Box sx={displayColStyle}>
-							<FormControlLabel
-								control={
-									<Checkbox
-										checked={checkboxType.hotel}
-										onChange={(e) => {
-											setCheckboxType((checkboxType) => ({
-												...checkboxType,
-												hotel: !checkboxType.hotel,
-											}));
-											handleProductTypeChange(e);
-										}}
-										name='hotel'
-										color='primary'
-									/>
-								}
-								label='Hotel'
-							/>
-							{checkboxType.hotel ? (
-								<TextField
-									name='hotelMarkup'
-									label='Hotel Markup'
-									fullWidth
-									disabled={isView}
-									InputProps={{
-										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-									}}
-									error={Boolean(formik.touched.hotelMarkup && formik.errors.hotelMarkup)}
-									helperText={formik.touched.hotelMarkup && formik.errors.hotelMarkup}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									value={formik.values.hotelMarkup}
-								/>
-							) : null}
-						</Box>
-						<Box sx={displayColStyle}>
-							<FormControlLabel
-								control={
-									<Checkbox
-										checked={checkboxType.car}
-										onChange={(e) => {
-											setCheckboxType((checkboxType) => ({
-												...checkboxType,
-												car: !checkboxType.car,
-											}));
-											handleProductTypeChange(e);
-										}}
-										name='car'
-										color='primary'
-									/>
-								}
-								label='Car'
-							/>
-							{checkboxType.car ? (
-								<TextField
-									name='carMarkup'
-									label='Car Markup'
-									fullWidth
-									disabled={isView}
-									InputProps={{
-										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-									}}
-									error={Boolean(formik.touched.carMarkup && formik.errors.carMarkup)}
-									helperText={formik.touched.carMarkup && formik.errors.carMarkup}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									value={formik.values.carMarkup}
-								/>
-							) : null}
-						</Box>
+														const productExists = initialProductType.reduce((acc, prop) => prop.property == object.property, false);
 
-						<Box sx={displayColStyle}>
-							<FormControlLabel
-								control={
-									<Checkbox
-										checked={checkboxType.insurance}
-										onChange={(e) => {
-											setCheckboxType((checkboxType) => ({
-												...checkboxType,
-												insurance: !checkboxType.insurance,
-											}));
-											handleProductTypeChange(e);
-										}}
-										name='insurance'
-										color='primary'
-									/>
-								}
-								label='Insurance'
-							/>
-							{checkboxType.insurance ? (
-								<TextField
-									name='insuranceMarkup'
-									label='Insurance Markup'
-									fullWidth
-									disabled={isView}
-									InputProps={{
-										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-									}}
-									error={Boolean(formik.touched.insuranceMarkup && formik.errors.insuranceMarkup)}
-									helperText={formik.touched.insuranceMarkup && formik.errors.insuranceMarkup}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									value={formik.values.insuranceMarkup}
-								/>
-							) : null}
-						</Box>
+														if (productExists) {
+															var remainingValues = initialProductType.filter((y) => y.property !== object.property);
+															setInitialProductType([...remainingValues]);
+														} else {
+															setInitialProductType([...initialProductType, object]);
+														}
+													}}
+													name={x + `Markup`}
+													color='primary'
+												/>
+											}
+											label={x}
+										/>
+										{checked && (
+											<TextField
+												name={x + `Markup`}
+												label={x + `Markup`}
+												fullWidth
+												disabled={isView}
+												InputProps={{
+													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+												}}
+												// error={Boolean(formik.touched.x + `Markup` && formik.errors.x + `Markup`)}
+												// helperText={formik.touched.x + `Markup` && formik.errors.x + `Markup`}
+												// onBlur={formik.handleBlur}
+												onChange={(e) => {
+													const index = initialProductType.findIndex((obj) => obj.property === x);
+													let data = [...initialProductType];
+													data[index]['propertyMarkup'] = e.target.value;
 
-						<Box sx={displayColStyle}>
-							<FormControlLabel
-								control={
-									<Checkbox
-										checked={checkboxType.addon}
-										onChange={(e) => {
-											setCheckboxType((checkboxType) => ({
-												...checkboxType,
-												addon: !checkboxType.addon,
-											}));
-											handleProductTypeChange(e);
-										}}
-										name='addon'
-										color='primary'
-									/>
-								}
-								label='Add-On'
-							/>
-							{checkboxType.addon ? (
-								<TextField
-									name='addonMarkup'
-									label='Add-On Markup'
-									fullWidth
-									disabled={isView}
-									InputProps={{
-										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-									}}
-									error={Boolean(formik.touched.addonMarkup && formik.errors.addonMarkup)}
-									helperText={formik.touched.addonMarkup && formik.errors.addonMarkup}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-									value={formik.values.addonMarkup}
-								/>
-							) : null}
-						</Box>
+													setInitialProductType(data);
+												}}
+												// value={formik.values.x + `Markup`}
+											/>
+										)}
+									</Box>
+								</>
+							);
+						})}
 					</Box>
 				</Grid>
+
 				{/* firstname Fields */}
 				<Grid item xs={12} md={2}>
 					<TextField
