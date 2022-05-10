@@ -50,7 +50,7 @@ const AddNewRecord = ({isView, data}) => {
 		ccLastDigit,
 	} = data;
 
-	const [inputList, setInputList] = useState([{cardHolderName: 'john', cardHolderPhn: '9876543210', cardNumber: '0858-8585-8585', expiryDate: null, cvv: '022'}]);
+	const [inputList, setInputList] = useState([{cardHolderName: 'john', cardHolderNumber: '9876543210', cardNumber: '0858-8585-8585', expiryDate: null, cvv: '022'}]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 	const [companyCardUsed, setCompanyCardUsed] = useState(false);
 	const [companyAmountUsed, setCompanyAmountUsed] = useState(false);
@@ -196,7 +196,7 @@ const AddNewRecord = ({isView, data}) => {
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList([...inputList, {cardHolderName: '', cardHolderPhn: '', cardNumber: '', expiryDate: null, cvv: ''}]);
+		setInputList([...inputList, {cardHolderName: '', cardHolderNumber: '', cardNumber: '', expiryDate: null, cvv: ''}]);
 	};
 	return (
 		<>
@@ -229,7 +229,7 @@ const AddNewRecord = ({isView, data}) => {
 								</Grid>
 								{/*  Card Holder Phone no. */}
 								<Grid item xs={12} md={3}>
-									<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderPhn} />
+									<TextField required name='cardHolderNumber' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderNumber} />
 								</Grid>
 								{/* CardNumber Field */}
 								<Grid item xs={12} md={3}>
