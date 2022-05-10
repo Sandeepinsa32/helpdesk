@@ -88,12 +88,9 @@ booking id - thd + 4 digit unique code
 
 format table pnrconvertor email open, ip address - first, last, authorize ip
 
-1. alternate email & phone in address form
-2. -- style no. of passenger
 3. card validation
-4. view and update mode
-5. product type filght array isssue
-6. onCLick Back fromik data is not there
+
+4. product type filght array isssue
 
 //issue
 

@@ -15,7 +15,39 @@ import BoyIcon from '@mui/icons-material/Boy';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import ElderlyIcon from '@mui/icons-material/Elderly';
 
-export default function AddressForm({formik, isView}) {
+export default function AddressForm(props) {
+	console.log(props.data);
+	const {
+		firstName,
+		lastName,
+		email,
+		phone,
+		altEmail,
+		altPhone,
+		pnrNo,
+		fareType,
+		mcoNo,
+		airlineCode,
+		bookingType,
+		bookedOn,
+		pricePerPerson,
+		productType,
+		comments,
+		notes,
+		totalInhouseCharge,
+		departureDate,
+		returnDate,
+		totalPassengerCount,
+		adultCount,
+		kidCount,
+		elderCount,
+		grandTotal,
+		flightMarkup,
+		hotelMarkup,
+		carMarkup,
+		insuranceMarkup,
+		addonMarkup,
+	} = props.data;
 	//for product type & CHECKBOX
 	const [productType, setProductType] = useState([]);
 	const [flightChecked, setFlightChecked] = useState(false);
@@ -46,7 +78,7 @@ export default function AddressForm({formik, isView}) {
 			<Grid container spacing={3}>
 				{/*  checkbox label  Fields */}
 				<Grid item xs={12} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
-					<FormControl sx={{m: 1, p: 1}} fullWidth disabled={isView} error={Boolean(formik.touched.productType && formik.errors.productType)}>
+					<FormControl sx={{m: 1, p: 1}} fullWidth error={Boolean(formik.touched.productType && formik.errors.productType)}>
 						<InputLabel variant='outlined'>Product Type :</InputLabel>
 					</FormControl>
 					<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', justifyContent: 'space-evenly'}}>
@@ -70,7 +102,6 @@ export default function AddressForm({formik, isView}) {
 									name='flightMarkup'
 									label='Flight Markup'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -102,7 +133,6 @@ export default function AddressForm({formik, isView}) {
 									name='hotelMarkup'
 									label='Hotel Markup'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -134,7 +164,6 @@ export default function AddressForm({formik, isView}) {
 									name='carMarkup'
 									label='Car Markup'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -167,7 +196,6 @@ export default function AddressForm({formik, isView}) {
 									name='insuranceMarkup'
 									label='Insurance Markup'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -200,7 +228,6 @@ export default function AddressForm({formik, isView}) {
 									name='addonMarkup'
 									label='Add-On Markup'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -218,7 +245,6 @@ export default function AddressForm({formik, isView}) {
 				<Grid item xs={12} md={2}>
 					<TextField
 						fullWidth
-						disabled={isView}
 						label='First Name'
 						name='firstName'
 						error={Boolean(formik.touched.firstName && formik.errors.firstName)}
@@ -235,7 +261,6 @@ export default function AddressForm({formik, isView}) {
 						name='lastName'
 						label='Last Name'
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.lastName && formik.errors.lastName)}
 						helperText={formik.touched.lastName && formik.errors.lastName}
 						onBlur={formik.handleBlur}
@@ -250,7 +275,6 @@ export default function AddressForm({formik, isView}) {
 						name='email'
 						label='email'
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.email && formik.errors.email)}
 						helperText={formik.touched.email && formik.errors.email}
 						onBlur={formik.handleBlur}
@@ -265,7 +289,6 @@ export default function AddressForm({formik, isView}) {
 						name='phone'
 						label='phone'
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.phone && formik.errors.phone)}
 						helperText={formik.touched.phone && formik.errors.phone}
 						onBlur={formik.handleBlur}
@@ -279,7 +302,6 @@ export default function AddressForm({formik, isView}) {
 						name='altEmail'
 						label='Alternative email'
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.altEmail && formik.errors.altEmail)}
 						helperText={formik.touched.altEmail && formik.errors.altEmail}
 						onBlur={formik.handleBlur}
@@ -293,7 +315,6 @@ export default function AddressForm({formik, isView}) {
 						name='altPhone'
 						label='Alternative Phone'
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.altPhone && formik.errors.altPhone)}
 						helperText={formik.touched.altPhone && formik.errors.altPhone}
 						onBlur={formik.handleBlur}
@@ -308,7 +329,6 @@ export default function AddressForm({formik, isView}) {
 							<TextField
 								error={Boolean(formik.touched.kidCount && formik.errors.kidCount)}
 								fullWidth
-								disabled={isView}
 								helperText={formik.touched.kidCount && formik.errors.kidCount}
 								label='Childs'
 								name='kidCount'
@@ -330,7 +350,6 @@ export default function AddressForm({formik, isView}) {
 									name='kidPrice'
 									label='Price Per Person'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -351,7 +370,6 @@ export default function AddressForm({formik, isView}) {
 							<TextField
 								error={Boolean(formik.touched.adultCount && formik.errors.adultCount)}
 								fullWidth
-								disabled={isView}
 								helperText={formik.touched.adultCount && formik.errors.adultCount}
 								label='Adults'
 								name='adultCount'
@@ -373,7 +391,6 @@ export default function AddressForm({formik, isView}) {
 									name='adultPrice'
 									label='Price Per Person'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -394,7 +411,6 @@ export default function AddressForm({formik, isView}) {
 							<TextField
 								error={Boolean(formik.touched.elderCount && formik.errors.elderCount)}
 								fullWidth
-								disabled={isView}
 								helperText={formik.touched.elderCount && formik.errors.elderCount}
 								label='Elder'
 								name='elderCount'
@@ -416,7 +432,6 @@ export default function AddressForm({formik, isView}) {
 									name='elderPrice'
 									label='Price Per Person'
 									fullWidth
-									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
@@ -437,7 +452,6 @@ export default function AddressForm({formik, isView}) {
 						name='pnrNo'
 						label='PNR No.'
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.pnrNo && formik.errors.pnrNo)}
 						helperText={(formik.touched.pnrNo && formik.errors.pnrNo) || 'optional'}
 						onBlur={formik.handleBlur}
@@ -447,7 +461,7 @@ export default function AddressForm({formik, isView}) {
 				</Grid>
 				{/* booking type -------Dropdown Fields */}
 				<Grid item xs={12} md={3}>
-					<FormControl fullWidth disabled={isView}>
+					<FormControl fullWidth>
 						<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
 						<Select
 							labelId='Bokking-type-Dropdown-label	'
@@ -455,7 +469,6 @@ export default function AddressForm({formik, isView}) {
 							// value={bookingType}
 							// onChange={handleBookingChange}
 							fullWidth
-							disabled={isView}
 							name='bookingType'
 							label='Booking Type'
 							error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
@@ -473,13 +486,12 @@ export default function AddressForm({formik, isView}) {
 				</Grid>
 				{/* Fare type Fields */}
 				<Grid item xs={12} md={3}>
-					<FormControl fullWidth disabled={isView}>
+					<FormControl fullWidth>
 						<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
 						<Select
 							labelId='Fare-Type-Dropdown-label'
 							id='Fare-Type-Dropdown'
 							fullWidth
-							disabled={isView}
 							name='fareType'
 							label='Fare Type'
 							error={Boolean(formik.touched.fareType && formik.errors.fareType)}
@@ -496,13 +508,12 @@ export default function AddressForm({formik, isView}) {
 				</Grid>
 				{/* Booked On Fields */}
 				<Grid item xs={12} md={3}>
-					<FormControl fullWidth disabled={isView}>
+					<FormControl fullWidth>
 						<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
 						<Select
 							labelId='Booked-on-Dropdown-label'
 							id='Booked-on-Dropdown'
 							fullWidth
-							disabled={isView}
 							name='bookedOn'
 							label='Booked On'
 							onBlur={formik.handleBlur}
@@ -524,7 +535,6 @@ export default function AddressForm({formik, isView}) {
 						name='airlineCode'
 						label='Airline Code *'
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.airlineCode && formik.errors.airlineCode)}
 						helperText={Boolean(formik.touched.airlineCode && formik.errors.airlineCode) ? formik.touched.airlineCode && formik.errors.airlineCode : `Use Abbrivated Form`}
 						onBlur={formik.handleBlur}
@@ -539,7 +549,6 @@ export default function AddressForm({formik, isView}) {
 						name='grandTotal'
 						label='Grand Total'
 						fullWidth
-						disabled={isView}
 						InputProps={{
 							startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 						}}
@@ -560,7 +569,6 @@ export default function AddressForm({formik, isView}) {
 							startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 						}}
 						fullWidth
-						disabled={isView}
 						error={Boolean(formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge)}
 						helperText={formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge}
 						onBlur={formik.handleBlur}
@@ -575,7 +583,6 @@ export default function AddressForm({formik, isView}) {
 						name='mcoNo'
 						label='MCO'
 						fullWidth
-						disabled={isView}
 						InputProps={{
 							startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 						}}

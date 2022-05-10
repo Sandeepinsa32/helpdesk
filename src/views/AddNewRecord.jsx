@@ -13,37 +13,46 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-const AddNewRecord = ({
-	firstName,
-	lastName,
-	email,
-	phone,
-	altEmail,
-	altPhone,
-	pnrNo,
-	fareType,
-	mcoNo,
-	airlineCode,
-	bookingType,
-	bookedOn,
-	pricePerPerson,
-	productType,
-	comments,
-	notes,
-	totalInhouseCharge,
-	departureDate,
-	returnDate,
-	totalPassengerCount,
-	adultCount,
-	kidCount,
-	elderCount,
-	grandTotal,
-	flightMarkup,
-	hotelMarkup,
-	carMarkup,
-	insuranceMarkup,
-	addonMarkup,
-}) => {
+const AddNewRecord = ({isView, data}) => {
+	console.log(data);
+	const {
+		firstName,
+		lastName,
+		email,
+		phone,
+		altEmail,
+		altPhone,
+		pnrNo,
+		fareType,
+		mcoNo,
+		airlineCode,
+		bookingType,
+		bookedOn,
+		pricePerPerson,
+		productType,
+		comments,
+		notes,
+		totalInhouseCharge,
+		departureDateValue,
+		returnDateValue,
+		totalPassengerCount,
+		adultCount,
+		kidCount,
+		elderCount,
+		grandTotal,
+		flightMarkup,
+		hotelMarkup,
+		carMarkup,
+		insuranceMarkup,
+		addonMarkup,
+		kidPrice,
+		adultPrice,
+		elderPrice,
+		ccUsedCount,
+		ccAmountUsed,
+		ccLastDigit,
+	} = data;
+
 	const [inputList, setInputList] = useState([{cardName: 'john', cardHolderPhn: '9876543210', cardNumber: '0858-8585-8585', expiryDate: null, cvv: '022'}]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 	const [companyCardUsed, setCompanyCardUsed] = useState(false);
@@ -75,9 +84,9 @@ const AddNewRecord = ({
 			kidCount: kidCount ? kidCount : '2',
 			elderCount: elderCount ? elderCount : '0',
 			grandTotal: grandTotal ? grandTotal : '100',
-			kidPrice: '',
-			adultPrice: '',
-			elderPrice: '',
+			kidPrice: kidPrice ? kidPrice : '',
+			adultPrice: adultPrice ? adultPrice : '',
+			elderPrice: elderPrice ? elderPrice : '',
 
 			//markup
 			flightMarkup: flightMarkup ? flightMarkup : '5',
@@ -86,12 +95,12 @@ const AddNewRecord = ({
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
 			addonMarkup: addonMarkup ? addonMarkup : '',
 			//date
-			departureDateValue: '',
-			returnDateValue: '',
+			departureDateValue: departureDateValue ? departureDateValue : '',
+			returnDateValue: returnDateValue ? returnDateValue : '',
 			//companyCard details
-			ccUsedCount: '',
-			ccAmountUsed: '',
-			ccLastDigit: '',
+			ccUsedCount: ccUsedCount ? ccUsedCount : '',
+			ccAmountUsed: ccAmountUsed ? ccAmountUsed : '',
+			ccLastDigit: ccLastDigit ? ccLastDigit : '',
 		},
 		validationSchema: Yup.object({
 			//basic
@@ -196,7 +205,7 @@ const AddNewRecord = ({
 		<>
 			<Formik>
 				<form onSubmit={formik.handleSubmit}>
-					<AddNewRecordForm formik={formik} />
+					<AddNewRecordForm formik={formik} isView={isView} />
 					<Box sx={{m: 1}}>
 						<Typography variant='h6' gutterBottom sx={{my: 4}}>
 							Payment method :
