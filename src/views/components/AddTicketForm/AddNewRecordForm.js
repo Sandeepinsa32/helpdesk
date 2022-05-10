@@ -59,6 +59,7 @@ export default function AddressForm({formik, isView}) {
 
 	useEffect(() => {
 		console.log(initialProductType);
+		console.log(checkboxType);
 	});
 
 	const checked = (propertyname) => initialProductType.reduce((obj) => obj.property == propertyname, false);
@@ -84,6 +85,10 @@ export default function AddressForm({formik, isView}) {
 															property: x,
 															propertyMarkup: '',
 														};
+														let checkboxData = {...checkboxType};
+														checkboxData[x] = !checkboxType[x];
+
+														setCheckboxType({...checkboxData});
 
 														const productExists = initialProductType.reduce((acc, prop) => prop.property == object.property, false);
 
@@ -100,7 +105,7 @@ export default function AddressForm({formik, isView}) {
 											}
 											label={x}
 										/>
-										{checked && (
+										{checkboxType[x] && (
 											<TextField
 												name={x + `Markup`}
 												label={x + `Markup`}
