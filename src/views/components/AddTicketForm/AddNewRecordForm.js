@@ -209,7 +209,6 @@ export default function AddressForm({formik}) {
 						</Box>
 					</Box>
 				</Grid>
-
 				{/* firstname Fields */}
 				<Grid item xs={12} md={2}>
 					<TextField
@@ -265,7 +264,6 @@ export default function AddressForm({formik}) {
 						value={formik.values.phone}
 					/>
 				</Grid>
-
 				{/* alt EMail Fields */}
 				<Grid item xs={12} md={2}>
 					<TextField
@@ -279,7 +277,6 @@ export default function AddressForm({formik}) {
 						value={formik.values.altEmail}
 					/>
 				</Grid>
-
 				{/* alt Phone Fields */}
 				<Grid item xs={12} md={2}>
 					<TextField
@@ -293,7 +290,6 @@ export default function AddressForm({formik}) {
 						value={formik.values.altPhone}
 					/>
 				</Grid>
-
 				{/* kidsCount Fields */}
 				<Grid item xs={12} md={2}>
 					<Box sx={displayFlexRowStyle}>
@@ -335,7 +331,6 @@ export default function AddressForm({formik}) {
 						</Box>
 					</Box>
 				</Grid>
-
 				{/* adult Count Fields */}
 				<Grid item xs={12} md={2}>
 					<Box sx={displayFlexRowStyle}>
@@ -377,7 +372,6 @@ export default function AddressForm({formik}) {
 						</Box>
 					</Box>
 				</Grid>
-
 				{/* elder Count Fields */}
 				<Grid item xs={12} md={2}>
 					<Box sx={displayFlexRowStyle}>
@@ -419,7 +413,6 @@ export default function AddressForm({formik}) {
 						</Box>
 					</Box>
 				</Grid>
-
 				{/* PNR no. Fields */}
 				<Grid item xs={12} md={6}>
 					<TextField
@@ -434,7 +427,6 @@ export default function AddressForm({formik}) {
 						value={formik.values.pnrNo}
 					/>
 				</Grid>
-
 				{/* booking type -------Dropdown Fields */}
 				<Grid item xs={12} md={3}>
 					<FormControl fullWidth>
@@ -460,7 +452,6 @@ export default function AddressForm({formik}) {
 						</Select>
 					</FormControl>
 				</Grid>
-
 				{/* Fare type Fields */}
 				<Grid item xs={12} md={3}>
 					<FormControl fullWidth>
@@ -505,7 +496,6 @@ export default function AddressForm({formik}) {
 						</Select>
 					</FormControl>
 				</Grid>
-
 				{/* Airline code Fields */}
 				<Grid item xs={12} md={3}>
 					<TextField
@@ -520,9 +510,8 @@ export default function AddressForm({formik}) {
 						value={formik.values.airlineCode}
 					/>
 				</Grid>
-
 				{/* Grand Total Fields */}
-				<Grid item xs={12} md={1}>
+				<Grid item xs={12} md={2}>
 					<TextField
 						id='grandTotal'
 						name='grandTotal'
@@ -538,9 +527,8 @@ export default function AddressForm({formik}) {
 						value={formik.values.grandTotal}
 					/>
 				</Grid>
-
 				{/* Total In-House Charge Fields */}
-				<Grid item xs={12} md={1}>
+				<Grid item xs={12} md={2}>
 					<TextField
 						id='totalInhouseChargetotalInhouseCharge'
 						name='totalInhouseCharge'
@@ -557,7 +545,7 @@ export default function AddressForm({formik}) {
 					/>
 				</Grid>
 				{/* MCO amount Fields */}
-				<Grid item xs={12} md={1}>
+				<Grid item xs={12} md={2}>
 					<TextField
 						id='mcoNo'
 						name='mcoNo'

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Checkout from './components/CheckoutStepper';
+// import Checkout from './components/CheckoutStepper';
+import AddNewRecord from './AddNewRecord';
 
 import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Utils';
 import axios from 'axios';
@@ -362,7 +363,7 @@ export const Transaction = () => {
 					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					{viewData ? <Checkout isView={true} data={userData} /> : <Checkout isView={false} />}
+					<AddNewRecord isView={true} data={userData} />
 				</Box>
 			</Modal>
 			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
