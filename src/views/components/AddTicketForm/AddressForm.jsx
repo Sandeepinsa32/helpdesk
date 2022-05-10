@@ -106,7 +106,7 @@ export default function AddressForm({
 			pnrNo: Yup.string().max(255),
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
 			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
-			productType: Yup.array().of(Yup.string()).required('Required'),
+			productType: Yup.array().required('Required'),
 			totalPassengerCount: Yup.number('input must consist if number').max(9).positive('input must consist if positive number').integer().required('This field is  Required'),
 			//dropdown
 
@@ -137,16 +137,16 @@ export default function AddressForm({
 		},
 	});
 
-	const handleChange = (event) => {
-		// setProductType([...productType, event.target.name]);
+	// const handleChange = (event) => {
+	// 	// setProductType([...productType, event.target.name]);
 
-		let newArray = [...ProductType, event.target.name];
-		if (ProductType.includes(event.target.name)) {
-			newArray = newArray.filter((x) => x !== event.target.name);
-		}
-		setProductType(newArray);
-		formik.setFieldValue('productType', ProductType);
-	};
+	// 	let newArray = [...ProductType, event.target.name];
+	// 	if (ProductType.includes(event.target.name)) {
+	// 		newArray = newArray.filter((x) => x !== event.target.name);
+	// 	}
+	// 	setProductType(newArray);
+	// 	formik.setFieldValue('productType', ProductType);
+	// };
 	return (
 		<>
 			<Typography variant='h6' gutterBottom>

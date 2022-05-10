@@ -28,12 +28,6 @@ export default function AddressForm({formik, isView}) {
 		addon: false,
 	});
 
-	// const [flightChecked, setFlightChecked] = useState(false);
-	// const [carChecked, setCarChecked] = useState(false);
-	// const [hotelChecked, setHotelChecked] = useState(false);
-	// const [insuranceChecked, setInsuranceChecked] = useState(false);
-	// const [addonChecked, setAddonChecked] = useState(false);
-
 	//date
 	const [depDate, setDepDate] = useState(formik.values.departureDate);
 	const [returnDate, setReturnDate] = useState(formik.values.returnDate);
@@ -54,13 +48,11 @@ export default function AddressForm({formik, isView}) {
 
 		console.log('newArray', newArray);
 		// setSelectedProductType(newArray);
-		formik.setFieldValue('productType', selectedProductType);
 	};
 
-	useEffect(() => {
-		console.log(initialProductType);
-		console.log(checkboxType);
-	});
+	// useEffect(() => {
+	// 	console.log(formik.values);
+	// });
 
 	const checked = (propertyname) => initialProductType.reduce((obj) => obj.property == propertyname, false);
 	return (
@@ -98,6 +90,9 @@ export default function AddressForm({formik, isView}) {
 														} else {
 															setInitialProductType([...initialProductType, object]);
 														}
+
+														setSelectedProductType(...initialProductType);
+														formik.setFieldValue('productType', initialProductType);
 													}}
 													name={x + `Markup`}
 													color='primary'
@@ -123,6 +118,7 @@ export default function AddressForm({formik, isView}) {
 													data[index]['propertyMarkup'] = e.target.value;
 
 													setInitialProductType(data);
+													formik.setFieldValue('productType', initialProductType);
 												}}
 												// value={formik.values.x + `Markup`}
 											/>

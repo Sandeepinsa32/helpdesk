@@ -14,7 +14,6 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 const AddNewRecord = ({isView, data}) => {
-	// console.log(data);
 	const {
 		firstName,
 		lastName,
@@ -29,7 +28,7 @@ const AddNewRecord = ({isView, data}) => {
 		bookingType,
 		bookedOn,
 		productType,
-		notes,
+
 		totalInhouseCharge,
 		departureDate,
 		returnDate,
@@ -37,23 +36,24 @@ const AddNewRecord = ({isView, data}) => {
 		childCount,
 		elderCount,
 		grandTotal,
-		flightMarkup,
-		hotelMarkup,
-		carMarkup,
-		insuranceMarkup,
-		addonMarkup,
+
 		childPrice,
 		adultPrice,
 		elderPrice,
 		ccUsedCount,
 		ccAmountUsed,
 		ccLastDigit,
+
+		// flightMarkup,
+		// hotelMarkup,
+		// carMarkup,
+		// insuranceMarkup,
+		// addonMarkup,
+		// notes,
 	} = data;
 
-	const [inputList, setInputList] = useState([{cardHolderName: 'john', cardHolderNumber: '9876543210', cardNumber: '0858-8585-8585', expiryDate: null, cvv: '022'}]);
+	const [inputList, setInputList] = useState([{cardHolderName: 'john', cardHolderNumber: '9876543210', cardNumber: '0858-8585-8585', expiryDate: '05/05/2022', cvv: '022'}]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
-	const [companyCardUsed, setCompanyCardUsed] = useState(false);
-	const [companyAmountUsed, setCompanyAmountUsed] = useState(false);
 
 	// formik validation object
 	const formik = useFormik({
@@ -61,40 +61,40 @@ const AddNewRecord = ({isView, data}) => {
 			firstName: firstName ? firstName : 'john',
 			lastName: lastName ? lastName : 'doe',
 			email: email ? email : 'john@doe.com',
-			phone: phone ? phone : '9874561230',
+			phone: phone ? phone : 9874561230,
 			alternateEmail: alternateEmail ? alternateEmail : 'jane@doe.com',
 			alternatePhone: alternatePhone ? alternatePhone : '0321456987',
 			pnrNo: pnrNo ? pnrNo : '1 ss2 5d5d d5jcjhbdc cncajnhc cscs',
 			fareType: fareType ? fareType : 'publish',
-			mcoNo: mcoNo ? mcoNo : '55',
+			mcoNo: mcoNo ? mcoNo : 55,
 			airlineCode: airlineCode ? airlineCode : 'DL',
 			bookingType: bookingType ? bookingType : 'new',
 			bookedOn: bookedOn ? bookedOn : 'trippro',
 			productType: productType ? productType : '',
-
-			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '20',
-
-			adultCount: adultCount ? adultCount : '2',
-			childCount: childCount ? childCount : '2',
-			elderCount: elderCount ? elderCount : '0',
-			grandTotal: grandTotal ? grandTotal : '100',
-			childPrice: childPrice ? childPrice : '',
-			adultPrice: adultPrice ? adultPrice : '',
+			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : 20,
+			adultCount: adultCount ? adultCount : 2,
+			childCount: childCount ? childCount : 2,
+			elderCount: elderCount ? elderCount : 0,
+			grandTotal: grandTotal ? grandTotal : 100,
+			childPrice: childPrice ? childPrice : 2,
+			adultPrice: adultPrice ? adultPrice : 2,
 			elderPrice: elderPrice ? elderPrice : '',
-
-			//markup
-			flightMarkup: flightMarkup ? flightMarkup : '5',
-			hotelMarkup: hotelMarkup ? hotelMarkup : '',
-			carMarkup: carMarkup ? carMarkup : '',
-			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
-			addonMarkup: addonMarkup ? addonMarkup : '',
 			//date
-			departureDate: departureDate ? departureDate : '',
-			returnDate: returnDate ? returnDate : '',
+			departureDate: departureDate ? departureDate : null,
+			returnDate: returnDate ? returnDate : null,
 			//companyCard details
+			isCompanyCard: isCompanyCard,
 			ccUsedCount: ccUsedCount ? ccUsedCount : '',
 			ccAmountUsed: ccAmountUsed ? ccAmountUsed : '',
 			ccLastDigit: ccLastDigit ? ccLastDigit : '',
+
+			//markup
+
+			// flightMarkup: flightMarkup ? flightMarkup : '5',
+			// hotelMarkup: hotelMarkup ? hotelMarkup : '',
+			// carMarkup: carMarkup ? carMarkup : '',
+			// insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
+			// addonMarkup: addonMarkup ? addonMarkup : '',
 		},
 		validationSchema: Yup.object({
 			//basic
@@ -108,8 +108,7 @@ const AddNewRecord = ({isView, data}) => {
 			pnrNo: Yup.string().max(255),
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
 			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
-			productType: Yup.array().of(Yup.string()).required('Required'),
-			totalPassengerCount: Yup.number('input must consist if number').max(9).positive('input must consist if positive number').integer().required('This field is  Required'),
+			productType: Yup.array().required('Required'),
 
 			//dropdown
 
@@ -117,7 +116,7 @@ const AddNewRecord = ({isView, data}) => {
 			bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'addon'], 'input should be one of below value').required('Required'),
 			bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is  required'),
 			//currency
-			pricePerPerson: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+
 			totalInhouseCharge: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
 			grandTotal: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
 
@@ -145,25 +144,43 @@ const AddNewRecord = ({isView, data}) => {
 					return elderCount > 0 ? schema.required('this field required ') : schema;
 				}),
 
-			//markup
-			flightMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			hotelMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-
-			comments: Yup.string().max(255),
-			notes: '',
-
 			//date
 			departureDate: Yup.string().required('This field is required').nullable(),
 			returnDate: Yup.string().required('This field is required').nullable(),
 			//companyCard details
-			ccUsedCount: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			ccAmountUsed: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			ccLastDigit: Yup.number('input must consist if number').min(4, 'please enter only last 4 digits of card').positive('input must consist if positive number'),
+			isCompanyCard: Yup.bool(),
+			ccUsedCount: Yup.number('input must consist if number')
+				.positive('input must consist if positive number')
+				.integer()
+				.when(['isCompanyCard'], (isCompanyCard, schema) => {
+					return isCompanyCard === true ? schema.required('this field required ') : schema;
+				}),
+			ccAmountUsed: Yup.number('input must consist if number')
+				.positive('input must consist if positive number')
+				.integer()
+				.when(['isCompanyCard'], (isCompanyCard, schema) => {
+					return isCompanyCard === true ? schema.required('this field required ') : schema;
+				}),
+			ccLastDigit: Yup.number('input must consist if number')
+				.min(4, 'please enter only last 4 digits of card')
+				.positive('input must consist if positive number')
+				.when(['isCompanyCard'], (isCompanyCard, schema) => {
+					return isCompanyCard === true ? schema.required('this field required ') : schema;
+				}),
+
+			//markup
+			// flightMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			// hotelMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			// carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			// insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			// addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+
+			// comments: Yup.string().max(255),
+			// notes: '',
+			// pricePerPerson: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+			// totalPassengerCount: Yup.number('input must consist if number').max(9).positive('input must consist if positive number').integer().required('This field is  Required'),
 		}),
-		onSubmit: (values) => {
+		onSubmit: () => {
 			alert('value logged in console');
 
 			console.log({
@@ -306,6 +323,7 @@ const AddNewRecord = ({isView, data}) => {
 								label='Company CC used ?'
 							/>
 						</Grid>
+
 						{isCompanyCard && (
 							<>
 								<Grid item xs={12} md={3}>

@@ -90,9 +90,10 @@ format table pnrconvertor email open, ip address - first, last, authorize ip
 
 3. card validation
 
-4. product type filght array isssue
-
 //issue
 
-1. card validation
 2. requried field dependen on ccompany card checkox
+
+3. elder price is coming even if field is hidden
+
+4.product type chcekbox working in reverse order --> markup calue test
