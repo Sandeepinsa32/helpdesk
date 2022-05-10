@@ -17,29 +17,43 @@ import ElderlyIcon from '@mui/icons-material/Elderly';
 
 export default function AddressForm({formik, isView}) {
 	//for product type & CHECKBOX
-	const [productType, setProductType] = useState([]);
-	const [flightChecked, setFlightChecked] = useState(false);
-	const [carChecked, setCarChecked] = useState(false);
-	const [hotelChecked, setHotelChecked] = useState(false);
-	const [insuranceChecked, setInsuranceChecked] = useState(false);
-	const [addonChecked, setAddonChecked] = useState(false);
+
+	const [selectedProductType, setSelectedProductType] = useState([]);
+	const [checkboxType, setCheckboxType] = useState({
+		flight: false,
+		hotel: false,
+		car: false,
+		insurance: false,
+		addon: false,
+	});
+
+	// const [flightChecked, setFlightChecked] = useState(false);
+	// const [carChecked, setCarChecked] = useState(false);
+	// const [hotelChecked, setHotelChecked] = useState(false);
+	// const [insuranceChecked, setInsuranceChecked] = useState(false);
+	// const [addonChecked, setAddonChecked] = useState(false);
+
 	//date
 	const [depDate, setDepDate] = useState(formik.values.departureDateValue);
 	const [returnDate, setReturnDate] = useState(formik.values.returnDateValue);
 
 	//  for Product Selected Checkbox ---> array
-	const handleProductTypeChange = (event) => {
-		// setProductType([...productType, event.target.name]);
+	const handleProductTypeChange = (e) => {
+		setSelectedProductType([...selectedProductType, e.target.name]);
 
-		let newArray = [...productType, event.target.name];
-		if (productType.includes(event.target.name)) {
-			newArray = newArray.filter((x) => {
-				return x !== event.target.name;
-			});
+		let newArray = [...selectedProductType, e.target.name];
+		if (selectedProductType.includes(e.target.name) && checkboxType[e.target.name] === true) {
+			newArray = newArray.filter((x) => x !== e.target.name);
+		} else if (selectedProductType.includes(e.target.name) && checkboxType[e.target.name] == false) {
+			const index = newArray.indexOf(e.target.name);
+			if (index > -1) {
+				newArray.splice(index, 1);
+			}
 		}
+
 		console.log('newArray', newArray);
-		setProductType(newArray);
-		formik.setFieldValue('productType', productType);
+		setSelectedProductType(newArray);
+		formik.setFieldValue('productType', selectedProductType);
 	};
 	return (
 		<>
@@ -54,9 +68,13 @@ export default function AddressForm({formik, isView}) {
 							<FormControlLabel
 								control={
 									<Checkbox
-										checked={flightChecked}
+										checked={checkboxType.flight}
 										onChange={(e) => {
-											setFlightChecked(!flightChecked);
+											setCheckboxType((checkboxType) => ({
+												...checkboxType,
+												flight: !checkboxType.flight,
+											}));
+
 											handleProductTypeChange(e);
 										}}
 										name='flight'
@@ -65,7 +83,7 @@ export default function AddressForm({formik, isView}) {
 								}
 								label='Flight'
 							/>
-							{flightChecked ? (
+							{checkboxType.flight ? (
 								<TextField
 									name='flightMarkup'
 									label='Flight Markup'
@@ -86,9 +104,12 @@ export default function AddressForm({formik, isView}) {
 							<FormControlLabel
 								control={
 									<Checkbox
-										checked={hotelChecked}
+										checked={checkboxType.hotel}
 										onChange={(e) => {
-											setHotelChecked(!hotelChecked);
+											setCheckboxType((checkboxType) => ({
+												...checkboxType,
+												hotel: !checkboxType.hotel,
+											}));
 											handleProductTypeChange(e);
 										}}
 										name='hotel'
@@ -97,7 +118,7 @@ export default function AddressForm({formik, isView}) {
 								}
 								label='Hotel'
 							/>
-							{hotelChecked ? (
+							{checkboxType.hotel ? (
 								<TextField
 									name='hotelMarkup'
 									label='Hotel Markup'
@@ -118,9 +139,12 @@ export default function AddressForm({formik, isView}) {
 							<FormControlLabel
 								control={
 									<Checkbox
-										checked={carChecked}
+										checked={checkboxType.car}
 										onChange={(e) => {
-											setCarChecked(!carChecked);
+											setCheckboxType((checkboxType) => ({
+												...checkboxType,
+												car: !checkboxType.car,
+											}));
 											handleProductTypeChange(e);
 										}}
 										name='car'
@@ -129,7 +153,7 @@ export default function AddressForm({formik, isView}) {
 								}
 								label='Car'
 							/>
-							{carChecked ? (
+							{checkboxType.car ? (
 								<TextField
 									name='carMarkup'
 									label='Car Markup'
@@ -151,9 +175,12 @@ export default function AddressForm({formik, isView}) {
 							<FormControlLabel
 								control={
 									<Checkbox
-										checked={insuranceChecked}
+										checked={checkboxType.insurance}
 										onChange={(e) => {
-											setInsuranceChecked(!insuranceChecked);
+											setCheckboxType((checkboxType) => ({
+												...checkboxType,
+												insurance: !checkboxType.insurance,
+											}));
 											handleProductTypeChange(e);
 										}}
 										name='insurance'
@@ -162,7 +189,7 @@ export default function AddressForm({formik, isView}) {
 								}
 								label='Insurance'
 							/>
-							{insuranceChecked ? (
+							{checkboxType.insurance ? (
 								<TextField
 									name='insuranceMarkup'
 									label='Insurance Markup'
@@ -184,9 +211,12 @@ export default function AddressForm({formik, isView}) {
 							<FormControlLabel
 								control={
 									<Checkbox
-										checked={addonChecked}
+										checked={checkboxType.addon}
 										onChange={(e) => {
-											setAddonChecked(!addonChecked);
+											setCheckboxType((checkboxType) => ({
+												...checkboxType,
+												addon: !checkboxType.addon,
+											}));
 											handleProductTypeChange(e);
 										}}
 										name='addon'
@@ -195,7 +225,7 @@ export default function AddressForm({formik, isView}) {
 								}
 								label='Add-On'
 							/>
-							{addonChecked ? (
+							{checkboxType.addon ? (
 								<TextField
 									name='addonMarkup'
 									label='Add-On Markup'
@@ -294,7 +324,7 @@ export default function AddressForm({formik, isView}) {
 						label='Alternative Phone'
 						fullWidth
 						disabled={isView}
-						error={Boolean(formik.touched.altPhone && formik.errors.altPhone)}
+						error={formik.touched.altPhone && formik.errors.altPhone}
 						helperText={formik.touched.altPhone && formik.errors.altPhone}
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}

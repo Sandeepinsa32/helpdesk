@@ -14,7 +14,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
 const AddNewRecord = ({isView, data}) => {
-	console.log(data);
+	// console.log(data);
 	const {
 		firstName,
 		lastName,
@@ -232,7 +232,7 @@ const AddNewRecord = ({isView, data}) => {
 								</Grid>
 								{/*  Card Holder Phone no. */}
 								<Grid item xs={12} md={3}>
-									<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardNumber} />
+									<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderPhn} />
 								</Grid>
 								{/* CardNumber Field */}
 								<Grid item xs={12} md={3}>
