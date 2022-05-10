@@ -215,6 +215,20 @@ const AddNewRecord = ({isView, data}) => {
 	const handleAddClick = () => {
 		setInputList([...inputList, {cardHolderName: '', cardHolderNumber: '', cardNumber: '', expiryDate: null, cvv: ''}]);
 	};
+	const items = [
+		{
+			name: 'ccUsedCount',
+			label: 'CC used How many times? ',
+		},
+		{
+			name: 'ccAmountUsed',
+			label: 'Company CC Used Amount',
+		},
+		{
+			name: 'ccLastDigit',
+			label: 'Last 4 Digits of of Company CC ',
+		},
+	];
 	return (
 		<>
 			<Formik>
@@ -324,49 +338,25 @@ const AddNewRecord = ({isView, data}) => {
 							/>
 						</Grid>
 
-						{isCompanyCard && (
-							<>
-								<Grid item xs={12} md={3}>
-									<TextField
-										required
-										name='ccUsedCount'
-										label='CC used How many times? '
-										fullWidth
-										error={Boolean(formik.touched.ccUsedCount && formik.errors.ccUsedCount)}
-										helperText={formik.touched.ccUsedCount && formik.errors.ccUsedCount}
-										onBlur={formik.handleBlur}
-										onChange={formik.handleChange}
-										value={formik.values.ccUsedCount}
-									/>
-								</Grid>
-								<Grid item xs={12} md={3}>
-									<TextField
-										required
-										name='ccAmountUsed'
-										label=' Company CC Used Amount'
-										fullWidth
-										error={Boolean(formik.touched.ccUsedCount && formik.errors.ccAmountUsed)}
-										helperText={formik.touched.ccUsedCount && formik.errors.ccAmountUsed}
-										onBlur={formik.handleBlur}
-										onChange={formik.handleChange}
-										value={formik.values.ccAmountUsed}
-									/>
-								</Grid>
-								<Grid item xs={12} md={3}>
-									<TextField
-										required
-										name='ccLastDigit'
-										label='Last 4 Digits of of Company CC '
-										fullWidth
-										error={Boolean(formik.touched.ccLastDigit && formik.errors.ccLastDigit)}
-										helperText={formik.touched.ccLastDigit && formik.errors.ccLastDigit}
-										onBlur={formik.handleBlur}
-										onChange={formik.handleChange}
-										value={formik.values.ccLastDigit}
-									/>
-								</Grid>
-							</>
-						)}
+						{isCompanyCard &&
+							items.map((item, index) => {
+								const {name, label} = item;
+								return (
+									<Grid item xs={12} md={3} key={item.title}>
+										<TextField
+											required
+											name={name}
+											label={label}
+											fullWidth
+											error={Boolean(formik.touched.name && formik.errors.name)}
+											helperText={formik.touched.name && formik.errors.name}
+											onBlur={formik.handleBlur}
+											onChange={formik.handleChange}
+											value={formik.values.name}
+										/>
+									</Grid>
+								);
+							})}
 					</Grid>
 					{/* Formik alert one  */}
 					<Box xs={8} md={10}>
