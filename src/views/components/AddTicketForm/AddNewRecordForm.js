@@ -52,7 +52,7 @@ export default function AddressForm({formik, isView}) {
 		}
 
 		console.log('newArray', newArray);
-		setSelectedProductType(newArray);
+		// setSelectedProductType(newArray);
 		formik.setFieldValue('productType', selectedProductType);
 	};
 	return (

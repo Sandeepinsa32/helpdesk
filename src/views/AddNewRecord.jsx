@@ -28,14 +28,11 @@ const AddNewRecord = ({isView, data}) => {
 		airlineCode,
 		bookingType,
 		bookedOn,
-		pricePerPerson,
 		productType,
-		comments,
 		notes,
 		totalInhouseCharge,
 		departureDate,
 		returnDate,
-		totalPassengerCount,
 		adultCount,
 		childCount,
 		elderCount,
@@ -53,7 +50,7 @@ const AddNewRecord = ({isView, data}) => {
 		ccLastDigit,
 	} = data;
 
-	const [inputList, setInputList] = useState([{cardName: 'john', cardHolderPhn: '9876543210', cardNumber: '0858-8585-8585', expiryDate: null, cvv: '022'}]);
+	const [inputList, setInputList] = useState([{cardHolderName: 'john', cardHolderPhn: '9876543210', cardNumber: '0858-8585-8585', expiryDate: null, cvv: '022'}]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 	const [companyCardUsed, setCompanyCardUsed] = useState(false);
 	const [companyAmountUsed, setCompanyAmountUsed] = useState(false);
@@ -73,13 +70,10 @@ const AddNewRecord = ({isView, data}) => {
 			airlineCode: airlineCode ? airlineCode : 'DL',
 			bookingType: bookingType ? bookingType : 'new',
 			bookedOn: bookedOn ? bookedOn : 'trippro',
-			pricePerPerson: pricePerPerson ? pricePerPerson : '5',
 			productType: productType ? productType : '',
-			comments: comments ? comments : '',
-			notes: notes ? notes : '',
+
 			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '20',
 
-			totalPassengerCount: totalPassengerCount ? totalPassengerCount : '5',
 			adultCount: adultCount ? adultCount : '2',
 			childCount: childCount ? childCount : '2',
 			elderCount: elderCount ? elderCount : '0',
@@ -202,7 +196,7 @@ const AddNewRecord = ({isView, data}) => {
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList([...inputList, {cardName: '', cardHolderPhn: '', cardNumber: '', expiryDate: null, cvv: ''}]);
+		setInputList([...inputList, {cardHolderName: '', cardHolderPhn: '', cardNumber: '', expiryDate: null, cvv: ''}]);
 	};
 	return (
 		<>
@@ -223,14 +217,14 @@ const AddNewRecord = ({isView, data}) => {
 								<Grid item xs={12} md={2}>
 									<TextField
 										required
-										name='cardName'
+										name='cardHolderName'
 										label='Name on card'
 										fullWidth
 										autoComplete='cc-name'
 										onChange={(e) => {
 											handleCardInput(e, i);
 										}}
-										value={inputList[i].cardName}
+										value={inputList[i].cardHolderName}
 									/>
 								</Grid>
 								{/*  Card Holder Phone no. */}

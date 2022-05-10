@@ -292,11 +292,11 @@ const items = [
 		icon: <LogoutIcon fontSize='small' />,
 		title: 'Log Out',
 	},
-	{
-		href: '/add-new-record',
-		icon: <BellIcon fontSize='small' />,
-		title: 'new records',
-	},
+	// {
+	// 	href: '/add-new-record',
+	// 	icon: <BellIcon fontSize='small' />,
+	// 	title: 'new records',
+	// },
 	// {
 	// 	href: '/404',
 	// 	icon: <XCircleIcon fontSize='small' />,

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-// import Checkout from './components/CheckoutStepper';
+import {NavLink, useNavigate} from 'react-router-dom';
+
 import AddNewRecord from './AddNewRecord';
 
 import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Utils';
@@ -49,6 +50,7 @@ import Visibility from '@mui/icons-material/Visibility';
 export const Transaction = () => {
 	const [myRecords, setMyRecords] = useState([]);
 	const [open, setOpen] = useState(false);
+	const [openLog, setOpenLog] = useState(false);
 	const [openEmail, setOpenEmail] = useState(false);
 	const [viewEmail, setViewEmail] = useState(false);
 	const [viewData, setViewData] = useState(false);
@@ -69,8 +71,15 @@ export const Transaction = () => {
 	const handleClose = () => {
 		setOpen(false);
 	};
+	const handleLogClose = () => {
+		setOpenLog(false);
+	};
 	const handleEmailClose = () => {
 		setOpenEmail(false);
+	};
+	const navigate = useNavigate();
+	const goToAddNewRecord = () => {
+		navigate('/add-new-record');
 	};
 
 	const [page, setPage] = React.useState(1);
@@ -168,7 +177,7 @@ export const Transaction = () => {
 						{/* </Typography> */}
 
 						<Box sx={{m: 1}}>
-							<Button color='primary' onClick={() => {}} variant='contained'>
+							<Button color='primary' onClick={goToAddNewRecord} variant='contained'>
 								Add New Record
 							</Button>
 						</Box>
@@ -344,7 +353,7 @@ export const Transaction = () => {
 													</Button>
 												</TableCell>
 												<TableCell>
-													<Button variant='contained' size='small' onClick={handleOpen}>
+													<Button variant='contained' size='small' onClick={() => setOpenLog(true)}>
 														logs
 													</Button>
 												</TableCell>
@@ -379,10 +388,10 @@ export const Transaction = () => {
 				</Container>
 			</Box>
 
-			{/* Add new Record MOdal*/}
-			<Modal open={open} onClose={handleClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+			{/* open Logs*/}
+			<Modal open={openLog} onClose={handleLogClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style}>
-					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+					<IconButton onClick={handleLogClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
 
@@ -410,6 +419,17 @@ export const Transaction = () => {
 					</Paper>
 				</Box>
 			</Modal>
+			{/* Open View Record modal */}
+			<Modal open={open} onClose={handleClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box sx={style}>
+					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<AddNewRecord isView={true} data={userData} />
+				</Box>
+			</Modal>
+
+			{/* Open EMail Modal */}
 			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box
 					sx={{
