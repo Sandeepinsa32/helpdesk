@@ -97,5 +97,5 @@ format table pnrconvertor email open, ip address - first, last, authorize ip
 
 //issue
 
-1. field dependencies on kid,adult,elder count
+1. card validation
 2. requried field dependen on ccompany card checkox

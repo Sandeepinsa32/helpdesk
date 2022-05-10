@@ -17,7 +17,7 @@ import ElderlyIcon from '@mui/icons-material/Elderly';
 
 export default function AddressForm({formik}) {
 	//for product type & CHECKBOX
-	const [ProductType, setProductType] = useState([]);
+	const [productType, setProductType] = useState([]);
 	const [flightChecked, setFlightChecked] = useState(false);
 	const [carChecked, setCarChecked] = useState(false);
 	const [hotelChecked, setHotelChecked] = useState(false);
@@ -31,12 +31,15 @@ export default function AddressForm({formik}) {
 	const handleProductTypeChange = (event) => {
 		// setProductType([...productType, event.target.name]);
 
-		let newArray = [...ProductType, event.target.name];
-		if (ProductType.includes(event.target.name)) {
-			newArray = newArray.filter((x) => x !== event.target.name);
+		let newArray = [...productType, event.target.name];
+		if (productType.includes(event.target.name)) {
+			newArray = newArray.filter((x) => {
+				return x !== event.target.name;
+			});
 		}
+		console.log('newArray', newArray);
 		setProductType(newArray);
-		formik.setFieldValue('productType', ProductType);
+		formik.setFieldValue('productType', productType);
 	};
 	return (
 		<>
@@ -70,6 +73,11 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.flightMarkup && formik.errors.flightMarkup)}
+									helperText={formik.touched.flightMarkup && formik.errors.flightMarkup}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.flightMarkup}
 								/>
 							) : null}
 						</Box>
@@ -96,6 +104,11 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.hotelMarkup && formik.errors.hotelMarkup)}
+									helperText={formik.touched.hotelMarkup && formik.errors.hotelMarkup}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.hotelMarkup}
 								/>
 							) : null}
 						</Box>
@@ -122,6 +135,11 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.carMarkup && formik.errors.carMarkup)}
+									helperText={formik.touched.carMarkup && formik.errors.carMarkup}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.carMarkup}
 								/>
 							) : null}
 						</Box>
@@ -149,6 +167,11 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.insuranceMarkup && formik.errors.insuranceMarkup)}
+									helperText={formik.touched.insuranceMarkup && formik.errors.insuranceMarkup}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.insuranceMarkup}
 								/>
 							) : null}
 						</Box>
@@ -176,6 +199,11 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.addonMarkup && formik.errors.addonMarkup)}
+									helperText={formik.touched.addonMarkup && formik.errors.addonMarkup}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.addonMarkup}
 								/>
 							) : null}
 						</Box>
@@ -244,11 +272,11 @@ export default function AddressForm({formik}) {
 						name='altEmail'
 						label='Alternative email'
 						fullWidth
-						error={Boolean(formik.touched.email && formik.errors.email)}
-						helperText={formik.touched.email && formik.errors.email}
+						error={Boolean(formik.touched.altEmail && formik.errors.altEmail)}
+						helperText={formik.touched.altEmail && formik.errors.altEmail}
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
-						value={formik.values.email}
+						value={formik.values.altEmail}
 					/>
 				</Grid>
 
@@ -258,11 +286,11 @@ export default function AddressForm({formik}) {
 						name='altPhone'
 						label='Alternative Phone'
 						fullWidth
-						error={Boolean(formik.touched.phone && formik.errors.phone)}
-						helperText={formik.touched.phone && formik.errors.phone}
+						error={Boolean(formik.touched.altPhone && formik.errors.altPhone)}
+						helperText={formik.touched.altPhone && formik.errors.altPhone}
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
-						value={formik.values.phone}
+						value={formik.values.altPhone}
 					/>
 				</Grid>
 
@@ -297,6 +325,11 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.kidPrice && formik.errors.kidPrice)}
+									helperText={formik.touched.kidPrice && formik.errors.kidPrice}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.kidPrice}
 								/>
 							) : null}
 						</Box>
@@ -334,13 +367,18 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.adultPrice && formik.errors.adultPrice)}
+									helperText={formik.touched.adultPrice && formik.errors.adultPrice}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.adultPrice}
 								/>
 							) : null}
 						</Box>
 					</Box>
 				</Grid>
 
-				{/* ellder Count Fields */}
+				{/* elder Count Fields */}
 				<Grid item xs={12} md={2}>
 					<Box sx={displayFlexRowStyle}>
 						<Box sx={displayColStyle}>
@@ -371,6 +409,11 @@ export default function AddressForm({formik}) {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
+									error={Boolean(formik.touched.elderPrice && formik.errors.elderPrice)}
+									helperText={formik.touched.elderPrice && formik.errors.elderPrice}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+									value={formik.values.elderPrice}
 								/>
 							) : null}
 						</Box>
@@ -385,7 +428,7 @@ export default function AddressForm({formik}) {
 						label='PNR No.'
 						fullWidth
 						error={Boolean(formik.touched.pnrNo && formik.errors.pnrNo)}
-						helperText={formik.touched.pnrNo && formik.errors.pnrNo}
+						helperText={(formik.touched.pnrNo && formik.errors.pnrNo) || 'optional'}
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
 						value={formik.values.pnrNo}

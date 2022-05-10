@@ -73,7 +73,7 @@ const AddNewRecord = ({
 			totalPassengerCount: totalPassengerCount ? totalPassengerCount : '5',
 			adultCount: adultCount ? adultCount : '2',
 			kidCount: kidCount ? kidCount : '2',
-			elderCount: elderCount ? elderCount : '1',
+			elderCount: elderCount ? elderCount : '0',
 			grandTotal: grandTotal ? grandTotal : '100',
 			kidPrice: '',
 			adultPrice: '',
@@ -117,29 +117,29 @@ const AddNewRecord = ({
 			pricePerPerson: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
 			totalInhouseCharge: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
 			grandTotal: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+
 			//number of passenger
-			adultCount: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
-			kidCount: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
-			elderCount: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+			adultCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
+			kidCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
+			elderCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
 
 			kidPrice: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
 				.integer()
 				.when(['kidCount'], (kidCount, schema) => {
-					return kidCount > 0 ? schema.required('this field required ') : null;
+					return kidCount > 0 ? schema.required('this field required ') : schema;
 				}),
 			adultPrice: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
 				.integer()
 				.when(['adultCount'], (adultCount, schema) => {
-					return adultCount > 0 ? schema.required('this field required ') : null;
+					return adultCount > 0 ? schema.required('this field required ') : schema;
 				}),
 			elderPrice: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
 				.integer()
 				.when(['elderCount'], (elderCount, schema) => {
-					console.log(elderCount);
-					return elderCount > 0 ? schema.required('this field required ') : null;
+					return elderCount > 0 ? schema.required('this field required ') : schema;
 				}),
 
 			//markup
