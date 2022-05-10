@@ -34,8 +34,8 @@ export default function AddressForm({formik, isView}) {
 	// const [addonChecked, setAddonChecked] = useState(false);
 
 	//date
-	const [depDate, setDepDate] = useState(formik.values.departureDateValue);
-	const [returnDate, setReturnDate] = useState(formik.values.returnDateValue);
+	const [depDate, setDepDate] = useState(formik.values.departureDate);
+	const [returnDate, setReturnDate] = useState(formik.values.returnDate);
 
 	//  for Product Selected Checkbox ---> array
 	const handleProductTypeChange = (e) => {
@@ -63,7 +63,7 @@ export default function AddressForm({formik, isView}) {
 					<FormControl sx={{m: 1, p: 1}} fullWidth disabled={isView} error={Boolean(formik.touched.productType && formik.errors.productType)}>
 						<InputLabel variant='outlined'>Product Type :</InputLabel>
 					</FormControl>
-					<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', justifyContent: 'space-evenly'}}>
+					<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
 						<Box sx={displayColStyle} style={{paddingTop: '8px !important'}}>
 							<FormControlLabel
 								control={
@@ -303,32 +303,32 @@ export default function AddressForm({formik, isView}) {
 						value={formik.values.phone}
 					/>
 				</Grid>
-				{/* alt EMail Fields */}
+				{/* alternateEmail EMail Fields */}
 				<Grid item xs={12} md={2}>
 					<TextField
-						name='altEmail'
+						name='alternateEmail'
 						label='Alternative email'
 						fullWidth
 						disabled={isView}
-						error={Boolean(formik.touched.altEmail && formik.errors.altEmail)}
-						helperText={formik.touched.altEmail && formik.errors.altEmail}
+						error={Boolean(formik.touched.alternateEmail && formik.errors.alternateEmail)}
+						helperText={formik.touched.alternateEmail && formik.errors.alternateEmail}
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
-						value={formik.values.altEmail}
+						value={formik.values.alternateEmail}
 					/>
 				</Grid>
-				{/* alt Phone Fields */}
+				{/* alternatePhone  Fields */}
 				<Grid item xs={12} md={2}>
 					<TextField
-						name='altPhone'
+						name='alternatePhone'
 						label='Alternative Phone'
 						fullWidth
 						disabled={isView}
-						error={formik.touched.altPhone && formik.errors.altPhone}
-						helperText={formik.touched.altPhone && formik.errors.altPhone}
+						error={formik.touched.alternatePhone && formik.errors.alternatePhone}
+						helperText={formik.touched.alternatePhone && formik.errors.alternatePhone}
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
-						value={formik.values.altPhone}
+						value={formik.values.alternatePhone}
 					/>
 				</Grid>
 				{/* kidsCount Fields */}
@@ -336,13 +336,13 @@ export default function AddressForm({formik, isView}) {
 					<Box sx={displayFlexRowStyle}>
 						<Box sx={displayColStyle}>
 							<TextField
-								error={Boolean(formik.touched.kidCount && formik.errors.kidCount)}
+								error={Boolean(formik.touched.childCount && formik.errors.childCount)}
 								fullWidth
 								disabled={isView}
-								helperText={formik.touched.kidCount && formik.errors.kidCount}
+								helperText={formik.touched.childCount && formik.errors.childCount}
 								label='Childs'
-								name='kidCount'
-								value={formik.values.kidCount}
+								name='childCount'
+								value={formik.values.childCount}
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
 								type='number'
@@ -354,21 +354,21 @@ export default function AddressForm({formik, isView}) {
 									),
 								}}
 							/>
-							{formik.values.kidCount > 0 ? (
+							{formik.values.childCount > 0 ? (
 								<TextField
 									sx={{mt: 2}}
-									name='kidPrice'
+									name='childPrice'
 									label='Price Per Person'
 									fullWidth
 									disabled={isView}
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
-									error={Boolean(formik.touched.kidPrice && formik.errors.kidPrice)}
-									helperText={formik.touched.kidPrice && formik.errors.kidPrice}
+									error={Boolean(formik.touched.childPrice && formik.errors.childPrice)}
+									helperText={formik.touched.childPrice && formik.errors.childPrice}
 									onBlur={formik.handleBlur}
 									onChange={formik.handleChange}
-									value={formik.values.kidPrice}
+									value={formik.values.childPrice}
 								/>
 							) : null}
 						</Box>
@@ -621,13 +621,13 @@ export default function AddressForm({formik, isView}) {
 					<LocalizationProvider dateAdapter={AdapterDateFns}>
 						<DatePicker
 							inputFormat='MM/dd/yyyy'
-							name='departureDateValue'
+							name='departureDate'
 							label='Departure Date'
 							onChange={(newValue) => {
 								setDepDate(newValue);
 
 								formik.setFieldValue(
-									'departureDateValue',
+									'departureDate',
 									new Date(newValue).toLocaleDateString('en-US', {
 										day: '2-digit',
 										month: '2-digit',
@@ -646,14 +646,14 @@ export default function AddressForm({formik, isView}) {
 				<Grid item xs={12} md={3}>
 					<LocalizationProvider dateAdapter={AdapterDateFns}>
 						<DatePicker
-							name='returnDateValue'
+							name='returnDate'
 							inputFormat='MM/dd/yyyy'
 							label='Return Date'
 							value={returnDate}
 							onChange={(newValue) => {
 								setReturnDate(newValue);
 								formik.setFieldValue(
-									'returnDateValue',
+									'returnDate',
 									new Date(newValue).toLocaleDateString('en-US', {
 										day: '2-digit',
 										month: '2-digit',

@@ -20,8 +20,8 @@ const AddNewRecord = ({isView, data}) => {
 		lastName,
 		email,
 		phone,
-		altEmail,
-		altPhone,
+		alternateEmail,
+		alternatePhone,
 		pnrNo,
 		fareType,
 		mcoNo,
@@ -33,11 +33,11 @@ const AddNewRecord = ({isView, data}) => {
 		comments,
 		notes,
 		totalInhouseCharge,
-		departureDateValue,
-		returnDateValue,
+		departureDate,
+		returnDate,
 		totalPassengerCount,
 		adultCount,
-		kidCount,
+		childCount,
 		elderCount,
 		grandTotal,
 		flightMarkup,
@@ -45,7 +45,7 @@ const AddNewRecord = ({isView, data}) => {
 		carMarkup,
 		insuranceMarkup,
 		addonMarkup,
-		kidPrice,
+		childPrice,
 		adultPrice,
 		elderPrice,
 		ccUsedCount,
@@ -65,8 +65,8 @@ const AddNewRecord = ({isView, data}) => {
 			lastName: lastName ? lastName : 'doe',
 			email: email ? email : 'john@doe.com',
 			phone: phone ? phone : '9874561230',
-			altEmail: altEmail ? altEmail : 'jane@doe.com',
-			altPhone: altPhone ? altPhone : '0321456987',
+			alternateEmail: alternateEmail ? alternateEmail : 'jane@doe.com',
+			alternatePhone: alternatePhone ? alternatePhone : '0321456987',
 			pnrNo: pnrNo ? pnrNo : '1 ss2 5d5d d5jcjhbdc cncajnhc cscs',
 			fareType: fareType ? fareType : 'publish',
 			mcoNo: mcoNo ? mcoNo : '55',
@@ -81,10 +81,10 @@ const AddNewRecord = ({isView, data}) => {
 
 			totalPassengerCount: totalPassengerCount ? totalPassengerCount : '5',
 			adultCount: adultCount ? adultCount : '2',
-			kidCount: kidCount ? kidCount : '2',
+			childCount: childCount ? childCount : '2',
 			elderCount: elderCount ? elderCount : '0',
 			grandTotal: grandTotal ? grandTotal : '100',
-			kidPrice: kidPrice ? kidPrice : '',
+			childPrice: childPrice ? childPrice : '',
 			adultPrice: adultPrice ? adultPrice : '',
 			elderPrice: elderPrice ? elderPrice : '',
 
@@ -95,8 +95,8 @@ const AddNewRecord = ({isView, data}) => {
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
 			addonMarkup: addonMarkup ? addonMarkup : '',
 			//date
-			departureDateValue: departureDateValue ? departureDateValue : '',
-			returnDateValue: returnDateValue ? returnDateValue : '',
+			departureDate: departureDate ? departureDate : '',
+			returnDate: returnDate ? returnDate : '',
 			//companyCard details
 			ccUsedCount: ccUsedCount ? ccUsedCount : '',
 			ccAmountUsed: ccAmountUsed ? ccAmountUsed : '',
@@ -108,8 +108,8 @@ const AddNewRecord = ({isView, data}) => {
 			lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 			email: Yup.string().email('Invalid email address').required('Required'),
 			phone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
-			altEmail: Yup.string().email('Invalid email address').required('Required'),
-			altPhone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
+			alternateEmail: Yup.string().email('Invalid email address').required('Required'),
+			alternatePhone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
 
 			pnrNo: Yup.string().max(255),
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
@@ -129,14 +129,14 @@ const AddNewRecord = ({isView, data}) => {
 
 			//number of passenger
 			adultCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
-			kidCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
+			childCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
 			elderCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
 
-			kidPrice: Yup.number('input must consist if number')
+			childPrice: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
 				.integer()
-				.when(['kidCount'], (kidCount, schema) => {
-					return kidCount > 0 ? schema.required('this field required ') : schema;
+				.when(['childCount'], (childCount, schema) => {
+					return childCount > 0 ? schema.required('this field required ') : schema;
 				}),
 			adultPrice: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
@@ -162,8 +162,8 @@ const AddNewRecord = ({isView, data}) => {
 			notes: '',
 
 			//date
-			departureDateValue: Yup.string().required('This field is required').nullable(),
-			returnDateValue: Yup.string().required('This field is required').nullable(),
+			departureDate: Yup.string().required('This field is required').nullable(),
+			returnDate: Yup.string().required('This field is required').nullable(),
 			//companyCard details
 			ccUsedCount: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			ccAmountUsed: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
@@ -171,8 +171,11 @@ const AddNewRecord = ({isView, data}) => {
 		}),
 		onSubmit: (values) => {
 			alert('value logged in console');
-			console.log(formik.values);
-			console.log(inputList);
+
+			console.log({
+				data: formik.values,
+				cards: inputList,
+			});
 		},
 	});
 
