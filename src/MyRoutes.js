@@ -12,6 +12,7 @@ import Email from './views/Email';
 import Dashboard from './views/Dashboard';
 import AddNewRecord from './views/AddNewRecord';
 
+const data = {};
 export default function RouteComponent() {
 	return (
 		<Routes>
@@ -25,7 +26,7 @@ export default function RouteComponent() {
 			<Route path='/404' element={<TypoText />}></Route>
 			<Route path='/all' element={<SearchRecord />}></Route>
 			<Route path='/email' element={<Email />}></Route>
-			<Route path='/add-new-record' element={<AddNewRecord />}></Route>
+			<Route path='/add-new-record' element={<AddNewRecord isview={false} data={data} />}></Route>
 		</Routes>
 	);
 }
