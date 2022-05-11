@@ -27,7 +27,7 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 	// }
 
 	function userTabelData(data) {
-		console.log(data);
+		// console.log(data);
 		var tableString = '';
 		data.forEach((x) => {
 			console.log(x);
@@ -45,7 +45,7 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 		return tableString;
 	}
 	function PnrDetail(data) {
-		console.log(data);
+		// console.log(data);
 		var tableString = '';
 		data.map((x) => {
 			tableString =

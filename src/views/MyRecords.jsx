@@ -99,7 +99,7 @@ export const Transaction = () => {
 		setPage(value);
 	};
 	const loadTransactions = async (search) => {
-		console.log(search);
+		// console.log(search);
 		setIsLoading(true);
 		axios
 			.get(BASEURL + '/ticket/my' + search, {
@@ -108,7 +108,7 @@ export const Transaction = () => {
 				},
 			})
 			.then((response) => {
-				console.log(response.data);
+				// console.log(response.data);
 				if (search === '?page=1') {
 					setOldTotalRecords(response.data.data.totalDocuments);
 
@@ -123,8 +123,8 @@ export const Transaction = () => {
 			})
 			.catch((e) => {
 				console.log(e);
-				console.log(e.response);
-				console.log(e.response.status);
+				// console.log(e.response);
+				// console.log(e.response.status);
 				setIsLoading(false);
 				errorToast(e.response.data.message);
 			});
@@ -329,7 +329,7 @@ export const Transaction = () => {
 														variant='contained'
 														size='small'
 														onClick={() => {
-															console.log(row);
+															// console.log(row);
 															setViewData(true);
 															setUserData(row);
 															handleOpen();
@@ -344,7 +344,7 @@ export const Transaction = () => {
 														onClick={(e) => {
 															// alert(row.id);
 															setViewEmail(row._id);
-															console.log(row.id);
+															// console.log(row.id);
 															setOpenEmail(true);
 														}}>
 														Send

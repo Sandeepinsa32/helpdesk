@@ -32,7 +32,7 @@ export const RecentBookings = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setRecordData(response.data.data.tickets);
         setTimeout(() => {
           setIsLoading(false);

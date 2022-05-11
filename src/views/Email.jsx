@@ -45,7 +45,7 @@ const Email = ({Ticketid}) => {
 	};
 	const handleEmailTemplateChange = (e) => {
 		setSelectedEmailTemplate(e.target.value);
-		console.log(selectedEmailTemplate);
+		// console.log(selectedEmailTemplate);
 	};
 
 	const handleInputChange = (e, index) => {
@@ -68,29 +68,24 @@ const Email = ({Ticketid}) => {
 		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
 		calculateTotalAmount();
 	};
-	function clean(obj) {
-		obj.map((x, i) => {
-			for (var propName in x) {
-				console.log();
-				if (obj[i][propName] === null || obj[i][propName] === undefined || obj[i][propName] === '') {
-					delete obj[i][propName];
-				}
-			}
-		});
+	// function clean(obj) {
+	// 	obj.map((x, i) => {
+	// 		for (var propName in x) {
+	// 			if (obj[i][propName] === null || obj[i][propName] === undefined || obj[i][propName] === '') {
+	// 				delete obj[i][propName];
+	// 			}
+	// 		}
+	// 	});
 
-		return obj;
-	}
+	// 	return obj;
+	// }
 
 	const handleConfirm = () => {
 		calculateTotalAmount();
 		let newArr = clean(inputList);
 		newArr = newArr.filter((value) => Object.keys(value).length !== 0);
 
-		console.log('selectedEmailTemplate', selectedEmailTemplate);
-
-		console.log('inputList', inputList);
-		console.log('newArr', newArr);
-		console.log('totalAmt', totalAmt);
+		console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >', newArr, 'totalAmt'), totalAmt;
 	};
 	const handlePreviewClose = () => {
 		setPreviewModal(false);

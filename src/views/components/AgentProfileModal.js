@@ -54,8 +54,8 @@ export const AgentProfileModal = () => {
 				}
 			)
 			.then((response) => {
-				console.log(response);
-				console.log(response.data);
+				// console.log(response);
+				// console.log(response.data);
 				successToast('Password Updated Successfully');
 			})
 			.catch((e) => {

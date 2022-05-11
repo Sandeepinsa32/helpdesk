@@ -47,12 +47,12 @@ export default function SearchRecord() {
 		setPage(value);
 	};
 	const loadTransactions = async (search) => {
-		console.log(search);
+		// console.log(search);
 		setIsLoading(true);
 		axios
 			.get(BASEURL + '/ticket/all' + search)
 			.then((response) => {
-				console.log(response.data);
+				// console.log(response.data);
 				if (search === '?page=1') {
 					setOldTotalRecords(response.data.data.totalDocuments);
 
@@ -78,7 +78,7 @@ export default function SearchRecord() {
 				ticket: ticketId,
 			})
 			.then((response) => {
-				console.log(response.data);
+				// console.log(response.data);
 				alert('log added');
 			})
 			.catch((e) => {
@@ -277,7 +277,7 @@ export default function SearchRecord() {
 														variant='contained'
 														size='small'
 														onClick={() => {
-															console.log(row);
+															// console.log(row);
 															setViewData(true);
 															setUserData(row);
 															handleOpen();
@@ -293,7 +293,7 @@ export default function SearchRecord() {
 														onClick={(e) => {
 															// alert(row.id);
 															setViewEmail(row._id);
-															console.log(row.id);
+															// console.log(row.id);
 															setOpenEmail(true);
 														}}>
 														Send

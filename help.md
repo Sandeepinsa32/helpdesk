@@ -98,7 +98,7 @@ format table pnrconvertor email open, ip address - first, last, authorize ip
 
 4. Add records data console. -- done
 5. Logout - remove localstorage and redirect to login --done
-6. View logs api (30 items atleast)
+6. View logs api (30 items atleast) --done
 7. Page responsive
 8. Hide menu items for user
 9. Remove console statements

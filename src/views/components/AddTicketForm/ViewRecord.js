@@ -16,7 +16,7 @@ import ChildCareIcon from '@mui/icons-material/ChildCare';
 import ElderlyIcon from '@mui/icons-material/Elderly';
 
 export default function AddressForm(props) {
-	console.log(props.data);
+	// console.log(props.data);
 	const {
 		firstName,
 		lastName,
@@ -69,7 +69,7 @@ export default function AddressForm(props) {
 				return x !== event.target.name;
 			});
 		}
-		console.log('newArray', newArray);
+		// console.log('newArray', newArray);
 		setProductType(newArray);
 		formik.setFieldValue('productType', productType);
 	};

@@ -249,7 +249,7 @@ export default function MiniDrawer() {
 				}}>
 				{/* <DrawerHeader /> */}
 
-				<RouteComponent />
+				<RouteComponent  />
 			</Box>
 		</Box>
 	);

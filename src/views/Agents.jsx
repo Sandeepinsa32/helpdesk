@@ -69,7 +69,7 @@ export const AddUser = () => {
 	const handleReset = () => {
 		setPhone('');
 		setEmail('');
-		console.log(allRecords);
+		// console.log(allRecords);
 		setAgentsList(allRecords);
 	};
 	const searchHandle = () => {
@@ -98,18 +98,18 @@ export const AddUser = () => {
 				},
 			})
 			.then((response) => {
-				console.log(response);
+				// console.log(response);
 				successToast('Agent added successfully');
 				setAgentsList((prev) => [response.data.data, ...prev]);
 				handleClose();
 			})
 			.catch((e) => {
-				console.log(e);
+				// console.log(e);
 				errorToast(e.response.data.message);
 			});
 	};
 	const loadAgents = async (search) => {
-		console.log(search);
+		// console.log(search);
 		setIsLoading(true);
 		axios
 			.get(BASEURL + `/agent/all${search}`, {

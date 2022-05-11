@@ -20,11 +20,11 @@ function Dashboard() {
 				},
 			})
 			.then((response) => {
-				console.log(interval, response.data.data);
+				// console.log(interval, response.data.data);
 				interval === 'today' ? setTodayStats(response.data.data.tickets) : interval === 'weekly' ? setWeeklyStats(response.data.data.tickets) : setMonthlyStats(response.data.data.tickets);
 			})
 			.catch((e) => {
-				console.log(e);
+				// console.log(e);
 
 				errorToast(e.response.data.message);
 			});

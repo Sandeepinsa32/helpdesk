@@ -60,7 +60,7 @@ export default function AddressForm({
 	const [departureDateValue, setDepartureDateValue] = useState(new Date());
 	const [returnDateValue, setReturnDateValue] = useState(new Date());
 
-	console.log(firstName, isView);
+	// console.log(firstName, isView);
 	const formik = useFormik({
 		initialValues: {
 			firstName: firstName ? firstName : 'john',
