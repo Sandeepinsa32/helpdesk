@@ -17,18 +17,17 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 8. Remove console statements--donde
 9. Remove unwanted code or unused code imports --done
 10. Remove margin between buttons --done
+11. Hide menu items for user --done
+12. Loader on api calls --done
+13. upadte password of agents --done
 
-11. Page responsive
-12. Hide menu items for user
+14. Design email templates --harmeet
 
-13. Loader on api calls
+15. Login successfull sometime give error
+16. Page responsive
+17. card validation
 
-14. Login successfull sometime give error
+### dependent
 
-15. card validation
-
-16. Design email templates
-
-17. upadte password of agents
 18. Views Logs edits
 19. update Record

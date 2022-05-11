@@ -58,7 +58,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 									marginBorder: '0px',
 								}}>
 								<Grid container spacing={3}>
-									<Grid item xs={12} md={4}>
+									<Grid item xs={4} md={4}>
 										<TextField
 											required
 											name='cardName'
@@ -71,10 +71,10 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 											value={inputList[i].cardName}
 										/>
 									</Grid>
-									<Grid item xs={12} md={4}>
+									<Grid item xs={4} md={4}>
 										<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardNumber} />
 									</Grid>
-									<Grid item xs={12} md={4}>
+									<Grid item xs={4} md={4}>
 										<TextField
 											required
 											name='cardNumber'
@@ -85,10 +85,10 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 											value={inputList[i].cardNumber}
 										/>
 									</Grid>
-									<Grid item xs={12} md={3}>
+									<Grid item xs={4} md={3}>
 										<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
 									</Grid>
-									<Grid item xs={12} md={4}>
+									<Grid item xs={4} md={4}>
 										<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 											<DatePicker
 												fullWidth
@@ -115,9 +115,9 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 
 									{inputList.length !== 1 && (
 										<>
-											<Grid item xs={12} md={10}></Grid>
+											<Grid item xs={4} md={10}></Grid>
 
-											<Grid item xs={12} md={2}>
+											<Grid item xs={4} md={2}>
 												<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
 													Remove
 												</Button>
@@ -126,8 +126,8 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 									)}
 									{inputList.length - 1 === i && (
 										<>
-											<Grid item xs={12} md={8}></Grid>
-											<Grid item xs={12} md={6}>
+											<Grid item xs={4} md={8}></Grid>
+											<Grid item xs={4} md={6}>
 												<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
 													Add One More Card
 												</Button>
@@ -150,7 +150,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 						marginBorder: '0px',
 					}}> */}
 				<Grid container spacing={3} sx={{padding: `12px`, margin: 0}}>
-					<Grid item xs={12} md={12}>
+					<Grid item xs={4} md={12}>
 						<FormControlLabel
 							control={
 								<Checkbox
@@ -167,7 +167,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 					</Grid>
 					{isCompanyCard ? (
 						<>
-							<Grid item xs={12} md={4}>
+							<Grid item xs={4} md={4}>
 								<TextField
 									required
 									name='ccUsedCount'
@@ -180,7 +180,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 									// value={inputList[i].cardName}
 								/>
 							</Grid>
-							<Grid item xs={12} md={4}>
+							<Grid item xs={4} md={4}>
 								<TextField
 									required
 									name='ccAmountUsed'
@@ -193,7 +193,7 @@ export default function PaymentForm({setCardInfo, handleBack, handleSubmit}) {
 									// value={inputList[i].cardName}
 								/>
 							</Grid>
-							<Grid item xs={12} md={4}>
+							<Grid item xs={4} md={4}>
 								<TextField
 									required
 									name='ccLastDigit'

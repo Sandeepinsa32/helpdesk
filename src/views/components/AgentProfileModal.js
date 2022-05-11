@@ -140,13 +140,13 @@ export const AgentProfileModal = () => {
 
 				<CardContent>
 					<Grid container spacing={3}>
-						<Grid item md={4} xs={12}>
+						<Grid item md={4} xs={6}>
 							<TextField fullWidth label='Old Password' name='oldPassword' type='password' required variant='outlined' onChange={handleChange} value={passwordInfo.oldPassword} />
 						</Grid>
-						<Grid item md={4} xs={12}>
+						<Grid item md={4} xs={6}>
 							<TextField fullWidth label='New Password' name='newPassword' type='password' required variant='outlined' onChange={handleChange} value={passwordInfo.newPassword} />
 						</Grid>
-						<Grid item md={4} xs={12}>
+						<Grid item md={4} xs={6}>
 							<TextField
 								fullWidth
 								label='Confirm Password'

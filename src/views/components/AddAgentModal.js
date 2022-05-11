@@ -209,7 +209,7 @@ export const Result = (props) => {
 
               <CardContent>
                 <Grid container spacing={3}>
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <TextField
                       fullWidth
                       helperText="Please specify the first name"
@@ -224,7 +224,7 @@ export const Result = (props) => {
                       }}
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <TextField
                       fullWidth
                       label="Last name"
@@ -238,7 +238,7 @@ export const Result = (props) => {
                       }}
                     />
                   </Grid>
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <TextField
                       fullWidth
                       label="Email Address"
@@ -253,7 +253,7 @@ export const Result = (props) => {
                     />
                   </Grid>
 
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <TextField
                       fullWidth
                       label="Emp ID"
@@ -268,7 +268,7 @@ export const Result = (props) => {
                     />
                   </Grid>
 
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <TextField
                       fullWidth
                       label="alias"
@@ -280,7 +280,7 @@ export const Result = (props) => {
                     />
                   </Grid>
 
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <TextField
                       fullWidth
                       label="Password"
@@ -296,7 +296,7 @@ export const Result = (props) => {
                     />
                   </Grid>
 
-                  <Grid item md={6} xs={12}>
+                  <Grid item md={6} xs={6}>
                     <Button
                       color="primary"
                       variant="contained"

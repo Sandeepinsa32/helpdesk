@@ -155,12 +155,12 @@ export default function AddressForm({
 			<Formik>
 				<form onSubmit={formik.handleSubmit}>
 					<Grid container spacing={3}>
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							{/* <Typography sx={{mt: 1}}>Product Type : </Typography> */}
 						</Grid>
 
 						{/*  checkbox label  */}
-						<Grid item xs={12} md={12} sx={{p: `8px !important`, pt: `0px !important`}}>
+						<Grid item xs={4} md={12} sx={{p: `8px !important`, pt: `0px !important`}}>
 							<FormControl sx={{m: 1}} fullWidth error={Boolean(formik.touched.productType && formik.errors.productType)}>
 								<InputLabel variant='outlined'>Product Type :</InputLabel>
 							</FormControl>
@@ -379,7 +379,7 @@ export default function AddressForm({
 							</Box>
 						</Grid>
 						{/*  checkbox label  */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								fullWidth
 								label='First Name'
@@ -391,7 +391,7 @@ export default function AddressForm({
 								value={formik.values.firstName}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='lastName'
 								name='lastName'
@@ -404,7 +404,7 @@ export default function AddressForm({
 								value={formik.values.lastName}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='email'
 								name='email'
@@ -418,7 +418,7 @@ export default function AddressForm({
 							/>
 						</Grid>
 
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='phone'
 								name='phone'
@@ -433,7 +433,7 @@ export default function AddressForm({
 						</Grid>
 
 						{/*  */}
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								name='altEmail'
 								label='Alternative email'
@@ -446,7 +446,7 @@ export default function AddressForm({
 							/>
 						</Grid>
 
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								name='altPhone'
 								label='Alternative Phone'
@@ -464,7 +464,7 @@ export default function AddressForm({
 			elderCount: '',
  */}
 
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							<TextField
 								error={Boolean(formik.touched.totalPassengerCount && formik.errors.totalPassengerCount)}
 								fullWidth
@@ -484,7 +484,7 @@ export default function AddressForm({
 								value={formik.values.totalPassengerCount}
 							/>
 						</Grid>
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							<TextField
 								error={Boolean(formik.touched.kidCount && formik.errors.kidCount)}
 								fullWidth
@@ -504,7 +504,7 @@ export default function AddressForm({
 								}}
 							/>
 						</Grid>
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							<TextField
 								error={Boolean(formik.touched.adultCount && formik.errors.adultCount)}
 								fullWidth
@@ -524,7 +524,7 @@ export default function AddressForm({
 								value={formik.values.adultCount}
 							/>
 						</Grid>
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							<TextField
 								error={Boolean(formik.touched.elderCount && formik.errors.elderCount)}
 								fullWidth
@@ -546,7 +546,7 @@ export default function AddressForm({
 							elderCount
 						</Grid>
 
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='pnrNo'
 								name='pnrNo'
@@ -559,7 +559,7 @@ export default function AddressForm({
 								value={formik.values.pnrNo}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<FormControl fullWidth>
 								<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
 								<Select
@@ -584,7 +584,7 @@ export default function AddressForm({
 							</FormControl>
 						</Grid>
 
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<FormControl fullWidth>
 								<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
 								<Select
@@ -605,7 +605,7 @@ export default function AddressForm({
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<FormControl fullWidth>
 								<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
 								<Select
@@ -626,7 +626,7 @@ export default function AddressForm({
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='mcoNo'
 								name='mcoNo'
@@ -642,7 +642,7 @@ export default function AddressForm({
 								value={formik.values.mcoNo}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='airlineCode'
 								name='airlineCode'
@@ -656,7 +656,7 @@ export default function AddressForm({
 							/>
 						</Grid>
 
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='pricePerPerson'
 								name='pricePerPerson'
@@ -672,7 +672,7 @@ export default function AddressForm({
 								value={formik.values.pricePerPerson}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='grandTotal'
 								name='grandTotal'
@@ -690,7 +690,7 @@ export default function AddressForm({
 						</Grid>
 						{/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<TextField
 								id='totalInhouseChargetotalInhouseCharge'
 								name='totalInhouseCharge'
@@ -706,7 +706,7 @@ export default function AddressForm({
 								value={formik.values.totalInhouseCharge}
 							/>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
 									inputFormat='dd/MM/yyyy'
@@ -731,7 +731,7 @@ export default function AddressForm({
 								/>
 							</LocalizationProvider>
 						</Grid>
-						<Grid item xs={12} md={4}>
+						<Grid item xs={4} md={4}>
 							<LocalizationProvider dateAdapter={AdapterDateFns}>
 								<DatePicker
 									name='returnDate'
@@ -757,7 +757,7 @@ export default function AddressForm({
 						</Grid>
 
 						{/* EMpty one  */}
-						<Grid item xs={12} md={8}></Grid>
+						<Grid item xs={4} md={8}></Grid>
 
 						<Grid item xs={8} md={10}>
 							{' '}
