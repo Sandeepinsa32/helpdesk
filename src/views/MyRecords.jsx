@@ -149,7 +149,6 @@ export const Transaction = () => {
 			},
 		},
 	});
-	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 	return (
 		<>
 			<Box
@@ -188,8 +187,8 @@ export const Transaction = () => {
 								<Card>
 									<CardContent>
 										<Box fullWidth sx={{display: ''}}>
-											<Grid container spacing={3}>
-												<Grid item xs={4} md={3}>
+											<Grid container spacing={4} justifyContent='center'>
+												<Grid item xs={3} md={3}>
 													<TextField
 														size='small'
 														fullWidth
@@ -210,7 +209,7 @@ export const Transaction = () => {
 													/>
 												</Grid>
 
-												<Grid item xs={4} md={3}>
+												<Grid item xs={3} md={3}>
 													<TextField
 														fullWidth
 														size='small'
@@ -230,7 +229,7 @@ export const Transaction = () => {
 														value={email}
 													/>
 												</Grid>
-												<Grid item xs={4} md={3}>
+												<Grid item xs={3} md={3}>
 													<TextField
 														size='small'
 														fullWidth
@@ -250,9 +249,9 @@ export const Transaction = () => {
 														value={phone}
 													/>
 												</Grid>
-												<Grid item xs={8} md={0}></Grid>
+												{/* <Grid item xs={0} md={0}></Grid> */}
 												{/* btn --reset and serach  */}
-												<Grid item xs={4} md={3} sx={{px: 2, mt: 0.5}}>
+												<Grid item xs={3} md={3} sx={{px: 2, mt: 0.5}}>
 													<Button
 														sx={{textTransform: 'capitalize', mx: 1}}
 														size='small'
@@ -276,7 +275,7 @@ export const Transaction = () => {
 
 					<Box sx={{mt: 3}}>
 						<TableContainer component={Paper}>
-							<Table sx={{minWidth: 650}} aria-label='simple table'>
+							<Table style={{whiteSpace: 'nowrap'}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
 										{[

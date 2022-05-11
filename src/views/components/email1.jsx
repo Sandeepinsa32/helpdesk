@@ -11,21 +11,6 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 		return today;
 	}
 
-	// function userTabelData() {
-	// 	// let tr, td, node, rootNode;
-	// 	// data.map((x, i) => {
-	// 	// 	tr = document.createElement('tr');
-	// 	// 	for (var obj in x) {
-	// 	// 		td = document.createElement('td');
-	// 	// 		node = document.createTextNode(data[i][obj]);
-	// 	// 		td.appendChild(node);
-	// 	// 		tr.appendChild(td);
-	// 	// 		rootNode = document.getElementById('appendCHildHere');
-	// 	// 		rootNode.appendChild(tr);
-	// 	// 	}
-	// 	// });
-	// }
-
 	function userTabelData(data) {
 		// console.log(data);
 		var tableString = '';
@@ -67,7 +52,6 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 		});
 		return tableString;
 	}
-
 	var html = `  <center>
 		<style>
     table.tableoutter {
