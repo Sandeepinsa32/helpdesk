@@ -191,10 +191,10 @@ export const AddUser = () => {
 										<CardContent>
 											<Box fullWidth sx={{display: 'flex'}}>
 												<Grid container spacing={3}>
-													<Grid item xs={12} md={3}>
+													<Grid item xs={6} md={3}>
 														<TextField
 															size='small'
-															sx={{width: `19vw`, height: `2rem`}}
+															sx={{width: `23vw`, height: `2rem`}}
 															InputProps={{
 																startAdornment: (
 																	<InputAdornment position='start'>
@@ -210,26 +210,8 @@ export const AddUser = () => {
 															value={email}
 														/>
 													</Grid>
-													{/* <Grid item xs={12} md={3}>
-                            <TextField
-                              size="small"
-                              sx={{ width: `19vw`, height: `2rem` }}
-                              InputProps={{
-                                startAdornment: (
-                                  <InputAdornment position="start">
-                                    <SvgIcon color="action" fontSize="small">
-                                      <SearchIcon />
-                                    </SvgIcon>
-                                  </InputAdornment>
-                                ),
-                              }}
-                              onChange={(e) => setPhone(e.target.value)}
-                              placeholder="Enter Phone Number"
-                              variant="outlined"
-                              value={phone}
-                            />
-                          </Grid> */}
-													<Grid item xs={12} md={3}>
+
+													<Grid item xs={4} md={3}>
 														<Box sx={{px: 2, mt: 0.5}}>
 															<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' onClick={searchHandle} disabled={!(email || phone)}>
 																Search
@@ -335,7 +317,7 @@ export const AddUser = () => {
 
 							<CardContent>
 								<Grid container spacing={3}>
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField
 											fullWidth
 											disabled={true}
@@ -347,22 +329,22 @@ export const AddUser = () => {
 											variant='outlined'
 										/>
 									</Grid>
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth disabled={true} label='Last name' name='lastName' required value={selectedRecord.lastName} variant='outlined' />
 									</Grid>
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth disabled={true} label='Email Address' name='email' required value={selectedRecord.email} variant='outlined' />
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth disabled={true} label='Emp ID' name='employeeCode' value={selectedRecord.employeeCode} type='string' variant='outlined' />
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth disabled={true} label='alias' name='employeeAlias' required variant='outlined' value={selectedRecord.employeeAlias} />
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField
 											fullWidth
 											label='Password'
@@ -374,7 +356,7 @@ export const AddUser = () => {
 											value={passwordInfo.password}
 										/>
 									</Grid>
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField
 											fullWidth
 											label='Confirm Password'
@@ -387,7 +369,7 @@ export const AddUser = () => {
 										/>
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<Button
 											color='primary'
 											variant='contained'
@@ -416,7 +398,7 @@ export const AddUser = () => {
 
 							<CardContent>
 								<Grid container spacing={3}>
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField
 											fullWidth
 											helperText='Please specify the first name'
@@ -428,26 +410,26 @@ export const AddUser = () => {
 											variant='outlined'
 										/>
 									</Grid>
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth label='Last name' name='lastName' onChange={handleChange} required value={values.lastName} variant='outlined' />
 									</Grid>
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth label='Email Address' name='email' onChange={handleChange} required value={values.email} variant='outlined' />
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth label='Emp ID' name='employeeCode' onChange={handleChange} value={values.employeeCode} type='string' variant='outlined' />
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth label='alias' name='employeeAlias' required variant='outlined' onChange={handleChange} value={values.employeeAlias} />
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<TextField fullWidth label='Password' name='password' type='password' required variant='outlined' onChange={handleChange} value={values.password} />
 									</Grid>
 
-									<Grid item md={6} xs={12}>
+									<Grid item md={6} xs={6}>
 										<Button color='primary' variant='contained' sx={{right: '2rem', position: 'absolute'}} onClick={SaveDetail}>
 											Save details
 										</Button>

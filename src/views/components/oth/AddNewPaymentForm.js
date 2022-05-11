@@ -45,7 +45,7 @@ export default function PaymentForm({setInputList, inputList}) {
 				return (
 					<Grid key={i} container spacing={3}>
 						{/* Card Holder NAme field */}
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							<TextField
 								required
 								name='cardName'
@@ -59,19 +59,19 @@ export default function PaymentForm({setInputList, inputList}) {
 							/>
 						</Grid>
 						{/*  Card Holder Phone no. */}
-						<Grid item xs={12} md={3}>
+						<Grid item xs={4} md={3}>
 							<TextField required name='cardHolderPhn' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardNumber} />
 						</Grid>
 						{/* CardNumber Field */}
-						<Grid item xs={12} md={3}>
+						<Grid item xs={4} md={3}>
 							<TextField required name='cardNumber' label='Card number' fullWidth autoComplete='cc-number' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardNumber} />
 						</Grid>
 						{/* CVV Field */}
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
 						</Grid>
 						{/* expiry date field */}
-						<Grid item xs={12} md={2}>
+						<Grid item xs={4} md={2}>
 							<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 								<DatePicker
 									fullWidth
@@ -96,7 +96,7 @@ export default function PaymentForm({setInputList, inputList}) {
 							</LocalizationProvider>
 						</Grid>
 						{/*  add/Remove btn for multiple card */}
-						<Box xs={12} md={2} sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+						<Box xs={4} md={2} sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
 							{inputList.length !== 1 && (
 								<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
 									Remove
@@ -111,7 +111,7 @@ export default function PaymentForm({setInputList, inputList}) {
 
 						{/*  company card  */}
 
-						<Grid item xs={12} md={3}>
+						<Grid item xs={4} md={3}>
 							<FormControlLabel
 								control={
 									<Checkbox
@@ -128,7 +128,7 @@ export default function PaymentForm({setInputList, inputList}) {
 						</Grid>
 						{isCompanyCard && (
 							<>
-								<Grid item xs={12} md={3}>
+								<Grid item xs={4} md={3}>
 									<TextField
 										required
 										name='ccUsedCount'
@@ -141,7 +141,7 @@ export default function PaymentForm({setInputList, inputList}) {
 										// value={inputList[i].cardName}
 									/>
 								</Grid>
-								<Grid item xs={12} md={3}>
+								<Grid item xs={4} md={3}>
 									<TextField
 										required
 										name='ccAmountUsed'
@@ -154,7 +154,7 @@ export default function PaymentForm({setInputList, inputList}) {
 										// value={inputList[i].cardName}
 									/>
 								</Grid>
-								<Grid item xs={12} md={3}>
+								<Grid item xs={4} md={3}>
 									<TextField
 										required
 										name='ccLastDigit'

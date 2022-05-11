@@ -189,7 +189,7 @@ export const Transaction = () => {
 									<CardContent>
 										<Box fullWidth sx={{display: ''}}>
 											<Grid container spacing={3}>
-												<Grid item xs={12} md={3}>
+												<Grid item xs={6} md={3}>
 													<TextField
 														size='small'
 														sx={{width: `19vw`, height: `2rem`}}
@@ -209,7 +209,7 @@ export const Transaction = () => {
 													/>
 												</Grid>
 
-												<Grid item xs={12} md={3}>
+												<Grid item xs={6} md={3}>
 													<TextField
 														size='small'
 														sx={{width: `19vw`, height: `2rem`}}
@@ -228,7 +228,7 @@ export const Transaction = () => {
 														value={email}
 													/>
 												</Grid>
-												<Grid item xs={12} md={3}>
+												<Grid item xs={6} md={3}>
 													<TextField
 														size='small'
 														sx={{width: `19vw`, height: `2rem`}}
@@ -247,7 +247,7 @@ export const Transaction = () => {
 														value={phone}
 													/>
 												</Grid>
-												<Grid item xs={12} md={3} sx={{px: 2, mt: 0.5}}>
+												<Grid item xs={6} md={3} sx={{px: 2, mt: 0.5}}>
 													<Button
 														sx={{textTransform: 'capitalize', mx: 1}}
 														size='small'

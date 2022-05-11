@@ -77,7 +77,7 @@ export default function AddressForm(props) {
 		<>
 			<Grid container spacing={3}>
 				{/*  checkbox label  Fields */}
-				<Grid item xs={12} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
+				<Grid item xs={4} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
 					<FormControl sx={{m: 1, p: 1}} fullWidth error={Boolean(formik.touched.productType && formik.errors.productType)}>
 						<InputLabel variant='outlined'>Product Type :</InputLabel>
 					</FormControl>
@@ -242,7 +242,7 @@ export default function AddressForm(props) {
 					</Box>
 				</Grid>
 				{/* firstname Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						fullWidth
 						label='First Name'
@@ -255,7 +255,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* lastname Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						id='lastName'
 						name='lastName'
@@ -269,7 +269,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/*  EMail Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						id='email'
 						name='email'
@@ -283,7 +283,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/*  Phone Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						id='phone'
 						name='phone'
@@ -297,7 +297,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* alt EMail Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						name='altEmail'
 						label='Alternative email'
@@ -310,7 +310,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* alt Phone Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						name='altPhone'
 						label='Alternative Phone'
@@ -323,7 +323,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* kidsCount Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<Box sx={displayFlexRowStyle}>
 						<Box sx={displayColStyle}>
 							<TextField
@@ -364,7 +364,7 @@ export default function AddressForm(props) {
 					</Box>
 				</Grid>
 				{/* adult Count Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<Box sx={displayFlexRowStyle}>
 						<Box sx={displayColStyle}>
 							<TextField
@@ -405,7 +405,7 @@ export default function AddressForm(props) {
 					</Box>
 				</Grid>
 				{/* elder Count Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<Box sx={displayFlexRowStyle}>
 						<Box sx={displayColStyle}>
 							<TextField
@@ -446,7 +446,7 @@ export default function AddressForm(props) {
 					</Box>
 				</Grid>
 				{/* PNR no. Fields */}
-				<Grid item xs={12} md={6}>
+				<Grid item xs={4} md={6}>
 					<TextField
 						id='pnrNo'
 						name='pnrNo'
@@ -460,7 +460,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* booking type -------Dropdown Fields */}
-				<Grid item xs={12} md={3}>
+				<Grid item xs={4} md={3}>
 					<FormControl fullWidth>
 						<InputLabel id='Bokking-type-Dropdown-label'>Booking Type</InputLabel>
 						<Select
@@ -485,7 +485,7 @@ export default function AddressForm(props) {
 					</FormControl>
 				</Grid>
 				{/* Fare type Fields */}
-				<Grid item xs={12} md={3}>
+				<Grid item xs={4} md={3}>
 					<FormControl fullWidth>
 						<InputLabel id='Fare-Type-Dropdown-label'>Fare Type</InputLabel>
 						<Select
@@ -507,7 +507,7 @@ export default function AddressForm(props) {
 					</FormControl>
 				</Grid>
 				{/* Booked On Fields */}
-				<Grid item xs={12} md={3}>
+				<Grid item xs={4} md={3}>
 					<FormControl fullWidth>
 						<InputLabel id='Booked-on-Dropdown-label'>Booked on </InputLabel>
 						<Select
@@ -529,7 +529,7 @@ export default function AddressForm(props) {
 					</FormControl>
 				</Grid>
 				{/* Airline code Fields */}
-				<Grid item xs={12} md={3}>
+				<Grid item xs={4} md={3}>
 					<TextField
 						id='airlineCode'
 						name='airlineCode'
@@ -543,7 +543,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* Grand Total Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						id='grandTotal'
 						name='grandTotal'
@@ -560,7 +560,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* Total In-House Charge Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						id='totalInhouseChargetotalInhouseCharge'
 						name='totalInhouseCharge'
@@ -577,7 +577,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* MCO amount Fields */}
-				<Grid item xs={12} md={2}>
+				<Grid item xs={4} md={2}>
 					<TextField
 						id='mcoNo'
 						name='mcoNo'
@@ -594,7 +594,7 @@ export default function AddressForm(props) {
 					/>
 				</Grid>
 				{/* DepartureDate Fields */}
-				<Grid item xs={12} md={3}>
+				<Grid item xs={4} md={3}>
 					<LocalizationProvider dateAdapter={AdapterDateFns}>
 						<DatePicker
 							inputFormat='MM/dd/yyyy'
@@ -620,7 +620,7 @@ export default function AddressForm(props) {
 					</LocalizationProvider>
 				</Grid>
 				{/* ReturnDate Fields */}
-				<Grid item xs={12} md={3}>
+				<Grid item xs={4} md={3}>
 					<LocalizationProvider dateAdapter={AdapterDateFns}>
 						<DatePicker
 							name='returnDateValue'

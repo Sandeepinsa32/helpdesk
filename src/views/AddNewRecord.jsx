@@ -247,7 +247,7 @@ const AddNewRecord = ({isView, data}) => {
 							return (
 								<Grid key={i} container spacing={3}>
 									{/* Card Holder NAme field */}
-									<Grid item xs={12} md={2}>
+									<Grid item xs={6} md={2}>
 										<TextField
 											required
 											name='cardHolderName'
@@ -261,11 +261,11 @@ const AddNewRecord = ({isView, data}) => {
 										/>
 									</Grid>
 									{/*  Card Holder Phone no. */}
-									<Grid item xs={12} md={3}>
+									<Grid item xs={6} md={3}>
 										<TextField required name='cardHolderNumber' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderNumber} />
 									</Grid>
 									{/* CardNumber Field */}
-									<Grid item xs={12} md={3}>
+									<Grid item xs={6} md={3}>
 										<TextField
 											required
 											name='cardNumber'
@@ -277,11 +277,11 @@ const AddNewRecord = ({isView, data}) => {
 										/>
 									</Grid>
 									{/* CVV Field */}
-									<Grid item xs={12} md={2}>
+									<Grid item xs={6} md={2}>
 										<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
 									</Grid>
 									{/* expiry date field */}
-									<Grid item xs={12} md={2}>
+									<Grid item xs={6} md={2}>
 										<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 											<DatePicker
 												fullWidth
@@ -306,7 +306,7 @@ const AddNewRecord = ({isView, data}) => {
 										</LocalizationProvider>
 									</Grid>
 									{/*  add/Remove btn for multiple card */}
-									<Box xs={12} md={2} sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+									<Box xs={6} md={2} sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
 										{inputList.length !== 1 && (
 											<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
 												Remove
@@ -324,7 +324,7 @@ const AddNewRecord = ({isView, data}) => {
 						<Grid container spacing={3}>
 							{/*  company card  */}
 
-							<Grid item xs={12} md={3}>
+							<Grid item xs={6} md={3}>
 								<FormControlLabel
 									control={
 										<Checkbox
@@ -344,7 +344,7 @@ const AddNewRecord = ({isView, data}) => {
 								items.map((item, i) => {
 									const {name, label} = item;
 									return (
-										<Grid item xs={12} md={3} key={i}>
+										<Grid item xs={6} md={3} key={i}>
 											<TextField
 												required
 												name={name}

@@ -153,7 +153,7 @@ const Email = () => {
 								value={pnrValue}
 							/>
 						</Grid>
-						<Grid item xs={12} md={2} sx={{pr: 1}}>
+						<Grid item xs={6} md={2} sx={{pr: 1}}>
 							<Button onClick={handlePnrConverter} variant='contained'>
 								Convert
 							</Button>
@@ -261,7 +261,7 @@ const Email = () => {
 												</TableCell>
 												{inputList.length !== 1 && (
 													<Grid container>
-														<Grid item xs={12} md={2}>
+														<Grid item md={2}>
 															<Button
 																startIcon={<DeleteOutlineIcon color='error' fontSize='small' />}
 																onClick={() => handleRemoveClick(i)}
@@ -279,14 +279,14 @@ const Email = () => {
 
 					<Grid container spacing={1} sx={{m: 0, p: 1}}>
 						{inputList.length < 9 && (
-							<Grid item xs={12} md={12} sx={{pr: 1}}>
+							<Grid item xs={6} md={12} sx={{pr: 1}}>
 								<Button startIcon={<AddIcon fontSize='small' />} fullWidth={true} onClick={handleAddClick} sx={{mr: 1, pr: 1}} variant='outlined'>
 									Add new
 								</Button>
 							</Grid>
 						)}
 						{/* Total Amount */}
-						<Grid item xs={12} md={12} sx={{pr: 1}}>
+						<Grid item xs={6} md={12} sx={{pr: 1}}>
 							<TextField
 								required
 								name='totalAmount'
@@ -299,13 +299,13 @@ const Email = () => {
 							/>
 						</Grid>
 
-						<Grid item xs={12} md={10}></Grid>
-						<Grid item xs={12} md={1}>
+						<Grid item xs={6} md={10}></Grid>
+						<Grid item xs={6} md={1}>
 							<Button onClick={() => setPreviewModal(true)} variant='contained'>
 								Preview
 							</Button>
 						</Grid>
-						<Grid item xs={12} md={1} sx={{pr: 1}}>
+						<Grid item xs={6} md={1} sx={{pr: 1}}>
 							<Button onClick={handleConfirm} variant='contained'>
 								Submit
 							</Button>
