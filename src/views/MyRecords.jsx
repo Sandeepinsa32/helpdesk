@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {NavLink, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import AddNewRecord from './AddNewRecord';
 
@@ -19,8 +19,6 @@ import {
 	InputAdornment,
 	SvgIcon,
 	Typography,
-	CardHeader,
-	Divider,
 	Grid,
 	IconButton,
 	ListItem,
@@ -40,7 +38,6 @@ import {createTheme} from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
 
 import Email from './Email';
-import Email1 from './components/email1';
 
 //  local icon
 import {Search as SearchIcon} from '../assets/icons/search';
@@ -55,9 +52,9 @@ export const Transaction = () => {
 	const [viewEmail, setViewEmail] = useState(false);
 	const [viewData, setViewData] = useState(false);
 	const [userData, setUserData] = useState({});
-	const [searchId, setSearchId] = useState('');
-	const [searchEmail, setSearchEmail] = useState('');
-	const [searchAgentCode, SearchAgentCode] = useState('');
+	// const [searchId, setSearchId] = useState('');
+	// const [searchEmail, setSearchEmail] = useState('');
+	// const [searchAgentCode, SearchAgentCode] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [totalRecords, setTotalRecords] = useState(-1);
 	const [size, setSize] = useState(5);
@@ -134,15 +131,15 @@ export const Transaction = () => {
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
 
-	function currentDate() {
-		let today = new Date();
-		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		let yyyy = today.getFullYear();
+	// function currentDate() {
+	// 	let today = new Date();
+	// 	let dd = String(today.getDate()).padStart(2, '0');
+	// 	let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	// 	let yyyy = today.getFullYear();
 
-		today = mm + '/' + dd + '/' + yyyy;
-		return today;
-	}
+	// 	today = mm + '/' + dd + '/' + yyyy;
+	// 	return today;
+	// }
 	const theme = createTheme({
 		palette: {
 			neutral: {

@@ -16,7 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import {createTheme} from '@mui/material/styles';
 
 import Email from './Email';
-import Email1 from './components/email1';
+// import Email1 from './components/email1';
 
 //icon
 import CloseIcon from '@mui/icons-material/Close';
@@ -30,7 +30,7 @@ export default function SearchRecord() {
 	const [allRecords, setAllRecords] = useState([]);
 	const [userData, setUserData] = useState({});
 	const [page, setPage] = React.useState(1);
-	const [search, setSearch] = useState('');
+	// const [search, setSearch] = useState('');
 	const [totalRecords, setTotalRecords] = useState(-1);
 	const [size, setSize] = useState(5);
 	const [bookingid, setBookingid] = useState('');

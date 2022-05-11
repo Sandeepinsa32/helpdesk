@@ -1,18 +1,13 @@
 import React from 'react';
-import {Routes, Route, NavLink} from 'react-router-dom';
+// import {Routes, Route, NavLink} from 'react-router-dom';
 import {useFormik} from 'formik';
 
 import * as Yup from 'yup';
-import {Box, Button, Container, Paper, Grid, Link, TextField, Typography, Checkbox, InputAdornment, IconButton} from '@mui/material';
+import {Box, Button, Container, Paper, TextField, Typography, Checkbox} from '@mui/material';
 
 // material UI-icon
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import {useNavigate} from 'react-router-dom';
 // local icon
-import {Facebook as FacebookIcon} from '../assets/icons/facebook';
-import {Google as GoogleIcon} from '../assets/icons/google';
 import {useState} from 'react';
 import {BASEURL, successToast, errorToast} from '../utils/Utils';
 import axios from 'axios';
@@ -58,8 +53,6 @@ const Login = () => {
 			<Box
 				component='main'
 				sx={{
-					alignItems: 'center',
-					display: 'flex',
 					flexGrow: 1,
 					minHeight: '100%',
 					height: '100vh',

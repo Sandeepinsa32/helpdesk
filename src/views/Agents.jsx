@@ -17,14 +17,14 @@ import {
 	SvgIcon,
 	Typography,
 	CardHeader,
-	Divider,
+	// Divider,
 	Grid,
 	IconButton,
 	ThemeProvider,
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import DeleteIcon from '@mui/icons-material/Delete';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -34,7 +34,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import {createTheme} from '@mui/material/styles';
-import {minWidth} from '@mui/system';
+// import {minWidth} from '@mui/system';
 
 //  local icon
 import {Search as SearchIcon} from '../assets/icons/search';
@@ -56,7 +56,7 @@ export const AddUser = () => {
 		employeeCode: '',
 		employeeAlias: '',
 	});
-	const [searchKey, setSearchKey] = useState('');
+	// const [searchKey, setSearchKey] = useState('');
 	const [agentsList, setAgentsList] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [deleteModal, setDeleteModal] = useState(false);

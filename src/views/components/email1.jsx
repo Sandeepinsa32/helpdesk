@@ -60,7 +60,7 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
       <td>${x.flt.operated_by}</td>
       <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(x.flt.departure.string).getMinutes()}</td>
       <td> ${x.dep.airportname},  ${x.dep.airportcode}</td>
-      <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes() == '0' ? `00` : new Date(x.flt.arrival.string).getMinutes()}</td>
+      <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes() === 0 ? `00` : new Date(x.flt.arrival.string).getMinutes()}</td>
       <td> ${x.arr.airportname}, ${x.arr.airportcode}</td>
       <td>${new Date(x.flt.departure.string).getHours()}H${new Date(x.flt.departure.string).getMinutes()}m </td>
     </tr>`;

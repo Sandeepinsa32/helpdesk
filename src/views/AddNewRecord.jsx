@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import AddNewRecordForm from './components/AddTicketForm/AddNewRecordForm';
 // import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
 import {useFormik, Formik} from 'formik';

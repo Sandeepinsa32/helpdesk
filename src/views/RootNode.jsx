@@ -1,17 +1,17 @@
-import {react, useState} from 'react';
+import {useState} from 'react';
 import {AgentProfileModal} from './components/AgentProfileModal';
 import {NavLink, useNavigate} from 'react-router-dom';
 
 import RouteComponent from '../MyRoutes';
 
 //  Material UI
-import {styled, useTheme} from '@mui/material/styles';
-import {Avatar, Badge, Box, Divider, IconButton, Toolbar, Tooltip, Typography, CssBaseline, List, Modal, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
+import {styled} from '@mui/material/styles';
+import {Box, IconButton, Toolbar, Tooltip, CssBaseline, List, Modal, ListItemButton, ListItemIcon, ListItemText} from '@mui/material';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 
 // material icon
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+// import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -21,17 +21,17 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 // local icon
-import {Bell as BellIcon} from '../assets/icons/bell';
-import {UserCircle as UserCircleIcon} from '../assets/icons/user-circle';
-import {Users as UsersIcon} from '../assets/icons/users';
+// import {Bell as BellIcon} from '../assets/icons/bell';
+// import {UserCircle as UserCircleIcon} from '../assets/icons/user-circle';
+// import {Users as UsersIcon} from '../assets/icons/users';
 import {ChartBar as ChartBarIcon} from '../assets/icons/chart-bar';
-import {Cog as CogIcon} from '../assets/icons/cog';
-import {Lock as LockIcon} from '../assets/icons/lock';
-import {Selector as SelectorIcon} from '../assets/icons/selector';
-import {ShoppingBag as ShoppingBagIcon} from '../assets/icons/shopping-bag';
-import {User as UserIcon} from '../assets/icons/user';
-import {UserAdd as UserAddIcon} from '../assets/icons/user-add';
-import {XCircle as XCircleIcon} from '../assets/icons/x-circle';
+// import {Cog as CogIcon} from '../assets/icons/cog';
+// import {Lock as LockIcon} from '../assets/icons/lock';
+// import {Selector as SelectorIcon} from '../assets/icons/selector';
+// import {ShoppingBag as ShoppingBagIcon} from '../assets/icons/shopping-bag';
+// import {User as UserIcon} from '../assets/icons/user';
+// import {UserAdd as UserAddIcon} from '../assets/icons/user-add';
+// import {XCircle as XCircleIcon} from '../assets/icons/x-circle';
 
 const drawerWidth = 240;
 
@@ -107,11 +107,11 @@ export default function MiniDrawer() {
 	};
 	const [open, setOpen] = useState(false);
 	const [modalopen, setModalopen] = useState(false);
-	const [modalNotiopen, setModalNotiopen] = useState(false);
+	// const [modalNotiopen, setModalNotiopen] = useState(false);
 
-	const handleNotiModalOpen = () => setModalNotiopen(true);
+	// const handleNotiModalOpen = () => setModalNotiopen(true);
 
-	const handleNotiModalClose = () => setModalNotiopen(false);
+	// const handleNotiModalClose = () => setModalNotiopen(false);
 
 	const handleModalOpen = () => setModalopen(true);
 	const handleModalClose = () => setModalopen(false);
@@ -249,7 +249,7 @@ export default function MiniDrawer() {
 				}}>
 				{/* <DrawerHeader /> */}
 
-				<RouteComponent  />
+				<RouteComponent />
 			</Box>
 		</Box>
 	);
