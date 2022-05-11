@@ -44,11 +44,11 @@ const AddNewRecord = ({isView, data}) => {
 		ccAmountUsed,
 		ccLastDigit,
 
-		// flightMarkup,
-		// hotelMarkup,
-		// carMarkup,
-		// insuranceMarkup,
-		// addonMarkup,
+		flightMarkup,
+		hotelMarkup,
+		carMarkup,
+		insuranceMarkup,
+		addonMarkup,
 		// notes,
 	} = data;
 
@@ -90,11 +90,11 @@ const AddNewRecord = ({isView, data}) => {
 
 			//markup
 
-			// flightMarkup: flightMarkup ? flightMarkup : '5',
-			// hotelMarkup: hotelMarkup ? hotelMarkup : '',
-			// carMarkup: carMarkup ? carMarkup : '',
-			// insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
-			// addonMarkup: addonMarkup ? addonMarkup : '',
+			flightMarkup: flightMarkup ? flightMarkup : '5',
+			hotelMarkup: hotelMarkup ? hotelMarkup : '',
+			carMarkup: carMarkup ? carMarkup : '',
+			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
+			addonMarkup: addonMarkup ? addonMarkup : '',
 		},
 		validationSchema: Yup.object({
 			//basic
@@ -169,11 +169,11 @@ const AddNewRecord = ({isView, data}) => {
 				}),
 
 			//markup
-			// flightMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			// hotelMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			// carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			// insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
-			// addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			flightMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			hotelMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 
 			// comments: Yup.string().max(255),
 			// notes: '',

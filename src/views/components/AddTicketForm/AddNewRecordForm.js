@@ -28,18 +28,32 @@ export default function AddressForm({formik, isView}) {
 		{
 			name: 'flight',
 			label: 'Fligh',
+			markup: 'flightMarkup',
+			markupLabel: 'FlightMarkup',
 		},
 		{
 			name: 'hotel',
 			label: 'Hotel',
+			markup: 'hotelMarkup',
+			markupLabel: 'HotelMarkup',
 		},
 		{
 			name: 'car',
 			label: 'Car',
+			markup: 'carMarkup',
+			markupLabel: 'CarMarkup',
+		},
+		{
+			name: 'insurance',
+			label: 'Insuance',
+			markup: 'insuranceMarkup',
+			markupLabel: 'InsuanceMarkup',
 		},
 		{
 			name: 'addon',
 			label: 'Add-On',
+			markup: 'addonMarkup',
+			markupLabel: 'AddonMarkup',
 		},
 	];
 
@@ -52,7 +66,7 @@ export default function AddressForm({formik, isView}) {
 				</FormControl>
 				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
 					{checkbox.map((data, i) => {
-						const {x, label} = data;
+						const {x, label, markup, markupLabel} = data;
 						return (
 							<>
 								<Box sx={displayColStyle} style={{paddingTop: '8px !important'}} key={i}>
@@ -81,7 +95,7 @@ export default function AddressForm({formik, isView}) {
 
 													formik.setFieldValue('productType', initialProductType);
 												}}
-												name={x + `Markup`}
+												name={x}
 												color='primary'
 											/>
 										}
@@ -89,17 +103,18 @@ export default function AddressForm({formik, isView}) {
 									/>
 									{checkboxType[x] && (
 										<TextField
-											name={x + `Markup`}
-											label={label + `Markup`}
+											name={markup}
+											label={markupLabel}
 											fullWidth
 											disabled={isView}
 											InputProps={{
 												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 											}}
-											// error={Boolean(formik.touched.x + `Markup` && formik.errors.x + `Markup`)}
-											// helperText={formik.touched.x + `Markup` && formik.errors.x + `Markup`}
-											// onBlur={formik.handleBlur}
+											error={formik.touched.markup && formik.errors.markup}
+											helperText={formik.touched.markup && formik.errors.markup}
+											onBlur={formik.handleBlur}
 											onChange={(e) => {
+												formik.setFieldValue(markup, e.target.value);
 												const index = initialProductType.findIndex((obj) => obj.property === x);
 												let data = [...initialProductType];
 												data[index]['propertyMarkup'] = e.target.value;
@@ -107,7 +122,6 @@ export default function AddressForm({formik, isView}) {
 												setInitialProductType(data);
 												formik.setFieldValue('productType', initialProductType);
 											}}
-											// value={formik.values.x + `Markup`}
 										/>
 									)}
 								</Box>
