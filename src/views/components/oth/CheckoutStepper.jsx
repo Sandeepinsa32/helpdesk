@@ -3,7 +3,7 @@ import React, {useState, useRef} from 'react';
 //@ material-UI
 import {Box, Container, Paper, Stepper, Step, StepLabel, Button, Typography} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {BASEURL} from '../../utils/Utils';
+import {BASEURL} from '../../../utils/Utils';
 // external components
 import AddressForm from './AddTicketForm/AddressForm';
 import PaymentForm from './AddTicketForm/PaymentForm';

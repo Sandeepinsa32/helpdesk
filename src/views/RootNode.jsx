@@ -238,9 +238,9 @@ export default function MiniDrawer() {
 				component='main'
 				sx={{
 					flexGrow: 1,
-					p: 3,
+					p: 1.5,
 					// background: 'rgb(227, 242, 253) !Important',
-					background: 'rgba(0, 0, 0, 0.04) !Important',
+					// background: 'rgba(0, 0, 0, 0.04) !Important',
 					borderRadius: '2rem',
 					margin: '9vh 0.5rem 0',
 					minHeight: '90vh',

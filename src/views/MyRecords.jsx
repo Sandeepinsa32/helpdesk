@@ -160,7 +160,7 @@ export const Transaction = () => {
 					pb: 4,
 					pt: 2,
 				}}>
-				<Container maxWidth={false}>
+				<Container maxWidth={false} sx={{p: `0!important`}}>
 					<Box
 						sx={{
 							alignItems: 'center',
@@ -172,9 +172,6 @@ export const Transaction = () => {
 						<Typography sx={{m: 1}} variant='h6'>
 							My Records
 						</Typography>
-						{/* <Typography sx={{ m: 1 }} variant="body2"> */}
-						{/* {currentDate()} */}
-						{/* </Typography> */}
 
 						<Box sx={{m: 1}}>
 							<Button color='primary' onClick={goToAddNewRecord} variant='contained'>

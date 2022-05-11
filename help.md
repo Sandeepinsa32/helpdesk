@@ -88,7 +88,7 @@ booking id - thd + 4 digit unique code
 
 format table pnrconvertor email open, ip address - first, last, authorize ip
 
-3. card validation
+3
 
 //issue
 
@@ -96,4 +96,17 @@ format table pnrconvertor email open, ip address - first, last, authorize ip
 
 3. elder price is coming even if field is hidden
 
-4.product type chcekbox working in reverse order --> markup calue test
+4. Add records data console.
+5. Logout - remove localstorage and redirect to login
+6. View logs api (30 items atleast)
+7. Page responsive
+8. Hide menu items for user
+9. Remove console statements
+10. Remove unwanted code or unused code imports
+11. Loader on api calls
+12. Remove margin between buttons
+13. Login successfull sometime give error
+14. Views Logs edit
+15. card validation
+16. Add card or paper in add record page
+17. Design email templates

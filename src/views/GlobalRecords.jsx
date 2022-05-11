@@ -126,7 +126,7 @@ export default function SearchRecord() {
 					pb: 4,
 					pt: 2,
 				}}>
-				<Container maxWidth={false}>
+				<Container maxWidth={false} sx={{p: `0 !important`}}>
 					<Typography sx={{m: 1}} variant='h6'>
 						All Transaction
 					</Typography>

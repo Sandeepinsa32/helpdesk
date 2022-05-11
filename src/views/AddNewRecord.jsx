@@ -233,134 +233,137 @@ const AddNewRecord = ({isView, data}) => {
 		<>
 			<Formik>
 				<form onSubmit={formik.handleSubmit}>
-					<AddNewRecordForm formik={formik} isView={isView} />
+					<Box sx={{m: 1, p: 1, py: 3, bgcolor: 'background.paper', borderRadius: 1}}>
+						<AddNewRecordForm formik={formik} isView={isView} />
+					</Box>
 					<Box sx={{m: 1}}>
 						<Typography variant='h6' gutterBottom sx={{my: 4}}>
 							Payment method :
 						</Typography>
 					</Box>
-					{/* <AddNewPaymentForm setInputList={setInputList} inputList={inputList} /> */}
 
-					{inputList.map((x, i) => {
-						return (
-							<Grid key={i} container spacing={3}>
-								{/* Card Holder NAme field */}
-								<Grid item xs={12} md={2}>
-									<TextField
-										required
-										name='cardHolderName'
-										label='Name on card'
-										fullWidth
-										autoComplete='cc-name'
-										onChange={(e) => {
-											handleCardInput(e, i);
-										}}
-										value={inputList[i].cardHolderName}
-									/>
-								</Grid>
-								{/*  Card Holder Phone no. */}
-								<Grid item xs={12} md={3}>
-									<TextField required name='cardHolderNumber' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderNumber} />
-								</Grid>
-								{/* CardNumber Field */}
-								<Grid item xs={12} md={3}>
-									<TextField
-										required
-										name='cardNumber'
-										label='Card number'
-										fullWidth
-										autoComplete='cc-number'
-										onChange={(e) => handleCardInput(e, i)}
-										value={inputList[i].cardNumber}
-									/>
-								</Grid>
-								{/* CVV Field */}
-								<Grid item xs={12} md={2}>
-									<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
-								</Grid>
-								{/* expiry date field */}
-								<Grid item xs={12} md={2}>
-									<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
-										<DatePicker
-											fullWidth
-											name='expiryDate'
-											label='Expiry date'
-											inputFormat='dd/MM/yyyy'
-											onChange={(newValue) => {
-												handleDateInputChange(
-													i,
-													new Date(newValue).toLocaleDateString('en-US', {
-														day: '2-digit',
-														month: '2-digit',
-														year: 'numeric',
-													})
-												);
-
-												// setExpiryDateValue(newValue);
-											}}
-											value={inputList[i].expiryDate}
-											renderInput={(params) => <TextField {...params} />}
-										/>
-									</LocalizationProvider>
-								</Grid>
-								{/*  add/Remove btn for multiple card */}
-								<Box xs={12} md={2} sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
-									{inputList.length !== 1 && (
-										<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
-											Remove
-										</Button>
-									)}
-									{inputList.length < 4 && inputList.length - 1 === i && (
-										<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
-											Add One More Card
-										</Button>
-									)}
-								</Box>
-							</Grid>
-						);
-					})}
-					<Grid container spacing={3}>
-						{/*  company card  */}
-
-						<Grid item xs={12} md={3}>
-							<FormControlLabel
-								control={
-									<Checkbox
-										checked={isCompanyCard}
-										onChange={(e) => {
-											setIsCompanyCard(!isCompanyCard);
-										}}
-										name='companyCard'
-										color='primary'
-									/>
-								}
-								label='Company CC used ?'
-							/>
-						</Grid>
-
-						{isCompanyCard &&
-							items.map((item, index) => {
-								const {name, label} = item;
-								return (
-									<Grid item xs={12} md={3} key={item.title}>
+					<Box sx={{m: 1, p: 2, py: 3, bgcolor: 'background.paper', borderRadius: 1}}>
+						{inputList.map((x, i) => {
+							return (
+								<Grid key={i} container spacing={3}>
+									{/* Card Holder NAme field */}
+									<Grid item xs={12} md={2}>
 										<TextField
 											required
-											name={name}
-											label={label}
+											name='cardHolderName'
+											label='Name on card'
 											fullWidth
-											error={Boolean(formik.touched.name && formik.errors.name)}
-											helperText={formik.touched.name && formik.errors.name}
-											onBlur={formik.handleBlur}
-											onChange={formik.handleChange}
-											value={formik.values.name}
+											autoComplete='cc-name'
+											onChange={(e) => {
+												handleCardInput(e, i);
+											}}
+											value={inputList[i].cardHolderName}
 										/>
 									</Grid>
-								);
-							})}
-					</Grid>
+									{/*  Card Holder Phone no. */}
+									<Grid item xs={12} md={3}>
+										<TextField required name='cardHolderNumber' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderNumber} />
+									</Grid>
+									{/* CardNumber Field */}
+									<Grid item xs={12} md={3}>
+										<TextField
+											required
+											name='cardNumber'
+											label='Card number'
+											fullWidth
+											autoComplete='cc-number'
+											onChange={(e) => handleCardInput(e, i)}
+											value={inputList[i].cardNumber}
+										/>
+									</Grid>
+									{/* CVV Field */}
+									<Grid item xs={12} md={2}>
+										<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
+									</Grid>
+									{/* expiry date field */}
+									<Grid item xs={12} md={2}>
+										<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
+											<DatePicker
+												fullWidth
+												name='expiryDate'
+												label='Expiry date'
+												inputFormat='dd/MM/yyyy'
+												onChange={(newValue) => {
+													handleDateInputChange(
+														i,
+														new Date(newValue).toLocaleDateString('en-US', {
+															day: '2-digit',
+															month: '2-digit',
+															year: 'numeric',
+														})
+													);
+
+													// setExpiryDateValue(newValue);
+												}}
+												value={inputList[i].expiryDate}
+												renderInput={(params) => <TextField {...params} />}
+											/>
+										</LocalizationProvider>
+									</Grid>
+									{/*  add/Remove btn for multiple card */}
+									<Box xs={12} md={2} sx={{display: 'flex', justifyContent: 'flex-end', width: '100%'}}>
+										{inputList.length !== 1 && (
+											<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
+												Remove
+											</Button>
+										)}
+										{inputList.length < 4 && inputList.length - 1 === i && (
+											<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
+												Add One More Card
+											</Button>
+										)}
+									</Box>
+								</Grid>
+							);
+						})}
+						<Grid container spacing={3}>
+							{/*  company card  */}
+
+							<Grid item xs={12} md={3}>
+								<FormControlLabel
+									control={
+										<Checkbox
+											checked={isCompanyCard}
+											onChange={(e) => {
+												setIsCompanyCard(!isCompanyCard);
+											}}
+											name='companyCard'
+											color='primary'
+										/>
+									}
+									label='Company CC used ?'
+								/>
+							</Grid>
+
+							{isCompanyCard &&
+								items.map((item, i) => {
+									const {name, label} = item;
+									return (
+										<Grid item xs={12} md={3} key={i}>
+											<TextField
+												required
+												name={name}
+												label={label}
+												fullWidth
+												error={Boolean(formik.touched.name && formik.errors.name)}
+												helperText={formik.touched.name && formik.errors.name}
+												onBlur={formik.handleBlur}
+												onChange={formik.handleChange}
+												value={formik.values.name}
+											/>
+										</Grid>
+									);
+								})}
+						</Grid>
+					</Box>
 					{/* Formik alert one  */}
 					<Box xs={8} md={10}>
-						{formik.errors && formik.errors !== null && (
+						{Object.keys(formik.errors).length !== 0 && formik.errors && (
 							<Alert variant='outlined' severity='error'>
 								{JSON.stringify(formik.errors)}
 							</Alert>
