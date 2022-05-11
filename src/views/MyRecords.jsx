@@ -45,7 +45,7 @@ import Email1 from './components/email1';
 //  local icon
 import {Search as SearchIcon} from '../assets/icons/search';
 import CloseIcon from '@mui/icons-material/Close';
-import Visibility from '@mui/icons-material/Visibility';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 export const Transaction = () => {
 	const [myRecords, setMyRecords] = useState([]);
@@ -151,6 +151,7 @@ export const Transaction = () => {
 			},
 		},
 	});
+	let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 	return (
 		<>
 			<Box
@@ -387,31 +388,39 @@ export const Transaction = () => {
 
 			{/* open Logs*/}
 			<Modal open={openLog} onClose={handleLogClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={style}>
+				<Box sx={style} style={{padding: '32px 16px !important'}}>
 					<IconButton onClick={handleLogClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-
-					<Paper elevation={3} sx={{mt: 1}}>
+					<Typography sx={{fontSize: `1rem`}} variant='Body2'>
+						View Logs
+					</Typography>
+					<Paper>
 						<List>
-							<ListItem disablePadding>
-								<ListItemButton>
-									<ListItemIcon>
-										<Visibility />
-									</ListItemIcon>
-									<ListItemText primary='text1' />
-								</ListItemButton>
-							</ListItem>
-							<Divider />
+							{arr.map((a, i) => {
+								return (
+									<ListItem disablePadding key={i}>
+										<ListItemButton>
+											<ListItemIcon>
+												<ArrowRightAltIcon />
+											</ListItemIcon>
 
-							<ListItem disablePadding>
-								<ListItemButton>
-									<ListItemIcon>
-										<Visibility />
-									</ListItemIcon>
-									<ListItemText primary='Drafts' />
-								</ListItemButton>
-							</ListItem>
+											<ListItemText
+												primary='John Recently Viewed This Record'
+												secondary={
+													<>
+														<Typography sx={{display: 'inline'}} component='span' variant='body2' color='text.primary'>
+															John Doe ( 20025)
+														</Typography>
+														{' — For Genrating E-mail '}
+														<span style={{float: 'right', width: 'fit-content	'}}>11/05/2022 8:30 PM</span>
+													</>
+												}
+											/>
+										</ListItemButton>
+									</ListItem>
+								);
+							})}
 						</List>
 					</Paper>
 				</Box>
