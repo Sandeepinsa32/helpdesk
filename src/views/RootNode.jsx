@@ -113,8 +113,8 @@ export default function MiniDrawer() {
 
 	const checkRole = () => {
 		const role = localStorage.getItem('role');
-
-		role === true ? setIsAdmin(true) : setIsAdmin(false);
+		console.log(role, role == true);
+		role !== null ? setIsAdmin(true) : setIsAdmin(false);
 	};
 
 	useEffect(() => {

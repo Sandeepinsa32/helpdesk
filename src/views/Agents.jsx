@@ -65,6 +65,12 @@ export const AddUser = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
+	const [selectedRecord, setSelectedRecord] = useState({});
+	const [openUpdatePass, setOpenUpdatePass] = useState(false);
+	const [passwordInfo, setPasswordInfo] = useState({
+		password: '',
+		confirmPassword: '',
+	});
 
 	const handleReset = () => {
 		setPhone('');
@@ -76,6 +82,9 @@ export const AddUser = () => {
 		setPage(1);
 		loadAgents(createQueryString({email, phone, page}));
 	};
+	const handlePassModal = () => {
+		setOpenUpdatePass(false);
+	};
 
 	const handleChange = (event) => {
 		setValues({
@@ -83,9 +92,14 @@ export const AddUser = () => {
 			[event.target.name]: event.target.value,
 		});
 	};
+	const handleChangePassupdate = (event) => {
+		setPasswordInfo({
+			...passwordInfo,
+			[event.target.name]: event.target.value,
+		});
+	};
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	const handleDeleteClose = () => setDeleteModal(false);
 	const [allRecords, setAllRecords] = useState([]);
 
 	const SaveDetail = async (e) => {
@@ -240,14 +254,7 @@ export const AddUser = () => {
 								<Table sx={{minWidth: 650}} aria-label='simple table'>
 									<TableHead>
 										<TableRow>
-											{[
-												'EmpCode',
-												'Name',
-												'Email',
-												'Alias',
-												'Registration Date',
-												//'Actions'
-											].map((th) => (
+											{['EmpCode', 'Name', 'Email', 'Alias', 'Registration Date', 'Actions'].map((th) => (
 												<TableCell key={th}>{th}</TableCell>
 											))}
 										</TableRow>
@@ -280,15 +287,17 @@ export const AddUser = () => {
 													<TableCell>{row.employeeAlias}</TableCell>
 													<TableCell>{row.createdAt?.substring(0, 10)}</TableCell>
 
-													{/* <TableCell>
-														<IconButton aria-label='delete' color='error' onClick={deleteHandler}>
-															<DeleteIcon />
-														</IconButton>
-													</TableCell> */}
-
-													{/* <Button variant='contained' color='neutral' size='small' onClick={() => deleteAgent(row._id)}>
-															Delete
-														</Button> */}
+													<TableCell>
+														<Button
+															variant='contained'
+															size='small'
+															onClick={() => {
+																setSelectedRecord(row);
+																setOpenUpdatePass(true);
+															}}>
+															Update
+														</Button>
+													</TableCell>
 												</TableRow>
 											))
 										) : (
@@ -312,28 +321,82 @@ export const AddUser = () => {
 				</Box>
 			</ThemeProvider>
 
-			<Modal open={deleteModal} onClose={handleDeleteClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+			<Modal open={openUpdatePass} onClose={handlePassModal} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style}>
-					<IconButton onClick={handleDeleteClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+					<IconButton onClick={handlePassModal} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<form autoComplete='off'>
+					<form autoComplete='off' noValidate>
 						<Card
 							sx={{
 								boxShadow: 'none',
-								padding: '0 !important',
 							}}>
-							<CardHeader sx={{padding: '0 !important'}} title='Want to Delete ? ' subheader='are u sure this action cannot be undo' />
+							<CardHeader subheader='you can only update Password' title='Update Password ' sx={{py: 0}} />
 
 							<CardContent>
-								<Box sx={{display: 'flex', justifyContent: 'flex-end'}}>
-									<Button color='primary' variant='contained' sx={{mx: 2}} onClick={handleDeleteClose}>
-										Yes
-									</Button>
-									<Button color='primary' variant='contained' onClick={handleDeleteClose}>
-										No
-									</Button>
-								</Box>
+								<Grid container spacing={3}>
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											disabled={true}
+											helperText='Please specify the first name'
+											label='First name'
+											name='firstName'
+											required
+											value={selectedRecord.firstName}
+											variant='outlined'
+										/>
+									</Grid>
+									<Grid item md={6} xs={12}>
+										<TextField fullWidth disabled={true} label='Last name' name='lastName' required value={selectedRecord.lastName} variant='outlined' />
+									</Grid>
+									<Grid item md={6} xs={12}>
+										<TextField fullWidth disabled={true} label='Email Address' name='email' required value={selectedRecord.email} variant='outlined' />
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<TextField fullWidth disabled={true} label='Emp ID' name='employeeCode' value={selectedRecord.employeeCode} type='string' variant='outlined' />
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<TextField fullWidth disabled={true} label='alias' name='employeeAlias' required variant='outlined' value={selectedRecord.employeeAlias} />
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											label='Password'
+											name='password'
+											type='password'
+											required
+											variant='outlined'
+											onChange={handleChangePassupdate}
+											value={passwordInfo.password}
+										/>
+									</Grid>
+									<Grid item md={6} xs={12}>
+										<TextField
+											fullWidth
+											label='Confirm Password'
+											onChange={handleChangePassupdate}
+											name='confirmPassword'
+											type='password'
+											required
+											variant='outlined'
+											value={passwordInfo.confirmPassword}
+										/>
+									</Grid>
+
+									<Grid item md={6} xs={12}>
+										<Button
+											color='primary'
+											variant='contained'
+											sx={{right: '2rem', position: 'absolute'}}
+											disabled={passwordInfo.password == '' || passwordInfo.confirmPassword == '' || passwordInfo.password !== passwordInfo.confirmPassword}>
+											Update
+										</Button>
+									</Grid>
+								</Grid>
 							</CardContent>
 						</Card>
 					</form>
