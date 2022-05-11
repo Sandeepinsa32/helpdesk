@@ -96,7 +96,7 @@ format table pnrconvertor email open, ip address - first, last, authorize ip
 
 3. elder price is coming even if field is hidden
 
-4. Add records data console.
+4. Add records data console. -- done
 5. Logout - remove localstorage and redirect to login
 6. View logs api (30 items atleast)
 7. Page responsive

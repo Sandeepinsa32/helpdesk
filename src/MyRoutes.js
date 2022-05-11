@@ -1,6 +1,7 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import {Typography} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 
 // importing components
 
@@ -14,6 +15,12 @@ import AddNewRecord from './views/AddNewRecord';
 
 const data = {};
 export default function RouteComponent() {
+	const navigate = useNavigate();
+
+	const Signoff = () => {
+		localStorage.removeItem('token');
+		navigate('/login');
+	};
 	return (
 		<Routes>
 			<Route path='/' element={<Dashboard />}></Route>
@@ -27,6 +34,7 @@ export default function RouteComponent() {
 			<Route path='/all' element={<SearchRecord />}></Route>
 			<Route path='/email' element={<Email />}></Route>
 			<Route path='/add-new-record' element={<AddNewRecord isview={false} data={data} />}></Route>
+			<Route path='/logout' element={<Signoff />}></Route>
 		</Routes>
 	);
 }

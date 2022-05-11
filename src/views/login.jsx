@@ -38,7 +38,7 @@ const Login = () => {
 	const [showPassword, setShowPassword] = useState();
 
 	const handleLogin = async (e) => {
-		e.preventDefault();
+		// e.preventDefault();
 
 		axios
 			.post(BASEURL + '/agent/login', formik.values)
