@@ -398,7 +398,7 @@ export const Transaction = () => {
 					</Typography>
 					<Paper>
 						<List>
-							{arr.map((a, i) => {
+							{[Array(10)].map((a, i) => {
 								return (
 									<ListItem disablePadding key={i}>
 										<ListItemButton>
