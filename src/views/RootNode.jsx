@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import {AgentProfileModal} from './components/AgentProfileModal';
 import {NavLink, useNavigate} from 'react-router-dom';
 
@@ -107,9 +107,19 @@ export default function MiniDrawer() {
 	};
 	const [open, setOpen] = useState(false);
 	const [modalopen, setModalopen] = useState(false);
-	// const [modalNotiopen, setModalNotiopen] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(false);
 
-	// const handleNotiModalOpen = () => setModalNotiopen(true);
+	console.log("localStorage.setItem('role' , true)");
+
+	const checkRole = () => {
+		const role = localStorage.getItem('role');
+
+		role === true ? setIsAdmin(true) : setIsAdmin(false);
+	};
+
+	useEffect(() => {
+		checkRole();
+	}, [0]);
 
 	// const handleNotiModalClose = () => setModalNotiopen(false);
 
@@ -150,25 +160,21 @@ export default function MiniDrawer() {
 						}}>
 						{open ? <CloseIcon /> : <MenuIcon fontSize='small' />}
 					</IconButton>
-					{/*  search icon  */}
 
 					<Box sx={{flexGrow: 1}} />
 
-					{/* user icon  */}
-					<Tooltip title='Add new agent ' onClick={goToCustomer}>
-						<IconButton sx={{ml: 1}}>
-							<GroupAddIcon fontSize='large' />
-						</IconButton>
-					</Tooltip>
-					{/* notification icon  */}
-
-					{/* avatar/user  icon  */}
+					{isAdmin && (
+						<Tooltip title='Add new agent ' onClick={goToCustomer}>
+							<IconButton sx={{ml: 1}}>
+								<GroupAddIcon fontSize='large' />
+							</IconButton>
+						</Tooltip>
+					)}
 					<Tooltip title='User Details'>
 						<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
 							<ManageAccountsIcon fontSize='large' />
 						</IconButton>
 					</Tooltip>
-
 					<Tooltip title='Logout'>
 						<NavLink className='navlink-decoration' onClick={() => localStorage.removeItem('token')} to='/login'>
 							<IconButton sx={{ml: 1}}>
