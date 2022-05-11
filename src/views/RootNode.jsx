@@ -272,36 +272,6 @@ const items = [
 		icon: <SearchIcon fontSize='small' />,
 		title: 'All Transaction',
 	},
-	// {
-	// 	href: '/account',
-	// 	icon: <UserIcon fontSize='small' />,
-	// 	title: 'Account',
-	// },
-	// {
-	// 	href: '/settings',
-	// 	icon: <CogIcon fontSize='small' />,
-	// 	title: 'Settings',
-	// },
-	// {
-	// 	href: '/login',
-	// 	icon: <LockIcon fontSize='small' />,
-	// 	title: 'Login',
-	// },
-	{
-		href: '/logout',
-		icon: <LogoutIcon fontSize='small' />,
-		title: 'Log Out',
-	},
-	// {
-	// 	href: '/add-new-record',
-	// 	icon: <BellIcon fontSize='small' />,
-	// 	title: 'new records',
-	// },
-	// {
-	// 	href: '/404',
-	// 	icon: <XCircleIcon fontSize='small' />,
-	// 	title: 'Error',
-	// },
 ];
 
 const style = {

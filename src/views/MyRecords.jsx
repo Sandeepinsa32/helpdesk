@@ -128,6 +128,7 @@ export const Transaction = () => {
 	};
 
 	useEffect(() => {
+		console.log('useEffect');
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
 
@@ -286,8 +287,6 @@ export const Transaction = () => {
 											'Dep Date',
 											'Return Date',
 											'action',
-											'Email',
-											'logs',
 										].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
@@ -331,11 +330,13 @@ export const Transaction = () => {
 															setUserData(row);
 															handleOpen();
 														}}>
-														View
+														Update
 													</Button>
-												</TableCell>
-												<TableCell>
+
 													<Button
+														sx={{
+															margin: ` 0 8px`,
+														}}
 														variant='contained'
 														size='small'
 														onClick={(e) => {
@@ -344,10 +345,9 @@ export const Transaction = () => {
 															// console.log(row.id);
 															setOpenEmail(true);
 														}}>
-														Send
+														Email
 													</Button>
-												</TableCell>
-												<TableCell>
+
 													<Button variant='contained' size='small' onClick={() => setOpenLog(true)}>
 														logs
 													</Button>

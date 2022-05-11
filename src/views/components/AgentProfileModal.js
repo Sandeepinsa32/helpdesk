@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Box, Button, Card, CardContent, CardHeader, Divider, Grid, TextField, Avatar, CardActions, Typography} from '@mui/material';
+import {Box, Button, Card, CardContent, CardHeader, CircularProgress, Divider, Grid, TextField, Avatar, CardActions, Typography} from '@mui/material';
 import axios from 'axios';
 import {BASEURL, errorToast, successToast} from '../../utils/Utils';
 
@@ -30,6 +30,9 @@ export const AgentProfileModal = () => {
 			})
 			.then((response) => {
 				setProfileDetails(response.data.data);
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 500);
 			})
 			.catch((e) => {
 				console.log(e);
@@ -78,33 +81,60 @@ export const AgentProfileModal = () => {
 				<CardHeader subheader='The information cannot be edited' title='Profile' sx={{py: 0}} />
 				<Divider />
 				<CardContent>
-					<Box
-						sx={{
-							alignItems: 'center',
-							display: 'flex',
-							flexDirection: 'column',
-						}}>
-						<Avatar
-							src={'/static/images/avatars/avatar_6.png'}
+					{isLoading ? (
+						<Box
 							sx={{
-								height: 64,
-								mb: 2,
-								width: 64,
-							}}
-						/>
-						<Typography color='textPrimary' variant='h5'>
-							{`${profileDetails?.firstName} ${profileDetails?.lastName}`}
-						</Typography>
-						<Typography color='textSecondary' variant='body2'>
-							{` ${profileDetails?.email}`}
-						</Typography>
-						<Typography color='textSecondary' variant='body2'>
-							{`Emp Code :  ${profileDetails?.employeeCode}`}
-						</Typography>
-						<Typography color='textSecondary' variant='body2'>
-							{`Emp alias :  ${profileDetails?.employeeAlias}`}
-						</Typography>
-					</Box>
+								alignItems: 'center',
+								display: 'flex',
+								flexDirection: 'column',
+							}}>
+							<Avatar
+								src={'/static/images/avatars/avatar_6.png'}
+								sx={{
+									height: 64,
+									mb: 2,
+									width: 64,
+								}}
+							/>
+							<Box>
+								<div
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+									}}>
+									<CircularProgress />
+								</div>
+							</Box>
+						</Box>
+					) : (
+						<Box
+							sx={{
+								alignItems: 'center',
+								display: 'flex',
+								flexDirection: 'column',
+							}}>
+							<Avatar
+								src={'/static/images/avatars/avatar_6.png'}
+								sx={{
+									height: 64,
+									mb: 2,
+									width: 64,
+								}}
+							/>
+							<Typography color='textPrimary' variant='h5'>
+								{`${profileDetails?.firstName} ${profileDetails?.lastName}`}
+							</Typography>
+							<Typography color='textSecondary' variant='body2'>
+								{` ${profileDetails?.email}`}
+							</Typography>
+							<Typography color='textSecondary' variant='body2'>
+								{`Emp Code :  ${profileDetails?.employeeCode}`}
+							</Typography>
+							<Typography color='textSecondary' variant='body2'>
+								{`Emp alias :  ${profileDetails?.employeeAlias}`}
+							</Typography>
+						</Box>
+					)}
 				</CardContent>
 				<Divider />
 

@@ -224,19 +224,7 @@ export default function SearchRecord() {
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
-										{[
-											'Agent Name',
-											'Booking ID',
-											//   "CCH Name",
-											'Phone',
-											'Total G.P',
-											'Airline',
-											'No.of PAX',
-											'Fare Type',
-											'Dep. Date',
-											'Return Date',
-											'Action',
-										].map((th) => (
+										{['Agent Name', 'Booking ID', 'Phone', 'Total G.P', 'Airline', 'No.of PAX', 'Fare Type', 'Dep. Date', 'Return Date', 'Action'].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
 									</TableRow>
@@ -276,6 +264,7 @@ export default function SearchRecord() {
 													<Button
 														variant='contained'
 														size='small'
+														sx={{margin: `0 8px`}}
 														onClick={() => {
 															// console.log(row);
 															setViewData(true);
@@ -284,9 +273,7 @@ export default function SearchRecord() {
 														}}>
 														View
 													</Button>
-												</TableCell>
 
-												<TableCell>
 													<Button
 														variant='contained'
 														size='small'
