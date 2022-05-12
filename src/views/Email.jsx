@@ -39,8 +39,9 @@ import { createTheme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { lightGreen } from "@mui/material/colors";
 
-const Email = ({ Ticketid }) => {
+const Email = ({ Ticketid, onClose }) => {
   const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
   const [inputList, setInputList] = useState([
     {
@@ -129,8 +130,9 @@ const Email = ({ Ticketid }) => {
   const handleConfirm = () => {
     calculateTotalAmount();
     let newArr = clean(inputList);
+    console.log(Ticketid);
     newArr = newArr.filter((value) => Object.keys(value).length !== 0);
-
+    console.log(pnrValue);
     console.log(
       "selectedEmailTemplate",
       selectedEmailTemplate,
@@ -145,25 +147,22 @@ const Email = ({ Ticketid }) => {
   const handlePreviewClose = () => {
     setPreviewModal(false);
   };
-  // const handlePnrConverter = () => {
-  // 	// setPreviewModal(false);
-  // };
-  let body =
-    // qs.stringify(
-    {
-      pnr: pnrValue,
-    };
-  // );
 
-  const headers = {
-    ContentType: "application/x-www-form-urlencoded",
-    PUBLIC_APP_KEY:
-      "6e0b98437220f87494a76c81543e941083aa6a4c85a2c87be5820372e87b82c9",
-    PRIVATE_APP_KEY: "pCPsHMMMZI2J2ZF4GAKB0v9XGxs0Yknxva1",
+  const handleSendEmail = async () => {
+    axios
+      .post(BASEURL + "/ticket/email", {
+        data: inputList,
+        ticketId: Ticketid,
+      })
+      .then((res) => {
+        console.log(res);
+        onClose();
+      })
+      .catch((e) => console.log(e));
   };
+
   const handlePnrConverter = async (e) => {
     e.preventDefault();
-
     axios
       .post(
         `https://api.pnrconverter.com/api`,
@@ -171,12 +170,15 @@ const Email = ({ Ticketid }) => {
           pnr: pnrValue,
         },
         {
-          headers,
+          headers: {
+            ContentType: "application/x-www-form-urlencoded",
+            PUBLIC_APP_KEY:
+              "6e0b98437220f87494a76c81543e941083aa6a4c85a2c87be5820372e87b82c9",
+            PRIVATE_APP_KEY: "pCPsHMMMZI2J2ZF4GAKB0v9XGxs0Yknxva1",
+          },
         }
       )
       .then((response) => {
-        // console.log(response.data);
-        // console.log(response.data.flightData.flights);
         setPnrData(response.data.flightData.flights);
       })
       .catch((e) => {
@@ -240,7 +242,7 @@ const Email = ({ Ticketid }) => {
                 value={pnrValue}
               />
             </Grid>
-            <Grid item xs={6} md={2} sx={{ pr: 1 }}>
+            <Grid item xs={6} md={2} sx={{ pr: 1, my: 2 }}>
               <Button onClick={handlePnrConverter} variant="contained">
                 Convert
               </Button>
@@ -426,7 +428,7 @@ const Email = ({ Ticketid }) => {
 							</Button>
 						</Grid> */}
             <Grid item xs={6} md={2} sx={{ mb: 3 }}>
-              <Button onClick={handleConfirm} variant="contained">
+              <Button onClick={handleSendEmail} variant="contained">
                 Submit
               </Button>
             </Grid>

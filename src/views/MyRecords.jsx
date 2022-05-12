@@ -519,7 +519,11 @@ export const Transaction = () => {
           >
             <CloseIcon />
           </IconButton>
-          <Email Ticketid={viewEmail} id={selectedTicket} />
+          <Email
+            Ticketid={viewEmail}
+            id={selectedTicket}
+            onClose={handleEmailClose}
+          />
         </Box>
       </Modal>
     </>
