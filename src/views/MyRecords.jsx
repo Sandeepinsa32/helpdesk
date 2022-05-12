@@ -297,7 +297,7 @@ export const Transaction = () => {
                   <TableRow>
                     {[
                       "Email",
-                      "Agent Name",
+                      "Cust. Name",
                       "Booking ID",
                       //   "CCH Name",
                       "Phone",
@@ -334,7 +334,11 @@ export const Transaction = () => {
                         sx={
                           row.status === "generate"
                             ? { borderLeft: "8px solid #E0021B" }
-                            : { borderLeft: "8px solid #76DF29" }
+                            : row.status === "sent"
+                            ? { borderLeft: "8px solid #0DC5F4" }
+                            : row.status === "authorized"
+                            ? { borderLeft: "8px solid #76DF29" }
+                            : {}
                         }
                       >
                         <TableCell>{row.email}</TableCell>

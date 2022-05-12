@@ -34,7 +34,8 @@ function App() {
       return response;
     },
     function (error) {
-      if (error.response.status) {
+      if (error.response.status === 401) {
+        console.log("hey this is inside if ");
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         navigate("/login");

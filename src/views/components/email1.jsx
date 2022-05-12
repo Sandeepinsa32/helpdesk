@@ -166,7 +166,7 @@ table.tableoutter th {
 
 </style>
     
-    <div style="width:100%; max-width:600px; background:#ffffff; padding:5px 10px; text-align:left;  font-family:"Calibri, sans-serif";">
+    <div style="width:100%; background:#ffffff; padding:5px 10px; text-align:left;  font-family:"Calibri, sans-serif";">
 		
       <p style="font-size:12px; line-height:24px; color:#666666; margin-bottom:10px;  font-family:"Calibri, sans-serif";">
         By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
@@ -436,7 +436,7 @@ table.tableoutter th {
 
 </style>
     
-    <div style="width:100%; max-width:600px; background:#ffffff; padding:5px 10px; text-align:left;  font-family:"Calibri, sans-serif";">
+    <div style="width:100%;  background:#ffffff; padding:5px 10px; text-align:left;  font-family:"Calibri, sans-serif";">
 		
       <p style="font-size:12px; line-height:24px; color:#666666; margin-bottom:10px;  font-family:"Calibri, sans-serif";">
         By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
@@ -672,7 +672,7 @@ table.tableoutter th {
 
 </style>
     
-    <div style="width:100%; max-width:600px; background:#ffffff; padding:5px 10px; text-align:left;  font-family:"Calibri, sans-serif";">
+    <div style="width:100%; background:#ffffff; padding:5px 10px; text-align:left;  font-family:"Calibri, sans-serif";">
 		
       <p style="font-size:12px; line-height:24px; color:#666666; margin-bottom:10px;  font-family:"Calibri, sans-serif";">
         By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
