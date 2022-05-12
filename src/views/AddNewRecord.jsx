@@ -43,7 +43,7 @@ const AddNewRecord = ({isView, data}) => {
 		ccTimes,
 		ccAmount,
 		ccDigits,
-
+		isCompanyCCUsed,
 		flightMarkup,
 		hotelMarkup,
 		carMarkup,
@@ -57,7 +57,7 @@ const AddNewRecord = ({isView, data}) => {
 			cardHolderName: 'john',
 			cardHolderNumber: '9876543210',
 			cardNumber: '0858-8585-8585',
-			expiryDate: '05/05/2022',
+			expiryDate: '5/2022',
 			cvv: '022',
 		},
 	]);
@@ -387,15 +387,17 @@ const AddNewRecord = ({isView, data}) => {
 							{isCompanyCard &&
 								items.map((item, i) => {
 									const {name, label} = item;
+
+									console.log('print ->', formik.touched, formik.errors[name]);
 									return (
 										<Grid item xs={12} md={3} key={i}>
 											<TextField
-												required
+												// required
 												name={name}
 												label={label}
 												fullWidth
-												error={Boolean(formik.touched.name && formik.errors.name)}
-												helperText={formik.touched.name && formik.errors.name}
+												error={formik.touched[name] && formik.errors[name]}
+												helperText={formik.touched[name] && formik.errors[name]}
 												onBlur={formik.handleBlur}
 												onChange={formik.handleChange}
 												value={formik.values.name}
