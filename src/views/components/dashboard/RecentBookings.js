@@ -26,11 +26,7 @@ export const RecentBookings = () => {
   const loadTransactions = async () => {
     setIsLoading(true);
     axios
-      .get(BASEURL + "/ticket/my", {
-        headers: {
-          authorization: "Bearer " + JSON.parse(localStorage.getItem("token")),
-        },
-      })
+      .get(BASEURL + "/ticket/my")
       .then((response) => {
         // console.log(response.data);
         setRecordData(response.data.data.tickets);

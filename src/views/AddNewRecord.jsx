@@ -267,19 +267,10 @@ const AddNewRecord = ({ isView, data }) => {
     onSubmit: () => {
       console.log(formik.values, inputList);
       axios
-        .post(
-          BASEURL + "/ticket/raise",
-          {
-            data: formik.values,
-            cards: inputList,
-          },
-          {
-            headers: {
-              authorization:
-                "Bearer " + JSON.parse(localStorage.getItem("token")),
-            },
-          }
-        )
+        .post(BASEURL + "/ticket/raise", {
+          data: formik.values,
+          cards: inputList,
+        })
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
     },
