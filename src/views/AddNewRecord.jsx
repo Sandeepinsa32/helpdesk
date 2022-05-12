@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AddNewRecordForm from './components/AddTicketForm/AddNewRecordForm';
 // import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
 import {useFormik, Formik} from 'formik';
@@ -57,8 +57,8 @@ const AddNewRecord = ({isView, data}) => {
 			cardHolderName: 'john',
 			cardHolderNumber: '9876543210',
 			cardNumber: '085885858585',
-			expiryDate: 'null',
-			cvv: '022',
+			expiryDate: null,
+			cvv: 123,
 		},
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
@@ -103,6 +103,9 @@ const AddNewRecord = ({isView, data}) => {
 			carMarkup: carMarkup ? carMarkup : '',
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
 			addonMarkup: addonMarkup ? addonMarkup : '',
+
+			//paymentCard
+			card: inputList,
 		},
 		validationSchema: Yup.object({
 			//basic
@@ -183,6 +186,19 @@ const AddNewRecord = ({isView, data}) => {
 			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 
+			//Card Payment
+			card: Yup.array()
+				.of(
+					Yup.object().shape({
+						cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+						cardHolderNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Phone is required'),
+						cardNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Card Number is required'),
+						cvv: Yup.number('input must consist of number').min(3).max(3).positive('input must consist of positive number').integer().required('CVV is required'),
+						expiryDate: Yup.string().required('This field is required').nullable(),
+					})
+				)
+				.min(1, 'card is >= 1'),
+
 			// comments: Yup.string().max(255),
 			// notes: '',
 			// pricePerPerson: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
@@ -206,6 +222,7 @@ const AddNewRecord = ({isView, data}) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
 		list[index][name] = value;
+		formik.setFieldValue('card', list);
 		setInputList(list);
 	};
 	const handleDateInputChange = (index, value) => {
@@ -219,12 +236,24 @@ const AddNewRecord = ({isView, data}) => {
 	const handleRemoveClick = (index) => {
 		const list = [...inputList];
 		list.splice(index, 1);
+		formik.setFieldValue('card', list);
 		setInputList(list);
 	};
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
 		setInputList([
+			...inputList,
+			{
+				cardHolderName: '',
+				cardHolderNumber: '',
+				cardNumber: '',
+				expiryDate: null,
+				cvv: '',
+			},
+		]);
+
+		formik.setFieldValue('card', [
 			...inputList,
 			{
 				cardHolderName: '',
@@ -249,10 +278,16 @@ const AddNewRecord = ({isView, data}) => {
 			label: 'Last 4 Digits of of Company CC ',
 		},
 	];
+
+	useEffect(() => {
+		console.log(formik);
+	});
+
 	return (
 		<>
 			<Formik>
 				<form onSubmit={formik.handleSubmit}>
+					{/* Address Form */}
 					<Box
 						sx={{
 							m: 1,
@@ -263,12 +298,13 @@ const AddNewRecord = ({isView, data}) => {
 						}}>
 						<AddNewRecordForm formik={formik} isView={isView} />
 					</Box>
+					{/*  card Payment */}
 					<Box sx={{m: 1}}>
 						<Typography variant='h6' gutterBottom sx={{my: 4}}>
 							Payment method :
 						</Typography>
 					</Box>
-
+					{/* CC card  */}
 					<Box
 						sx={{
 							m: 1,
@@ -280,10 +316,10 @@ const AddNewRecord = ({isView, data}) => {
 						{inputList.map((x, i) => {
 							return (
 								<Grid key={i} container spacing={3}>
-									{/* Card Holder NAme field */}
+									{/* Card Holder Name field */}
 									<Grid item xs={12} md={2}>
 										<TextField
-											required
+											// required
 											name='cardHolderName'
 											label='Name on card'
 											fullWidth
@@ -294,25 +330,48 @@ const AddNewRecord = ({isView, data}) => {
 											value={inputList[i].cardHolderName}
 										/>
 									</Grid>
+
 									{/*  Card Holder Phone no. */}
 									<Grid item xs={12} md={3}>
-										<TextField required name='cardHolderNumber' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderNumber} />
+										<TextField
+											// required
+											name='cardHolderNumber'
+											label='Phone no.'
+											fullWidth
+											onChange={(e) => handleCardInput(e, i)}
+											value={inputList[i].cardHolderNumber}
+											error={formik.touched.cardHolderNumber && formik.errors.cardHolderNumber}
+											helperText={formik.touched.cardHolderNumber && formik.errors.cardHolderNumber}
+											onBlur={formik.handleBlur}
+										/>
 									</Grid>
 									{/* CardNumber Field */}
 									<Grid item xs={12} md={3}>
 										<TextField
-											required
+											// required
 											name='cardNumber'
 											label='Card number'
 											fullWidth
 											autoComplete='cc-number'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardNumber}
+											error={formik.touched.cardNumber && formik.errors.cardNumber}
+											helperText={formik.touched.cardNumber && formik.errors.cardNumber}
 										/>
 									</Grid>
 									{/* CVV Field */}
 									<Grid item xs={12} md={2}>
-										<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
+										<TextField
+											// required
+											name='cvv'
+											label='CVV'
+											fullWidth
+											autoComplete='cc-csc'
+											onChange={(e) => handleCardInput(e, i)}
+											value={inputList[i].cvv}
+											error={formik.touched.cvv && formik.errors.cvv}
+											helperText={formik.touched.cvv && formik.errors.cvv}
+										/>
 									</Grid>
 									{/* expiry date field */}
 									<Grid item xs={12} md={2}>
@@ -325,6 +384,8 @@ const AddNewRecord = ({isView, data}) => {
 												inputFormat='MM/yyyy'
 												placeholder='MM/yyyy'
 												minDate={new Date()}
+												error={formik.touched.expiryDate && formik.errors.expiryDate}
+												helperText={formik.touched.expiryDate && formik.errors.expiryDate}
 												onChange={(newValue) => {
 													handleDateInputChange(
 														i,

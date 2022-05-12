@@ -33,3 +33,10 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 18. Views Logs edits
 19. update Record
+
+20. Email Authorization
+21. 48 hours edit for agent
+22. 48 hours edit for admin
+23. Product type --done
+24. Card validation
+25. Send email
