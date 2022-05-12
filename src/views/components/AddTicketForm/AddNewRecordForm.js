@@ -70,7 +70,12 @@ export default function AddressForm({formik, isView}) {
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
 			<Grid item xs={6} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
-				<FormControl sx={{m: 1, p: 1}} fullWidth disabled={isView} error={Boolean(formik.touched.productType && formik.errors.productType)}>
+				<FormControl
+					sx={{m: 1, p: 1}}
+					fullWidth
+					disabled={isView}
+					error={Boolean(formik.touched.productType && formik.errors.productType)}
+					helperText={formik.touched.productType && formik.errors.productType}>
 					<InputLabel variant='outlined'>Product Type :</InputLabel>
 				</FormControl>
 				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
@@ -108,8 +113,8 @@ export default function AddressForm({formik, isView}) {
 												color='primary'
 											/>
 										}
-										label={label}
-									/>
+										label={label}></FormControlLabel>
+
 									{checkboxType[x] && (
 										<TextField
 											name={markup}

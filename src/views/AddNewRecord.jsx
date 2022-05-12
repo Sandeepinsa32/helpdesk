@@ -40,9 +40,9 @@ const AddNewRecord = ({isView, data}) => {
 		childPrice,
 		adultPrice,
 		elderPrice,
-		ccUsedCount,
-		ccAmountUsed,
-		ccLastDigit,
+		ccTimes,
+		ccAmount,
+		ccDigits,
 
 		flightMarkup,
 		hotelMarkup,
@@ -91,10 +91,10 @@ const AddNewRecord = ({isView, data}) => {
 			departureDate: departureDate ? departureDate : null,
 			returnDate: returnDate ? returnDate : null,
 			//companyCard details
-			isCompanyCard: isCompanyCard,
-			ccUsedCount: ccUsedCount ? ccUsedCount : '',
-			ccAmountUsed: ccAmountUsed ? ccAmountUsed : '',
-			ccLastDigit: ccLastDigit ? ccLastDigit : '',
+			isCompanyCCUsed: isCompanyCCUsed,
+			ccTimes: ccTimes ? ccTimes : '',
+			ccAmount: ccAmount ? ccAmount : '',
+			ccDigits: ccDigits ? ccDigits : '',
 
 			//markup
 
@@ -156,24 +156,24 @@ const AddNewRecord = ({isView, data}) => {
 			departureDate: Yup.string().required('This field is required').nullable(),
 			returnDate: Yup.string().required('please enter  DepartureDate value first ,This field is required').nullable(),
 			//companyCard details
-			isCompanyCard: Yup.bool(),
-			ccUsedCount: Yup.number('input must consist if number')
+			isCompanyCCUsed: Yup.bool(),
+			ccTimes: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
 				.integer()
-				.when(['isCompanyCard'], (isCompanyCard, schema) => {
-					return isCompanyCard === true ? schema.required('this field required ') : schema;
+				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
+					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),
-			ccAmountUsed: Yup.number('input must consist if number')
+			ccAmount: Yup.number('input must consist if number')
 				.positive('input must consist if positive number')
 				.integer()
-				.when(['isCompanyCard'], (isCompanyCard, schema) => {
-					return isCompanyCard === true ? schema.required('this field required ') : schema;
+				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
+					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),
-			ccLastDigit: Yup.number('input must consist if number')
+			ccDigits: Yup.number('input must consist if number')
 				.min(4, 'please enter only last 4 digits of card')
 				.positive('input must consist if positive number')
-				.when(['isCompanyCard'], (isCompanyCard, schema) => {
-					return isCompanyCard === true ? schema.required('this field required ') : schema;
+				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
+					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),
 
 			//markup
@@ -236,15 +236,15 @@ const AddNewRecord = ({isView, data}) => {
 	};
 	const items = [
 		{
-			name: 'ccUsedCount',
+			name: 'ccTimes',
 			label: 'CC used How many times? ',
 		},
 		{
-			name: 'ccAmountUsed',
+			name: 'ccAmount',
 			label: 'Company CC Used Amount',
 		},
 		{
-			name: 'ccLastDigit',
+			name: 'ccDigits',
 			label: 'Last 4 Digits of of Company CC ',
 		},
 	];
@@ -374,6 +374,7 @@ const AddNewRecord = ({isView, data}) => {
 											checked={isCompanyCard}
 											onChange={(e) => {
 												setIsCompanyCard(!isCompanyCard);
+												formik.setFieldValue('isCompanyCCUsed', !isCompanyCard);
 											}}
 											name='companyCard'
 											color='primary'
