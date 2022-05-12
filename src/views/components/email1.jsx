@@ -2,8 +2,25 @@ import React, {useState} from 'react';
 
 const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) => {
 	const [selectedEmail, setSelectedEmail] = useState();
+	console.log(data);
+	function renderingEmail() {
+		switch (selectedEmailTemplate) {
+			// case 0:
+			// 	return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
+			case 1:
+				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
+			case 2:
+				return <span dangerouslySetInnerHTML={{__html: Exchange}} />;
+			case 6:
+				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
+			// case 4:
+			// 	return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
 
-	function renderingEmail() {}
+			default:
+				throw new Error('Unknown step');
+		}
+	}
+
 	function currentDate() {
 		let today = new Date();
 		let dd = String(today.getDate()).padStart(2, '0');
@@ -15,10 +32,8 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 	}
 
 	function userTabelData(data) {
-		// console.log(data);
 		var tableString = '';
 		data.forEach((x) => {
-			console.log(x);
 			tableString =
 				tableString +
 				`<tr>
@@ -697,9 +712,9 @@ table.tableoutter th {
   </thead>
   <tbody id='appendCHildHere' >
     
-<!--     ${setTimeout(() => {
+
 		userTabelData();
-	}, 2000)} -->
+
    
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
@@ -808,11 +823,9 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	return (
-		<>
-			<span dangerouslySetInnerHTML={{__html: futureCredit}} />
-		</>
-	);
+	return <>{renderingEmail()}</>;
 };
 
 export default Email1;
+
+setSelectedEmailTemplate(Number(e.target.value));

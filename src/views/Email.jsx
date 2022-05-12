@@ -44,7 +44,7 @@ const Email = ({Ticketid}) => {
 		setTotalAmt(total);
 	};
 	const handleEmailTemplateChange = (e) => {
-		setSelectedEmailTemplate(e.target.value);
+		setSelectedEmailTemplate(Number(e.target.value));
 		// console.log(selectedEmailTemplate);
 	};
 
