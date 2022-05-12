@@ -242,17 +242,6 @@ const AddNewRecord = ({isView, data}) => {
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList([
-			...inputList,
-			{
-				cardHolderName: '',
-				cardHolderNumber: '',
-				cardNumber: '',
-				expiryDate: null,
-				cvv: '',
-			},
-		]);
-
 		formik.setFieldValue('card', [
 			...inputList,
 			{
@@ -260,7 +249,17 @@ const AddNewRecord = ({isView, data}) => {
 				cardHolderNumber: '',
 				cardNumber: '',
 				expiryDate: null,
-				cvv: '',
+				cvv: 123,
+			},
+		]);
+		setInputList([
+			...inputList,
+			{
+				cardHolderName: '',
+				cardHolderNumber: '',
+				cardNumber: '',
+				expiryDate: null,
+				cvv: 123,
 			},
 		]);
 	};
@@ -279,9 +278,9 @@ const AddNewRecord = ({isView, data}) => {
 		},
 	];
 
-	useEffect(() => {
-		console.log(formik);
-	});
+	// useEffect(() => {
+	// 	console.log(formik);
+	// });
 
 	return (
 		<>
@@ -314,6 +313,9 @@ const AddNewRecord = ({isView, data}) => {
 							borderRadius: 1,
 						}}>
 						{inputList.map((x, i) => {
+							{
+								console.log(formik.errors);
+							}
 							return (
 								<Grid key={i} container spacing={3}>
 									{/* Card Holder Name field */}
@@ -328,6 +330,8 @@ const AddNewRecord = ({isView, data}) => {
 												handleCardInput(e, i);
 											}}
 											value={inputList[i].cardHolderName}
+											// error={Boolean(formik.errors.card !== (undefined && null) ? (formik.errors.card ? formik.errors.card[i].cardHolderName ? formik.errors.card[i].cardHolderName : null) : null)}
+											// helperText={formik.errors.card !== (undefined && null) ? (formik.errors.card[i].cardHolderName ? formik.errors.card[i].cardHolderName : null) : null}
 										/>
 									</Grid>
 
@@ -340,8 +344,8 @@ const AddNewRecord = ({isView, data}) => {
 											fullWidth
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardHolderNumber}
-											error={formik.touched.cardHolderNumber && formik.errors.cardHolderNumber}
-											helperText={formik.touched.cardHolderNumber && formik.errors.cardHolderNumber}
+											// error={Boolean(formik.errors.card !== undefined ? (formik.errors.card[i].cardHolderNumber ? formik.errors.card[i].cardHolderNumber : null) : null)}
+											// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].cardHolderNumber ? formik.errors.card[i].cardHolderNumber : null) : null}
 											onBlur={formik.handleBlur}
 										/>
 									</Grid>
@@ -355,8 +359,8 @@ const AddNewRecord = ({isView, data}) => {
 											autoComplete='cc-number'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardNumber}
-											error={formik.touched.cardNumber && formik.errors.cardNumber}
-											helperText={formik.touched.cardNumber && formik.errors.cardNumber}
+											// error={Boolean(formik.errors.card !== undefined ? (formik.errors.card[i].cardNumber ? formik.errors.card[i].cardNumber : null) : null)}
+											// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].cardNumber ? formik.errors.card[i].cardNumber : null) : null}
 										/>
 									</Grid>
 									{/* CVV Field */}
@@ -369,8 +373,8 @@ const AddNewRecord = ({isView, data}) => {
 											autoComplete='cc-csc'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cvv}
-											error={formik.touched.cvv && formik.errors.cvv}
-											helperText={formik.touched.cvv && formik.errors.cvv}
+											// error={Boolean(formik.errors.card !== undefined ? (formik.errors.card[i].cvv ? formik.errors.card[i].cvv : null) : null)}
+											// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].cvv ? formik.errors.card[i].cvv : null) : null}
 										/>
 									</Grid>
 									{/* expiry date field */}
@@ -384,8 +388,8 @@ const AddNewRecord = ({isView, data}) => {
 												inputFormat='MM/yyyy'
 												placeholder='MM/yyyy'
 												minDate={new Date()}
-												error={formik.touched.expiryDate && formik.errors.expiryDate}
-												helperText={formik.touched.expiryDate && formik.errors.expiryDate}
+												// spiryDate : null) : null)}
+												// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].expiryDate ? formik.errors.card[i].expiryDate : null) : null}
 												onChange={(newValue) => {
 													handleDateInputChange(
 														i,
