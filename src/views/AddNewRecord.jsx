@@ -56,8 +56,8 @@ const AddNewRecord = ({isView, data}) => {
 		{
 			cardHolderName: 'john',
 			cardHolderNumber: '9876543210',
-			cardNumber: '0858-8585-8585',
-			expiryDate: '5/2022',
+			cardNumber: '085885858585',
+			expiryDate: 'null',
 			cvv: '022',
 		},
 	]);
@@ -190,6 +190,7 @@ const AddNewRecord = ({isView, data}) => {
 		}),
 		onSubmit: () => {
 			console.log(formik.values, inputList);
+			console.log(formik.values.productType);
 			axios
 				.post(BASEURL + '/ticket/raise', {
 					data: formik.values,
