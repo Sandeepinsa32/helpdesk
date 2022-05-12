@@ -827,5 +827,3 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
 };
 
 export default Email1;
-
-setSelectedEmailTemplate(Number(e.target.value));
