@@ -56,11 +56,11 @@ const UpdateRecord = ({data}) => {
 
 	const [inputList, setInputList] = useState([
 		{
-			cardHolderName: 'john',
-			cardHolderNumber: '9876543210',
-			cardNumber: '0858-8585-8585',
-			expiryDate: '5/2022',
-			cvv: '022',
+			cardHolderName: '',
+			cardHolderNumber: '',
+			cardNumber: '',
+			expiryDate: '',
+			cvv: '',
 		},
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
@@ -68,26 +68,26 @@ const UpdateRecord = ({data}) => {
 	// formik validation object
 	const formik = useFormik({
 		initialValues: {
-			firstName: firstName ? firstName : 'john',
-			lastName: lastName ? lastName : 'doe',
-			email: email ? email : 'john@doe.com',
-			phone: phone ? phone : 9874561230,
-			alternateEmail: alternateEmail ? alternateEmail : 'jane@doe.com',
-			alternatePhone: alternatePhone ? alternatePhone : '0321456987',
-			pnrNo: pnrNo ? pnrNo : '1 ss2 5d5d d5jcjhbdc cncajnhc cscs',
-			fareType: fareType ? fareType : 'publish',
-			mcoNo: mcoNo ? mcoNo : 55,
-			airlineCode: airlineCode ? airlineCode : 'DL',
-			bookingType: bookingType ? bookingType : 'new',
-			bookedOn: bookedOn ? bookedOn : 'trippro',
+			firstName: firstName ? firstName : '',
+			lastName: lastName ? lastName : '',
+			email: email ? email : '',
+			phone: phone ? phone : '',
+			alternateEmail: alternateEmail ? alternateEmail : '',
+			alternatePhone: alternatePhone ? alternatePhone : '',
+			pnrNo: pnrNo ? pnrNo : '',
+			fareType: fareType ? fareType : '',
+			mcoNo: mcoNo ? mcoNo : '',
+			airlineCode: airlineCode ? airlineCode : '',
+			bookingType: bookingType ? bookingType : '',
+			bookedOn: bookedOn ? bookedOn : '',
 			productType: productType ? productType : '',
-			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : 20,
-			adultCount: adultCount ? adultCount : 2,
-			childCount: childCount ? childCount : 2,
-			elderCount: elderCount ? elderCount : 0,
-			grandTotal: grandTotal ? grandTotal : 100,
-			childPrice: childPrice ? childPrice : 2,
-			adultPrice: adultPrice ? adultPrice : 2,
+			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '',
+			adultCount: adultCount ? adultCount : '',
+			childCount: childCount ? childCount : '',
+			elderCount: elderCount ? elderCount : '',
+			grandTotal: grandTotal ? grandTotal : '',
+			childPrice: childPrice ? childPrice : '',
+			adultPrice: adultPrice ? adultPrice : '',
 			elderPrice: elderPrice ? elderPrice : '',
 			//date
 			departureDate: departureDate ? departureDate : null,
@@ -100,7 +100,7 @@ const UpdateRecord = ({data}) => {
 
 			//markup
 
-			flightMarkup: flightMarkup ? flightMarkup : '5',
+			flightMarkup: flightMarkup ? flightMarkup : '',
 			hotelMarkup: hotelMarkup ? hotelMarkup : '',
 			carMarkup: carMarkup ? carMarkup : '',
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
