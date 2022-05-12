@@ -23,9 +23,11 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 14. Design email templates --harmeet
 
-15. Login successfull sometime give error
+15. Login successfull sometime give error -- in testing
 16. Page responsive
-17. card validation
+17. card validation center loader
+18. api error on btn
+19. emial status
 
 ### dependent
 
