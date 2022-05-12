@@ -29,7 +29,7 @@ export default function UpdateRecordForm({formik}) {
 	const checkbox = [
 		{
 			name: 'flight',
-			label: 'Fligh',
+			label: 'Flight',
 			markup: 'flightMarkup',
 			markupLabel: 'FlightMarkup',
 		},

@@ -27,7 +27,7 @@ export default function AddressForm({formik, isView}) {
 	const checkbox = [
 		{
 			name: 'flight',
-			label: 'Fligh',
+			label: 'FlighT',
 			markup: 'flightMarkup',
 			markupLabel: 'FlightMarkup',
 		},

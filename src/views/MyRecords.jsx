@@ -392,7 +392,7 @@ export const Transaction = () => {
 					<IconButton onClick={handleLogClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<ViewLog data={[Array(10)]} />
+					<ViewLog data={[Array(10)]} id={userData} />
 				</Box>
 			</Modal>
 
@@ -443,7 +443,7 @@ export const Transaction = () => {
 					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<Email Ticketid={viewEmail} />
+					<Email Ticketid={viewEmail} id={userData} />
 				</Box>
 			</Modal>
 		</>
