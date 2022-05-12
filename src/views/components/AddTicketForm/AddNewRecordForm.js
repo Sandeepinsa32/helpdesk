@@ -56,6 +56,15 @@ export default function AddressForm({formik, isView}) {
 			markupLabel: 'AddonMarkup',
 		},
 	];
+	function currentDate() {
+		let today = new Date();
+		let dd = String(today.getDate()).padStart(2, '0');
+		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let yyyy = today.getFullYear();
+
+		today = mm + '/' + dd + '/' + yyyy;
+		return today;
+	}
 
 	return (
 		<Grid container spacing={3} key={1}>
@@ -404,7 +413,7 @@ export default function AddressForm({formik, isView}) {
 						onBlur={formik.handleBlur}
 						onChange={formik.handleChange}
 						value={formik.values.fareType}>
-						<MenuItem value='publish'>publish</MenuItem>
+						<MenuItem value='publish'>Publish</MenuItem>
 						<MenuItem value='private'>Private</MenuItem>
 						<MenuItem value='fxl'>FXL</MenuItem>
 						<MenuItem value='dummy'>Dummy</MenuItem>
@@ -429,8 +438,8 @@ export default function AddressForm({formik, isView}) {
 						// helperText={formik.touched.bookedOn && formik.errors.bookedOn}
 					>
 						<MenuItem value='web'>Web</MenuItem>
-						<MenuItem value='trippro'>trippro</MenuItem>
-						<MenuItem value='skybird'>skybird</MenuItem>
+						<MenuItem value='trippro'>TripPro</MenuItem>
+						<MenuItem value='skybird'>SkyBird</MenuItem>
 						<MenuItem value='picasso'>Picasso</MenuItem>
 					</Select>
 				</FormControl>
@@ -511,6 +520,8 @@ export default function AddressForm({formik, isView}) {
 						inputFormat='MM/dd/yyyy'
 						name='departureDate'
 						label='Departure Date'
+						minDate={new Date()}
+						maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 2))}
 						onChange={(newValue) => {
 							setDepDate(newValue);
 
@@ -526,7 +537,13 @@ export default function AddressForm({formik, isView}) {
 						error={Boolean(formik.touched.departureDate && formik.errors.departureDate)}
 						helperText={formik.touched.departureDate && formik.errors.departureDate}
 						value={depDate}
-						renderInput={(params) => <TextField {...params} />}
+						renderInput={(params) => (
+							<TextField
+								{...params}
+								error={Boolean(formik.touched.departureDate && formik.errors.departureDate)}
+								helperText={formik.touched.departureDate && formik.errors.departureDate}
+							/>
+						)}
 					/>
 				</LocalizationProvider>
 			</Grid>
@@ -537,6 +554,9 @@ export default function AddressForm({formik, isView}) {
 						name='returnDate'
 						inputFormat='MM/dd/yyyy'
 						label='Return Date'
+						disabled={!depDate}
+						minDate={depDate}
+						maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 2))}
 						value={returnDate}
 						onChange={(newValue) => {
 							setReturnDate(newValue);
@@ -551,7 +571,9 @@ export default function AddressForm({formik, isView}) {
 						}}
 						error={Boolean(formik.touched.returnDate && formik.errors.returnDate)}
 						helperText={formik.touched.returnDate && formik.errors.returnDate}
-						renderInput={(params) => <TextField {...params} />}
+						renderInput={(params) => (
+							<TextField {...params} helperText={formik.touched.returnDate && formik.errors.returnDate} error={Boolean(formik.touched.returnDate && formik.errors.returnDate)} />
+						)}
 					/>
 				</LocalizationProvider>
 			</Grid>
