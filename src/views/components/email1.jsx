@@ -1,42 +1,48 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) => {
-	const [selectedEmail, setSelectedEmail] = useState();
-	console.log(data);
-	function renderingEmail() {
-		switch (selectedEmailTemplate) {
-			// case 0:
-			// 	return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
-			case 1:
-				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
-			case 2:
-				return <span dangerouslySetInnerHTML={{__html: Exchange}} />;
-			case 6:
-				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
-			// case 4:
-			// 	return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
+const Email1 = ({
+  selectedEmailTemplate,
+  data,
+  pnrData,
+  TotalAmount,
+  noOfPas,
+}) => {
+  const [selectedEmail, setSelectedEmail] = useState();
+  console.log(data);
+  function renderingEmail() {
+    switch (selectedEmailTemplate) {
+      // case 0:
+      // 	return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
+      case 1:
+        return <span dangerouslySetInnerHTML={{ __html: newBooking }} />;
+      case 2:
+        return <span dangerouslySetInnerHTML={{ __html: Exchange }} />;
+      case 6:
+        return <span dangerouslySetInnerHTML={{ __html: futureCredit }} />;
+      // case 4:
+      // 	return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
 
-			default:
-				throw new Error('Unknown step');
-		}
-	}
+      default:
+        throw new Error("Unknown step");
+    }
+  }
 
-	function currentDate() {
-		let today = new Date();
-		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		let yyyy = today.getFullYear();
+  function currentDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyy = today.getFullYear();
 
-		today = mm + '/' + dd + '/' + yyyy;
-		return today;
-	}
+    today = mm + "/" + dd + "/" + yyyy;
+    return today;
+  }
 
-	function userTabelData(data) {
-		var tableString = '';
-		data.forEach((x) => {
-			tableString =
-				tableString +
-				`<tr>
+  function userTabelData(data) {
+    var tableString = "";
+    data.forEach((x) => {
+      tableString =
+        tableString +
+        `<tr>
       <td >${x.firstName}</td>
       <td>${x.middleName}</td>
       <td>${x.lastName}</td>
@@ -44,33 +50,41 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
       <td>${x.confirmation}</td>
       <td>${x.price}</td>
     </tr>`;
-		});
-		return tableString;
-	}
-	function PnrDetail(data) {
-		// console.log(data);
-		var tableString = '';
-		data.map((x) => {
-			tableString =
-				tableString +
-				`<tr>
-      <td >${new Date(x.flt.departure.string).toLocaleDateString('en-US', {
-			day: '2-digit',
-			weekday: 'short',
-			month: 'short',
-			year: '2-digit',
-		})}</td>
+    });
+    return tableString;
+  }
+  function PnrDetail(data) {
+    // console.log(data);
+    var tableString = "";
+    data.map((x) => {
+      tableString =
+        tableString +
+        `<tr>
+      <td >${new Date(x.flt.departure.string).toLocaleDateString("en-US", {
+        day: "2-digit",
+        weekday: "short",
+        month: "short",
+        year: "2-digit",
+      })}</td>
       <td>${x.flt.operated_by}</td>
-      <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(x.flt.departure.string).getMinutes()}</td>
+      <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(
+          x.flt.departure.string
+        ).getMinutes()}</td>
       <td> ${x.dep.airportname},  ${x.dep.airportcode}</td>
-      <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes() === 0 ? `00` : new Date(x.flt.arrival.string).getMinutes()}</td>
+      <td> ${new Date(x.flt.arrival.string).getHours()}:${
+          new Date(x.flt.arrival.string).getMinutes() === 0
+            ? `00`
+            : new Date(x.flt.arrival.string).getMinutes()
+        }</td>
       <td> ${x.arr.airportname}, ${x.arr.airportcode}</td>
-      <td>${new Date(x.flt.departure.string).getHours()}H${new Date(x.flt.departure.string).getMinutes()}m </td>
+      <td>${new Date(x.flt.departure.string).getHours()}H${new Date(
+          x.flt.departure.string
+        ).getMinutes()}m </td>
     </tr>`;
-		});
-		return tableString;
-	}
-	var Exchange = `<center>
+    });
+    return tableString;
+  }
+  var Exchange = `<center>
 		<style>
     table.tableoutter {
   border: 1px solid #ccc;
@@ -340,7 +354,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	var newBooking = `  <center>
+  var newBooking = `  <center>
 		<style>
     table.tableoutter {
   border: 1px solid #ccc;
@@ -576,7 +590,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	var futureCredit = `<center>
+  var futureCredit = `<center>
 		<style>
     table.tableoutter {
   border: 1px solid #ccc;
@@ -823,7 +837,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	return <>{renderingEmail()}</>;
+  return <>{renderingEmail()}</>;
 };
 
 export default Email1;
