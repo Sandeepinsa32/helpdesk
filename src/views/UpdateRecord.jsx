@@ -51,13 +51,14 @@ const UpdateRecord = ({data}) => {
 		insuranceMarkup,
 		addonMarkup,
 		cards,
+		checkboxValue,
 		// notes,
 	} = data;
 
 	console.log(data);
 
 	const [inputList, setInputList] = useState(cards);
-	const [isCompanyCard, setIsCompanyCard] = useState(false);
+	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 
 	// formik validation object
 	const formik = useFormik({
@@ -75,10 +76,10 @@ const UpdateRecord = ({data}) => {
 			bookingType: bookingType ? bookingType : '',
 			bookedOn: bookedOn ? bookedOn : '',
 			productType: productType ? productType : '',
-			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '',
-			adultCount: adultCount ? adultCount : '',
-			childCount: childCount ? childCount : '',
-			elderCount: elderCount ? elderCount : '',
+			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : 0,
+			adultCount: adultCount ? adultCount : 0,
+			childCount: childCount ? childCount : 0,
+			elderCount: elderCount ? elderCount : 0,
 			grandTotal: grandTotal ? grandTotal : '',
 			childPrice: childPrice ? childPrice : '',
 			adultPrice: adultPrice ? adultPrice : '',
@@ -86,8 +87,9 @@ const UpdateRecord = ({data}) => {
 			//date
 			departureDate: departureDate ? departureDate : null,
 			returnDate: returnDate ? returnDate : null,
+			checkboxValue: checkboxValue ? checkboxValue : '',
 			//companyCard details
-			isCompanyCCUsed: isCompanyCCUsed,
+			isCompanyCCUsed: isCompanyCCUsed ? isCompanyCCUsed : false,
 			ccTimes: ccTimes ? ccTimes : '',
 			ccAmount: ccAmount ? ccAmount : '',
 			ccDigits: ccDigits ? ccDigits : '',
@@ -150,6 +152,13 @@ const UpdateRecord = ({data}) => {
 				.when(['elderCount'], (elderCount, schema) => {
 					return elderCount > 0 ? schema.required('this field required ') : schema;
 				}),
+			checkboxValue: Yup.object().shape({
+				flight: Yup.bool(),
+				hotel: Yup.bool(),
+				car: Yup.bool(),
+				insurance: Yup.bool(),
+				addon: Yup.bool(),
+			}),
 
 			//date
 			departureDate: Yup.string().required('This field is required').nullable(),
@@ -270,9 +279,6 @@ const UpdateRecord = ({data}) => {
 			label: 'Last 4 Digits of of Company CC ',
 		},
 	];
-	useEffect(() => {
-		console.log(inputList);
-	});
 
 	return (
 		<>
@@ -414,7 +420,6 @@ const UpdateRecord = ({data}) => {
 								items.map((item, i) => {
 									const {name, label} = item;
 
-									console.log('print ->', formik.touched, formik.errors[name]);
 									return (
 										<Grid item xs={12} md={3} key={i}>
 											<TextField

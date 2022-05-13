@@ -103,6 +103,13 @@ const AddNewRecord = ({isView, data}) => {
 			carMarkup: carMarkup ? carMarkup : '',
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
 			addonMarkup: addonMarkup ? addonMarkup : '',
+			checkboxValue: {
+				flight: false,
+				hotel: false,
+				car: false,
+				insurance: false,
+				addon: false,
+			},
 
 			//paymentCard
 			card: inputList,
@@ -185,6 +192,13 @@ const AddNewRecord = ({isView, data}) => {
 			carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			checkboxValue: Yup.object().shape({
+				flight: Yup.bool(),
+				hotel: Yup.bool(),
+				car: Yup.bool(),
+				insurance: Yup.bool(),
+				addon: Yup.bool(),
+			}),
 
 			//Card Payment
 			card: Yup.array()

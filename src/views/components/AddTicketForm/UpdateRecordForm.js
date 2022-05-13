@@ -15,16 +15,10 @@ export default function UpdateRecordForm({formik}) {
 	//date
 	const [depDate, setDepDate] = useState(formik.values.departureDate);
 	const [returnDate, setReturnDate] = useState(formik.values.returnDate);
-	const [initialProductType, setInitialProductType] = useState([]);
+	const [initialProductType, setInitialProductType] = useState(formik.values.productType);
 	const [isView, setIsView] = useState(true);
 
-	const [checkboxType, setCheckboxType] = useState({
-		flight: false,
-		hotel: false,
-		car: false,
-		insurance: false,
-		addon: false,
-	});
+	const [checkboxType, setCheckboxType] = useState(formik.values.checkboxValue);
 
 	const checkbox = [
 		{
@@ -82,21 +76,21 @@ export default function UpdateRecordForm({formik}) {
 				</FormControl>
 				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
 					{checkbox.map((data, i) => {
-						const {x, label, markup, markupLabel} = data;
+						const {name, label, markup, markupLabel} = data;
 						return (
 							<>
 								<Box sx={displayColStyle} style={{paddingTop: '8px !important'}} key={i}>
 									<FormControlLabel
 										control={
 											<Checkbox
-												checked={checkboxType.x}
+												checked={checkboxType.name}
 												onChange={(e) => {
 													let object = {
-														property: x,
+														property: name,
 														propertyMarkup: '',
 													};
 													let checkboxData = {...checkboxType};
-													checkboxData[x] = !checkboxType[x];
+													checkboxData[name] = !checkboxType[name];
 
 													setCheckboxType({...checkboxData});
 
@@ -111,13 +105,13 @@ export default function UpdateRecordForm({formik}) {
 
 													formik.setFieldValue('productType', initialProductType);
 												}}
-												name={x}
+												name={name}
 												color='primary'
 											/>
 										}
 										label={label}></FormControlLabel>
 
-									{checkboxType[x] && (
+									{checkboxType[name] && (
 										<TextField
 											name={markup}
 											label={markupLabel}
@@ -131,13 +125,14 @@ export default function UpdateRecordForm({formik}) {
 											onBlur={formik.handleBlur}
 											onChange={(e) => {
 												formik.setFieldValue(markup, e.target.value);
-												const index = initialProductType.findIndex((obj) => obj.property === x);
+												const index = initialProductType.findIndex((obj) => obj.property === name);
 												let data = [...initialProductType];
 												data[index]['propertyMarkup'] = e.target.value;
 
 												setInitialProductType(data);
 												formik.setFieldValue('productType', initialProductType);
 											}}
+											value={formik.values.productType[i]['propertyMarkup']}
 										/>
 									)}
 								</Box>

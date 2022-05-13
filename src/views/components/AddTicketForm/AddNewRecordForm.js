@@ -97,6 +97,7 @@ export default function AddressForm({formik, isView}) {
 													let checkboxData = {...checkboxType};
 													checkboxData[name] = !checkboxType[name];
 
+													formik.setFieldValue('checkboxValue', {...checkboxData});
 													setCheckboxType({...checkboxData});
 
 													const productExists = initialProductType.reduce((acc, prop) => prop.property == object.property, false);
