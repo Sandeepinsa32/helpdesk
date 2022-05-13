@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import UpdateRecordForm from './components/AddTicketForm/UpdateRecordForm';
+import valid from 'card-validator';
 // import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
 import {useFormik, Formik} from 'formik';
 import * as Yup from 'yup';
@@ -49,20 +50,13 @@ const UpdateRecord = ({data}) => {
 		carMarkup,
 		insuranceMarkup,
 		addonMarkup,
+		cards,
 		// notes,
 	} = data;
 
 	console.log(data);
 
-	const [inputList, setInputList] = useState([
-		{
-			cardHolderName: '',
-			cardHolderNumber: '',
-			cardNumber: '',
-			expiryDate: '',
-			cvv: '',
-		},
-	]);
+	const [inputList, setInputList] = useState(cards);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 
 	// formik validation object
@@ -105,6 +99,9 @@ const UpdateRecord = ({data}) => {
 			carMarkup: carMarkup ? carMarkup : '',
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
 			addonMarkup: addonMarkup ? addonMarkup : '',
+
+			//paymentCard
+			card: cards ? cards : inputList,
 		},
 		validationSchema: Yup.object({
 			//basic
@@ -185,6 +182,29 @@ const UpdateRecord = ({data}) => {
 			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 
+			card: Yup.array()
+				.of(
+					Yup.object().shape({
+						cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+						cardHolderNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Phone is required'),
+						// cardNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Card Number is required'),
+						cardNumber: Yup.string()
+							.test(
+								'test-number', // this is used internally by yup
+								'Credit Card number is invalid', //validation message
+								(value) => valid.number(value).isValid
+							) // return true false based on validation
+							.required()
+							.max(16, 'Must be 16 characters')
+							.min(16, 'Must be 16 characters'),
+						cvv: Yup.number()
+							.positive('input must consist of positive number')
+							.integer()
+							.test('len', 'Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
+						expiryDate: Yup.string().required('This field is required').nullable(),
+					})
+				)
+				.min(1, 'card is >= 1'),
 			// comments: Yup.string().max(255),
 			// notes: '',
 			// pricePerPerson: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
@@ -250,6 +270,10 @@ const UpdateRecord = ({data}) => {
 			label: 'Last 4 Digits of of Company CC ',
 		},
 	];
+	useEffect(() => {
+		console.log(inputList);
+	});
+
 	return (
 		<>
 			<Formik>
