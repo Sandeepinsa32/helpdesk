@@ -54,8 +54,8 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 export const Transaction = () => {
   const [myRecords, setMyRecords] = useState([]);
-  const [showUpdateModal, setShowUpdateModal] = useState(false);
-  const [logsModal, setLogsModal] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [openLog, setOpenLog] = useState(false);
   const [openEmail, setOpenEmail] = useState(false);
   const [viewEmail, setViewEmail] = useState(false);
   const [viewData, setViewData] = useState(false);
@@ -73,12 +73,12 @@ export const Transaction = () => {
   const [allRecords, setAllRecords] = useState([]);
   const [isUpdate, setIsUpdate] = useState(true);
 
-  const handleOpen = () => setShowUpdateModal(true);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setShowUpdateModal(false);
+    setOpen(false);
   };
   const handleLogClose = () => {
-    setLogsModal(false);
+    setOpenLog(false);
   };
   const handleEmailClose = () => {
     setOpenEmail(false);
@@ -89,10 +89,6 @@ export const Transaction = () => {
   };
 
   const [page, setPage] = React.useState(1);
-  useEffect(() => {
-    // console.log('useEffect');
-    loadTransactions(createQueryString({ email, bookingid, phone, page }));
-  }, [page]);
 
   function searchHandler() {
     setPage(1);
@@ -138,14 +134,15 @@ export const Transaction = () => {
 
   useEffect(() => {}, [0]);
   useEffect(() => {
-    console.log("useEffect");
+    // console.log('useEffect');
     loadTransactions(createQueryString({ email, bookingid, phone, page }));
   }, [page]);
 
-  // let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
-  // let GenTime = hours;
-  // // console.log(GenTime);
-  // GenTime = GenTime >= 48 ? false : true;
+  // function currentDate() {
+  // 	let today = new Date();
+  // 	let dd = String(today.getDate()).padStart(2, '0');
+  // 	let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  // 	let yyyy = today.getFullYear();
 
   // 	today = mm + '/' + dd + '/' + yyyy;
   // 	return today;
@@ -159,7 +156,23 @@ export const Transaction = () => {
     },
   });
   function msToTime(date) {
-    return new Date() - new Date(date) > 60000 * 60 * 48;
+    const duration = new Date() - new Date(date);
+
+    var milliseconds = Math.floor((duration % 1000) / 100),
+      seconds = Math.floor((duration / 1000) % 60),
+      minutes = Math.floor((duration / (1000 * 60)) % 60),
+      hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    // let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+    let GenTime = hours;
+    // console.log(GenTime);
+    GenTime = GenTime >= 48 ? false : true;
+
+    return Boolean(GenTime);
   }
   return (
     <>
@@ -369,14 +382,15 @@ export const Transaction = () => {
                             size="small"
                             onClick={() => {
                               // console.log(row);
-                              msToTime(row.createdAt)
-                                ? setViewData(true)
-                                : setViewData(false);
+                              setViewData(true);
                               setSelectedTicket(row);
-                              setShowUpdateModal(true);
+                              handleOpen();
                             }}
                           >
-                            {msToTime(row.createdAt) ? "View" : "Update"}
+                            {new Date() - new Date(row.createdAt) <
+                            60000 * 60 * 48
+                              ? "Update"
+                              : "View"}
                           </Button>
 
                           <Button
@@ -399,7 +413,7 @@ export const Transaction = () => {
                             size="small"
                             onClick={() => {
                               setSelectedTicket(row);
-                              setLogsModal(true);
+                              setOpenLog(true);
                             }}
                           >
                             logs
@@ -444,7 +458,7 @@ export const Transaction = () => {
 
       {/* open Logs*/}
       <Modal
-        open={logsModal}
+        open={openLog}
         onClose={handleLogClose}
         size="xs"
         aria-labelledby="modal-modal-title"
@@ -463,7 +477,7 @@ export const Transaction = () => {
 
       {/* Open update Record modal */}
       <Modal
-        open={showUpdateModal}
+        open={open}
         onClose={handleClose}
         size="xs"
         aria-labelledby="modal-modal-title"

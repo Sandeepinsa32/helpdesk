@@ -11,7 +11,9 @@ const Authorizing = () => {
 
   const handleConfirm = async () => {
     axios
-      .put(BASEURL + "/ticket/auth-email/" + id)
+      .put(BASEURL + "/ticket/auth-email/", {
+        id,
+      })
       .then((res) => {
         setShowLoading(false);
         console.log(res);

@@ -31,6 +31,9 @@ export default function UpdateRecordForm({ formik, disabled }) {
   );
   const [isView, setIsView] = useState(disabled);
   useEffect(() => {
+    console.log("---------------");
+    console.log(disabled);
+    console.log("---------------");
     setIsView(disabled);
   });
 
@@ -68,15 +71,22 @@ export default function UpdateRecordForm({ formik, disabled }) {
       markupLabel: "AddonMarkup",
     },
   ];
-  function currentDate() {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, "0");
-    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    let yyyy = today.getFullYear();
-
-    today = mm + "/" + dd + "/" + yyyy;
-    return today;
-  }
+  console.log(formik.values.productType);
+  const isCheckedHandler = (name) => {
+    var isChecked = false;
+    for (let i = 0; i < formik.values.productType.length; i++) {
+      const product = formik.values.productType[i];
+      if (name === product.property) {
+        isChecked = true;
+        return {
+          isChecked,
+          product,
+        };
+        break;
+      }
+    }
+    return { isChecked };
+  };
 
   return (
     <Grid container spacing={3} key={1}>
@@ -104,6 +114,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
         >
           {checkbox.map((data, i) => {
             const { name, label, markup, markupLabel } = data;
+            var productData = isCheckedHandler(data.name);
             return (
               <>
                 <Box
@@ -114,7 +125,8 @@ export default function UpdateRecordForm({ formik, disabled }) {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={checkboxType.name}
+                        checked={productData.isChecked}
+                        disabled={isView}
                         onChange={(e) => {
                           let object = {
                             property: name,
@@ -154,7 +166,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
                     label={label}
                   ></FormControlLabel>
 
-                  {checkboxType[name] && (
+                  {(checkboxType[name] || productData.isChecked) && (
                     <TextField
                       name={markup}
                       label={markupLabel}
@@ -179,7 +191,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
                         setInitialProductType(data);
                         formik.setFieldValue("productType", initialProductType);
                       }}
-                      // value={formik.values.productType[i]['propertyMarkup']}
+                      value={productData.product.propertyMarkup}
                     />
                   )}
                 </Box>
@@ -193,7 +205,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
       <Grid item xs={6} md={2}>
         <TextField
           fullWidth
-          disabled={isView}
+          disabled={true}
           label="First Name"
           name="firstName"
           error={Boolean(formik.touched.firstName && formik.errors.firstName)}
@@ -210,7 +222,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
           name="lastName"
           label="Last Name"
           fullWidth
-          disabled={isView}
+          disabled={true}
           error={Boolean(formik.touched.lastName && formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
           onBlur={formik.handleBlur}
@@ -225,7 +237,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
           name="email"
           label="email"
           fullWidth
-          disabled={isView}
+          disabled={true}
           error={Boolean(formik.touched.email && formik.errors.email)}
           helperText={formik.touched.email && formik.errors.email}
           onBlur={formik.handleBlur}
@@ -240,7 +252,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
           name="phone"
           label="phone"
           fullWidth
-          disabled={isView}
+          disabled={true}
           error={Boolean(formik.touched.phone && formik.errors.phone)}
           helperText={formik.touched.phone && formik.errors.phone}
           onBlur={formik.handleBlur}

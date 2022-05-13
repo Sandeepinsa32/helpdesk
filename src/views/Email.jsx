@@ -46,13 +46,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { lightGreen } from "@mui/material/colors";
 
-const Email = ({ Ticketid, onClose }) => {
+const Email = ({ Ticketid, id, onClose }) => {
+  // console.log(id);
   const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
-  const [tableData, setTableData] = useState();
   const [pnrValue, setPnrValue] = useState(
     "1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R"
   );
-
+  const [pnrData, setPnrData] = useState([]);
   const [inputList1, setInputList1] = useState([
     {
       firstName: "john",
@@ -88,20 +88,24 @@ const Email = ({ Ticketid, onClose }) => {
       confirmation: "2.72136",
     },
   ]);
-  const [pnrData, setPnrData] = useState([]);
 
-  const handleEmailTemplateChange = (e) => {
+  const handleEmailTemplateChange = (e) =>
     setSelectedEmailTemplate(Number(e.target.value));
-    console.log(selectedEmailTemplate);
-  };
 
-  const handleConfirm = () => {
+  const handleConfirm = (inputList) => {
     // calculateTotalAmount();
     // let newArr = clean(inputList);
-    // console.log(Ticketid);
-    // newArr = newArr.filter((value) => Object.keys(value).length !== 0);
-    // console.log(pnrValue);
-    // console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >', newArr, 'totalAmt', totalAmt);
+
+    console.log(Ticketid);
+
+    console.log(pnrValue);
+    console.log(
+      "selectedEmailTemplate",
+      selectedEmailTemplate,
+      "inputList ->",
+      inputList,
+      "newArr - >"
+    );
   };
 
   const handleSendEmail = async () => {
@@ -172,7 +176,7 @@ const Email = ({ Ticketid, onClose }) => {
             selectedEmailTemplate={selectedEmailTemplate}
             pnrData={pnrData}
             Tabledata={inputList1}
-            TotalAmount={[]}
+            recordData={id}
           />
         );
       case 2:
@@ -181,7 +185,7 @@ const Email = ({ Ticketid, onClose }) => {
             selectedEmailTemplate={selectedEmailTemplate}
             pnrData={pnrData}
             Tabledata={inputList2}
-            TotalAmount={[]}
+            recordData={id}
           />
         );
       case 3:
@@ -190,7 +194,7 @@ const Email = ({ Ticketid, onClose }) => {
             selectedEmailTemplate={selectedEmailTemplate}
             pnrData={pnrData}
             Tabledata={inputList3}
-            TotalAmount={[]}
+            recordData={id}
           />
         );
       case 4:
@@ -199,7 +203,7 @@ const Email = ({ Ticketid, onClose }) => {
             selectedEmailTemplate={selectedEmailTemplate}
             pnrData={pnrData}
             Tabledata={inputList4}
-            TotalAmount={[]}
+            recordData={id}
           />
         );
 
@@ -210,7 +214,7 @@ const Email = ({ Ticketid, onClose }) => {
             selectedEmailTemplate={selectedEmailTemplate}
             pnrData={pnrData}
             Tabledata={[]}
-            TotalAmount={[]}
+            recordData={id}
           />
         );
     }

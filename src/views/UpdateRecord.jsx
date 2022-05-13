@@ -394,7 +394,9 @@ const UpdateRecord = ({ data }) => {
     return Boolean(GenTime);
   }
   useEffect(() => {
-    msToTime(createdAt) ? setIsDisable(false) : setIsDisable(true);
+    new Date() - new Date(createdAt) < 60000 * 60 * 48
+      ? setIsDisable(false)
+      : setIsDisable(true);
   }, [0]);
 
   return (
@@ -566,6 +568,7 @@ const UpdateRecord = ({ data }) => {
                     />
                   }
                   label="Company CC used ?"
+                  disabled={isDisable}
                 />
               </Grid>
 
