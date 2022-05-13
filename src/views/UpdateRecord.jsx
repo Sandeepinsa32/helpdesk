@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import UpdateRecordForm from './components/AddTicketForm/UpdateRecordForm';
 import valid from 'card-validator';
 // import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
-import {useFormik, Formik} from 'formik';
+import { useFormik, Formik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import {Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, Checkbox} from '@mui/material';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {BASEURL} from '../utils/Utils';
+import { Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, Checkbox } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { BASEURL } from '../utils/Utils';
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-const UpdateRecord = ({data}) => {
+const UpdateRecord = ({ data }) => {
 	const {
 		firstName,
 		lastName,
@@ -224,7 +224,7 @@ const UpdateRecord = ({data}) => {
 		onSubmit: () => {
 			console.log(formik.values, inputList);
 			axios
-				.post(BASEURL + '/ticket/raise', {
+				.put(BASEURL + `/ticket/${data._id}`, {
 					data: formik.values,
 					cards: inputList,
 				})
@@ -235,7 +235,7 @@ const UpdateRecord = ({data}) => {
 
 	// handle input change
 	const handleCardInput = (e, index) => {
-		const {name, value} = e.target;
+		const { name, value } = e.target;
 		const list = [...inputList];
 		list[index][name] = value;
 		setInputList(list);
@@ -319,8 +319,8 @@ const UpdateRecord = ({data}) => {
 						}}>
 						<UpdateRecordForm formik={formik} disabled={isDisable} />
 					</Box>
-					<Box sx={{m: 1}}>
-						<Typography variant='h6' gutterBottom sx={{my: 4}}>
+					<Box sx={{ m: 1 }}>
+						<Typography variant='h6' gutterBottom sx={{ my: 4 }}>
 							Payment method :
 						</Typography>
 					</Box>
@@ -427,12 +427,12 @@ const UpdateRecord = ({data}) => {
 											width: '100%',
 										}}>
 										{inputList.length !== 1 && (
-											<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
+											<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{ mr: 1 }}>
 												Remove
 											</Button>
 										)}
 										{inputList.length < 4 && inputList.length - 1 === i && (
-											<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
+											<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{ mr: 1 }}>
 												Add One More Card
 											</Button>
 										)}
@@ -462,7 +462,7 @@ const UpdateRecord = ({data}) => {
 
 							{isCompanyCard &&
 								items.map((item, i) => {
-									const {name, label} = item;
+									const { name, label } = item;
 
 									return (
 										<Grid item xs={12} md={3} key={i}>
@@ -495,7 +495,7 @@ const UpdateRecord = ({data}) => {
 					)}
 					{!isDisable && (
 						<Box xs={4} md={4}>
-							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
+							<Button variant='contained' type='submit' sx={{ mt: 3, ml: 1 }}>
 								submit
 							</Button>
 						</Box>

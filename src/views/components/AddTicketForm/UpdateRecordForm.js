@@ -1,17 +1,17 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {Grid, TextField, FormControlLabel, InputAdornment, Box, Checkbox, InputLabel, MenuItem, FormControl, Select} from '@mui/material';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+import { Grid, TextField, FormControlLabel, InputAdornment, Box, Checkbox, InputLabel, MenuItem, FormControl, Select } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 //material-icon
 import BoyIcon from '@mui/icons-material/Boy';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import ElderlyIcon from '@mui/icons-material/Elderly';
 
-export default function UpdateRecordForm({formik, disabled}) {
+export default function UpdateRecordForm({ formik, disabled }) {
 	//date
 	const [depDate, setDepDate] = useState(formik.values.departureDate);
 	const [returnDate, setReturnDate] = useState(formik.values.returnDate);
@@ -68,21 +68,21 @@ export default function UpdateRecordForm({formik, disabled}) {
 	return (
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
-			<Grid item xs={6} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
+			<Grid item xs={6} md={12} sx={{ p: `16px !important`, pt: `0px !important` }}>
 				<FormControl
-					sx={{m: 1, p: 1}}
+					sx={{ m: 1, p: 1 }}
 					fullWidth
 					disabled={isView}
 					error={Boolean(formik.touched.productType && formik.errors.productType)}
 					helperText={formik.touched.productType && formik.errors.productType}>
 					<InputLabel variant='outlined'>Product Type :</InputLabel>
 				</FormControl>
-				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
+				<Box sx={displayFlexRowStyle} style={{ marginTop: '10px ', marginLeft: '18px' }}>
 					{checkbox.map((data, i) => {
-						const {name, label, markup, markupLabel} = data;
+						const { name, label, markup, markupLabel } = data;
 						return (
 							<>
-								<Box sx={displayColStyle} style={{paddingTop: '8px !important'}} key={i}>
+								<Box sx={displayColStyle} style={{ paddingTop: '8px !important' }} key={i}>
 									<FormControlLabel
 										control={
 											<Checkbox
@@ -92,10 +92,10 @@ export default function UpdateRecordForm({formik, disabled}) {
 														property: name,
 														propertyMarkup: '',
 													};
-													let checkboxData = {...checkboxType};
+													let checkboxData = { ...checkboxType };
 													checkboxData[name] = !checkboxType[name];
 
-													setCheckboxType({...checkboxData});
+													setCheckboxType({ ...checkboxData });
 
 													const productExists = initialProductType.reduce((acc, prop) => prop.property == object.property, false);
 
@@ -135,7 +135,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 												setInitialProductType(data);
 												formik.setFieldValue('productType', initialProductType);
 											}}
-											value={formik.values.productType[i]['propertyMarkup']}
+										// value={formik.values.productType[i]['propertyMarkup']}
 										/>
 									)}
 								</Box>
@@ -257,7 +257,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 						/>
 						{formik.values.childCount > 0 ? (
 							<TextField
-								sx={{mt: 2}}
+								sx={{ mt: 2 }}
 								name='childPrice'
 								label='Price Per Person'
 								fullWidth
@@ -300,7 +300,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 						/>
 						{formik.values.adultCount > 0 ? (
 							<TextField
-								sx={{mt: 2}}
+								sx={{ mt: 2 }}
 								name='adultPrice'
 								label='Price Per Person'
 								fullWidth
@@ -343,7 +343,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 						/>
 						{formik.values.elderCount > 0 ? (
 							<TextField
-								sx={{mt: 2}}
+								sx={{ mt: 2 }}
 								name='elderPrice'
 								label='Price Per Person'
 								fullWidth
@@ -440,7 +440,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 						onChange={formik.handleChange}
 						value={formik.values.bookedOn}
 						error={Boolean(formik.touched.bookedOn && formik.errors.bookedOn)}
-						// helperText={formik.touched.bookedOn && formik.errors.bookedOn}
+					// helperText={formik.touched.bookedOn && formik.errors.bookedOn}
 					>
 						<MenuItem value='web'>Web</MenuItem>
 						<MenuItem value='trippro'>TripPro</MenuItem>
