@@ -34,7 +34,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
     setIsView(disabled);
   });
 
-  const [checkboxType, setCheckboxType] = useState(formik.values.productType);
+  const [checkboxType, setCheckboxType] = useState(formik.values.checkboxValue);
 
   const checkbox = [
     {
@@ -78,16 +78,6 @@ export default function UpdateRecordForm({ formik, disabled }) {
     return today;
   }
 
-  const alreadyPresent = (name) => {
-    var remaining =
-      checkboxType &&
-      checkboxType.filter((i) => {
-        console.log(i);
-        return i.property?.toLowerCase() != name.toLowerCase();
-      });
-    return remaining.length !== checkboxType.length;
-  };
-
   return (
     <Grid container spacing={3} key={1}>
       {/*  checkbox label  Fields */}
@@ -124,7 +114,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={alreadyPresent(name)}
+                        checked={checkboxType.name}
                         onChange={(e) => {
                           let object = {
                             property: name,
@@ -189,7 +179,7 @@ export default function UpdateRecordForm({ formik, disabled }) {
                         setInitialProductType(data);
                         formik.setFieldValue("productType", initialProductType);
                       }}
-                      value={formik.values.productType[i]["propertyMarkup"]}
+                      // value={formik.values.productType[i]['propertyMarkup']}
                     />
                   )}
                 </Box>

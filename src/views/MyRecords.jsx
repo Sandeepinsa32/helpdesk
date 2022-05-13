@@ -89,6 +89,10 @@ export const Transaction = () => {
   };
 
   const [page, setPage] = React.useState(1);
+  useEffect(() => {
+    // console.log('useEffect');
+    loadTransactions(createQueryString({ email, bookingid, phone, page }));
+  }, [page]);
 
   function searchHandler() {
     setPage(1);
@@ -138,11 +142,10 @@ export const Transaction = () => {
     loadTransactions(createQueryString({ email, bookingid, phone, page }));
   }, [page]);
 
-  // function currentDate() {
-  // 	let today = new Date();
-  // 	let dd = String(today.getDate()).padStart(2, '0');
-  // 	let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  // 	let yyyy = today.getFullYear();
+  // let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+  // let GenTime = hours;
+  // // console.log(GenTime);
+  // GenTime = GenTime >= 48 ? false : true;
 
   // 	today = mm + '/' + dd + '/' + yyyy;
   // 	return today;
