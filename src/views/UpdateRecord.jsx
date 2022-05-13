@@ -52,6 +52,7 @@ const UpdateRecord = ({data}) => {
 		addonMarkup,
 		cards,
 		checkboxValue,
+		createdAt,
 		// notes,
 	} = data;
 
@@ -59,6 +60,7 @@ const UpdateRecord = ({data}) => {
 
 	const [inputList, setInputList] = useState(cards);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
+	const [isDisable, setIsDisable] = useState(true);
 
 	// formik validation object
 	const formik = useFormik({
@@ -280,6 +282,29 @@ const UpdateRecord = ({data}) => {
 		},
 	];
 
+	function msToTime(date) {
+		const duration = new Date() - new Date(date);
+
+		var milliseconds = Math.floor((duration % 1000) / 100),
+			seconds = Math.floor((duration / 1000) % 60),
+			minutes = Math.floor((duration / (1000 * 60)) % 60),
+			hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+		hours = hours < 10 ? '0' + hours : hours;
+		minutes = minutes < 10 ? '0' + minutes : minutes;
+		seconds = seconds < 10 ? '0' + seconds : seconds;
+
+		// let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+		let GenTime = hours;
+		console.log(GenTime);
+		GenTime = GenTime >= 48 ? false : true;
+
+		return Boolean(GenTime);
+	}
+	useEffect(() => {
+		msToTime(createdAt) ? setIsDisable(false) : setIsDisable(true);
+	}, [0]);
+
 	return (
 		<>
 			<Formik>
@@ -292,14 +317,13 @@ const UpdateRecord = ({data}) => {
 							bgcolor: 'background.paper',
 							borderRadius: 1,
 						}}>
-						<UpdateRecordForm formik={formik} />
+						<UpdateRecordForm formik={formik} disabled={isDisable} />
 					</Box>
 					<Box sx={{m: 1}}>
 						<Typography variant='h6' gutterBottom sx={{my: 4}}>
 							Payment method :
 						</Typography>
 					</Box>
-
 					<Box
 						sx={{
 							m: 1,
@@ -318,6 +342,7 @@ const UpdateRecord = ({data}) => {
 											name='cardHolderName'
 											label='Name on card'
 											fullWidth
+											disabled={isDisable}
 											autoComplete='cc-name'
 											onChange={(e) => {
 												handleCardInput(e, i);
@@ -327,7 +352,15 @@ const UpdateRecord = ({data}) => {
 									</Grid>
 									{/*  Card Holder Phone no. */}
 									<Grid item xs={12} md={3}>
-										<TextField required name='cardHolderNumber' label='Phone no.' fullWidth onChange={(e) => handleCardInput(e, i)} value={inputList[i].cardHolderNumber} />
+										<TextField
+											required
+											name='cardHolderNumber'
+											label='Phone no.'
+											fullWidth
+											disabled={isDisable}
+											onChange={(e) => handleCardInput(e, i)}
+											value={inputList[i].cardHolderNumber}
+										/>
 									</Grid>
 									{/* CardNumber Field */}
 									<Grid item xs={12} md={3}>
@@ -336,6 +369,7 @@ const UpdateRecord = ({data}) => {
 											name='cardNumber'
 											label='Card number'
 											fullWidth
+											disabled={isDisable}
 											autoComplete='cc-number'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardNumber}
@@ -343,13 +377,23 @@ const UpdateRecord = ({data}) => {
 									</Grid>
 									{/* CVV Field */}
 									<Grid item xs={12} md={2}>
-										<TextField required name='cvv' label='CVV' fullWidth autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
+										<TextField
+											required
+											name='cvv'
+											label='CVV'
+											fullWidth
+											disabled={isDisable}
+											autoComplete='cc-csc'
+											onChange={(e) => handleCardInput(e, i)}
+											value={inputList[i].cvv}
+										/>
 									</Grid>
 									{/* expiry date field */}
 									<Grid item xs={12} md={2}>
-										<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
+										<LocalizationProvider fullWidth disabled={isDisable} dateAdapter={AdapterDateFns}>
 											<DatePicker
 												fullWidth
+												disabled={isDisable}
 												views={['year', 'month']}
 												name='expiryDate'
 												label='Expiry date'
@@ -427,6 +471,7 @@ const UpdateRecord = ({data}) => {
 												name={name}
 												label={label}
 												fullWidth
+												disabled={isDisable}
 												error={formik.touched[name] && formik.errors[name]}
 												helperText={formik.touched[name] && formik.errors[name]}
 												onBlur={formik.handleBlur}
@@ -439,18 +484,22 @@ const UpdateRecord = ({data}) => {
 						</Grid>
 					</Box>
 					{/* Formik alert one  */}
-					<Box xs={8} md={10}>
-						{Object.keys(formik.errors).length !== 0 && formik.errors && (
-							<Alert variant='outlined' severity='error'>
-								{JSON.stringify(formik.errors)}
-							</Alert>
-						)}
-					</Box>
-					<Box xs={4} md={4}>
-						<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
-							submit
-						</Button>
-					</Box>
+					{!isDisable && (
+						<Box xs={8} md={10}>
+							{Object.keys(formik.errors).length !== 0 && formik.errors && (
+								<Alert variant='outlined' severity='error'>
+									{JSON.stringify(formik.errors)}
+								</Alert>
+							)}
+						</Box>
+					)}
+					{!isDisable && (
+						<Box xs={4} md={4}>
+							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
+								submit
+							</Button>
+						</Box>
+					)}
 				</form>
 			</Formik>
 		</>
