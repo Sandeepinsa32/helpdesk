@@ -11,6 +11,7 @@ import Login from "./login";
 import { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
 import axios from "axios";
+import Authorizing from "./Authorizing";
 
 function App() {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ function App() {
       <StyledEngineProvider>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/auth" element={<Authorizing />}></Route>
 
           <Route
             path="/*"
