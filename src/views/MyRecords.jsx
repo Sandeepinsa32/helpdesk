@@ -129,7 +129,7 @@ export const Transaction = () => {
 
 	useEffect(() => {}, [0]);
 	useEffect(() => {
-		console.log('useEffect');
+		// console.log('useEffect');
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
 
@@ -164,7 +164,7 @@ export const Transaction = () => {
 
 		// let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
 		let GenTime = hours;
-		console.log(GenTime);
+		// console.log(GenTime);
 		GenTime = GenTime >= 48 ? false : true;
 
 		return Boolean(GenTime);
