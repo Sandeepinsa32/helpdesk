@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {Grid, TextField, FormControlLabel, InputAdornment, Box, Checkbox, InputLabel, MenuItem, FormControl, Select} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
@@ -11,12 +11,15 @@ import BoyIcon from '@mui/icons-material/Boy';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import ElderlyIcon from '@mui/icons-material/Elderly';
 
-export default function UpdateRecordForm({formik}) {
+export default function UpdateRecordForm({formik, disabled}) {
 	//date
 	const [depDate, setDepDate] = useState(formik.values.departureDate);
 	const [returnDate, setReturnDate] = useState(formik.values.returnDate);
 	const [initialProductType, setInitialProductType] = useState(formik.values.productType);
-	const [isView, setIsView] = useState(true);
+	const [isView, setIsView] = useState(disabled);
+	useEffect(() => {
+		setIsView(disabled);
+	});
 
 	const [checkboxType, setCheckboxType] = useState(formik.values.checkboxValue);
 
@@ -522,6 +525,7 @@ export default function UpdateRecordForm({formik}) {
 						inputFormat='MM/dd/yyyy'
 						name='departureDate'
 						label='Departure Date'
+						disabled={isView}
 						minDate={new Date()}
 						maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 2))}
 						onChange={(newValue) => {
@@ -541,6 +545,7 @@ export default function UpdateRecordForm({formik}) {
 						value={depDate}
 						renderInput={(params) => (
 							<TextField
+								disabled={isView}
 								{...params}
 								error={Boolean(formik.touched.departureDate && formik.errors.departureDate)}
 								helperText={formik.touched.departureDate && formik.errors.departureDate}
@@ -556,7 +561,7 @@ export default function UpdateRecordForm({formik}) {
 						name='returnDate'
 						inputFormat='MM/dd/yyyy'
 						label='Return Date'
-						disabled={!depDate}
+						disabled={!depDate || isView}
 						minDate={depDate}
 						maxDate={new Date(new Date().setFullYear(new Date().getFullYear() + 2))}
 						value={returnDate}
@@ -574,7 +579,12 @@ export default function UpdateRecordForm({formik}) {
 						error={Boolean(formik.touched.returnDate && formik.errors.returnDate)}
 						helperText={formik.touched.returnDate && formik.errors.returnDate}
 						renderInput={(params) => (
-							<TextField {...params} helperText={formik.touched.returnDate && formik.errors.returnDate} error={Boolean(formik.touched.returnDate && formik.errors.returnDate)} />
+							<TextField
+								{...params}
+								disabled={isView}
+								helperText={formik.touched.returnDate && formik.errors.returnDate}
+								error={Boolean(formik.touched.returnDate && formik.errors.returnDate)}
+							/>
 						)}
 					/>
 				</LocalizationProvider>
