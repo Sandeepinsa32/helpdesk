@@ -4,6 +4,11 @@ import Email1 from './components/email1';
 import axios from 'axios';
 import qs from 'qs';
 
+import NewBooking from './components/email/NewBooking';
+import Exchange from './components/email/Exchange';
+import FutureCredit from './components/email/FutureCredit';
+import Refund from './components/email/Refund';
+
 import {BASEURL, createQueryString, errorToast, successToast} from '../utils/Utils';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -20,9 +25,12 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const Email = ({Ticketid, onClose}) => {
+const Email = ({Ticketid, id, onClose}) => {
+	// console.log(id);
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
-	const [inputList, setInputList] = useState([
+	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
+	const [pnrData, setPnrData] = useState([]);
+	const [inputList1, setInputList1] = useState([
 		{
 			firstName: 'john',
 			middleName: 'D',
@@ -32,98 +40,56 @@ const Email = ({Ticketid, onClose}) => {
 			price: '200',
 		},
 	]);
-	const [totalAmt, setTotalAmt] = useState(0);
-	const [previewModal, setPreviewModal] = useState(false);
-	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
-	const [pnrData, setPnrData] = useState([]);
+	const [inputList2, setInputList2] = useState([
+		{
+			firstName: 'john',
+			middleName: 'D',
+			lastName: 'doe',
+			ticket: '2.72136E+11',
+			price: '200',
+		},
+	]);
+	const [inputList3, setInputList3] = useState([
+		{
+			firstName: 'john',
+			middleName: 'D',
+			lastName: 'doe',
+			refund: '2',
+		},
+	]);
+	const [inputList4, setInputList4] = useState([
+		{
+			firstName: 'john',
+			middleName: 'D',
+			lastName: 'doe',
+			confirmation: '2.72136',
+		},
+	]);
 
-	useEffect(() => {
-		calculateTotalAmount();
-	});
-	// handle click event of the Remove button
-	const calculateTotalAmount = () => {
-		let Amount = [];
-		inputList.map((x, i) => {
-			Amount.push(inputList[i].price);
-		});
+	const handleEmailTemplateChange = (e) => setSelectedEmailTemplate(Number(e.target.value));
 
-		var total = 0;
-		for (var i in Amount) {
-			total += Number(Amount[i]);
-		}
-		setTotalAmt(total);
-	};
-	const handleEmailTemplateChange = (e) => {
-		setSelectedEmailTemplate(Number(e.target.value));
-		// console.log(selectedEmailTemplate);
-	};
+	const handleConfirm = (inputList) => {
+		// calculateTotalAmount();
+		// let newArr = clean(inputList);
 
-	const handleInputChange = (e, index) => {
-		const {name, value} = e.target;
-		const list = [...inputList];
-		list[index][name] = value;
-		setInputList(list);
-	};
-
-	// handle click event of the Remove button
-	const handleRemoveClick = (index) => {
-		var list = [...inputList];
-		list.splice(index, 1);
-		setInputList(list);
-	};
-
-	// handle click event of the Add button
-	const handleAddClick = () => {
-		setInputList([
-			...inputList,
-			{
-				firstName: '',
-				middleName: '',
-				lastName: '',
-				ticket: '',
-				confirmation: '',
-				price: '',
-			},
-		]);
-		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
-		calculateTotalAmount();
-	};
-	function clean(obj) {
-		obj.map((x, i) => {
-			for (var propName in x) {
-				if (obj[i][propName] === null || obj[i][propName] === undefined || obj[i][propName] === '') {
-					delete obj[i][propName];
-				}
-			}
-		});
-
-		return obj;
-	}
-
-	const handleConfirm = () => {
-		calculateTotalAmount();
-		let newArr = clean(inputList);
 		console.log(Ticketid);
-		newArr = newArr.filter((value) => Object.keys(value).length !== 0);
+
 		console.log(pnrValue);
-		console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >', newArr, 'totalAmt', totalAmt);
-	};
-	const handlePreviewClose = () => {
-		setPreviewModal(false);
+		console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >');
 	};
 
-	const handleSendEmail = async () => {
-		axios
-			.post(BASEURL + '/ticket/email', {
-				data: inputList,
-				ticketId: Ticketid,
-			})
-			.then((res) => {
-				console.log(res);
-				onClose();
-			})
-			.catch((e) => console.log(e));
-	};
+	// const handleSendEmail = async () => {
+	// 	axios
+	// 		.post(BASEURL + '/ticket/email', {
+	// 			data: inputList,
+	// 			ticketId: Ticketid,
+	// 		})
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 			onClose();
+	// 		})
+	// 		.catch((e) => console.log(e));
+	// };
 
 	const handlePnrConverter = async (e) => {
 		e.preventDefault();
@@ -148,6 +114,39 @@ const Email = ({Ticketid, onClose}) => {
 				console.log(e.response.data.message);
 			});
 	};
+
+	function renderFields() {
+		switch (selectedEmailTemplate) {
+			case 1:
+				return <NewBooking inputList1={inputList1} setInputList1={setInputList1} />;
+			case 2:
+				return <Exchange inputList2={inputList2} setInputList2={setInputList2} />;
+			case 3:
+				return <Refund inputList3={inputList3} setInputList3={setInputList3} />;
+			case 4:
+				return <FutureCredit inputList4={inputList4} setInputList4={setInputList4} />;
+
+			default:
+				// throw new Error("Unknown step");
+				return <NewBooking />;
+		}
+	}
+	function renderEmail() {
+		switch (selectedEmailTemplate) {
+			case 1:
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={id} />;
+			case 2:
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={id} />;
+			case 3:
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={id} />;
+			case 4:
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={id} />;
+
+			default:
+				// throw new Error("Unknown step");
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} recordData={id} />;
+		}
+	}
 
 	return (
 		<>
@@ -199,164 +198,16 @@ const Email = ({Ticketid, onClose}) => {
 								Convert
 							</Button>
 						</Grid>
+						<Box sx={{mt: 2, p: 1}}>{renderFields()}</Box>
 					</Grid>
 
-					<Box sx={{mt: 2, p: 1}}>
-						<TableContainer component={Paper}>
-							<Table sx={{minWidth: 650}} aria-label='simple table'>
-								<TableHead>
-									<TableRow>
-										{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Confirmation', 'Price', 'Action'].map((th) => (
-											<TableCell key={th}>{th}</TableCell>
-										))}
-									</TableRow>
-								</TableHead>
-								<TableBody>
-									{inputList.map((x, i) => {
-										return (
-											<TableRow
-												key={i}
-												sx={{
-													'&:last-child td, &:last-child th': {border: 0},
-												}}>
-												<TableCell>
-													<TextField
-														required
-														size='small'
-														name='firstName'
-														label='First Name'
-														fullWidth
-														autoComplete='firstName'
-														onChange={(e) => {
-															handleInputChange(e, i);
-														}}
-														value={inputList[i].firstName}
-													/>
-												</TableCell>
-												<TableCell>
-													<TextField
-														required
-														size='small'
-														name='middleName'
-														label='Middle Name'
-														fullWidth
-														autoComplete='middleName'
-														onChange={(e) => {
-															handleInputChange(e, i);
-														}}
-														value={inputList[i].middleName}
-													/>
-												</TableCell>
-												<TableCell>
-													<TextField
-														required
-														name='lastName'
-														label='Last Name'
-														size='small'
-														fullWidth
-														autoComplete='lastName'
-														onChange={(e) => {
-															handleInputChange(e, i);
-														}}
-														value={inputList[i].lastName}
-													/>
-												</TableCell>
-												<TableCell>
-													<TextField
-														required
-														name='ticket'
-														label='Ticket'
-														fullWidth
-														size='small'
-														autoComplete='ticket'
-														onChange={(e) => {
-															handleInputChange(e, i);
-														}}
-														value={inputList[i].ticket}
-													/>
-												</TableCell>
-												<TableCell>
-													<TextField
-														required
-														name='confirmation'
-														size='small'
-														label='Confirmation'
-														fullWidth
-														autoComplete='confirmation'
-														onChange={(e) => {
-															handleInputChange(e, i);
-														}}
-														value={inputList[i].confirmation}
-													/>
-												</TableCell>
-												<TableCell>
-													<TextField
-														required
-														name='price'
-														size='small'
-														label='Price'
-														fullWidth
-														autoComplete='price'
-														InputProps={{
-															startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-														}}
-														onChange={(e) => {
-															handleInputChange(e, i);
-															calculateTotalAmount();
-														}}
-														value={inputList[i].price}
-													/>
-												</TableCell>
-												{inputList.length !== 1 && (
-													<Grid container>
-														<Grid item xs={6} md={2}>
-															<Button
-																startIcon={<DeleteOutlineIcon color='error' fontSize='small' />}
-																onClick={() => handleRemoveClick(i)}
-																sx={{mr: 1, mt: '1.8rem'}}></Button>
-														</Grid>
-													</Grid>
-												)}
-											</TableRow>
-										);
-									})}
-								</TableBody>
-							</Table>
-						</TableContainer>
-					</Box>
-
 					<Grid container spacing={1} sx={{m: 0, p: 1}}>
-						{inputList.length < 9 && (
-							<Grid item xs={6} md={12} sx={{pr: 1}}>
-								<Button startIcon={<AddIcon fontSize='small' />} fullWidth={true} onClick={handleAddClick} sx={{mr: 1, pr: 1}} variant='outlined'>
-									Add new
-								</Button>
-							</Grid>
-						)}
-						{/* Total Amount */}
-						<Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
-							<TextField
-								disabled
-								size='small'
-								required
-								name='totalAmount'
-								label='Grand Total'
-								fullWidth={true}
-								onChange={(e) => {
-									setTotalAmt(e.target.value);
-								}}
-								value={totalAmt}
-							/>
-						</Grid>
-
 						<Grid item xs={6} md={10}></Grid>
-						{/* <Grid item xs={6} md={1}>
-							<Button onClick={() => setPreviewModal(true)} variant='contained'>
-								Preview
-							</Button>
-						</Grid> */}
+
 						<Grid item xs={6} md={2} sx={{mb: 3}}>
-							<Button onClick={handleSendEmail} variant='contained'>
+							<Button
+								// onClick={handleSendEmail}
+								variant='contained'>
 								Submit
 							</Button>
 						</Grid>
@@ -366,7 +217,7 @@ const Email = ({Ticketid, onClose}) => {
 
 			<Box sx={{m: 3}}></Box>
 			<Paper elevation={1}>
-				<Email1 selectedEmailTemplate={selectedEmailTemplate} data={inputList} TotalAmount={totalAmt} pnrData={pnrData} />
+				<Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} TotalAmount={[]} />
 			</Paper>
 		</>
 	);

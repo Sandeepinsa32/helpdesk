@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 
-const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) => {
+const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData}) => {
 	const [selectedEmail, setSelectedEmail] = useState();
-	console.log(data);
+	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
+	const grandTotal = '100';
 	function renderingEmail() {
 		switch (selectedEmailTemplate) {
 			case 1:
@@ -30,42 +31,42 @@ const Email1 = ({selectedEmailTemplate, data, pnrData, TotalAmount, noOfPas}) =>
 		return today;
 	}
 
-	function userTabelData(data) {
+	function userTabelData() {
 		var tableString = '';
-		data.forEach((x) => {
+		Tabledata.forEach((x) => {
 			tableString =
 				tableString +
 				`<tr>
-      <td >${x.firstName}</td>
-      <td>${x.middleName}</td>
-      <td>${x.lastName}</td>
-      <td>${x.ticket}</td>
-      <td>${x.confirmation}</td>
-      <td>${x.price}</td>
-    </tr>`;
+		  <td >${x.firstName}</td>
+		  <td>${x.middleName}</td>
+		  <td>${x.lastName}</td>
+		  <td>${x.ticket}</td>
+		  <td>${x.confirmation}</td>
+		  <td>${x.price}</td>
+		</tr>`;
 		});
+
 		return tableString;
 	}
-	function PnrDetail(data) {
-		// console.log(data);
+	function PnrDetail() {
 		var tableString = '';
-		data.map((x) => {
+		pnrData.map((x) => {
 			tableString =
 				tableString +
 				`<tr>
-      <td >${new Date(x.flt.departure.string).toLocaleDateString('en-US', {
-			day: '2-digit',
-			weekday: 'short',
-			month: 'short',
-			year: '2-digit',
-		})}</td>
-      <td>${x.flt.operated_by}</td>
-      <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(x.flt.departure.string).getMinutes()}</td>
-      <td> ${x.dep.airportname},  ${x.dep.airportcode}</td>
-      <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes() === 0 ? `00` : new Date(x.flt.arrival.string).getMinutes()}</td>
-      <td> ${x.arr.airportname}, ${x.arr.airportcode}</td>
-      <td>${new Date(x.flt.departure.string).getHours()}H${new Date(x.flt.departure.string).getMinutes()}m </td>
-    </tr>`;
+		  <td >${new Date(x.flt.departure.string).toLocaleDateString('en-US', {
+				day: '2-digit',
+				weekday: 'short',
+				month: 'short',
+				year: '2-digit',
+			})}</td>
+		  <td>${x.flt.operated_by}</td>
+		  <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(x.flt.departure.string).getMinutes()}</td>
+		  <td> ${x.dep.airportname},  ${x.dep.airportcode}</td>
+		  <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes() === 0 ? `00` : new Date(x.flt.arrival.string).getMinutes()}</td>
+		  <td> ${x.arr.airportname}, ${x.arr.airportcode}</td>
+		  <td>${new Date(x.flt.departure.string).getHours()}H${new Date(x.flt.departure.string).getMinutes()}m </td>
+		</tr>`;
 		});
 		return tableString;
 	}
@@ -210,7 +211,7 @@ Once completed your agent will notify you and you'll be able to access the reser
   </thead>
   <tbody id='appendCHildHere' >
     
-  ${userTabelData(data)}
+  ${userTabelData()}
 
    
     
@@ -245,7 +246,7 @@ Once completed your agent will notify you and you'll be able to access the reser
     </tr>
           <tr>
       <td style="border-right: 1px solid #ddd;" name="firstname">Credit :	</td>
-      <td style="border-right: 1px solid #ddd;"  name="lastname" >$ ${TotalAmount}	</td>
+      <td style="border-right: 1px solid #ddd;"  name="lastname" >$ ${grandTotal}	</td>
        
        
       
@@ -304,7 +305,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
   <tbody >
     
     
-		${PnrDetail(pnrData)}
+		${PnrDetail()}
 	
   
   
@@ -480,7 +481,7 @@ table.tableoutter th {
   <tbody id='appendCHildHere' >
     
     
-		${userTabelData(data)}
+		${userTabelData()}
 	
    
   
@@ -495,7 +496,7 @@ table.tableoutter th {
      
            <div class="paymentMessage" style="background: #efefef;"> 
 
-             <p style="font-size: 12px; line-height: 20px; color: #222; margin-bottom:20px; font-weight: 600;font-family: 'sans-serif';">Total amount charged $ ${TotalAmount} in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
+             <p style="font-size: 12px; line-height: 20px; color: #222; margin-bottom:20px; font-weight: 600;font-family: 'sans-serif';">Total amount charged $ ${grandTotal} in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
         </p>
               
             </div>
@@ -538,7 +539,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
   <tbody >
     
     
-		${PnrDetail(pnrData)}
+		${PnrDetail()}
 	
   
   
@@ -684,8 +685,8 @@ table.tableoutter th {
 		
 		
 		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
-<!--         ${currentDate()} -->
-        Wed, May 11, 2022 
+         ${currentDate()} 
+ <!--       Wed, May 11, 2022 -->
         </h1>
 		<h1 style="font-size:14px; line-height:22px; font-weight:600; color:#333333;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
    Requested Service: Cancellation of Airline Ticket For Credi
@@ -703,7 +704,9 @@ table.tableoutter th {
   
   <thead class=" tableHead ">
     <tr>
-      <th class="tableHeading" scope="col" name="firstname"> Passenger(s)</th>
+      <th class="tableHeading" scope="col" name="firstname"> firstname</th>
+      <th class="tableHeading" scope="col" name="firstname"> middlename</th>
+      <th class="tableHeading" scope="col" name="firstname">lastname</th>
       
        <th scope="col"  class="tableHeading" name="price">Confirmation</th>
       
@@ -712,16 +715,14 @@ table.tableoutter th {
   <tbody id='appendCHildHere' >
     
 
-		userTabelData();
+    ${userTabelData()} 
 
-   
+   <!-- 
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
       <td class="tableHeading" scope="col" name="lastname" >DJT2JJ</td>
-       
-       
-      
-    </tr>
+        </tr>
+    -->
      	
   
   </tbody>
@@ -933,8 +934,10 @@ table.tableoutter th {
 		
 		
 		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
-<!--         ${currentDate()} -->
-        Wed, May 11, 2022 
+<!--       Wed, May 11, 2022      -->
+${currentDate()}
+
+     
         </h1>
 		<h1 style="font-size:14px; line-height:22px; font-weight:600; color:#333333;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
    Requested Service:Refund
@@ -961,17 +964,18 @@ table.tableoutter th {
   </thead>
   <tbody id='appendCHildHere' >
     
-<!--     ${setTimeout(() => {
-		userTabelData();
-	}, 2000)} -->
+
    
+  	${userTabelData()}
+    <!--    
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
       <td class="tableHeading" scope="col" name="lastname" >DJT2JJ</td>
        
        
       
-    </tr>
+    </tr >
+       -->
      	 <tr>
       <td class="tableHeading" scope="col" name="firstname"> 
         <b>Grand Total (Expected Refund From Airlines)	<b/></td>
