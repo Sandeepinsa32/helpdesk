@@ -69,26 +69,27 @@ const Email = ({Ticketid, id, onClose}) => {
 	const handleEmailTemplateChange = (e) => setSelectedEmailTemplate(Number(e.target.value));
 
 	const handleConfirm = (inputList) => {
-		calculateTotalAmount();
-		let newArr = clean(inputList);
+		// calculateTotalAmount();
+		// let newArr = clean(inputList);
+
 		console.log(Ticketid);
-		newArr = newArr.filter((value) => Object.keys(value).length !== 0);
+
 		console.log(pnrValue);
-		console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >', newArr);
+		console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >');
 	};
 
-	const handleSendEmail = async () => {
-		axios
-			.post(BASEURL + '/ticket/email', {
-				data: inputList,
-				ticketId: Ticketid,
-			})
-			.then((res) => {
-				console.log(res);
-				onClose();
-			})
-			.catch((e) => console.log(e));
-	};
+	// const handleSendEmail = async () => {
+	// 	axios
+	// 		.post(BASEURL + '/ticket/email', {
+	// 			data: inputList,
+	// 			ticketId: Ticketid,
+	// 		})
+	// 		.then((res) => {
+	// 			console.log(res);
+	// 			onClose();
+	// 		})
+	// 		.catch((e) => console.log(e));
+	// };
 
 	const handlePnrConverter = async (e) => {
 		e.preventDefault();
