@@ -684,8 +684,8 @@ table.tableoutter th {
 		
 		
 		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
-<!--         ${currentDate()} -->
-        Wed, May 11, 2022 
+         ${currentDate()} 
+ <!--       Wed, May 11, 2022 -->
         </h1>
 		<h1 style="font-size:14px; line-height:22px; font-weight:600; color:#333333;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
    Requested Service: Cancellation of Airline Ticket For Credi
@@ -703,7 +703,9 @@ table.tableoutter th {
   
   <thead class=" tableHead ">
     <tr>
-      <th class="tableHeading" scope="col" name="firstname"> Passenger(s)</th>
+      <th class="tableHeading" scope="col" name="firstname"> firstname</th>
+      <th class="tableHeading" scope="col" name="firstname"> middlename</th>
+      <th class="tableHeading" scope="col" name="firstname">lastname</th>
       
        <th scope="col"  class="tableHeading" name="price">Confirmation</th>
       
@@ -712,16 +714,14 @@ table.tableoutter th {
   <tbody id='appendCHildHere' >
     
 
-		userTabelData();
+    ${userTabelData()} 
 
-   
+   <!-- 
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
       <td class="tableHeading" scope="col" name="lastname" >DJT2JJ</td>
-       
-       
-      
-    </tr>
+        </tr>
+    -->
      	
   
   </tbody>

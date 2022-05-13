@@ -62,14 +62,14 @@ const Email = ({Ticketid, onClose}) => {
 			firstName: 'john',
 			middleName: 'D',
 			lastName: 'doe',
-			confirmation: '2.72136E+11',
+			confirmation: '2.72136',
 		},
 	]);
 	const [pnrData, setPnrData] = useState([]);
 
 	const handleEmailTemplateChange = (e) => {
 		setSelectedEmailTemplate(Number(e.target.value));
-		// console.log(selectedEmailTemplate);
+		console.log(selectedEmailTemplate);
 	};
 
 	const handleConfirm = () => {
@@ -147,7 +147,7 @@ const Email = ({Ticketid, onClose}) => {
 
 			default:
 				// throw new Error("Unknown step");
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} TotalAmount={[]} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} TotalAmount={[]} />;
 		}
 	}
 
