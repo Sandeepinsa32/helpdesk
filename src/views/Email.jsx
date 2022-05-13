@@ -28,9 +28,8 @@ import {lightGreen} from '@mui/material/colors';
 const Email = ({Ticketid, id, onClose}) => {
 	// console.log(id);
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
-	const [tableData, setTableData] = useState();
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
-
+	const [pnrData, setPnrData] = useState([]);
 	const [inputList1, setInputList1] = useState([
 		{
 			firstName: 'john',
@@ -66,34 +65,30 @@ const Email = ({Ticketid, id, onClose}) => {
 			confirmation: '2.72136',
 		},
 	]);
-	const [pnrData, setPnrData] = useState([]);
 
-	const handleEmailTemplateChange = (e) => {
-		setSelectedEmailTemplate(Number(e.target.value));
-		console.log(selectedEmailTemplate);
+	const handleEmailTemplateChange = (e) => setSelectedEmailTemplate(Number(e.target.value));
+
+	const handleConfirm = (inputList) => {
+		calculateTotalAmount();
+		let newArr = clean(inputList);
+		console.log(Ticketid);
+		newArr = newArr.filter((value) => Object.keys(value).length !== 0);
+		console.log(pnrValue);
+		console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >', newArr);
 	};
 
-	const handleConfirm = () => {
-		// calculateTotalAmount();
-		// let newArr = clean(inputList);
-		// console.log(Ticketid);
-		// newArr = newArr.filter((value) => Object.keys(value).length !== 0);
-		// console.log(pnrValue);
-		// console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >', newArr, 'totalAmt', totalAmt);
+	const handleSendEmail = async () => {
+		axios
+			.post(BASEURL + '/ticket/email', {
+				data: inputList,
+				ticketId: Ticketid,
+			})
+			.then((res) => {
+				console.log(res);
+				onClose();
+			})
+			.catch((e) => console.log(e));
 	};
-
-	// const handleSendEmail = async () => {
-	// 	axios
-	// 		.post(BASEURL + '/ticket/email', {
-	// 			data: inputList,
-	// 			ticketId: Ticketid,
-	// 		})
-	// 		.then((res) => {
-	// 			console.log(res);
-	// 			onClose();
-	// 		})
-	// 		.catch((e) => console.log(e));
-	// };
 
 	const handlePnrConverter = async (e) => {
 		e.preventDefault();
