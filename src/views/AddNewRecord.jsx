@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import AddNewRecordForm from './components/AddTicketForm/AddNewRecordForm';
-// import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
 import {useFormik, Formik} from 'formik';
+import valid from 'card-validator';
 import * as Yup from 'yup';
 import axios from 'axios';
 import {Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, Checkbox} from '@mui/material';
@@ -56,9 +56,9 @@ const AddNewRecord = ({isView, data}) => {
 		{
 			cardHolderName: 'john',
 			cardHolderNumber: '9876543210',
-			cardNumber: '085885858585',
+			cardNumber: '4263982640269299',
 			expiryDate: null,
-			cvv: 123,
+			cvv: '123',
 		},
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
@@ -192,8 +192,20 @@ const AddNewRecord = ({isView, data}) => {
 					Yup.object().shape({
 						cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 						cardHolderNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Phone is required'),
-						cardNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Card Number is required'),
-						cvv: Yup.number('input must consist of number').min(3).max(3).positive('input must consist of positive number').integer().required('CVV is required'),
+						// cardNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Card Number is required'),
+						cardNumber: Yup.string()
+							.test(
+								'test-number', // this is used internally by yup
+								'Credit Card number is invalid', //validation message
+								(value) => valid.number(value).isValid
+							) // return true false based on validation
+							.required()
+							.max(16, 'Must be 16 characters')
+							.min(16, 'Must be 16 characters'),
+						cvv: Yup.number()
+							.positive('input must consist of positive number')
+							.integer()
+							.test('len', 'Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
 						expiryDate: Yup.string().required('This field is required').nullable(),
 					})
 				)
@@ -249,7 +261,7 @@ const AddNewRecord = ({isView, data}) => {
 				cardHolderNumber: '',
 				cardNumber: '',
 				expiryDate: null,
-				cvv: 123,
+				cvv: '',
 			},
 		]);
 		setInputList([
@@ -259,7 +271,7 @@ const AddNewRecord = ({isView, data}) => {
 				cardHolderNumber: '',
 				cardNumber: '',
 				expiryDate: null,
-				cvv: 123,
+				cvv: '',
 			},
 		]);
 	};
