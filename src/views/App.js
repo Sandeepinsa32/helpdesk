@@ -50,7 +50,7 @@ function App() {
       <StyledEngineProvider>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/auth" element={<Authorizing />}></Route>
+          <Route path="/auth/:id" element={<Authorizing />}></Route>
 
           <Route
             path="/*"

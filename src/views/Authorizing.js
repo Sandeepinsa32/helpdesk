@@ -1,13 +1,17 @@
 import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { BASEURL } from "../utils/Utils";
+import { useParams } from "react-router-dom";
 
 const Authorizing = () => {
+  const { id } = useParams();
   const [showLoading, setShowLoading] = useState(true);
   const [message, Message] = useState("You have confirmed the tickets");
+
   const handleConfirm = async () => {
     axios
-      .get("https://jsonplaceholder.typicode.com/todos/1")
+      .put(BASEURL + "/ticket/auth-email/" + id)
       .then((res) => {
         setShowLoading(false);
         console.log(res);
@@ -16,8 +20,8 @@ const Authorizing = () => {
   };
 
   useEffect(() => {
-    handleConfirm();
-  }, []);
+    if (id) handleConfirm();
+  }, [id]);
 
   return (
     <div
