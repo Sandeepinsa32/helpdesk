@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import AddNewRecord from './AddNewRecord';
 import UpdateRecord from './UpdateRecord';
 import ViewLog from './components/ViewLog';
 
-import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Utils';
+import { BASEURL, createQueryString, successToast, errorToast } from '../utils/Utils';
 import axios from 'axios';
 
 //@material-ui
@@ -36,14 +36,14 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import {Paper, ThemeProvider} from '@mui/material';
-import {createTheme} from '@mui/material/styles';
+import { Paper, ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
 
 import Email from './Email';
 
 //  local icon
-import {Search as SearchIcon} from '../assets/icons/search';
+import { Search as SearchIcon } from '../assets/icons/search';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
@@ -87,7 +87,7 @@ export const Transaction = () => {
 
 	function searchHandler() {
 		setPage(1);
-		loadTransactions(createQueryString({email, bookingid, phone, page}));
+		loadTransactions(createQueryString({ email, bookingid, phone, page }));
 	}
 	const handleReset = () => {
 		setPhone('');
@@ -127,10 +127,10 @@ export const Transaction = () => {
 			});
 	};
 
-	useEffect(() => {}, [0]);
+	useEffect(() => { }, [0]);
 	useEffect(() => {
 		console.log('useEffect');
-		loadTransactions(createQueryString({email, bookingid, phone, page}));
+		loadTransactions(createQueryString({ email, bookingid, phone, page }));
 	}, [page]);
 
 	// function currentDate() {
@@ -178,7 +178,7 @@ export const Transaction = () => {
 					pb: 4,
 					pt: 2,
 				}}>
-				<Container maxWidth={false} sx={{p: `0!important`}}>
+				<Container maxWidth={false} sx={{ p: `0!important` }}>
 					<Box
 						sx={{
 							alignItems: 'center',
@@ -187,11 +187,11 @@ export const Transaction = () => {
 							flexWrap: 'wrap',
 							m: -1,
 						}}>
-						<Typography sx={{m: 1}} variant='h6'>
+						<Typography sx={{ m: 1 }} variant='h6'>
 							My Records
 						</Typography>
 
-						<Box sx={{m: 1}}>
+						<Box sx={{ m: 1 }}>
 							<Button color='primary' onClick={goToAddNewRecord} variant='contained'>
 								Add New Record
 							</Button>
@@ -203,16 +203,16 @@ export const Transaction = () => {
 					<Box>
 						<ThemeProvider theme={theme}>
 							{/* Search COmponent */}
-							<Box sx={{mt: 3}}>
+							<Box sx={{ mt: 3 }}>
 								<Card>
 									<CardContent>
-										<Box fullWidth sx={{display: ''}}>
+										<Box fullWidth sx={{ display: '' }}>
 											<Grid container spacing={4} justifyContent='center'>
 												<Grid item xs={3} md={3}>
 													<TextField
 														size='small'
 														fullWidth
-														sx={{height: `2rem`}}
+														sx={{ height: `2rem` }}
 														InputProps={{
 															startAdornment: (
 																<InputAdornment position='start'>
@@ -233,7 +233,7 @@ export const Transaction = () => {
 													<TextField
 														fullWidth
 														size='small'
-														sx={{height: `2rem`}}
+														sx={{ height: `2rem` }}
 														InputProps={{
 															startAdornment: (
 																<InputAdornment position='start'>
@@ -253,7 +253,7 @@ export const Transaction = () => {
 													<TextField
 														size='small'
 														fullWidth
-														sx={{height: `2rem`}}
+														sx={{ height: `2rem` }}
 														InputProps={{
 															startAdornment: (
 																<InputAdornment position='start'>
@@ -271,16 +271,16 @@ export const Transaction = () => {
 												</Grid>
 												{/* <Grid item xs={0} md={0}></Grid> */}
 												{/* btn --reset and serach  */}
-												<Grid item xs={3} md={3} sx={{px: 2, mt: 0.5}}>
+												<Grid item xs={3} md={3} sx={{ px: 2, mt: 0.5 }}>
 													<Button
-														sx={{textTransform: 'capitalize', mx: 1}}
+														sx={{ textTransform: 'capitalize', mx: 1 }}
 														size='small'
 														disabled={!(email || phone || bookingid)}
 														variant='contained'
 														onClick={searchHandler}>
 														Search
 													</Button>
-													<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral' onClick={handleReset}>
+													<Button sx={{ textTransform: 'capitalize', mx: 1 }} size='small' variant='contained' color='neutral' onClick={handleReset}>
 														Reset
 													</Button>
 												</Grid>
@@ -293,9 +293,9 @@ export const Transaction = () => {
 					</Box>
 					{/* End: Search  Component */}
 
-					<Box sx={{mt: 3}}>
+					<Box sx={{ mt: 3 }}>
 						<TableContainer component={Paper}>
-							<Table style={{whiteSpace: 'nowrap'}} aria-label='simple table'>
+							<Table style={{ whiteSpace: 'nowrap' }} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
 										{[
@@ -335,12 +335,12 @@ export const Transaction = () => {
 												key={index}
 												sx={
 													row.status === 'generate'
-														? {borderLeft: '8px solid #E0021B'}
+														? { borderLeft: '8px solid #E0021B' }
 														: row.status === 'sent'
-														? {borderLeft: '8px solid #0DC5F4'}
-														: row.status === 'authorized'
-														? {borderLeft: '8px solid #76DF29'}
-														: {}
+															? { borderLeft: '8px solid #0DC5F4' }
+															: row.status === 'authorized'
+																? { borderLeft: '8px solid #76DF29' }
+																: {}
 												}>
 												<TableCell>{row.email}</TableCell>
 												<TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>
@@ -364,7 +364,7 @@ export const Transaction = () => {
 															setSelectedTicket(row);
 															handleOpen();
 														}}>
-														{msToTime(row.createdAt) ? 'Update' : 'View'}
+														{new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? 'Update' : 'View'}
 													</Button>
 
 													<Button
@@ -424,8 +424,8 @@ export const Transaction = () => {
 
 			{/* open Logs*/}
 			<Modal open={openLog} onClose={handleLogClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={style} style={{padding: '32px 16px !important'}}>
-					<IconButton onClick={handleLogClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+				<Box sx={style} style={{ padding: '32px 16px !important' }}>
+					<IconButton onClick={handleLogClose} sx={{ position: `absolute`, right: `10px`, top: `10px` }}>
 						<CloseIcon />
 					</IconButton>
 					<ViewLog data={[Array(10)]} id={selectedTicket} />
@@ -450,7 +450,7 @@ export const Transaction = () => {
 						borderRadius: '1rem',
 						p: 4,
 					}}>
-					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+					<IconButton onClick={handleClose} sx={{ position: `absolute`, right: `10px`, top: `10px` }}>
 						<CloseIcon />
 					</IconButton>
 
@@ -476,7 +476,7 @@ export const Transaction = () => {
 						borderRadius: '1rem',
 						p: 4,
 					}}>
-					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+					<IconButton onClick={handleEmailClose} sx={{ position: `absolute`, right: `10px`, top: `10px` }}>
 						<CloseIcon />
 					</IconButton>
 					<Email Ticketid={viewEmail} id={selectedTicket} onClose={handleEmailClose} />

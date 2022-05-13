@@ -111,11 +111,7 @@ export const AddUser = () => {
     e.preventDefault();
 
     axios
-      .post(BASEURL + "/agent", values, {
-        headers: {
-          authorization: "Bearer " + JSON.parse(localStorage.getItem("token")),
-        },
-      })
+      .post(BASEURL + "/agent", values)
       .then((response) => {
         // console.log(response);
         successToast("Agent added successfully");
