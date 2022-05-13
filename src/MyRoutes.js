@@ -12,6 +12,7 @@ import {Transaction} from './views/MyRecords';
 import Email from './views/Email';
 import Dashboard from './views/Dashboard';
 import AddNewRecord from './views/AddNewRecord';
+import Auth from './views/Auth';
 
 const data = {};
 export default function RouteComponent() {
@@ -35,6 +36,7 @@ export default function RouteComponent() {
 			<Route path='/email' element={<Email />}></Route>
 			<Route path='/add-new-record' element={<AddNewRecord isview={false} data={data} />}></Route>
 			<Route path='/logout' element={<Signoff />}></Route>
+			<Route path='/Auth' element={<Auth />}></Route>
 		</Routes>
 	);
 }
