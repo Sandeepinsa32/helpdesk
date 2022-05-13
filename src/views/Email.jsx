@@ -25,7 +25,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const Email = ({Ticketid, onClose}) => {
+const Email = ({Ticketid, id, onClose}) => {
+	// console.log(id);
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
 	const [tableData, setTableData] = useState();
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
@@ -137,17 +138,17 @@ const Email = ({Ticketid, onClose}) => {
 	function renderEmail() {
 		switch (selectedEmailTemplate) {
 			case 1:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} TotalAmount={[]} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={id} />;
 			case 2:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} TotalAmount={[]} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={id} />;
 			case 3:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} TotalAmount={[]} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={id} />;
 			case 4:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} TotalAmount={[]} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={id} />;
 
 			default:
 				// throw new Error("Unknown step");
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} TotalAmount={[]} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} recordData={id} />;
 		}
 	}
 

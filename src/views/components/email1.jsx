@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 
-const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, TotalAmount}) => {
+const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData}) => {
 	const [selectedEmail, setSelectedEmail] = useState();
-	console.log(selectedEmailTemplate, Tabledata, pnrData, TotalAmount);
+	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
+	const grandTotal = '100';
 	function renderingEmail() {
 		switch (selectedEmailTemplate) {
 			case 1:
@@ -245,7 +246,7 @@ Once completed your agent will notify you and you'll be able to access the reser
     </tr>
           <tr>
       <td style="border-right: 1px solid #ddd;" name="firstname">Credit :	</td>
-      <td style="border-right: 1px solid #ddd;"  name="lastname" >$ ${TotalAmount}	</td>
+      <td style="border-right: 1px solid #ddd;"  name="lastname" >$ ${grandTotal}	</td>
        
        
       
@@ -495,7 +496,7 @@ table.tableoutter th {
      
            <div class="paymentMessage" style="background: #efefef;"> 
 
-             <p style="font-size: 12px; line-height: 20px; color: #222; margin-bottom:20px; font-weight: 600;font-family: 'sans-serif';">Total amount charged $ ${TotalAmount} in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
+             <p style="font-size: 12px; line-height: 20px; color: #222; margin-bottom:20px; font-weight: 600;font-family: 'sans-serif';">Total amount charged $ ${grandTotal} in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
         </p>
               
             </div>
