@@ -1,18 +1,25 @@
 import React, {useState} from 'react';
+import {Grid, Button, Box, Paper} from '@mui/material';
+// @mat_icon
+import SendIcon from '@mui/icons-material/Send';
 
-const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData}) => {
+const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid}) => {
 	const [selectedEmail, setSelectedEmail] = useState();
 	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
 	const grandTotal = '100';
 	function renderingEmail() {
 		switch (selectedEmailTemplate) {
-			case 1:
+			case 'newBooking':
+				// setSelectedEmail(newBooking);
 				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
-			case 2:
+			case 'exchange':
+				// setSelectedEmail(Exchange);
 				return <span dangerouslySetInnerHTML={{__html: Exchange}} />;
-			case 3:
+			case 'refund':
+				// setSelectedEmail(Refund);
 				return <span dangerouslySetInnerHTML={{__html: Refund}} />;
-			case 4:
+			case 'futureCredit':
+				// setSelectedEmail(futureCredit) ;
 				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
 
 			default:
@@ -101,28 +108,6 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData}) => {
 		return tableString;
 	}
 
-	function PnrDetail() {
-		var tableString = '';
-		pnrData.map((x) => {
-			tableString =
-				tableString +
-				`<tr>
-		  <td >${new Date(x.flt.departure.string).toLocaleDateString('en-US', {
-				day: '2-digit',
-				weekday: 'short',
-				month: 'short',
-				year: '2-digit',
-			})}</td>
-		  <td>${x.flt.operated_by}</td>
-		  <td> ${new Date(x.flt.departure.string).getHours()}:${new Date(x.flt.departure.string).getMinutes()}</td>
-		  <td> ${x.dep.airportname},  ${x.dep.airportcode}</td>
-		  <td> ${new Date(x.flt.arrival.string).getHours()}:${new Date(x.flt.arrival.string).getMinutes() === 0 ? `00` : new Date(x.flt.arrival.string).getMinutes()}</td>
-		  <td> ${x.arr.airportname}, ${x.arr.airportcode}</td>
-		  <td>${new Date(x.flt.departure.string).getHours()}H${new Date(x.flt.departure.string).getMinutes()}m </td>
-		</tr>`;
-		});
-		return tableString;
-	}
 	var Exchange = `<center>
 		<style>
     table.tableoutter {
@@ -652,31 +637,40 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
 	var futureCredit = `<center>
 		<style>
     table.tableoutter {
-  border: 1px solid #ccc;
+
   border-collapse: collapse;
   margin: 0;
   padding: 0;
   width: 100%;
   table-layout: fixed;
+     
 }
 
-
+      
 
 table.tableoutter tr {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
+  background-color: #f8f8f8;  
   padding: .35em;
+  text-align:center;
 }
 
+table.tableoutter tr th{
+  background-color: #fff !important;  
+  border: 0px solid #fff !important;
+}
 table.tableoutter th,
 table.tableoutter td {
   padding: .625em;
-  font-size:12px;
+  font-size:14px;
+  color:#0B4173;
+   font-weight:600;
 
 }
 
 table.tableoutter th {
-  font-size: 10px;
+  font-size: 14px;
+  color:#0B4173;
+  font-weight:600;
   text-transform: capitalize;
 }
 
@@ -731,44 +725,46 @@ table.tableoutter th {
 
 </style>
     
-    <div style="width:100%; background:#ffffff; padding:5px 10px; text-align:left;  font-family:"Calibri, sans-serif";">
+    <div style="width:80vw;background:#ffffff; padding:p-x 10px;font-weight:500; text-align:left;  font-family:Calibri, sans-serif;">
 		
-      <p style="font-size:12px; line-height:24px; color:#666666; margin-bottom:10px;  font-family:"Calibri, sans-serif";">
+      <p style="font-size:13px; line-height:16px; color:#0B4173; margin:0px;border-radius:3px;padding:10px 5px;  font-family:Calibri, sans-serif;">
         By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
       </p>
       
-		<hr/>
-		  <h1 style="font-size:14px; text-align:right; line-height:22px; font-weight:normal; color:#333333; font-family: 'sans-serif', font-family:"Calibri, sans-serif";">
-			  Trip Help Desk Powered By <b>Valalto Inc.</b>	
+		<hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
+		  <h1 style="font-size:14px; text-align:right; line-height:22px; font-weight:normal; color:#0B4173;font-family:sans-serif;">
+			  Trip Help Desk Powered By <b style="color: #0B4173;font-size: 16px;">Valalto Inc.</b>	
          </h1>
           
 		<div style="display:flex;justify-content:space-between;">
 		
   
-            <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
+            <h1 style="color: #0B4173;font-size: 16px; line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; ">
                 Invoice
+              
             </h1>
-            <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif";">
+            <h1 style=" line-height:22px; font-weight:bold;margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px; ">
                 Confirmation :
             </h1>
-            <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif";">
+            <h1 style="line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px;">
                THDFRN2203011
             </h1>
 	    </div>
 		
 		
-		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color:#333333;margin:0;height:fit-content;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
-         ${currentDate()} 
- <!--       Wed, May 11, 2022 -->
+		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color: #0B4173;margin:0;height:fit-content;font-family:sans-serif; ">
+<!--    Wed, May 11, 2022      -->
+         ${currentDate()}
         </h1>
-		<h1 style="font-size:14px; line-height:22px; font-weight:600; color:#333333;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
+		<h1 style="font-size:14px; line-height:22px; font-weight:600; color: #0B4173;font-family:Arial; ">
    Requested Service: Cancellation of Airline Ticket For Credi
         </h1>
       
+		
       
-      <p style="font-size:12px; line-height:18px; color:#666666; margin-bottom:30px; font-family: 'sans-serif', font-family:"Calibri, sans-serif";">
-       "Your cancelation for future credit is in process and will be submitted to the airlines to finalize. Once completed, you'll have a credit with the airlines for the amount. (credit and rebooking fees are subject to the ailrine policy). You can contact us or the airlines directly when it's time to use your airline credit - Trip Help Desk is more than happy to help!
-		  If you need any assistance regarding changes, please contact us at <b> +1 866-270-1413</b>  or email at <b>info@triphelpdesk.com</b>
+       <p style="font-size:12px; line-height:16px; color:#0B4173; margin-bottom:30px; font-family: Arial;">
+       Your cancelation for future credit is in process and will be submitted to the airlines to finalize. Once completed, you'll have a credit with the airlines for the amount. (credit and rebooking fees are subject to the ailrine policy). You can contact us or the airlines directly when it's time to use your airline credit - Trip Help Desk is more than happy to help!
+		 
       </p>
       
 
@@ -777,9 +773,9 @@ table.tableoutter th {
   
   <thead class=" tableHead ">
     <tr>
-      <th class="tableHeading" scope="col" name="firstname"> firstname</th>
-      <th class="tableHeading" scope="col" name="firstname"> middlename</th>
-      <th class="tableHeading" scope="col" name="firstname">lastname</th>
+      <th class="tableHeading" scope="col" name="firstname"> First Name</th>
+       <th class="tableHeading" scope="col" name="middlename"> Middle  Name</th>
+       <th class="tableHeading" scope="col" name="lasstname"> Last Name</th>
       
        <th scope="col"  class="tableHeading" name="price">Confirmation</th>
       
@@ -787,15 +783,18 @@ table.tableoutter th {
   </thead>
   <tbody id='appendCHildHere' >
     
-
-    ${userTabelData4()} 
-
-   <!-- 
+      ${userTabelData4()}
+   
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
+       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
+       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
+      
       <td class="tableHeading" scope="col" name="lastname" >DJT2JJ</td>
-        </tr>
-    -->
+       
+       
+      
+    </tr>
      	
   
   </tbody>
@@ -809,21 +808,21 @@ table.tableoutter th {
 
    
     <tr>
-      <td style="border-right: 1px solid #ddd;"   name="firstname">Airline : 	</td>
-      <td  style="border-right: 1px solid #ddd; width:100px"  name="lastname" ></td>
+      <td style=""   name="firstname">Airline : 	</td>
+      <td  style=" width:100px"  name="lastname" ></td>
        
        
       
     </tr>
           <tr>
-      <td style="border-right: 1px solid #ddd;" name="firstname">Credit :	</td>
-      <td style="border-right: 1px solid #ddd;"  name="lastname" >$	</td>
+      <td style="" name="firstname">Credit :	</td>
+      <td style="  name="lastname" >$	</td>
        
        
       
     </tr>  <tr>
-      <td style="border-right: 1px solid #ddd;"  name="firstname">Valid Till :	</td>
-      <td style="border-right: 1px solid #ddd;"  name="lastname" ></td>
+      <td style=""  name="firstname">Valid Till :	</td>
+      <td style=""  name="lastname" ></td>
        
        
       
@@ -840,15 +839,18 @@ table.tableoutter th {
 
           
       
-      <div>
-      <p style="font-size:9px; line-height:11px; color:#666666; margin-bottom:10px;">
+      <p style="font-size:12px; line-height:18px; font-weight:500;color: #0B4173;margin-bottom:10px;margin:0px;border-radius:3px;padding:10px 5px; font-family:Calibri, sans-serif;">
        
-Note: Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the ""Charge For Processing '' amount. . Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total ""Charge For Processing '' amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @ 866-270-1413 or email info@triphelpdesk.com 
-
-Changes and Cancellations are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more. 
-
-24 Hour Cancelation Policy: From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
-
+        <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><u><a href="tel:8662701413"> 866-270-1413</a></u></b> or email 
+        <b><u><a href = "mailto:info@triphelpdesk.com">info@triphelpdesk.com </a></u></b> 
+<br/>
+<br/>
+ <b>Changes and Cancellations :  </b>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more. 
+<br/>
+<br/>
+<b>24 Hour Cancelation Policy:</b> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
+<br/>
+<br/>
 Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
       </p>
       
@@ -860,7 +862,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
          
          
 
-      
+    
         
        
        </div>
@@ -875,12 +877,12 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
 
 
 
-      <hr style="border:none; height:1px; color:#dddddd; background:#dddddd; width:100%; margin-bottom:20px;">
+    <hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
       
-      <p style="font-size:12px; line-height:18px; color:#999999; margin-bottom:10px;">
-        &copy; Copyright 2018 
-        <a href="http://glennsmith.me" 
-           style="font-size:12px; line-height:18px; color:#666666; font-weight:bold;">
+      <p style=" line-height:18px;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
+        &copy; Copyright 2022 
+        <a href="https://valalto.com/" 
+           style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
           Valalto Inc.</a>, All Rights Reserved.
       </p>
       
@@ -1161,8 +1163,37 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     </div>
       
     </center >`;
+	const handleSendEmail = async () => {
+		console.log(selectedEmail);
+		// 	axios
+		// 		.post(BASEURL + '/ticket/email', {
+		// 			data: inputList1,
+		// 			ticketId: Ticketid,
+		// 		})
+		// 		.then((res) => {
+		// 			console.log(res);
+		// 			onClose();
+		// 		})
+		// 		.catch((e) => console.log(e));
+	};
 
-	return <>{renderingEmail()}</>;
+	return (
+		<>
+			<Paper elevation={1}>
+				<Box sx={{m: 0, p: 2}}>{renderingEmail()} </Box>
+			</Paper>
+
+			<Grid container spacing={1} sx={{m: 0, p: 1}}>
+				<Grid item xs={6} md={10}></Grid>
+
+				<Grid item xs={6} md={2} sx={{mb: 3}}>
+					<Button onClick={handleSendEmail} variant='contained' endIcon={<SendIcon />}>
+						Send Mail
+					</Button>
+				</Grid>
+			</Grid>
+		</>
+	);
 };
 
 export default Email1;

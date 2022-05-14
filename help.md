@@ -82,3 +82,9 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
   </div>
 
 -->
+
+14/may/2020 14. selected email template log it in console 15. cha
+
+11. card masking --prince ji
+12. adding two field in address form --- && make it uppercase (all label ) && PNR conv. (Value should be in upppercase ) -- airline code --- && markup total change Elder to Infants
+13. email validation and SHould Accept empty value from files

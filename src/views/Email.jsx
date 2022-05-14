@@ -27,7 +27,8 @@ import {lightGreen} from '@mui/material/colors';
 
 const Email = ({Ticketid, id, onClose}) => {
 	// console.log(id);
-	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState(1);
+
+	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState('newBooking');
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
 	const [pnrData, setPnrData] = useState([]);
 	const [inputList1, setInputList1] = useState([
@@ -66,30 +67,17 @@ const Email = ({Ticketid, id, onClose}) => {
 		},
 	]);
 
-	const handleEmailTemplateChange = (e) => setSelectedEmailTemplate(Number(e.target.value));
+	const handleEmailTemplateChange = (e) => setSelectedEmailTemplate(e.target.value);
 
-	const handleConfirm = (inputList) => {
-		// calculateTotalAmount();
-		// let newArr = clean(inputList);
+	// const handleConfirm = (inputList) => {
+	// 	// calculateTotalAmount();
+	// 	// let newArr = clean(inputList);
 
-		console.log(Ticketid);
+	// 	console.log(Ticketid);
 
-		console.log(pnrValue);
-		console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >');
-	};
-
-	const handleSendEmail = async () => {
-		axios
-			.post(BASEURL + '/ticket/email', {
-				data: inputList1,
-				ticketId: Ticketid,
-			})
-			.then((res) => {
-				console.log(res);
-				onClose();
-			})
-			.catch((e) => console.log(e));
-	};
+	// 	console.log(pnrValue);
+	// 	console.log('selectedEmailTemplate', selectedEmailTemplate, 'inputList ->', inputList, 'newArr - >');
+	// };
 
 	const handlePnrConverter = async (e) => {
 		e.preventDefault();
@@ -116,31 +104,33 @@ const Email = ({Ticketid, id, onClose}) => {
 	};
 
 	function renderFields() {
+		console.log(selectedEmailTemplate);
 		switch (selectedEmailTemplate) {
-			case 1:
+			case 'newBooking':
 				return <NewBooking inputList1={inputList1} setInputList1={setInputList1} />;
-			case 2:
+			case 'exchange':
 				return <Exchange inputList2={inputList2} setInputList2={setInputList2} />;
-			case 3:
+			case 'refund':
 				return <Refund inputList3={inputList3} setInputList3={setInputList3} />;
-			case 4:
+			case 'futureCredit':
 				return <FutureCredit inputList4={inputList4} setInputList4={setInputList4} />;
 
 			default:
 				// throw new Error("Unknown step");
-				return <NewBooking />;
+				return <NewBooking setInputList1={setInputList1} />;
 		}
 	}
+
 	function renderEmail() {
 		switch (selectedEmailTemplate) {
-			case 1:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={id} />;
-			case 2:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={id} />;
-			case 3:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={id} />;
-			case 4:
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={id} />;
+			case 'newBooking':
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={id} Ticketid={Ticketid} />;
+			case 'exchange':
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={id} Ticketid={Ticketid} />;
+			case 'refund':
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={id} Ticketid={Ticketid} />;
+			case 'futureCredit':
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={id} Ticketid={Ticketid} />;
 
 			default:
 				// throw new Error("Unknown step");
@@ -154,7 +144,7 @@ const Email = ({Ticketid, id, onClose}) => {
 				<>
 					<Grid container spacing={1} sx={{m: 0, p: 1}}>
 						{/*  Email template  */}
-						<Grid item md={6} sx={{pr: 1}}>
+						<Grid item md={3} sx={{pr: 1}}>
 							<FormControl required fullWidth>
 								<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
 								<Select
@@ -166,19 +156,19 @@ const Email = ({Ticketid, id, onClose}) => {
 									fullWidth
 									name='emailTemplate'
 									label='Email Template'>
-									<MenuItem value='1'>New Booking Confirmation </MenuItem>
-									<MenuItem value='2'>Exchange</MenuItem>
-									<MenuItem value='3'>Refund</MenuItem>
-									<MenuItem value='4'>Future Credit</MenuItem>
+									<MenuItem value='newBooking'>New Booking Confirmation </MenuItem>
+									<MenuItem value='exchange'>Exchange</MenuItem>
+									<MenuItem value='refund'>Refund</MenuItem>
+									<MenuItem value='futureCredit'>Future Credit</MenuItem>
 									{/* <MenuItem value='5'>Add On </MenuItem> */}
 								</Select>
 							</FormControl>
 						</Grid>
-						<Grid item md={6} sx={{pr: 1}}>
+						{/* <Grid item md={6} sx={{pr: 1}}>
 							<TextField required name='ticketId' size='small' label='Booking ID' fullWidth={true} value={Ticketid} disabled={true} />
-						</Grid>
+						</Grid> */}
 
-						<Grid item md={10} sx={{pr: 1, my: 2}}>
+						<Grid item md={6} sx={{pr: 1}}>
 							<TextField
 								id='outlined-multiline-flexible'
 								multiline
@@ -193,31 +183,17 @@ const Email = ({Ticketid, id, onClose}) => {
 								value={pnrValue}
 							/>
 						</Grid>
-						<Grid item xs={6} md={2} sx={{pr: 1, my: 2}}>
+						<Grid item xs={6} md={2} sx={{pr: 1}}>
 							<Button onClick={handlePnrConverter} variant='contained'>
 								Convert
 							</Button>
 						</Grid>
-						<Box sx={{mt: 2, p: 1}}>{renderFields()}</Box>
 					</Grid>
-
-					<Grid container spacing={1} sx={{m: 0, p: 1}}>
-						<Grid item xs={6} md={10}></Grid>
-
-						<Grid item xs={6} md={2} sx={{mb: 3}}>
-							<Button onClick={handleSendEmail} variant='contained'>
-								Submit
-							</Button>
-						</Grid>
-					</Grid>
+					<Box sx={{mt: 2, p: 1}}>{renderFields()}</Box>
 				</>
 			</Box>
 
-			<Box sx={{m: 3}}></Box>
-			<Paper elevation={1}>
-				{/* <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} TotalAmount={[]} /> */}
-				{renderEmail()}
-			</Paper>
+			<Box sx={{m: 3}}>Genrated Email Preview : {renderEmail()}</Box>
 		</>
 	);
 };
