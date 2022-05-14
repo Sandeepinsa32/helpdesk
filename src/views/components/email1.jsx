@@ -31,7 +31,9 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData}) => {
 		return today;
 	}
 
-	function userTabelData() {
+	function userTabelData1() {
+		console.log(Tabledata);
+
 		var tableString = '';
 		Tabledata.forEach((x) => {
 			tableString =
@@ -48,6 +50,57 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData}) => {
 
 		return tableString;
 	}
+	function userTabelData2() {
+		console.log(Tabledata);
+		var tableString = '';
+		Tabledata.forEach((x) => {
+			tableString =
+				tableString +
+				`<tr>
+		  <td >${x.firstName}</td>
+		  <td>${x.middleName}</td>
+		  <td>${x.lastName}</td>
+		  <td>${x.ticket}</td>
+		  <td>${x.price}</td>
+		</tr>`;
+		});
+
+		return tableString;
+	}
+	function userTabelData3() {
+		console.log(Tabledata);
+		var tableString = '';
+		Tabledata.forEach((x) => {
+			tableString =
+				tableString +
+				`<tr>
+		  <td >${x.firstName}</td>
+		  <td>${x.middleName}</td>
+		  <td>${x.lastName}</td>
+		  <td>${x.refund}</td>
+		</tr>`;
+		});
+
+		return tableString;
+	}
+	function userTabelData4() {
+		console.log(Tabledata);
+		var tableString = '';
+		Tabledata.forEach((x) => {
+			console.log(x);
+			tableString =
+				tableString +
+				`<tr>
+		  <td >${x.firstName}</td>
+		  <td>${x.middleName}</td>
+		  <td>${x.lastName}</td>
+		  <td>${x.confirmation}</td>
+		</tr>`;
+		});
+
+		return tableString;
+	}
+
 	function PnrDetail() {
 		var tableString = '';
 		pnrData.map((x) => {
@@ -205,13 +258,12 @@ Once completed your agent will notify you and you'll be able to access the reser
       <th  class="tableHeading" scope="col" name="Ticket">Ticket </th>
     
        <th scope="col"  class="tableHeading" name="price">Price</th>
-       <th scope="col"  class="tableHeading" name="price">other</th>
       
     </tr>
   </thead>
   <tbody id='appendCHildHere' >
     
-  ${userTabelData()}
+  ${userTabelData2()}
 
    
     
@@ -481,7 +533,7 @@ table.tableoutter th {
   <tbody id='appendCHildHere' >
     
     
-		${userTabelData()}
+		${userTabelData1()}
 	
    
   
@@ -715,7 +767,7 @@ table.tableoutter th {
   <tbody id='appendCHildHere' >
     
 
-    ${userTabelData()} 
+    ${userTabelData4()} 
 
    <!-- 
     <tr>
@@ -956,7 +1008,9 @@ ${currentDate()}
   
   <thead class=" tableHead ">
     <tr>
-      <th class="tableHeading" scope="col" name="firstname"> Name</th>
+      <th class="tableHeading" scope="col" name="firstname">First Name</th>
+      <th class="tableHeading" scope="col" name="firstname">Middle Name</th>
+      <th class="tableHeading" scope="col" name="firstname">Last Name</th>
       
        <th scope="col"  class="tableHeading" name="price">Refund</th>
       
@@ -966,7 +1020,7 @@ ${currentDate()}
     
 
    
-  	${userTabelData()}
+  	${userTabelData3()}
     <!--    
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>

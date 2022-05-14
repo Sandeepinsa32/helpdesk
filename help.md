@@ -43,7 +43,7 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 13/5
 
-1. update record padd card details  --done
+1. update record padd card details --done
 2. add new record cvv
 3. hide update btn in my record
 4. new screen for /auth  
@@ -51,3 +51,5 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 5. email template
 6. cvv validation on card
  <!-- new Date('2022-05-13T03:39:48.781Z') - new Date() -->
+
+7. navigate on add new record
