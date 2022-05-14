@@ -43,6 +43,8 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 13/5
 
+<!-- https://datastudio.google.com/u/0/reporting/2975876c-76bc-4c5c-9775-74544276471c/page/ElInC -->
+
 1. update record padd card details --done
 2. add new record cvv
 3. hide update btn in my record
@@ -53,3 +55,30 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
  <!-- new Date('2022-05-13T03:39:48.781Z') - new Date() -->
 
 7. navigate on add new record
+8. #1882E5
+    <!-- #0E4E8A -->
+     <!-- color: #0B4173;font-size: 16px; -->
+
+<!--
+
+
+
+
+.menu-icon{
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+   padding:20px;
+}
+.logo {
+  display:flex;
+}
+
+<div class="menu">
+  <div class="menu-icon">
+  <div class="logo"> Logo</div>
+
+  </div>
+
+-->
