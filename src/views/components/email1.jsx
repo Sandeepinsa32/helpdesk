@@ -74,10 +74,10 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData}) => {
 			tableString =
 				tableString +
 				`<tr>
-		  <td >${x.firstName}</td>
-		  <td>${x.middleName}</td>
-		  <td>${x.lastName}</td>
-		  <td>${x.refund}</td>
+		  <td class="tableHeading" scope="col" name="firstname">${x.firstName}</td>
+		  <td class="tableHeading" scope="col" name="middlename">${x.middleName}</td>
+		  <td class="tableHeading" scope="col" name="lastname">${x.lastName}</td>
+		  <td class="tableHeading" scope="col" name="refund">${x.refund}</td>
 		</tr>`;
 		});
 
@@ -1014,9 +1014,11 @@ table.tableoutter th {
   
   <thead class=" tableHead ">
     <tr>
-      <th class="tableHeading" scope="col" name="firstname"> Name</th>
+      <th class="tableHeading" scope="col" name="firstname"> First Name</th>
+      <th class="tableHeading" scope="col" name="middlename"> Middle Name</th>
+      <th class="tableHeading" scope="col" name="lastname"> Last Name</th>
       
-       <th scope="col"  class="tableHeading" name="price">Refund</th>
+       <th scope="col"  class="tableHeading" name="refund">Refund</th>
       
     </tr>
   </thead>
@@ -1025,13 +1027,13 @@ table.tableoutter th {
 
 		${userTabelData3()}
 
-   
+     <!-- 
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
       <td class="tableHeading" scope="col" name="lastname" >DJT2JJ</td>
        
        
-      
+   
     </tr>
      	 <tr>
       <td class="tableHeading" scope="col" name="firstname"> 
@@ -1042,6 +1044,7 @@ table.tableoutter th {
        
       
     </tr>
+    -->
   		
   </tbody>
 </table>
