@@ -4,27 +4,34 @@ import {Grid, Button, Box, Paper} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 
 const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid}) => {
-	const [selectedEmail, setSelectedEmail] = useState();
 	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
 	const grandTotal = '100';
 	function renderingEmail() {
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
-				// setSelectedEmail(newBooking);
 				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
 			case 'exchange':
-				// setSelectedEmail(Exchange);
 				return <span dangerouslySetInnerHTML={{__html: Exchange}} />;
 			case 'refund':
-				// setSelectedEmail(Refund);
 				return <span dangerouslySetInnerHTML={{__html: Refund}} />;
 			case 'futureCredit':
-				// setSelectedEmail(futureCredit) ;
 				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
 
-			default:
-				// throw new Error("Unknown step");
 				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
+		}
+	}
+	function getSelectedEmail() {
+		switch (selectedEmailTemplate) {
+			case 'newBooking':
+				return newBooking;
+			case 'exchange':
+				return Exchange;
+			case 'refund':
+				return Refund;
+			case 'futureCredit':
+				return futureCredit;
+			default:
+				return newBooking;
 		}
 	}
 
@@ -1164,7 +1171,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 	const handleSendEmail = async () => {
-		console.log(selectedEmail);
+		console.log(getSelectedEmail());
 		// 	axios
 		// 		.post(BASEURL + '/ticket/email', {
 		// 			data: inputList1,
