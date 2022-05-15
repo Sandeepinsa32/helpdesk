@@ -72,6 +72,11 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid
 		// console.log(Tabledata);
 		var tableString = '';
 		Tabledata.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+			console.log(isEmpty);
+			if (isEmpty) {
+				return;
+			}
 			tableString =
 				tableString +
 				`<tr>
@@ -89,6 +94,11 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid
 		// console.log(Tabledata);
 		var tableString = '';
 		Tabledata.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+			console.log(isEmpty);
+			if (isEmpty) {
+				return;
+			}
 			tableString =
 				tableString +
 				`<tr>
@@ -105,6 +115,11 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid
 		// console.log(Tabledata);
 		var tableString = '';
 		Tabledata.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+			console.log(isEmpty);
+			if (isEmpty) {
+				return;
+			}
 			// console.log(x);
 			tableString =
 				tableString +
