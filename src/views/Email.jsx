@@ -104,7 +104,7 @@ const Email = ({Ticketid, id, onClose}) => {
 	};
 
 	function renderFields() {
-		// console.log(selectedEmailTemplate);
+		console.log(selectedEmailTemplate);
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
 				return <NewBooking inputList1={inputList1} setInputList1={setInputList1} />;
