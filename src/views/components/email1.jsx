@@ -623,6 +623,17 @@ table.tableoutter th {
 
 
 
+<div style="display:flex;justify-content:center; padding:15px">
+  <a  style="display:inline-block;
+    border: 0;cursor: pointer;
+   
+    color: #efefef;
+    font-size: 18px;
+    background-color: transparent;
+    background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
+    border-radius: 50px 50px 50px 50px;
+    padding: 15px 25px 15px 25px; font-family:sans-serif;"  href="http://localhost:3000/validateToken" target='_blank'>Authorize</a>
+</div>
 
 
 
