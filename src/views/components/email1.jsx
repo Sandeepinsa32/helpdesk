@@ -1,58 +1,66 @@
-import React, {useState} from 'react';
-import {Grid, Button, Box, Paper} from '@mui/material';
+import React, { useState } from "react";
+import { Grid, Button, Box, Paper } from "@mui/material";
 // @mat_icon
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from "@mui/icons-material/Send";
+import axios from "axios";
+import { BASEURL } from "../../utils/Utils";
 
-const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid}) => {
-	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
-	const grandTotal = '100';
-	function renderingEmail() {
-		switch (selectedEmailTemplate) {
-			case 'newBooking':
-				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
-			case 'exchange':
-				return <span dangerouslySetInnerHTML={{__html: Exchange}} />;
-			case 'refund':
-				return <span dangerouslySetInnerHTML={{__html: Refund}} />;
-			case 'futureCredit':
-				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
+const Email1 = ({
+  selectedEmailTemplate,
+  Tabledata,
+  pnrData,
+  recordData,
+  Ticketid,
+}) => {
+  console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
+  const grandTotal = "100";
+  function renderingEmail() {
+    switch (selectedEmailTemplate) {
+      case "newBooking":
+        return <span dangerouslySetInnerHTML={{ __html: newBooking }} />;
+      case "exchange":
+        return <span dangerouslySetInnerHTML={{ __html: Exchange }} />;
+      case "refund":
+        return <span dangerouslySetInnerHTML={{ __html: Refund }} />;
+      case "futureCredit":
+        return <span dangerouslySetInnerHTML={{ __html: futureCredit }} />;
 
-				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
-		}
-	}
-	function getSelectedEmail() {
-		switch (selectedEmailTemplate) {
-			case 'newBooking':
-				return newBooking;
-			case 'exchange':
-				return Exchange;
-			case 'refund':
-				return Refund;
-			case 'futureCredit':
-				return futureCredit;
-			default:
-				return newBooking;
-		}
-	}
+        return <span dangerouslySetInnerHTML={{ __html: newBooking }} />;
+    }
+  }
+  function getSelectedEmail() {
+    switch (selectedEmailTemplate) {
+      case "newBooking":
+        return newBooking;
+      case "exchange":
+        return Exchange;
+      case "refund":
+        return Refund;
+      case "futureCredit":
+        return futureCredit;
+      default:
+        return newBooking;
+    }
+  }
 
-	function currentDate() {
-		let today = new Date();
-		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		let yyyy = today.getFullYear();
+  function currentDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyy = today.getFullYear();
 
-		today = mm + '/' + dd + '/' + yyyy;
-		return today;
-	}
+    today = mm + "/" + dd + "/" + yyyy;
+    return today;
+  }
 
-	function userTabelData1() {
-		console.log(Tabledata);
+  function userTabelData1() {
+    console.log(Tabledata);
 
-		var tableString = '';
-		Tabledata.forEach((x) => {
-			tableString =
-				tableString +
-				`<tr>
+    var tableString = "";
+    Tabledata.forEach((x) => {
+      tableString =
+        tableString +
+        `<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
@@ -60,62 +68,62 @@ const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid
 		  <td>${x.confirmation}</td>
 		  <td>${x.price}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
-	function userTabelData2() {
-		console.log(Tabledata);
-		var tableString = '';
-		Tabledata.forEach((x) => {
-			tableString =
-				tableString +
-				`<tr>
+    return tableString;
+  }
+  function userTabelData2() {
+    console.log(Tabledata);
+    var tableString = "";
+    Tabledata.forEach((x) => {
+      tableString =
+        tableString +
+        `<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
 		  <td>${x.ticket}</td>
 		  <td>${x.price}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
-	function userTabelData3() {
-		console.log(Tabledata);
-		var tableString = '';
-		Tabledata.forEach((x) => {
-			tableString =
-				tableString +
-				`<tr>
+    return tableString;
+  }
+  function userTabelData3() {
+    console.log(Tabledata);
+    var tableString = "";
+    Tabledata.forEach((x) => {
+      tableString =
+        tableString +
+        `<tr>
 		  <td class="tableHeading" scope="col" name="firstname">${x.firstName}</td>
 		  <td class="tableHeading" scope="col" name="middlename">${x.middleName}</td>
 		  <td class="tableHeading" scope="col" name="lastname">${x.lastName}</td>
 		  <td class="tableHeading" scope="col" name="refund">${x.refund}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
-	function userTabelData4() {
-		console.log(Tabledata);
-		var tableString = '';
-		Tabledata.forEach((x) => {
-			console.log(x);
-			tableString =
-				tableString +
-				`<tr>
+    return tableString;
+  }
+  function userTabelData4() {
+    console.log(Tabledata);
+    var tableString = "";
+    Tabledata.forEach((x) => {
+      console.log(x);
+      tableString =
+        tableString +
+        `<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
 		  <td>${x.confirmation}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
+    return tableString;
+  }
 
-	var Exchange = `<center>
+  var Exchange = `<center>
 		<style>
     table.tableoutter {
 
@@ -389,7 +397,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	var newBooking = `<center>
+  var newBooking = `<center>
 			<style>
     table.tableoutter {
 
@@ -641,7 +649,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	var futureCredit = `<center>
+  var futureCredit = `<center>
 		<style>
     table.tableoutter {
 
@@ -899,7 +907,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	var Refund = `<center>
+  var Refund = `<center>
 		<style>
     table.tableoutter {
 
@@ -1170,37 +1178,41 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     </div>
       
     </center >`;
-	const handleSendEmail = async () => {
-		console.log(getSelectedEmail());
-		// 	axios
-		// 		.post(BASEURL + '/ticket/email', {
-		// 			data: inputList1,
-		// 			ticketId: Ticketid,
-		// 		})
-		// 		.then((res) => {
-		// 			console.log(res);
-		// 			onClose();
-		// 		})
-		// 		.catch((e) => console.log(e));
-	};
+  const handleSendEmail = async () => {
+    console.log(getSelectedEmail());
+    axios
+      .post(BASEURL + "/ticket/email", {
+        data: getSelectedEmail(),
+        ticketId: Ticketid,
+      })
+      .then((res) => {
+        console.log(res);
+        // onClose();
+      })
+      .catch((e) => console.log(e));
+  };
 
-	return (
-		<>
-			<Paper elevation={1}>
-				<Box sx={{m: 0, p: 2}}>{renderingEmail()} </Box>
-			</Paper>
+  return (
+    <>
+      <Paper elevation={1}>
+        <Box sx={{ m: 0, p: 2 }}>{renderingEmail()} </Box>
+      </Paper>
 
-			<Grid container spacing={1} sx={{m: 0, p: 1}}>
-				<Grid item xs={6} md={10}></Grid>
+      <Grid container spacing={1} sx={{ m: 0, p: 1 }}>
+        <Grid item xs={6} md={10}></Grid>
 
-				<Grid item xs={6} md={2} sx={{mb: 3}}>
-					<Button onClick={handleSendEmail} variant='contained' endIcon={<SendIcon />}>
-						Send Mail
-					</Button>
-				</Grid>
-			</Grid>
-		</>
-	);
+        <Grid item xs={6} md={2} sx={{ mb: 3 }}>
+          <Button
+            onClick={handleSendEmail}
+            variant="contained"
+            endIcon={<SendIcon />}
+          >
+            Send Mail
+          </Button>
+        </Grid>
+      </Grid>
+    </>
+  );
 };
 
 export default Email1;
