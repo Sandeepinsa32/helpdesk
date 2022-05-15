@@ -7,22 +7,27 @@ import { useParams } from "react-router-dom";
 const Authorizing = () => {
   const { id } = useParams();
   const [showLoading, setShowLoading] = useState(true);
-  const [message, Message] = useState("You have confirmed the tickets");
+  const [message, setMessage] = useState("");
 
-  const handleConfirm = async () => {
+  const handleConfirm = async (id) => {
+    console.log(id);
     axios
-      .put(BASEURL + "/ticket/auth-email/", {
-        id,
-      })
+      .get(BASEURL + "/ticket/auth-email/" + id)
       .then((res) => {
+        setMessage("You have confirmed the tickets");
         setShowLoading(false);
         console.log(res);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        console.log(e.response.data.message);
+        setShowLoading(false);
+        setMessage(e.response.data.message);
+      });
   };
 
   useEffect(() => {
-    if (id) handleConfirm();
+    if (id) handleConfirm(id);
   }, [id]);
 
   return (
