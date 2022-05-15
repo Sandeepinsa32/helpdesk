@@ -5,11 +5,11 @@ export const BASEURL = "http://localhost:4000";
 export const successToast = (message) => toast.success(message);
 export const errorToast = (message) => toast.error(message);
 
-export const createQueryString = ({ email, phone, name, page }) => {
+export const createQueryString = ({ email, phone, bookingid, page }) => {
   var query = "?";
   if (page) query = query + `page=${page}&`;
   if (email) query = query + `email=${email}&`;
-  if (name) query = query + `name=${name}&`;
+  if (bookingid) query = query + `bookingid=${bookingid}&`;
   if (phone) query = query + `phone=${phone}&`;
 
   return query?.substring(0, query.length - 1);

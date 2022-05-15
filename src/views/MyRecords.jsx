@@ -364,7 +364,7 @@ export const Transaction = () => {
                       >
                         <TableCell>{row.email}</TableCell>
                         <TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>
-                        <TableCell>{row._id.substring(0, 8)}...</TableCell>
+                        <TableCell>{row.bookingId}</TableCell>
                         {/* <TableCell>{row.cards[0].card}</TableCell> */}
                         <TableCell>{row.phone}</TableCell>
                         <TableCell>{row.grandTotal}</TableCell>
