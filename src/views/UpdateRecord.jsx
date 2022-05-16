@@ -57,10 +57,12 @@ const UpdateRecord = ({data}) => {
 		// notes,
 	} = data;
 
-	console.log(data);
+	// console.log(data);
 
+	// console.log(cards);
 	const [inputList, setInputList] = useState(cards);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
+	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
 	const [isDisable, setIsDisable] = useState(true);
 
 	// formik validation object
@@ -307,6 +309,9 @@ const UpdateRecord = ({data}) => {
 	useEffect(() => {
 		new Date() - new Date(createdAt) < 60000 * 60 * 48 ? setIsDisable(false) : setIsDisable(true);
 	}, [0]);
+	const showCardHandler = () => {
+		setIsPaymentVisible(true);
+	};
 
 	return (
 		<>
@@ -336,111 +341,211 @@ const UpdateRecord = ({data}) => {
 							borderRadius: 1,
 						}}>
 						{inputList.map((x, i) => {
-							return (
-								<Grid key={i} container spacing={3}>
-									{/* Card Holder NAme field */}
-									<Grid item xs={12} md={2}>
-										<TextField
-											required
-											name='cardHolderName'
-											label='NAME ON CARD'
-											fullWidth
-											disabled={isDisable}
-											autoComplete='cc-name'
-											onChange={(e) => {
-												handleCardInput(e, i);
-											}}
-											value={inputList[i].cardHolderName}
-										/>
-									</Grid>
-									{/*  Card Holder Phone no. */}
-									<Grid item xs={12} md={3}>
-										<TextField
-											required
-											name='cardHolderNumber'
-											label='PHONE NO.'
-											fullWidth
-											disabled={isDisable}
-											onChange={(e) => handleCardInput(e, i)}
-											value={inputList[i].cardHolderNumber}
-										/>
-									</Grid>
-									{/* CardNumber Field */}
-									<Grid item xs={12} md={3}>
-										<TextField
-											required
-											name='cardNumber'
-											label='CARD NUMBER'
-											fullWidth
-											disabled={isDisable}
-											autoComplete='cc-number'
-											onChange={(e) => handleCardInput(e, i)}
-											value={inputList[i].cardNumber}
-										/>
-									</Grid>
-									{/* CVV Field */}
-									<Grid item xs={12} md={2}>
-										<TextField
-											required
-											name='cvv'
-											label='CVV'
-											fullWidth
-											disabled={isDisable}
-											autoComplete='cc-csc'
-											onChange={(e) => handleCardInput(e, i)}
-											value={inputList[i].cvv}
-										/>
-									</Grid>
-									{/* expiry date field */}
-									<Grid item xs={12} md={2}>
-										<LocalizationProvider fullWidth disabled={isDisable} dateAdapter={AdapterDateFns}>
-											<DatePicker
-												fullWidth
-												disabled={isDisable}
-												views={['year', 'month']}
-												name='expiryDate'
-												label='EXPIRY DATE'
-												inputFormat='MM/yyyy'
-												placeholder='MM/yyyy'
-												minDate={new Date()}
-												onChange={(newValue) => {
-													handleDateInputChange(
-														i,
-														new Date(newValue).toLocaleDateString('en-US', {
-															day: '2-digit',
-															month: '2-digit',
-															year: 'numeric',
-														})
-													);
+							const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
 
-													// setExpiryDateValue(newValue);
-												}}
-												value={inputList[i].expiryDate}
-												renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
-											/>
-										</LocalizationProvider>
+							return (
+								<>
+									<Grid key={i} container spacing={3}>
+										{isEmpty ? (
+											<>
+												{/* Card Holder NAme field */}
+												<Grid item xs={12} md={2}>
+													<TextField
+														required
+														name='cardHolderName'
+														label='NAME ON CARD'
+														fullWidth
+														disabled={isDisable}
+														autoComplete='cc-name'
+														onChange={(e) => {
+															handleCardInput(e, i);
+														}}
+														value={inputList[i].cardHolderName}
+													/>
+												</Grid>
+												{/*  Card Holder Phone no. */}
+												<Grid item xs={12} md={3}>
+													<TextField
+														required
+														name='cardHolderNumber'
+														label='PHONE NO.'
+														fullWidth
+														disabled={isDisable}
+														onChange={(e) => handleCardInput(e, i)}
+														value={inputList[i].cardHolderNumber}
+													/>
+												</Grid>
+												{/* CardNumber Field */}
+												<Grid item xs={12} md={3}>
+													<TextField
+														required
+														name='cardNumber'
+														label='CARD NUMBER'
+														fullWidth
+														disabled={isDisable}
+														autoComplete='cc-number'
+														onChange={(e) => handleCardInput(e, i)}
+														value={inputList[i].cardNumber}
+													/>
+												</Grid>
+												{/* CVV Field */}
+												<Grid item xs={12} md={2}>
+													<TextField
+														required
+														name='cvv'
+														label='CVV'
+														fullWidth
+														disabled={isDisable}
+														autoComplete='cc-csc'
+														onChange={(e) => handleCardInput(e, i)}
+														value={inputList[i].cvv}
+													/>
+												</Grid>
+												{/* expiry date field */}
+												<Grid item xs={12} md={2}>
+													<LocalizationProvider fullWidth disabled={isDisable} dateAdapter={AdapterDateFns}>
+														<DatePicker
+															fullWidth
+															disabled={isDisable}
+															views={['year', 'month']}
+															name='expiryDate'
+															label='EXPIRY DATE'
+															inputFormat='MM/yyyy'
+															placeholder='MM/yyyy'
+															minDate={new Date()}
+															onChange={(newValue) => {
+																handleDateInputChange(
+																	i,
+																	new Date(newValue).toLocaleDateString('en-US', {
+																		day: '2-digit',
+																		month: '2-digit',
+																		year: 'numeric',
+																	})
+																);
+
+																// setExpiryDateValue(newValue);
+															}}
+															value={inputList[i].expiryDate}
+															renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
+														/>
+													</LocalizationProvider>
+												</Grid>
+											</>
+										) : (
+											isPaymentVisible && (
+												<>
+													{/* Card Holder NAme field */}
+													<Grid item xs={12} md={2}>
+														<TextField
+															required
+															name='cardHolderName'
+															label='NAME ON CARD'
+															fullWidth
+															disabled={isDisable}
+															autoComplete='cc-name'
+															onChange={(e) => {
+																handleCardInput(e, i);
+															}}
+															value={inputList[i].cardHolderName}
+														/>
+													</Grid>
+													{/*  Card Holder Phone no. */}
+													<Grid item xs={12} md={3}>
+														<TextField
+															required
+															name='cardHolderNumber'
+															label='PHONE NO.'
+															fullWidth
+															disabled={isDisable}
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cardHolderNumber}
+														/>
+													</Grid>
+													{/* CardNumber Field */}
+													<Grid item xs={12} md={3}>
+														<TextField
+															required
+															name='cardNumber'
+															label='CARD NUMBER'
+															fullWidth
+															disabled={isDisable}
+															autoComplete='cc-number'
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cardNumber}
+														/>
+													</Grid>
+													{/* CVV Field */}
+													<Grid item xs={12} md={2}>
+														<TextField
+															required
+															name='cvv'
+															label='CVV'
+															fullWidth
+															disabled={isDisable}
+															autoComplete='cc-csc'
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cvv}
+														/>
+													</Grid>
+													{/* expiry date field */}
+													<Grid item xs={12} md={2}>
+														<LocalizationProvider fullWidth disabled={isDisable} dateAdapter={AdapterDateFns}>
+															<DatePicker
+																fullWidth
+																disabled={isDisable}
+																views={['year', 'month']}
+																name='expiryDate'
+																label='EXPIRY DATE'
+																inputFormat='MM/yyyy'
+																placeholder='MM/yyyy'
+																minDate={new Date()}
+																onChange={(newValue) => {
+																	handleDateInputChange(
+																		i,
+																		new Date(newValue).toLocaleDateString('en-US', {
+																			day: '2-digit',
+																			month: '2-digit',
+																			year: 'numeric',
+																		})
+																	);
+
+																	// setExpiryDateValue(newValue);
+																}}
+																value={inputList[i].expiryDate}
+																renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
+															/>
+														</LocalizationProvider>
+													</Grid>
+												</>
+											)
+										)}
+										{/*  add/Remove btn for multiple card */}
+										<Box
+											xs={12}
+											md={2}
+											sx={{
+												display: 'flex',
+												justifyContent: 'flex-end',
+												width: '100%',
+											}}>
+											{inputList.length !== 1 && (
+												<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
+													Remove
+												</Button>
+											)}
+											{inputList.length < 4 && inputList.length - 1 === i && (
+												<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
+													Add One More Card
+												</Button>
+											)}
+											{!isPaymentVisible && inputList.length - 1 === i && (
+												<Button onClick={showCardHandler} sx={{mr: 1}}>
+													show card
+												</Button>
+											)}
+										</Box>
 									</Grid>
-									{/*  add/Remove btn for multiple card */}
-									<Box
-										xs={12}
-										md={2}
-										sx={{
-											display: 'flex',
-											justifyContent: 'flex-end',
-											width: '100%',
-										}}>
-										{inputList.length !== 1 && (
-											<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
-												Remove
-											</Button>
-										)}
-										{inputList.length < 4 && inputList.length - 1 === i && (
-											<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
-												Add One More Card
-											</Button>
-										)}
-									</Box>
-								</Grid>
+								</>
 							);
 						})}
 						<Grid container spacing={3}>
@@ -487,6 +592,7 @@ const UpdateRecord = ({data}) => {
 								})}
 						</Grid>
 					</Box>
+
 					{/* Formik alert one  */}
 					{!isDisable && (
 						<Box xs={8} md={10}>
@@ -497,6 +603,7 @@ const UpdateRecord = ({data}) => {
 							)}
 						</Box>
 					)}
+
 					{!isDisable && (
 						<Box xs={4} md={4}>
 							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>

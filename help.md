@@ -93,7 +93,7 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 17. app theme me primary color site ka dedo --done
 18. all caps --done
 
-19. -- airline code ---
+19. -- airline code ---done
 20. email validation and SHould Accept empty value from files
 
 21. add validation
@@ -104,3 +104,5 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 <!--  font  -->
 
 #1E73DE "Montserrat", Sans-serif
+
+. Montserrat 2. Remove payment part and show button 3. Add validation 4. Only send these fields in update part. Add new phone. Add new email Add new card PNR no Airline confirmation code 5 Make my records and global records responsive

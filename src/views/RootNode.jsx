@@ -167,8 +167,8 @@ export default function MiniDrawer() {
 							src={Navlogo}
 							alt='logo'
 							style={{
-								height: '80px',
-								padding: '12px 12px',
+								height: '65px',
+								padding: '12px',
 							}}
 						/>
 					</Tooltip>
