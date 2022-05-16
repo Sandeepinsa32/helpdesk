@@ -113,8 +113,8 @@ const UpdateRecord = ({data}) => {
 			lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 			email: Yup.string().email('Invalid email address').required('Required'),
 			phone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
-			alternateEmail: Yup.string().email('Invalid email address').required('Required'),
-			alternatePhone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
+			alternateEmail: Yup.string().email('Invalid email address'),
+			alternatePhone: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 
 			pnrNo: Yup.string().max(255),
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
