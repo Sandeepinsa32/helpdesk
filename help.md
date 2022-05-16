@@ -105,4 +105,4 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 #1E73DE "Montserrat", Sans-serif
 
-. Montserrat 2. Remove payment part and show button 3. Add validation 4. Only send these fields in update part. Add new phone. Add new email Add new card PNR no Airline confirmation code 5 Make my records and global records responsive
+. Montserrat 3. Add validation 5 Make my records and global records responsive

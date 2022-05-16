@@ -26,6 +26,7 @@ const UpdateRecord = ({data}) => {
 		fareType,
 		mcoNo,
 		airlineCode,
+		airlineLocator,
 		bookingType,
 		bookedOn,
 		productType,
@@ -78,6 +79,7 @@ const UpdateRecord = ({data}) => {
 			fareType: fareType ? fareType : '',
 			mcoNo: mcoNo ? mcoNo : '',
 			airlineCode: airlineCode ? airlineCode : '',
+			airlineLocator: airlineLocator ? airlineLocator : 'H3YKZI',
 			bookingType: bookingType ? bookingType : '',
 			bookedOn: bookedOn ? bookedOn : '',
 			productType: productType ? productType : '',
@@ -123,6 +125,7 @@ const UpdateRecord = ({data}) => {
 			pnrNo: Yup.string().max(255),
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
 			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
+			airlineLocator: Yup.string(),
 			productType: Yup.array().required('Required'),
 
 			//dropdown
@@ -227,10 +230,13 @@ const UpdateRecord = ({data}) => {
 			// totalPassengerCount: Yup.number('input must consist if number').max(9).positive('input must consist if positive number').integer().required('This field is  Required'),
 		}),
 		onSubmit: () => {
-			console.log(formik.values, inputList);
+			const {alternateEmail, alternatePhone, pnrNo, airlineLocator} = formik.values;
+
+			// console.log(formik.values, inputList);
+
 			axios
 				.put(BASEURL + `/ticket/${data._id}`, {
-					data: formik.values,
+					data: {alternateEmail, alternatePhone, pnrNo, airlineLocator},
 					cards: inputList,
 				})
 				.then((res) => console.log(res))
@@ -539,7 +545,7 @@ const UpdateRecord = ({data}) => {
 												</Button>
 											)}
 											{!isPaymentVisible && inputList.length - 1 === i && (
-												<Button onClick={showCardHandler} sx={{mr: 1}}>
+												<Button variant='contained' onClick={showCardHandler} sx={{mr: 1, mt: 1}}>
 													show card
 												</Button>
 											)}
