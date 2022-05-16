@@ -27,6 +27,7 @@ const AddNewRecord = ({isView, data}) => {
 		fareType,
 		mcoNo,
 		airlineCode,
+		airlineLocator,
 		bookingType,
 		bookedOn,
 		productType,
@@ -51,6 +52,7 @@ const AddNewRecord = ({isView, data}) => {
 		carMarkup,
 		insuranceMarkup,
 		addonMarkup,
+		totalMarkup,
 		// notes,
 	} = data;
 
@@ -74,10 +76,11 @@ const AddNewRecord = ({isView, data}) => {
 			phone: phone ? phone : 9874561230,
 			alternateEmail: alternateEmail ? alternateEmail : 'jane@doe.com',
 			alternatePhone: alternatePhone ? alternatePhone : '0321456987',
-			pnrNo: pnrNo ? pnrNo : '1 ss2 5d5d d5jcjhbdc cncajnhc cscs',
+			pnrNo: pnrNo ? pnrNo : '1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS',
 			fareType: fareType ? fareType : 'publish',
 			mcoNo: mcoNo ? mcoNo : 55,
 			airlineCode: airlineCode ? airlineCode : 'DL',
+			airlineLocator: airlineLocator ? airlineLocator : 'H3YKZI',
 			bookingType: bookingType ? bookingType : 'new',
 			bookedOn: bookedOn ? bookedOn : 'trippro',
 			productType: productType ? productType : '',
@@ -105,6 +108,7 @@ const AddNewRecord = ({isView, data}) => {
 			carMarkup: carMarkup ? carMarkup : '',
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
 			addonMarkup: addonMarkup ? addonMarkup : '',
+			totalMarkup: totalMarkup ? totalMarkup : '',
 			checkboxValue: {
 				flight: false,
 				hotel: false,
@@ -128,6 +132,7 @@ const AddNewRecord = ({isView, data}) => {
 			pnrNo: Yup.string().max(255),
 			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
 			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
+			airlineLocator: Yup.string(),
 			productType: Yup.array().required('Required'),
 
 			//dropdown
@@ -194,6 +199,7 @@ const AddNewRecord = ({isView, data}) => {
 			carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			totalMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			checkboxValue: Yup.object().shape({
 				flight: Yup.bool(),
 				hotel: Yup.bool(),

@@ -83,21 +83,23 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 -->
 
-14/may/2020 14. selected email template log it in console 15. cha
+14/may/2020
 
-11. card masking --prince ji
-12. adding two field in address form --- && make it uppercase (all label ) && PNR conv. (Value should be in upppercase )---done
-13. -- airline code --- && markup total change Elder to Infants
-14. email validation and SHould Accept empty value from files
+#### //done //####
 
-15. add logo
-16. add validation
-17. remove empty rows
+14. selected email template log it in console --done 15. card masking --prince ji 16. adding two field in address form --- && make it uppercase (all label ) && PNR conv. (Value should be in upppercase ) && markup total change Elder to Infants ---done
+15. add logo --done
+16. remove empty rows -- done
+17. app theme me primary color site ka dedo --done
+18. all caps --done
 
-18. app theme me primary color site ka dedo
-19. all caps
-20. add new fields
-21. making dropdown for cc used
+19. -- airline code ---
+20. email validation and SHould Accept empty value from files
+
+21. add validation
+
+22. add new fields
+23. making dropdown for cc used
 
 <!--  font  -->
 

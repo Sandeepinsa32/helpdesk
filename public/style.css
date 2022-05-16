@@ -11,3 +11,9 @@
   outline: 0px solid transparent;
   border-radius: 10px;
 }
+
+span.MuiCheckbox-root.MuiCheckbox-colorSecondry.MuiButtonBase-root.MuiCheckbox-root.MuiCheckbox-colorSecondry.PrivateSwitchBase-root{
+
+visibility: none  !important;
+opacity: 0  !important;
+}

@@ -23,6 +23,7 @@ export default function AddressForm({formik, isView}) {
 		insurance: false,
 		addon: false,
 	});
+	const [totalAmt, setTotalAmt] = useState(0);
 
 	const checkbox = [
 		{
@@ -55,6 +56,12 @@ export default function AddressForm({formik, isView}) {
 			markup: 'addonMarkup',
 			markupLabel: 'AddonMarkup',
 		},
+		{
+			name: null,
+			label: 'TOTAL',
+			markup: 'TotalMarkup',
+			markupLabel: 'TOTAL MARKUP',
+		},
 	];
 	function currentDate() {
 		let today = new Date();
@@ -65,6 +72,18 @@ export default function AddressForm({formik, isView}) {
 		today = mm + '/' + dd + '/' + yyyy;
 		return today;
 	}
+	const calculateTotalMarkup = () => {
+		let Amount = [];
+		initialProductType.map((x, i) => {
+			Amount.push(initialProductType[i].propertyMarkup);
+		});
+
+		var total = 0;
+		for (var i in Amount) {
+			total += Number(Amount[i]);
+		}
+		setTotalAmt(total);
+	};
 
 	return (
 		<Grid container spacing={3} key={1}>
@@ -87,61 +106,90 @@ export default function AddressForm({formik, isView}) {
 								<Box sx={displayColStyle} style={{paddingTop: '8px !important'}} key={i}>
 									<FormControlLabel
 										control={
-											<Checkbox
-												checked={checkboxType.name}
-												onChange={(e) => {
-													let object = {
-														property: name,
-														propertyMarkup: '',
-													};
-													let checkboxData = {...checkboxType};
-													checkboxData[name] = !checkboxType[name];
+											name !== null ? (
+												<Checkbox
+													checked={checkboxType.name}
+													onChange={(e) => {
+														let object = {
+															property: name,
+															propertyMarkup: '',
+														};
+														let checkboxData = {...checkboxType};
+														checkboxData[name] = !checkboxType[name];
 
-													formik.setFieldValue('checkboxValue', {
-														...checkboxData,
-													});
-													setCheckboxType({...checkboxData});
+														formik.setFieldValue('checkboxValue', {
+															...checkboxData,
+														});
+														setCheckboxType({...checkboxData});
 
-													const productExists = initialProductType.reduce((acc, prop) => prop.property == object.property, false);
+														const productExists = initialProductType.reduce((acc, prop) => prop.property == object.property, false);
 
-													if (productExists) {
-														var remainingValues = initialProductType.filter((y) => y.property !== object.property);
-														setInitialProductType([...remainingValues]);
-													} else {
-														setInitialProductType([...initialProductType, object]);
-													}
-													// console.log(initialProductType);
-													formik.setFieldValue('productType', initialProductType);
-												}}
-												name={name}
-												color='primary'
-											/>
+														if (productExists) {
+															var remainingValues = initialProductType.filter((y) => y.property !== object.property);
+															setInitialProductType([...remainingValues]);
+														} else {
+															setInitialProductType([...initialProductType, object]);
+														}
+														// console.log(initialProductType);
+														formik.setFieldValue('productType', initialProductType);
+													}}
+													name={name}
+													color='primary'
+												/>
+											) : (
+												<Checkbox checked={false} name='TOTAL' color='secondry' />
+											)
 										}
 										label={label}></FormControlLabel>
 
-									{checkboxType[name] && (
-										<TextField
-											name={markup}
-											label={markupLabel}
-											fullWidth
-											disabled={isView}
-											InputProps={{
-												startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-											}}
-											error={formik.touched.markup && formik.errors.markup}
-											helperText={formik.touched.markup && formik.errors.markup}
-											onBlur={formik.handleBlur}
-											onChange={(e) => {
-												formik.setFieldValue(markup, e.target.value);
-												const index = initialProductType.findIndex((obj) => obj.property === name);
-												let data = [...initialProductType];
-												data[index]['propertyMarkup'] = e.target.value;
+									{name !== null
+										? checkboxType[name] && (
+												<TextField
+													name={markup}
+													label={markupLabel}
+													fullWidth
+													disabled={isView}
+													InputProps={{
+														startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+													}}
+													error={formik.touched.markup && formik.errors.markup}
+													helperText={formik.touched.markup && formik.errors.markup}
+													onBlur={formik.handleBlur}
+													onChange={(e) => {
+														formik.setFieldValue(markup, e.target.value);
+														const index = initialProductType.findIndex((obj) => obj.property === name);
+														let data = [...initialProductType];
+														data[index]['propertyMarkup'] = e.target.value;
 
-												setInitialProductType(data);
-												formik.setFieldValue('productType', initialProductType);
-											}}
-										/>
-									)}
+														setInitialProductType(data);
+														formik.setFieldValue('productType', initialProductType);
+														calculateTotalMarkup();
+													}}
+												/>
+										  )
+										: (checkboxType['flight'] || checkboxType.hotel || checkboxType.car || checkboxType.insurance || checkboxType.addon) && (
+												<TextField
+													name={markup}
+													label={markupLabel}
+													fullWidth
+													disabled={true}
+													InputProps={{
+														startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+													}}
+													error={formik.touched.markup && formik.errors.markup}
+													helperText={formik.touched.markup && formik.errors.markup}
+													onBlur={formik.handleBlur}
+													onChange={(e) => {
+														formik.setFieldValue(markup, e.target.value);
+														const index = initialProductType.findIndex((obj) => obj.property === name);
+														let data = [...initialProductType];
+														data[index]['propertyMarkup'] = e.target.value;
+														setInitialProductType(data);
+														formik.setFieldValue('productType', initialProductType);
+													}}
+													value={totalAmt}
+												/>
+										  )}
 								</Box>
 							</>
 						);
@@ -366,7 +414,7 @@ export default function AddressForm({formik, isView}) {
 				</Box>
 			</Grid>
 			{/* PNR no. Fields */}
-			<Grid item xs={6} md={6}>
+			<Grid item xs={6} md={3}>
 				<TextField
 					id='pnrNo'
 					name='pnrNo'
@@ -381,6 +429,24 @@ export default function AddressForm({formik, isView}) {
 						formik.setFieldValue('pnrNo', value.toUpperCase());
 					}}
 					value={formik.values.pnrNo}
+				/>
+			</Grid>
+			{/* Airline code */}
+			<Grid item xs={6} md={3}>
+				<TextField
+					id='airlineCode'
+					name='airlineLocator'
+					label='AIRLINE Locator '
+					fullWidth
+					disabled={isView}
+					error={Boolean(formik.touched.airlineLocator && formik.errors.airlineLocator)}
+					helperText={formik.touched.airlineLocator && formik.errors.airlineLocator}
+					onBlur={formik.handleBlur}
+					onChange={(e) => {
+						const value = e.target.value || '';
+						formik.setFieldValue('airlineLocator', value.toUpperCase());
+					}}
+					value={formik.values.airlineLocator}
 				/>
 			</Grid>
 			{/* booking type -------Dropdown Fields */}
@@ -461,7 +527,7 @@ export default function AddressForm({formik, isView}) {
 				<TextField
 					id='airlineCode'
 					name='airlineCode'
-					label='AIRLINE CODE '
+					label='AIRPORT CODE '
 					fullWidth
 					disabled={isView}
 					error={Boolean(formik.touched.airlineCode && formik.errors.airlineCode)}
