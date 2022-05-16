@@ -50,6 +50,7 @@ const UpdateRecord = ({data}) => {
 		carMarkup,
 		insuranceMarkup,
 		addonMarkup,
+		totalMarkup,
 		cards,
 		checkboxValue,
 		createdAt,
@@ -103,6 +104,7 @@ const UpdateRecord = ({data}) => {
 			carMarkup: carMarkup ? carMarkup : '',
 			insuranceMarkup: insuranceMarkup ? insuranceMarkup : '',
 			addonMarkup: addonMarkup ? addonMarkup : '',
+			totalMarkup: totalMarkup ? totalMarkup : '',
 
 			//paymentCard
 			card: cards ? cards : inputList,
@@ -192,6 +194,7 @@ const UpdateRecord = ({data}) => {
 			carMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			insuranceMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 			addonMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			totalMarkup: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
 
 			card: Yup.array()
 				.of(

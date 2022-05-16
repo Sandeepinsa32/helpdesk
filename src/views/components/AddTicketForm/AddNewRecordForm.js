@@ -23,7 +23,6 @@ export default function AddressForm({formik, isView}) {
 		insurance: false,
 		addon: false,
 	});
-	const [totalAmt, setTotalAmt] = useState(0);
 
 	const checkbox = [
 		{
@@ -82,7 +81,8 @@ export default function AddressForm({formik, isView}) {
 		for (var i in Amount) {
 			total += Number(Amount[i]);
 		}
-		setTotalAmt(total);
+
+		formik.setFieldValue('totalMarkup', total);
 	};
 
 	return (
@@ -187,7 +187,7 @@ export default function AddressForm({formik, isView}) {
 														setInitialProductType(data);
 														formik.setFieldValue('productType', initialProductType);
 													}}
-													value={totalAmt}
+													value={formik.values.totalMarkup}
 												/>
 										  )}
 								</Box>
