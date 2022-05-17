@@ -144,6 +144,25 @@ export const AddUser = () => {
       });
   };
 
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+
+    axios
+      .put(BASEURL + "/agent/reset", {
+        newPassword: passwordInfo.password,
+        agentId: selectedRecord._id,
+      })
+      .then((response) => {
+        console.log(response);
+        successToast("Password Changed successfully");
+        handlePassModal();
+      })
+      .catch((e) => {
+        // console.log(e);
+        errorToast(e.response.data.message);
+      });
+  };
+
   useEffect(() => {
     loadAgents(createQueryString({ email, phone, page }));
   }, []);
@@ -452,6 +471,7 @@ export const AddUser = () => {
                         passwordInfo.confirmPassword == "" ||
                         passwordInfo.password !== passwordInfo.confirmPassword
                       }
+                      onClick={handlePasswordChange}
                     >
                       Update
                     </Button>
