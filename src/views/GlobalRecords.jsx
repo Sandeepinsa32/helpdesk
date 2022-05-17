@@ -105,8 +105,7 @@ export default function SearchRecord() {
         ticket: ticketId,
       })
       .then((response) => {
-        // console.log(response.data);
-        alert("log added");
+        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -261,7 +260,7 @@ export default function SearchRecord() {
                 <TableHead>
                   <TableRow>
                     {[
-                      "Agent Name",
+                      "Cust. Name",
                       "Booking ID",
                       "Phone",
                       "Total G.P",
@@ -298,14 +297,14 @@ export default function SearchRecord() {
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
                       >
-                        <TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>
+                        <TableCell>{`${row.firstName.toUpperCase()} ${row.lastName.toUpperCase()}`}</TableCell>
                         <TableCell>{row.bookingId}</TableCell>
                         {/* <TableCell>{row.cards[0].card}</TableCell> */}
                         <TableCell>{row.phone}</TableCell>
                         <TableCell>{row.grandTotal}</TableCell>
                         <TableCell>{row.airlineCode}</TableCell>
                         <TableCell>{row.passengerCount}</TableCell>
-                        <TableCell>{row.fareType}</TableCell>
+                        <TableCell>{row.fareType.toUpperCase()}</TableCell>
                         <TableCell>
                           {row.departureDate.substring(0, 10)}
                         </TableCell>
@@ -316,9 +315,11 @@ export default function SearchRecord() {
                             size="small"
                             onClick={() => {
                               // console.log(row);
+                              console.log(row);
                               setViewData(true);
                               setUserData(row);
                               handleOpen();
+                              addLog(row._id);
                             }}
                           >
                             Update
@@ -343,7 +344,11 @@ export default function SearchRecord() {
                           <Button
                             variant="contained"
                             size="small"
-                            onClick={() => setOpenLog(true)}
+                            onClick={() => {
+                              setUserData(row);
+
+                              setOpenLog(true);
+                            }}
                           >
                             logs
                           </Button>

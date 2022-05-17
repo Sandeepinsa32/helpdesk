@@ -14,6 +14,7 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const ViewLog = ({ id }) => {
   id = id._id;
+  console.log(id);
 
   const handleLoadLogs = async (id) => {
     axios
@@ -37,8 +38,7 @@ const ViewLog = ({ id }) => {
       <Paper elevation={0}>
         <List>
           {ticketLogs?.length > 0 ? (
-            ticketLogs.map((a, i) => {
-              console.log(a);
+            ticketLogs.map((log, i) => {
               return (
                 <ListItem disablePadding key={i}>
                   <ListItemButton>
@@ -47,7 +47,7 @@ const ViewLog = ({ id }) => {
                     </ListItemIcon>
 
                     <ListItemText
-                      primary="John Recently Viewed This Record"
+                      // primary="John Recently Viewed This Record"
                       secondary={
                         <>
                           <Typography
@@ -56,13 +56,15 @@ const ViewLog = ({ id }) => {
                             variant="body2"
                             color="text.primary"
                           >
-                            John Doe ( 20025)
+                            {log.agent.firstName} {log.agent.lastName} (
+                            {log.agent.employeeCode})
                           </Typography>
-                          {" — For Genrating E-mail "}
+                          {`--${log.action} `}
                           <span
                             style={{ float: "right", width: "fit-content	" }}
                           >
-                            11/05/2022 8:30 PM
+                            {log.createdAt.split("T")[1]}{" "}
+                            {log.createdAt.split("T")[0]}
                           </span>
                         </>
                       }

@@ -104,6 +104,22 @@ export const Transaction = () => {
   const handleChange = (event, value) => {
     setPage(value);
   };
+
+  const addLog = async (ticketId) => {
+    axios
+      .post(BASEURL + "/log", {
+        ticket: ticketId,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+        setIsLoading(false);
+        errorToast(e.response.data.message);
+      });
+  };
+
   const loadTransactions = async (search) => {
     // console.log(search);
     setIsLoading(true);
@@ -328,7 +344,7 @@ export const Transaction = () => {
                       "Fare Type",
                       "Dep Date",
                       "Return Date",
-                      "action",
+                      "Action",
                     ].map((th) => (
                       <TableCell key={th}>{th}</TableCell>
                     ))}
@@ -363,14 +379,14 @@ export const Transaction = () => {
                         }
                       >
                         <TableCell>{row.email}</TableCell>
-                        <TableCell>{`${row.firstName} ${row.lastName}`}</TableCell>
+                        <TableCell>{`${row.firstName.toUpperCase()} ${row.lastName.toUpperCase()}`}</TableCell>
                         <TableCell>{row.bookingId}</TableCell>
                         {/* <TableCell>{row.cards[0].card}</TableCell> */}
                         <TableCell>{row.phone}</TableCell>
                         <TableCell>{row.grandTotal}</TableCell>
                         <TableCell>{row.airlineCode}</TableCell>
                         <TableCell>{row.passengerCount}</TableCell>
-                        <TableCell>{row.fareType}</TableCell>
+                        <TableCell>{row.fareType.toUpperCase()}</TableCell>
                         <TableCell>
                           {row.departureDate.substring(0, 10)}
                         </TableCell>
@@ -385,6 +401,7 @@ export const Transaction = () => {
                               setViewData(true);
                               setSelectedTicket(row);
                               handleOpen();
+                              addLog(row._id);
                             }}
                           >
                             {new Date() - new Date(row.createdAt) <
