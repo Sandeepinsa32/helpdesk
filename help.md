@@ -106,3 +106,5 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 #1E73DE "Montserrat", Sans-serif
 
 . Montserrat 3. Add validation 5 Make my records and global records responsive
+
+responsive, product type cc card dropdown
