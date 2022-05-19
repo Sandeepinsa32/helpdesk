@@ -357,7 +357,7 @@ const AddNewRecord = ({isView, data}) => {
 							return (
 								<Grid key={i} container spacing={3}>
 									{/* Card Holder Name field */}
-									<Grid item xs={12} md={2}>
+									<Grid item xs={4} md={2}>
 										<TextField
 											// required
 											name='cardHolderName'
@@ -374,7 +374,7 @@ const AddNewRecord = ({isView, data}) => {
 									</Grid>
 
 									{/*  Card Holder Phone no. */}
-									<Grid item xs={12} md={3}>
+									<Grid item xs={4} md={3}>
 										<TextField
 											// required
 											name='cardHolderNumber'
@@ -388,7 +388,7 @@ const AddNewRecord = ({isView, data}) => {
 										/>
 									</Grid>
 									{/* CardNumber Field */}
-									<Grid item xs={12} md={3}>
+									<Grid item xs={4} md={3}>
 										<TextField
 											// required
 											name='cardNumber'
@@ -402,7 +402,7 @@ const AddNewRecord = ({isView, data}) => {
 										/>
 									</Grid>
 									{/* CVV Field */}
-									<Grid item xs={12} md={2}>
+									<Grid item xs={4} md={2}>
 										<TextField
 											// required
 											name='cvv'
@@ -416,7 +416,7 @@ const AddNewRecord = ({isView, data}) => {
 										/>
 									</Grid>
 									{/* expiry date field */}
-									<Grid item xs={12} md={2}>
+									<Grid item xs={4} md={2}>
 										<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 											<DatePicker
 												fullWidth
@@ -494,7 +494,7 @@ const AddNewRecord = ({isView, data}) => {
 
 									console.log('print ->', formik.touched, formik.errors[name]);
 									return (
-										<Grid item xs={12} md={3} key={i}>
+										<Grid item xs={4} md={3} key={i}>
 											<TextField
 												// required
 												name={name}

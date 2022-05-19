@@ -355,7 +355,7 @@ const UpdateRecord = ({data}) => {
 										{isEmpty ? (
 											<>
 												{/* Card Holder NAme field */}
-												<Grid item xs={12} md={2}>
+												<Grid item xs={4} md={2}>
 													<TextField
 														required
 														name='cardHolderName'
@@ -370,7 +370,7 @@ const UpdateRecord = ({data}) => {
 													/>
 												</Grid>
 												{/*  Card Holder Phone no. */}
-												<Grid item xs={12} md={3}>
+												<Grid item xs={4} md={3}>
 													<TextField
 														required
 														name='cardHolderNumber'
@@ -382,7 +382,7 @@ const UpdateRecord = ({data}) => {
 													/>
 												</Grid>
 												{/* CardNumber Field */}
-												<Grid item xs={12} md={3}>
+												<Grid item xs={4} md={3}>
 													<TextField
 														required
 														name='cardNumber'
@@ -395,7 +395,7 @@ const UpdateRecord = ({data}) => {
 													/>
 												</Grid>
 												{/* CVV Field */}
-												<Grid item xs={12} md={2}>
+												<Grid item xs={4} md={2}>
 													<TextField
 														required
 														name='cvv'
@@ -408,7 +408,7 @@ const UpdateRecord = ({data}) => {
 													/>
 												</Grid>
 												{/* expiry date field */}
-												<Grid item xs={12} md={2}>
+												<Grid item xs={4} md={2}>
 													<LocalizationProvider fullWidth disabled={isDisable} dateAdapter={AdapterDateFns}>
 														<DatePicker
 															fullWidth
@@ -580,7 +580,7 @@ const UpdateRecord = ({data}) => {
 									const {name, label} = item;
 
 									return (
-										<Grid item xs={12} md={3} key={i}>
+										<Grid item xs={4} md={3} key={i}>
 											<TextField
 												// required
 												name={name}
