@@ -311,7 +311,7 @@ export const Transaction = () => {
 
 					<Box sx={{mt: 3}}>
 						<TableContainer component={Paper}>
-							<Table style={{whiteSpace: 'nowrap'}} aria-label='simple table'>
+							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
 										{[
@@ -323,12 +323,14 @@ export const Transaction = () => {
 											'Total G.P',
 											'Airline',
 											'	No.of PAX',
-											'Fare Type',
+											//'Fare Type',
 											'Dep Date',
 											'Return Date',
 											'Action',
 										].map((th) => (
-											<TableCell key={th}>{th}</TableCell>
+											<TableCell sx={{p: 1}} key={th}>
+												{th}
+											</TableCell>
 										))}
 									</TableRow>
 								</TableHead>
@@ -366,11 +368,11 @@ export const Transaction = () => {
 												<TableCell>{row.grandTotal}</TableCell>
 												<TableCell>{row.airlineCode}</TableCell>
 												<TableCell>{row.passengerCount}</TableCell>
-												<TableCell>{row.fareType.toUpperCase()}</TableCell>
+												{/* <TableCell>{row.fareType.toUpperCase()}</TableCell> */}
 												<TableCell>{row.departureDate.substring(0, 10)}</TableCell>
 												<TableCell>{row.returnDate.substring(0, 10)}</TableCell>
 
-												<TableCell>
+												<TableCell sx={{p: 0}}>
 													<Button
 														variant='contained'
 														size='small'

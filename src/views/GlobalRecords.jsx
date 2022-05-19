@@ -172,7 +172,7 @@ export default function SearchRecord() {
                         <Grid item sm={2} md={3}>
                           <TextField
                             size="small"
-                            sx={{ width: `19vw`, height: `2rem` }}
+                            sx={{  height: `2rem` }}
                             InputProps={{
                               startAdornment: (
                                 <InputAdornment position="start">
