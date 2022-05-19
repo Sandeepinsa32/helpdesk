@@ -271,7 +271,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 					name='alternateEmail'
 					label='ALTERNATIVE EMAIL'
 					fullWidth
-					disabled={isView}
+					// disabled={isView}
 					error={Boolean(formik.touched.alternateEmail && formik.errors.alternateEmail)}
 					helperText={formik.touched.alternateEmail && formik.errors.alternateEmail}
 					onBlur={formik.handleBlur}
@@ -285,7 +285,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 					name='alternatePhone'
 					label='ALTERNATIVE PHONE'
 					fullWidth
-					disabled={isView}
+					// disabled={isView}
 					error={formik.touched.alternatePhone && formik.errors.alternatePhone}
 					helperText={formik.touched.alternatePhone && formik.errors.alternatePhone}
 					onBlur={formik.handleBlur}
@@ -423,18 +423,36 @@ export default function UpdateRecordForm({formik, disabled}) {
 				</Box>
 			</Grid>
 			{/* PNR no. Fields */}
-			<Grid item xs={6} md={6}>
+			<Grid item xs={6} md={3}>
 				<TextField
 					id='pnrNo'
 					name='pnrNo'
 					label='PNR NO.'
 					fullWidth
-					disabled={isView}
+					// disabled={isView}
 					error={Boolean(formik.touched.pnrNo && formik.errors.pnrNo)}
 					helperText={(formik.touched.pnrNo && formik.errors.pnrNo) || 'optional'}
 					onBlur={formik.handleBlur}
 					onChange={formik.handleChange}
 					value={formik.values.pnrNo}
+				/>
+			</Grid>
+			{/* Airline code */}
+			<Grid item xs={6} md={3}>
+				<TextField
+					id='airlineCode'
+					name='airlineLocator'
+					label='AIRLINE Locator '
+					fullWidth
+					// disabled={isView}
+					error={Boolean(formik.touched.airlineLocator && formik.errors.airlineLocator)}
+					helperText={formik.touched.airlineLocator && formik.errors.airlineLocator}
+					onBlur={formik.handleBlur}
+					onChange={(e) => {
+						const value = e.target.value || '';
+						formik.setFieldValue('airlineLocator', value.toUpperCase());
+					}}
+					value={formik.values.airlineLocator}
 				/>
 			</Grid>
 			{/* booking type -------Dropdown Fields */}
