@@ -436,6 +436,20 @@ const UpdateRecord = ({data}) => {
 														/>
 													</LocalizationProvider>
 												</Grid>
+												<Box
+													xs={12}
+													md={2}
+													sx={{
+														display: 'flex',
+														justifyContent: 'flex-end',
+														width: '100%',
+													}}>
+													{inputList.length !== 1 && (
+														<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
+															Remove
+														</Button>
+													)}
+												</Box>
 											</>
 										) : (
 											isPaymentVisible && (
@@ -522,6 +536,7 @@ const UpdateRecord = ({data}) => {
 															/>
 														</LocalizationProvider>
 													</Grid>
+													<Grid item xs={12} md={12}></Grid>
 												</>
 											)
 										)}
@@ -534,11 +549,6 @@ const UpdateRecord = ({data}) => {
 												justifyContent: 'flex-end',
 												width: '100%',
 											}}>
-											{inputList.length !== 1 && (
-												<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
-													Remove
-												</Button>
-											)}
 											{inputList.length < 4 && inputList.length - 1 === i && (
 												<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
 													Add One More Card
@@ -562,6 +572,7 @@ const UpdateRecord = ({data}) => {
 									control={
 										<Checkbox
 											checked={isCompanyCard}
+											disabled={Boolean(isDisable)}
 											onChange={(e) => {
 												setIsCompanyCard(!isCompanyCard);
 												formik.setFieldValue('isCompanyCCUsed', !isCompanyCard);
@@ -571,7 +582,7 @@ const UpdateRecord = ({data}) => {
 										/>
 									}
 									label='COMPANY CC USED ?'
-									disabled={isDisable}
+									disabled={Boolean(isDisable)}
 								/>
 							</Grid>
 
@@ -586,7 +597,7 @@ const UpdateRecord = ({data}) => {
 												name={name}
 												label={label}
 												fullWidth
-												disabled={isDisable}
+												disabled={Boolean(isDisable)}
 												error={formik.touched[name] && formik.errors[name]}
 												helperText={formik.touched[name] && formik.errors[name]}
 												onBlur={formik.handleBlur}
@@ -602,14 +613,14 @@ const UpdateRecord = ({data}) => {
 					{/* Formik alert one  */}
 					{!isDisable && (
 						<Box xs={8} md={10}>
-							{Object.keys(formik.errors).length !== 0 && formik.errors && (
+							{/* {Object.keys(formik.errors).length !== 0 && formik.errors && (
 								<Alert variant='outlined' severity='error'>
-									{JSON.stringify(formik.errors)}
+									
 								</Alert>
-							)}
+							)} */}
 						</Box>
 					)}
-
+					{console.log(JSON.stringify(formik.errors))}
 					{!isDisable && (
 						<Box xs={4} md={4}>
 							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
