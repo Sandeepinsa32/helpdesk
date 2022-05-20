@@ -4,7 +4,7 @@ import {useFormik, Formik} from 'formik';
 import valid from 'card-validator';
 import * as Yup from 'yup';
 import axios from 'axios';
-import {Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, Checkbox} from '@mui/material';
+import {Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, InputLabel, FormControl, Checkbox} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -62,9 +62,9 @@ const AddNewRecord = ({isView, data}) => {
 			adultCount: 2,
 			childCount: 2,
 			elderCount: 0,
-			grandTotal: 0,
-			childPrice: 0,
-			adultPrice: 0,
+			grandTotal: 2,
+			childPrice: 2,
+			adultPrice: 2,
 			elderPrice: 0,
 			//date
 			departureDate: null,
@@ -215,6 +215,13 @@ const AddNewRecord = ({isView, data}) => {
 	const handleAddClick = () => {
 		formik.setFieldValue('card', [
 			...inputList,
+			// {
+			// 	cardHolderName: 'john',
+			// 	cardHolderNumber: '9876543210',
+			// 	cardNumber: '4263982640269299',
+			// 	expiryDate: null,
+			// 	cvv: '123',
+			// },
 			{
 				cardHolderName: '',
 				cardHolderNumber: '',
@@ -225,6 +232,13 @@ const AddNewRecord = ({isView, data}) => {
 		]);
 		setInputList([
 			...inputList,
+			// {
+			// 	cardHolderName: 'john',
+			// 	cardHolderNumber: '9876543210',
+			// 	cardNumber: '4263982640269299',
+			// 	expiryDate: null,
+			// 	cvv: '123',
+			// },
 			{
 				cardHolderName: '',
 				cardHolderNumber: '',
@@ -248,6 +262,10 @@ const AddNewRecord = ({isView, data}) => {
 			label: 'LAST 4 DIGITS OF OF COMPANY CC ',
 		},
 	];
+	var err = [];
+	useEffect(() => {
+		console.log(err);
+	});
 
 	return (
 		<>
@@ -269,6 +287,9 @@ const AddNewRecord = ({isView, data}) => {
 						<Typography variant='h6' gutterBottom sx={{my: 4}}>
 							Payment method :
 						</Typography>
+						<FormControl sx={{m: 1, p: 1}} fullWidth error={true}>
+							<InputLabel variant='outlined'>Invalid Cards Detail*</InputLabel>
+						</FormControl>
 					</Box>
 					{/* CC card  */}
 					<Box
@@ -280,6 +301,12 @@ const AddNewRecord = ({isView, data}) => {
 							borderRadius: 1,
 						}}>
 						{inputList.map((x, i) => {
+							if (formik.errors.card) {
+								err = formik.errors.card;
+							}
+							//console.log(err, i);
+							//console.log(err.length === Number(i + 1) ? err[i].expiryDate : null, Number(i + 1));
+
 							return (
 								<Grid key={i} container spacing={3}>
 									{/* Card Holder Name field */}
@@ -294,8 +321,8 @@ const AddNewRecord = ({isView, data}) => {
 												handleCardInput(e, i);
 											}}
 											value={inputList[i].cardHolderName}
-											// error={Boolean(formik.errors.card !== (undefined && null) ? (formik.errors.card ? formik.errors.card[i].cardHolderName ? formik.errors.card[i].cardHolderName : null) : null)}
-											// helperText={formik.errors.card !== (undefined && null) ? (formik.errors.card[i].cardHolderName ? formik.errors.card[i].cardHolderName : null) : null}
+											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
 										/>
 									</Grid>
 
@@ -308,8 +335,8 @@ const AddNewRecord = ({isView, data}) => {
 											fullWidth
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardHolderNumber}
-											// error={Boolean(formik.errors.card !== undefined ? (formik.errors.card[i].cardHolderNumber ? formik.errors.card[i].cardHolderNumber : null) : null)}
-											// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].cardHolderNumber ? formik.errors.card[i].cardHolderNumber : null) : null}
+											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null)}
+											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null}
 											onBlur={formik.handleBlur}
 										/>
 									</Grid>
@@ -323,8 +350,8 @@ const AddNewRecord = ({isView, data}) => {
 											autoComplete='cc-number'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardNumber}
-											// error={Boolean(formik.errors.card !== undefined ? (formik.errors.card[i].cardNumber ? formik.errors.card[i].cardNumber : null) : null)}
-											// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].cardNumber ? formik.errors.card[i].cardNumber : null) : null}
+											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
+											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
 										/>
 									</Grid>
 									{/* CVV Field */}
@@ -337,8 +364,10 @@ const AddNewRecord = ({isView, data}) => {
 											autoComplete='cc-csc'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cvv}
-											// error={Boolean(formik.errors.card !== undefined ? (formik.errors.card[i].cvv ? formik.errors.card[i].cvv : null) : null)}
-											// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].cvv ? formik.errors.card[i].cvv : null) : null}
+											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
+											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
+											// error={Boolean(err[i] ? err[i].cvv : null)}
+											// helperText={err.length === Number(i + 1) ? err[i].cvv : null}
 										/>
 									</Grid>
 									{/* expiry date field */}
@@ -352,8 +381,8 @@ const AddNewRecord = ({isView, data}) => {
 												inputFormat='MM/yyyy'
 												placeholder='MM/yyyy'
 												minDate={new Date()}
-												// spiryDate : null) : null)}
-												// helperText={formik.errors.card !== undefined ? (formik.errors.card[i].expiryDate ? formik.errors.card[i].expiryDate : null) : null}
+												error={Boolean(err.length === Number(i + 1) ? true : false)}
+												helperText={err.length === Number(i + 1) ? err[i].expiryDate : null}
 												onChange={(newValue) => {
 													handleDateInputChange(
 														i,
@@ -394,6 +423,7 @@ const AddNewRecord = ({isView, data}) => {
 								</Grid>
 							);
 						})}
+
 						<Grid container spacing={3}>
 							{/*  company card  */}
 
@@ -436,14 +466,7 @@ const AddNewRecord = ({isView, data}) => {
 								})}
 						</Grid>
 					</Box>
-					{/* Formik alert one  */}
-					<Box xs={8} md={10}>
-						{Object.keys(formik.errors).length !== 0 && formik.errors && (
-							<Alert variant='outlined' severity='error'>
-								{JSON.stringify(formik.errors)}
-							</Alert>
-						)}
-					</Box>
+
 					<Box xs={4} md={4}>
 						<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
 							submit
