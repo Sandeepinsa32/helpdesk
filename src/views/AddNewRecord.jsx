@@ -19,46 +19,53 @@ const AddNewRecord = ({isView, data}) => {
 
 	const [inputList, setInputList] = useState([
 		{
-			cardHolderName: 'john',
-			cardHolderNumber: '9876543210',
-			cardNumber: '4263982640269299',
+			cardHolderName: '',
+			cardHolderNumber: '',
+			cardNumber: '',
 			expiryDate: null,
-			cvv: '123',
+			cvv: '0',
 		},
+		// {
+		// 	cardHolderName: 'john',
+		// 	cardHolderNumber: '9876543210',
+		// 	cardNumber: '4263982640269299',
+		// 	expiryDate: null,
+		// 	cvv: '123',
+		// },
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 
 	// formik validation object
 	const formik = useFormik({
 		initialValues: {
-			firstName: '',
-			lastName: '',
-			email: '',
-			phone: '',
+			firstName: 'john',
+			lastName: 'doe',
+			email: 'john@doe.com',
+			phone: 9874561230,
 			//
 			alternateEmail: '',
 			alternatePhone: '',
 			//
-			pnrNo: '',
-			airlineCode: '',
-			airlineLocator: '',
+			pnrNo: '1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS',
+			airlineCode: 'DL',
+			airlineLocator: 'H3YKZI',
 			//
-			bookingType: '',
-			bookedOn: '',
-			fareType: '',
+			bookingType: 'new',
+			bookedOn: 'trippro',
+			fareType: 'publish',
 			//
-			productType: [],
+			productType: '',
 
 			//
-			mcoNo: '',
-			totalInhouseCharge: '',
-			adultCount: '',
-			childCount: '',
-			elderCount: '',
-			grandTotal: '',
-			childPrice: '',
-			adultPrice: '',
-			elderPrice: '',
+			mcoNo: 55,
+			totalInhouseCharge: 20,
+			adultCount: 2,
+			childCount: 2,
+			elderCount: 0,
+			grandTotal: 0,
+			childPrice: 0,
+			adultPrice: 0,
+			elderPrice: 0,
 			//date
 			departureDate: null,
 			returnDate: null,
@@ -71,6 +78,7 @@ const AddNewRecord = ({isView, data}) => {
 			//paymentCard
 			card: inputList,
 		},
+
 		validationSchema: Yup.object({
 			//basic
 			firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
@@ -93,33 +101,24 @@ const AddNewRecord = ({isView, data}) => {
 			bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is  required'),
 
 			//currency
-			mcoNo: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This Field is required'),
-			totalInhouseCharge: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
-			grandTotal: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('This field is  Required'),
+			mcoNo: Yup.number('input must consist if number').positive(' value Should be Greater then 0 ').integer().required('This Field is required'),
+			totalInhouseCharge: Yup.number('input must consist if number').positive('value Should be Greater then 0').integer().required('This field is  Required'),
+			grandTotal: Yup.number('input must consist if number').positive('value Should be Greater then 0').integer().required('This field is  Required'),
 
 			//number of passenger
-			adultCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
-			childCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
-			elderCount: Yup.number('input must consist if number').integer().required('This field is  Required'),
+			adultCount: Yup.number('input must consist if number').integer().max(9).required('This field is  Required'),
+			childCount: Yup.number('input must consist if number').integer().max(9).required('This field is  Required'),
+			elderCount: Yup.number('input must consist if number').integer().max(9).required('This field is  Required'),
 
-			childPrice: Yup.number('input must consist if number')
-				.positive('input must consist if positive number')
-				.integer()
-				.when(['childCount'], (childCount, schema) => {
-					return childCount > 0 ? schema.required('this field required ') : schema;
-				}),
-			adultPrice: Yup.number('input must consist if number')
-				.positive('input must consist if positive number')
-				.integer()
-				.when(['adultCount'], (adultCount, schema) => {
-					return adultCount > 0 ? schema.required('this field required ') : schema;
-				}),
-			elderPrice: Yup.number('input must consist if number')
-				.positive('input must consist if positive number')
-				.integer()
-				.when(['elderCount'], (elderCount, schema) => {
-					return elderCount > 0 ? schema.required('this field required ') : schema;
-				}),
+			childPrice: Yup.number('input must consist if number').when(['childCount'], (childCount, schema) => {
+				return childCount > 0 ? schema.required('this field required ').positive('Price Should be Greater then 0 ').integer() : schema;
+			}),
+			adultPrice: Yup.number('input must consist if number').when(['adultCount'], (adultCount, schema) => {
+				return adultCount > 0 ? schema.required('this field required ').positive('Price Should be Greater then 0').integer() : schema;
+			}),
+			elderPrice: Yup.number('input must consist if number').when(['elderCount'], (elderCount, schema) => {
+				return elderCount > 0 ? schema.required('this field required ').positive('Price Should be Greater then 0').integer() : schema;
+			}),
 
 			//date
 			departureDate: Yup.string().required('This field is required').nullable(),
@@ -128,20 +127,20 @@ const AddNewRecord = ({isView, data}) => {
 			//companyCard details
 			isCompanyCCUsed: Yup.bool(),
 			ccTimes: Yup.number('input must consist if number')
-				.positive('input must consist if positive number')
+				.positive('value Should be Greater then 0')
 				.integer()
 				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
 					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),
 			ccAmount: Yup.number('input must consist if number')
-				.positive('input must consist if positive number')
+				.positive('value Should be Greater then 0')
 				.integer()
 				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
 					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),
 			ccDigits: Yup.number('input must consist if number')
 				.min(4, 'please enter only last 4 digits of card')
-				.positive('input must consist if positive number')
+				.positive('value Should be Greater then 0')
 				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
 					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),
@@ -163,7 +162,8 @@ const AddNewRecord = ({isView, data}) => {
 							.max(16, 'Must be 16 characters')
 							.min(16, 'Must be 16 characters'),
 						cvv: Yup.number()
-							.positive('input must consist of positive number')
+							.nullable()
+							.positive('value Should be Greater then 0')
 							.integer()
 							.test('len', 'Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
 						expiryDate: Yup.string().required('This field is required').nullable(),
@@ -220,7 +220,7 @@ const AddNewRecord = ({isView, data}) => {
 				cardHolderNumber: '',
 				cardNumber: '',
 				expiryDate: null,
-				cvv: '',
+				cvv: '0',
 			},
 		]);
 		setInputList([
@@ -230,7 +230,7 @@ const AddNewRecord = ({isView, data}) => {
 				cardHolderNumber: '',
 				cardNumber: '',
 				expiryDate: null,
-				cvv: '',
+				cvv: '0',
 			},
 		]);
 	};
