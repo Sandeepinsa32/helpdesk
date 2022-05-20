@@ -264,7 +264,7 @@ const AddNewRecord = ({isView, data}) => {
 	];
 	var err = [];
 	useEffect(() => {
-		console.log(err);
+		console.log(formik.errors);
 	});
 
 	return (
@@ -287,9 +287,6 @@ const AddNewRecord = ({isView, data}) => {
 						<Typography variant='h6' gutterBottom sx={{my: 4}}>
 							Payment method :
 						</Typography>
-						<FormControl sx={{m: 1, p: 1}} fullWidth error={true}>
-							<InputLabel variant='outlined'>Invalid Cards Detail*</InputLabel>
-						</FormControl>
 					</Box>
 					{/* CC card  */}
 					<Box
@@ -381,8 +378,6 @@ const AddNewRecord = ({isView, data}) => {
 												inputFormat='MM/yyyy'
 												placeholder='MM/yyyy'
 												minDate={new Date()}
-												error={Boolean(err.length === Number(i + 1) ? true : false)}
-												helperText={err.length === Number(i + 1) ? err[i].expiryDate : null}
 												onChange={(newValue) => {
 													handleDateInputChange(
 														i,
@@ -396,7 +391,14 @@ const AddNewRecord = ({isView, data}) => {
 													// setExpiryDateValue(newValue);
 												}}
 												value={inputList[i].expiryDate}
-												renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
+												renderInput={(params) => (
+													<TextField
+														placeholder='MM/yyyy'
+														{...params}
+														error={Boolean(err.length === Number(i + 1) ? true : false)}
+														helperText={err.length === Number(i + 1) ? err[i].expiryDate : null}
+													/>
+												)}
 											/>
 										</LocalizationProvider>
 									</Grid>
