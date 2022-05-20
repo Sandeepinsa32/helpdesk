@@ -468,8 +468,8 @@ export default function AddressForm({formik, isView}) {
 						<MenuItem value='new'>New</MenuItem>
 						<MenuItem value='exchange'>Exchange</MenuItem>
 						<MenuItem value='refund'>Refund</MenuItem>
-						<MenuItem value='Void'>Void</MenuItem>
-						<MenuItem value='Add-On'>Add-On</MenuItem>
+						<MenuItem value='void'>Void</MenuItem>
+						<MenuItem value='addon'>Add-On</MenuItem>
 					</Select>
 				</FormControl>
 			</Grid>

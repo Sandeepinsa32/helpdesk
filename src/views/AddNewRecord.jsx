@@ -97,7 +97,7 @@ const AddNewRecord = ({isView, data}) => {
 
 			//dropdown
 			fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('Required'),
-			bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'addon'], 'input should be one of below value').required('Required'),
+			bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'void', 'addon'], 'input should be one of below value').required('Required'),
 			bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is  required'),
 
 			//currency
@@ -165,7 +165,7 @@ const AddNewRecord = ({isView, data}) => {
 							.nullable()
 							.positive('value Should be Greater then 0')
 							.integer()
-							.test('len', 'Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
+							.test('len', 'CVV should be Min 3 and Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
 						expiryDate: Yup.string().required('This field is required').nullable(),
 					})
 				)
@@ -363,8 +363,6 @@ const AddNewRecord = ({isView, data}) => {
 											value={inputList[i].cvv}
 											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
 											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
-											// error={Boolean(err[i] ? err[i].cvv : null)}
-											// helperText={err.length === Number(i + 1) ? err[i].cvv : null}
 										/>
 									</Grid>
 									{/* expiry date field */}
