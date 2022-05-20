@@ -62,4 +62,4 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 1. email field validation
 2. remove Err in add new /update record
 3. remove pre-defined values
-4.
+4. airlineLocator value is not showing and validation on ccused

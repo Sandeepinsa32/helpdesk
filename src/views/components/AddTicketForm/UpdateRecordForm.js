@@ -71,7 +71,6 @@ export default function UpdateRecordForm({formik, disabled}) {
 	];
 
 	const isCheckedHandler = (name) => {
-		console.log('fun run');
 		var isChecked = false;
 		for (let i = 0; i < formik.values.productType.length; i++) {
 			const product = formik.values.productType[i];

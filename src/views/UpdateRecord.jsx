@@ -80,7 +80,7 @@ const UpdateRecord = ({data}) => {
 			mcoNo: mcoNo ? mcoNo : '',
 
 			airlineCode: airlineCode ? airlineCode : '',
-			airlineLocator: airlineLocator ? airlineLocator : '',
+			airlineLocator: airlineLocator ? airlineLocator : 'N/a',
 
 			fareType: fareType ? fareType : '',
 			bookingType: bookingType ? bookingType : '',
@@ -90,7 +90,7 @@ const UpdateRecord = ({data}) => {
 			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '',
 			adultCount: adultCount ? adultCount : '',
 			childCount: childCount ? childCount : '',
-			elderCount: elderCount ? elderCount : '',
+			elderCount: elderCount ? elderCount : 0,
 			grandTotal: grandTotal ? grandTotal : '',
 			childPrice: childPrice ? childPrice : '',
 			adultPrice: adultPrice ? adultPrice : '',
@@ -176,30 +176,28 @@ const UpdateRecord = ({data}) => {
 				}),
 
 			//Card Payment
-			card: Yup.array()
-				.of(
-					Yup.object().shape({
-						cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
-						cardHolderNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Phone is required'),
+			card: Yup.array().of(
+				Yup.object().shape({
+					cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+					cardHolderNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Phone is required'),
 
-						cardNumber: Yup.string()
-							.test(
-								'test-number', // this is used internally by yup
-								'Credit Card number is invalid', //validation message
-								(value) => valid.number(value).isValid
-							) // return true false based on validation
-							.required()
-							.max(16, 'Must be 16 characters')
-							.min(16, 'Must be 16 characters'),
-						cvv: Yup.number()
-							.nullable()
-							.positive('value Should be Greater then 0')
-							.integer()
-							.test('len', 'Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
-						expiryDate: Yup.string().required('This field is required').nullable(),
-					})
-				)
-				.min(1, 'card is >= 1'),
+					cardNumber: Yup.string()
+						.test(
+							'test-number', // this is used internally by yup
+							'Credit Card number is invalid', //validation message
+							(value) => valid.number(value).isValid
+						) // return true false based on validation
+						.required()
+						.max(16, 'Must be 16 characters')
+						.min(16, 'Must be 16 characters'),
+					cvv: Yup.number()
+						.nullable()
+						.positive('value Should be Greater then 0')
+						.integer()
+						.test('len', 'Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
+					expiryDate: Yup.string().required('This field is required').nullable(),
+				})
+			),
 		}),
 		onSubmit: () => {
 			const {alternateEmail, alternatePhone, pnrNo, airlineLocator} = formik.values;
@@ -308,6 +306,8 @@ const UpdateRecord = ({data}) => {
 	const showCardHandler = () => {
 		setIsPaymentVisible(true);
 	};
+
+	console.log(JSON.stringify(formik.errors));
 
 	return (
 		<>
@@ -579,7 +579,7 @@ const UpdateRecord = ({data}) => {
 										/>
 									}
 									label='COMPANY CC USED ?'
-									disabled={Boolean(isDisable)}
+									disabled={true}
 								/>
 							</Grid>
 
@@ -594,12 +594,12 @@ const UpdateRecord = ({data}) => {
 												name={name}
 												label={label}
 												fullWidth
-												disabled={Boolean(isDisable)}
+												disabled={true}
 												error={formik.touched[name] && formik.errors[name]}
 												helperText={formik.touched[name] && formik.errors[name]}
 												onBlur={formik.handleBlur}
 												onChange={formik.handleChange}
-												value={formik.values.name}
+												value={formik.values[name]}
 											/>
 										</Grid>
 									);
@@ -607,17 +607,6 @@ const UpdateRecord = ({data}) => {
 						</Grid>
 					</Box>
 
-					{/* Formik alert one  */}
-					{!isDisable && (
-						<Box xs={8} md={10}>
-							{/* {Object.keys(formik.errors).length !== 0 && formik.errors && (
-								<Alert variant='outlined' severity='error'>
-									
-								</Alert>
-							)} */}
-						</Box>
-					)}
-					{console.log(JSON.stringify(formik.errors))}
 					{!isDisable && (
 						<Box xs={4} md={4}>
 							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
