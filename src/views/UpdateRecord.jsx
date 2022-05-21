@@ -353,35 +353,19 @@ const UpdateRecord = ({data}) => {
 											<Grid container spacing={3} key={i}>
 												{/* Card Holder NAme field */}
 												<Grid item xs={4} md={2}>
-													<TextField
-														required
-														name='cardHolderName'
-														label='NAME ON CARD'
-														fullWidth
-														disabled={true}
-														autoComplete='cc-name'
-														value={alreadyPresentCard[i].cardHolderName}
-													/>
+													<TextField name='cardHolderName' label='NAME ON CARD' fullWidth disabled={true} value={alreadyPresentCard[i].cardHolderName} />
 												</Grid>
 												{/*  Card Holder Phone no. */}
 												<Grid item xs={4} md={2}>
-													<TextField required name='cardHolderNumber' label='PHONE NO.' fullWidth disabled={true} value={alreadyPresentCard[i].cardHolderNumber} />
+													<TextField name='cardHolderNumber' label='PHONE NO.' fullWidth disabled={true} value={alreadyPresentCard[i].cardHolderNumber} />
 												</Grid>
 												{/* CardNumber Field */}
 												<Grid item xs={4} md={3}>
-													<TextField
-														required
-														name='cardNumber'
-														label='CARD NUMBER'
-														fullWidth
-														disabled={true}
-														autoComplete='cc-number'
-														value={alreadyPresentCard[i].cardNumber}
-													/>
+													<TextField name='cardNumber' label='CARD NUMBER' fullWidth disabled={true} value={alreadyPresentCard[i].cardNumber} />
 												</Grid>
 												{/* CVV Field */}
 												<Grid item xs={4} md={2}>
-													<TextField required name='cvv' label='CVV' fullWidth disabled={true} autoComplete='cc-csc' value={alreadyPresentCard[i].cvv} />
+													<TextField name='cvv' label='CVV' fullWidth disabled={true} value={alreadyPresentCard[i].cvv} />
 												</Grid>
 												{/* expiry date field */}
 												<Grid item xs={4} md={3}>
@@ -394,7 +378,6 @@ const UpdateRecord = ({data}) => {
 															label='EXPIRY DATE'
 															inputFormat='MM/yyyy'
 															placeholder='MM/yyyy'
-															minDate={new Date()}
 															value={alreadyPresentCard[i].expiryDate}
 															renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
 														/>
