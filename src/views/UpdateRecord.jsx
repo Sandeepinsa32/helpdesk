@@ -567,11 +567,14 @@ const UpdateRecord = ({data}) => {
 					</Box>
 
 					{!isDisable && (
-						<Box xs={4} md={4}>
-							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
-								submit
-							</Button>
-						</Box>
+						<Grid container spacing={1}>
+							<Grid item xs={8} md={10}></Grid>
+							<Grid item xs={4} md={2}>
+								<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
+									Update
+								</Button>
+							</Grid>
+						</Grid>
 					)}
 				</form>
 			</Formik>
