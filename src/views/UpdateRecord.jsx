@@ -55,6 +55,7 @@ const UpdateRecord = ({data}) => {
 		cards,
 		createdAt,
 		// notes,
+		_id,
 	} = data;
 
 	console.log(data);
@@ -521,7 +522,7 @@ const UpdateRecord = ({data}) => {
 												<Button
 													variant='contained'
 													onClick={() => {
-														cardLog();
+														cardLog(_id);
 														showCardHandler();
 													}}
 													sx={{mr: 1, mt: 1}}>
