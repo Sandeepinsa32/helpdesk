@@ -62,7 +62,15 @@ const UpdateRecord = ({data}) => {
 
 	// console.log(cards);
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
-	const [inputList, setInputList] = useState([{}]);
+	const [inputList, setInputList] = useState([
+		{
+			cardHolderName: '',
+			cardHolderNumber: '',
+			cardNumber: '',
+			expiryDate: null,
+			cvv: '',
+		},
+	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
 	const [isDisable, setIsDisable] = useState(true);
@@ -399,7 +407,6 @@ const UpdateRecord = ({data}) => {
 										{/* Card Holder NAme field */}
 										<Grid item xs={4} md={2}>
 											<TextField
-												required
 												name='cardHolderName'
 												label='NAME ON CARD'
 												fullWidth
@@ -414,7 +421,6 @@ const UpdateRecord = ({data}) => {
 										{/*  Card Holder Phone no. */}
 										<Grid item xs={4} md={2}>
 											<TextField
-												required
 												name='cardHolderNumber'
 												label='PHONE NO.'
 												fullWidth
@@ -426,7 +432,6 @@ const UpdateRecord = ({data}) => {
 										{/* CardNumber Field */}
 										<Grid item xs={4} md={3}>
 											<TextField
-												required
 												name='cardNumber'
 												label='CARD NUMBER'
 												fullWidth
@@ -438,16 +443,7 @@ const UpdateRecord = ({data}) => {
 										</Grid>
 										{/* CVV Field */}
 										<Grid item xs={4} md={2}>
-											<TextField
-												required
-												name='cvv'
-												label='CVV'
-												fullWidth
-												disabled={isDisable}
-												autoComplete='cc-csc'
-												onChange={(e) => handleCardInput(e, i)}
-												value={inputList[i].cvv}
-											/>
+											<TextField name='cvv' label='CVV' fullWidth disabled={isDisable} autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
 										</Grid>
 										{/* expiry date field */}
 										<Grid item xs={4} md={3}>
@@ -501,6 +497,8 @@ const UpdateRecord = ({data}) => {
 												display: 'flex',
 												justifyContent: 'flex-end',
 												width: '100%',
+												alignItems: 'end',
+												my: 1,
 											}}>
 											{inputList.length < 4 && inputList.length - 1 === i && (
 												<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
@@ -523,7 +521,7 @@ const UpdateRecord = ({data}) => {
 									</Grid>
 								);
 							})}
-						<Grid container spacing={3}>
+						<Grid container spacing={3} sx={{mt: 1}}>
 							{/*  company card  */}
 
 							<Grid item xs={12} md={3}>
@@ -552,7 +550,6 @@ const UpdateRecord = ({data}) => {
 									return (
 										<Grid item xs={4} md={3} key={i}>
 											<TextField
-												// required
 												name={name}
 												label={label}
 												fullWidth
