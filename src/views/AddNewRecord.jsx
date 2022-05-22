@@ -402,6 +402,7 @@ const AddNewRecord = ({isView, data}) => {
 											display: 'flex',
 											justifyContent: 'flex-end',
 											width: '100%',
+											my: 2,
 										}}>
 										{inputList.length !== 1 && (
 											<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
