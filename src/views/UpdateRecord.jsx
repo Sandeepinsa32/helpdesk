@@ -90,7 +90,7 @@ const UpdateRecord = ({data}) => {
 			mcoNo: mcoNo ? mcoNo : '',
 
 			airlineCode: airlineCode ? airlineCode : '',
-			airlineLocator: airlineLocator ? airlineLocator : 'N/a',
+			airlineLocator: airlineLocator ? airlineLocator : '',
 
 			fareType: fareType ? fareType : '',
 			bookingType: bookingType ? bookingType : '',

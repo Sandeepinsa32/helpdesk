@@ -38,33 +38,33 @@ const AddNewRecord = ({isView, data}) => {
 	// formik validation object
 	const formik = useFormik({
 		initialValues: {
-			firstName: 'john',
-			lastName: 'doe',
-			email: 'john@doe.com',
-			phone: 9874561230,
+			firstName: '',
+			lastName: '',
+			email: '',
+			phone: '',
 			//
 			alternateEmail: '',
 			alternatePhone: '',
 			//
-			pnrNo: '1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS',
-			airlineCode: 'DL',
-			airlineLocator: 'H3YKZI',
+			pnrNo: '',
+			airlineCode: '',
+			airlineLocator: '',
 			//
-			bookingType: 'new',
-			bookedOn: 'trippro',
-			fareType: 'publish',
+			bookingType: '',
+			bookedOn: '',
+			fareType: '',
 			//
 			productType: '',
 
 			//
-			mcoNo: 55,
-			totalInhouseCharge: 20,
-			adultCount: 2,
-			childCount: 2,
+			mcoNo: 0,
+			totalInhouseCharge: 0,
+			adultCount: 0,
+			childCount: 0,
 			elderCount: 0,
-			grandTotal: 2,
-			childPrice: 2,
-			adultPrice: 2,
+			grandTotal: 0,
+			childPrice: 0,
+			adultPrice: 0,
 			elderPrice: 0,
 			//date
 			departureDate: null,

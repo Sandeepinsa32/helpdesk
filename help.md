@@ -102,17 +102,16 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 #1E73DE "Montserrat", Sans-serif
 
 1. email field validation
-2. remove Err in add new /update record
-3. remove pre-defined values
-4. airlineLocator value is not showing and validation on ccused
-5. testing 48 hours disable functionality
+2. remove pre-defined values
+3. airlineLocator value is not showing and validation on ccused
+4. testing 48 hours disable functionality
 
-6. add new card -> add more card css when[cc used checked]
-7. updaer record -> add more card && show card css when[cc used checked]
-8. validation on phone number && also on card field ---(on both add new record && update record )
-9. adding state in card field while showing err to check wheter submit is clikced or not yet
-10. validation on same phone & email checked with alternative one
-11. val. on card details if same
-12. val. cc used
-13. change style to inline css in email template
-14. val. err message on type cast
+5. add new card -> add more card css when[cc used checked]
+6. updaer record -> add more card && show card css when[cc used checked]
+7. validation on phone number && also on card field ---(on both add new record && update record )
+8. adding state in card field while showing err to check wheter submit is clikced or not yet
+9. validation on same phone & email checked with alternative one
+10. val. on card details if same
+11. val. cc used
+12. change style to inline css in email template
+13. val. err message on type cast
