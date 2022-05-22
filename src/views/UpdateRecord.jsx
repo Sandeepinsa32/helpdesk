@@ -200,11 +200,7 @@ const UpdateRecord = ({data}) => {
 						.required()
 						.max(16, 'Must be 16 characters')
 						.min(16, 'Must be 16 characters'),
-					cvv: Yup.number()
-						.nullable()
-						.positive('value Should be Greater then 0')
-						.integer()
-						.test('len', 'Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
+					cvv: Yup.string().min(3, 'cvv must have atleast3  characters').max(4, 'cvv must have atleast 4 characters'),
 					expiryDate: Yup.string().required('This field is required').nullable(),
 				})
 			),
@@ -253,6 +249,7 @@ const UpdateRecord = ({data}) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
 		list[index][name] = value;
+		formik.setFieldValue('card', list);
 		setInputList(list);
 	};
 	const handleDateInputChange = (index, value) => {
@@ -266,11 +263,29 @@ const UpdateRecord = ({data}) => {
 	const handleRemoveClick = (index) => {
 		const list = [...inputList];
 		list.splice(index, 1);
+		formik.setFieldValue('card', list);
 		setInputList(list);
 	};
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
+		formik.setFieldValue('card', [
+			...inputList,
+			// {
+			// 	cardHolderName: 'john',
+			// 	cardHolderNumber: '9876543210',
+			// 	cardNumber: '4263982640269299',
+			// 	expiryDate: null,
+			// 	cvv: '123',
+			// },
+			{
+				cardHolderName: '',
+				cardHolderNumber: '',
+				cardNumber: '',
+				expiryDate: null,
+				cvv: '0',
+			},
+		]);
 		setInputList([
 			...inputList,
 			{
@@ -322,8 +337,10 @@ const UpdateRecord = ({data}) => {
 	const showCardHandler = () => {
 		// setIsPaymentVisible(true);
 	};
-
-	console.log(JSON.stringify(formik.errors));
+	var err = [];
+	useEffect(() => {
+		console.log(formik.errors);
+	});
 
 	return (
 		<>
@@ -401,6 +418,9 @@ const UpdateRecord = ({data}) => {
 						{inputList &&
 							inputList.map((x, i) => {
 								// const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+								if (formik.errors.card) {
+									err = formik.errors.card;
+								}
 
 								return (
 									<Grid key={i} container spacing={3}>
@@ -416,6 +436,8 @@ const UpdateRecord = ({data}) => {
 													handleCardInput(e, i);
 												}}
 												value={inputList[i].cardHolderName}
+												error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+												helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
 											/>
 										</Grid>
 										{/*  Card Holder Phone no. */}
@@ -427,6 +449,8 @@ const UpdateRecord = ({data}) => {
 												disabled={isDisable}
 												onChange={(e) => handleCardInput(e, i)}
 												value={inputList[i].cardHolderNumber}
+												error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+												helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
 											/>
 										</Grid>
 										{/* CardNumber Field */}
@@ -439,11 +463,24 @@ const UpdateRecord = ({data}) => {
 												autoComplete='cc-number'
 												onChange={(e) => handleCardInput(e, i)}
 												value={inputList[i].cardNumber}
+												error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+												helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
 											/>
 										</Grid>
 										{/* CVV Field */}
 										<Grid item xs={4} md={2}>
-											<TextField name='cvv' label='CVV' fullWidth disabled={isDisable} autoComplete='cc-csc' onChange={(e) => handleCardInput(e, i)} value={inputList[i].cvv} />
+											<TextField
+												name='cvv'
+												label='CVV'
+												type='number'
+												fullWidth
+												disabled={isDisable}
+												autoComplete='cc-csc'
+												onChange={(e) => handleCardInput(e, i)}
+												value={inputList[i].cvv}
+												error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+												helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
+											/>
 										</Grid>
 										{/* expiry date field */}
 										<Grid item xs={4} md={3}>
@@ -470,7 +507,14 @@ const UpdateRecord = ({data}) => {
 														// setExpiryDateValue(newValue);
 													}}
 													value={inputList[i].expiryDate}
-													renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
+													renderInput={(params) => (
+														<TextField
+															placeholder='MM/yyyy'
+															{...params}
+															error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+															helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
+														/>
+													)}
 												/>
 											</LocalizationProvider>
 										</Grid>

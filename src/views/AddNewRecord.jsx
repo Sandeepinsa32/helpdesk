@@ -161,11 +161,7 @@ const AddNewRecord = ({isView, data}) => {
 							.required()
 							.max(16, 'Must be 16 characters')
 							.min(16, 'Must be 16 characters'),
-						cvv: Yup.number()
-							.nullable()
-							.positive('value Should be Greater then 0')
-							.integer()
-							.test('len', 'CVV should be Min 3 and Max 4 numbers', (val) => val.toString().length >= 3 && val.toString().length <= 4),
+						cvv: Yup.string().min(3, 'cvv must have atleast3  characters').max(4, 'cvv must have atleast 4 characters'),
 						expiryDate: Yup.string().required('This field is required').nullable(),
 					})
 				)
@@ -264,7 +260,7 @@ const AddNewRecord = ({isView, data}) => {
 	];
 	var err = [];
 	useEffect(() => {
-		console.log(formik.errors);
+		console.log(formik);
 	});
 
 	return (
@@ -301,8 +297,6 @@ const AddNewRecord = ({isView, data}) => {
 							if (formik.errors.card) {
 								err = formik.errors.card;
 							}
-							//console.log(err, i);
-							//console.log(err.length === Number(i + 1) ? err[i].expiryDate : null, Number(i + 1));
 
 							return (
 								<Grid key={i} container spacing={3}>
@@ -318,8 +312,8 @@ const AddNewRecord = ({isView, data}) => {
 												handleCardInput(e, i);
 											}}
 											value={inputList[i].cardHolderName}
-											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
-											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
+											error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+											helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
 										/>
 									</Grid>
 
@@ -332,8 +326,8 @@ const AddNewRecord = ({isView, data}) => {
 											fullWidth
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardHolderNumber}
-											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null)}
-											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null}
+											error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null)}
+											helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null}
 											onBlur={formik.handleBlur}
 										/>
 									</Grid>
@@ -347,22 +341,22 @@ const AddNewRecord = ({isView, data}) => {
 											autoComplete='cc-number'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cardNumber}
-											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
-											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
+											error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
+											helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
 										/>
 									</Grid>
 									{/* CVV Field */}
 									<Grid item xs={4} md={2}>
 										<TextField
-											// required
+											type='number'
 											name='cvv'
 											label='CVV'
 											fullWidth
 											autoComplete='cc-csc'
 											onChange={(e) => handleCardInput(e, i)}
 											value={inputList[i].cvv}
-											error={Boolean(err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
-											helperText={err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
+											error={Boolean(formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
+											helperText={formik.submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
 										/>
 									</Grid>
 									{/* expiry date field */}
@@ -393,8 +387,8 @@ const AddNewRecord = ({isView, data}) => {
 													<TextField
 														placeholder='MM/yyyy'
 														{...params}
-														error={Boolean(err.length === Number(i + 1) ? true : false)}
-														helperText={err.length === Number(i + 1) ? err[i].expiryDate : null}
+														error={Boolean(formik.submitCount > 0 && err.length === Number(i + 1) ? true : false)}
+														helperText={formik.submitCount > 0 && err.length === Number(i + 1) ? err[i].expiryDate : null}
 													/>
 												)}
 											/>

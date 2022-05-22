@@ -8,6 +8,48 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 //issue
 
+    initialValues: {
+    		firstName: 'john',
+    		lastName: 'doe',
+    		email: 'john@doe.com',
+    		phone: 9874561230,
+    		//
+    		alternateEmail: '',
+    		alternatePhone: '',
+    		//
+    		pnrNo: '1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS',
+    		airlineCode: 'DL',
+    		airlineLocator: 'H3YKZI',
+    		//
+    		bookingType: 'new',
+    		bookedOn: 'trippro',
+    		fareType: 'publish',
+    		//
+    		productType: '',
+
+    		//
+    		mcoNo: 55,
+    		totalInhouseCharge: 20,
+    		adultCount: 2,
+    		childCount: 2,
+    		elderCount: 0,
+    		grandTotal: 2,
+    		childPrice: 2,
+    		adultPrice: 2,
+    		elderPrice: 0,
+    		//date
+    		departureDate: null,
+    		returnDate: null,
+    		//companyCard details
+    		isCompanyCCUsed: isCompanyCard,
+    		ccTimes: '',
+    		ccAmount: '',
+    		ccDigits: '',
+
+    		//paymentCard
+    		card: inputList,
+    	},
+
 3. elder price is coming even if field is hidden
 
 4. Add records data console. -- done
