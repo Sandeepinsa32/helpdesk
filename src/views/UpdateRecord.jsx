@@ -63,13 +63,13 @@ const UpdateRecord = ({data}) => {
 	// console.log(cards);
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
 	const [inputList, setInputList] = useState([
-		{
-			cardHolderName: '',
-			cardHolderNumber: '',
-			cardNumber: '',
-			expiryDate: null,
-			cvv: '',
-		},
+		// {
+		// 	cardHolderName: '',
+		// 	cardHolderNumber: '',
+		// 	cardNumber: '',
+		// 	expiryDate: null,
+		// 	cvv: '',
+		// },
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
@@ -526,45 +526,37 @@ const UpdateRecord = ({data}) => {
 												justifyContent: 'flex-end',
 												width: '100%',
 											}}>
-											{inputList.length !== 1 && (
-												<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
-													Remove
-												</Button>
-											)}
-										</Box>
-
-										{/*  add/Remove btn for multiple card */}
-										<Box
-											xs={12}
-											md={2}
-											sx={{
-												display: 'flex',
-												justifyContent: 'flex-end',
-												width: '100%',
-												alignItems: 'end',
-												my: 1,
-											}}>
-											{inputList.length < 4 && inputList.length - 1 === i && (
-												<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
-													Add One More Card
-												</Button>
-											)}
-											{!isPaymentVisible && inputList.length - 1 === i && (
-												<Button
-													variant='contained'
-													onClick={() => {
-														cardLog(_id);
-														showCardHandler();
-														fetchCards(_id);
-													}}
-													sx={{mr: 1, mt: 1}}>
-													Show card
-												</Button>
-											)}
+											<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
+												Remove
+											</Button>
 										</Box>
 									</Grid>
 								);
 							})}
+						{inputList.length < 4 && (
+							<Grid container spacing={3} sx={{mt: 1}}>
+								<Grid item xs={12} md={7}></Grid>
+								<Grid item xs={12} md={2}>
+									{!isPaymentVisible && (
+										<Button
+											variant='contained'
+											onClick={() => {
+												cardLog(_id);
+												showCardHandler();
+												fetchCards(_id);
+											}}>
+											Show card
+										</Button>
+									)}
+								</Grid>
+								<Grid item xs={12} md={3}>
+									<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
+										Add One More Card
+									</Button>
+								</Grid>
+							</Grid>
+						)}
+
 						<Grid container spacing={3} sx={{mt: 1}}>
 							{/*  company card  */}
 
