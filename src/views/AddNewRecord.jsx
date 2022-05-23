@@ -138,9 +138,9 @@ const AddNewRecord = ({isView, data}) => {
 				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
 					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),
-			ccDigits: Yup.number('input must consist if number')
+			ccDigits: Yup.string('input must consist if number')
+				.max(4, 'please enter only last 4 digits of card')
 				.min(4, 'please enter only last 4 digits of card')
-				.positive('value Should be Greater then 0')
 				.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
 					return isCompanyCCUsed === true ? schema.required('this field required ') : schema;
 				}),

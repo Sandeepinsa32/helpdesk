@@ -58,7 +58,7 @@ const UpdateRecord = ({data}) => {
 		_id,
 	} = data;
 
-	console.log(data);
+	// console.log(data);
 
 	// console.log(cards);
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
@@ -74,6 +74,7 @@ const UpdateRecord = ({data}) => {
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
 	const [isDisable, setIsDisable] = useState(true);
+	const [isDisableUpdatebtn, setIsDisableUpdatebtn] = useState(false);
 
 	// formik validation object
 	const formik = useFormik({
@@ -97,22 +98,22 @@ const UpdateRecord = ({data}) => {
 			bookedOn: bookedOn ? bookedOn : '',
 			productType: productType ? productType : '',
 
-			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '',
-			adultCount: adultCount ? adultCount : '',
-			childCount: childCount ? childCount : '',
+			totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : 0,
+			adultCount: adultCount ? adultCount : 0,
+			childCount: childCount ? childCount : 0,
 			elderCount: elderCount ? elderCount : 0,
-			grandTotal: grandTotal ? grandTotal : '',
-			childPrice: childPrice ? childPrice : '',
-			adultPrice: adultPrice ? adultPrice : '',
-			elderPrice: elderPrice ? elderPrice : '',
+			grandTotal: grandTotal ? grandTotal : 0,
+			childPrice: childPrice ? childPrice : 0,
+			adultPrice: adultPrice ? adultPrice : 0,
+			elderPrice: elderPrice ? elderPrice : 0,
 			//date
 			departureDate: departureDate ? departureDate : null,
 			returnDate: returnDate ? returnDate : null,
 
 			//companyCard details
 			isCompanyCCUsed: isCompanyCCUsed ? isCompanyCCUsed : false,
-			ccTimes: ccTimes ? ccTimes : '',
-			ccAmount: ccAmount ? ccAmount : '',
+			ccTimes: ccTimes ? ccTimes : 0,
+			ccAmount: ccAmount ? ccAmount : 0,
 			ccDigits: ccDigits ? ccDigits : '',
 
 			//markup
@@ -206,7 +207,7 @@ const UpdateRecord = ({data}) => {
 			),
 		}),
 		onSubmit: () => {
-			console.log('heheh');
+			console.log('formik submitted');
 			const {alternateEmail, alternatePhone, pnrNo, airlineLocator} = formik.values;
 
 			axios
@@ -214,7 +215,7 @@ const UpdateRecord = ({data}) => {
 					data: {alternateEmail, alternatePhone, pnrNo, airlineLocator},
 					cards: inputList,
 				})
-				.then((res) => console.log(res))
+				.then((res) => console.log(res.data))
 				.catch((e) => console.log(e));
 		},
 	});
@@ -339,7 +340,7 @@ const UpdateRecord = ({data}) => {
 	};
 	var err = [];
 	useEffect(() => {
-		console.log(formik.errors);
+		// console.log(formik.errors);
 	});
 
 	return (
@@ -602,16 +603,14 @@ const UpdateRecord = ({data}) => {
 						</Grid>
 					</Box>
 
-					{!isDisable && (
-						<Grid container spacing={1}>
-							<Grid item xs={8} md={10}></Grid>
-							<Grid item xs={4} md={2}>
-								<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
-									Update
-								</Button>
-							</Grid>
+					<Grid container spacing={1}>
+						<Grid item xs={8} md={10}></Grid>
+						<Grid item xs={4} md={2}>
+							<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}} disabled={isDisableUpdatebtn}>
+								Update
+							</Button>
 						</Grid>
-					)}
+					</Grid>
 				</form>
 			</Formik>
 		</>
