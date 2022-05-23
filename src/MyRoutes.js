@@ -12,7 +12,6 @@ import {Transaction} from './views/MyRecords';
 import Email from './views/Email';
 import Dashboard from './views/Dashboard';
 import AddNewRecord from './views/components/AddNewRecord';
-import Authorizing from './views/Authorizing';
 
 const data = {};
 export default function RouteComponent() {

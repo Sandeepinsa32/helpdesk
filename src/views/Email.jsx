@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {Avatar, Box, Card, CardContent, Grid, InputAdornment, TextField, IconButton, Modal, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import Email1 from './components/email1';
 import axios from 'axios';
-import qs from 'qs';
 
 import NewBooking from './components/email/NewBooking';
 import Exchange from './components/email/Exchange';
