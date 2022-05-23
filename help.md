@@ -112,3 +112,6 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 7. val. cc used
 8. change style to inline css in email template
 9. val. err message on type cast
+
+10. remove unused code
+11.

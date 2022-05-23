@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import AddNewRecordForm from './components/AddTicketForm/AddNewRecordForm';
+import AddNewRecordForm from './AddTicketForm/AddNewRecordForm';
 import {useFormik, Formik} from 'formik';
 import valid from 'card-validator';
 import * as Yup from 'yup';
@@ -8,7 +8,7 @@ import {Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, Input
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {BASEURL, successToast} from '../utils/Utils';
+import {BASEURL, successToast} from '../../utils/Utils';
 import {useNavigate} from 'react-router-dom';
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';

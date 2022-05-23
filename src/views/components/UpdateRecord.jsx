@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import UpdateRecordForm from "./components/AddTicketForm/UpdateRecordForm";
+import UpdateRecordForm from "./AddTicketForm/UpdateRecordForm";
 import valid from "card-validator";
 // import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
 import { useFormik, Formik } from "formik";
@@ -18,7 +18,7 @@ import {
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { BASEURL, errorToast } from "../utils/Utils";
+import { BASEURL, errorToast } from "../../utils/Utils";
 // mui Icon
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -121,8 +121,8 @@ const UpdateRecord = ({ data }) => {
 
       //companyCard details
       isCompanyCCUsed: isCompanyCCUsed ? isCompanyCCUsed : false,
-      ccTimes: ccTimes ? ccTimes : 0,
-      ccAmount: ccAmount ? ccAmount : 0,
+      ccTimes: ccTimes ? ccTimes : "",
+      ccAmount: ccAmount ? ccAmount : "",
       ccDigits: ccDigits ? ccDigits : "",
 
       //markup
@@ -440,7 +440,7 @@ const UpdateRecord = ({ data }) => {
   };
   var err = [];
   useEffect(() => {
-    // console.log(formik.errors);
+    console.log(formik.errors);
   });
 
   return (

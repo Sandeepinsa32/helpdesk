@@ -14,10 +14,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 import {createTheme} from '@mui/material/styles';
-import UpdateRecord from './UpdateRecord';
+import UpdateRecord from './components/UpdateRecord';
 import ViewLog from './components/ViewLog';
 import Email from './Email';
-// import Email1 from './components/email1';
 
 //icon
 import CloseIcon from '@mui/icons-material/Close';

@@ -11,9 +11,7 @@ import { Account } from "./views/Account";
 import { Transaction } from "./views/MyRecords";
 import Email from "./views/Email";
 import Dashboard from "./views/Dashboard";
-import AddNewRecord from "./views/AddNewRecord";
-import Auth from "./views/Auth";
-import Authorizing from "./views/Authorizing";
+import AddNewRecord from "./views/components/AddNewRecord";
 
 const data = {};
 export default function RouteComponent() {
@@ -26,8 +24,11 @@ export default function RouteComponent() {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />}></Route>
+      <Route path="/home" element={<h1>home</h1>}></Route>
       <Route path="/agents" element={<AddUser />}></Route>
+      <Route path="/products" element={<h1>products</h1>}></Route>
       <Route path="/account" element={<Account />}></Route>
+      <Route path="/setting" element={<h1>setting</h1>}></Route>
       <Route path="/my-records" element={<Transaction />}></Route>
       <Route path="/404" element={<TypoText />}></Route>
       <Route path="/all" element={<SearchRecord />}></Route>

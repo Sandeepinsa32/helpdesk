@@ -1,13 +1,10 @@
-import RootNode from './RootNode';
+import RootNode from './views/RootNode';
 import {StyledEngineProvider, createTheme, ThemeProvider, styled} from '@mui/material/styles';
 import {BrowserRouter as Router, Routes, Navigate, Route, useNavigate} from 'react-router-dom';
-import {orange} from '@mui/material/colors';
-
-import Login from './login';
+import Login from './views/login';
 import {Toaster} from 'react-hot-toast';
-import {useEffect} from 'react';
 import axios from 'axios';
-import Authorizing from './Authorizing';
+import Authorizing from './views/Authorizing';
 
 function App() {
 	const navigate = useNavigate();
