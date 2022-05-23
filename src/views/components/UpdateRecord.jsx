@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import UpdateRecordForm from './components/AddTicketForm/UpdateRecordForm';
+import UpdateRecordForm from './AddTicketForm/UpdateRecordForm';
 import valid from 'card-validator';
 // import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
 import {useFormik, Formik} from 'formik';
@@ -9,7 +9,7 @@ import {Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, Check
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {BASEURL, errorToast} from '../utils/Utils';
+import {BASEURL, errorToast} from '../../utils/Utils';
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
