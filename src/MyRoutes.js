@@ -27,7 +27,7 @@ export default function RouteComponent() {
     <Routes>
       <Route path="/" element={<Dashboard />}></Route>
       <Route path="/home" element={<h1>home</h1>}></Route>
-      <Route path="/customers" element={<AddUser />}></Route>
+      <Route path="/agents" element={<AddUser />}></Route>
       <Route path="/products" element={<h1>products</h1>}></Route>
       <Route path="/account" element={<Account />}></Route>
       <Route path="/setting" element={<h1>setting</h1>}></Route>

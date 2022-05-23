@@ -26,6 +26,7 @@ import {
   Grid,
   IconButton,
   ThemeProvider,
+  Pagination,
 } from "@mui/material";
 
 import CloseIcon from "@mui/icons-material/Close";
@@ -66,7 +67,7 @@ export const AddUser = () => {
   const [open, setOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [page, setPage] = React.useState(1);
-
+  const [size, setSize] = useState(10);
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -78,10 +79,10 @@ export const AddUser = () => {
   });
 
   const handleReset = () => {
-    setPhone("");
     setEmail("");
-    // console.log(allRecords);
-    setAgentsList(allRecords);
+    setPage(1);
+    setAgentsList(previousData.agents);
+    setTotalRecords(previousData.total);
   };
   const searchHandle = () => {
     setPage(1);
@@ -105,7 +106,8 @@ export const AddUser = () => {
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [allRecords, setAllRecords] = useState([]);
+  const [previousData, setPreviousData] = useState([]);
+  const [totalRecords, setTotalRecords] = useState(-1);
 
   const SaveDetail = async (e) => {
     e.preventDefault();
@@ -129,9 +131,10 @@ export const AddUser = () => {
     axios
       .get(BASEURL + `/agent/all${search}`)
       .then((response) => {
-        setAgentsList(response.data.data);
+        setAgentsList(response.data.data.agents);
+        setTotalRecords(response.data.data.total);
 
-        if (search === "?page=1") setAllRecords(response.data.data);
+        if (search === "?page=1") setPreviousData(response.data.data);
         setTimeout(() => {
           setIsLoading(false);
         }, 500);
@@ -144,6 +147,9 @@ export const AddUser = () => {
       });
   };
 
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
   const handlePasswordChange = async (e) => {
     e.preventDefault();
 
@@ -165,7 +171,7 @@ export const AddUser = () => {
 
   useEffect(() => {
     loadAgents(createQueryString({ email, phone, page }));
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -345,6 +351,20 @@ export const AddUser = () => {
                   </TableBody>
                 </Table>
               </TableContainer>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  margin: "20px auto",
+                  width: "100%",
+                }}
+              >
+                <Pagination
+                  count={totalRecords != -1 && Math.ceil(totalRecords / size)}
+                  page={page}
+                  onChange={handlePageChange}
+                />
+              </div>
             </Box>
           </Container>
         </Box>
