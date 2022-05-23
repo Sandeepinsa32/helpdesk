@@ -26,11 +26,8 @@ export default function RouteComponent() {
   return (
     <Routes>
       <Route path="/" element={<Dashboard />}></Route>
-      <Route path="/home" element={<h1>home</h1>}></Route>
       <Route path="/agents" element={<AddUser />}></Route>
-      <Route path="/products" element={<h1>products</h1>}></Route>
       <Route path="/account" element={<Account />}></Route>
-      <Route path="/setting" element={<h1>setting</h1>}></Route>
       <Route path="/my-records" element={<Transaction />}></Route>
       <Route path="/404" element={<TypoText />}></Route>
       <Route path="/all" element={<SearchRecord />}></Route>
