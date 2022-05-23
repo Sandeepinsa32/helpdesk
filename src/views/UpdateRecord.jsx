@@ -112,8 +112,8 @@ const UpdateRecord = ({data}) => {
 
 			//companyCard details
 			isCompanyCCUsed: isCompanyCCUsed ? isCompanyCCUsed : false,
-			ccTimes: ccTimes ? ccTimes : 0,
-			ccAmount: ccAmount ? ccAmount : 0,
+			ccTimes: ccTimes ? ccTimes : '',
+			ccAmount: ccAmount ? ccAmount : '',
 			ccDigits: ccDigits ? ccDigits : '',
 
 			//markup
@@ -340,7 +340,7 @@ const UpdateRecord = ({data}) => {
 	};
 	var err = [];
 	useEffect(() => {
-		// console.log(formik.errors);
+		console.log(formik.errors);
 	});
 
 	return (
