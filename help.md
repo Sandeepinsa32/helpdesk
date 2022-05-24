@@ -114,4 +114,4 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 9. val. err message on type cast
 
 10. remove unused code
-11.
+11. add new uncheck product type

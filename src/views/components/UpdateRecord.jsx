@@ -127,8 +127,13 @@ const UpdateRecord = ({data}) => {
 			email: Yup.string().email('Invalid email address').required('Required'),
 			phone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
 
-			alternateEmail: Yup.string().email('Invalid email address'),
-			alternatePhone: Yup.number('input must consist if number').positive('input must consist if positive number').integer(),
+			alternateEmail: Yup.string()
+				.email('Invalid email address')
+				.notOneOf([Yup.ref('email')], 'alternative Email should be unique'),
+			alternatePhone: Yup.number('input must consist if number')
+				.positive('input must consist if positive number')
+				.integer()
+				.notOneOf([Yup.ref('phone')], 'alternative phone should be unique'),
 
 			pnrNo: Yup.string().max(255),
 			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
