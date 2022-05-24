@@ -5,7 +5,7 @@ import valid from 'card-validator';
 import {useFormik, Formik} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import {Grid, Box, Alert, Typography, Button, TextField, FormControlLabel, Checkbox} from '@mui/material';
+import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, FormControlLabel, Checkbox} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -58,19 +58,12 @@ const UpdateRecord = ({data}) => {
 		_id,
 	} = data;
 
+	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	// console.log(data);
 
 	// console.log(cards);
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
-	const [inputList, setInputList] = useState([
-		// {
-		// 	cardHolderName: '',
-		// 	cardHolderNumber: '',
-		// 	cardNumber: '',
-		// 	expiryDate: null,
-		// 	cvv: '',
-		// },
-	]);
+	const [inputList, setInputList] = useState([]);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
 	const [isDisable, setIsDisable] = useState(true);
@@ -125,15 +118,14 @@ const UpdateRecord = ({data}) => {
 			firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 			lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 			email: Yup.string().email('Invalid email address').required('Required'),
-			phone: Yup.number('input must consist if number').positive('input must consist if positive number').integer().required('phone is required'),
+			phone: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
 
 			alternateEmail: Yup.string()
 				.email('Invalid email address')
 				.notOneOf([Yup.ref('email')], 'alternative Email should be unique'),
-			alternatePhone: Yup.number('input must consist if number')
-				.positive('input must consist if positive number')
-				.integer()
-				.notOneOf([Yup.ref('phone')], 'alternative phone should be unique'),
+			alternatePhone: Yup.string()
+				.notOneOf([Yup.ref('phone')], 'alternative phone should be unique')
+				.matches(phoneRegExp, 'Phone number is not valid'),
 
 			pnrNo: Yup.string().max(255),
 			airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
@@ -195,7 +187,7 @@ const UpdateRecord = ({data}) => {
 			card: Yup.array().of(
 				Yup.object().shape({
 					cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
-					cardHolderNumber: Yup.number('input must consist of number').positive('input must consist of positive number').integer().required('Phone is required'),
+					cardHolderNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
 
 					cardNumber: Yup.string()
 						.test(
@@ -277,19 +269,12 @@ const UpdateRecord = ({data}) => {
 	const handleAddClick = () => {
 		formik.setFieldValue('card', [
 			...inputList,
-			// {
-			// 	cardHolderName: 'john',
-			// 	cardHolderNumber: '9876543210',
-			// 	cardNumber: '4263982640269299',
-			// 	expiryDate: null,
-			// 	cvv: '123',
-			// },
 			{
 				cardHolderName: '',
 				cardHolderNumber: '',
 				cardNumber: '',
 				expiryDate: null,
-				cvv: '0',
+				cvv: '',
 			},
 		]);
 		setInputList([
@@ -449,6 +434,7 @@ const UpdateRecord = ({data}) => {
 										{/*  Card Holder Phone no. */}
 										<Grid item xs={4} md={2}>
 											<TextField
+												type='number'
 												name='cardHolderNumber'
 												label='PHONE NO.'
 												fullWidth
@@ -462,6 +448,7 @@ const UpdateRecord = ({data}) => {
 										{/* CardNumber Field */}
 										<Grid item xs={4} md={3}>
 											<TextField
+												type='number'
 												name='cardNumber'
 												label='CARD NUMBER'
 												fullWidth
@@ -593,6 +580,7 @@ const UpdateRecord = ({data}) => {
 										<Grid item xs={4} md={3} key={i}>
 											<TextField
 												name={name}
+												type='number'
 												label={label}
 												fullWidth
 												disabled={true}
@@ -601,6 +589,13 @@ const UpdateRecord = ({data}) => {
 												onBlur={formik.handleBlur}
 												onChange={formik.handleChange}
 												value={formik.values[name]}
+												InputProps={
+													name == 'ccAmount'
+														? {
+																startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+														  }
+														: null
+												}
 											/>
 										</Grid>
 									);
