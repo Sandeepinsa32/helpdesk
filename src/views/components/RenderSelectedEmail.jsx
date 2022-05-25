@@ -188,12 +188,12 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
   
   <thead class=" tableHead ">
     <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:600;text-transform: capitalize;padding: .625em;color:#0B4173;" class="tableHeading" scope="col" name="firstname">First Name</th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:600;text-transform: capitalize;padding: .625em;color:#0B4173;"class="tableHeading" scope="col" name="middlename">Middle Name</th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:600;text-transform: capitalize;padding: .625em;color:#0B4173;"class="tableHeading" scope="col" name="lastname" >Last Name</th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:600;text-transform: capitalize;padding: .625em;color:#0B4173;" class="tableHeading" scope="col" name="Ticket">Ticket </th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:600;text-transform: capitalize;padding: .625em;color:#0B4173;"scope="col"  class="tableHeading" name="confirmation" >Confirmation</th>
-       <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:600;text-transform: capitalize;padding: .625em;color:#0B4173;" scope="col"  class="tableHeading" name="price">Price</th>
+      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;" class="tableHeading" scope="col" name="firstname">First Name</th>
+      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;"class="tableHeading" scope="col" name="middlename">Middle Name</th>
+      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;"class="tableHeading" scope="col" name="lastname" >Last Name</th>
+      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;" class="tableHeading" scope="col" name="Ticket">Ticket </th>
+      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;"scope="col"  class="tableHeading" name="confirmation" >Confirmation</th>
+       <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;" scope="col"  class="tableHeading" name="price">Price</th>
       
     </tr>
   </thead>
@@ -202,32 +202,32 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 
 <!-- 		${userTabelData1()} -->
     <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">john</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">D</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">doe</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">200</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
+		  <td style="font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">200</td>
 		</tr>
 <!--  Repeating code 2 more times    -->
   
-     <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">john</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">D</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">doe</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">200</td>
+    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
+		  <td style="font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">200</td>
 		</tr>
-    
-     <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">john</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">D</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">doe</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
-		  <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" class="tableHeading" scope="col" name="firstname">200</td>
+    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
+		  <td style="font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
+		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">200</td>
 		</tr>
+     
     <!--  Repeating code 2 more times    -->
 
    
@@ -300,7 +300,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
                   background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
                   border-radius: 50px 50px 50px 50px;    	
                   padding: 10px 30px; font-family:sans-serif;'
-            href='https://triphelpdesk.netlify.app/auth/validateToken'
+            href='http://localhost:3000/auth/validateToken'
             target='_blank'>
             Authorize
           </a>`
@@ -342,7 +342,10 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
             
           
             
-</div>`;
+</div>
+      
+
+`;
 
 	var Exchange = `<center>
 		<style>
