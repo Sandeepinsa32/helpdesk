@@ -162,6 +162,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 											<TextField
 												name={markup}
 												label={markupLabel}
+												type='number'
 												fullWidth
 												disabled={isView}
 												InputProps={{
@@ -187,6 +188,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 									) : (
 										<TextField
 											name={markup}
+											type='number'
 											label={markupLabel}
 											fullWidth
 											disabled={true}
@@ -255,6 +257,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 					id='phone'
 					name='phone'
 					label='PHONE'
+					type='number'
 					fullWidth
 					disabled={true}
 					error={Boolean(formik.touched.phone && formik.errors.phone)}
@@ -281,6 +284,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 			{/* alternatePhone  Fields */}
 			<Grid item xs={4} md={3} sm={4}>
 				<TextField
+					type='number'
 					name='alternatePhone'
 					label='ALTERNATIVE PHONE'
 					fullWidth
@@ -545,6 +549,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 			{/* Grand Total Fields */}
 			<Grid item xs={3} md={2} sm={3}>
 				<TextField
+					type='number'
 					id='grandTotal'
 					name='grandTotal'
 					label='GRAND TOTAL'
@@ -563,6 +568,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 			{/* Total In-House Charge Fields */}
 			<Grid item xs={3} md={2} sm={3}>
 				<TextField
+					type='number'
 					id='totalInhouseChargetotalInhouseCharge'
 					name='totalInhouseCharge'
 					label='TOTAL INHOUSE CHARGE'
@@ -581,6 +587,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 			{/* MCO amount Fields */}
 			<Grid item xs={3} md={2} sm={3}>
 				<TextField
+					type='number'
 					id='mcoNo'
 					name='mcoNo'
 					label='MCO'

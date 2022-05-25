@@ -145,6 +145,7 @@ export default function AddressForm({formik, isView}) {
 									? checkboxType[name] && (
 											<TextField
 												name={markup}
+												type='number'
 												label={markupLabel}
 												fullWidth
 												disabled={isView}
@@ -170,6 +171,7 @@ export default function AddressForm({formik, isView}) {
 											<TextField
 												name={markup}
 												label={markupLabel}
+												type='number'
 												fullWidth
 												disabled={true}
 												InputProps={{
@@ -246,6 +248,7 @@ export default function AddressForm({formik, isView}) {
 					name='phone'
 					label='PHONE'
 					fullWidth
+					type='number'
 					disabled={isView}
 					error={Boolean(formik.touched.phone && formik.errors.phone)}
 					helperText={formik.touched.phone && formik.errors.phone}
@@ -271,6 +274,7 @@ export default function AddressForm({formik, isView}) {
 			{/* alternatePhone  Fields */}
 			<Grid item xs={4} md={3} sm={4}>
 				<TextField
+					type='number'
 					name='alternatePhone'
 					label='ALTERNATIVE PHONE'
 					fullWidth
@@ -541,6 +545,7 @@ export default function AddressForm({formik, isView}) {
 					id='grandTotal'
 					name='grandTotal'
 					label='GRAND TOTAL'
+					type='number'
 					fullWidth
 					disabled={isView}
 					InputProps={{
@@ -556,6 +561,7 @@ export default function AddressForm({formik, isView}) {
 			{/* Total In-House Charge Fields */}
 			<Grid item xs={3} sm={3} md={2}>
 				<TextField
+					type='number'
 					id='totalInhouseChargetotalInhouseCharge'
 					name='totalInhouseCharge'
 					label='TOTAL INHOUSE CHARGE'
@@ -574,6 +580,7 @@ export default function AddressForm({formik, isView}) {
 			{/* MCO amount Fields */}
 			<Grid item xs={3} sm={3} md={2}>
 				<TextField
+					type='number'
 					id='mcoNo'
 					name='mcoNo'
 					label='MCO'

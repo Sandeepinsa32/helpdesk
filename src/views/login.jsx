@@ -15,11 +15,12 @@ import axios from 'axios';
 const Login = () => {
 	const navigate = useNavigate();
 
+	console.log('jack@gmail.com ', '0000');
 	// const router = useRouter();
 	const formik = useFormik({
 		initialValues: {
-			email: 'jack@gmail.com',
-			password: '0000',
+			email: '',
+			password: '',
 		},
 		validationSchema: Yup.object({
 			email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
