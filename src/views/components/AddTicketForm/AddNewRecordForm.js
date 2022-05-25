@@ -354,6 +354,7 @@ export default function AddressForm({formik, isView}) {
 						/>
 						{formik.values.adultCount > 0 ? (
 							<TextField
+								type='number'
 								sx={{mt: 2}}
 								name='adultPrice'
 								label='PRICE PER ADULT'

@@ -321,6 +321,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 						/>
 						{formik.values.childCount > 0 ? (
 							<TextField
+								type='number'
 								sx={{mt: 2}}
 								name='childPrice'
 								label='PRICE PER CHILD'
@@ -364,6 +365,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 						/>
 						{formik.values.adultCount > 0 ? (
 							<TextField
+								type='number'
 								sx={{mt: 2}}
 								name='adultPrice'
 								label='PRICE PER ADULT'
@@ -407,6 +409,7 @@ export default function UpdateRecordForm({formik, disabled}) {
 						/>
 						{formik.values.elderCount > 0 ? (
 							<TextField
+								type='number'
 								sx={{mt: 2}}
 								name='elderPrice'
 								label='PRICE PER INFANT'

@@ -101,23 +101,83 @@ const AddNewRecord = ({isView, data}) => {
 			bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is  required'),
 
 			//currency
-			mcoNo: Yup.number('input must consist if number').positive(' value Should be Greater then 0 ').integer().required('This Field is required'),
-			totalInhouseCharge: Yup.number('input must consist if number').positive('value Should be Greater then 0').integer().required('This field is  Required'),
-			grandTotal: Yup.number('input must consist if number').positive('value Should be Greater then 0').integer().required('This field is  Required'),
+			mcoNo: Yup.number('input must consist if number')
+				.required('This Field is required')
+				.test(
+					'number should be postive', // this is used internally by yup
+					'value should be greater or Equal to 0', //validation message
+					(value) => value == 0 || value > 0
+				),
+			totalInhouseCharge: Yup.number('input must consist if number')
+				.required('This field is  Required')
+				.test(
+					'number should be postive', // this is used internally by yup
+					'value should be greater or Equal to 0', //validation message
+					(value) => value == 0 || value > 0
+				),
+			grandTotal: Yup.number('input must consist if number')
+				.required('This field is  Required')
+				.test(
+					'number should be postive', // this is used internally by yup
+					'value should be greater or Equal to 0', //validation message
+					(value) => value == 0 || value > 0
+				),
 
 			//number of passenger
-			adultCount: Yup.number('input must consist if number').integer().max(9).required('This field is  Required'),
-			childCount: Yup.number('input must consist if number').integer().max(9).required('This field is  Required'),
-			elderCount: Yup.number('input must consist if number').integer().max(9).required('This field is  Required'),
+			adultCount: Yup.number('input must consist if number')
+				.integer()
+				.max(9)
+				.required('This field is  Required')
+				.test(
+					'number should be postive', // this is used internally by yup
+					'value should be greater or Equal to 0', //validation message
+					(value) => value == 0 || value > 0
+				),
+			childCount: Yup.number('input must consist if number')
+				.integer()
+				.max(9)
+				.required('This field is  Required')
+				.test(
+					'number should be postive', // this is used internally by yup
+					'value should be greater or Equal to 0', //validation message
+					(value) => value == 0 || value > 0
+				),
+			elderCount: Yup.number('input must consist if number')
+				.integer()
+				.max(9)
+				.required('This field is  Required')
+				.test(
+					'number should be postive', // this is used internally by yup
+					'value should be greater or Equal to 0', //validation message
+					(value) => value == 0 || value > 0
+				),
 
 			childPrice: Yup.number('input must consist if number').when(['childCount'], (childCount, schema) => {
-				return childCount > 0 ? schema.required('this field required ').positive('Price Should be Greater then 0 ').integer() : schema;
+				return childCount > 0
+					? schema.required('this field required ').test(
+							'number should be postive', // this is used internally by yup
+							'value should be greater or Equal to 0', //validation message
+							(value) => value == 0 || value > 0
+					  )
+					: schema;
 			}),
 			adultPrice: Yup.number('input must consist if number').when(['adultCount'], (adultCount, schema) => {
-				return adultCount > 0 ? schema.required('this field required ').positive('Price Should be Greater then 0').integer() : schema;
+				return adultCount > 0
+					? schema.required('this field required ').test(
+							'number should be postive', // this is used internally by yup
+							'value should be greater or Equal to 0', //validation message
+							(value) => value == 0 || value > 0
+					  )
+					: schema;
 			}),
 			elderPrice: Yup.number('input must consist if number').when(['elderCount'], (elderCount, schema) => {
-				return elderCount > 0 ? schema.required('this field required ').positive('Price Should be Greater then 0').integer() : schema;
+				return elderCount > 0
+					? schema.required('this field required ').test(
+							'number should be postive', // this is used internally by yup
+							'value should be greater or Equal to 0', //validation message
+							(value) => value == 0 || value > 0
+					  )
+					: schema;
 			}),
 
 			//date

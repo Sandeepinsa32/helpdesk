@@ -114,3 +114,4 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 
 9. remove unused code
 10. add new uncheck product type
+11. number field change fromik number --> string && validation on -ve number
