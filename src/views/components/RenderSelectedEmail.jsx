@@ -138,43 +138,70 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 	}
 	var newBooking = `
 <div style="background:#ffffff; padding:10px;font-weight:500; text-align:left;  font-family:Calibri, sans-serif;">
-		
-      <p style="font-size:13px; line-height:16px; color:#0B4173; margin:0px;border-radius:3px;padding:10px 5px;  font-family:Calibri, sans-serif;">
+		<style>
+       .header-para-12x{
+            font-size: 0.875rem !important;
+            line-height: 22px !important;
+        }
+      .valalto-header{
+            font-size: 1rem !important;
+      }
+      
+      
+      @media screen and (max-width: 450px) {
+        table.tableoutter {
+          border: 0;
+        }
+        .header-para-12x{
+        font-size: 6px !important;
+        line-height: 10px !important;
+        font-weight: 400 !important;
+        }
+         .valalto-header{
+            font-size: 8px !important;
+      }
+
+
+  
+  
+        }
+  </style>
+      <p class="header-para-12x" style="font-size:12px; line-height:16px; color:#0B4173; margin:0px;border-radius:3px;padding:10px 5px;  font-family:Calibri, sans-serif;">
         By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
       </p>
       
 	  	<hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
-		  <h1 style="font-size:14px; text-align:right; line-height:22px; font-weight:normal; color:#0B4173;font-family:sans-serif;">
-			  Trip Help Desk Powered By <b style="color: #0B4173;font-size: 16px;">Valalto Inc.</b>	
+		  <h1 class=" header-para-12x" style="font-size:14px; text-align:right; line-height:22px; font-weight:normal; color:#0B4173;font-family:sans-serif;">
+			  Trip Help Desk Powered By <b class="valalto-header" style="color: #0B4173;font-size: 16px;">Valalto Inc.</b>	
         </h1>
           
 			<div style="display:flex;justify-content:space-between;">
 		
         <div style="width:50%">
-            <span style="color: #0B4173;font-size: 16px; line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; "> New Booking   </span>
+            <span class=" header-para-12x" style="color: #0B4173;font-size: 16px; line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; "> New Booking   </span>
            
         </div>
         <div style="width:50%">
-            <span style=" line-height:22px; font-weight:bold;margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px; ">
+            <span class=" header-para-12x" style=" line-height:22px; font-weight:bold;margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px; ">
                 Confirmation :
             </span>
-            <span style="line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px;">
+            <span  class=" header-para-12x" style="line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px;">
                THDFRN2203011
             </span>
               
           </div>
 	    </div>
 		
-		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color: #0B4173;margin:0;height:fit-content;font-family:sans-serif; ">
+		 <h1  class=" header-para-12x" style="font-size:14px; line-height:22px; font-weight:bold; color: #0B4173;margin:0;height:fit-content;font-family:sans-serif; ">
   Wed, May 11, 2022      
 <!--          ${currentDate()} -->
         </h1>
-		<h1 style="font-size:14px; line-height:22px; font-weight:normal;  color: #0B4173;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
+		<h1  class=" header-para-12x" style="font-size:14px; line-height:22px; font-weight:normal;  color: #0B4173;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
         Dear Customer
         </h1>
       
       
-       <p style="font-size:12px; line-height:16px; color:#0B4173; margin-bottom:30px; font-family: Arial;">
+       <p  class="header-para-12x" style="font-size:12px; line-height:16px; color:#0B4173; margin-bottom:30px; font-family: Arial;">
        Thank you for choosing Triphelpdesk for your travel arrangements. We truly appreciate your business.
         As per our conversation and agreed, we have processed your reservation under the confirmation code 
         Your flight is now booked and is in process. Please note that you will receive the E-Ticket confirmation shortly in a separate email once the process is finalized.
@@ -201,7 +228,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
     
 
 <!-- 		${userTabelData1()} -->
-    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
+    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
@@ -211,7 +238,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 		</tr>
 <!--  Repeating code 2 more times    -->
   
-    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
+    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
@@ -219,7 +246,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 		  <td style="font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">200</td>
 		</tr>
-    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
+    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
 		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
@@ -243,7 +270,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
      
  <!--         TotalAmount -->
 
-        <p style=" line-height: 18px;  color: #0B4173;font-size: 14px;margin-bottom: 5px; font-weight: 600;font-family:Helvetica;padding: 0 1rem;">Total amount charged $
+        <p class="header-para-12x" style=" line-height: 18px;  color: #0B4173;font-size: 12px;margin-bottom: 5px; font-weight: 600;font-family:Helvetica;padding: 0 1rem;">Total amount charged $
     
              in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
         </p>
@@ -251,31 +278,44 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
          
        
 
-      <table class="tableoutter" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+      <table class="tableoutter" style="margin: 0 auto;padding:1rem;">
   
  
-    
-       <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row" style="font-size: 11px; text-align:unset;">
-       <b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m
+       <tr>
+         <td  class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row" style="font-size: 11px; text-align:unset;">
+         <b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m
+         </td>
+        </tr>
+        <tr>
+           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row" style="font-size: 11px; text-align:unset;">
+       <b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
        </td>
+         </tr>
+         <tr>
+            <td class="header-para-12x"  style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row" style="font-size: 11px; text-align:unset;">
+            <b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
+            </td>
+         </tr>
       </table>
-      <table class="tableoutter" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
-       <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row" style="font-size: 11px; text-align:unset;">
+  
+  
+<!--       <table class="tableoutter" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+       <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row" style="font-size: 11px; text-align:unset;">
        <b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
        </td>
       </table>
       <table class="tableoutter" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
-            <td style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row" style="font-size: 11px; text-align:unset;">
+            <td class="header-para-12x"  style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row" style="font-size: 11px; text-align:unset;">
             <b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
             </td>
-      </table>
+      </table> -->
         
        
-      <div style="display:flex;justify-content:center; padding:15px">
+      <div  style="display:flex;justify-content:center; padding: 15px 0;width: 100% !Important;">
 
-      ${
-			isPreviewed
-				? `
+<!--       ${
+		isPreviewed
+			? `
           <a
             style='display:inline-block;
           border: 0;cursor: pointer;
@@ -290,8 +330,8 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
           padding: 10px 30px; font-family:sans-serif;'>
             Authorize
           </a>`
-				: `	<a
-            style='display:inline-block;
+			: `	 -->
+           <a style='display:inline-block;
                   border: 0;cursor: pointer;
                   color: white;
                   text-decoration:none;
@@ -303,8 +343,9 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
             href='http://localhost:3000/auth/validateToken'
             target='_blank'>
             Authorize
-          </a>`
-		}
+          </a>
+<!--         `
+	} -->
 
 
       </div>
@@ -314,7 +355,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 
 
       <div>
-          <p style="font-size:12px; line-height:18px; font-weight:500;color: #0B4173;margin-bottom:10px;margin:0px;border-radius:3px;padding:10px 5px; font-family:Calibri, sans-serif;">
+          <p  class="header-para-12x" style="font-size:12px; line-height:18px; font-weight:500;color: #0B4173;margin-bottom:10px;margin:0px;border-radius:3px;padding:10px 5px; font-family:Calibri, sans-serif;">
             
               <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><u><a href="tel:8662701413"> 866-270-1413</a></u></b> or email
               <b><u><a href = "mailto:info@triphelpdesk.com">info@triphelpdesk.com </a></u></b>
@@ -333,9 +374,9 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
      
           <hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
             
-            <p style=" line-height:18px;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
+            <p class=" header-para-12x" style=" line-height:18px;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
               &copy; Copyright 2022
-              <a href="https://valalto.com/"
+              <a class=" header-para-12x"  href="https://valalto.com/"
                 style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
                 Valalto Inc.</a>, All Rights Reserved.
             </p>
