@@ -249,15 +249,20 @@ const UpdateRecord = ({data}) => {
 					cardHolderNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
 
 					cardNumber: Yup.string()
-						.test(
-							'test-number', // this is used internally by yup
-							'Credit Card number is invalid', //validation message
-							(value) => valid.number(value).isValid
-						) // return true false based on validation
+						// 	.test(
+						// 		'test-number', // this is used internally by yup
+						// 		'Credit Card number is invalid', //validation message
+						// 		(value) => valid.number(value).isValid
+						// )
+						// return true false based on validation
 						.required()
 						.max(16, 'Must be 16 characters')
 						.min(16, 'Must be 16 characters'),
-					cvv: Yup.string().min(3, 'cvv must have atleast3  characters').max(4, 'cvv must have atleast 4 characters'),
+					cvv: Yup.number().test(
+						'min 3 && max 4 digit required', // this is used internally by yup
+						'atleat 3 and atmost 4 character should be there', //validation message
+						(value) => value == 0 || value > 0
+					),
 					expiryDate: Yup.string().required('This field is required').nullable(),
 				})
 			),
