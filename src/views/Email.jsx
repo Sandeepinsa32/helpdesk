@@ -123,17 +123,17 @@ const Email = ({Ticketid, id, onClose}) => {
 	function renderEmail() {
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={id} Ticketid={Ticketid} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
 			case 'exchange':
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={id} Ticketid={Ticketid} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
 			case 'refund':
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={id} Ticketid={Ticketid} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
 			case 'futureCredit':
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={id} Ticketid={Ticketid} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
 
 			default:
 				// throw new Error("Unknown step");
-				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} recordData={id} />;
+				return <Email1 selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} recordData={id} onClose={onClose} />;
 		}
 	}
 
