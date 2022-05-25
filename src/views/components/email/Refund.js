@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Avatar, Box, Card, CardContent, Grid, InputAdornment, TextField, IconButton, Modal, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
-import Email1 from '../email1';
+import RenderSelectedEmail from '../RenderSelectedEmail';
 import axios from 'axios';
 import qs from 'qs';
 

@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import {BASEURL, successToast} from '../../utils/Utils';
 
-const Email1 = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid, onClose}) => {
+const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid, onClose}) => {
 	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
 	const [isPreviewed, setIsPreviewed] = useState(true);
 	const grandTotal = '100';
@@ -1282,4 +1282,4 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
 	);
 };
 
-export default Email1;
+export default RenderSelectedEmail;
