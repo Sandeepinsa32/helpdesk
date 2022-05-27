@@ -13,7 +13,6 @@ import ElderlyIcon from '@mui/icons-material/Elderly';
 
 // custom Formik field
 import Textfield from '../FormField/Textfield';
-import SubmitButton from '../FormField/SubmitButton';
 
 export default function AddressForm({formik, isView}) {
 	// de-str new formik object
@@ -398,7 +397,7 @@ export default function AddressForm({formik, isView}) {
 
 			{/* Airline code Fields */}
 			<Grid item xs={3} sm={3} md={3}>
-				<Textfield name='airlineCode' label='AIRPORT CODE ' />
+				<Textfield name='airlineCode' label='AIRLINE ' />
 			</Grid>
 
 			{/* Grand Total Fields */}

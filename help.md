@@ -124,9 +124,8 @@ Return false }
 
 ---
 
-chil count field null  
-card validator api needed
-
-ad new record only phone & email required only dropdown first value by default only boked on Airport code --> airline
-
-Payment method --> cust card details naming convenstion to cards -123 only can see global card detail after 48 hours mask card docusign card validator email foramt charge button airline button
+1. card validator api needed
+2. only can see global card detail after 48 hours mask card
+3. docusign card validator
+4. email foramt
+5. charge button ,airline button

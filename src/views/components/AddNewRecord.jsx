@@ -4,7 +4,7 @@ import {useFormik, Formik, Form} from 'formik';
 import valid from 'card-validator';
 import * as Yup from 'yup';
 import axios from 'axios';
-import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, FormControlLabel, InputLabel, FormControl, Checkbox} from '@mui/material';
+import {Grid, Box, Typography, Button, TextField, InputAdornment, FormControlLabel, FormLabel, FormControl, Checkbox} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -14,6 +14,9 @@ import {useNavigate} from 'react-router-dom';
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+
+// custom Formik field
+import Textfield from './FormField/Textfield';
 
 const AddNewRecord = ({isView, data}) => {
 	const navigate = useNavigate();
@@ -109,7 +112,7 @@ const AddNewRecord = ({isView, data}) => {
 		airlineLocator: '',
 		//
 		bookingType: '',
-		bookedOn: '',
+		bookedOn: 'web',
 		fareType: '',
 		//
 		productType: '',
@@ -138,10 +141,10 @@ const AddNewRecord = ({isView, data}) => {
 	};
 	const FORM_VALIDATION = Yup.object({
 		//basic
-		firstName: Yup.string().max(15, 'Must be 15 characters or less'),
-		lastName: Yup.string().max(15, 'Must be 15 characters or less'),
-		email: Yup.string().email('Invalid email address'),
-		phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+		lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+		email: Yup.string().email('Invalid email address').required('Required'),
+		phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Required'),
 
 		alternateEmail: Yup.string()
 			.email('Invalid email address')
@@ -296,19 +299,17 @@ const AddNewRecord = ({isView, data}) => {
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
 					console.log(values, inputList);
-
-					console.log(values.productType);
-					// 	axios
-					// 		.post(BASEURL + '/ticket/raise', {
-					// 			data: values,
-					// 			cards: inputList,
-					// 		})
-					// 		.then((res) => {
-					// 			console.log(res);
-					// 			navigate('/my-records');
-					// 			successToast('Conv. added Successfully');
-					// 		})
-					// 		.catch((e) => console.log(e));
+					axios
+						.post(BASEURL + '/ticket/raise', {
+							data: values,
+							cards: inputList,
+						})
+						.then((res) => {
+							console.log(res);
+							navigate('/my-records');
+							successToast('Conv. added Successfully');
+						})
+						.catch((e) => console.log(e));
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount} = props;
@@ -332,7 +333,7 @@ const AddNewRecord = ({isView, data}) => {
 							{/*  card Payment */}
 							<Box sx={{m: 1}}>
 								<Typography variant='h6' gutterBottom sx={{my: 4}}>
-									Payment method :
+									Customer Card Detail:
 								</Typography>
 							</Box>
 							{/* CC card  */}
@@ -352,9 +353,13 @@ const AddNewRecord = ({isView, data}) => {
 									return (
 										<Grid key={i} container spacing={3}>
 											{/* Card Holder Name field */}
+											<Grid item xs={4} md={1}>
+												<FormControl sx={{pt: 2, ml: -2}}>
+													<FormLabel id='demo-row-radio-buttons-group-label'>Card {i + 1}</FormLabel>
+												</FormControl>
+											</Grid>
 											<Grid item xs={4} md={2}>
 												<TextField
-													// required
 													name='cardHolderName'
 													label='NAME ON CARD'
 													fullWidth
@@ -369,7 +374,7 @@ const AddNewRecord = ({isView, data}) => {
 											</Grid>
 
 											{/*  Card Holder Phone no. */}
-											<Grid item xs={4} md={3}>
+											<Grid item xs={4} md={2}>
 												<TextField
 													type='number'
 													name='cardHolderNumber'
@@ -496,16 +501,10 @@ const AddNewRecord = ({isView, data}) => {
 
 											return (
 												<Grid item xs={4} md={3} key={i}>
-													<TextField
+													<Textfield
 														name={name}
 														label={label}
 														type='number'
-														fullWidth
-														error={touched[name] && errors[name]}
-														helperText={touched[name] && errors[name]}
-														onBlur={handleBlur}
-														onChange={handleChange}
-														value={values.name}
 														InputProps={
 															name == 'ccAmount'
 																? {
