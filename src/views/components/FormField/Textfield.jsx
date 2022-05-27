@@ -1,8 +1,8 @@
 import React from 'react';
-import {TextField} from '@mui/material';
+import {TextField, InputAdornment} from '@mui/material';
 import {useField, useFormikContext} from 'formik';
 
-const TextfieldWrapper = ({name, ...otherProps}) => {
+const TextfieldWrapper = ({name, currenyField, ...otherProps}) => {
 	// const {setFieldValue} = useFormikContext();
 	const [field, mata] = useField(name);
 
@@ -11,6 +11,11 @@ const TextfieldWrapper = ({name, ...otherProps}) => {
 	// 	console.log(value);
 	// 	setFieldValue(name, value);
 	// };
+
+	const InputProps = {
+		startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+	};
+
 	const configTextfield = {
 		...field,
 		...otherProps,
@@ -21,6 +26,9 @@ const TextfieldWrapper = ({name, ...otherProps}) => {
 	if (mata && mata.touched && mata.error) {
 		configTextfield.error = true;
 		configTextfield.helperText = mata.error;
+	}
+	if (currenyField) {
+		configTextfield.InputProps = {InputProps};
 	}
 
 	return <TextField {...configTextfield} />;

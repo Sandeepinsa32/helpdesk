@@ -122,7 +122,6 @@ export default function AddressForm({formik, isView}) {
 														var remainingValues = initialProductType.filter((y) => y.property !== object.property);
 														setInitialProductType([...remainingValues]);
 													} else {
-														console.log('prod else');
 														setInitialProductType([...initialProductType, object]);
 													}
 												}}
@@ -153,7 +152,6 @@ export default function AddressForm({formik, isView}) {
 													data[index]['propertyMarkup'] = e.target.value;
 
 													setInitialProductType(data);
-													setFieldValue('productType', initialProductType);
 													calculateTotalMarkup();
 												}}
 											/>
@@ -175,7 +173,6 @@ export default function AddressForm({formik, isView}) {
 													let data = [...initialProductType];
 													data[index]['propertyMarkup'] = e.target.value;
 													setInitialProductType(data);
-													setFieldValue('productType', initialProductType);
 												}}
 												value={values.totalMarkup}
 											/>
@@ -214,14 +211,9 @@ export default function AddressForm({formik, isView}) {
 			<Grid item xs={4} md={3} sm={4}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
-						<TextField
-							error={Boolean(touched.childCount && errors.childCount)}
-							fullWidth
-							helperText={touched.childCount && errors.childCount}
-							label='CHILDS'
+						<Textfield
 							name='childCount'
-							value={values.childCount}
-							onChange={handleChange}
+							label='CHILDS'
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -231,19 +223,15 @@ export default function AddressForm({formik, isView}) {
 								),
 							}}
 						/>
+
 						{values.childCount > 0 ? (
-							<TextField
+							<Textfield
 								sx={{mt: 2}}
 								name='childPrice'
 								label='PRICE PER CHILD'
-								fullWidth
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(touched.childPrice && errors.childPrice)}
-								helperText={touched.childPrice && errors.childPrice}
-								onChange={handleChange}
-								value={values.childPrice}
 							/>
 						) : null}
 					</Box>
@@ -253,13 +241,9 @@ export default function AddressForm({formik, isView}) {
 			<Grid item xs={4} md={3} sm={4}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
-						<TextField
-							error={Boolean(touched.adultCount && errors.adultCount)}
-							fullWidth
-							helperText={touched.adultCount && errors.adultCount}
+						<Textfield
 							label='ADULTS'
 							name='adultCount'
-							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -268,22 +252,16 @@ export default function AddressForm({formik, isView}) {
 									</InputAdornment>
 								),
 							}}
-							value={values.adultCount}
 						/>
 						{values.adultCount > 0 ? (
-							<TextField
+							<Textfield
 								type='number'
 								sx={{mt: 2}}
 								name='adultPrice'
 								label='PRICE PER ADULT'
-								fullWidth
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(touched.adultPrice && errors.adultPrice)}
-								helperText={touched.adultPrice && errors.adultPrice}
-								onChange={handleChange}
-								value={values.adultPrice}
 							/>
 						) : null}
 					</Box>
@@ -293,13 +271,9 @@ export default function AddressForm({formik, isView}) {
 			<Grid item xs={4} md={3} sm={4}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
-						<TextField
-							error={Boolean(touched.elderCount && errors.elderCount)}
-							fullWidth
-							helperText={touched.elderCount && errors.elderCount}
+						<Textfield
 							label='INFANT'
 							name='elderCount'
-							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -311,7 +285,7 @@ export default function AddressForm({formik, isView}) {
 							value={values.elderCount}
 						/>
 						{values.elderCount > 0 ? (
-							<TextField
+							<Textfield
 								sx={{mt: 2}}
 								name='elderPrice'
 								label='PRICE PER INFANT'
@@ -319,9 +293,6 @@ export default function AddressForm({formik, isView}) {
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(touched.elderPrice && errors.elderPrice)}
-								helperText={touched.elderPrice && errors.elderPrice}
-								onChange={handleChange}
 								value={values.elderPrice}
 							/>
 						) : null}
@@ -362,19 +333,6 @@ export default function AddressForm({formik, isView}) {
 						setFieldValue('airlineLocator', value.toUpperCase());
 					}}
 				/>
-				{/* <TextField
-					id='airlineCode'
-					name='airlineLocator'
-					label='AIRLINE Locator '
-					fullWidth
-					error={Boolean(touched.airlineLocator && errors.airlineLocator)}
-					helperText={touched.airlineLocator && errors.airlineLocator}
-					value={values.airlineLocator}
-					onChange={(e) => {
-						const value = e.target.value || '';
-						setFieldValue('airlineLocator', value.toUpperCase());
-					}}
-				/> */}
 			</Grid>
 			{/* booking type -------Dropdown Fields */}
 			<Grid item xs={3} sm={3} md={3}>
@@ -383,14 +341,10 @@ export default function AddressForm({formik, isView}) {
 					<Select
 						labelId='Bokking-type-Dropdown-label	'
 						id='Bokking-type-Dropdown'
-						// value={bookingType}
-						// onChange={handleBookingChange}
 						fullWidth
 						name='bookingType'
 						label='BOOKING TYPE'
 						error={Boolean(touched.bookingType && errors.bookingType)}
-						// helperText={touched.bookingType && errors.bookingType}
-
 						onChange={handleChange}
 						value={values.bookingType}>
 						<MenuItem value='new'>New</MenuItem>
@@ -412,8 +366,6 @@ export default function AddressForm({formik, isView}) {
 						name='fareType'
 						label='FARE TYPE'
 						error={Boolean(touched.fareType && errors.fareType)}
-						// helperText={touched.fareType && errors.fareType}
-
 						onChange={handleChange}
 						value={values.fareType}>
 						<MenuItem value='publish'>Publish</MenuItem>
@@ -435,9 +387,7 @@ export default function AddressForm({formik, isView}) {
 						label='BOOKED ON'
 						onChange={handleChange}
 						value={values.bookedOn}
-						error={Boolean(touched.bookedOn && errors.bookedOn)}
-						// helperText={touched.bookedOn && errors.bookedOn}
-					>
+						error={Boolean(touched.bookedOn && errors.bookedOn)}>
 						<MenuItem value='web'>Web</MenuItem>
 						<MenuItem value='trippro'>TripPro</MenuItem>
 						<MenuItem value='skybird'>SkyBird</MenuItem>

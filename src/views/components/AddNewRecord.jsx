@@ -121,9 +121,9 @@ const AddNewRecord = ({isView, data}) => {
 		childCount: '',
 		elderCount: '',
 		grandTotal: '',
-		childPrice: null,
-		adultPrice: null,
-		elderPrice: null,
+		childPrice: '',
+		adultPrice: '',
+		elderPrice: '',
 		//date
 		departureDate: null,
 		returnDate: null,
