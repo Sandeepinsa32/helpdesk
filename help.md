@@ -105,13 +105,28 @@ main - usd booking id - thd + 4 digit unique code 2. email validation
 2. airlineLocator value is not showing and validation on ccused
 3. testing 48 hours disable functionality
 
-4. validation on phone number && also on card field ---(on both add new record && update record )
+4. change style to inline css in email template
+5. val. err message on type cast
 
-5. val. on card details if same --
-6. val. cc used
-7. change style to inline css in email template
-8. val. err message on type cast
+6. remove unused code
+7. add new uncheck product type
+8. number field change fromik number --> string && validation on -ve number ----done
+9. Disable submit button if pnr is empty
+10. Disable button when required
+11. A B
+12. Function validate()
 
-9. remove unused code
-10. add new uncheck product type
-11. number field change fromik number --> string && validation on -ve number
+{
+
+If(!a ||!b) Return true
+
+Return false }
+
+---
+
+chil count field null  
+card validator api needed
+
+ad new record only phone & email required only dropdown first value by default only boked on Airport code --> airline
+
+Payment method --> cust card details naming convenstion to cards -123 only can see global card detail after 48 hours mask card docusign card validator email foramt charge button airline button

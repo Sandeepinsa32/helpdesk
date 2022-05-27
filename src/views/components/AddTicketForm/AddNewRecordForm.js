@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-
+import React, {useState, useEffect} from 'react';
+import {useFormikContext} from 'formik';
 import {Grid, TextField, FormControlLabel, InputAdornment, Box, Checkbox, InputLabel, MenuItem, FormControl, Select} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -11,10 +11,17 @@ import BoyIcon from '@mui/icons-material/Boy';
 import ChildCareIcon from '@mui/icons-material/ChildCare';
 import ElderlyIcon from '@mui/icons-material/Elderly';
 
+// custom Formik field
+import Textfield from '../FormField/Textfield';
+import SubmitButton from '../FormField/SubmitButton';
+
 export default function AddressForm({formik, isView}) {
+	// de-str new formik object
+	const {values, handleChange, errors, touched, setFieldValue} = useFormikContext();
+
 	//date
-	const [depDate, setDepDate] = useState(formik.values.departureDate);
-	const [returnDate, setReturnDate] = useState(formik.values.returnDate);
+	const [depDate, setDepDate] = useState(values.departureDate);
+	const [returnDate, setReturnDate] = useState(values.returnDate);
 	const [initialProductType, setInitialProductType] = useState([]);
 	const [checkboxType, setCheckboxType] = useState({
 		flight: false,
@@ -62,15 +69,7 @@ export default function AddressForm({formik, isView}) {
 			markupLabel: 'TOTAL MARKUP',
 		},
 	];
-	function currentDate() {
-		let today = new Date();
-		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		let yyyy = today.getFullYear();
 
-		today = mm + '/' + dd + '/' + yyyy;
-		return today;
-	}
 	const calculateTotalMarkup = () => {
 		let Amount = [];
 		initialProductType.map((x, i) => {
@@ -82,19 +81,18 @@ export default function AddressForm({formik, isView}) {
 			total += Number(Amount[i]);
 		}
 
-		formik.setFieldValue('totalMarkup', total);
+		setFieldValue('totalMarkup', total);
 	};
+
+	useEffect(() => {
+		setFieldValue('productType', initialProductType);
+	}, [initialProductType]);
 
 	return (
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
 			<Grid item xs={12} sm={12} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
-				<FormControl
-					sx={{m: 1, p: 1}}
-					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.productType && formik.errors.productType)}
-					helperText={formik.touched.productType && formik.errors.productType}>
+				<FormControl sx={{m: 1, p: 1}} fullWidth error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
 					<InputLabel variant='outlined'>Product Type :</InputLabel>
 				</FormControl>
 				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
@@ -116,9 +114,6 @@ export default function AddressForm({formik, isView}) {
 													let checkboxData = {...checkboxType};
 													checkboxData[name] = !checkboxType[name];
 
-													formik.setFieldValue('checkboxValue', {
-														...checkboxData,
-													});
 													setCheckboxType({...checkboxData});
 
 													const productExists = initialProductType.reduce((acc, prop) => prop.property == object.property, false);
@@ -127,10 +122,9 @@ export default function AddressForm({formik, isView}) {
 														var remainingValues = initialProductType.filter((y) => y.property !== object.property);
 														setInitialProductType([...remainingValues]);
 													} else {
+														console.log('prod else');
 														setInitialProductType([...initialProductType, object]);
 													}
-													// console.log(initialProductType);
-													formik.setFieldValue('productType', initialProductType);
 												}}
 												name={name}
 												color='primary'
@@ -148,21 +142,18 @@ export default function AddressForm({formik, isView}) {
 												type='number'
 												label={markupLabel}
 												fullWidth
-												disabled={isView}
 												InputProps={{
 													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 												}}
-												error={formik.touched.markup && formik.errors.markup}
-												helperText={formik.touched.markup && formik.errors.markup}
-												onBlur={formik.handleBlur}
+												error={touched.markup && errors.markup}
+												helperText={touched.markup && errors.markup}
 												onChange={(e) => {
-													formik.setFieldValue(markup, e.target.value);
 													const index = initialProductType.findIndex((obj) => obj.property === name);
 													let data = [...initialProductType];
 													data[index]['propertyMarkup'] = e.target.value;
 
 													setInitialProductType(data);
-													formik.setFieldValue('productType', initialProductType);
+													setFieldValue('productType', initialProductType);
 													calculateTotalMarkup();
 												}}
 											/>
@@ -177,18 +168,16 @@ export default function AddressForm({formik, isView}) {
 												InputProps={{
 													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 												}}
-												error={formik.touched.markup && formik.errors.markup}
-												helperText={formik.touched.markup && formik.errors.markup}
-												onBlur={formik.handleBlur}
+												error={touched.markup && errors.markup}
+												helperText={touched.markup && errors.markup}
 												onChange={(e) => {
-													formik.setFieldValue(markup, e.target.value);
 													const index = initialProductType.findIndex((obj) => obj.property === name);
 													let data = [...initialProductType];
 													data[index]['propertyMarkup'] = e.target.value;
 													setInitialProductType(data);
-													formik.setFieldValue('productType', initialProductType);
+													setFieldValue('productType', initialProductType);
 												}}
-												value={formik.values.totalMarkup}
+												value={values.totalMarkup}
 											/>
 									  )}
 							</Box>
@@ -199,107 +188,40 @@ export default function AddressForm({formik, isView}) {
 
 			{/* firstname Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					fullWidth
-					disabled={isView}
-					label='FIRST NAME'
-					name='firstName'
-					error={Boolean(formik.touched.firstName && formik.errors.firstName)}
-					helperText={formik.touched.firstName && formik.errors.firstName}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.firstName}
-				/>
+				<Textfield name='firstName' label='FIRST NAME' />
 			</Grid>
 			{/* lastname Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					id='lastName'
-					name='lastName'
-					label='LAST NAME'
-					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.lastName && formik.errors.lastName)}
-					helperText={formik.touched.lastName && formik.errors.lastName}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.lastName}
-				/>
+				<Textfield name='lastName' label='LAST NAME' />
 			</Grid>
 			{/*  EMail Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					id='email'
-					name='email'
-					label='EMAIL'
-					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.email && formik.errors.email)}
-					helperText={formik.touched.email && formik.errors.email}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.email}
-				/>
+				<Textfield name='email' label='EMAIL' />
 			</Grid>
 			{/*  Phone Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					id='phone'
-					name='phone'
-					label='PHONE'
-					fullWidth
-					type='number'
-					disabled={isView}
-					error={Boolean(formik.touched.phone && formik.errors.phone)}
-					helperText={formik.touched.phone && formik.errors.phone}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.phone}
-				/>
+				<Textfield name='phone' label='PHONE' />
 			</Grid>
 			{/* alternateEmail EMail Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					name='alternateEmail'
-					label='ALTERNATIVE EMAIL'
-					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.alternateEmail && formik.errors.alternateEmail)}
-					helperText={formik.touched.alternateEmail && formik.errors.alternateEmail}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.alternateEmail}
-				/>
+				<Textfield name='alternateEmail' label='ALTERNATIVE EMAIL' />
 			</Grid>
 			{/* alternatePhone  Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					type='number'
-					name='alternatePhone'
-					label='ALTERNATIVE PHONE'
-					fullWidth
-					disabled={isView}
-					error={formik.touched.alternatePhone && formik.errors.alternatePhone}
-					helperText={formik.touched.alternatePhone && formik.errors.alternatePhone}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.alternatePhone}
-				/>
+				<Textfield name='alternatePhone' label='ALTERNATIVE PHONE' />
 			</Grid>
 			{/* kidsCount Fields */}
 			<Grid item xs={4} md={3} sm={4}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
 						<TextField
-							error={Boolean(formik.touched.childCount && formik.errors.childCount)}
+							error={Boolean(touched.childCount && errors.childCount)}
 							fullWidth
-							disabled={isView}
-							helperText={formik.touched.childCount && formik.errors.childCount}
+							helperText={touched.childCount && errors.childCount}
 							label='CHILDS'
 							name='childCount'
-							value={formik.values.childCount}
-							onBlur={formik.handleBlur}
-							onChange={formik.handleChange}
+							value={values.childCount}
+							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -309,21 +231,19 @@ export default function AddressForm({formik, isView}) {
 								),
 							}}
 						/>
-						{formik.values.childCount > 0 ? (
+						{values.childCount > 0 ? (
 							<TextField
 								sx={{mt: 2}}
 								name='childPrice'
 								label='PRICE PER CHILD'
 								fullWidth
-								disabled={isView}
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(formik.touched.childPrice && formik.errors.childPrice)}
-								helperText={formik.touched.childPrice && formik.errors.childPrice}
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								value={formik.values.childPrice}
+								error={Boolean(touched.childPrice && errors.childPrice)}
+								helperText={touched.childPrice && errors.childPrice}
+								onChange={handleChange}
+								value={values.childPrice}
 							/>
 						) : null}
 					</Box>
@@ -334,14 +254,12 @@ export default function AddressForm({formik, isView}) {
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
 						<TextField
-							error={Boolean(formik.touched.adultCount && formik.errors.adultCount)}
+							error={Boolean(touched.adultCount && errors.adultCount)}
 							fullWidth
-							disabled={isView}
-							helperText={formik.touched.adultCount && formik.errors.adultCount}
+							helperText={touched.adultCount && errors.adultCount}
 							label='ADULTS'
 							name='adultCount'
-							onBlur={formik.handleBlur}
-							onChange={formik.handleChange}
+							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -350,24 +268,22 @@ export default function AddressForm({formik, isView}) {
 									</InputAdornment>
 								),
 							}}
-							value={formik.values.adultCount}
+							value={values.adultCount}
 						/>
-						{formik.values.adultCount > 0 ? (
+						{values.adultCount > 0 ? (
 							<TextField
 								type='number'
 								sx={{mt: 2}}
 								name='adultPrice'
 								label='PRICE PER ADULT'
 								fullWidth
-								disabled={isView}
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(formik.touched.adultPrice && formik.errors.adultPrice)}
-								helperText={formik.touched.adultPrice && formik.errors.adultPrice}
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								value={formik.values.adultPrice}
+								error={Boolean(touched.adultPrice && errors.adultPrice)}
+								helperText={touched.adultPrice && errors.adultPrice}
+								onChange={handleChange}
+								value={values.adultPrice}
 							/>
 						) : null}
 					</Box>
@@ -378,14 +294,12 @@ export default function AddressForm({formik, isView}) {
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
 						<TextField
-							error={Boolean(formik.touched.elderCount && formik.errors.elderCount)}
+							error={Boolean(touched.elderCount && errors.elderCount)}
 							fullWidth
-							disabled={isView}
-							helperText={formik.touched.elderCount && formik.errors.elderCount}
+							helperText={touched.elderCount && errors.elderCount}
 							label='INFANT'
 							name='elderCount'
-							onBlur={formik.handleBlur}
-							onChange={formik.handleChange}
+							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -394,23 +308,21 @@ export default function AddressForm({formik, isView}) {
 									</InputAdornment>
 								),
 							}}
-							value={formik.values.elderCount}
+							value={values.elderCount}
 						/>
-						{formik.values.elderCount > 0 ? (
+						{values.elderCount > 0 ? (
 							<TextField
 								sx={{mt: 2}}
 								name='elderPrice'
 								label='PRICE PER INFANT'
 								fullWidth
-								disabled={isView}
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(formik.touched.elderPrice && formik.errors.elderPrice)}
-								helperText={formik.touched.elderPrice && formik.errors.elderPrice}
-								onBlur={formik.handleBlur}
-								onChange={formik.handleChange}
-								value={formik.values.elderPrice}
+								error={Boolean(touched.elderPrice && errors.elderPrice)}
+								helperText={touched.elderPrice && errors.elderPrice}
+								onChange={handleChange}
+								value={values.elderPrice}
 							/>
 						) : null}
 					</Box>
@@ -418,43 +330,55 @@ export default function AddressForm({formik, isView}) {
 			</Grid>
 			{/* PNR no. Fields */}
 			<Grid item xs={9} md={6} sm={9}>
-				<TextField
+				<Textfield
+					name='pnrNo'
+					label='PNR NO.'
+					onChange={(e) => {
+						const value = e.target.value || '';
+						setFieldValue('pnrNo', value.toUpperCase());
+					}}
+				/>
+				{/* <TextField
 					id='pnrNo'
 					name='pnrNo'
 					label='PNR NO.'
 					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.pnrNo && formik.errors.pnrNo)}
-					helperText={(formik.touched.pnrNo && formik.errors.pnrNo) || 'optional'}
-					onBlur={formik.handleBlur}
+					error={Boolean(touched.pnrNo && errors.pnrNo)}
+					helperText={(touched.pnrNo && errors.pnrNo) || 'optional'}
+					value={values.pnrNo}
 					onChange={(e) => {
 						const value = e.target.value || '';
-						formik.setFieldValue('pnrNo', value.toUpperCase());
+						setFieldValue('pnrNo', value.toUpperCase());
 					}}
-					value={formik.values.pnrNo}
-				/>
+				/> */}
 			</Grid>
 			{/* Airline code */}
 			<Grid item xs={3} sm={3} md={3}>
-				<TextField
+				<Textfield
+					name='airlineLocator'
+					label='AIRLINE Locator '
+					onChange={(e) => {
+						const value = e.target.value || '';
+						setFieldValue('airlineLocator', value.toUpperCase());
+					}}
+				/>
+				{/* <TextField
 					id='airlineCode'
 					name='airlineLocator'
 					label='AIRLINE Locator '
 					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.airlineLocator && formik.errors.airlineLocator)}
-					helperText={formik.touched.airlineLocator && formik.errors.airlineLocator}
-					onBlur={formik.handleBlur}
+					error={Boolean(touched.airlineLocator && errors.airlineLocator)}
+					helperText={touched.airlineLocator && errors.airlineLocator}
+					value={values.airlineLocator}
 					onChange={(e) => {
 						const value = e.target.value || '';
-						formik.setFieldValue('airlineLocator', value.toUpperCase());
+						setFieldValue('airlineLocator', value.toUpperCase());
 					}}
-					value={formik.values.airlineLocator}
-				/>
+				/> */}
 			</Grid>
 			{/* booking type -------Dropdown Fields */}
 			<Grid item xs={3} sm={3} md={3}>
-				<FormControl fullWidth disabled={isView}>
+				<FormControl fullWidth>
 					<InputLabel id='Bokking-type-Dropdown-label'>BOOKING TYPE</InputLabel>
 					<Select
 						labelId='Bokking-type-Dropdown-label	'
@@ -462,14 +386,13 @@ export default function AddressForm({formik, isView}) {
 						// value={bookingType}
 						// onChange={handleBookingChange}
 						fullWidth
-						disabled={isView}
 						name='bookingType'
 						label='BOOKING TYPE'
-						error={Boolean(formik.touched.bookingType && formik.errors.bookingType)}
-						// helperText={formik.touched.bookingType && formik.errors.bookingType}
-						onBlur={formik.handleBlur}
-						onChange={formik.handleChange}
-						value={formik.values.bookingType}>
+						error={Boolean(touched.bookingType && errors.bookingType)}
+						// helperText={touched.bookingType && errors.bookingType}
+
+						onChange={handleChange}
+						value={values.bookingType}>
 						<MenuItem value='new'>New</MenuItem>
 						<MenuItem value='exchange'>Exchange</MenuItem>
 						<MenuItem value='refund'>Refund</MenuItem>
@@ -480,20 +403,19 @@ export default function AddressForm({formik, isView}) {
 			</Grid>
 			{/* Fare type Fields */}
 			<Grid item xs={3} sm={3} md={3}>
-				<FormControl fullWidth disabled={isView}>
+				<FormControl fullWidth>
 					<InputLabel id='Fare-Type-Dropdown-label'>FARE TYPE</InputLabel>
 					<Select
 						labelId='Fare-Type-Dropdown-label'
 						id='Fare-Type-Dropdown'
 						fullWidth
-						disabled={isView}
 						name='fareType'
 						label='FARE TYPE'
-						error={Boolean(formik.touched.fareType && formik.errors.fareType)}
-						// helperText={formik.touched.fareType && formik.errors.fareType}
-						onBlur={formik.handleBlur}
-						onChange={formik.handleChange}
-						value={formik.values.fareType}>
+						error={Boolean(touched.fareType && errors.fareType)}
+						// helperText={touched.fareType && errors.fareType}
+
+						onChange={handleChange}
+						value={values.fareType}>
 						<MenuItem value='publish'>Publish</MenuItem>
 						<MenuItem value='private'>Private</MenuItem>
 						<MenuItem value='fxl'>FXL</MenuItem>
@@ -503,20 +425,18 @@ export default function AddressForm({formik, isView}) {
 			</Grid>
 			{/* Booked On Fields */}
 			<Grid item xs={3} sm={3} md={3}>
-				<FormControl fullWidth disabled={isView}>
+				<FormControl fullWidth>
 					<InputLabel id='Booked-on-Dropdown-label'>BOOKED ON </InputLabel>
 					<Select
 						labelId='Booked-on-Dropdown-label'
 						id='Booked-on-Dropdown'
 						fullWidth
-						disabled={isView}
 						name='bookedOn'
 						label='BOOKED ON'
-						onBlur={formik.handleBlur}
-						onChange={formik.handleChange}
-						value={formik.values.bookedOn}
-						error={Boolean(formik.touched.bookedOn && formik.errors.bookedOn)}
-						// helperText={formik.touched.bookedOn && formik.errors.bookedOn}
+						onChange={handleChange}
+						value={values.bookedOn}
+						error={Boolean(touched.bookedOn && errors.bookedOn)}
+						// helperText={touched.bookedOn && errors.bookedOn}
 					>
 						<MenuItem value='web'>Web</MenuItem>
 						<MenuItem value='trippro'>TripPro</MenuItem>
@@ -525,76 +445,40 @@ export default function AddressForm({formik, isView}) {
 					</Select>
 				</FormControl>
 			</Grid>
+
 			{/* Airline code Fields */}
 			<Grid item xs={3} sm={3} md={3}>
-				<TextField
-					id='airlineCode'
-					name='airlineCode'
-					label='AIRPORT CODE '
-					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.airlineCode && formik.errors.airlineCode)}
-					helperText={Boolean(formik.touched.airlineCode && formik.errors.airlineCode) ? formik.touched.airlineCode && formik.errors.airlineCode : `Use Abbrivated Form`}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.airlineCode}
-				/>
+				<Textfield name='airlineCode' label='AIRPORT CODE ' />
 			</Grid>
+
 			{/* Grand Total Fields */}
 			<Grid item xs={3} sm={3} md={2}>
-				<TextField
-					id='grandTotal'
+				<Textfield
 					name='grandTotal'
 					label='GRAND TOTAL'
-					type='number'
-					fullWidth
-					disabled={isView}
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}
-					error={Boolean(formik.touched.grandTotal && formik.errors.grandTotal)}
-					helperText={formik.touched.grandTotal && formik.errors.grandTotal}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.grandTotal}
 				/>
 			</Grid>
 			{/* Total In-House Charge Fields */}
 			<Grid item xs={3} sm={3} md={2}>
-				<TextField
-					type='number'
-					id='totalInhouseChargetotalInhouseCharge'
+				<Textfield
 					name='totalInhouseCharge'
 					label='TOTAL INHOUSE CHARGE'
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}
-					fullWidth
-					disabled={isView}
-					error={Boolean(formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge)}
-					helperText={formik.touched.totalInhouseCharge && formik.errors.totalInhouseCharge}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.totalInhouseCharge}
 				/>
 			</Grid>
 			{/* MCO amount Fields */}
 			<Grid item xs={3} sm={3} md={2}>
-				<TextField
-					type='number'
-					id='mcoNo'
+				<Textfield
 					name='mcoNo'
 					label='MCO'
-					fullWidth
-					disabled={isView}
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}
-					error={Boolean(formik.touched.mcoNo && formik.errors.mcoNo)}
-					helperText={formik.touched.mcoNo && formik.errors.mcoNo}
-					onBlur={formik.handleBlur}
-					onChange={formik.handleChange}
-					value={formik.values.mcoNo}
 				/>
 			</Grid>
 			{/* DepartureDate Fields */}
@@ -609,7 +493,7 @@ export default function AddressForm({formik, isView}) {
 						onChange={(newValue) => {
 							setDepDate(newValue);
 
-							formik.setFieldValue(
+							setFieldValue(
 								'departureDate',
 								new Date(newValue).toLocaleDateString('en-US', {
 									day: '2-digit',
@@ -618,16 +502,10 @@ export default function AddressForm({formik, isView}) {
 								})
 							);
 						}}
-						error={Boolean(formik.touched.departureDate && formik.errors.departureDate)}
-						helperText={formik.touched.departureDate && formik.errors.departureDate}
+						error={Boolean(touched.departureDate && errors.departureDate)}
+						helperText={touched.departureDate && errors.departureDate}
 						value={depDate}
-						renderInput={(params) => (
-							<TextField
-								{...params}
-								error={Boolean(formik.touched.departureDate && formik.errors.departureDate)}
-								helperText={formik.touched.departureDate && formik.errors.departureDate}
-							/>
-						)}
+						renderInput={(params) => <TextField {...params} error={Boolean(touched.departureDate && errors.departureDate)} helperText={touched.departureDate && errors.departureDate} />}
 					/>
 				</LocalizationProvider>
 			</Grid>
@@ -644,7 +522,7 @@ export default function AddressForm({formik, isView}) {
 						value={returnDate}
 						onChange={(newValue) => {
 							setReturnDate(newValue);
-							formik.setFieldValue(
+							setFieldValue(
 								'returnDate',
 								new Date(newValue).toLocaleDateString('en-US', {
 									day: '2-digit',
@@ -653,11 +531,9 @@ export default function AddressForm({formik, isView}) {
 								})
 							);
 						}}
-						error={Boolean(formik.touched.returnDate && formik.errors.returnDate)}
-						helperText={formik.touched.returnDate && formik.errors.returnDate}
-						renderInput={(params) => (
-							<TextField {...params} helperText={formik.touched.returnDate && formik.errors.returnDate} error={Boolean(formik.touched.returnDate && formik.errors.returnDate)} />
-						)}
+						error={Boolean(touched.returnDate && errors.returnDate)}
+						helperText={touched.returnDate && errors.returnDate}
+						renderInput={(params) => <TextField {...params} helperText={touched.returnDate && errors.returnDate} error={Boolean(touched.returnDate && errors.returnDate)} />}
 					/>
 				</LocalizationProvider>
 			</Grid>
