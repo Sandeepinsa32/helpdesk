@@ -21,7 +21,7 @@ export default function UpdateRecordForm() {
 	const [depDate, setDepDate] = useState(values.departureDate);
 	const [returnDate, setReturnDate] = useState(values.returnDate);
 	const [initialProductType, setInitialProductType] = useState(values.productType);
-	const [isDisable, setIsDisable] = useState(true);
+	const [isDisable, setIsDisable] = useState(false);
 	useEffect(() => {
 		setIsDisable(true);
 	});

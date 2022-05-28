@@ -59,15 +59,14 @@ const UpdateRecord = ({data}) => {
 		_id,
 	} = data;
 
-	// console.log(data);
-
-	// console.log(cards);
+	console.log(data);
+	console.log(cards);
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
 	const [inputList, setInputList] = useState([]);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
-	const [isDisable, setIsDisable] = useState(true);
+	const [isDisable, setIsDisable] = useState(false);
 	const [isDisableUpdatebtn, setIsDisableUpdatebtn] = useState(false);
 
 	const fetchCards = async (id) => {
