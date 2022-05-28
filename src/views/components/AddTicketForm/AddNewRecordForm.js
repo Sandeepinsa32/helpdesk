@@ -14,7 +14,7 @@ import ElderlyIcon from '@mui/icons-material/Elderly';
 // custom Formik field
 import Textfield from '../FormField/Textfield';
 
-export default function AddressForm({formik, isView}) {
+export default function AddressForm() {
 	// de-str new formik object
 	const {values, handleChange, errors, touched, setFieldValue} = useFormikContext();
 

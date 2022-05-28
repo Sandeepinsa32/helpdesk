@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AddNewRecordForm from './AddTicketForm/AddNewRecordForm';
-import {useFormik, Formik, Form} from 'formik';
+import {Formik, Form} from 'formik';
 import valid from 'card-validator';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -312,13 +312,13 @@ const AddNewRecord = ({isView, data}) => {
 						.catch((e) => console.log(e));
 				}}>
 				{(props) => {
-					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount} = props;
+					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
 
 					// console.log('props', props); // formik object --containg values, err, etc....
 					console.log(errors);
 
 					return (
-						<Form onSubmit={props.handleSubmit}>
+						<Form onSubmit={handleSubmit}>
 							{/* Address Form */}
 							<Box
 								sx={{
