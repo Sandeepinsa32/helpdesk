@@ -21,9 +21,9 @@ export default function UpdateRecordForm() {
 	const [depDate, setDepDate] = useState(values.departureDate);
 	const [returnDate, setReturnDate] = useState(values.returnDate);
 	const [initialProductType, setInitialProductType] = useState(values.productType);
-	const [isView, setIsView] = useState(true);
+	const [isDisable, setIsDisable] = useState(true);
 	useEffect(() => {
-		setIsView(true);
+		setIsDisable(true);
 	});
 
 	const [checkObj, setCheckObj] = useState({});
@@ -104,7 +104,7 @@ export default function UpdateRecordForm() {
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
 			<Grid item xs={12} sm={12} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
-				<FormControl sx={{m: 1, p: 1}} fullWidth disabled={isView} error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
+				<FormControl sx={{m: 1, p: 1}} fullWidth disabled={isDisable} error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
 					<InputLabel variant='outlined'>Product Type :</InputLabel>
 				</FormControl>
 				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
@@ -117,12 +117,12 @@ export default function UpdateRecordForm() {
 							<>
 								<Box sx={displayColStyle} style={{paddingTop: '8px !important'}} key={i}>
 									<FormControlLabel
-										disabled={isView}
+										disabled={isDisable}
 										control={
 											name !== null ? (
 												<Checkbox
 													checked={productData.isChecked}
-													disabled={isView}
+													disabled={isDisable}
 													onChange={(e) => {
 														let object = {
 															property: name,
@@ -163,7 +163,7 @@ export default function UpdateRecordForm() {
 												label={markupLabel}
 												type='number'
 												fullWidth
-												disabled={isView}
+												disabled={isDisable}
 												InputProps={{
 													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 												}}
@@ -208,107 +208,36 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* firstname Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					fullWidth
-					disabled={true}
-					label='FIRST NAME'
-					name='firstName'
-					error={Boolean(touched.firstName && errors.firstName)}
-					helperText={touched.firstName && errors.firstName}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.firstName}
-				/>
+				<Textfield disabled={isDisable} label='FIRST NAME' name='firstName' />
 			</Grid>
 			{/* lastname Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					id='lastName'
-					name='lastName'
-					label='LAST NAME'
-					fullWidth
-					disabled={true}
-					error={Boolean(touched.lastName && errors.lastName)}
-					helperText={touched.lastName && errors.lastName}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.lastName}
-				/>
+				<Textfield disabled={isDisable} name='lastName' label='LAST NAME' />
 			</Grid>
 			{/*  EMail Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					id='email'
-					name='email'
-					label='EMAIL'
-					fullWidth
-					disabled={true}
-					error={Boolean(touched.email && errors.email)}
-					helperText={touched.email && errors.email}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.email}
-				/>
+				<Textfield disabled={isDisable} name='email' label='EMAIL' />
 			</Grid>
 			{/*  Phone Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					id='phone'
-					name='phone'
-					label='PHONE'
-					type='number'
-					fullWidth
-					disabled={true}
-					error={Boolean(touched.phone && errors.phone)}
-					helperText={touched.phone && errors.phone}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.phone}
-				/>
+				<Textfield disabled={isDisable} name='phone' label='PHONE' type='number' />
 			</Grid>
 			{/* alternateEmail EMail Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					name='alternateEmail'
-					label='ALTERNATIVE EMAIL'
-					fullWidth
-					// disabled={isView}
-					error={Boolean(touched.alternateEmail && errors.alternateEmail)}
-					helperText={touched.alternateEmail && errors.alternateEmail}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.alternateEmail}
-				/>
+				<Textfield disabled={isDisable} name='alternateEmail' label='ALTERNATIVE EMAIL' fullWidth />
 			</Grid>
 			{/* alternatePhone  Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<TextField
-					type='number'
-					name='alternatePhone'
-					label='ALTERNATIVE PHONE'
-					fullWidth
-					// disabled={isView}
-					error={touched.alternatePhone && errors.alternatePhone}
-					helperText={touched.alternatePhone && errors.alternatePhone}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.alternatePhone}
-				/>
+				<Textfield disabled={isDisable} type='number' name='alternatePhone' label='ALTERNATIVE PHONE' />
 			</Grid>
 			{/* kidsCount Fields */}
 			<Grid item xs={3} md={2} sm={4}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
-						<TextField
-							error={Boolean(touched.childCount && errors.childCount)}
-							fullWidth
-							disabled={true}
-							helperText={touched.childCount && errors.childCount}
+						<Textfield
+							disabled={isDisable}
 							label='CHILDS'
 							name='childCount'
-							value={values.childCount}
-							onBlur={handleBlur}
-							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -319,21 +248,16 @@ export default function UpdateRecordForm() {
 							}}
 						/>
 						{values.childCount > 0 ? (
-							<TextField
+							<Textfield
+								disabled={isDisable}
 								type='number'
 								sx={{mt: 2}}
 								name='childPrice'
 								label='PRICE PER CHILD'
 								fullWidth
-								disabled={true}
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(touched.childPrice && errors.childPrice)}
-								helperText={touched.childPrice && errors.childPrice}
-								onBlur={handleBlur}
-								onChange={handleChange}
-								value={values.childPrice}
 							/>
 						) : null}
 					</Box>
@@ -343,15 +267,10 @@ export default function UpdateRecordForm() {
 			<Grid item xs={3} md={2} sm={4}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
-						<TextField
-							error={Boolean(touched.adultCount && errors.adultCount)}
-							fullWidth
-							disabled={true}
-							helperText={touched.adultCount && errors.adultCount}
+						<Textfield
+							disabled={isDisable}
 							label='ADULTS'
 							name='adultCount'
-							onBlur={handleBlur}
-							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -360,24 +279,17 @@ export default function UpdateRecordForm() {
 									</InputAdornment>
 								),
 							}}
-							value={values.adultCount}
 						/>
 						{values.adultCount > 0 ? (
-							<TextField
+							<Textfield
+								disabled={isDisable}
 								type='number'
 								sx={{mt: 2}}
 								name='adultPrice'
 								label='PRICE PER ADULT'
-								fullWidth
-								disabled={true}
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(touched.adultPrice && errors.adultPrice)}
-								helperText={touched.adultPrice && errors.adultPrice}
-								onBlur={handleBlur}
-								onChange={handleChange}
-								value={values.adultPrice}
 							/>
 						) : null}
 					</Box>
@@ -387,15 +299,10 @@ export default function UpdateRecordForm() {
 			<Grid item xs={3} md={2} sm={4}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
-						<TextField
-							error={Boolean(touched.elderCount && errors.elderCount)}
-							fullWidth
-							disabled={true}
-							helperText={touched.elderCount && errors.elderCount}
+						<Textfield
+							disabled={isDisable}
 							label='INFANT'
 							name='elderCount'
-							onBlur={handleBlur}
-							onChange={handleChange}
 							type='number'
 							InputProps={{
 								startAdornment: (
@@ -404,24 +311,17 @@ export default function UpdateRecordForm() {
 									</InputAdornment>
 								),
 							}}
-							value={values.elderCount}
 						/>
 						{values.elderCount > 0 ? (
-							<TextField
+							<Textfield
+								disabled={isDisable}
 								type='number'
 								sx={{mt: 2}}
 								name='elderPrice'
 								label='PRICE PER INFANT'
-								fullWidth
-								disabled={true}
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
-								error={Boolean(touched.elderPrice && errors.elderPrice)}
-								helperText={touched.elderPrice && errors.elderPrice}
-								onBlur={handleBlur}
-								onChange={handleChange}
-								value={values.elderPrice}
 							/>
 						) : null}
 					</Box>
@@ -429,40 +329,23 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* PNR no. Fields */}
 			<Grid item xs={9} md={6} sm={9}>
-				<TextField
-					id='pnrNo'
-					name='pnrNo'
-					label='PNR NO.'
-					fullWidth
-					// disabled={isView}
-					error={Boolean(touched.pnrNo && errors.pnrNo)}
-					helperText={(touched.pnrNo && errors.pnrNo) || 'optional'}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.pnrNo}
-				/>
+				<Textfield disabled={isDisable} name='pnrNo' label='PNR NO.' />
 			</Grid>
 			{/* Airline code */}
 			<Grid item xs={3} md={3} sm={3}>
-				<TextField
-					id='airlineCode'
+				<Textfield
+					disabled={isDisable}
 					name='airlineLocator'
 					label='AIRLINE Locator '
-					fullWidth
-					// disabled={isView}
-					error={Boolean(touched.airlineLocator && errors.airlineLocator)}
-					helperText={touched.airlineLocator && errors.airlineLocator}
-					onBlur={handleBlur}
 					onChange={(e) => {
 						const value = e.target.value || '';
 						setFieldValue('airlineLocator', value.toUpperCase());
 					}}
-					value={values.airlineLocator}
 				/>
 			</Grid>
 			{/* booking type -------Dropdown Fields */}
 			<Grid item xs={3} md={3} sm={3}>
-				<FormControl fullWidth disabled={isView}>
+				<FormControl fullWidth disabled={isDisable}>
 					<InputLabel id='Bokking-type-Dropdown-label'>BOOKING TYPE</InputLabel>
 					<Select
 						labelId='Bokking-type-Dropdown-label	'
@@ -488,7 +371,7 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* Fare type Fields */}
 			<Grid item xs={3} md={3} sm={3}>
-				<FormControl fullWidth disabled={isView}>
+				<FormControl fullWidth disabled={isDisable}>
 					<InputLabel id='Fare-Type-Dropdown-label'>FARE TYPE</InputLabel>
 					<Select
 						labelId='Fare-Type-Dropdown-label'
@@ -511,7 +394,7 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* Booked On Fields */}
 			<Grid item xs={3} md={3} sm={3}>
-				<FormControl fullWidth disabled={isView}>
+				<FormControl fullWidth disabled={isDisable}>
 					<InputLabel id='Booked-on-Dropdown-label'>BOOKED ON </InputLabel>
 					<Select
 						labelId='Booked-on-Dropdown-label'
@@ -535,74 +418,42 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* Airline code Fields */}
 			<Grid item xs={3} md={3} sm={3}>
-				<TextField
-					id='airlineCode'
-					name='airlineCode'
-					label='AIRLINE CODE '
-					fullWidth
-					disabled={isView}
-					error={Boolean(touched.airlineCode && errors.airlineCode)}
-					helperText={Boolean(touched.airlineCode && errors.airlineCode) ? touched.airlineCode && errors.airlineCode : `Use Abbrivated Form`}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.airlineCode}
-				/>
+				<Textfield disabled={isDisable} name='airlineCode' label='AIRLINE CODE ' />
 			</Grid>
 			{/* Grand Total Fields */}
 			<Grid item xs={3} md={2} sm={3}>
-				<TextField
+				<Textfield
+					disabled={isDisable}
 					type='number'
-					id='grandTotal'
 					name='grandTotal'
 					label='GRAND TOTAL'
-					fullWidth
-					disabled={true}
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}
-					error={Boolean(touched.grandTotal && errors.grandTotal)}
-					helperText={touched.grandTotal && errors.grandTotal}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.grandTotal}
 				/>
 			</Grid>
 			{/* Total In-House Charge Fields */}
 			<Grid item xs={3} md={2} sm={3}>
-				<TextField
+				<Textfield
+					disabled={isDisable}
 					type='number'
-					id='totalInhouseChargetotalInhouseCharge'
 					name='totalInhouseCharge'
 					label='TOTAL INHOUSE CHARGE'
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}
-					fullWidth
-					disabled={true}
-					error={Boolean(touched.totalInhouseCharge && errors.totalInhouseCharge)}
-					helperText={touched.totalInhouseCharge && errors.totalInhouseCharge}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.totalInhouseCharge}
 				/>
 			</Grid>
 			{/* MCO amount Fields */}
 			<Grid item xs={3} md={2} sm={3}>
-				<TextField
+				<Textfield
+					disabled={isDisable}
 					type='number'
-					id='mcoNo'
 					name='mcoNo'
 					label='MCO'
-					fullWidth
-					disabled={true}
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}
-					error={Boolean(touched.mcoNo && errors.mcoNo)}
-					helperText={touched.mcoNo && errors.mcoNo}
-					onBlur={handleBlur}
-					onChange={handleChange}
-					value={values.mcoNo}
 				/>
 			</Grid>
 			{/* DepartureDate Fields */}
@@ -631,7 +482,7 @@ export default function UpdateRecordForm() {
 						helperText={touched.departureDate && errors.departureDate}
 						value={depDate}
 						renderInput={(params) => (
-							<TextField disabled={isView} {...params} error={Boolean(touched.departureDate && errors.departureDate)} helperText={touched.departureDate && errors.departureDate} />
+							<TextField disabled={isDisable} {...params} error={Boolean(touched.departureDate && errors.departureDate)} helperText={touched.departureDate && errors.departureDate} />
 						)}
 					/>
 				</LocalizationProvider>
@@ -661,7 +512,7 @@ export default function UpdateRecordForm() {
 						error={Boolean(touched.returnDate && errors.returnDate)}
 						helperText={touched.returnDate && errors.returnDate}
 						renderInput={(params) => (
-							<TextField {...params} disabled={isView} helperText={touched.returnDate && errors.returnDate} error={Boolean(touched.returnDate && errors.returnDate)} />
+							<TextField {...params} disabled={isDisable} helperText={touched.returnDate && errors.returnDate} error={Boolean(touched.returnDate && errors.returnDate)} />
 						)}
 					/>
 				</LocalizationProvider>

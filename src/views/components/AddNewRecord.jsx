@@ -4,13 +4,14 @@ import {Formik, Form} from 'formik';
 import valid from 'card-validator';
 import * as Yup from 'yup';
 import axios from 'axios';
+
+//mui
 import {Grid, Box, Typography, Button, TextField, InputAdornment, FormControlLabel, FormLabel, FormControl, Checkbox} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {BASEURL, successToast} from '../../utils/Utils';
 import {useNavigate} from 'react-router-dom';
-
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -21,8 +22,8 @@ import Textfield from './FormField/Textfield';
 const AddNewRecord = ({isView, data}) => {
 	const navigate = useNavigate();
 
-	// console.log('4263982640269299');
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+
 	const [inputList, setInputList] = useState([
 		{
 			cardHolderName: '',
@@ -34,54 +35,6 @@ const AddNewRecord = ({isView, data}) => {
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 
-	// handle input change
-	const handleCardInput = (e, index) => {
-		const {name, value} = e.target;
-		const list = [...inputList];
-		list[index][name] = value;
-		// setFieldValue('card', list);
-		setInputList(list);
-	};
-	const handleDateInputChange = (index, value) => {
-		const list = [...inputList];
-		const name = 'expiryDate';
-		list[index][name] = value;
-		setInputList(list);
-	};
-
-	// handle click event of the Remove button
-	const handleRemoveClick = (index) => {
-		const list = [...inputList];
-		list.splice(index, 1);
-		// setFieldValue('card', list);
-		setInputList(list);
-	};
-
-	// handle click event of the Add button
-	const handleAddClick = () => {
-		// setFieldValue('card', [
-		// 	...inputList,
-
-		// 	{
-		// 		cardHolderName: '',
-		// 		cardHolderNumber: '',
-		// 		cardNumber: '',
-		// 		expiryDate: null,
-		// 		cvv: '',
-		// 	},
-		// ]);
-		setInputList([
-			...inputList,
-
-			{
-				cardHolderName: '',
-				cardHolderNumber: '',
-				cardNumber: '',
-				expiryDate: null,
-				cvv: '',
-			},
-		]);
-	};
 	const items = [
 		{
 			name: 'ccTimes',
@@ -317,6 +270,53 @@ const AddNewRecord = ({isView, data}) => {
 					// console.log('props', props); // formik object --containg values, err, etc....
 					console.log(errors);
 
+					// handle input change
+					const handleCardInput = (e, index) => {
+						const {name, value} = e.target;
+						const list = [...inputList];
+						list[index][name] = value;
+						setFieldValue('card', list);
+						setInputList(list);
+					};
+					const handleDateInputChange = (index, value) => {
+						const list = [...inputList];
+						const name = 'expiryDate';
+						list[index][name] = value;
+						setInputList(list);
+					};
+					// handle click event of the Remove button
+					const handleRemoveClick = (index) => {
+						const list = [...inputList];
+						list.splice(index, 1);
+						setFieldValue('card', list);
+						setInputList(list);
+					};
+					// handle click event of the Add button
+					const handleAddClick = () => {
+						setFieldValue('card', [
+							...inputList,
+
+							{
+								cardHolderName: '',
+								cardHolderNumber: '',
+								cardNumber: '',
+								expiryDate: null,
+								cvv: '',
+							},
+						]);
+						setInputList([
+							...inputList,
+
+							{
+								cardHolderName: '',
+								cardHolderNumber: '',
+								cardNumber: '',
+								expiryDate: null,
+								cvv: '',
+							},
+						]);
+					};
+
 					return (
 						<Form onSubmit={handleSubmit}>
 							{/* Address Form */}
@@ -533,3 +533,5 @@ const AddNewRecord = ({isView, data}) => {
 };
 
 export default AddNewRecord;
+
+// console.log('4263982640269299');

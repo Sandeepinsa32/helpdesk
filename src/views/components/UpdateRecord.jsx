@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import UpdateRecordForm from './AddTicketForm/UpdateRecordForm';
 import valid from 'card-validator';
-// import AddNewPaymentForm from './components/AddTicketForm/AddNewPaymentForm';
 import {Formik, Form} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+
+// mui
 import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, FormControlLabel, Checkbox} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -58,10 +59,10 @@ const UpdateRecord = ({data}) => {
 		_id,
 	} = data;
 
-	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	// console.log(data);
 
 	// console.log(cards);
+	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
 	const [inputList, setInputList] = useState([]);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
@@ -80,7 +81,6 @@ const UpdateRecord = ({data}) => {
 			})
 			.catch((e) => console.log(e));
 	};
-
 	const cardLog = async (ticketId) => {
 		axios
 			.post(BASEURL + '/log/details', {
@@ -92,53 +92,6 @@ const UpdateRecord = ({data}) => {
 			.catch((e) => {
 				console.log(e);
 			});
-	};
-
-	// handle input change
-	const handleCardInput = (e, index) => {
-		const {name, value} = e.target;
-		const list = [...inputList];
-		list[index][name] = value;
-		// setFieldValue('card', list);
-		setInputList(list);
-	};
-	const handleDateInputChange = (index, value) => {
-		const list = [...inputList];
-		const name = 'expiryDate';
-		list[index][name] = value;
-		setInputList(list);
-	};
-
-	// handle click event of the Remove button
-	const handleRemoveClick = (index) => {
-		const list = [...inputList];
-		list.splice(index, 1);
-		// setFieldValue('card', list);
-		setInputList(list);
-	};
-
-	// handle click event of the Add button
-	const handleAddClick = () => {
-		// setFieldValue('card', [
-		// 	...inputList,
-		// 	{
-		// 		cardHolderName: '',
-		// 		cardHolderNumber: '',
-		// 		cardNumber: '',
-		// 		expiryDate: null,
-		// 		cvv: '',
-		// 	},
-		// ]);
-		setInputList([
-			...inputList,
-			{
-				cardHolderName: '',
-				cardHolderNumber: '',
-				cardNumber: '',
-				expiryDate: null,
-				cvv: '',
-			},
-		]);
 	};
 	const items = [
 		{
@@ -155,31 +108,10 @@ const UpdateRecord = ({data}) => {
 		},
 	];
 
-	function msToTime(date) {
-		const duration = new Date() - new Date(date);
-
-		var milliseconds = Math.floor((duration % 1000) / 100),
-			seconds = Math.floor((duration / 1000) % 60),
-			minutes = Math.floor((duration / (1000 * 60)) % 60),
-			hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-		hours = hours < 10 ? '0' + hours : hours;
-		minutes = minutes < 10 ? '0' + minutes : minutes;
-		seconds = seconds < 10 ? '0' + seconds : seconds;
-
-		// let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
-		let GenTime = hours;
-		console.log(GenTime);
-		GenTime = GenTime >= 48 ? false : true;
-
-		return Boolean(GenTime);
-	}
 	useEffect(() => {
 		new Date() - new Date(createdAt) < 60000 * 60 * 48 ? setIsDisable(false) : setIsDisable(true);
 	}, [0]);
-	const showCardHandler = () => {
-		// setIsPaymentVisible(true);
-	};
+
 	var err = [];
 
 	const INITIAL_FORM_STATE = {
@@ -202,14 +134,14 @@ const UpdateRecord = ({data}) => {
 		bookedOn: bookedOn ? bookedOn : '',
 		productType: productType ? productType : '',
 
-		totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : 0,
-		adultCount: adultCount ? adultCount : 0,
-		childCount: childCount ? childCount : 0,
-		elderCount: elderCount ? elderCount : 0,
-		grandTotal: grandTotal ? grandTotal : 0,
-		childPrice: childPrice ? childPrice : 0,
-		adultPrice: adultPrice ? adultPrice : 0,
-		elderPrice: elderPrice ? elderPrice : 0,
+		totalInhouseCharge: totalInhouseCharge ? totalInhouseCharge : '',
+		adultCount: adultCount ? adultCount : '',
+		childCount: childCount ? childCount : '',
+		elderCount: elderCount ? elderCount : '',
+		grandTotal: grandTotal ? grandTotal : '',
+		childPrice: childPrice ? childPrice : '',
+		adultPrice: adultPrice ? adultPrice : '',
+		elderPrice: elderPrice ? elderPrice : '',
 		//date
 		departureDate: departureDate ? departureDate : null,
 		returnDate: returnDate ? returnDate : null,
@@ -400,6 +332,52 @@ const UpdateRecord = ({data}) => {
 
 					// console.log('props', props); // formik object --containg values, err, etc....
 					console.log(errors);
+					// handle input change
+					const handleCardInput = (e, index) => {
+						const {name, value} = e.target;
+						const list = [...inputList];
+						list[index][name] = value;
+						setFieldValue('card', list);
+						setInputList(list);
+					};
+					const handleDateInputChange = (index, value) => {
+						const list = [...inputList];
+						const name = 'expiryDate';
+						list[index][name] = value;
+						setInputList(list);
+					};
+
+					// handle click event of the Remove button
+					const handleRemoveClick = (index) => {
+						const list = [...inputList];
+						list.splice(index, 1);
+						setFieldValue('card', list);
+						setInputList(list);
+					};
+
+					// handle click event of the Add button
+					const handleAddClick = () => {
+						setFieldValue('card', [
+							...inputList,
+							{
+								cardHolderName: '',
+								cardHolderNumber: '',
+								cardNumber: '',
+								expiryDate: null,
+								cvv: '',
+							},
+						]);
+						setInputList([
+							...inputList,
+							{
+								cardHolderName: '',
+								cardHolderNumber: '',
+								cardNumber: '',
+								expiryDate: null,
+								cvv: '',
+							},
+						]);
+					};
 
 					return (
 						<Form onSubmit={handleSubmit}>
@@ -601,7 +579,6 @@ const UpdateRecord = ({data}) => {
 													variant='contained'
 													onClick={() => {
 														cardLog(_id);
-														showCardHandler();
 														fetchCards(_id);
 													}}>
 													Show card
@@ -686,3 +663,23 @@ const UpdateRecord = ({data}) => {
 };
 
 export default UpdateRecord;
+
+// function msToTime(date) {
+// 	const duration = new Date() - new Date(date);
+
+// 	var milliseconds = Math.floor((duration % 1000) / 100),
+// 		seconds = Math.floor((duration / 1000) % 60),
+// 		minutes = Math.floor((duration / (1000 * 60)) % 60),
+// 		hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+// 	hours = hours < 10 ? '0' + hours : hours;
+// 	minutes = minutes < 10 ? '0' + minutes : minutes;
+// 	seconds = seconds < 10 ? '0' + seconds : seconds;
+
+// 	// let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
+// 	let GenTime = hours;
+// 	console.log(GenTime);
+// 	GenTime = GenTime >= 48 ? false : true;
+
+// 	return Boolean(GenTime);
+// }
