@@ -5,6 +5,7 @@ import {useNavigate} from 'react-router-dom';
 import AddNewRecord from './components/AddNewRecord';
 import UpdateRecord from './components/UpdateRecord';
 import ViewLog from './components/ViewLog';
+import RequestCharge from './components/modal/RequestCharge';
 
 import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Utils';
 import axios from 'axios';
@@ -24,6 +25,7 @@ import {
 	Typography,
 	Grid,
 	IconButton,
+	Tooltip,
 	ListItem,
 	ListItemButton,
 	ListItemText,
@@ -46,13 +48,25 @@ import Email from './Email';
 import {Search as SearchIcon} from '../assets/icons/search';
 import CloseIcon from '@mui/icons-material/Close';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import EditIcon from '@mui/icons-material/Edit';
+import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
+import PaymentIcon from '@mui/icons-material/Payment';
+import SupportAgentIcon from '@mui/icons-material/SupportAgent';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export const Transaction = () => {
 	const [myRecords, setMyRecords] = useState([]);
+
+	//modal state
 	const [open, setOpen] = useState(false);
 	const [openLog, setOpenLog] = useState(false);
+	const [chargeModelOpen, setChargeModelOpen] = useState(false);
+	const [airlineModelOpen, setAirlineModelOpen] = useState(false);
+
 	const [openEmail, setOpenEmail] = useState(false);
 	const [viewEmail, setViewEmail] = useState(false);
+
 	const [viewData, setViewData] = useState(false);
 	const [selectedTicket, setSelectedTicket] = useState({});
 	const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +77,8 @@ export const Transaction = () => {
 	const [phone, setPhone] = useState('');
 	const [oldTotalRecords, setOldTotalRecords] = useState(-1);
 	const [allRecords, setAllRecords] = useState([]);
-	const [isUpdate, setIsUpdate] = useState(true);
+	// const [isUpdate, setIsUpdate] = useState(true);
+	// const [isUpdate, setIsUpdate] = useState(true);
 	const [page, setPage] = React.useState(1);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => {
@@ -320,9 +335,9 @@ export const Transaction = () => {
 											'Booking ID',
 											//   "CCH Name",
 											'Phone',
-											'Total G.P',
-											'Airline',
-											'	No.of PAX',
+											// 'Total G.P',
+											//	'Airline',
+											// '	No.of PAX',
 											//'Fare Type',
 											'Dep Date',
 											'Return Date',
@@ -363,49 +378,75 @@ export const Transaction = () => {
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.email}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{`${row?.firstName.toUpperCase()} ${row?.lastName.toUpperCase()}`}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.bookingId}</TableCell>
-												{/* <TableCell>{row?.cards[0].card}</TableCell> */}
+
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.phone}</TableCell>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.grandTotal}</TableCell>
+
+												{/* <TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.grandTotal}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.airlineCode}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.passengerCount}</TableCell>
-												{/* <TableCell>{row?.fareType.toUpperCase()}</TableCell> */}
+												<TableCell>{row?.fareType.toUpperCase()}</TableCell> */}
+
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{formateDate(row?.departureDate)}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{formateDate(row?.returnDate)}</TableCell>
 
 												<TableCell sx={{p: 0}}>
-													<Button
-														variant='contained'
-														size='small'
-														onClick={() => {
-															setViewData(true);
-															setSelectedTicket(row);
-															handleOpen();
-															addLog(row._id);
-														}}>
-														{new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? 'Update' : 'View'}
-													</Button>
-
-													<Button
-														sx={{
-															margin: ` 0 8px`,
-														}}
-														variant='contained'
-														size='small'
-														onClick={(e) => {
-															setViewEmail(row._id);
-															setOpenEmail(true);
-														}}>
-														Email
-													</Button>
-													<Button
-														variant='contained'
-														size='small'
-														onClick={() => {
-															setSelectedTicket(row);
-															setOpenLog(true);
-														}}>
-														logs
-													</Button>
+													{/* Update*/}
+													<Tooltip title={new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? 'Edit' : 'View'}>
+														<IconButton
+															aria-label='update'
+															onClick={() => {
+																setViewData(true);
+																setSelectedTicket(row);
+																handleOpen();
+																addLog(row._id);
+															}}>
+															{new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? <EditIcon /> : <VisibilityIcon />}
+														</IconButton>
+													</Tooltip>
+													{/* email*/}
+													<Tooltip title='Email to Customer '>
+														<IconButton
+															aria-label='sendEmail'
+															onClick={(e) => {
+																setViewEmail(row._id);
+																setOpenEmail(true);
+															}}>
+															<ForwardToInboxIcon />
+														</IconButton>
+													</Tooltip>
+													{/* logs*/}
+													<Tooltip title='View Logs'>
+														<IconButton
+															aria-label='viewlogs'
+															onClick={() => {
+																setSelectedTicket(row);
+																setOpenLog(true);
+															}}>
+															<ReceiptLongIcon />
+														</IconButton>
+													</Tooltip>
+													{/* charge*/}
+													<Tooltip title='Request to charges'>
+														<IconButton
+															aria-label='Charge'
+															onClick={() => {
+																setSelectedTicket(row);
+																setChargeModelOpen(true);
+															}}>
+															<PaymentIcon />
+														</IconButton>
+													</Tooltip>
+													{/* airline confirmation*/}
+													<Tooltip title='Airline Confirmation'>
+														<IconButton
+															aria-label='airelineConfirmation'
+															onClick={() => {
+																setSelectedTicket(row);
+																setAirlineModelOpen(true);
+															}}>
+															<SupportAgentIcon />
+														</IconButton>
+													</Tooltip>
 												</TableCell>
 											</TableRow>
 										))
@@ -432,7 +473,7 @@ export const Transaction = () => {
 								margin: '20px auto',
 								width: '100%',
 							}}>
-							<Pagination count={totalRecords != -1 && Math.ceil(totalRecords / size)} page={page} onChange={handleChange} />{' '}
+							<Pagination count={totalRecords != -1 && Math.ceil(totalRecords / size)} page={page} onChange={handleChange} />
 						</div>
 					</Box>
 				</Container>
@@ -496,6 +537,57 @@ export const Transaction = () => {
 						<CloseIcon />
 					</IconButton>
 					<Email Ticketid={viewEmail} id={selectedTicket} onClose={handleEmailClose} />
+				</Box>
+			</Modal>
+
+			{/* Open Charge Modal */}
+			<Modal open={chargeModelOpen} onClose={() => setChargeModelOpen(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						minWidth: '70vw',
+						minHeight: '60vh',
+						maxHeight: '90vh',
+						overflowX: ' auto',
+						bgcolor: 'background.paper',
+						// border: '2px solid #000',
+						boxShadow: 24,
+						borderRadius: '1rem',
+						p: 4,
+					}}>
+					<IconButton onClick={() => setChargeModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					{/* <Email Ticketid={viewEmail} id={selectedTicket} onClose={handleEmailClose} /> */}
+					<RequestCharge />
+				</Box>
+			</Modal>
+
+			{/* Open airline Modal */}
+			<Modal open={airlineModelOpen} onClose={() => setAirlineModelOpen(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						minWidth: '70vw',
+						minHeight: '60vh',
+						maxHeight: '90vh',
+						overflowX: ' auto',
+						bgcolor: 'background.paper',
+						// border: '2px solid #000',
+						boxShadow: 24,
+						borderRadius: '1rem',
+						p: 4,
+					}}>
+					<IconButton onClick={() => setAirlineModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					{/* <Email Ticketid={viewEmail} id={selectedTicket} onClose={handleEmailClose} /> */}
 				</Box>
 			</Modal>
 		</>
