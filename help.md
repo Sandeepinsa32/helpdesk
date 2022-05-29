@@ -129,3 +129,5 @@ Return false }
 3. docusign card validator
 4. email foramt
 5. charge button ,airline button
+6. Disable add new card button when record is in view mode
+7. updating global record page with latest my record pae

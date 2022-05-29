@@ -5,15 +5,30 @@ import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Uti
 import axios from 'axios';
 
 //material UI
-import {Box, Button, Card, Container, Modal, IconButton, Grid, CardContent, TextField, ThemeProvider, Pagination, Paper, InputAdornment, SvgIcon, CircularProgress, Typography} from '@mui/material';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import {
+	Box,
+	Button,
+	Card,
+	Container,
+	Modal,
+	IconButton,
+	Grid,
+	CardContent,
+	TextField,
+	Pagination,
+	Paper,
+	InputAdornment,
+	SvgIcon,
+	CircularProgress,
+	Typography,
+	Table,
+	TableBody,
+	TableCell,
+	TableContainer,
+	TableHead,
+	TableRow,
+} from '@mui/material';
 
-import {createTheme} from '@mui/material/styles';
 import UpdateRecord from './components/UpdateRecord';
 import ViewLog from './components/ViewLog';
 import Email from './Email';
@@ -24,13 +39,12 @@ import {Search as SearchIcon} from '../assets/icons/search';
 
 export default function SearchRecord() {
 	const [recordData, setRecordData] = useState([]);
-	const [open, setOpen] = useState(false);
+	const [openUpdateRecord, setOpenUpdateRecord] = useState(false);
 	const [viewData, setViewData] = useState(false);
 	const [oldTotalRecords, setOldTotalRecords] = useState(-1);
 	const [allRecords, setAllRecords] = useState([]);
 	const [userData, setUserData] = useState({});
 	const [page, setPage] = React.useState(1);
-	// const [search, setSearch] = useState('');
 	const [totalRecords, setTotalRecords] = useState(-1);
 	const [size, setSize] = useState(5);
 	const [bookingid, setBookingid] = useState('');
@@ -38,18 +52,15 @@ export default function SearchRecord() {
 	const [phone, setPhone] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [openEmail, setOpenEmail] = useState(false);
+	const [openEmailModal, setOpenEmailModal] = useState(false);
 	const [viewEmail, setViewEmail] = useState(false);
-	const [openLog, setOpenLog] = useState(false);
+	const [openLogModal, setOpenLogModal] = useState(false);
 	//Handler's
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+
 	const handleChange = (event, value) => {
 		setPage(value);
 	};
-	const handleLogClose = () => {
-		setOpenLog(false);
-	};
+
 	const loadTransactions = async (search) => {
 		// console.log(search);
 		setIsLoading(true);
@@ -111,24 +122,13 @@ export default function SearchRecord() {
 		setRecordData(allRecords);
 		setTotalRecords(oldTotalRecords);
 	};
-	const handleEmailClose = () => {
-		setOpenEmail(false);
-	};
+
 	useEffect(() => {
 		axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem('token'));
 
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
 
-	// MUi Theme COlor Theme
-	const theme = createTheme({
-		palette: {
-			neutral: {
-				main: '#64748B',
-				contrastText: '#fff',
-			},
-		},
-	});
 	return (
 		<>
 			<Box
@@ -146,90 +146,83 @@ export default function SearchRecord() {
 					{/* Start : Search Component */}
 
 					<Box>
-						<ThemeProvider theme={theme}>
-							{/* Search COmponent */}
-							<Box sx={{mt: 3}}>
-								<Card>
-									<CardContent>
-										<Box fullWidth sx={{display: ''}}>
-											<Grid container spacing={3}>
-												<Grid item sm={2} md={3}>
-													<TextField
-														size='small'
-														sx={{height: `2rem`}}
-														InputProps={{
-															startAdornment: (
-																<InputAdornment position='start'>
-																	<SvgIcon color='action' fontSize='small'>
-																		<SearchIcon />
-																	</SvgIcon>
-																</InputAdornment>
-															),
-														}}
-														onChange={(e) => setBookingid(e.target.value)}
-														placeholder='Enter Booking Id'
-														variant='outlined'
-														value={bookingid}
-													/>
-												</Grid>
-
-												{/* <Grid item sm={2} md={3}>
-                          <TextField
-                            size="small"
-                            sx={{ width: `19vw`, height: `2rem` }}
-                            InputProps={{
-                              startAdornment: (
-                                <InputAdornment position="start">
-                                  <SvgIcon color="action" fontSize="small">
-                                    <SearchIcon />
-                                  </SvgIcon>
-                                </InputAdornment>
-                              ),
-                            }}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter Email id"
-                            variant="outlined"
-                            value={email}
-                          />
-                        </Grid> */}
-												<Grid item sm={2} md={3}>
-													<TextField
-														size='small'
-														sx={{width: `19vw`, height: `2rem`}}
-														InputProps={{
-															startAdornment: (
-																<InputAdornment position='start'>
-																	<SvgIcon color='action' fontSize='small'>
-																		<SearchIcon />
-																	</SvgIcon>
-																</InputAdornment>
-															),
-														}}
-														onChange={(e) => setPhone(e.target.value)}
-														placeholder='Enter Phone Number'
-														variant='outlined'
-														value={phone}
-													/>
-												</Grid>
-												<Grid item sm={4} md={3} sx={{px: 2, mt: 0.5}}>
-													<Button
-														sx={{textTransform: 'capitalize', mx: 1}}
-														size='small'
-														disabled={!(email || phone || bookingid)}
-														variant='contained'
-														onClick={searchHandler}>
-														Search
-													</Button>
-													<Button sx={{textTransform: 'capitalize'}} size='small' variant='contained' color='neutral' onClick={handleReset}>
-														Reset
-													</Button>
-												</Grid>
+						{/* Search COmponent */}
+						<Box sx={{mt: 3}}>
+							<Card>
+								<CardContent>
+									<Box fullWidth sx={{display: ''}}>
+										<Grid container spacing={3}>
+											<Grid item sm={2} md={3}>
+												<TextField
+													size='small'
+													sx={{height: `2rem`}}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position='start'>
+																<SvgIcon color='action' fontSize='small'>
+																	<SearchIcon />
+																</SvgIcon>
+															</InputAdornment>
+														),
+													}}
+													onChange={(e) => setBookingid(e.target.value)}
+													placeholder='Enter Booking Id'
+													variant='outlined'
+													value={bookingid}
+												/>
 											</Grid>
-										</Box>
-									</CardContent>
-								</Card>
-							</Box>
-						</ThemeProvider>
+
+											{/* <Grid item sm={2} md={3}>
+														<TextField
+															size="small"
+															sx={{ width: `19vw`, height: `2rem` }}
+															InputProps={{
+															startAdornment: (
+																<InputAdornment position="start">
+																<SvgIcon color="action" fontSize="small">
+																	<SearchIcon />
+																</SvgIcon>
+																</InputAdornment>
+															),
+															}}
+															onChange={(e) => setEmail(e.target.value)}
+															placeholder="Enter Email id"
+															variant="outlined"
+															value={email}
+														/>
+														</Grid> */}
+											<Grid item sm={2} md={3}>
+												<TextField
+													size='small'
+													sx={{width: `19vw`, height: `2rem`}}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position='start'>
+																<SvgIcon color='action' fontSize='small'>
+																	<SearchIcon />
+																</SvgIcon>
+															</InputAdornment>
+														),
+													}}
+													onChange={(e) => setPhone(e.target.value)}
+													placeholder='Enter Phone Number'
+													variant='outlined'
+													value={phone}
+												/>
+											</Grid>
+											<Grid item sm={4} md={3} sx={{px: 2, mt: 0.5}}>
+												<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' disabled={!(email || phone || bookingid)} variant='contained' onClick={searchHandler}>
+													Search
+												</Button>
+												<Button sx={{textTransform: 'capitalize'}} size='small' variant='contained' color='neutral' onClick={handleReset}>
+													Reset
+												</Button>
+											</Grid>
+										</Grid>
+									</Box>
+								</CardContent>
+							</Card>
+						</Box>
 					</Box>
 					<Box sx={{mt: 3}}>
 						<TableContainer component={Paper}>
@@ -280,7 +273,7 @@ export default function SearchRecord() {
 															console.log(row);
 															setViewData(true);
 															setUserData(row);
-															handleOpen();
+															setOpenUpdateRecord(true);
 															addLog(row._id);
 														}}>
 														Update
@@ -296,7 +289,7 @@ export default function SearchRecord() {
 															// alert(row.id);
 															setViewEmail(row._id);
 															// console.log(row.id);
-															setOpenEmail(true);
+															setOpenEmailModal(true);
 														}}>
 														Send
 													</Button>
@@ -307,7 +300,7 @@ export default function SearchRecord() {
 														onClick={() => {
 															setUserData(row);
 
-															setOpenLog(true);
+															setOpenLogModal(true);
 														}}>
 														logs
 													</Button>
@@ -343,16 +336,16 @@ export default function SearchRecord() {
 				</Container>
 			</Box>
 			{/* open Logs*/}
-			<Modal open={openLog} onClose={handleLogClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+			<Modal open={openLogModal} onClose={() => setOpenLogModal(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style} style={{padding: '32px 16px !important'}}>
-					<IconButton onClick={handleLogClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+					<IconButton onClick={() => setOpenLogModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
 					<ViewLog data={[Array(10)]} id={userData} />
 				</Box>
 			</Modal>
 			{/* update Record */}
-			<Modal open={open} onClose={handleClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+			<Modal open={openUpdateRecord} onClose={() => setOpenUpdateRecord(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box
 					sx={{
 						position: 'absolute',
@@ -369,7 +362,7 @@ export default function SearchRecord() {
 						borderRadius: '1rem',
 						p: 4,
 					}}>
-					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+					<IconButton onClick={() => setOpenUpdateRecord(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
 
@@ -377,7 +370,7 @@ export default function SearchRecord() {
 				</Box>
 			</Modal>
 			{/* Send Email */}
-			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+			<Modal open={openEmailModal} onClose={() => setOpenEmailModal(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box
 					sx={{
 						position: 'absolute',
@@ -394,7 +387,7 @@ export default function SearchRecord() {
 						borderRadius: '1rem',
 						p: 4,
 					}}>
-					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+					<IconButton onClick={() => setOpenEmailModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
 					<Email Ticketid={viewEmail} id={userData} />
