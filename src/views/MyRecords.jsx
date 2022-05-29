@@ -6,6 +6,7 @@ import AddNewRecord from './components/AddNewRecord';
 import UpdateRecord from './components/UpdateRecord';
 import ViewLog from './components/ViewLog';
 import RequestCharge from './components/modal/RequestCharge';
+import AirlineConfirmation from './components/modal/AirlineConfirmation';
 
 import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Utils';
 import axios from 'axios';
@@ -587,7 +588,7 @@ export const Transaction = () => {
 					<IconButton onClick={() => setAirlineModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					{/* <Email Ticketid={viewEmail} id={selectedTicket} onClose={handleEmailClose} /> */}
+					<AirlineConfirmation Ticketid={viewEmail} id={selectedTicket} onClose={() => setAirlineModelOpen(false)} />
 				</Box>
 			</Modal>
 		</>

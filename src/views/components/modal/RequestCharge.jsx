@@ -38,7 +38,7 @@ function RequestCharge() {
 			'atleat 3 and atmost 4 character should be there', //validation message
 			(value) => value == 0 || value > 0
 		),
-		expiryDate: Yup.string().nullable().required('please enter exipry date'),
+		expiryDate: Yup.string().nullable(),
 		amount: Yup.number('input must consist if number')
 			.required('This Field is required')
 			.test(
