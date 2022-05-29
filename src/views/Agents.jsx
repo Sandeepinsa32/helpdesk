@@ -116,7 +116,6 @@ export const AddUser = () => {
 		lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Last Name is Required'),
 		email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
 		password: Yup.string().max(255).required('Password is required'),
-		password: Yup.string().max(255).required('Password is required'),
 		employeeCode: Yup.string().max(10).required('Emp Code is required'),
 		employeeAlias: Yup.string().max(10).required('Emp Alias is required'),
 	});
@@ -125,10 +124,13 @@ export const AddUser = () => {
 		lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Last Name is Required'),
 		email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
 		password: Yup.string().max(255).required('Password is required'),
-		password: Yup.string().max(255).required('Password is required'),
 		employeeCode: Yup.string().max(10).required('Emp Code is required'),
 		employeeAlias: Yup.string().max(10).required('Emp Alias is required'),
-		confirmPassword: Yup.string().max(255),
+		confirmPassword: Yup.string()
+			.max(255)
+			.when(['password'], (password, schema) => {
+				return password.length > 0 ? schema.required('Confirm Password is required').oneOf([Yup.ref('password'), null], 'Passwords must match') : schema;
+			}),
 	});
 	return (
 		<>
@@ -359,7 +361,8 @@ export const AddUser = () => {
 														variant='contained'
 														sx={{right: '2rem', position: 'absolute'}}
 														type='submit'
-														disabled={values.password == '' || values.confirmPassword == '' || values.password !== values.confirmPassword}>
+														// disabled={values.password == '' || values.confirmPassword == '' || values.password !== values.confirmPassword}
+													>
 														Update
 													</Button>
 												</Grid>
