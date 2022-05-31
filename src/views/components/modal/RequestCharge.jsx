@@ -32,16 +32,12 @@ function RequestCharge({data}) {
 		markup: '',
 	};
 	const FORM_VALIDATION = Yup.object({
-		cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
-		cardHolderNumber: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
+		cardHolderName: Yup.string(),
+		cardHolderNumber: Yup.string(),
 		cardNumber: Yup.string(),
 		email: Yup.string().email('Invalid email address').required('Required'),
 		phone: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
-		cvv: Yup.number().test(
-			'min 3 && max 4 digit required', // this is used internally by yup
-			'atleat 3 and atmost 4 character should be there', //validation message
-			(value) => value == 0 || value > 0
-		),
+		cvv: Yup.number(),
 		expiryDate: Yup.string().nullable(),
 		amount: Yup.number('input must consist if number')
 			// .required('This Field is required')
