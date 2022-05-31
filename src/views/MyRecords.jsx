@@ -27,11 +27,11 @@ import {
 	Grid,
 	IconButton,
 	Tooltip,
-	ListItem,
-	ListItemButton,
-	ListItemText,
-	ListItemIcon,
-	List,
+	// ListItem,
+	// ListItemButton,
+	// ListItemText,
+	// ListItemIcon,
+	// List,
 } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -174,14 +174,7 @@ export const Transaction = () => {
 	// 	today = mm + '/' + dd + '/' + yyyy;
 	// 	return today;
 	// }
-	const theme = createTheme({
-		palette: {
-			neutral: {
-				main: '#64748B',
-				contrastText: '#fff',
-			},
-		},
-	});
+
 	function msToTime(date) {
 		const duration = new Date() - new Date(date);
 
@@ -233,95 +226,88 @@ export const Transaction = () => {
 					{/*  Search  Component */}
 
 					<Box>
-						<ThemeProvider theme={theme}>
-							{/* Search COmponent */}
-							<Box sx={{mt: 3}}>
-								<Card>
-									<CardContent>
-										<Box fullWidth sx={{display: ''}}>
-											<Grid container spacing={4} justifyContent='center'>
-												<Grid item xs={3} md={3}>
-													<TextField
-														size='small'
-														fullWidth
-														sx={{height: `2rem`}}
-														InputProps={{
-															startAdornment: (
-																<InputAdornment position='start'>
-																	<SvgIcon color='action' fontSize='small'>
-																		<SearchIcon />
-																	</SvgIcon>
-																</InputAdornment>
-															),
-														}}
-														onChange={(e) => setBookingid(e.target.value)}
-														placeholder='Enter Booking Id'
-														variant='outlined'
-														value={bookingid}
-													/>
-												</Grid>
-
-												<Grid item xs={3} md={3}>
-													<TextField
-														fullWidth
-														size='small'
-														sx={{height: `2rem`}}
-														InputProps={{
-															startAdornment: (
-																<InputAdornment position='start'>
-																	<SvgIcon color='action' fontSize='small'>
-																		<SearchIcon />
-																	</SvgIcon>
-																</InputAdornment>
-															),
-														}}
-														onChange={(e) => setEmail(e.target.value)}
-														placeholder='Enter Email id'
-														variant='outlined'
-														value={email}
-													/>
-												</Grid>
-												<Grid item xs={3} md={3}>
-													<TextField
-														size='small'
-														fullWidth
-														sx={{height: `2rem`}}
-														InputProps={{
-															startAdornment: (
-																<InputAdornment position='start'>
-																	<SvgIcon color='action' fontSize='small'>
-																		<SearchIcon />
-																	</SvgIcon>
-																</InputAdornment>
-															),
-														}}
-														onChange={(e) => setPhone(e.target.value)}
-														placeholder='Enter Phone Number'
-														variant='outlined'
-														value={phone}
-													/>
-												</Grid>
-												{/* <Grid item xs={0} md={0}></Grid> */}
-												{/* btn --reset and serach  */}
-												<Grid item xs={3} md={3} sx={{px: 2, mt: 0.5}}>
-													<Button
-														sx={{textTransform: 'capitalize', mx: 1}}
-														size='small'
-														disabled={!(email || phone || bookingid)}
-														variant='contained'
-														onClick={searchHandler}>
-														Search
-													</Button>
-													<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral' onClick={handleReset}>
-														Reset
-													</Button>
-												</Grid>
+						{/* Search COmponent */}
+						<Box sx={{mt: 3}}>
+							<Card>
+								<CardContent>
+									<Box fullWidth sx={{display: ''}}>
+										<Grid container spacing={4} justifyContent='center'>
+											<Grid item xs={3} md={3}>
+												<TextField
+													size='small'
+													fullWidth
+													sx={{height: `2rem`}}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position='start'>
+																<SvgIcon color='action' fontSize='small'>
+																	<SearchIcon />
+																</SvgIcon>
+															</InputAdornment>
+														),
+													}}
+													onChange={(e) => setBookingid(e.target.value)}
+													placeholder='Enter Booking Id'
+													variant='outlined'
+													value={bookingid}
+												/>
 											</Grid>
-										</Box>
-									</CardContent>
-								</Card>
-							</Box>
-						</ThemeProvider>
+
+											<Grid item xs={3} md={3}>
+												<TextField
+													fullWidth
+													size='small'
+													sx={{height: `2rem`}}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position='start'>
+																<SvgIcon color='action' fontSize='small'>
+																	<SearchIcon />
+																</SvgIcon>
+															</InputAdornment>
+														),
+													}}
+													onChange={(e) => setEmail(e.target.value)}
+													placeholder='Enter Email id'
+													variant='outlined'
+													value={email}
+												/>
+											</Grid>
+											<Grid item xs={3} md={3}>
+												<TextField
+													size='small'
+													fullWidth
+													sx={{height: `2rem`}}
+													InputProps={{
+														startAdornment: (
+															<InputAdornment position='start'>
+																<SvgIcon color='action' fontSize='small'>
+																	<SearchIcon />
+																</SvgIcon>
+															</InputAdornment>
+														),
+													}}
+													onChange={(e) => setPhone(e.target.value)}
+													placeholder='Enter Phone Number'
+													variant='outlined'
+													value={phone}
+												/>
+											</Grid>
+											{/* <Grid item xs={0} md={0}></Grid> */}
+											{/* btn --reset and serach  */}
+											<Grid item xs={3} md={3} sx={{px: 2, mt: 0.5}}>
+												<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' disabled={!(email || phone || bookingid)} variant='contained' onClick={searchHandler}>
+													Search
+												</Button>
+												<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral' onClick={handleReset}>
+													Reset
+												</Button>
+											</Grid>
+										</Grid>
+									</Box>
+								</CardContent>
+							</Card>
+						</Box>
 					</Box>
 					{/* End: Search  Component */}
 

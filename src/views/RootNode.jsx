@@ -19,6 +19,7 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import LogoutIcon from '@mui/icons-material/Logout';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 // local icon
 
@@ -192,6 +193,7 @@ export default function MiniDrawer() {
 					<IconButton onClick={handleModalClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
+
 					<AgentProfileModal />
 				</Box>
 			</Modal>
@@ -200,44 +202,83 @@ export default function MiniDrawer() {
 				<DrawerHeader> </DrawerHeader>
 
 				<List>
-					{items.map((item, index) => (
-						<NavLink
-							key={item.title}
-							style={({isActive}) => {
-								return {
-									display: 'block',
-									margin: '1rem 0',
-									minHeight: 48,
-									justifyContent: open ? 'initial' : 'center',
-									px: 2.5,
-									color: isActive ? '#000' : '',
-									background: isActive ? ' rgb(227, 242, 253)' : '',
-									borderRadius: '5px',
-									textDecoration: 'none !important',
-									color: `unset !important`,
-								};
-							}}
-							className='navlink-decoration'
-							to={item.href}>
-							<ListItemButton
+					{items.map((item, index) =>
+						item.title == 'Charge Requests' && isAdmin ? (
+							<NavLink
 								key={item.title}
-								sx={{
-									minHeight: 48,
-									justifyContent: open ? 'initial' : 'center',
-									px: 2.5,
-								}}>
-								<ListItemIcon
+								style={({isActive}) => {
+									return {
+										display: 'block',
+										margin: '1rem 0',
+										minHeight: 48,
+										justifyContent: open ? 'initial' : 'center',
+										px: 2.5,
+										color: isActive ? '#000' : '',
+										background: isActive ? ' rgb(227, 242, 253)' : '',
+										borderRadius: '5px',
+										textDecoration: 'none !important',
+										color: `unset !important`,
+									};
+								}}
+								className='navlink-decoration'
+								to={item.href}>
+								<ListItemButton
+									key={item.title}
 									sx={{
-										minWidth: 0,
-										mr: open ? 3 : 'auto',
-										justifyContent: 'center',
+										minHeight: 48,
+										justifyContent: open ? 'initial' : 'center',
+										px: 2.5,
 									}}>
-									{item.icon}
-								</ListItemIcon>
-								<ListItemText primary={item.title} sx={{opacity: open ? 1 : 0}} />
-							</ListItemButton>
-						</NavLink>
-					))}
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											mr: open ? 3 : 'auto',
+											justifyContent: 'center',
+										}}>
+										{item.icon}
+									</ListItemIcon>
+									<ListItemText primary={item.title} sx={{opacity: open ? 1 : 0}} />
+								</ListItemButton>
+							</NavLink>
+						) : (
+							<NavLink
+								key={item.title}
+								style={({isActive}) => {
+									return {
+										display: 'block',
+										margin: '1rem 0',
+										minHeight: 48,
+										justifyContent: open ? 'initial' : 'center',
+										px: 2.5,
+										color: isActive ? '#000' : '',
+										background: isActive ? ' rgb(227, 242, 253)' : '',
+										borderRadius: '5px',
+										textDecoration: 'none !important',
+										color: `unset !important`,
+									};
+								}}
+								className='navlink-decoration'
+								to={item.href}>
+								<ListItemButton
+									key={item.title}
+									sx={{
+										minHeight: 48,
+										justifyContent: open ? 'initial' : 'center',
+										px: 2.5,
+									}}>
+									<ListItemIcon
+										sx={{
+											minWidth: 0,
+											mr: open ? 3 : 'auto',
+											justifyContent: 'center',
+										}}>
+										{item.icon}
+									</ListItemIcon>
+									<ListItemText primary={item.title} sx={{opacity: open ? 1 : 0}} />
+								</ListItemButton>
+							</NavLink>
+						)
+					)}
 				</List>
 			</Drawer>
 
@@ -279,6 +320,11 @@ const items = [
 		href: '/all',
 		icon: <SearchIcon fontSize='small' />,
 		title: 'All Transaction',
+	},
+	{
+		href: '/Charge-request',
+		icon: <AttachMoneyIcon fontSize='small' />,
+		title: 'Charge Requests',
 	},
 ];
 
