@@ -54,7 +54,30 @@ function ChargeTransaction() {
   const [size, setSize] = useState(5);
 
   //fetch
-  const [requestObj, setRequestObj] = useState(false);
+  const [requestObj, setRequestObj] = useState([
+    {
+      cardNumber: 842717555520,
+      cvv: 555,
+      amount: 55,
+      markup: 20,
+      remarks: "sasas",
+      email: "sandeep@gmail.com",
+      phone: "8427175003",
+      agent: null,
+      ticket: null,
+    },
+    {
+      cardNumber: 842717555520,
+      cvv: 555,
+      amount: 55,
+      markup: 20,
+      remarks: "sasas",
+      email: "sandeep@gmail.com",
+      phone: "8427175003",
+      agent: null,
+      ticket: null,
+    },
+  ]);
 
   // fecth all record
   const loadChargeRequests = async (search) => {
@@ -223,16 +246,18 @@ function ChargeTransaction() {
                       >
                         <TableCell
                           sx={{ padding: ` 16px 0 16px 8px !important` }}
-                        >{`${row?.firstName.toUpperCase()} ${row?.lastName.toUpperCase()}`}</TableCell>
-                        <TableCell
-                          sx={{ padding: ` 16px 0 16px 8px !important` }}
                         >
-                          5
+                          {row.email}
                         </TableCell>
                         <TableCell
                           sx={{ padding: ` 16px 0 16px 8px !important` }}
                         >
-                          5
+                          {row.phone}
+                        </TableCell>
+                        <TableCell
+                          sx={{ padding: ` 16px 0 16px 8px !important` }}
+                        >
+                          {row.phone}
                         </TableCell>
 
                         <TableCell
