@@ -28,7 +28,7 @@ function RequestCharge({data}) {
 		phone: phone,
 		amount: '',
 		address: '',
-		description: '',
+		remarks: '',
 		markup: '',
 	};
 	const FORM_VALIDATION = Yup.object({
@@ -58,7 +58,7 @@ function RequestCharge({data}) {
 				(value) => value == 0 || value > 0
 			),
 		address: Yup.string(),
-		description: Yup.string(),
+		remarks: Yup.string(),
 	});
 	// console.log(data);
 
@@ -93,7 +93,7 @@ function RequestCharge({data}) {
 				initialValues={{...INITIAL_FORM_STATE}}
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
-					console.log('formik submitted', values);
+					console.log('formik submitted', values, _id);
 
 					// axios
 					// 	.put(BASEURL + `/ticket/${data._id}`, {
@@ -168,6 +168,7 @@ function RequestCharge({data}) {
 								<Grid item xs={4} md={3}>
 									<LocalizationProvider fullWidth disabled={true} dateAdapter={AdapterDateFns}>
 										<DatePicker
+											disabled={true}
 											fullWidth
 											views={['year', 'month']}
 											name='expiryDate'
@@ -211,9 +212,9 @@ function RequestCharge({data}) {
 										}}
 									/>
 								</Grid>
-								{/* Description Fields */}
+								{/* remarks Fields */}
 								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='description' label='DESCRIPTION' />
+									<Textfield name='remarks' label='DESCRIPTION' />
 								</Grid>
 								{/* ADDRESS Fields */}
 								<Grid item xs={4} md={4} sm={4}>
