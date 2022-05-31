@@ -15,19 +15,37 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 function RequestCharge() {
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const INITIAL_FORM_STATE = {
+		confirmationNo: '',
+		agencyRefNo: '',
+		name: '',
+		email: 'test@gmail.com',
+		phone: '8427155003',
+		dob: '',
+		dob: '',
+		ticketnumber: '',
+		passportNumber: '',
+		description: 'desciption',
+		billingAddress: 'adress',
 		cardHolderName: 'sandeep',
 		cardHolderNumber: '8427175003',
 		cardNumber: '8427155003',
 		cvv: '0123',
 		expiryDate: null,
-		email: 'test@gmail.com',
-		phone: '8427155003',
-		amount: '1.2',
-		address: 'adress',
-		description: 'desciption',
-		markup: '1.2',
 	};
 	const FORM_VALIDATION = Yup.object({
+		confirmationNo: Yup.string(),
+		agencyRefNo: Yup.string(),
+		name: Yup.string(),
+		email: Yup.string(),
+		phone: Yup.string(),
+		dob: null,
+
+		ticketnumber: Yup.string(),
+		passportNumber: Yup.string(),
+
+		description: Yup.string(),
+		billingAddress: Yup.string(),
+
 		cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 		cardHolderNumber: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
 		cardNumber: Yup.string(),
@@ -39,22 +57,6 @@ function RequestCharge() {
 			(value) => value == 0 || value > 0
 		),
 		expiryDate: Yup.string().nullable(),
-		amount: Yup.number('input must consist if number')
-			.required('This Field is required')
-			.test(
-				'number should be postive', // this is used internally by yup
-				'value should be greater or Equal to 0', //validation message
-				(value) => value == 0 || value > 0
-			),
-		markup: Yup.number('input must consist if number')
-			.required('This Field is required')
-			.test(
-				'number should be postive', // this is used internally by yup
-				'value should be greater or Equal to 0', //validation message
-				(value) => value == 0 || value > 0
-			),
-		address: Yup.string(),
-		description: Yup.string(),
 	});
 	return (
 		<>
@@ -83,25 +85,90 @@ function RequestCharge() {
 								</Typography>
 							</Box>
 							<Grid container spacing={3}>
+								{/* CONFIRMATION NO.field */}
+
+								<Grid item xs={6} md={6}>
+									<Textfield name='confirmationNo' label='CONFIRMATION NO.' />
+								</Grid>
+
+								{/*  TRAVEL AGENCY REFERENCE NO.*/}
+								<Grid item xs={6} md={6}>
+									<Textfield name='agencyRefNo' label='TRAVEL AGENCY REFERENCE NO.' />
+								</Grid>
+
+								{/* name Field */}
+								<Grid item xs={6} md={3}>
+									<Textfield name='name' label='NAME ' />
+								</Grid>
+
+								{/* email Field */}
+								<Grid item xs={6} md={3}>
+									<Textfield name='email ' label='EMAIL ' />
+								</Grid>
+								{/* phone Field */}
+								<Grid item xs={6} md={3}>
+									<Textfield name='phone ' label='PHONE ' />
+								</Grid>
+								{/* DOB field */}
+								<Grid item xs={4} md={3}>
+									<LocalizationProvider dateAdapter={AdapterDateFns}>
+										<DatePicker
+											name='dob'
+											label='Date of Birth'
+											inputFormat='MM/dd/yyyy'
+											placeholder='MM/dd/yyyy'
+											onChange={(newValue) => {
+												setFieldValue(
+													'dob',
+													new Date(newValue).toLocaleDateString('en-US', {
+														day: '2-digit',
+														month: '2-digit',
+														year: 'numeric',
+													})
+												);
+											}}
+											renderInput={(params) => <TextField placeholder='MM/dd/yyyy' {...params} />}
+										/>
+									</LocalizationProvider>
+								</Grid>
+
+								{/* ticketnumber Field */}
+								<Grid item xs={6} md={3}>
+									<Textfield name='ticketNumber' label='TICKET No. ' />
+								</Grid>
+
+								{/* Passport number Field */}
+								<Grid item xs={6} md={3}>
+									<Textfield name='passportNumber' label='PASSPORT NO. ' />
+								</Grid>
+
+								{/* Description Fields */}
+								<Grid item xs={4} md={3} sm={4}>
+									<Textfield name='description' label='DESCRIPTION' />
+								</Grid>
+								{/* billingAddress Fields */}
+								<Grid item xs={4} md={3} sm={4}>
+									<Textfield name='billingAddress' label='BILLING ADDRESS' />
+								</Grid>
+
 								{/* Card Holder NAme field */}
-								<Grid item xs={6} md={4}>
-									<Textfield name='cardHolderName' label='NAME ON CC' fullWidth />
+								<Grid item xs={4} md={2}>
+									<Textfield name='cardHolderName' label='NAME ON CC' />
 								</Grid>
 								{/*  Card Holder Phone no. */}
-								<Grid item xs={6} md={4}>
-									<Textfield name='cardHolderNumber' label='PHONE NO.' fullWidth />
+								<Grid item xs={4} md={2}>
+									<Textfield name='cardHolderNumber' label='PHONE NO.' />
 								</Grid>
 								{/* CardNumber Field */}
-								<Grid item xs={6} md={4}>
-									<Textfield name='cardNumber' label='CARD NUMBER' fullWidth />
+								<Grid item xs={4} md={3}>
+									<Textfield name='cardNumber' label='CARD NUMBER' />
 								</Grid>
 								{/* CVV Field */}
 								<Grid item xs={4} md={2}>
-									<Textfield name='cvv' label='CVV' fullWidth />
+									<Textfield name='cvv' label='CVV' />
 								</Grid>
-
 								{/* expiry date field */}
-								<Grid item xs={4} md={2}>
+								<Grid item xs={4} md={3}>
 									<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 										<DatePicker
 											fullWidth
@@ -110,59 +177,12 @@ function RequestCharge() {
 											label='EXPIRY DATE'
 											inputFormat='MM/yyyy'
 											placeholder='MM/yyyy'
-											error={Boolean(touched.password && errors.password)}
-											helperText={touched.password && errors.password}
-											onChange={(newValue) => {
-												setFieldValue(
-													'expiryDate',
-													new Date(newValue).toLocaleDateString('en-US', {
-														day: '2-digit',
-														month: '2-digit',
-														year: 'numeric',
-													})
-												);
-											}}
+											value={values.expiryDate}
 											renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
 										/>
 									</LocalizationProvider>
 								</Grid>
-
-								{/*  EMail Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='email' label='EMAIL' />
-								</Grid>
-								{/*  Phone Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='phone' label='PHONE' />
-								</Grid>
-								{/*  AMOUNT Fields */}
-								<Grid item xs={3} sm={3} md={2}>
-									<Textfield
-										name='amount'
-										label='AMOUNT'
-										InputProps={{
-											startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-										}}
-									/>
-								</Grid>
-								{/*  MARKUP Fields */}
-								<Grid item xs={3} sm={3} md={2}>
-									<Textfield
-										name='markup'
-										label='MARKUP'
-										InputProps={{
-											startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-										}}
-									/>
-								</Grid>
-								{/* Description Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='description' label='DESCRIPTION' />
-								</Grid>
-								{/* ADDRESS Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='address' label='ADDRESS' />
-								</Grid>
+								<Grid item xs={12} md={12}></Grid>
 
 								<Grid item xs={10} md={10}></Grid>
 								<Grid item xs={10} md={2}>

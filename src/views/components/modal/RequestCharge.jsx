@@ -147,41 +147,22 @@ function RequestCharge({data}) {
 								</Grid>
 							</Grid>
 
-							{/* {selectedCard &&
-								selectedCard.map((x, i) => {
-									return ( */}
 							<Grid container spacing={3}>
 								{/* Card Holder NAme field */}
 								<Grid item xs={4} md={2}>
-									<Textfield
-										name='cardHolderName'
-										label='NAME ON CC'
-										// value={selectedCard[i].cardHolderName} disabled={true}
-									/>
+									<Textfield name='cardHolderName' label='NAME ON CC' disabled={true} />
 								</Grid>
 								{/*  Card Holder Phone no. */}
 								<Grid item xs={4} md={2}>
-									<Textfield
-										name='cardHolderNumber'
-										label='PHONE NO.'
-										// disabled={true} value={selectedCard[i].cardHolderNumber}
-									/>
+									<Textfield name='cardHolderNumber' label='PHONE NO.' disabled={true} />
 								</Grid>
 								{/* CardNumber Field */}
 								<Grid item xs={4} md={3}>
-									<Textfield
-										name='cardNumber'
-										label='CARD NUMBER'
-										// disabled={true} value={selectedCard[i].cardNumber}
-									/>
+									<Textfield name='cardNumber' label='CARD NUMBER' disabled={true} />
 								</Grid>
 								{/* CVV Field */}
 								<Grid item xs={4} md={2}>
-									<Textfield
-										name='cvv'
-										label='CVV'
-										// disabled={true} value={selectedCard[i].cvv}
-									/>
+									<Textfield name='cvv' label='CVV' disabled={true} />
 								</Grid>
 								{/* expiry date field */}
 								<Grid item xs={4} md={3}>
@@ -200,8 +181,6 @@ function RequestCharge({data}) {
 								</Grid>
 								<Grid item xs={12} md={12}></Grid>
 							</Grid>
-							{/* );
-								})} */}
 
 							<Grid container spacing={3}>
 								{/*  EMail Fields */}
