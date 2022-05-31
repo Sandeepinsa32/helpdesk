@@ -111,6 +111,7 @@ export const AddUser = () => {
 		password: '',
 		employeeCode: '',
 		employeeAlias: '',
+		status: '',
 	};
 
 	const INITIAL_FORM_STATE_UPDATE = {...selectedRecord, confirmPassword: '', status: ''};
@@ -122,6 +123,7 @@ export const AddUser = () => {
 		password: Yup.string().max(255).required('Password is required'),
 		employeeCode: Yup.string().max(10).required('Emp Code is required'),
 		employeeAlias: Yup.string().max(10).required('Emp Alias is required'),
+		status: Yup.string(),
 	});
 	const FORM_VALIDATION_UPDATE = Yup.object({
 		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('First Name is Required'),
@@ -456,8 +458,25 @@ export const AddUser = () => {
 												<Grid item md={6} xs={6}>
 													<Textfield label='Password' name='password' type='password' />
 												</Grid>
+												<Grid item xs={12} sm={6} md={6}>
+													<FormControl fullWidth>
+														<InputLabel id='status-label'>STATUS</InputLabel>
+														<Select
+															labelId='status-label'
+															fullWidth
+															defaultValue='active'
+															name='status'
+															label='STATUS'
+															error={Boolean(touched.status && errors.status)}
+															value={values.status}
+															onChange={handleChange}>
+															<MenuItem value='active'>ACTIVE</MenuItem>
+															<MenuItem value='inactive'>IN-ACTIVE</MenuItem>
+														</Select>
+													</FormControl>
+												</Grid>
 
-												<Grid item md={6} xs={6}>
+												<Grid item md={6} xs={3} sx={{my: 2}}>
 													<Button color='primary' variant='contained' sx={{right: '2rem', position: 'absolute'}} type='submit'>
 														Save details
 													</Button>
