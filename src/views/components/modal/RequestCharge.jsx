@@ -5,27 +5,31 @@ import axios from 'axios';
 import Textfield from '../FormField/Textfield';
 
 // mui
-import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, FormControlLabel, Checkbox} from '@mui/material';
+import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox} from '@mui/material';
 import {BASEURL, errorToast} from '../../../utils/Utils';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-// mui Icon
 
-function RequestCharge() {
+// mui Icon
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+function RequestCharge({data}) {
+	const {_id, email, phone} = data;
+	const [cardDetail, setCardDetail] = useState();
+	const [selectedCard, setSelectedCard] = useState();
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const INITIAL_FORM_STATE = {
-		cardHolderName: 'sandeep',
-		cardHolderNumber: '8427175003',
-		cardNumber: '8427155003',
-		cvv: '0123',
+		cardHolderName: '',
+		cardHolderNumber: '',
+		cardNumber: '',
+		cvv: '',
 		expiryDate: null,
-		email: 'test@gmail.com',
-		phone: '8427155003',
-		amount: '1.2',
-		address: 'adress',
-		description: 'desciption',
-		markup: '1.2',
+		email: email,
+		phone: phone,
+		amount: '',
+		address: '',
+		description: '',
+		markup: '',
 	};
 	const FORM_VALIDATION = Yup.object({
 		cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
@@ -40,14 +44,14 @@ function RequestCharge() {
 		),
 		expiryDate: Yup.string().nullable(),
 		amount: Yup.number('input must consist if number')
-			.required('This Field is required')
+			// .required('This Field is required')
 			.test(
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
 				(value) => value == 0 || value > 0
 			),
 		markup: Yup.number('input must consist if number')
-			.required('This Field is required')
+			// .required('This Field is required')
 			.test(
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
@@ -56,6 +60,33 @@ function RequestCharge() {
 		address: Yup.string(),
 		description: Yup.string(),
 	});
+	// console.log(data);
+
+	const fetchCards = async (id) => {
+		axios
+			.get(BASEURL + '/ticket/details/' + id)
+			.then((response) => {
+				// console.log(response.data);
+
+				setCardDetail(response.data.data);
+			})
+			.catch((e) => console.log(e));
+	};
+
+	function formateDate(value) {
+		let today = new Date(value);
+		let dd = String(today.getDate()).padStart(2, '0');
+		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let yyyy = today.getFullYear();
+
+		today = mm + '/' + yyyy;
+		return today;
+	}
+
+	useEffect(() => {
+		fetchCards(_id);
+	}, [0]);
+
 	return (
 		<>
 			<Formik
@@ -74,7 +105,7 @@ function RequestCharge() {
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
-					console.log(errors, touched);
+					console.log(errors);
 					return (
 						<Form onSubmit={handleSubmit}>
 							<Box sx={{m: 1}}>
@@ -82,27 +113,79 @@ function RequestCharge() {
 									Request Charge :
 								</Typography>
 							</Box>
+
+							<Grid container spacing={3}>
+								<Grid item xs={12} sm={6} md={6} sx={{my: 3}}>
+									<FormControl fullWidth>
+										<InputLabel id='CARD-label'>Card</InputLabel>
+										<Select
+											labelId='CARD-label'
+											fullWidth
+											name='cardValue'
+											label=' CARD'
+											error={Boolean(touched.cardValue && errors.cardValue)}
+											value={values.cardValue}
+											onChange={(e) => {
+												const {cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate} = e.target.value;
+												setFieldValue('cardHolderName', cardHolderName);
+												setFieldValue('cardHolderNumber', cardHolderNumber);
+												setFieldValue('cardNumber', cardNumber);
+												setFieldValue('cvv', cvv);
+												setFieldValue('expiryDate', expiryDate);
+											}}>
+											{cardDetail &&
+												cardDetail.map((x, i) => {
+													const {_id, cardHolderName, cardNumber} = x;
+													return (
+														<MenuItem value={x}>
+															{cardHolderName}-{cardNumber}
+														</MenuItem>
+													);
+												})}
+										</Select>
+									</FormControl>
+								</Grid>
+							</Grid>
+
+							{/* {selectedCard &&
+								selectedCard.map((x, i) => {
+									return ( */}
 							<Grid container spacing={3}>
 								{/* Card Holder NAme field */}
-								<Grid item xs={6} md={4}>
-									<Textfield name='cardHolderName' label='NAME ON CC' fullWidth />
+								<Grid item xs={4} md={2}>
+									<Textfield
+										name='cardHolderName'
+										label='NAME ON CC'
+										// value={selectedCard[i].cardHolderName} disabled={true}
+									/>
 								</Grid>
 								{/*  Card Holder Phone no. */}
-								<Grid item xs={6} md={4}>
-									<Textfield name='cardHolderNumber' label='PHONE NO.' fullWidth />
+								<Grid item xs={4} md={2}>
+									<Textfield
+										name='cardHolderNumber'
+										label='PHONE NO.'
+										// disabled={true} value={selectedCard[i].cardHolderNumber}
+									/>
 								</Grid>
 								{/* CardNumber Field */}
-								<Grid item xs={6} md={4}>
-									<Textfield name='cardNumber' label='CARD NUMBER' fullWidth />
+								<Grid item xs={4} md={3}>
+									<Textfield
+										name='cardNumber'
+										label='CARD NUMBER'
+										// disabled={true} value={selectedCard[i].cardNumber}
+									/>
 								</Grid>
 								{/* CVV Field */}
 								<Grid item xs={4} md={2}>
-									<Textfield name='cvv' label='CVV' fullWidth />
+									<Textfield
+										name='cvv'
+										label='CVV'
+										// disabled={true} value={selectedCard[i].cvv}
+									/>
 								</Grid>
-
 								{/* expiry date field */}
-								<Grid item xs={4} md={2}>
-									<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
+								<Grid item xs={4} md={3}>
+									<LocalizationProvider fullWidth disabled={true} dateAdapter={AdapterDateFns}>
 										<DatePicker
 											fullWidth
 											views={['year', 'month']}
@@ -110,23 +193,17 @@ function RequestCharge() {
 											label='EXPIRY DATE'
 											inputFormat='MM/yyyy'
 											placeholder='MM/yyyy'
-											error={Boolean(touched.password && errors.password)}
-											helperText={touched.password && errors.password}
-											onChange={(newValue) => {
-												setFieldValue(
-													'expiryDate',
-													new Date(newValue).toLocaleDateString('en-US', {
-														day: '2-digit',
-														month: '2-digit',
-														year: 'numeric',
-													})
-												);
-											}}
+											value={values.expiryDate}
 											renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
 										/>
 									</LocalizationProvider>
 								</Grid>
+								<Grid item xs={12} md={12}></Grid>
+							</Grid>
+							{/* );
+								})} */}
 
+							<Grid container spacing={3}>
 								{/*  EMail Fields */}
 								<Grid item xs={4} md={4} sm={4}>
 									<Textfield name='email' label='EMAIL' />
