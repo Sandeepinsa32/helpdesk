@@ -80,7 +80,7 @@ export const Transaction = () => {
 	const [allRecords, setAllRecords] = useState([]);
 	// const [isUpdate, setIsUpdate] = useState(true);
 	// const [isUpdate, setIsUpdate] = useState(true);
-	const [page, setPage] = React.useState(1);
+	const [page, setPage] = useState(1);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => {
 		setOpen(false);
@@ -164,16 +164,6 @@ export const Transaction = () => {
 		// console.log('useEffect');
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
-
-	// function currentDate() {
-	// 	let today = new Date();
-	// 	let dd = String(today.getDate()).padStart(2, '0');
-	// 	let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-	// 	let yyyy = today.getFullYear();
-
-	// 	today = mm + '/' + dd + '/' + yyyy;
-	// 	return today;
-	// }
 
 	function msToTime(date) {
 		const duration = new Date() - new Date(date);

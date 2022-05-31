@@ -1,26 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
-import {
-	Box,
-	Button,
-	Card,
-	Container,
-	CardContent,
-	TextField,
-	CircularProgress,
-	Modal,
-	InputAdornment,
-	SvgIcon,
-	Typography,
-	Grid,
-	IconButton,
-	Tooltip,
-	// ListItem,
-	// ListItemButton,
-	// ListItemText,
-	// ListItemIcon,
-	// List,
-} from '@mui/material';
+import {Box, Button, Card, Container, CardContent, TextField, CircularProgress, Modal, InputAdornment, SvgIcon, Typography, Grid, IconButton, Tooltip} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -28,8 +8,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import {Paper, ThemeProvider} from '@mui/material';
-import {createTheme} from '@mui/material/styles';
 import Pagination from '@mui/material/Pagination';
+import UpdateRequestCharge from './components/modal/UpdateRequestCharge';
+
+import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Utils';
+import axios from 'axios';
 
 //  local icon
 import {Search as SearchIcon} from '../assets/icons/search';
@@ -38,6 +21,63 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PaymentIcon from '@mui/icons-material/Payment';
 
 function ChargeTransaction() {
+	const [viewDetailModal, setViewDetailModal] = useState(false);
+	const [selectedTicket, setSelectedTicket] = useState(false);
+	const [searchId, setSearchId] = useState('');
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	//pagination
+	const [totalRecords, setTotalRecords] = useState(-1);
+	const [oldTotalRecords, setOldTotalRecords] = useState(-1);
+	const [page, setPage] = useState(1);
+	const [size, setSize] = useState(5);
+
+	//fetch
+	const [requestObj, setRequestObj] = useState(false);
+
+	// fecth all record
+	const loadAllRequest = async (search) => {
+		setIsLoading(true);
+		axios
+			.get(BASEURL + '/ticket/my' + search)
+			.then((response) => {
+				if (search === '?page=1') {
+					setOldTotalRecords(response.data.data.totalDocuments);
+					// setAllRecords(response.data.data.tickets);
+				}
+				setRequestObj(response.data.data.tickets);
+				setTotalRecords(response.data.data.totalDocuments);
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 500);
+			})
+			.catch((e) => {
+				console.log(e);
+				// console.log(e.response);
+				// console.log(e.response.status);
+				setIsLoading(false);
+				errorToast(e.response.data.message);
+			});
+	};
+
+	function searchHandler() {
+		setPage(1);
+		loadAllRequest(createQueryString({searchId, page}));
+	}
+
+	const handleReset = () => {
+		setSearchId('');
+	};
+
+	//  pagination -- change handler
+	const handleChange = (event, value) => {
+		setPage(value);
+	};
+
+	useEffect(() => {
+		loadAllRequest(createQueryString({searchId, page}));
+	}, [page]);
 	return (
 		<>
 			<Box
@@ -81,19 +121,20 @@ function ChargeTransaction() {
 														</InputAdornment>
 													),
 												}}
-												onChange={(e) => console.log(e.target.value)}
+												onChange={(e) => setSearchId(e.target.value)}
 												placeholder='Enter Id'
 												variant='outlined'
+												value={searchId}
 											/>
 										</Grid>
 
 										{/* <Grid item xs={0} md={0}></Grid> */}
 										{/* btn --reset and serach  */}
 										<Grid item xs={3} md={3} sx={{px: 2, mt: 0.5}}>
-											<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' onClick={() => console.log('sreach btn click')}>
+											<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' onClick={searchHandler}>
 												Search
 											</Button>
-											<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral' onClick={() => console.log('reset btn click')}>
+											<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' color='neutral' onClick={handleReset}>
 												Reset
 											</Button>
 										</Grid>
@@ -117,7 +158,7 @@ function ChargeTransaction() {
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{false ? (
+									{isLoading ? (
 										<TableRow>
 											<TableCell colSpan={10}>
 												<div
@@ -129,13 +170,12 @@ function ChargeTransaction() {
 												</div>
 											</TableCell>
 										</TableRow>
-									) : true ? (
-										<>
-											{/* myRecords.map((row, index) => ( */}
+									) : requestObj?.length > 0 ? (
+										requestObj.map((row, index) => (
 											<TableRow
 												// key={index}
 												sx={'generate' === 'generate' ? {borderLeft: '4px solid #E0021B'} : {}}>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>5</TableCell>
+												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{`${row?.firstName.toUpperCase()} ${row?.lastName.toUpperCase()}`}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>5</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>5</TableCell>
 
@@ -143,22 +183,20 @@ function ChargeTransaction() {
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>5</TableCell>
 
 												<TableCell sx={{p: 0}}>
-													{/* logs*/}
-													<Tooltip title='View Logs'>
-														<IconButton aria-label='viewlogs'>
-															<ReceiptLongIcon />
-														</IconButton>
-													</Tooltip>
 													{/* charge*/}
 													<Tooltip title='Request to charges'>
-														<IconButton aria-label='Charge'>
+														<IconButton
+															aria-label='Charge'
+															onClick={() => {
+																setSelectedTicket(row);
+																setViewDetailModal(true);
+															}}>
 															<PaymentIcon />
 														</IconButton>
 													</Tooltip>
 												</TableCell>
 											</TableRow>
-											{/* )) */}
-										</>
+										))
 									) : (
 										<TableRow>
 											<TableCell colSpan={10}>
@@ -182,11 +220,36 @@ function ChargeTransaction() {
 								margin: '20px auto',
 								width: '100%',
 							}}>
-							{/* <Pagination count={totalRecords != -1 && Math.ceil(totalRecords / size)} page={page} onChange={handleChange} /> */}
+							<Pagination count={totalRecords != -1 && Math.ceil(totalRecords / size)} page={page} onChange={handleChange} />
 						</div>
 					</Box>
 				</Container>
 			</Box>
+
+			{/* Open airline Modal */}
+			<Modal open={viewDetailModal} onClose={() => setViewDetailModal(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						minWidth: '70vw',
+						minHeight: '60vh',
+						maxHeight: '90vh',
+						overflowX: ' auto',
+						bgcolor: 'background.paper',
+						// border: '2px solid #000',
+						boxShadow: 24,
+						borderRadius: '1rem',
+						p: 4,
+					}}>
+					<IconButton onClick={() => setViewDetailModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+						<CloseIcon />
+					</IconButton>
+					<UpdateRequestCharge formData={selectedTicket} onClose={() => setViewDetailModal(false)} />
+				</Box>
+			</Modal>
 		</>
 	);
 }
