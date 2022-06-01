@@ -188,7 +188,7 @@ function UpdateRequestCharge({formData}) {
 								<Grid item xs={4} md={4} sm={4}>
 									<Textfield name='comment' label='COMMENT' multiline rows={2} />
 								</Grid>
-								<Grid item xs={12} sm={6} md={3}>
+								<Grid item xs={12} sm={6} md={4}>
 									<FormControl fullWidth>
 										<InputLabel id='Status-label'>Status</InputLabel>
 										<Select

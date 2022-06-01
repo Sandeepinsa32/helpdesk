@@ -538,7 +538,12 @@ export const Transaction = () => {
 					<IconButton onClick={() => setChargeModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<RequestCharge data={selectedTicket} />
+					<RequestCharge
+						data={selectedTicket}
+						onClose={() => {
+							setChargeModelOpen(false);
+						}}
+					/>
 				</Box>
 			</Modal>
 
