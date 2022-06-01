@@ -43,7 +43,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 function ChargeTransaction() {
   const [viewDetailModal, setViewDetailModal] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState(false);
-  const [searchId, setSearchId] = useState("");
+  const [bookingid, setBookingid] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -52,6 +52,7 @@ function ChargeTransaction() {
   const [oldTotalRecords, setOldTotalRecords] = useState(-1);
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(5);
+  const [allRecords, setAllRecords] = useState([]);
 
   //fetch
   const [requestObj, setRequestObj] = useState([
@@ -87,19 +88,15 @@ function ChargeTransaction() {
       .then((response) => {
         console.log(response.data.data);
         if (search === "?page=1") {
-          //   setOldTotalRecords(response.data.data.totalDocuments);
-          // setAllRecords(response.data.data.tickets);
+          setOldTotalRecords(response.data.data.totalRecords);
+          setAllRecords(response.data.data.requests);
         }
-        setRequestObj(response.data.data.tickets);
-        // setTotalRecords(response.data.data.totalDocuments);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
+        setIsLoading(false);
+        setRequestObj(response.data.data.requests);
+        setTotalRecords(response.data.data.totalRecords);
       })
       .catch((e) => {
         console.log(e);
-        // console.log(e.response);
-        // console.log(e.response.status);
         setIsLoading(false);
         errorToast(e.response.data.message);
       });
@@ -107,11 +104,13 @@ function ChargeTransaction() {
 
   function searchHandler() {
     setPage(1);
-    loadChargeRequests(createQueryString({ searchId, page }));
+    loadChargeRequests(createQueryString({ bookingid, page }));
   }
 
   const handleReset = () => {
-    setSearchId("");
+    setBookingid("");
+    setTotalRecords(oldTotalRecords);
+    setRequestObj(allRecords);
   };
 
   //  pagination -- change handler
@@ -120,7 +119,7 @@ function ChargeTransaction() {
   };
 
   useEffect(() => {
-    loadChargeRequests(createQueryString({ searchId, page }));
+    loadChargeRequests(createQueryString({ bookingid, page }));
   }, [page]);
   return (
     <>
@@ -167,10 +166,10 @@ function ChargeTransaction() {
                             </InputAdornment>
                           ),
                         }}
-                        onChange={(e) => setSearchId(e.target.value)}
+                        onChange={(e) => setBookingid(e.target.value)}
                         placeholder="Enter Id"
                         variant="outlined"
-                        value={searchId}
+                        value={bookingid}
                       />
                     </Grid>
 
@@ -207,18 +206,13 @@ function ChargeTransaction() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    {[
-                      "Email",
-                      "Name",
-                      "Booking ID",
-                      "Dep Date",
-                      "Return Date",
-                      "Action",
-                    ].map((th) => (
-                      <TableCell sx={{ p: 1 }} key={th}>
-                        {th}
-                      </TableCell>
-                    ))}
+                    {["Email", "Amount", "Booking ID", "Remarks", "Action"].map(
+                      (th) => (
+                        <TableCell sx={{ p: 1 }} key={th}>
+                          {th}
+                        </TableCell>
+                      )
+                    )}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -237,14 +231,7 @@ function ChargeTransaction() {
                     </TableRow>
                   ) : requestObj?.length > 0 ? (
                     requestObj.map((row, index) => (
-                      <TableRow
-                        // key={index}
-                        sx={
-                          "generate" === "generate"
-                            ? { borderLeft: "4px solid #E0021B" }
-                            : {}
-                        }
-                      >
+                      <TableRow key={index}>
                         <TableCell
                           sx={{ padding: ` 16px 0 16px 8px !important` }}
                         >
@@ -253,23 +240,18 @@ function ChargeTransaction() {
                         <TableCell
                           sx={{ padding: ` 16px 0 16px 8px !important` }}
                         >
-                          {row.phone}
+                          ${row.amount}
                         </TableCell>
                         <TableCell
                           sx={{ padding: ` 16px 0 16px 8px !important` }}
                         >
-                          {row.phone}
+                          {row.bookingId}
                         </TableCell>
 
                         <TableCell
                           sx={{ padding: ` 16px 0 16px 8px !important` }}
                         >
-                          5
-                        </TableCell>
-                        <TableCell
-                          sx={{ padding: ` 16px 0 16px 8px !important` }}
-                        >
-                          5
+                          {row.remarks}
                         </TableCell>
 
                         <TableCell sx={{ p: 0 }}>
