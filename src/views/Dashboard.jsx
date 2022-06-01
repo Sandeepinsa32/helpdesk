@@ -42,16 +42,16 @@ function Dashboard() {
 				}}>
 				<Container maxWidth={false} sx={{p: `0 !important`}}>
 					<Grid container spacing={3}>
-						<Grid item lg={3} sm={6} xl={3} xs={6}>
+						<Grid item lg={3} sm={4} xl={3} xs={6} md={4}>
 							<TicketStat tickets={todayStats} interval={'24 Hrs'} />
 						</Grid>
-						<Grid item lg={3} sm={6} xl={3} xs={6}>
+						<Grid item lg={3} sm={4} xl={3} xs={6} md={4}>
 							<TicketStat tickets={weeklyStats} interval={'7 Days'} />
-						</Grid>{' '}
-						<Grid item lg={3} sm={6} xl={3} xs={6}>
+						</Grid>
+						<Grid item lg={3} sm={4} xl={3} xs={6} md={4}>
 							<TicketStat tickets={monthlyStats} interval={'30 Days'} />
 						</Grid>
-						<Grid item lg={12} md={12} xl={12} xs={6}>
+						<Grid item lg={12} sm={12} md={12} xl={12} xs={12}>
 							<RecentBookings />
 						</Grid>
 					</Grid>
