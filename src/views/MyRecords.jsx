@@ -131,7 +131,6 @@ export const Transaction = () => {
 			.catch((e) => {
 				console.log(e);
 				setIsLoading(false);
-				// errorToast(e.response.data.message);
 			});
 	};
 
@@ -151,9 +150,6 @@ export const Transaction = () => {
 				}, 500);
 			})
 			.catch((e) => {
-				console.log(e);
-				// console.log(e.response);
-				// console.log(e.response.status);
 				setIsLoading(false);
 				errorToast(e.response.data.message);
 			});
@@ -161,29 +157,9 @@ export const Transaction = () => {
 
 	useEffect(() => {}, [0]);
 	useEffect(() => {
-		// console.log('useEffect');
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
 
-	function msToTime(date) {
-		const duration = new Date() - new Date(date);
-
-		var milliseconds = Math.floor((duration % 1000) / 100),
-			seconds = Math.floor((duration / 1000) % 60),
-			minutes = Math.floor((duration / (1000 * 60)) % 60),
-			hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-
-		hours = hours < 10 ? '0' + hours : hours;
-		minutes = minutes < 10 ? '0' + minutes : minutes;
-		seconds = seconds < 10 ? '0' + seconds : seconds;
-
-		// let GenTime = hours + ':' + minutes + ':' + seconds + '.' + milliseconds;
-		let GenTime = hours;
-		// console.log(GenTime);
-		GenTime = GenTime >= 48 ? false : true;
-
-		return Boolean(GenTime);
-	}
 	return (
 		<>
 			<Box
@@ -285,7 +261,14 @@ export const Transaction = () => {
 											</Grid>
 											{/* <Grid item xs={0} md={0}></Grid> */}
 											{/* btn --reset and serach  */}
-											<Grid item xs={3} md={3} sx={{px: 2, mt: 0.5}}>
+											<Grid
+												item
+												xs={3}
+												md={3}
+												sx={{
+													px: `0 !important`,
+													mt: 0.5,
+												}}>
 												<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' disabled={!(email || phone || bookingid)} variant='contained' onClick={searchHandler}>
 													Search
 												</Button>
@@ -306,20 +289,7 @@ export const Transaction = () => {
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
-										{[
-											'Email',
-											'Cust. Name',
-											'Booking ID',
-											//   "CCH Name",
-											'Phone',
-											// 'Total G.P',
-											//	'Airline',
-											// '	No.of PAX',
-											//'Fare Type',
-											'Dep Date',
-											'Return Date',
-											'Action',
-										].map((th) => (
+										{['Email', 'Name', 'Booking ID', 'Phone', 'Dep. Date', 'Return Date', 'Action'].map((th) => (
 											<TableCell sx={{p: 1}} key={th}>
 												{th}
 											</TableCell>
@@ -352,16 +322,11 @@ export const Transaction = () => {
 														? {borderLeft: '4px solid #76DF29'}
 														: {}
 												}>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.email}</TableCell>
+												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.email.length > 12 ? row?.email.substring(0, 12) + `...` : row?.email}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{`${row?.firstName.toUpperCase()} ${row?.lastName.toUpperCase()}`}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.bookingId}</TableCell>
 
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.phone}</TableCell>
-
-												{/* <TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.grandTotal}</TableCell>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.airlineCode}</TableCell>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.passengerCount}</TableCell>
-												<TableCell>{row?.fareType.toUpperCase()}</TableCell> */}
 
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{formateDate(row?.departureDate)}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{formateDate(row?.returnDate)}</TableCell>

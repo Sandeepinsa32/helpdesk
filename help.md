@@ -131,3 +131,14 @@ Return false }
 5. charge button ,airline button
 6. Disable add new card button when record is in view mode
 7. updating global record page with latest my record pae
+
+## 1/6/22
+
+1. --> css for breakpoint --done
+2. use substring in data
+3. add new record responsive
+4. style update record
+5. style log modal
+6. request style responsive , airline confirmation
+7. global record style
+8. raised request admin page style
