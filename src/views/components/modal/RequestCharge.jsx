@@ -107,7 +107,11 @@ function RequestCharge({ data }) {
         onSubmit={(values) => {
           console.log("formik submitted", values, bookingId);
           axios
-            .post(BASEURL + `/charge/`, { ...values, ticket: bookingId })
+            .post(BASEURL + `/charge/`, {
+              ...values,
+              ticket: bookingId,
+              phone: values.cardHolderNumber,
+            })
             .then((res) => {
               console.log(res.data);
               successToast("Request sent to admin");
