@@ -115,7 +115,7 @@ const AddNewRecord = ({isView, data}) => {
 		airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Airline code is 2 '),
 		airlineLocator: Yup.string(),
 		//
-		productType: Yup.array().required('please Choose at-least one Product type'),
+		productType: Yup.array().required('please Choose at-least one Product type').min(1, 'please Choose at-least one Product type'),
 
 		//dropdown
 		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('This field is Required'),
@@ -242,7 +242,7 @@ const AddNewRecord = ({isView, data}) => {
 						'atleat 3 and atmost 4 character should be there', //validation message
 						(value) => value == 0 || value > 0
 					),
-					expiryDate: Yup.string().nullable(),
+					expiryDate: Yup.string().nullable().required(' required'),
 				})
 			)
 			.min(1, 'card is >= 1'),
