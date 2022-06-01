@@ -17,10 +17,12 @@ function UpdateRequestCharge({formData}) {
 	const {_id, cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone} = formData;
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();
+	const [disable, setDisable] = useState(true);
+
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const INITIAL_FORM_STATE = {
 		cardHolderName: cardHolderName,
-		cardHolderNumber: cardHolderNumber,
+		cardHolderNumber: phone,
 		cardNumber: cardNumber,
 		cvv: cvv,
 		expiryDate: expiryDate,
@@ -104,26 +106,31 @@ function UpdateRequestCharge({formData}) {
 
 							<Grid container spacing={3}>
 								{/* Card Holder NAme field */}
-								<Grid item xs={4} md={2}>
-									<Textfield name='cardHolderName' label='NAME ON CC' disabled={false} />
-								</Grid>
-								{/*  Card Holder Phone no. */}
-								<Grid item xs={4} md={2}>
-									<Textfield name='cardHolderNumber' label='PHONE NO.' disabled={false} />
+								{/* <Grid item xs={4} md={2}>
+									<Textfield name='cardHolderName' label='NAME ON CC' disabled={disable} />
+								</Grid> */}
+								{/* Card Holder Phone no. */}
+								{/* <Grid item xs={4} md={2}>
+									<Textfield name='cardHolderNumber' label='PHONE NO.' disabled={disable} />
+								</Grid> */}
+								{/*  EMail Fields */}
+								<Grid item xs={4} md={4} sm={3}>
+									<Textfield name='email' label='EMAIL' disabled={disable} />
 								</Grid>
 								{/* CardNumber Field */}
 								<Grid item xs={4} md={3}>
-									<Textfield name='cardNumber' label='CARD NUMBER' disabled={false} />
+									<Textfield name='cardNumber' label='CARD NUMBER' disabled={disable} />
 								</Grid>
 								{/* CVV Field */}
 								<Grid item xs={4} md={2}>
-									<Textfield name='cvv' label='CVV' disabled={false} />
+									<Textfield name='cvv' label='CVV' disabled={disable} />
 								</Grid>
 								{/* expiry date field */}
 								<Grid item xs={4} md={3}>
-									<LocalizationProvider fullWidth disabled={false} dateAdapter={AdapterDateFns}>
+									<LocalizationProvider fullWidth disabled={disable} dateAdapter={AdapterDateFns}>
 										<DatePicker
 											fullWidth
+											disabled={disable}
 											views={['year', 'month']}
 											name='expiryDate'
 											label='EXPIRY DATE'
@@ -144,23 +151,16 @@ function UpdateRequestCharge({formData}) {
 										/>
 									</LocalizationProvider>
 								</Grid>
-								<Grid item xs={12} md={12}></Grid>
-							</Grid>
-
-							<Grid container spacing={3}>
-								{/*  EMail Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='email' label='EMAIL' />
-								</Grid>
 								{/*  Phone Fields */}
 								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='phone' label='PHONE' />
+									<Textfield name='phone' label='PHONE' disabled={disable} />
 								</Grid>
 								{/*  AMOUNT Fields */}
 								<Grid item xs={3} sm={3} md={2}>
 									<Textfield
 										name='amount'
 										label='AMOUNT'
+										disabled={disable}
 										InputProps={{
 											startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 										}}
@@ -169,6 +169,7 @@ function UpdateRequestCharge({formData}) {
 								{/*  MARKUP Fields */}
 								<Grid item xs={3} sm={3} md={2}>
 									<Textfield
+										disabled={disable}
 										name='markup'
 										label='MARKUP'
 										InputProps={{
@@ -178,16 +179,15 @@ function UpdateRequestCharge({formData}) {
 								</Grid>
 								{/* Description Fields */}
 								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='description' label='DESCRIPTION' multiline rows={2} />
+									<Textfield name='description' disabled={disable} label='DESCRIPTION' multiline rows={2} />
 								</Grid>
 								{/* ADDRESS Fields */}
 								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='address' label='ADDRESS' multiline rows={2} />
+									<Textfield name='address' label='ADDRESS' disabled={disable} multiline rows={2} />
 								</Grid>
 								<Grid item xs={4} md={4} sm={4}>
 									<Textfield name='comment' label='COMMENT' multiline rows={2} />
 								</Grid>
-
 								<Grid item xs={12} sm={6} md={3}>
 									<FormControl fullWidth>
 										<InputLabel id='Status-label'>Status</InputLabel>
@@ -204,7 +204,6 @@ function UpdateRequestCharge({formData}) {
 										</Select>
 									</FormControl>
 								</Grid>
-
 								<Grid item xs={10} md={10}></Grid>
 								<Grid item xs={10} md={2}>
 									<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
