@@ -27,6 +27,7 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
+	Tooltip,
 } from '@mui/material';
 
 import UpdateRecord from './components/UpdateRecord';
@@ -36,6 +37,10 @@ import Email from './Email';
 //icon
 import CloseIcon from '@mui/icons-material/Close';
 import {Search as SearchIcon} from '../assets/icons/search';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import EditIcon from '@mui/icons-material/Edit';
+import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function SearchRecord() {
 	const [recordData, setRecordData] = useState([]);
@@ -172,29 +177,10 @@ export default function SearchRecord() {
 												/>
 											</Grid>
 
-											{/* <Grid item sm={2} md={3}>
-														<TextField
-															size="small"
-															sx={{ width: `19vw`, height: `2rem` }}
-															InputProps={{
-															startAdornment: (
-																<InputAdornment position="start">
-																<SvgIcon color="action" fontSize="small">
-																	<SearchIcon />
-																</SvgIcon>
-																</InputAdornment>
-															),
-															}}
-															onChange={(e) => setEmail(e.target.value)}
-															placeholder="Enter Email id"
-															variant="outlined"
-															value={email}
-														/>
-														</Grid> */}
 											<Grid item sm={2} md={3}>
 												<TextField
 													size='small'
-													sx={{width: `19vw`, height: `2rem`}}
+													sx={{height: `2rem`}}
 													InputProps={{
 														startAdornment: (
 															<InputAdornment position='start'>
@@ -229,7 +215,16 @@ export default function SearchRecord() {
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
-										{['Cust. Name', 'Booking ID', 'Phone', 'Total G.P', 'Airline', 'No.of PAX', 'Fare Type', 'Dep. Date', 'Return Date', 'Action'].map((th) => (
+										{[
+											//'Email',
+											'Name',
+											'Booking ID',
+											'Phone',
+											'Dep. Date',
+											'Return Date',
+											'Created Date',
+											'Action',
+										].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
 										))}
 									</TableRow>
@@ -254,56 +249,55 @@ export default function SearchRecord() {
 												sx={{
 													'&:last-child td, &:last-child th': {border: 0},
 												}}>
-												<TableCell>{`${row.firstName.toUpperCase()} ${row.lastName.toUpperCase()}`}</TableCell>
-												<TableCell>{row.bookingId}</TableCell>
-												{/* <TableCell>{row.cards[0].card}</TableCell> */}
-												<TableCell>{row.phone}</TableCell>
-												<TableCell>{row.grandTotal}</TableCell>
-												<TableCell>{row.airlineCode}</TableCell>
-												<TableCell>{row.passengerCount}</TableCell>
-												<TableCell>{row.fareType.toUpperCase()}</TableCell>
-												<TableCell>{formateDate(row.departureDate)}</TableCell>
-												<TableCell>{formateDate(row.returnDate)}</TableCell>
+												{/* <TableCell>{false ? row?.email.substring(0, 12) + `...` : row?.email}</TableCell> */}
+												<TableCell>{`${row?.firstName.toUpperCase()} ${row?.lastName.toUpperCase()}`}</TableCell>
+												<TableCell>{row?.bookingId}</TableCell>
+
+												<TableCell>{row?.phone}</TableCell>
+
+												<TableCell>{formateDate(row?.departureDate)}</TableCell>
+												<TableCell>{formateDate(row?.returnDate)}</TableCell>
+												<TableCell>{formateDate(row?.createdAt)}</TableCell>
+
 												<TableCell>
-													<Button
-														variant='contained'
-														size='small'
-														onClick={() => {
-															// console.log(row);
-															console.log(row);
-															setViewData(true);
-															setUserData(row);
-															setOpenUpdateRecord(true);
-															addLog(row._id);
-														}}>
-														Update
-													</Button>
+													{/* Update*/}
+													<Tooltip title={new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? 'Edit' : 'View'}>
+														<IconButton
+															aria-label='update'
+															onClick={() => {
+																setViewData(true);
+																setUserData(row);
+																setOpenUpdateRecord(true);
+																addLog(row._id);
+															}}>
+															{new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? <EditIcon /> : <VisibilityIcon />}
+														</IconButton>
+													</Tooltip>
 
-													<Button
-														sx={{
-															margin: ` 0 8px`,
-														}}
-														variant='contained'
-														size='small'
-														onClick={(e) => {
-															// alert(row.id);
-															setViewEmail(row._id);
-															// console.log(row.id);
-															setOpenEmailModal(true);
-														}}>
-														Send
-													</Button>
+													{/* email*/}
+													<Tooltip title='Email to Customer '>
+														<IconButton
+															aria-label='sendEmail'
+															onClick={(e) => {
+																setViewEmail(row._id);
+																setOpenEmailModal(true);
+															}}>
+															<ForwardToInboxIcon />
+														</IconButton>
+													</Tooltip>
 
-													<Button
-														variant='contained'
-														size='small'
-														onClick={() => {
-															setUserData(row);
+													{/* logs*/}
+													<Tooltip title='View Logs'>
+														<IconButton
+															aria-label='viewlogs'
+															onClick={() => {
+																setUserData(row);
 
-															setOpenLogModal(true);
-														}}>
-														logs
-													</Button>
+																setOpenLogModal(true);
+															}}>
+															<ReceiptLongIcon />
+														</IconButton>
+													</Tooltip>
 												</TableCell>
 											</TableRow>
 										))
