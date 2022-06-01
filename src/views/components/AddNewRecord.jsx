@@ -112,15 +112,15 @@ const AddNewRecord = ({isView, data}) => {
 			.nullable(),
 
 		pnrNo: Yup.string().max(255),
-		airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 '),
+		airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Airline code is 2 '),
 		airlineLocator: Yup.string(),
 		//
-		productType: Yup.array().required('Phone is required'),
+		productType: Yup.array().required('please Choose at-least one Product type').min(1, 'please Choose at-least one Product type'),
 
 		//dropdown
-		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent '),
-		bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'void', 'addon'], 'input should be one of below value'),
-		bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value'),
+		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('This field is Required'),
+		bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'void', 'addon'], 'input should be one of below value').required('This field is Required'),
+		bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is Required'),
 
 		//currency
 		mcoNo: Yup.number('input must consist if number').test(
@@ -225,29 +225,28 @@ const AddNewRecord = ({isView, data}) => {
 		card: Yup.array()
 			.of(
 				Yup.object().shape({
-					cardHolderName: Yup.string().max(15, 'Must be 15 characters or less'),
+					cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 					cardHolderNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
 
 					cardNumber: Yup.string()
-						// 	.test(
-						// 		'test-number', // this is used internally by yup
-						// 		'Credit Card number is invalid', //validation message
-						// 		(value) => valid.number(value).isValid
-						// )
-						// return true false based on validation
-						.required()
-						.max(16, 'Must be 16 characters')
-						.min(16, 'Must be 16 characters'),
+						.test(
+							'test-number', // this is used internally by yup
+							'Credit Card number is invalid', //validation message
+							(value) => valid.number(value).isValid
+						) // return true false based on validation
+						.required('card number is required'),
+					// .max(16, 'Must be 16 characters')
+					// .min(15, 'Must be 16 characters')
 					cvv: Yup.number().test(
 						'min 3 && max 4 digit required', // this is used internally by yup
 						'atleat 3 and atmost 4 character should be there', //validation message
 						(value) => value == 0 || value > 0
 					),
-					expiryDate: Yup.string().nullable(),
+					expiryDate: Yup.string().nullable().required(' required'),
 				})
 			)
 			.min(1, 'card is >= 1'),
-		remarks: Yup.string().required('This field is required'),
+		remarks: Yup.string(),
 	});
 
 	return (
