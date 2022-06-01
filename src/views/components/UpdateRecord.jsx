@@ -11,6 +11,7 @@ import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import {BASEURL, errorToast} from '../../utils/Utils';
+import Textfield from './FormField/Textfield';
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -163,7 +164,7 @@ const UpdateRecord = ({data}) => {
 		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 		lastName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 		email: Yup.string().email('Invalid email address').required('Required'),
-		phone: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
+		phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
 
 		alternateEmail: Yup.string()
 			.email('Invalid email address')
@@ -173,43 +174,36 @@ const UpdateRecord = ({data}) => {
 			.matches(phoneRegExp, 'Phone number is not valid'),
 
 		pnrNo: Yup.string().max(255),
-		airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 ').required('airlineCode is required'),
+		airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Aieline code is 2 '),
 		airlineLocator: Yup.string(),
 		//
-		productType: Yup.array().required('Required'),
+		productType: Yup.array(),
 
 		//dropdown
-		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('Required'),
-		bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'void', 'addon'], 'input should be one of below value').required('Required'),
-		bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is  required'),
+		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent '),
+		bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'void', 'addon'], 'input should be one of below value'),
+		bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value'),
 
-		mcoNo: Yup.number('input must consist if number')
-			.required('This Field is required')
-			.test(
-				'number should be postive', // this is used internally by yup
-				'value should be greater or Equal to 0', //validation message
-				(value) => value == 0 || value > 0
-			),
-		totalInhouseCharge: Yup.number('input must consist if number')
-			.required('This field is  Required')
-			.test(
-				'number should be postive', // this is used internally by yup
-				'value should be greater or Equal to 0', //validation message
-				(value) => value == 0 || value > 0
-			),
-		grandTotal: Yup.number('input must consist if number')
-			.required('This field is  Required')
-			.test(
-				'number should be postive', // this is used internally by yup
-				'value should be greater or Equal to 0', //validation message
-				(value) => value == 0 || value > 0
-			),
+		mcoNo: Yup.number('input must consist if number').test(
+			'number should be postive', // this is used internally by yup
+			'value should be greater or Equal to 0', //validation message
+			(value) => value == 0 || value > 0
+		),
+		totalInhouseCharge: Yup.number('input must consist if number').test(
+			'number should be postive', // this is used internally by yup
+			'value should be greater or Equal to 0', //validation message
+			(value) => value == 0 || value > 0
+		),
+		grandTotal: Yup.number('input must consist if number').test(
+			'number should be postive', // this is used internally by yup
+			'value should be greater or Equal to 0', //validation message
+			(value) => value == 0 || value > 0
+		),
 
 		//number of passenger
 		adultCount: Yup.number('input must consist if number')
 			.integer()
 			.max(9)
-			.required('This field is  Required')
 			.test(
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
@@ -218,7 +212,6 @@ const UpdateRecord = ({data}) => {
 		childCount: Yup.number('input must consist if number')
 			.integer()
 			.max(9)
-			.required('This field is  Required')
 			.test(
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
@@ -227,7 +220,6 @@ const UpdateRecord = ({data}) => {
 		elderCount: Yup.number('input must consist if number')
 			.integer()
 			.max(9)
-			.required('This field is  Required')
 			.test(
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
@@ -236,7 +228,7 @@ const UpdateRecord = ({data}) => {
 
 		childPrice: Yup.number('input must consist if number').when(['childCount'], (childCount, schema) => {
 			return childCount > 0
-				? schema.required('this field required ').test(
+				? schema.test(
 						'number should be postive', // this is used internally by yup
 						'value should be greater or Equal to 0', //validation message
 						(value) => value == 0 || value > 0
@@ -245,7 +237,7 @@ const UpdateRecord = ({data}) => {
 		}),
 		adultPrice: Yup.number('input must consist if number').when(['adultCount'], (adultCount, schema) => {
 			return adultCount > 0
-				? schema.required('this field required ').test(
+				? schema.test(
 						'number should be postive', // this is used internally by yup
 						'value should be greater or Equal to 0', //validation message
 						(value) => value == 0 || value > 0
@@ -254,7 +246,7 @@ const UpdateRecord = ({data}) => {
 		}),
 		elderPrice: Yup.number('input must consist if number').when(['elderCount'], (elderCount, schema) => {
 			return elderCount > 0
-				? schema.required('this field required ').test(
+				? schema.test(
 						'number should be postive', // this is used internally by yup
 						'value should be greater or Equal to 0', //validation message
 						(value) => value == 0 || value > 0
@@ -263,8 +255,8 @@ const UpdateRecord = ({data}) => {
 		}),
 
 		//date
-		departureDate: Yup.string().required('This field is required').nullable(),
-		returnDate: Yup.string().required('please enter  DepartureDate value first ,This field is required').nullable(),
+		departureDate: Yup.string().nullable(),
+		returnDate: Yup.string().nullable(),
 
 		//companyCard details
 		isCompanyCCUsed: Yup.bool(),
@@ -393,6 +385,11 @@ const UpdateRecord = ({data}) => {
 									borderRadius: 1,
 								}}>
 								<UpdateRecordForm />
+								<Grid container spacing={3} sx={{mt: 1}}>
+									<Grid item xs={4} md={4} sm={4}>
+										<Textfield name='remarks' label='COMMENT' multiline rows={2} />
+									</Grid>
+								</Grid>
 							</Box>
 							<Box sx={{m: 1}}>
 								<Typography variant='h6' gutterBottom sx={{my: 4}}>
@@ -558,6 +555,7 @@ const UpdateRecord = ({data}) => {
 														/>
 													</LocalizationProvider>
 												</Grid>
+
 												<Box
 													xs={12}
 													md={2}
