@@ -85,12 +85,13 @@ function ChargeTransaction() {
     axios
       .get(BASEURL + "/charge/all" + search)
       .then((response) => {
+        console.log(response.data.data);
         if (search === "?page=1") {
-          setOldTotalRecords(response.data.data.totalDocuments);
+          //   setOldTotalRecords(response.data.data.totalDocuments);
           // setAllRecords(response.data.data.tickets);
         }
         setRequestObj(response.data.data.tickets);
-        setTotalRecords(response.data.data.totalDocuments);
+        // setTotalRecords(response.data.data.totalDocuments);
         setTimeout(() => {
           setIsLoading(false);
         }, 500);
