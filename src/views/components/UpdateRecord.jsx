@@ -376,11 +376,15 @@ const UpdateRecord = ({data}) => {
 
 					return (
 						<Form onSubmit={handleSubmit}>
+							<Box sx={{m: 0}}>
+								<Typography variant='h6' gutterBottom sx={{my: 4}}>
+									Update Record :
+								</Typography>
+							</Box>
 							<Box
 								sx={{
-									m: 1,
-									p: 1,
-									py: 3,
+									m: 0,
+									p: 0,
 									bgcolor: 'background.paper',
 									borderRadius: 1,
 								}}>

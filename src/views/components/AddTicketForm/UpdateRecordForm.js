@@ -103,7 +103,7 @@ export default function UpdateRecordForm() {
 	return (
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
-			<Grid item xs={12} sm={12} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
+			<Grid item xs={12} sm={12} md={12} sx={{p: `16px !important`, py: `0px !important`}}>
 				<FormControl sx={{m: 1, p: 1}} fullWidth disabled={isDisable} error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
 					<InputLabel variant='outlined'>Product Type :</InputLabel>
 				</FormControl>

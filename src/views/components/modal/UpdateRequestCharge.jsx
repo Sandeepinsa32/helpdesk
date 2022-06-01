@@ -12,9 +12,7 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
 function UpdateRequestCharge({formData}) {
-	console.log(formData);
-
-	const {_id, cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone} = formData;
+	const {_id, cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone, bookingId} = formData;
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();
 	const [disable, setDisable] = useState(true);
@@ -52,7 +50,7 @@ function UpdateRequestCharge({formData}) {
 	}, [0]);
 
 	const INITIAL_FORM_STATE = {
-		cardHolderName: cardHolderName,
+		// cardHolderName: cardHolderName,
 		cardHolderNumber: phone,
 		cardNumber: cardNumber,
 		cvv: cvv,
@@ -67,11 +65,13 @@ function UpdateRequestCharge({formData}) {
 		status: '',
 	};
 	const FORM_VALIDATION = Yup.object({
-		cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
-		cardHolderNumber: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
+		// cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
+		cardHolderNumber: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid'),
 		cardNumber: Yup.string(),
-		email: Yup.string().email('Invalid email address').required('Required'),
-		phone: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
+		email: Yup.string().email('Invalid email address'),
+		// .required('Required'),
+		phone: Yup.string().matches(phoneRegExp, 'Phone number is not valid'),
+		// .required('Phone is required'),
 		cvv: Yup.number().test(
 			'min 3 && max 4 digit required', // this is used internally by yup
 			'atleat 3 and atmost 4 character should be there', //validation message
@@ -104,15 +104,16 @@ function UpdateRequestCharge({formData}) {
 				initialValues={{...INITIAL_FORM_STATE}}
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
-					console.log('formik submitted', values);
+					console.log('formik submitted', values, bookingId);
 
-					// axios
-					// 	.put(BASEURL + `/ticket/${data._id}`, {
-					// 		data: {alternateEmail, alternatePhone, pnrNo, airlineLocator},
-					// 		cards: inputList,
-					// 	})
-					// 	.then((res) => console.log(res.data))
-					// 	.catch((e) => console.log(e));
+					axios
+						.put(BASEURL + `/ticket/payment`, {
+							id: bookingId,
+							status: values.status,
+							description: values.comment,
+						})
+						.then((res) => console.log(res.data))
+						.catch((e) => console.log(e));
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
@@ -231,8 +232,9 @@ function UpdateRequestCharge({formData}) {
 													error={Boolean(touched.status && errors.status)}
 													value={values.status}
 													onChange={handleChange}>
-													<MenuItem value='approve'>APPROVE</MenuItem>
+													<MenuItem value='accepted'>ACCEPTED</MenuItem>
 													<MenuItem value='decline'>DECLINE</MenuItem>
+													{/* "accepted", "declined", "new", "rejected" */}
 												</Select>
 											</FormControl>
 										</Grid>
