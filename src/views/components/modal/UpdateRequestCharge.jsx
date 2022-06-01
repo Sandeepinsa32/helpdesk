@@ -5,7 +5,7 @@ import axios from 'axios';
 import Textfield from '../FormField/Textfield';
 
 // mui
-import {Grid, Box, Typography, Button, TextField, InputAdornment, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox} from '@mui/material';
+import {Grid, Box, Typography, Button, TextField, InputAdornment, CircularProgress, FormControl, InputLabel, Select, MenuItem, FormControlLabel, Checkbox} from '@mui/material';
 import {BASEURL, errorToast} from '../../../utils/Utils';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -18,6 +18,7 @@ function UpdateRequestCharge({formData}) {
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();
 	const [disable, setDisable] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const INITIAL_FORM_STATE = {
@@ -77,6 +78,10 @@ function UpdateRequestCharge({formData}) {
 		return today;
 	}
 
+	useEffect(() => {
+		setIsLoading(true);
+	}, [0]);
+
 	return (
 		<>
 			<Formik
@@ -97,121 +102,134 @@ function UpdateRequestCharge({formData}) {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
 					console.log(errors);
 					return (
-						<Form onSubmit={handleSubmit}>
-							<Box sx={{m: 1}}>
-								<Typography variant='h6' gutterBottom sx={{my: 4}}>
-									View Charge Request :
-								</Typography>
-							</Box>
+						<>
+							{isLoading ? (
+								<div
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+										margin: '20%',
+									}}>
+									<CircularProgress />
+								</div>
+							) : (
+								<Form onSubmit={handleSubmit}>
+									<Box sx={{m: 1}}>
+										<Typography variant='h6' gutterBottom sx={{my: 4}}>
+											View Charge Request :
+										</Typography>
+									</Box>
 
-							<Grid container spacing={3}>
-								{/* Card Holder NAme field */}
-								{/* <Grid item xs={4} md={2}>
+									<Grid container spacing={3}>
+										{/* Card Holder NAme field */}
+										{/* <Grid item xs={4} md={2}>
 									<Textfield name='cardHolderName' label='NAME ON CC' disabled={disable} />
 								</Grid> */}
-								{/* Card Holder Phone no. */}
-								{/* <Grid item xs={4} md={2}>
+										{/* Card Holder Phone no. */}
+										{/* <Grid item xs={4} md={2}>
 									<Textfield name='cardHolderNumber' label='PHONE NO.' disabled={disable} />
 								</Grid> */}
-								{/*  EMail Fields */}
-								<Grid item xs={4} md={4} sm={3}>
-									<Textfield name='email' label='EMAIL' disabled={disable} />
-								</Grid>
-								{/* CardNumber Field */}
-								<Grid item xs={4} md={3}>
-									<Textfield name='cardNumber' label='CARD NUMBER' disabled={disable} />
-								</Grid>
-								{/* CVV Field */}
-								<Grid item xs={4} md={2}>
-									<Textfield name='cvv' label='CVV' disabled={disable} />
-								</Grid>
-								{/* expiry date field */}
-								<Grid item xs={4} md={3}>
-									<LocalizationProvider fullWidth disabled={disable} dateAdapter={AdapterDateFns}>
-										<DatePicker
-											fullWidth
-											disabled={disable}
-											views={['year', 'month']}
-											name='expiryDate'
-											label='EXPIRY DATE'
-											inputFormat='MM/yyyy'
-											placeholder='MM/yyyy'
-											value={values.expiryDate}
-											onChange={(newValue) => {
-												setFieldValue(
-													'expiryDate',
-													new Date(newValue).toLocaleDateString('en-US', {
-														day: '2-digit',
-														month: '2-digit',
-														year: 'numeric',
-													})
-												);
-											}}
-											renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
-										/>
-									</LocalizationProvider>
-								</Grid>
-								{/*  Phone Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='phone' label='PHONE' disabled={disable} />
-								</Grid>
-								{/*  AMOUNT Fields */}
-								<Grid item xs={3} sm={3} md={2}>
-									<Textfield
-										name='amount'
-										label='AMOUNT'
-										disabled={disable}
-										InputProps={{
-											startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-										}}
-									/>
-								</Grid>
-								{/*  MARKUP Fields */}
-								<Grid item xs={3} sm={3} md={2}>
-									<Textfield
-										disabled={disable}
-										name='markup'
-										label='MARKUP'
-										InputProps={{
-											startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-										}}
-									/>
-								</Grid>
-								{/* Description Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='description' disabled={disable} label='DESCRIPTION' multiline rows={2} />
-								</Grid>
-								{/* ADDRESS Fields */}
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='address' label='ADDRESS' disabled={disable} multiline rows={2} />
-								</Grid>
-								<Grid item xs={4} md={4} sm={4}>
-									<Textfield name='comment' label='COMMENT' multiline rows={2} />
-								</Grid>
-								<Grid item xs={12} sm={6} md={4}>
-									<FormControl fullWidth>
-										<InputLabel id='Status-label'>Status</InputLabel>
-										<Select
-											labelId='Status-label'
-											fullWidth
-											name='status'
-											label='Status'
-											error={Boolean(touched.status && errors.status)}
-											value={values.status}
-											onChange={handleChange}>
-											<MenuItem value='approve'>APPROVE</MenuItem>
-											<MenuItem value='decline'>DECLINE</MenuItem>
-										</Select>
-									</FormControl>
-								</Grid>
-								<Grid item xs={10} md={10}></Grid>
-								<Grid item xs={10} md={2}>
-									<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
-										Submit
-									</Button>
-								</Grid>
-							</Grid>
-						</Form>
+										{/*  EMail Fields */}
+										<Grid item xs={4} md={4} sm={3}>
+											<Textfield name='email' label='EMAIL' disabled={disable} />
+										</Grid>
+										{/* CardNumber Field */}
+										<Grid item xs={4} md={3}>
+											<Textfield name='cardNumber' label='CARD NUMBER' disabled={disable} />
+										</Grid>
+										{/* CVV Field */}
+										<Grid item xs={4} md={2}>
+											<Textfield name='cvv' label='CVV' disabled={disable} />
+										</Grid>
+										{/* expiry date field */}
+										<Grid item xs={4} md={3}>
+											<LocalizationProvider fullWidth disabled={disable} dateAdapter={AdapterDateFns}>
+												<DatePicker
+													fullWidth
+													disabled={disable}
+													views={['year', 'month']}
+													name='expiryDate'
+													label='EXPIRY DATE'
+													inputFormat='MM/yyyy'
+													placeholder='MM/yyyy'
+													value={values.expiryDate}
+													onChange={(newValue) => {
+														setFieldValue(
+															'expiryDate',
+															new Date(newValue).toLocaleDateString('en-US', {
+																day: '2-digit',
+																month: '2-digit',
+																year: 'numeric',
+															})
+														);
+													}}
+													renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
+												/>
+											</LocalizationProvider>
+										</Grid>
+										{/*  Phone Fields */}
+										<Grid item xs={4} md={4} sm={4}>
+											<Textfield name='phone' label='PHONE' disabled={disable} />
+										</Grid>
+										{/*  AMOUNT Fields */}
+										<Grid item xs={3} sm={3} md={2}>
+											<Textfield
+												name='amount'
+												label='AMOUNT'
+												disabled={disable}
+												InputProps={{
+													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+												}}
+											/>
+										</Grid>
+										{/*  MARKUP Fields */}
+										<Grid item xs={3} sm={3} md={2}>
+											<Textfield
+												disabled={disable}
+												name='markup'
+												label='MARKUP'
+												InputProps={{
+													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+												}}
+											/>
+										</Grid>
+										{/* Description Fields */}
+										<Grid item xs={4} md={4} sm={4}>
+											<Textfield name='description' disabled={disable} label='DESCRIPTION' multiline rows={2} />
+										</Grid>
+										{/* ADDRESS Fields */}
+										<Grid item xs={4} md={4} sm={4}>
+											<Textfield name='address' label='ADDRESS' disabled={disable} multiline rows={2} />
+										</Grid>
+										<Grid item xs={4} md={4} sm={4}>
+											<Textfield name='comment' label='COMMENT' multiline rows={2} />
+										</Grid>
+										<Grid item xs={12} sm={6} md={4}>
+											<FormControl fullWidth>
+												<InputLabel id='Status-label'>Status</InputLabel>
+												<Select
+													labelId='Status-label'
+													fullWidth
+													name='status'
+													label='Status'
+													error={Boolean(touched.status && errors.status)}
+													value={values.status}
+													onChange={handleChange}>
+													<MenuItem value='approve'>APPROVE</MenuItem>
+													<MenuItem value='decline'>DECLINE</MenuItem>
+												</Select>
+											</FormControl>
+										</Grid>
+										<Grid item xs={10} md={10}></Grid>
+										<Grid item xs={10} md={2}>
+											<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
+												Submit
+											</Button>
+										</Grid>
+									</Grid>
+								</Form>
+							)}
+						</>
 					);
 				}}
 			</Formik>
