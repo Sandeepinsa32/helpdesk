@@ -21,6 +21,36 @@ function UpdateRequestCharge({formData}) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+
+	function formateDate(value) {
+		let today = new Date(value);
+		let dd = String(today.getDate()).padStart(2, '0');
+		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let yyyy = today.getFullYear();
+
+		today = mm + '/' + yyyy;
+		return today;
+	}
+
+	const fetchCards = async (id) => {
+		setIsLoading(true);
+		axios
+			.post(BASEURL + '/ticket/mask/' + id)
+			.then((response) => {
+				// setCardDetail(response.data.data);
+				console.log(response.data);
+				setIsLoading(false);
+			})
+			.catch((e) => {
+				console.log(e);
+				setIsLoading(false);
+			});
+	};
+
+	useEffect(() => {
+		fetchCards();
+	}, [0]);
+
 	const INITIAL_FORM_STATE = {
 		cardHolderName: cardHolderName,
 		cardHolderNumber: phone,
@@ -67,20 +97,6 @@ function UpdateRequestCharge({formData}) {
 		comment: Yup.string().required('Required'),
 		status: Yup.string().required('Required'),
 	});
-
-	function formateDate(value) {
-		let today = new Date(value);
-		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		let yyyy = today.getFullYear();
-
-		today = mm + '/' + yyyy;
-		return today;
-	}
-
-	useEffect(() => {
-		setIsLoading(true);
-	}, [0]);
 
 	return (
 		<>

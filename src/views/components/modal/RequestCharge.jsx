@@ -63,6 +63,7 @@ function RequestCharge({data, onClose}) {
 	// console.log(data);
 
 	const fetchCards = async (id) => {
+		setIsLoading(true);
 		axios
 			.get(BASEURL + '/ticket/details/' + id)
 			.then((response) => {
@@ -88,10 +89,6 @@ function RequestCharge({data, onClose}) {
 	useEffect(() => {
 		fetchCards(_id);
 	}, []);
-
-	useEffect(() => {
-		setIsLoading(true);
-	}, [0]);
 
 	return (
 		<>
