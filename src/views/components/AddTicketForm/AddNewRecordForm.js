@@ -402,6 +402,7 @@ export default function AddressForm() {
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
 						<Textfield
+							fullWidth
 							name='childCount'
 							label='CHILDS'
 							type='number'
@@ -416,6 +417,7 @@ export default function AddressForm() {
 
 						{values.childCount > 0 ? (
 							<Textfield
+								fullWidth
 								sx={{mt: 2}}
 								name='childPrice'
 								label='PRICE PER CHILD'

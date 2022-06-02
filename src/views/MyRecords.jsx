@@ -12,7 +12,7 @@ import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Uti
 import axios from 'axios';
 
 //@material-ui
-import {Box, Button, Card, Container, CardContent, TextField, CircularProgress, Modal, InputAdornment, SvgIcon, Typography, Grid, IconButton, Tooltip} from '@mui/material';
+import {Box, Button, Card, Container, CardContent, TextField, CircularProgress, Modal, Divider, InputAdornment, SvgIcon, Typography, Grid, IconButton, Tooltip, CardHeader} from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -419,21 +419,29 @@ export const Transaction = () => {
 						top: '50%',
 						left: '50%',
 						transform: 'translate(-50%, -50%)',
-						minWidth: '90vw',
-						minHeight: '80vh',
-						maxHeight: '95vh',
-						overflowX: ' auto',
+						width: '80vw',
+						Height: '85vh',
 						bgcolor: 'background.paper',
-						// border: '2px solid #000',
 						boxShadow: 24,
 						borderRadius: '1rem',
-						p: 4,
+						pt: 2,
 					}}>
-					<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
+					<Card sx={{p: 0, m: 0}}>
+						<CardHeader
+							sx={{py: '0 !important'}}
+							title='UPDATE RECORD :'
+							action={
+								<IconButton onClick={handleClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+									<CloseIcon />
+								</IconButton>
+							}
+						/>
+						<Divider />
 
-					<UpdateRecord data={selectedTicket} />
+						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
+							<UpdateRecord data={selectedTicket} />
+						</CardContent>
+					</Card>
 				</Box>
 			</Modal>
 

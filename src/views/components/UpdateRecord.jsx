@@ -376,11 +376,6 @@ const UpdateRecord = ({data}) => {
 
 					return (
 						<Form onSubmit={handleSubmit}>
-							<Box sx={{m: 0}}>
-								<Typography variant='h6' gutterBottom sx={{my: 4}}>
-									Update Record :
-								</Typography>
-							</Box>
 							<Box
 								sx={{
 									m: 0,
@@ -390,11 +385,65 @@ const UpdateRecord = ({data}) => {
 								}}>
 								<UpdateRecordForm />
 							</Box>
+							{isCompanyCard && (
+								<Grid container spacing={3} sx={{mt: 1}}>
+									{/*  company card  */}
+
+									<Grid item xs={12} md={3}>
+										<FormControlLabel
+											control={
+												<Checkbox
+													checked={isCompanyCard}
+													disabled={Boolean(isDisable)}
+													onChange={(e) => {
+														setIsCompanyCard(!isCompanyCard);
+														setFieldValue('isCompanyCCUsed', !isCompanyCard);
+													}}
+													name='companyCard'
+													color='primary'
+												/>
+											}
+											label='COMPANY CC USED ?'
+											disabled={true}
+										/>
+									</Grid>
+
+									{isCompanyCard &&
+										items.map((item, i) => {
+											const {name, label} = item;
+
+											return (
+												<Grid item xs={4} md={3} key={i}>
+													<TextField
+														name={name}
+														type='number'
+														label={label}
+														fullWidth
+														disabled={true}
+														error={touched[name] && errors[name]}
+														helperText={touched[name] && errors[name]}
+														onBlur={handleBlur}
+														onChange={handleChange}
+														value={values[name]}
+														InputProps={
+															name == 'ccAmount'
+																? {
+																		startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+																  }
+																: null
+														}
+													/>
+												</Grid>
+											);
+										})}
+								</Grid>
+							)}
 							<Box sx={{m: 1}}>
 								<Typography variant='h6' gutterBottom sx={{my: 4}}>
 									Customer Card Detail :
 								</Typography>
 							</Box>
+
 							<Box
 								sx={{
 									m: 1,
@@ -592,58 +641,6 @@ const UpdateRecord = ({data}) => {
 										</Grid>
 									</Grid>
 								)}
-
-								<Grid container spacing={3} sx={{mt: 1}}>
-									{/*  company card  */}
-
-									<Grid item xs={12} md={3}>
-										<FormControlLabel
-											control={
-												<Checkbox
-													checked={isCompanyCard}
-													disabled={Boolean(isDisable)}
-													onChange={(e) => {
-														setIsCompanyCard(!isCompanyCard);
-														setFieldValue('isCompanyCCUsed', !isCompanyCard);
-													}}
-													name='companyCard'
-													color='primary'
-												/>
-											}
-											label='COMPANY CC USED ?'
-											disabled={true}
-										/>
-									</Grid>
-
-									{isCompanyCard &&
-										items.map((item, i) => {
-											const {name, label} = item;
-
-											return (
-												<Grid item xs={4} md={3} key={i}>
-													<TextField
-														name={name}
-														type='number'
-														label={label}
-														fullWidth
-														disabled={true}
-														error={touched[name] && errors[name]}
-														helperText={touched[name] && errors[name]}
-														onBlur={handleBlur}
-														onChange={handleChange}
-														value={values[name]}
-														InputProps={
-															name == 'ccAmount'
-																? {
-																		startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-																  }
-																: null
-														}
-													/>
-												</Grid>
-											);
-										})}
-								</Grid>
 							</Box>
 
 							<Grid container spacing={1}>

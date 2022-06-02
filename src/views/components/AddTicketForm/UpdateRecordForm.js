@@ -428,10 +428,11 @@ export default function UpdateRecordForm() {
 				</LocalizationProvider>
 			</Grid>
 			{/* kidsCount Fields */}
-			<Grid item xs={3} md={2} sm={4}>
+			<Grid item xs={3} md={2} sm={3}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
 						<Textfield
+							fullWidth
 							disabled={isDisable}
 							label='CHILDS'
 							name='childCount'
@@ -446,12 +447,12 @@ export default function UpdateRecordForm() {
 						/>
 						{values.childCount > 0 ? (
 							<Textfield
+								fullWidth
 								disabled={isDisable}
 								type='number'
 								sx={{mt: 2}}
 								name='childPrice'
 								label='PRICE PER CHILD'
-								fullWidth
 								InputProps={{
 									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 								}}
@@ -461,7 +462,7 @@ export default function UpdateRecordForm() {
 				</Box>
 			</Grid>
 			{/* adult Count Fields */}
-			<Grid item xs={3} md={2} sm={4}>
+			<Grid item xs={3} md={2} sm={3}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
 						<Textfield
@@ -493,7 +494,7 @@ export default function UpdateRecordForm() {
 				</Box>
 			</Grid>
 			{/* elder Count Fields */}
-			<Grid item xs={3} md={2} sm={4}>
+			<Grid item xs={3} md={2} sm={3}>
 				<Box sx={displayFlexRowStyle}>
 					<Box sx={displayColStyle}>
 						<Textfield
