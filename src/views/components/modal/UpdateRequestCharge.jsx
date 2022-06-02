@@ -22,6 +22,8 @@ import {
 	MenuItem,
 	FormControlLabel,
 	Checkbox,
+	CardActions,
+	Divider,
 } from '@mui/material';
 import {BASEURL, errorToast} from '../../../utils/Utils';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
@@ -141,34 +143,23 @@ function UpdateRequestCharge({formData}) {
 					console.log(errors);
 					return (
 						<Card>
-							<CardHeader title='Request Charge' />
-							<CardContent>
-								{isLoading ? (
-									<div
-										style={{
-											display: 'flex',
-											justifyContent: 'center',
-											margin: '20%',
-										}}>
-										<CircularProgress />
-									</div>
-								) : (
-									<Form onSubmit={handleSubmit}>
-										<Box sx={{m: 1}}>
-											<Typography variant='h6' gutterBottom sx={{my: 4}}>
-												View Charge Request :
-											</Typography>
-										</Box>
-
+							<Form onSubmit={handleSubmit}>
+								<CardHeader title='	View Charge Request :' />
+								<Divider />
+								<CardContent>
+									{isLoading ? (
+										<div
+											style={{
+												display: 'flex',
+												justifyContent: 'center',
+												margin: '20%',
+											}}>
+											<CircularProgress />
+										</div>
+									) : (
 										<Grid container spacing={3}>
 											{/* Card Holder NAme field */}
-											{/* <Grid item xs={4} md={2}>
-									<Textfield name='cardHolderName' label='NAME ON CC' disabled={disable} />
-								</Grid> */}
-											{/* Card Holder Phone no. */}
-											{/* <Grid item xs={4} md={2}>
-									<Textfield name='cardHolderNumber' label='PHONE NO.' disabled={disable} />
-								</Grid> */}
+
 											{/*  EMail Fields */}
 											<Grid item xs={4} md={4} sm={3}>
 												<Textfield name='email' label='EMAIL' disabled={disable} />
@@ -262,16 +253,16 @@ function UpdateRequestCharge({formData}) {
 													</Select>
 												</FormControl>
 											</Grid>
-											<Grid item xs={10} md={10}></Grid>
-											<Grid item xs={10} md={2}>
-												<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
-													Submit
-												</Button>
-											</Grid>
 										</Grid>
-									</Form>
-								)}
-							</CardContent>
+									)}
+								</CardContent>
+								<Divider />
+								<CardActions sx={{display: 'flex', justifyContent: 'flex-end', p: 2}}>
+									<Button variant='contained' type='submit'>
+										Submit
+									</Button>
+								</CardActions>
+							</Form>
 						</Card>
 					);
 				}}
