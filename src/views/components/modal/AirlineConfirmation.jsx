@@ -65,6 +65,7 @@ function RequestCharge() {
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
 					console.log('formik submitted', values);
+					console.log(CreateEmailHTML(values));
 
 					// axios
 					// 	.put(BASEURL + `/ticket/${data._id}`, {
@@ -76,7 +77,7 @@ function RequestCharge() {
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
-					console.log(errors, touched);
+					console.log(errors);
 					return (
 						<Card>
 							<CardHeader title='	Airline Confirmation' />
@@ -176,6 +177,16 @@ function RequestCharge() {
 													label='EXPIRY DATE'
 													inputFormat='MM/yyyy'
 													placeholder='MM/yyyy'
+													onChange={(newValue) => {
+														setFieldValue(
+															'expiryDate',
+															new Date(newValue).toLocaleDateString('en-US', {
+																day: '2-digit',
+																month: '2-digit',
+																year: 'numeric',
+															})
+														);
+													}}
 													value={values.expiryDate}
 													renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
 												/>
@@ -199,3 +210,72 @@ function RequestCharge() {
 }
 
 export default RequestCharge;
+
+function CreateEmailHTML(data) {
+	const {confirmationNo, agencyRefNo, name, email, phone, dob, ticketnumber, passportNumber, description, billingAddress, cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate} = data;
+	return `
+
+			<table class='tableoutter' style='margin-top:1rem;display: inline-block;border: 0; '>
+				<tr>
+					<td style='font-weight:bold;'>CONFIRMATION NO</td>
+					<td style=''>${confirmationNo}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>AGENCY REF NO</td>
+					<td style=''>${agencyRefNo}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>NAME</td>
+					<td style=''>${name}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>EMAIL</td>
+					<td style=''>${email}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>PHONE</td>
+					<td style=''>${phone}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>DOB</td>
+					<td style=''>${dob}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>TICKET NUMBER</td>
+					<td style=''>${ticketnumber}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>PASSPORT NUMBER </td>
+					<td style=''>${passportNumber}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>DESCRIPTION </td>
+					<td style=''>${description}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>BILLINGADDRESS</td>
+					<td style=''>${billingAddress}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>CARD HOLDER NAME</td>
+					<td style=''>${cardHolderName}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>CARD HOLDER NUMBER</td>
+					<td style=''>${cardHolderNumber}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>card Number</td>
+					<td style=''>${cardNumber}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>cvv</td>
+					<td style=''>${cvv}</td>
+				</tr>
+				<tr>
+					<td style='font-weight:bold;'>Expiry Date</td>
+					<td style=''>${expiryDate}</td>
+				</tr>
+			</table>
+		`;
+}

@@ -30,12 +30,12 @@ import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
-function UpdateRequestCharge({formData}) {
+function UpdateRequestCharge({formData, onClose}) {
 	const {_id, cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone, bookingId} = formData;
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();
 	const [disable, setDisable] = useState(true);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 
@@ -128,15 +128,22 @@ function UpdateRequestCharge({formData}) {
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
 					console.log('formik submitted', values, bookingId);
-
+					setIsLoading(true);
 					axios
 						.put(BASEURL + `/ticket/payment/${bookingId}`, {
 							id: bookingId,
 							status: values.status,
 							description: values.comment,
 						})
-						.then((res) => console.log(res.data))
-						.catch((e) => console.log(e));
+						.then((res) => {
+							console.log(res.data);
+							setIsLoading(false);
+							onClose();
+						})
+						.catch((e) => {
+							console.log(e);
+							setIsLoading(false);
+						});
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
@@ -152,7 +159,7 @@ function UpdateRequestCharge({formData}) {
 											style={{
 												display: 'flex',
 												justifyContent: 'center',
-												margin: '20%',
+												margin: '10%',
 											}}>
 											<CircularProgress />
 										</div>

@@ -266,7 +266,7 @@ function ChargeTransaction() {
 						left: '50%',
 						transform: 'translate(-50%, -50%)',
 						minWidth: '70vw',
-						minHeight: '58vh',
+						minHeight: '50vh',
 						maxHeight: '90vh',
 						overflowX: ' auto',
 						bgcolor: 'background.paper',

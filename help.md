@@ -145,6 +145,9 @@ Return false }
 8. request style responsive , airline confirmation
 9. agent modal and profile modal wrap in card
 10. loader on modal , add new record , add new agent , upadte record
-11. View Charge Request : onsubmit close
+
+####
+
+11. View Charge Request : onsubmit close --done
 12. payment status , show comment
-13. email template
+13. email template --done

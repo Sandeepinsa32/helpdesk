@@ -6,7 +6,28 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 // mui
-import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, Card, CardHeader, CardContent, IconButton, FormControlLabel, Checkbox} from '@mui/material';
+import {
+	Grid,
+	Box,
+	Alert,
+	Typography,
+	Button,
+	TextField,
+	InputAdornment,
+	Card,
+	CircularProgress,
+	CardHeader,
+	CardContent,
+	IconButton,
+	FormControlLabel,
+	Checkbox,
+	ListItem,
+	ListItemButton,
+	ListItemText,
+	ListItemIcon,
+	List,
+	Divider,
+} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -15,6 +36,7 @@ import Textfield from './FormField/Textfield';
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
@@ -60,11 +82,11 @@ const UpdateRecord = ({data}) => {
 		createdAt,
 		remarks,
 		// notes,
+		comments,
 		_id,
 	} = data;
 
 	console.log(data);
-	console.log(cards);
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
 	const [inputList, setInputList] = useState([]);
@@ -72,6 +94,8 @@ const UpdateRecord = ({data}) => {
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
 	const [isDisable, setIsDisable] = useState(false);
 	const [isDisableUpdatebtn, setIsDisableUpdatebtn] = useState(false);
+
+	const [isLoading, setIsLoading] = useState(false);
 
 	const fetchCards = async (id) => {
 		axios
@@ -116,6 +140,19 @@ const UpdateRecord = ({data}) => {
 	}, [0]);
 
 	var err = [];
+
+	function formateDate(date) {
+		let today = new Date(date);
+		let dd = String(today.getDate()).padStart(2, '0');
+		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let yyyy = today.getFullYear();
+		var hh = today.getHours();
+		var MM = today.getMinutes();
+		// var ss = today.getSeconds(); // seconds
+
+		today = mm + '/' + dd + '/' + yyyy + ' ' + hh + ':' + MM;
+		return today;
+	}
 
 	const INITIAL_FORM_STATE = {
 		firstName: firstName ? firstName : '',
@@ -642,6 +679,42 @@ const UpdateRecord = ({data}) => {
 									Update
 								</Button>
 							</Box>
+
+							<Divider />
+							<Card>
+								<CardHeader title='Logs' />
+								<Divider />
+								<CardContent>
+									<List>
+										{comments?.length > 0 ? (
+											comments.map((log, i) => {
+												return (
+													<ListItem disablePadding key={i}>
+														<ListItemButton>
+															<ListItemIcon>
+																<ArrowRightAltIcon />
+															</ListItemIcon>
+
+															<ListItemText
+																secondary={
+																	<>
+																		<Typography sx={{display: 'inline'}} component='span' variant='body2' color='text.primary'>
+																			{log.remark}
+																		</Typography>
+																		<span style={{float: 'right', width: 'fit-content	'}}>{formateDate(log.timestamp)}</span>
+																	</>
+																}
+															/>
+														</ListItemButton>
+													</ListItem>
+												);
+											})
+										) : (
+											<Typography variant='h6'>No Logs found!!</Typography>
+										)}
+									</List>
+								</CardContent>
+							</Card>
 						</Form>
 					);
 				}}

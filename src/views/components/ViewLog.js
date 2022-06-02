@@ -63,10 +63,9 @@ const ViewLog = ({id}) => {
 												secondary={
 													<>
 														<Typography sx={{display: 'inline'}} component='span' variant='body2' color='text.primary'>
-															{log.agent.firstName} {log.agent.lastName} ({log.agent.employeeCode})
+															{log.remark}
 														</Typography>
-														{`==>${log.action} `}
-														<span style={{float: 'right', width: 'fit-content	'}}>{formateDate(log.createdAt)}</span>
+														<span style={{float: 'right', width: 'fit-content	'}}>{formateDate(log.timestamp)}</span>
 													</>
 												}
 											/>
