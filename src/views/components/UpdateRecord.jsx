@@ -389,11 +389,6 @@ const UpdateRecord = ({data}) => {
 									borderRadius: 1,
 								}}>
 								<UpdateRecordForm />
-								<Grid container spacing={3} sx={{mt: 1}}>
-									<Grid item xs={4} md={4} sm={4}>
-										<Textfield name='remarks' label='COMMENT' multiline rows={2} />
-									</Grid>
-								</Grid>
 							</Box>
 							<Box sx={{m: 1}}>
 								<Typography variant='h6' gutterBottom sx={{my: 4}}>

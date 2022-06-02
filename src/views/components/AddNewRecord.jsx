@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 //mui
-import {Grid, Box, Typography, Button, TextField, InputAdornment, FormControlLabel, FormLabel, FormControl, Checkbox} from '@mui/material';
+import {Grid, Box, Typography, Button, TextField, InputAdornment, FormControlLabel, FormLabel, FormControl, Checkbox, Card, CardHeader, CardContent, IconButton} from '@mui/material';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
@@ -15,6 +15,7 @@ import {useNavigate} from 'react-router-dom';
 // mui Icon
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 // custom Formik field
 import Textfield from './FormField/Textfield';
@@ -342,185 +343,198 @@ const AddNewRecord = ({isView, data}) => {
 							</Box>
 							{/* CC card  */}
 							<Box
-								sx={{
-									m: 1,
-									p: 2,
-									py: 3,
-									bgcolor: 'background.paper',
-									borderRadius: 1,
-								}}>
+							// sx={{
+							// 	m: 1,
+							// 	p: 2,
+							// 	py: 3,
+							// 	bgcolor: 'background.paper',
+							// 	borderRadius: 1,
+							// }}
+							>
 								{inputList.map((x, i) => {
 									if (errors.card) {
 										err = errors.card;
 									}
 
 									return (
-										<Grid key={i} container spacing={3}>
-											{/* Card Holder Name field */}
-											<Grid item xs={4} md={1}>
-												<FormControl sx={{pt: 2, ml: -2}}>
-													<FormLabel id='demo-row-radio-buttons-group-label'>Card {i + 1}</FormLabel>
-												</FormControl>
-											</Grid>
-											<Grid item xs={4} md={2}>
-												<TextField
-													name='cardHolderName'
-													label='NAME ON CARD'
-													fullWidth
-													autoComplete='cc-name'
-													onChange={(e) => {
-														handleCardInput(e, i);
-													}}
-													value={inputList[i].cardHolderName}
-													error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
-													helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
-												/>
-											</Grid>
+										<Card key={i} sx={{p: 0, m: 0}}>
+											<CardHeader sx={{py: '0 !important'}} title={'Card' + ' ' + (i + 1)} />
+											<CardContent>
+												<Grid container spacing={3}>
+													{/* Card Holder Name field */}
 
-											{/*  Card Holder Phone no. */}
-											<Grid item xs={4} md={2}>
-												<TextField
-													type='number'
-													name='cardHolderNumber'
-													label='PHONE NO.'
-													fullWidth
-													onChange={(e) => handleCardInput(e, i)}
-													value={inputList[i].cardHolderNumber}
-													error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null)}
-													helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null}
-													onBlur={handleBlur}
-												/>
-											</Grid>
-											{/* CardNumber Field */}
-											<Grid item xs={4} md={3}>
-												<TextField
-													type='number'
-													name='cardNumber'
-													label='CARD NUMBER'
-													fullWidth
-													autoComplete='cc-number'
-													onChange={(e) => handleCardInput(e, i)}
-													value={inputList[i].cardNumber}
-													error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
-													helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
-												/>
-											</Grid>
-											{/* CVV Field */}
-											<Grid item xs={4} md={2}>
-												<TextField
-													type='number'
-													name='cvv'
-													label='CVV'
-													fullWidth
-													autoComplete='cc-csc'
-													onChange={(e) => handleCardInput(e, i)}
-													value={inputList[i].cvv}
-													error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
-													helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
-												/>
-											</Grid>
-											{/* expiry date field */}
-											<Grid item xs={4} md={2}>
-												<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
-													<DatePicker
-														fullWidth
-														views={['year', 'month']}
-														name='expiryDate'
-														label='EXPIRY DATE'
-														inputFormat='MM/yyyy'
-														placeholder='MM/yyyy'
-														minDate={new Date()}
-														onChange={(newValue) => {
-															handleDateInputChange(
-																i,
-																new Date(newValue).toLocaleDateString('en-US', {
-																	day: '2-digit',
-																	month: '2-digit',
-																	year: 'numeric',
-																})
-															);
+													<Grid item xs={4} md={2}>
+														<TextField
+															name='cardHolderName'
+															label='NAME ON CARD'
+															fullWidth
+															autoComplete='cc-name'
+															onChange={(e) => {
+																handleCardInput(e, i);
+															}}
+															value={inputList[i].cardHolderName}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
+														/>
+													</Grid>
 
-															// setExpiryDateValue(newValue);
-														}}
-														value={inputList[i].expiryDate}
-														renderInput={(params) => (
-															<TextField
+													{/*  Card Holder Phone no. */}
+													<Grid item xs={4} md={2}>
+														<TextField
+															type='number'
+															name='cardHolderNumber'
+															label='PHONE NO.'
+															fullWidth
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cardHolderNumber}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null}
+															onBlur={handleBlur}
+														/>
+													</Grid>
+													{/* CardNumber Field */}
+													<Grid item xs={4} md={3}>
+														<TextField
+															type='number'
+															name='cardNumber'
+															label='CARD NUMBER'
+															fullWidth
+															autoComplete='cc-number'
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cardNumber}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
+														/>
+													</Grid>
+													{/* CVV Field */}
+													<Grid item xs={4} md={2}>
+														<TextField
+															type='number'
+															name='cvv'
+															label='CVV'
+															fullWidth
+															autoComplete='cc-csc'
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cvv}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
+														/>
+													</Grid>
+													{/* expiry date field */}
+													<Grid item xs={4} md={2}>
+														<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
+															<DatePicker
+																fullWidth
+																views={['year', 'month']}
+																name='expiryDate'
+																label='EXPIRY DATE'
+																inputFormat='MM/yyyy'
 																placeholder='MM/yyyy'
-																{...params}
-																error={Boolean(submitCount > 0 && err.length === Number(i + 1) ? true : false)}
-																helperText={submitCount > 0 && err.length === Number(i + 1) ? err[i].expiryDate : null}
+																minDate={new Date()}
+																onChange={(newValue) => {
+																	handleDateInputChange(
+																		i,
+																		new Date(newValue).toLocaleDateString('en-US', {
+																			day: '2-digit',
+																			month: '2-digit',
+																			year: 'numeric',
+																		})
+																	);
+
+																	// setExpiryDateValue(newValue);
+																}}
+																value={inputList[i].expiryDate}
+																renderInput={(params) => (
+																	<TextField
+																		placeholder='MM/yyyy'
+																		{...params}
+																		error={Boolean(submitCount > 0 && err.length === Number(i + 1) ? true : false)}
+																		helperText={submitCount > 0 && err.length === Number(i + 1) ? err[i].expiryDate : null}
+																	/>
+																)}
 															/>
-														)}
-													/>
-												</LocalizationProvider>
-											</Grid>
-											{/*  add/Remove btn for multiple card */}
-											<Box
-												xs={12}
-												md={2}
-												sx={{
-													display: 'flex',
-													justifyContent: 'flex-end',
-													width: '100%',
-													my: 2,
-												}}>
-												{inputList.length !== 1 && (
-													<Button startIcon={<RemoveIcon fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1}}>
-														Remove
-													</Button>
-												)}
-												{inputList.length < 4 && inputList.length - 1 === i && (
-													<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
-														Add One More Card
-													</Button>
-												)}
-											</Box>
-										</Grid>
+														</LocalizationProvider>
+													</Grid>
+
+													{inputList.length !== 1 && (
+														<Grid item xs={1} sm={1} md={1}>
+															<IconButton onClick={() => handleRemoveClick(i)} color='error' sx={{mt: 1}}>
+																<DeleteOutlineIcon />
+															</IconButton>
+														</Grid>
+													)}
+
+													{/*  add/Remove btn for multiple card */}
+
+													{inputList.length < 4 && inputList.length - 1 === i && (
+														<Box
+															xs={12}
+															md={2}
+															sx={{
+																display: 'flex',
+																justifyContent: 'flex-end',
+																width: '100%',
+																my: 2,
+															}}>
+															<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mr: 1}}>
+																Add One More Card
+															</Button>
+														</Box>
+													)}
+												</Grid>
+											</CardContent>
+										</Card>
 									);
 								})}
 
-								<Grid container spacing={3}>
-									{/*  company card  */}
+								<Card sx={{p: 0, m: 0}}>
+									<CardHeader sx={{py: '0 !important'}} />
 
-									<Grid item xs={12} md={3}>
-										<FormControlLabel
-											control={
-												<Checkbox
-													checked={isCompanyCard}
-													onChange={(e) => {
-														setIsCompanyCard(!isCompanyCard);
-														setFieldValue('isCompanyCCUsed', !isCompanyCard);
-													}}
-													name='companyCard'
-													color='primary'
+									<CardContent>
+										<Grid container spacing={3}>
+											{/*  company card  */}
+
+											<Grid item xs={12} md={3}>
+												<FormControlLabel
+													control={
+														<Checkbox
+															checked={isCompanyCard}
+															onChange={(e) => {
+																setIsCompanyCard(!isCompanyCard);
+																setFieldValue('isCompanyCCUsed', !isCompanyCard);
+															}}
+															name='companyCard'
+															color='primary'
+														/>
+													}
+													label='COMPANY CC USED ?'
 												/>
-											}
-											label='COMPANY CC USED ?'
-										/>
-									</Grid>
+											</Grid>
 
-									{isCompanyCard &&
-										items.map((item, i) => {
-											const {name, label} = item;
+											{isCompanyCard &&
+												items.map((item, i) => {
+													const {name, label} = item;
 
-											return (
-												<Grid item xs={4} md={3} key={i}>
-													<Textfield
-														name={name}
-														label={label}
-														type='number'
-														InputProps={
-															name == 'ccAmount'
-																? {
-																		startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-																  }
-																: null
-														}
-													/>
-												</Grid>
-											);
-										})}
-								</Grid>
+													return (
+														<Grid item xs={4} md={3} key={i}>
+															<Textfield
+																name={name}
+																label={label}
+																type='number'
+																InputProps={
+																	name == 'ccAmount'
+																		? {
+																				startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+																		  }
+																		: null
+																}
+															/>
+														</Grid>
+													);
+												})}
+										</Grid>
+									</CardContent>
+								</Card>
 							</Box>
 
 							<Box xs={4} md={4}>

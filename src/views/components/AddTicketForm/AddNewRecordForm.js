@@ -90,8 +90,8 @@ export default function AddressForm() {
 	return (
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
-			<Grid item xs={12} sm={12} md={12} sx={{p: `16px !important`, pt: `0px !important`}}>
-				<FormControl sx={{m: 1, p: 1}} fullWidth error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
+			<Grid item xs={12} sm={12} md={12} sx={{p: `16px !important`, py: `0px !important`}}>
+				<FormControl fullWidth error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
 					<InputLabel variant='outlined'>Product Type :</InputLabel>
 				</FormControl>
 				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
@@ -206,98 +206,7 @@ export default function AddressForm() {
 			<Grid item xs={4} md={3} sm={4}>
 				<Textfield name='alternatePhone' label='ALTERNATIVE PHONE' />
 			</Grid>
-			{/* kidsCount Fields */}
-			<Grid item xs={4} md={3} sm={4}>
-				<Box sx={displayFlexRowStyle}>
-					<Box sx={displayColStyle}>
-						<Textfield
-							name='childCount'
-							label='CHILDS'
-							type='number'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<ChildCareIcon />
-									</InputAdornment>
-								),
-							}}
-						/>
 
-						{values.childCount > 0 ? (
-							<Textfield
-								sx={{mt: 2}}
-								name='childPrice'
-								label='PRICE PER CHILD'
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-							/>
-						) : null}
-					</Box>
-				</Box>
-			</Grid>
-			{/* adult Count Fields */}
-			<Grid item xs={4} md={3} sm={4}>
-				<Box sx={displayFlexRowStyle}>
-					<Box sx={displayColStyle}>
-						<Textfield
-							label='ADULTS'
-							name='adultCount'
-							type='number'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<BoyIcon />
-									</InputAdornment>
-								),
-							}}
-						/>
-						{values.adultCount > 0 ? (
-							<Textfield
-								type='number'
-								sx={{mt: 2}}
-								name='adultPrice'
-								label='PRICE PER ADULT'
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-							/>
-						) : null}
-					</Box>
-				</Box>
-			</Grid>
-			{/* elder Count Fields */}
-			<Grid item xs={4} md={3} sm={4}>
-				<Box sx={displayFlexRowStyle}>
-					<Box sx={displayColStyle}>
-						<Textfield
-							label='INFANT'
-							name='elderCount'
-							type='number'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<ElderlyIcon />
-									</InputAdornment>
-								),
-							}}
-							value={values.elderCount}
-						/>
-						{values.elderCount > 0 ? (
-							<Textfield
-								sx={{mt: 2}}
-								name='elderPrice'
-								label='PRICE PER INFANT'
-								fullWidth
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-								value={values.elderPrice}
-							/>
-						) : null}
-					</Box>
-				</Box>
-			</Grid>
 			{/* PNR no. Fields */}
 			<Grid item xs={9} md={6} sm={9}>
 				<Textfield
@@ -432,7 +341,7 @@ export default function AddressForm() {
 			</Grid>
 			{/* DepartureDate Fields */}
 			<Grid item xs={3} sm={3} md={3}>
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 					<DatePicker
 						inputFormat='MM/dd/yyyy'
 						name='departureDate'
@@ -454,13 +363,15 @@ export default function AddressForm() {
 						error={Boolean(touched.departureDate && errors.departureDate)}
 						helperText={touched.departureDate && errors.departureDate}
 						value={depDate}
-						renderInput={(params) => <TextField {...params} error={Boolean(touched.departureDate && errors.departureDate)} helperText={touched.departureDate && errors.departureDate} />}
+						renderInput={(params) => (
+							<TextField {...params} fullWidth error={Boolean(touched.departureDate && errors.departureDate)} helperText={touched.departureDate && errors.departureDate} />
+						)}
 					/>
 				</LocalizationProvider>
 			</Grid>
 			{/* ReturnDate Fields */}
 			<Grid item xs={3} sm={3} md={3}>
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 					<DatePicker
 						name='returnDate'
 						inputFormat='MM/dd/yyyy'
@@ -482,9 +393,101 @@ export default function AddressForm() {
 						}}
 						error={Boolean(touched.returnDate && errors.returnDate)}
 						helperText={touched.returnDate && errors.returnDate}
-						renderInput={(params) => <TextField {...params} helperText={touched.returnDate && errors.returnDate} error={Boolean(touched.returnDate && errors.returnDate)} />}
+						renderInput={(params) => <TextField {...params} fullWidth helperText={touched.returnDate && errors.returnDate} error={Boolean(touched.returnDate && errors.returnDate)} />}
 					/>
 				</LocalizationProvider>
+			</Grid>
+			{/* kidsCount Fields */}
+			<Grid item xs={3} sm={3} md={2}>
+				<Box sx={displayFlexRowStyle}>
+					<Box sx={displayColStyle}>
+						<Textfield
+							name='childCount'
+							label='CHILDS'
+							type='number'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<ChildCareIcon />
+									</InputAdornment>
+								),
+							}}
+						/>
+
+						{values.childCount > 0 ? (
+							<Textfield
+								sx={{mt: 2}}
+								name='childPrice'
+								label='PRICE PER CHILD'
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+							/>
+						) : null}
+					</Box>
+				</Box>
+			</Grid>
+			{/* adult Count Fields */}
+			<Grid item xs={3} sm={3} md={2}>
+				<Box sx={displayFlexRowStyle}>
+					<Box sx={displayColStyle}>
+						<Textfield
+							label='ADULTS'
+							name='adultCount'
+							type='number'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<BoyIcon />
+									</InputAdornment>
+								),
+							}}
+						/>
+						{values.adultCount > 0 ? (
+							<Textfield
+								type='number'
+								sx={{mt: 2}}
+								name='adultPrice'
+								label='PRICE PER ADULT'
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+							/>
+						) : null}
+					</Box>
+				</Box>
+			</Grid>
+			{/* elder Count Fields */}
+			<Grid item xs={3} sm={3} md={2}>
+				<Box sx={displayFlexRowStyle}>
+					<Box sx={displayColStyle}>
+						<Textfield
+							label='INFANT'
+							name='elderCount'
+							type='number'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<ElderlyIcon />
+									</InputAdornment>
+								),
+							}}
+							value={values.elderCount}
+						/>
+						{values.elderCount > 0 ? (
+							<Textfield
+								sx={{mt: 2}}
+								name='elderPrice'
+								label='PRICE PER INFANT'
+								fullWidth
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+								value={values.elderPrice}
+							/>
+						) : null}
+					</Box>
+				</Box>
 			</Grid>
 		</Grid>
 	);

@@ -230,103 +230,7 @@ export default function UpdateRecordForm() {
 			<Grid item xs={4} md={3} sm={4}>
 				<Textfield disabled={isDisable} type='number' name='alternatePhone' label='ALTERNATIVE PHONE' />
 			</Grid>
-			{/* kidsCount Fields */}
-			<Grid item xs={3} md={2} sm={4}>
-				<Box sx={displayFlexRowStyle}>
-					<Box sx={displayColStyle}>
-						<Textfield
-							disabled={isDisable}
-							label='CHILDS'
-							name='childCount'
-							type='number'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<ChildCareIcon />
-									</InputAdornment>
-								),
-							}}
-						/>
-						{values.childCount > 0 ? (
-							<Textfield
-								disabled={isDisable}
-								type='number'
-								sx={{mt: 2}}
-								name='childPrice'
-								label='PRICE PER CHILD'
-								fullWidth
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-							/>
-						) : null}
-					</Box>
-				</Box>
-			</Grid>
-			{/* adult Count Fields */}
-			<Grid item xs={3} md={2} sm={4}>
-				<Box sx={displayFlexRowStyle}>
-					<Box sx={displayColStyle}>
-						<Textfield
-							disabled={isDisable}
-							label='ADULTS'
-							name='adultCount'
-							type='number'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<BoyIcon />
-									</InputAdornment>
-								),
-							}}
-						/>
-						{values.adultCount > 0 ? (
-							<Textfield
-								disabled={isDisable}
-								type='number'
-								sx={{mt: 2}}
-								name='adultPrice'
-								label='PRICE PER ADULT'
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-							/>
-						) : null}
-					</Box>
-				</Box>
-			</Grid>
-			{/* elder Count Fields */}
-			<Grid item xs={3} md={2} sm={4}>
-				<Box sx={displayFlexRowStyle}>
-					<Box sx={displayColStyle}>
-						<Textfield
-							disabled={isDisable}
-							label='INFANT'
-							name='elderCount'
-							type='number'
-							InputProps={{
-								startAdornment: (
-									<InputAdornment position='start'>
-										<ElderlyIcon />
-									</InputAdornment>
-								),
-							}}
-						/>
-						{values.elderCount > 0 ? (
-							<Textfield
-								disabled={isDisable}
-								type='number'
-								sx={{mt: 2}}
-								name='elderPrice'
-								label='PRICE PER INFANT'
-								InputProps={{
-									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-								}}
-							/>
-						) : null}
-					</Box>
-				</Box>
-			</Grid>
+
 			{/* PNR no. Fields */}
 			<Grid item xs={9} md={6} sm={9}>
 				<Textfield disabled={isDisable} name='pnrNo' label='PNR NO.' />
@@ -458,7 +362,7 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* DepartureDate Fields */}
 			<Grid item xs={3} md={3} sm={3}>
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 					<DatePicker
 						inputFormat='MM/dd/yyyy'
 						name='departureDate'
@@ -482,14 +386,20 @@ export default function UpdateRecordForm() {
 						helperText={touched.departureDate && errors.departureDate}
 						value={depDate}
 						renderInput={(params) => (
-							<TextField disabled={isDisable} {...params} error={Boolean(touched.departureDate && errors.departureDate)} helperText={touched.departureDate && errors.departureDate} />
+							<TextField
+								disabled={isDisable}
+								{...params}
+								fullWidth
+								error={Boolean(touched.departureDate && errors.departureDate)}
+								helperText={touched.departureDate && errors.departureDate}
+							/>
 						)}
 					/>
 				</LocalizationProvider>
 			</Grid>
 			{/* ReturnDate Fields */}
 			<Grid item xs={3} md={3} sm={3}>
-				<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 					<DatePicker
 						name='returnDate'
 						inputFormat='MM/dd/yyyy'
@@ -512,10 +422,111 @@ export default function UpdateRecordForm() {
 						error={Boolean(touched.returnDate && errors.returnDate)}
 						helperText={touched.returnDate && errors.returnDate}
 						renderInput={(params) => (
-							<TextField {...params} disabled={isDisable} helperText={touched.returnDate && errors.returnDate} error={Boolean(touched.returnDate && errors.returnDate)} />
+							<TextField {...params} fullWidth disabled={isDisable} helperText={touched.returnDate && errors.returnDate} error={Boolean(touched.returnDate && errors.returnDate)} />
 						)}
 					/>
 				</LocalizationProvider>
+			</Grid>
+			{/* kidsCount Fields */}
+			<Grid item xs={3} md={2} sm={4}>
+				<Box sx={displayFlexRowStyle}>
+					<Box sx={displayColStyle}>
+						<Textfield
+							disabled={isDisable}
+							label='CHILDS'
+							name='childCount'
+							type='number'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<ChildCareIcon />
+									</InputAdornment>
+								),
+							}}
+						/>
+						{values.childCount > 0 ? (
+							<Textfield
+								disabled={isDisable}
+								type='number'
+								sx={{mt: 2}}
+								name='childPrice'
+								label='PRICE PER CHILD'
+								fullWidth
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+							/>
+						) : null}
+					</Box>
+				</Box>
+			</Grid>
+			{/* adult Count Fields */}
+			<Grid item xs={3} md={2} sm={4}>
+				<Box sx={displayFlexRowStyle}>
+					<Box sx={displayColStyle}>
+						<Textfield
+							disabled={isDisable}
+							label='ADULTS'
+							name='adultCount'
+							type='number'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<BoyIcon />
+									</InputAdornment>
+								),
+							}}
+						/>
+						{values.adultCount > 0 ? (
+							<Textfield
+								disabled={isDisable}
+								type='number'
+								sx={{mt: 2}}
+								name='adultPrice'
+								label='PRICE PER ADULT'
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+							/>
+						) : null}
+					</Box>
+				</Box>
+			</Grid>
+			{/* elder Count Fields */}
+			<Grid item xs={3} md={2} sm={4}>
+				<Box sx={displayFlexRowStyle}>
+					<Box sx={displayColStyle}>
+						<Textfield
+							disabled={isDisable}
+							label='INFANT'
+							name='elderCount'
+							type='number'
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position='start'>
+										<ElderlyIcon />
+									</InputAdornment>
+								),
+							}}
+						/>
+						{values.elderCount > 0 ? (
+							<Textfield
+								disabled={isDisable}
+								type='number'
+								sx={{mt: 2}}
+								name='elderPrice'
+								label='PRICE PER INFANT'
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+							/>
+						) : null}
+					</Box>
+				</Box>
+			</Grid>
+			{/* Remarks Field */}
+			<Grid item xs={3} md={3} sm={3}>
+				<Textfield name='remarks' label='COMMENT' multiline rows={4} />
 			</Grid>
 		</Grid>
 	);
