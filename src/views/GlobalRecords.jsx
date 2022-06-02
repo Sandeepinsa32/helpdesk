@@ -333,7 +333,22 @@ export default function SearchRecord() {
 			</Box>
 			{/* open Logs*/}
 			<Modal open={openLogModal} onClose={() => setOpenLogModal(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={style} style={{padding: '32px 16px !important'}}>
+				<Box
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						minWidth: '70vw',
+						minHeight: '60vh',
+						maxHeight: '90vh',
+						overflowX: ' auto',
+						bgcolor: 'background.paper',
+						boxShadow: 24,
+						borderRadius: '1rem',
+						pt: 2,
+					}}
+					style={{padding: '32px 16px !important'}}>
 					<IconButton onClick={() => setOpenLogModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
