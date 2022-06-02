@@ -157,8 +157,9 @@ export default function SearchRecord() {
 								<CardContent>
 									<Box fullWidth sx={{display: ''}}>
 										<Grid container spacing={3}>
-											<Grid item sm={2} md={3}>
+											<Grid item sm={4} xs={4} md={4} lg={3}>
 												<TextField
+													fullWidth
 													size='small'
 													sx={{height: `2rem`}}
 													InputProps={{
@@ -177,8 +178,9 @@ export default function SearchRecord() {
 												/>
 											</Grid>
 
-											<Grid item sm={2} md={3}>
+											<Grid item sm={4} xs={4} md={4} lg={3}>
 												<TextField
+													fullWidth
 													size='small'
 													sx={{height: `2rem`}}
 													InputProps={{
@@ -196,7 +198,7 @@ export default function SearchRecord() {
 													value={phone}
 												/>
 											</Grid>
-											<Grid item sm={4} md={3} sx={{px: 2, mt: 0.5}}>
+											<Grid item sm={4} xs={4} md={4} lg={3} sx={{px: 2, mt: 0.5}}>
 												<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' disabled={!(email || phone || bookingid)} variant='contained' onClick={searchHandler}>
 													Search
 												</Button>

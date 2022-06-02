@@ -20,6 +20,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import PaymentIcon from '@mui/icons-material/Payment';
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 function ChargeTransaction() {
 	const [viewDetailModal, setViewDetailModal] = useState(false);
 	const [selectedTicket, setSelectedTicket] = useState(false);
@@ -130,7 +132,7 @@ function ChargeTransaction() {
 							<CardContent>
 								<Box fullWidth sx={{display: ''}}>
 									<Grid container spacing={4} justifyContent='flex-start'>
-										<Grid item xs={3} md={3}>
+										<Grid item xs={6} md={6}>
 											<TextField
 												size='small'
 												fullWidth
@@ -153,7 +155,7 @@ function ChargeTransaction() {
 
 										{/* <Grid item xs={0} md={0}></Grid> */}
 										{/* btn --reset and serach  */}
-										<Grid item xs={3} md={3} sx={{px: `0 !Important`, mt: 0.5}}>
+										<Grid item xs={6} md={6} sx={{px: `0 !Important`, mt: 0.5}}>
 											<Button sx={{textTransform: 'capitalize', mx: 1}} size='small' variant='contained' onClick={searchHandler}>
 												Search
 											</Button>
@@ -173,7 +175,15 @@ function ChargeTransaction() {
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
-										{['Email', 'Amount', 'Booking ID', 'Remarks', 'Action'].map((th) => (
+										{[
+											'Booking ID',
+											'Email',
+											'Phone',
+											'Amount',
+											'Markup',
+											//'Remarks',
+											'Action',
+										].map((th) => (
 											<TableCell sx={{p: 1}} key={th}>
 												{th}
 											</TableCell>
@@ -196,22 +206,23 @@ function ChargeTransaction() {
 									) : requestObj?.length > 0 ? (
 										requestObj.map((row, index) => (
 											<TableRow key={index}>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row.email}</TableCell>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>${row.amount}</TableCell>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row.bookingId}</TableCell>
+												<TableCell>{row.bookingId}</TableCell>
+												<TableCell>{row.email}</TableCell>
+												<TableCell>{row.phone}</TableCell>
+												<TableCell>${row.amount}</TableCell>
 
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row.remarks}</TableCell>
+												<TableCell>${row.markup}</TableCell>
 
 												<TableCell sx={{p: 0}}>
 													{/* charge*/}
-													<Tooltip title='Request to charges'>
+													<Tooltip title='View'>
 														<IconButton
 															aria-label='Charge'
 															onClick={() => {
 																setSelectedTicket(row);
 																setViewDetailModal(true);
 															}}>
-															<PaymentIcon />
+															<VisibilityIcon />
 														</IconButton>
 													</Tooltip>
 												</TableCell>

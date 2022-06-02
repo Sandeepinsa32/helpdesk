@@ -135,10 +135,11 @@ Return false }
 ## 1/6/22
 
 1. --> css for breakpoint --done
-2. use substring in data
-3. add new record responsive
-4. style update record
-5. style log modal
-6. request style responsive , airline confirmation
-7. global record style
-8. raised request admin page style
+2. use substring in data --done
+3. add new record responsive --done
+4. global record style --done
+5. raised request admin page style --done
+
+6. style update record
+7. style log modal
+8. request style responsive , airline confirmation
