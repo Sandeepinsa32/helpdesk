@@ -5,7 +5,7 @@ import axios from 'axios';
 import Textfield from '../FormField/Textfield';
 
 // mui
-import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, FormControlLabel, Checkbox} from '@mui/material';
+import {Grid, Box, Alert, Typography, Button, TextField, InputAdornment, Card, CardHeader, Divider, CardContent, CardActions, FormControlLabel, Checkbox} from '@mui/material';
 import {BASEURL, errorToast} from '../../../utils/Utils';
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -78,120 +78,119 @@ function RequestCharge() {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
 					console.log(errors, touched);
 					return (
-						<Form onSubmit={handleSubmit}>
-							<Box sx={{m: 1}}>
-								<Typography variant='h6' gutterBottom sx={{my: 4}}>
-									Airline Confirmation
-								</Typography>
-							</Box>
-							<Grid container spacing={3}>
-								{/* CONFIRMATION NO.field */}
+						<Card>
+							<CardHeader title='	Airline Confirmation' />
+							<Divider />
+							<Form onSubmit={handleSubmit}>
+								<CardContent>
+									<Grid container spacing={3}>
+										{/* CONFIRMATION NO.field */}
 
-								<Grid item xs={6} md={6}>
-									<Textfield name='confirmationNo' label='CONFIRMATION NO.' />
-								</Grid>
+										<Grid item xs={6} md={6}>
+											<Textfield name='confirmationNo' label='CONFIRMATION NO.' />
+										</Grid>
 
-								{/*  TRAVEL AGENCY REFERENCE NO.*/}
-								<Grid item xs={6} md={6}>
-									<Textfield name='agencyRefNo' label='TRAVEL AGENCY REFERENCE NO.' />
-								</Grid>
+										{/*  TRAVEL AGENCY REFERENCE NO.*/}
+										<Grid item xs={6} md={6}>
+											<Textfield name='agencyRefNo' label='TRAVEL AGENCY REFERENCE NO.' />
+										</Grid>
 
-								{/* name Field */}
-								<Grid item xs={6} md={3}>
-									<Textfield name='name' label='NAME ' />
-								</Grid>
+										{/* name Field */}
+										<Grid item xs={6} md={3}>
+											<Textfield name='name' label='NAME ' />
+										</Grid>
 
-								{/* email Field */}
-								<Grid item xs={6} md={3}>
-									<Textfield name='email ' label='EMAIL ' />
-								</Grid>
-								{/* phone Field */}
-								<Grid item xs={6} md={3}>
-									<Textfield name='phone ' label='PHONE ' />
-								</Grid>
-								{/* DOB field */}
-								<Grid item xs={4} md={3}>
-									<LocalizationProvider dateAdapter={AdapterDateFns}>
-										<DatePicker
-											name='dob'
-											label='Date of Birth'
-											inputFormat='MM/dd/yyyy'
-											placeholder='MM/dd/yyyy'
-											onChange={(newValue) => {
-												setFieldValue(
-													'dob',
-													new Date(newValue).toLocaleDateString('en-US', {
-														day: '2-digit',
-														month: '2-digit',
-														year: 'numeric',
-													})
-												);
-											}}
-											renderInput={(params) => <TextField placeholder='MM/dd/yyyy' {...params} />}
-										/>
-									</LocalizationProvider>
-								</Grid>
+										{/* email Field */}
+										<Grid item xs={6} md={3}>
+											<Textfield name='email ' label='EMAIL ' />
+										</Grid>
+										{/* phone Field */}
+										<Grid item xs={6} md={3}>
+											<Textfield name='phone ' label='PHONE ' />
+										</Grid>
+										{/* DOB field */}
+										<Grid item xs={4} md={3}>
+											<LocalizationProvider dateAdapter={AdapterDateFns}>
+												<DatePicker
+													name='dob'
+													label='Date of Birth'
+													inputFormat='MM/dd/yyyy'
+													placeholder='MM/dd/yyyy'
+													onChange={(newValue) => {
+														setFieldValue(
+															'dob',
+															new Date(newValue).toLocaleDateString('en-US', {
+																day: '2-digit',
+																month: '2-digit',
+																year: 'numeric',
+															})
+														);
+													}}
+													renderInput={(params) => <TextField placeholder='MM/dd/yyyy' {...params} />}
+												/>
+											</LocalizationProvider>
+										</Grid>
 
-								{/* ticketnumber Field */}
-								<Grid item xs={6} md={3}>
-									<Textfield name='ticketNumber' label='TICKET No. ' />
-								</Grid>
+										{/* ticketnumber Field */}
+										<Grid item xs={6} md={3}>
+											<Textfield name='ticketNumber' label='TICKET No. ' />
+										</Grid>
 
-								{/* Passport number Field */}
-								<Grid item xs={6} md={3}>
-									<Textfield name='passportNumber' label='PASSPORT NO. ' />
-								</Grid>
+										{/* Passport number Field */}
+										<Grid item xs={6} md={3}>
+											<Textfield name='passportNumber' label='PASSPORT NO. ' />
+										</Grid>
 
-								{/* Description Fields */}
-								<Grid item xs={4} md={3} sm={4}>
-									<Textfield name='description' label='DESCRIPTION' />
-								</Grid>
-								{/* billingAddress Fields */}
-								<Grid item xs={4} md={3} sm={4}>
-									<Textfield name='billingAddress' label='BILLING ADDRESS' />
-								</Grid>
+										{/* Description Fields */}
+										<Grid item xs={4} md={3} sm={4}>
+											<Textfield name='description' label='DESCRIPTION' multiline rows={4} />
+										</Grid>
+										{/* billingAddress Fields */}
+										<Grid item xs={4} md={3} sm={4}>
+											<Textfield name='billingAddress' label='BILLING ADDRESS' multiline rows={4} />
+										</Grid>
 
-								{/* Card Holder NAme field */}
-								<Grid item xs={4} md={2}>
-									<Textfield name='cardHolderName' label='NAME ON CC' />
-								</Grid>
-								{/*  Card Holder Phone no. */}
-								<Grid item xs={4} md={2}>
-									<Textfield name='cardHolderNumber' label='PHONE NO.' />
-								</Grid>
-								{/* CardNumber Field */}
-								<Grid item xs={4} md={3}>
-									<Textfield name='cardNumber' label='CARD NUMBER' />
-								</Grid>
-								{/* CVV Field */}
-								<Grid item xs={4} md={2}>
-									<Textfield name='cvv' label='CVV' />
-								</Grid>
-								{/* expiry date field */}
-								<Grid item xs={4} md={3}>
-									<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
-										<DatePicker
-											fullWidth
-											views={['year', 'month']}
-											name='expiryDate'
-											label='EXPIRY DATE'
-											inputFormat='MM/yyyy'
-											placeholder='MM/yyyy'
-											value={values.expiryDate}
-											renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
-										/>
-									</LocalizationProvider>
-								</Grid>
-								<Grid item xs={12} md={12}></Grid>
-
-								<Grid item xs={10} md={10}></Grid>
-								<Grid item xs={10} md={2}>
-									<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
+										{/* Card Holder NAme field */}
+										<Grid item xs={4} md={2}>
+											<Textfield name='cardHolderName' label='NAME ON CC' />
+										</Grid>
+										{/*  Card Holder Phone no. */}
+										<Grid item xs={4} md={2}>
+											<Textfield name='cardHolderNumber' label='PHONE NO.' />
+										</Grid>
+										{/* CardNumber Field */}
+										<Grid item xs={4} md={3}>
+											<Textfield name='cardNumber' label='CARD NUMBER' />
+										</Grid>
+										{/* CVV Field */}
+										<Grid item xs={4} md={2}>
+											<Textfield name='cvv' label='CVV' />
+										</Grid>
+										{/* expiry date field */}
+										<Grid item xs={4} md={3}>
+											<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
+												<DatePicker
+													fullWidth
+													views={['year', 'month']}
+													name='expiryDate'
+													label='EXPIRY DATE'
+													inputFormat='MM/yyyy'
+													placeholder='MM/yyyy'
+													value={values.expiryDate}
+													renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
+												/>
+											</LocalizationProvider>
+										</Grid>
+									</Grid>
+								</CardContent>
+								<Divider />
+								<CardActions sx={{display: 'flex', justifyContent: 'flex-end', p: 2}}>
+									<Button variant='contained' type='submit'>
 										Submit
 									</Button>
-								</Grid>
-							</Grid>
-						</Form>
+								</CardActions>
+							</Form>
+						</Card>
 					);
 				}}
 			</Formik>

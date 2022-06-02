@@ -483,10 +483,9 @@ export const Transaction = () => {
 						maxHeight: '90vh',
 						overflowX: ' auto',
 						bgcolor: 'background.paper',
-						// border: '2px solid #000',
 						boxShadow: 24,
 						borderRadius: '1rem',
-						p: 4,
+						pt: 2,
 					}}>
 					<IconButton onClick={() => setChargeModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
@@ -513,10 +512,9 @@ export const Transaction = () => {
 						maxHeight: '90vh',
 						overflowX: ' auto',
 						bgcolor: 'background.paper',
-						// border: '2px solid #000',
 						boxShadow: 24,
 						borderRadius: '1rem',
-						p: 4,
+						pt: 2,
 					}}>
 					<IconButton onClick={() => setAirlineModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />

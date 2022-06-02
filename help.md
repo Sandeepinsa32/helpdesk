@@ -140,6 +140,6 @@ Return false }
 4. global record style --done
 5. raised request admin page style --done
 
-6. style update record
+6. style update record --done
 7. style log modal
 8. request style responsive , airline confirmation
