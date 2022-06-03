@@ -28,6 +28,8 @@ import {
 	TableHead,
 	TableRow,
 	Tooltip,
+	CardHeader,
+	Divider,
 } from '@mui/material';
 
 import UpdateRecord from './components/UpdateRecord';
@@ -341,7 +343,7 @@ export default function SearchRecord() {
 						transform: 'translate(-50%, -50%)',
 						minWidth: '70vw',
 						minHeight: '60vh',
-						maxHeight: '90vh',
+						maxHeight: '92vh',
 						overflowX: ' auto',
 						bgcolor: 'background.paper',
 						boxShadow: 24,
@@ -349,10 +351,22 @@ export default function SearchRecord() {
 						pt: 2,
 					}}
 					style={{padding: '32px 16px !important'}}>
-					<IconButton onClick={() => setOpenLogModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
-					<ViewLog data={[Array(10)]} id={userData} />
+					<Card sx={{p: 0, m: 0}}>
+						<CardHeader
+							sx={{py: '0 !important'}}
+							title='Logs :'
+							action={
+								<IconButton onClick={() => setOpenLogModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+									<CloseIcon />
+								</IconButton>
+							}
+						/>
+						<Divider />
+
+						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
+							<ViewLog data={[Array(10)]} id={userData} />
+						</CardContent>
+					</Card>
 				</Box>
 			</Modal>
 			{/* update Record */}

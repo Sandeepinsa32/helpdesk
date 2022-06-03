@@ -682,7 +682,7 @@ const UpdateRecord = ({data}) => {
 
 							<Divider />
 							<Card>
-								<CardHeader title='Logs' />
+								<CardHeader title='Comments' />
 								<Divider />
 								<CardContent>
 									<List>

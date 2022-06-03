@@ -3,6 +3,7 @@ import {Typography, Paper, ListItem, ListItemButton, ListItemText, ListItemIcon,
 import axios from 'axios';
 import {BASEURL} from '../../utils/Utils';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import DoneAllSharpIcon from '@mui/icons-material/DoneAllSharp';
 
 const ViewLog = ({id}) => {
 	id = id._id;
@@ -34,7 +35,7 @@ const ViewLog = ({id}) => {
 		let yyyy = today.getFullYear();
 		var hh = today.getHours();
 		var MM = today.getMinutes();
-		// var ss = today.getSeconds(); // seconds
+		// var ss = today.getSeconds();
 
 		today = mm + '/' + dd + '/' + yyyy + ' ' + hh + ':' + MM;
 		return today;
@@ -42,7 +43,6 @@ const ViewLog = ({id}) => {
 
 	return (
 		<Card>
-			<CardHeader title='Logs' />
 			<Divider />
 			<CardContent>
 				{isLoading ? (
@@ -55,17 +55,21 @@ const ViewLog = ({id}) => {
 									<ListItem disablePadding key={i}>
 										<ListItemButton>
 											<ListItemIcon>
-												<ArrowRightAltIcon />
+												<DoneAllSharpIcon />
 											</ListItemIcon>
 
 											<ListItemText
-												// primary="John Recently Viewed This Record"
+												primary={`${log.agent.firstName} ${log.agent.lastName} (${log.agent.employeeCode})`}
 												secondary={
 													<>
-														<Typography sx={{display: 'inline'}} component='span' variant='body2' color='text.primary'>
-															{log.remark}
-														</Typography>
-														<span style={{float: 'right', width: 'fit-content	'}}>{formateDate(log.timestamp)}</span>
+														{/* <Typography sx={{display: 'inline'}} component='span' variant='body2' color='text.primary'>
+															{log.agent.firstName} {log.agent.lastName} ({log.agent.employeeCode})
+														</Typography> */}
+														{`${log.action} `}
+														<span style={{float: 'right', width: 'fit-content	'}}>
+															{formateDate(log.createdAt)}
+															{/* {log.createdAt.split('T')[0]} {log.createdAt.split('T')[1]} */}
+														</span>
 													</>
 												}
 											/>
