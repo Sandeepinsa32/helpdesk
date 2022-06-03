@@ -40,3 +40,13 @@
 10. val. err message on type cast
 
 11. making dropdown for cc used:
+
+---
+
+### TESTING
+
+1. Login issue of new agent
+2. update agent password
+3. dashboard active link
+4. disble update
+5. check role of current user --> only in global record (admin can update record even after 48 hours)

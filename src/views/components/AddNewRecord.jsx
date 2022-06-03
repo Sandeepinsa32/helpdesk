@@ -53,34 +53,34 @@ const AddNewRecord = ({isView, data}) => {
 	var err = [];
 
 	const INITIAL_FORM_STATE = {
-		firstName: '',
-		lastName: '',
-		email: '',
-		phone: '',
+		firstName: 'john',
+		lastName: 'doe',
+		email: 'john@doe.com',
+		phone: 9874561230,
 		//
-		alternateEmail: null,
-		alternatePhone: null,
+		alternateEmail: '',
+		alternatePhone: '',
 		//
-		pnrNo: '',
-		airlineCode: '',
-		airlineLocator: '',
+		pnrNo: '1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS',
+		airlineCode: 'DL',
+		airlineLocator: 'H3YKZI',
 		//
-		bookingType: '',
-		bookedOn: 'web',
-		fareType: '',
+		bookingType: 'new',
+		bookedOn: 'trippro',
+		fareType: 'publish',
 		//
 		productType: '',
 
 		//
-		mcoNo: '',
-		totalInhouseCharge: '',
-		adultCount: '',
-		childCount: '',
-		elderCount: '',
-		grandTotal: '',
-		childPrice: '',
-		adultPrice: '',
-		elderPrice: '',
+		mcoNo: 55,
+		totalInhouseCharge: 20,
+		adultCount: 2,
+		childCount: 2,
+		elderCount: 0,
+		grandTotal: 2,
+		childPrice: 2,
+		adultPrice: 2,
+		elderPrice: 0,
 		//date
 		departureDate: null,
 		returnDate: null,
@@ -92,9 +92,51 @@ const AddNewRecord = ({isView, data}) => {
 
 		//paymentCard
 		card: inputList,
-		//update
-		remarks: '',
 	};
+
+	// const INITIAL_FORM_STATE = {
+	// 	firstName: '',
+	// 	lastName: '',
+	// 	email: '',
+	// 	phone: '',
+	// 	//
+	// 	alternateEmail: null,
+	// 	alternatePhone: null,
+	// 	//
+	// 	pnrNo: '',
+	// 	airlineCode: '',
+	// 	airlineLocator: '',
+	// 	//
+	// 	bookingType: '',
+	// 	bookedOn: 'web',
+	// 	fareType: '',
+	// 	//
+	// 	productType: '',
+
+	// 	//
+	// 	mcoNo: '',
+	// 	totalInhouseCharge: '',
+	// 	adultCount: '',
+	// 	childCount: '',
+	// 	elderCount: '',
+	// 	grandTotal: '',
+	// 	childPrice: '',
+	// 	adultPrice: '',
+	// 	elderPrice: '',
+	// 	//date
+	// 	departureDate: null,
+	// 	returnDate: null,
+	// 	//companyCard details
+	// 	isCompanyCCUsed: isCompanyCard,
+	// 	ccTimes: '',
+	// 	ccAmount: '',
+	// 	ccDigits: '',
+
+	// 	//paymentCard
+	// 	card: inputList,
+	// 	//update
+	// 	remarks: '',
+	// };
 	const FORM_VALIDATION = Yup.object({
 		//basic
 		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
