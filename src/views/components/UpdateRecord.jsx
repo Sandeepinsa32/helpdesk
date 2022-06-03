@@ -37,7 +37,7 @@ import Textfield from './FormField/Textfield';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-
+import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 const UpdateRecord = ({data}) => {
@@ -154,6 +154,19 @@ const UpdateRecord = ({data}) => {
 		return today;
 	}
 
+	const addUpdateLog = async (ticketId) => {
+		axios
+			.post(BASEURL + '/log/updated', {
+				ticket: ticketId,
+			})
+			.then((response) => {
+				console.log(response.data);
+			})
+			.catch((e) => {
+				console.log(e);
+				setIsLoading(false);
+			});
+	};
 	const INITIAL_FORM_STATE = {
 		firstName: firstName ? firstName : '',
 		lastName: lastName ? lastName : '',
@@ -363,7 +376,11 @@ const UpdateRecord = ({data}) => {
 							data: {alternateEmail, alternatePhone, pnrNo, airlineLocator},
 							cards: inputList,
 						})
-						.then((res) => console.log(res.data))
+						.then((res) => {
+							console.log(res.data);
+
+							addUpdateLog(data._id);
+						})
 						.catch((e) => console.log(e));
 				}}>
 				{(props) => {
@@ -682,7 +699,7 @@ const UpdateRecord = ({data}) => {
 
 							<Divider />
 							<Card>
-								<CardHeader title='Comments' />
+								<CardHeader title='Remarks' />
 								<Divider />
 								<CardContent>
 									<List>
@@ -692,10 +709,11 @@ const UpdateRecord = ({data}) => {
 													<ListItem disablePadding key={i}>
 														<ListItemButton>
 															<ListItemIcon>
-																<ArrowRightAltIcon />
+																<ForumOutlinedIcon />
 															</ListItemIcon>
 
 															<ListItemText
+																primary={`${log.agent.firstName} ${log.agent.lastName}`}
 																secondary={
 																	<>
 																		<Typography sx={{display: 'inline'}} component='span' variant='body2' color='text.primary'>

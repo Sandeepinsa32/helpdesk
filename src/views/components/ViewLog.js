@@ -2,8 +2,13 @@ import React, {useState, useEffect} from 'react';
 import {Typography, Paper, ListItem, ListItemButton, Box, ListItemText, ListItemIcon, CircularProgress, List, Card, CardHeader, CardContent, Divider} from '@mui/material';
 import axios from 'axios';
 import {BASEURL} from '../../utils/Utils';
+
+// mui icon
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import DoneAllSharpIcon from '@mui/icons-material/DoneAllSharp';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import CreditScoreOutlinedIcon from '@mui/icons-material/CreditScoreOutlined';
+import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 
 const ViewLog = ({id}) => {
 	id = id._id;
@@ -15,7 +20,7 @@ const ViewLog = ({id}) => {
 		axios
 			.get(BASEURL + '/log/' + id)
 			.then((res) => {
-				setTicketLogs(res.data.data);
+				setTicketLogs(res.data.data.reverse());
 				setIsLoading(false);
 			})
 			.catch((e) => {
@@ -41,6 +46,20 @@ const ViewLog = ({id}) => {
 		return today;
 	}
 
+	function LogIcon(action) {
+		switch (action) {
+			case 'viewed':
+				return <VisibilityIcon />;
+			case 'viewed card details':
+				return <CreditScoreOutlinedIcon />;
+			case 'updated':
+				return <ModeEditOutlinedIcon />;
+
+			default:
+				// throw new Error("Unknown step");
+				return <VisibilityIcon />;
+		}
+	}
 	return (
 		<Card>
 			<Divider />
@@ -56,15 +75,13 @@ const ViewLog = ({id}) => {
 								return (
 									<ListItem disablePadding key={i}>
 										<ListItemButton>
-											<ListItemIcon>
-												<DoneAllSharpIcon />
-											</ListItemIcon>
+											<ListItemIcon>{LogIcon(log.action)}</ListItemIcon>
 
 											<ListItemText
 												primary={`${log.agent.firstName} ${log.agent.lastName} (${log.agent.employeeCode})`}
 												secondary={
 													<>
-														{`${log.action} `}
+														{`${log.action} This Record at `}
 														<span style={{float: 'right', width: 'fit-content	'}}>
 															{formateDate(log.createdAt)}
 															{/* {log.createdAt.split('T')[0]} {log.createdAt.split('T')[1]} */}

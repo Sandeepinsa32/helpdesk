@@ -22,9 +22,9 @@ export default function UpdateRecordForm() {
 	const [returnDate, setReturnDate] = useState(values.returnDate);
 	const [initialProductType, setInitialProductType] = useState(values.productType);
 	const [isDisable, setIsDisable] = useState(false);
-	useEffect(() => {
-		setIsDisable(true);
-	});
+	// useEffect(() => {
+	// 	setIsDisable(true);
+	// });
 
 	const [checkObj, setCheckObj] = useState({});
 	const [checkboxType, setCheckboxType] = useState({
@@ -104,7 +104,7 @@ export default function UpdateRecordForm() {
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
 			<Grid item xs={12} sm={12} md={12} sx={{p: `16px !important`, py: `0px !important`}}>
-				<FormControl sx={{m: 1, p: 1}} fullWidth disabled={isDisable} error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
+				<FormControl sx={{m: 1, p: 1}} fullWidth disabled={true} error={Boolean(touched.productType && errors.productType)} helperText={touched.productType && errors.productType}>
 					<InputLabel variant='outlined'>Product Type :</InputLabel>
 				</FormControl>
 				<Box sx={displayFlexRowStyle} style={{marginTop: '10px ', marginLeft: '18px'}}>
@@ -527,7 +527,7 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* Remarks Field */}
 			<Grid item xs={3} md={3} sm={3}>
-				<Textfield name='remarks' label='COMMENT' multiline rows={4} />
+				<Textfield name='remarks' label='REMARKS' multiline rows={4} />
 			</Grid>
 		</Grid>
 	);
