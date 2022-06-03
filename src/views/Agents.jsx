@@ -17,6 +17,7 @@ import {
 	Modal,
 	InputAdornment,
 	SvgIcon,
+	Divider,
 	Typography,
 	CardHeader,
 	Grid,
@@ -32,6 +33,7 @@ import {
 	MenuItem,
 	Select,
 	FormControl,
+	CardActions,
 } from '@mui/material';
 
 import CloseIcon from '@mui/icons-material/Close';
@@ -299,9 +301,6 @@ export const AddUser = () => {
 			{/*  update Agent Modal */}
 			<Modal open={openUpdatePass} onClose={() => setOpenUpdatePass(false)} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={style}>
-					<IconButton onClick={() => setOpenUpdatePass(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
 					<Formik
 						initialValues={{...INITIAL_FORM_STATE_UPDATE}}
 						validationSchema={FORM_VALIDATION_UPDATE}
@@ -334,8 +333,16 @@ export const AddUser = () => {
 										sx={{
 											boxShadow: 'none',
 										}}>
-										<CardHeader subheader='you can only update Password' title='Update Password ' sx={{py: 0}} />
-
+										<CardHeader
+											title='Update Password '
+											sx={{py: 0}}
+											action={
+												<IconButton onClick={() => setOpenUpdatePass(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+													<CloseIcon />
+												</IconButton>
+											}
+										/>
+										<Divider />
 										<CardContent>
 											<Grid container spacing={3}>
 												<Grid item md={6} xs={6}>
@@ -378,21 +385,18 @@ export const AddUser = () => {
 														</Select>
 													</FormControl>
 												</Grid>
-
-												<Grid item md={6} xs={6}>
-													<Button
-														color='primary'
-														variant='contained'
-														sx={{right: '2rem', position: 'absolute'}}
-														type='submit'
-														disabled={
-															values.employeeAlias == selectedRecord.employeeAlias && values.email == selectedRecord.email && values.status == selectedRecord.status
-														}>
-														Update
-													</Button>
-												</Grid>
 											</Grid>
 										</CardContent>
+										<Divider />
+										<CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
+											<Button
+												color='primary'
+												variant='contained'
+												type='submit'
+												disabled={values.employeeAlias == selectedRecord.employeeAlias && values.email == selectedRecord.email && values.status == selectedRecord.status}>
+												Update
+											</Button>
+										</CardActions>
 									</Card>
 								</Form>
 							);
@@ -403,10 +407,7 @@ export const AddUser = () => {
 
 			{/*  add new record Modal */}
 			<Modal open={openAddNewModal} onClose={() => setOpenAddNewModal(false)} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={style}>
-					<IconButton onClick={() => setOpenAddNewModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
+				<Box sx={style} style={{padding: '16px 8px'}}>
 					<Formik
 						initialValues={{...INITIAL_FORM_STATE_ADD_NEW}}
 						validationSchema={FORM_VALIDATION_ADD_NEW}
@@ -433,7 +434,16 @@ export const AddUser = () => {
 										sx={{
 											boxShadow: 'none',
 										}}>
-										<CardHeader subheader='you can only add Sales-agent' title='Add new Agent ' sx={{py: 0}} />
+										<CardHeader
+											title='Add New Agent '
+											sx={{py: 0}}
+											action={
+												<IconButton onClick={() => setOpenAddNewModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+													<CloseIcon />
+												</IconButton>
+											}
+										/>
+										<Divider />
 
 										<CardContent>
 											<Grid container spacing={3}>
@@ -475,14 +485,14 @@ export const AddUser = () => {
 														</Select>
 													</FormControl>
 												</Grid>
-
-												<Grid item md={6} xs={3} sx={{my: 2}}>
-													<Button color='primary' variant='contained' sx={{right: '2rem', position: 'absolute'}} type='submit'>
-														Save details
-													</Button>
-												</Grid>
 											</Grid>
 										</CardContent>
+										<Divider />
+										<CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
+											<Button color='primary' variant='contained' type='submit'>
+												Save details
+											</Button>
+										</CardActions>
 									</Card>
 								</Form>
 							);

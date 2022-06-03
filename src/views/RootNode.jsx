@@ -154,16 +154,16 @@ export default function MiniDrawer() {
 					</IconButton>
 
 					<Box sx={{flexGrow: 1}} />
-					<Tooltip title='User Details'>
-						<img
-							src={Navlogo}
-							alt='logo'
-							style={{
-								height: '65px',
-								padding: '12px',
-							}}
-						/>
-					</Tooltip>
+
+					<img
+						src={Navlogo}
+						alt='logo'
+						style={{
+							height: '65px',
+							padding: '12px',
+						}}
+					/>
+
 					<Box sx={{flexGrow: 1}} />
 
 					{isAdmin && (
@@ -189,12 +189,21 @@ export default function MiniDrawer() {
 			</AppBar>
 			{/* Account Details */}
 			<Modal open={modalopen} onClose={handleModalClose} aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={style}>
-					<IconButton onClick={handleModalClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
-
-					<AgentProfileModal />
+				<Box
+					sx={{
+						position: 'absolute',
+						top: '50%',
+						left: '50%',
+						transform: 'translate(-50%, -50%)',
+						minWidth: '40vw',
+						width: 'auto',
+						height: 'auto',
+						bgcolor: 'background.paper',
+						boxShadow: 24,
+						borderRadius: '1rem',
+						p: 2,
+					}}>
+					<AgentProfileModal onClose={handleModalClose} />
 				</Box>
 			</Modal>
 
@@ -206,7 +215,7 @@ export default function MiniDrawer() {
 						item.title == 'Charge Requests' && isAdmin ? (
 							<NavLink
 								key={item.title}
-								style={({isActive}) => {
+								sx={({isActive}) => {
 									return {
 										display: 'block',
 										margin: '1rem 0',
@@ -243,7 +252,7 @@ export default function MiniDrawer() {
 						) : (
 							<NavLink
 								key={item.title}
-								style={({isActive}) => {
+								sx={({isActive}) => {
 									return {
 										display: 'block',
 										margin: '1rem 0',
@@ -327,17 +336,3 @@ const items = [
 		title: 'Charge Requests',
 	},
 ];
-
-const style = {
-	position: 'absolute',
-	top: '50%',
-	left: '50%',
-	transform: 'translate(-50%, -50%)',
-	minWidth: '40vw',
-	minHeight: '50vh',
-	bgcolor: 'background.paper',
-	// border: '2px solid #000',
-	boxShadow: 24,
-	borderRadius: '1rem',
-	p: 4,
-};

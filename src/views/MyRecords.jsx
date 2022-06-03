@@ -404,20 +404,7 @@ export const Transaction = () => {
 
 			{/* open Logs*/}
 			<Modal open={openLog} onClose={handleLogClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box
-					sx={{
-						position: 'absolute',
-						top: '50%',
-						left: '50%',
-						transform: 'translate(-50%, -50%)',
-						minWidth: '70vw',
-						minHeight: '60vh',
-						maxHeight: '90vh',
-						bgcolor: 'background.paper',
-						boxShadow: 24,
-						borderRadius: '1rem',
-						pt: 2,
-					}}>
+				<Box sx={BoxModalStyle}>
 					<Card sx={{p: 0, m: 0}}>
 						<CardHeader
 							sx={{py: '0 !important'}}
@@ -439,19 +426,7 @@ export const Transaction = () => {
 
 			{/* Open update Record modal */}
 			<Modal open={open} onClose={handleClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box
-					sx={{
-						position: 'absolute',
-						top: '50%',
-						left: '50%',
-						transform: 'translate(-50%, -50%)',
-						width: '80vw',
-						Height: '85vh',
-						bgcolor: 'background.paper',
-						boxShadow: 24,
-						borderRadius: '1rem',
-						pt: 2,
-					}}>
+				<Box sx={BoxModalStyle}>
 					<Card sx={{p: 0, m: 0}}>
 						<CardHeader
 							sx={{py: '0 !important'}}
@@ -473,22 +448,7 @@ export const Transaction = () => {
 
 			{/* Open EMail Modal */}
 			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box
-					sx={{
-						position: 'absolute',
-						top: '50%',
-						left: '50%',
-						transform: 'translate(-50%, -50%)',
-						minWidth: '70vw',
-						minHeight: '60vh',
-						maxHeight: '90vh',
-						overflowX: ' auto',
-						bgcolor: 'background.paper',
-						// border: '2px solid #000',
-						boxShadow: 24,
-						borderRadius: '1rem',
-						p: 4,
-					}}>
+				<Box sx={BoxModalStyle} style={{overflowX: ' auto', padding: 4}}>
 					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
@@ -498,20 +458,7 @@ export const Transaction = () => {
 
 			{/* Open Charge Modal */}
 			<Modal open={chargeModelOpen} onClose={() => setChargeModelOpen(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box
-					sx={{
-						position: 'absolute',
-						top: '50%',
-						left: '50%',
-						transform: 'translate(-50%, -50%)',
-						minWidth: '70vw',
-						minHeight: '60vh',
-						maxHeight: '80vh',
-						bgcolor: 'background.paper',
-						boxShadow: 24,
-						borderRadius: '1rem',
-						pt: 2,
-					}}>
+				<Box sx={BoxModalStyle}>
 					<IconButton onClick={() => setChargeModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
@@ -526,21 +473,7 @@ export const Transaction = () => {
 
 			{/* Open airline Modal */}
 			<Modal open={airlineModelOpen} onClose={() => setAirlineModelOpen(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box
-					sx={{
-						position: 'absolute',
-						top: '50%',
-						left: '50%',
-						transform: 'translate(-50%, -50%)',
-						minWidth: '70vw',
-						minHeight: '60vh',
-						maxHeight: '90vh',
-						overflowX: ' auto',
-						bgcolor: 'background.paper',
-						boxShadow: 24,
-						borderRadius: '1rem',
-						pt: 2,
-					}}>
+				<Box sx={BoxModalStyle}>
 					<IconButton onClick={() => setAirlineModelOpen(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
@@ -551,18 +484,18 @@ export const Transaction = () => {
 	);
 };
 
-const style = {
+const BoxModalStyle = {
 	position: 'absolute',
 	top: '50%',
 	left: '50%',
 	transform: 'translate(-50%, -50%)',
 	minWidth: '70vw',
-	minHeight: '60vh',
-	maxHeight: '90vh',
-	overflowX: ' auto',
+	width: 'auto',
+	height: 'auto',
+	maxWidth: '80vw',
+	maxHeight: '90vh !important',
 	bgcolor: 'background.paper',
-	// border: '2px solid #000',
 	boxShadow: 24,
 	borderRadius: '1rem',
-	p: 4,
+	pt: 2,
 };
