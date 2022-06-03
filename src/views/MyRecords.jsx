@@ -413,7 +413,6 @@ export const Transaction = () => {
 						minWidth: '70vw',
 						minHeight: '60vh',
 						maxHeight: '90vh',
-						overflowX: ' auto',
 						bgcolor: 'background.paper',
 						boxShadow: 24,
 						borderRadius: '1rem',
@@ -422,7 +421,7 @@ export const Transaction = () => {
 					<Card sx={{p: 0, m: 0}}>
 						<CardHeader
 							sx={{py: '0 !important'}}
-							title='Logs :'
+							title='Logs:'
 							action={
 								<IconButton onClick={handleLogClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 									<CloseIcon />
@@ -507,8 +506,7 @@ export const Transaction = () => {
 						transform: 'translate(-50%, -50%)',
 						minWidth: '70vw',
 						minHeight: '60vh',
-						maxHeight: '90vh',
-						overflowX: ' auto',
+						maxHeight: '80vh',
 						bgcolor: 'background.paper',
 						boxShadow: 24,
 						borderRadius: '1rem',

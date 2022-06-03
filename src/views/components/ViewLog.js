@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Typography, Paper, ListItem, ListItemButton, ListItemText, ListItemIcon, CircularProgress, List, Card, CardHeader, CardContent, Divider} from '@mui/material';
+import {Typography, Paper, ListItem, ListItemButton, Box, ListItemText, ListItemIcon, CircularProgress, List, Card, CardHeader, CardContent, Divider} from '@mui/material';
 import axios from 'axios';
 import {BASEURL} from '../../utils/Utils';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -46,7 +46,9 @@ const ViewLog = ({id}) => {
 			<Divider />
 			<CardContent>
 				{isLoading ? (
-					<CircularProgress size={30} />
+					<Box sx={{display: 'flex', minHeight: '70vh', justifyContent: 'center', alignItems: 'center'}}>
+						<CircularProgress size={30} />
+					</Box>
 				) : (
 					<List>
 						{ticketLogs?.length > 0 ? (
@@ -62,9 +64,6 @@ const ViewLog = ({id}) => {
 												primary={`${log.agent.firstName} ${log.agent.lastName} (${log.agent.employeeCode})`}
 												secondary={
 													<>
-														{/* <Typography sx={{display: 'inline'}} component='span' variant='body2' color='text.primary'>
-															{log.agent.firstName} {log.agent.lastName} ({log.agent.employeeCode})
-														</Typography> */}
 														{`${log.action} `}
 														<span style={{float: 'right', width: 'fit-content	'}}>
 															{formateDate(log.createdAt)}

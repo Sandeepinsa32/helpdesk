@@ -143,14 +143,15 @@ function RequestCharge({data, onClose}) {
 								<Divider />
 								<CardContent>
 									{isLoading ? (
-										<div
-											style={{
+										<Box
+											sx={{
 												display: 'flex',
 												justifyContent: 'center',
-												margin: '20%',
+												alignItems: 'center',
+												minHeight: '50vh',
 											}}>
 											<CircularProgress />
-										</div>
+										</Box>
 									) : (
 										<>
 											<Grid container spacing={3}>
