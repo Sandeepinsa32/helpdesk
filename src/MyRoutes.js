@@ -20,6 +20,8 @@ export default function RouteComponent() {
 
 	const Signoff = () => {
 		localStorage.removeItem('token');
+		localStorage.removeItem('role');
+		localStorage.clear();
 		navigate('/login');
 	};
 	return (

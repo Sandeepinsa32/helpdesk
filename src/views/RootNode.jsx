@@ -215,11 +215,10 @@ export default function MiniDrawer() {
 						item.title == 'Charge Requests' && isAdmin ? (
 							<NavLink
 								key={item.title}
-								sx={({isActive}) => {
+								style={({isActive}) => {
 									return {
 										display: 'block',
-										margin: '1rem 0',
-										minHeight: 48,
+										minHeight: 40,
 										justifyContent: open ? 'initial' : 'center',
 										px: 2.5,
 										color: isActive ? '#000' : '',
@@ -234,7 +233,7 @@ export default function MiniDrawer() {
 								<ListItemButton
 									key={item.title}
 									sx={{
-										minHeight: 48,
+										minHeight: 40,
 										justifyContent: open ? 'initial' : 'center',
 										px: 2.5,
 									}}>
@@ -252,11 +251,10 @@ export default function MiniDrawer() {
 						) : (
 							<NavLink
 								key={item.title}
-								sx={({isActive}) => {
+								style={({isActive}) => {
 									return {
 										display: 'block',
-										margin: '1rem 0',
-										minHeight: 48,
+										minHeight: 40,
 										justifyContent: open ? 'initial' : 'center',
 										px: 2.5,
 										color: isActive ? '#000' : '',
@@ -271,7 +269,7 @@ export default function MiniDrawer() {
 								<ListItemButton
 									key={item.title}
 									sx={{
-										minHeight: 48,
+										minHeight: 40,
 										justifyContent: open ? 'initial' : 'center',
 										px: 2.5,
 									}}>

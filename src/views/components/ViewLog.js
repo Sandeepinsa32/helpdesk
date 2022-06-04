@@ -20,7 +20,7 @@ const ViewLog = ({id}) => {
 		axios
 			.get(BASEURL + '/log/' + id)
 			.then((res) => {
-				setTicketLogs(res.data.data.reverse());
+				setTicketLogs(res.data.data);
 				setIsLoading(false);
 			})
 			.catch((e) => {

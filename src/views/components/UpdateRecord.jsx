@@ -86,7 +86,6 @@ const UpdateRecord = ({data}) => {
 		_id,
 	} = data;
 
-	console.log(data);
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
 	const [inputList, setInputList] = useState([]);

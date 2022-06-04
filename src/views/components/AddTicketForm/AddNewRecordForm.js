@@ -16,7 +16,7 @@ import Textfield from '../FormField/Textfield';
 
 export default function AddressForm() {
 	// de-str new formik object
-	const {values, handleChange, errors, touched, setFieldValue} = useFormikContext();
+	const {values, handleChange, errors, touched, submitCount, setFieldValue} = useFormikContext();
 
 	//date
 	const [depDate, setDepDate] = useState(values.departureDate);
@@ -137,14 +137,11 @@ export default function AddressForm() {
 									? checkboxType[name] && (
 											<TextField
 												name={markup}
-												type='number'
 												label={markupLabel}
 												fullWidth
 												InputProps={{
 													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 												}}
-												error={touched.markup && errors.markup}
-												helperText={touched.markup && errors.markup}
 												onChange={(e) => {
 													const index = initialProductType.findIndex((obj) => obj.property === name);
 													let data = [...initialProductType];

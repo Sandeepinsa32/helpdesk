@@ -19,7 +19,6 @@
 13. email template --done
 14. charge button ,airline button ---done
 15. number field change fromik number --> string && validation on -ve number ----done
-
 16. card validator api needed : -----> Testing Pending
 17. testing 48 hours disable functionality : -----> Testing Pending
 18. airlineLocator value is not showing a : -----> Testing Pending
@@ -41,12 +40,24 @@
 
 11. making dropdown for cc used:
 
----
-
 ### TESTING
 
-1. Login issue of new agent
-2. update agent password
-3. dashboard active link
-4. disble update
-5. check role of current user --> only in global record (admin can update record even after 48 hours)
+-
+
+1. Login issue of new agent ---done
+2. dashboard active link --done
+3. product tpye markup in folat --done
+4. dep . & return date required --done
+
+5. airline loctor: --- missing from backend
+6. remove arr.reverse() in log : --- Removed from frontend && [ending form backend]
+7. update agent password :
+
+8. disble update
+9. check role of current user --> only in global record (admin can update record even after 48 hours)
+
+10. send remark in update records in payload
+11. hide charge transaction from agent
+12. desc missing in admim charge transac
+13. modal close on update &&& rest value of field
+14. all field req on request charge

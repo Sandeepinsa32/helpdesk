@@ -27,11 +27,11 @@ const AddNewRecord = ({isView, data}) => {
 
 	const [inputList, setInputList] = useState([
 		{
-			cardHolderName: '',
-			cardHolderNumber: '',
-			cardNumber: '',
+			cardHolderName: 'testCard',
+			cardHolderNumber: '8427175553',
+			cardNumber: '4263982640269299',
 			expiryDate: null,
-			cvv: '',
+			cvv: '123',
 		},
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
@@ -155,10 +155,17 @@ const AddNewRecord = ({isView, data}) => {
 			.nullable(),
 
 		pnrNo: Yup.string().max(255),
-		airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Airline code is 2 '),
-		airlineLocator: Yup.string(),
+		airlineCode: Yup.string(2).min(2).max(3, 'maximum limit for Airline code is 2 ').required('This field is Required'),
+		airlineLocator: Yup.string().required('This field is Required'),
 		//
-		productType: Yup.array().required('please Choose at-least one Product type').min(1, 'please Choose at-least one Product type'),
+		productType: Yup.array()
+			.of(
+				Yup.object().shape({
+					property: Yup.string().oneOf(['flight', 'car', 'hotel', 'insurance', 'addon'], 'Invalid Product type Please Refresh page').required('Required'),
+					propertyMarkup: Yup.number('invalid Markup'),
+				})
+			)
+			.min(1, 'please Choose at-least one Product type'),
 
 		//dropdown
 		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent ').required('This field is Required'),
@@ -166,21 +173,27 @@ const AddNewRecord = ({isView, data}) => {
 		bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value').required('This field is Required'),
 
 		//currency
-		mcoNo: Yup.number('input must consist if number').test(
-			'number should be postive', // this is used internally by yup
-			'value should be greater or Equal to 0', //validation message
-			(value) => value == 0 || value > 0 || value !== ''
-		),
-		totalInhouseCharge: Yup.number('input must consist if number').test(
-			'number should be postive', // this is used internally by yup
-			'value should be greater or Equal to 0', //validation message
-			(value) => value == 0 || value > 0 || value !== ''
-		),
-		grandTotal: Yup.number('input must consist if number').test(
-			'number should be postive', // this is used internally by yup
-			'value should be greater or Equal to 0', //validation message
-			(value) => value == 0 || value > 0 || value !== ''
-		),
+		mcoNo: Yup.number('input must consist if number')
+			.test(
+				'number should be postive', // this is used internally by yup
+				'value should be greater or Equal to 0', //validation message
+				(value) => value == 0 || value > 0 || value !== ''
+			)
+			.required('This field is Required'),
+		totalInhouseCharge: Yup.number('input must consist if number')
+			.test(
+				'number should be postive', // this is used internally by yup
+				'value should be greater or Equal to 0', //validation message
+				(value) => value == 0 || value > 0 || value !== ''
+			)
+			.required('This field is Required'),
+		grandTotal: Yup.number('input must consist if number')
+			.test(
+				'number should be postive', // this is used internally by yup
+				'value should be greater or Equal to 0', //validation message
+				(value) => value == 0 || value > 0 || value !== ''
+			)
+			.required('This field is Required'),
 
 		//number of passenger
 		adultCount: Yup.number('input must consist if number')
@@ -191,7 +204,8 @@ const AddNewRecord = ({isView, data}) => {
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
 				(value) => value == 0 || value > 0 || value !== ''
-			),
+			)
+			.required('required'),
 		childCount: Yup.number('input must consist if number')
 			.integer()
 			.nullable()
@@ -200,7 +214,8 @@ const AddNewRecord = ({isView, data}) => {
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
 				(value) => value == 0 || value > 0 || value !== ''
-			),
+			)
+			.required('required'),
 		elderCount: Yup.number('input must consist if number')
 			.integer()
 			.nullable()
@@ -209,39 +224,46 @@ const AddNewRecord = ({isView, data}) => {
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
 				(value) => value == 0 || value > 0 || value !== ''
-			),
+			)
+			.required('required'),
 
 		childPrice: Yup.number('input must consist if number').when(['childCount'], (childCount, schema) => {
 			return childCount > 0
-				? schema.test(
-						'number should be postive', // this is used internally by yup
-						'value should be greater or Equal to 0', //validation message
-						(value) => value == 0 || value > 0 || value !== ''
-				  )
+				? schema
+						.test(
+							'number should be postive', // this is used internally by yup
+							'value should be greater or Equal to 0', //validation message
+							(value) => value == 0 || value > 0 || value !== ''
+						)
+						.required('required')
 				: schema;
 		}),
 		adultPrice: Yup.number('input must consist if number').when(['adultCount'], (adultCount, schema) => {
 			return adultCount > 0
-				? schema.test(
-						'number should be postive', // this is used internally by yup
-						'value should be greater or Equal to 0', //validation message
-						(value) => value == 0 || value > 0 || value !== ''
-				  )
+				? schema
+						.test(
+							'number should be postive', // this is used internally by yup
+							'value should be greater or Equal to 0', //validation message
+							(value) => value == 0 || value > 0 || value !== ''
+						)
+						.required('required')
 				: schema;
 		}),
 		elderPrice: Yup.number('input must consist if number').when(['elderCount'], (elderCount, schema) => {
 			return elderCount > 0
-				? schema.test(
-						'number should be postive', // this is used internally by yup
-						'value should be greater or Equal to 0', //validation message
-						(value) => value == 0 || value > 0 || value !== ''
-				  )
+				? schema
+						.test(
+							'number should be postive', // this is used internally by yup
+							'value should be greater or Equal to 0', //validation message
+							(value) => value == 0 || value > 0 || value !== ''
+						)
+						.required('required')
 				: schema;
 		}),
 
 		//date
-		departureDate: Yup.string().nullable(),
-		returnDate: Yup.string().nullable(),
+		departureDate: Yup.string().nullable().required('required'),
+		returnDate: Yup.string().nullable().required('required'),
 
 		//companyCard details
 		isCompanyCCUsed: Yup.bool(),
@@ -249,19 +271,19 @@ const AddNewRecord = ({isView, data}) => {
 			.positive('value Should be Greater then 0')
 			.integer()
 			.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
-				return isCompanyCCUsed === true ? schema : schema;
+				return isCompanyCCUsed === true ? schema.required('required') : schema;
 			}),
 		ccAmount: Yup.number('input must consist if number')
 			.positive('value Should be Greater then 0')
 			.integer()
 			.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
-				return isCompanyCCUsed === true ? schema : schema;
+				return isCompanyCCUsed === true ? schema.required('required') : schema;
 			}),
 		ccDigits: Yup.string('input must consist if number')
 			.max(4, 'please enter only last 4 digits of card')
 			.min(4, 'please enter only last 4 digits of card')
 			.when(['isCompanyCCUsed'], (isCompanyCCUsed, schema) => {
-				return isCompanyCCUsed === true ? schema : schema;
+				return isCompanyCCUsed === true ? schema.required('required') : schema;
 			}),
 
 		//Card Payment
@@ -378,12 +400,12 @@ const AddNewRecord = ({isView, data}) => {
 								<AddNewRecordForm isView={isView} />
 							</Box>
 							{/*  card Payment */}
-							<Box sx={{m: 1}}>
+							{/* <Box sx={{m: 1}}>
 								<Typography variant='h6' gutterBottom sx={{my: 4}}>
 									Customer Card Detail:
 								</Typography>
-							</Box>
-							{/* CC card  */}
+							</Box> */}
+							{/* PAyment CArd */}
 							<Box
 							// sx={{
 							// 	m: 1,
@@ -456,7 +478,11 @@ const AddNewRecord = ({isView, data}) => {
 															label='CVV'
 															fullWidth
 															autoComplete='cc-csc'
-															onChange={(e) => handleCardInput(e, i)}
+															onChange={(e) => {
+																console.log(e.target.value);
+
+																handleCardInput(e, i);
+															}}
 															value={inputList[i].cvv}
 															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
 															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
