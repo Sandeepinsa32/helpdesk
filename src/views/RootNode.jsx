@@ -212,7 +212,7 @@ export default function MiniDrawer() {
 
 				<List>
 					{items.map((item, index) =>
-						item.title == 'Charge Requests' && isAdmin ? (
+						item.href == '/Charge-request' && isAdmin ? (
 							<NavLink
 								key={item.title}
 								style={({isActive}) => {
