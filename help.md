@@ -60,4 +60,4 @@
 
 12. hide charge transaction from agent
 13. desc missing in admim charge transac
-14. modal close on update &&& rest value of field
+14. modal close on update &&& rest value of field --done
