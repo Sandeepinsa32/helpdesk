@@ -396,7 +396,7 @@ export default function SearchRecord() {
 						<CloseIcon />
 					</IconButton>
 
-					<UpdateRecord data={userData} />
+					<UpdateRecord data={userData} onClose={() => setOpenUpdateRecord(false)} />
 				</Box>
 			</Modal>
 			{/* Send Email */}

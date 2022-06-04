@@ -445,7 +445,7 @@ export const Transaction = () => {
 						<Divider />
 
 						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
-							<UpdateRecord data={selectedTicket} />
+							<UpdateRecord data={selectedTicket} onClose={() => setOpen(false)} />
 						</CardContent>
 					</Card>
 				</Box>

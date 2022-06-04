@@ -40,7 +40,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-const UpdateRecord = ({data}) => {
+const UpdateRecord = ({data, onClose}) => {
 	const {
 		firstName,
 		lastName,
@@ -384,6 +384,7 @@ const UpdateRecord = ({data}) => {
 							console.log(res.data);
 
 							addUpdateLog(data._id);
+							onClose();
 						})
 						.catch((e) => console.log(e));
 				}}>
