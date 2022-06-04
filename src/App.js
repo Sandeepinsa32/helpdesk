@@ -5,6 +5,7 @@ import Login from './views/login';
 import {Toaster} from 'react-hot-toast';
 import axios from 'axios';
 import Authorizing from './views/Authorizing';
+import {useEffect} from 'react';
 
 function App() {
 	const navigate = useNavigate();
@@ -57,15 +58,32 @@ function App() {
 			},
 		},
 	});
+	// console.log('app.js outside function');
+	// useEffect(() => {
+	// 	console.log('@ useEffect App.js');
+	// });
 	return (
 		<>
+			{/* {console.log('===> app.js inside function 1')} */}
 			<ThemeProvider theme={theme}>
 				<StyledEngineProvider>
 					<Routes>
 						<Route path='/login' element={<Login />}></Route>
 						<Route path='/auth/:id' element={<Authorizing />}></Route>
 
-						<Route path='/*' element={localStorage.getItem('token') ? <RootNode /> : <Navigate to='/login' replace />} />
+						<Route
+							path='/*'
+							element={
+								localStorage.getItem('token') ? (
+									<>
+										{/* {console.log('===> app.js inside function 2 ')} */}
+										<RootNode />
+									</>
+								) : (
+									<Navigate to='/login' replace />
+								)
+							}
+						/>
 					</Routes>
 					<Toaster
 						position='top-right'

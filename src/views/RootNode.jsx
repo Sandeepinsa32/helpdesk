@@ -94,8 +94,10 @@ const Drawer = styled(MuiDrawer, {
 		'& .MuiDrawer-paper': closedMixin(theme),
 	}),
 }));
+console.log('root-node outside function 0');
 
-export default function MiniDrawer() {
+export default function RootNode() {
+	console.log('root-node outside function');
 	const navigate = useNavigate();
 	const goToCustomer = () => {
 		navigate('/agents');
@@ -105,17 +107,25 @@ export default function MiniDrawer() {
 	};
 	const [open, setOpen] = useState(false);
 	const [modalopen, setModalopen] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
-
-	const checkRole = () => {
+	const [isAdmin, setIsAdmin] = useState(() => {
 		const role = localStorage.getItem('role');
-		role === 'admin' ? setIsAdmin(true) : setIsAdmin(false);
-	};
+		console.log('check log');
+		return role === 'admin' ? true : false;
+	});
 
-	useEffect(() => {
-		checkRole();
-	}, [0]);
+	// const checkRole = () => {
+	// 	const role = localStorage.getItem('role');
+	// 	// console.log('check log');
+	// 	role === 'admin' ? setIsAdmin(true) : setIsAdmin(false);
+	// };
 
+	// useEffect(() => {
+	// 	checkRole();
+	// }, [0]);
+
+	// useEffect(() => {
+	// 	console.log('@ Rootnode  useEffect run ', isAdmin);
+	// });
 	const handleModalOpen = () => setModalopen(true);
 	const handleModalClose = () => setModalopen(false);
 	const handleDrawerOpen = () => setOpen(true);
@@ -250,7 +260,7 @@ export default function MiniDrawer() {
 						boxShadow: 'inset rgb(0 0 0 / 7%) 0px 0px 21px 1px',
 					}}>
 					{/* <DrawerHeader /> */}
-					{console.log('==========================================================================================')}
+					{/* {console.log('======root node inside function===============')} */}
 					<RouteComponent isAdmin={isAdmin} />
 				</Box>
 			</Box>
