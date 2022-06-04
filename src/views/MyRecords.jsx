@@ -140,6 +140,11 @@ export const Transaction = () => {
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
 
+	const CheckViewUpdate = (createdAt) => {
+		if (new Date() - new Date(createdAt) < 60000 * 60 * 48) {
+			return true;
+		}
+	};
 	return (
 		<>
 			<Box
@@ -314,7 +319,7 @@ export const Transaction = () => {
 
 												<TableCell sx={{p: 0}}>
 													{/* Update*/}
-													<Tooltip title={new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? 'Edit' : 'View'}>
+													<Tooltip title={CheckViewUpdate(row.createdAt) ? 'Edit' : 'View'}>
 														<IconButton
 															aria-label='update'
 															onClick={() => {
@@ -323,7 +328,7 @@ export const Transaction = () => {
 																handleOpen();
 																addLog(row._id);
 															}}>
-															{new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? <EditIcon /> : <VisibilityIcon />}
+															{CheckViewUpdate(row.createdAt) ? <EditIcon /> : <VisibilityIcon />}
 														</IconButton>
 													</Tooltip>
 													{/* email*/}

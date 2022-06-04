@@ -361,6 +361,11 @@ const UpdateRecord = ({data}) => {
 		),
 		remarks: Yup.string().required('This field is required'),
 	});
+	const CheckViewUpdate = (createdAt) => {
+		if (new Date() - new Date(createdAt) < 60000 * 60 * 48 || localStorage.getItem('role') == 'admin') {
+			return true;
+		}
+	};
 	return (
 		<>
 			<Formik
@@ -445,7 +450,6 @@ const UpdateRecord = ({data}) => {
 								}}>
 								<UpdateRecordForm />
 							</Box>
-
 							<Grid container spacing={3} sx={{mt: 1}}>
 								{/*  company card  */}
 
@@ -497,7 +501,6 @@ const UpdateRecord = ({data}) => {
 										);
 									})}
 							</Grid>
-
 							{alreadyPresentCard &&
 								alreadyPresentCard.map((x, i) => {
 									console.log('alreadyPresentCard', alreadyPresentCard);
@@ -548,7 +551,6 @@ const UpdateRecord = ({data}) => {
 										</>
 									);
 								})}
-
 							{inputList &&
 								inputList.map((x, i) => {
 									// const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
@@ -673,29 +675,30 @@ const UpdateRecord = ({data}) => {
 										</Card>
 									);
 								})}
+							{CheckViewUpdate && (
+								<Box sx={{py: 1, my: 1, display: 'flex ', justifyContent: 'flex-end'}}>
+									{inputList.length < 2 && (
+										<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mx: 1}}>
+											Add One More Card
+										</Button>
+									)}
+									{!isPaymentVisible && (
+										<Button
+											sx={{mx: 1}}
+											variant='contained'
+											onClick={() => {
+												cardLog(_id);
+												fetchCards(_id);
+											}}>
+											Show card
+										</Button>
+									)}
 
-							<Box sx={{py: 1, my: 1, display: 'flex ', justifyContent: 'flex-end'}}>
-								{inputList.length < 2 && (
-									<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mx: 1}}>
-										Add One More Card
+									<Button variant='contained' type='submit' sx={{mx: 1}} disabled={isDisableUpdatebtn}>
+										Update
 									</Button>
-								)}
-								{!isPaymentVisible && (
-									<Button
-										sx={{mx: 1}}
-										variant='contained'
-										onClick={() => {
-											cardLog(_id);
-											fetchCards(_id);
-										}}>
-										Show card
-									</Button>
-								)}
-								<Button variant='contained' type='submit' sx={{mx: 1}} disabled={isDisableUpdatebtn}>
-									Update
-								</Button>
-							</Box>
-
+								</Box>
+							)}
 							<Divider />
 							<Card>
 								<CardHeader title='Remarks' />

@@ -48,13 +48,13 @@
 2. dashboard active link --done
 3. product tpye markup in folat --done
 4. dep . & return date required --done
+5. check role of current user --> only in global record (admin can update record even after 48 hours) --done
 
-5. airline loctor: --- missing from backend
-6. remove arr.reverse() in log : --- Removed from frontend && [ending form backend]
-7. update agent password :
+6. airline loctor: --- missing from backend
+7. remove arr.reverse() in log : --- Removed from frontend && [ending form backend]
+8. update agent password :
 
-8. disble update
-9. check role of current user --> only in global record (admin can update record even after 48 hours)
+9. disble update
 
 10. send remark in update records in payload
 11. hide charge transaction from agent

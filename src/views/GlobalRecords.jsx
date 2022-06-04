@@ -136,6 +136,11 @@ export default function SearchRecord() {
 		loadTransactions(createQueryString({email, bookingid, phone, page}));
 	}, [page]);
 
+	const CheckViewUpdate = (createdAt) => {
+		if (new Date() - new Date(createdAt) < 60000 * 60 * 48 && localStorage.getItem('role') == 'admin') {
+			return true;
+		}
+	};
 	return (
 		<>
 			<Box
@@ -265,7 +270,7 @@ export default function SearchRecord() {
 
 												<TableCell>
 													{/* Update*/}
-													<Tooltip title={new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? 'Edit' : 'View'}>
+													<Tooltip title={CheckViewUpdate(row.createdAt) ? 'Edit' : 'View'}>
 														<IconButton
 															aria-label='update'
 															onClick={() => {
@@ -274,7 +279,7 @@ export default function SearchRecord() {
 																setOpenUpdateRecord(true);
 																addLog(row._id);
 															}}>
-															{new Date() - new Date(row.createdAt) < 60000 * 60 * 48 ? <EditIcon /> : <VisibilityIcon />}
+															{CheckViewUpdate(row.createdAt) ? <EditIcon /> : <VisibilityIcon />}
 														</IconButton>
 													</Tooltip>
 

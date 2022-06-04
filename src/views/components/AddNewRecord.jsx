@@ -399,22 +399,8 @@ const AddNewRecord = ({isView, data}) => {
 								}}>
 								<AddNewRecordForm isView={isView} />
 							</Box>
-							{/*  card Payment */}
-							{/* <Box sx={{m: 1}}>
-								<Typography variant='h6' gutterBottom sx={{my: 4}}>
-									Customer Card Detail:
-								</Typography>
-							</Box> */}
 							{/* PAyment CArd */}
-							<Box
-							// sx={{
-							// 	m: 1,
-							// 	p: 2,
-							// 	py: 3,
-							// 	bgcolor: 'background.paper',
-							// 	borderRadius: 1,
-							// }}
-							>
+							<Box>
 								{inputList.map((x, i) => {
 									if (errors.card) {
 										err = errors.card;
@@ -604,7 +590,6 @@ const AddNewRecord = ({isView, data}) => {
 									</CardContent>
 								</Card>
 							</Box>
-
 							<Box xs={4} md={4}>
 								<Button variant='contained' type='submit' sx={{mt: 3, ml: 1}}>
 									submit
