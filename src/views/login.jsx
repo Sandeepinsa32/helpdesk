@@ -14,8 +14,6 @@ import axios from 'axios';
 
 const Login = () => {
 	const navigate = useNavigate();
-
-	console.log('jack@gmail.com ', '0000');
 	// const router = useRouter();
 	const formik = useFormik({
 		initialValues: {
@@ -39,14 +37,12 @@ const Login = () => {
 		axios
 			.post(BASEURL + '/agent/login', formik.values)
 			.then((response) => {
-				console.log(response.data);
 				localStorage.setItem('role', response.data.data.agent.role);
 				localStorage.setItem('token', JSON.stringify(response.data.data.token));
 				successToast('Login Successfull');
 				navigate('/');
 			})
 			.catch((e) => {
-				// console.log(e.response.data.message);
 				errorToast(e.response.data.message);
 			});
 	};
