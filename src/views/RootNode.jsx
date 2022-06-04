@@ -278,7 +278,7 @@ export default function MiniDrawer() {
 				}}>
 				{/* <DrawerHeader /> */}
 
-				<RouteComponent />
+				<RouteComponent isAdmin={isAdmin} />
 			</Box>
 		</Box>
 	);

@@ -1,6 +1,6 @@
 import {Box, Container, Grid, Typography} from '@mui/material';
 
-import {AgentProfileModal} from './components/AgentProfileModal';
+import {AgentProfileModal} from '../views/components/AgentProfileModal';
 
 export const Account = () => (
 	<>
