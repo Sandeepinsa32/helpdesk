@@ -20,6 +20,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 // local icon
 
@@ -99,6 +100,9 @@ export default function MiniDrawer() {
 	const goToCustomer = () => {
 		navigate('/agents');
 	};
+	const goToPayment = () => {
+		navigate('/Charge-request');
+	};
 	const [open, setOpen] = useState(false);
 	const [modalopen, setModalopen] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
@@ -167,11 +171,18 @@ export default function MiniDrawer() {
 					<Box sx={{flexGrow: 1}} />
 
 					{isAdmin && (
-						<Tooltip title='Add new agent ' onClick={goToCustomer}>
-							<IconButton sx={{ml: 1}}>
-								<GroupAddIcon fontSize='large' />
-							</IconButton>
-						</Tooltip>
+						<>
+							<Tooltip title='Payment' onClick={goToPayment}>
+								<IconButton sx={{ml: 1}}>
+									<AccountBalanceWalletIcon fontSize='large' />
+								</IconButton>
+							</Tooltip>
+							<Tooltip title='Add new agent ' onClick={goToCustomer}>
+								<IconButton sx={{ml: 1}}>
+									<GroupAddIcon fontSize='large' />
+								</IconButton>
+							</Tooltip>
+						</>
 					)}
 					<Tooltip title='User Details'>
 						<IconButton sx={{ml: 1}} onClick={handleModalOpen}>
@@ -211,83 +222,43 @@ export default function MiniDrawer() {
 				<DrawerHeader> </DrawerHeader>
 
 				<List>
-					{items.map((item, index) => {
-						console.log(item.admin, isAdmin);
-
-						return item.admin && isAdmin ? (
-							<NavLink
+					{items.map((item, index) => (
+						<NavLink
+							key={item.title}
+							style={({isActive}) => {
+								return {
+									display: 'block',
+									minHeight: 40,
+									justifyContent: open ? 'initial' : 'center',
+									px: 2.5,
+									color: isActive ? '#000' : '',
+									background: isActive ? ' rgb(227, 242, 253)' : '',
+									borderRadius: '5px',
+									textDecoration: 'none !important',
+									color: `unset !important`,
+								};
+							}}
+							className='navlink-decoration'
+							to={item.href}>
+							<ListItemButton
 								key={item.title}
-								style={({isActive}) => {
-									return {
-										display: 'block',
-										minHeight: 40,
-										justifyContent: open ? 'initial' : 'center',
-										px: 2.5,
-										color: isActive ? '#000' : '',
-										background: isActive ? ' rgb(227, 242, 253)' : '',
-										borderRadius: '5px',
-										textDecoration: 'none !important',
-										color: `unset !important`,
-									};
-								}}
-								className='navlink-decoration'
-								to={item.href}>
-								<ListItemButton
-									key={item.title}
+								sx={{
+									minHeight: 40,
+									justifyContent: open ? 'initial' : 'center',
+									px: 2.5,
+								}}>
+								<ListItemIcon
 									sx={{
-										minHeight: 40,
-										justifyContent: open ? 'initial' : 'center',
-										px: 2.5,
+										minWidth: 0,
+										mr: open ? 3 : 'auto',
+										justifyContent: 'center',
 									}}>
-									<ListItemIcon
-										sx={{
-											minWidth: 0,
-											mr: open ? 3 : 'auto',
-											justifyContent: 'center',
-										}}>
-										{item.icon}
-									</ListItemIcon>
-									<ListItemText primary={item.title} sx={{opacity: open ? 1 : 0}} />
-								</ListItemButton>
-							</NavLink>
-						) : (
-							<NavLink
-								key={item.title}
-								style={({isActive}) => {
-									return {
-										display: 'block',
-										minHeight: 40,
-										justifyContent: open ? 'initial' : 'center',
-										px: 2.5,
-										color: isActive ? '#000' : '',
-										background: isActive ? ' rgb(227, 242, 253)' : '',
-										borderRadius: '5px',
-										textDecoration: 'none !important',
-										color: `unset !important`,
-									};
-								}}
-								className='navlink-decoration'
-								to={item.href}>
-								<ListItemButton
-									key={item.title}
-									sx={{
-										minHeight: 40,
-										justifyContent: open ? 'initial' : 'center',
-										px: 2.5,
-									}}>
-									<ListItemIcon
-										sx={{
-											minWidth: 0,
-											mr: open ? 3 : 'auto',
-											justifyContent: 'center',
-										}}>
-										{item.icon}
-									</ListItemIcon>
-									<ListItemText primary={item.title} sx={{opacity: open ? 1 : 0}} />
-								</ListItemButton>
-							</NavLink>
-						);
-					})}
+									{item.icon}
+								</ListItemIcon>
+								<ListItemText primary={item.title} sx={{opacity: open ? 1 : 0}} />
+							</ListItemButton>
+						</NavLink>
+					))}
 				</List>
 			</Drawer>
 
@@ -329,11 +300,5 @@ const items = [
 		href: '/all',
 		icon: <SearchIcon fontSize='small' />,
 		title: 'All Transaction',
-	},
-	{
-		href: '/Charge-request',
-		icon: <AttachMoneyIcon fontSize='small' />,
-		title: 'Charge Requests',
-		admin: true,
 	},
 ];
