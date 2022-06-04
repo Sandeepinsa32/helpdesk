@@ -211,8 +211,10 @@ export default function MiniDrawer() {
 				<DrawerHeader> </DrawerHeader>
 
 				<List>
-					{items.map((item, index) =>
-						item.href == '/Charge-request' && isAdmin ? (
+					{items.map((item, index) => {
+						console.log(item.admin, isAdmin);
+
+						return item.admin && isAdmin ? (
 							<NavLink
 								key={item.title}
 								style={({isActive}) => {
@@ -284,8 +286,8 @@ export default function MiniDrawer() {
 									<ListItemText primary={item.title} sx={{opacity: open ? 1 : 0}} />
 								</ListItemButton>
 							</NavLink>
-						)
-					)}
+						);
+					})}
 				</List>
 			</Drawer>
 
@@ -332,5 +334,6 @@ const items = [
 		href: '/Charge-request',
 		icon: <AttachMoneyIcon fontSize='small' />,
 		title: 'Charge Requests',
+		admin: true,
 	},
 ];
