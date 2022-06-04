@@ -58,27 +58,27 @@ function RequestCharge({data, onClose}) {
 	const FORM_VALIDATION = Yup.object({
 		cardHolderName: Yup.string(),
 		cardHolderNumber: Yup.string(),
-		cardNumber: Yup.string(),
+		cardNumber: Yup.string().required('This is Field is required'),
 		email: Yup.string().email('Invalid email address').required('Required'),
 		phone: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
-		cvv: Yup.number(),
-		expiryDate: Yup.string().nullable(),
+		cvv: Yup.number().required('This is Field is required'),
+		expiryDate: Yup.string().nullable().required('This is Field is required'),
 		amount: Yup.number('input must consist if number')
-			// .required('This Field is required')
+			.required('This Field is required')
 			.test(
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
 				(value) => value == 0 || value > 0
 			),
 		markup: Yup.number('input must consist if number')
-			// .required('This Field is required')
+			.required('This Field is required')
 			.test(
 				'number should be postive', // this is used internally by yup
 				'value should be greater or Equal to 0', //validation message
 				(value) => value == 0 || value > 0
 			),
-		address: Yup.string(),
-		remarks: Yup.string(),
+		address: Yup.string().required('This is Field is required'),
+		remarks: Yup.string().required('This is Field is required'),
 	});
 	// console.log(data);
 

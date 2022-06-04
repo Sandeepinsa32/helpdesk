@@ -373,11 +373,11 @@ const UpdateRecord = ({data}) => {
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
 					console.log('formik submitted');
-					const {alternateEmail, alternatePhone, pnrNo, airlineLocator} = values;
+					const {alternateEmail, alternatePhone, pnrNo, airlineLocator, remarks} = values;
 
 					axios
 						.put(BASEURL + `/ticket/${data._id}`, {
-							data: {alternateEmail, alternatePhone, pnrNo, airlineLocator},
+							data: {alternateEmail, alternatePhone, pnrNo, airlineLocator, remarks},
 							cards: inputList,
 						})
 						.then((res) => {
