@@ -113,10 +113,17 @@ export const AddUser = () => {
 		password: '',
 		employeeCode: '',
 		employeeAlias: '',
-		status: '',
+		status: 'active',
 	};
 
-	const INITIAL_FORM_STATE_UPDATE = {...selectedRecord, confirmPassword: '', status: ''};
+	const INITIAL_FORM_STATE_UPDATE = {
+		...selectedRecord,
+		confirmPassword: '',
+		status: 'active',
+		oldEmail: selectedRecord.email,
+		oldEmployeeAlias: selectedRecord.employeeAlias,
+		oldStatus: selectedRecord.status,
+	};
 
 	const FORM_VALIDATION_ADD_NEW = Yup.object({
 		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('First Name is Required'),
@@ -125,7 +132,7 @@ export const AddUser = () => {
 		password: Yup.string().max(255).required('Password is required'),
 		employeeCode: Yup.string().max(10).required('Emp Code is required'),
 		employeeAlias: Yup.string().max(10).required('Emp Alias is required'),
-		status: Yup.string(),
+		status: Yup.string().oneOf(['active', 'inactive', null]),
 	});
 	const FORM_VALIDATION_UPDATE = Yup.object({
 		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('First Name is Required'),
@@ -139,7 +146,10 @@ export const AddUser = () => {
 			.when(['password'], (password, schema) => {
 				return password ? schema.required('Confirm Password is required').oneOf([Yup.ref('password'), null], 'Passwords must match') : schema;
 			}),
-		status: Yup.string(),
+		status: Yup.string().oneOf(['active', 'inactive', null]),
+		oldEmail: Yup.string(),
+		oldEmployeeAlias: Yup.string(),
+		oldStatus: Yup.string(),
 	});
 	return (
 		<>
@@ -305,11 +315,20 @@ export const AddUser = () => {
 						initialValues={{...INITIAL_FORM_STATE_UPDATE}}
 						validationSchema={FORM_VALIDATION_UPDATE}
 						onSubmit={(values) => {
-							console.log('update record', values);
-							alert(' check console ......');
+							const {email, oldEmail, employeeAlias, oldEmployeeAlias, password, status, oldStatus, _id} = values;
+
+							var updateValues = {};
+
+							if (password !== undefined && password !== null) updateValues.password = password;
+							if (email !== oldEmail) updateValues.email = email;
+							if (employeeAlias !== oldEmployeeAlias) updateValues.employeeAlias = email;
+							if (status !== oldStatus) updateValues.status = status;
+
+							console.log('update record', updateValues);
+
 							// axios
 							// 	.put(BASEURL + '/agent/reset', {
-							// 		newPassword: values.password,
+							// 		newPassword: password,
 							// 		agentId: values._id,
 							// 	})
 							// 	.then((response) => {
@@ -326,7 +345,7 @@ export const AddUser = () => {
 							const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
 
 							// console.log('props', props); // formik object --containg values, err, etc....
-							console.log('update err', errors);
+							//console.log('update err', errors);
 							return (
 								<Form onSubmit={handleSubmit}>
 									<Card

@@ -92,7 +92,7 @@ const UpdateRecord = ({data, onClose}) => {
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
 	const [isDisable, setIsDisable] = useState(false);
-	const [isDisableUpdatebtn, setIsDisableUpdatebtn] = useState(false);
+	const [isDisableUpdatebtn, setIsDisableUpdatebtn] = useState(true);
 
 	const [isLoading, setIsLoading] = useState(false);
 
