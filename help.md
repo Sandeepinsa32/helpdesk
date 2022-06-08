@@ -27,17 +27,14 @@
 
 #### PENDING
 
-1. only can see global card detail after 48 hours mask card
-2. Disable add new card button when record is in view mode
 3. updating global record page with latest my record pae
 4. docusign card validator
 5. email foramt
-6. Disable submit button if pnr is empty
-7. Disable button when required
-8. email field validation
-9. remove unused code
-10. val. err message on type cast
-
+6. Disable submit button if pnr is empty ---pending
+7. email field validation -----pending
+8. remove unused code ----pending
+9. val. err message on type cast
+10. airline locator
 11. making dropdown for cc used:
 
 ### TESTING
@@ -55,15 +52,15 @@
 8. airline loctor: --- missing from backend
 9. remove arr.reverse() in log : --- Removed from frontend && [ending form backend]
 10. update agent password :
+11. Disable add new card button when record is in view mode : ---testing
+12. only can see global card detail after 48 hours mask card : ---> testing
 
-11. disble update
-
-12. hide charge transaction from agent
-13. desc missing in admim charge transac
-14. modal close on update &&& rest value of field --done
-
-15. airline locator 16.update -admin after 48 hours on global record
-16. CheckViewUpdate
+13. disble update
+14. hide charge transaction from agent --done
+15. desc missing in admim charge transac --done
+16. modal close on update &&& rest value of field --done
+17. update -admin after 48 hours on global record
+18. CheckViewUpdate --done
 
 # {
 

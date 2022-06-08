@@ -31,7 +31,7 @@ import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
 function UpdateRequestCharge({formData, onClose}) {
-	const {_id, cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone, bookingId} = formData;
+	const {_id, cardHolderName, cardHolderNumber, remarks, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone, bookingId} = formData;
 	console.log(formData);
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();
@@ -83,7 +83,7 @@ function UpdateRequestCharge({formData, onClose}) {
 		phone: phone,
 		amount: amount,
 		address: address,
-		description: description,
+		description: remarks,
 		markup: markup,
 		comment: '',
 		status: '',
