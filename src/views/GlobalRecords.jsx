@@ -45,20 +45,24 @@ import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 export default function SearchRecord() {
+	//fetch state & pagination
 	const [recordData, setRecordData] = useState([]);
-	const [openUpdateRecord, setOpenUpdateRecord] = useState(false);
-	const [viewData, setViewData] = useState(false);
-	const [oldTotalRecords, setOldTotalRecords] = useState(-1);
+
 	const [allRecords, setAllRecords] = useState([]);
 	const [userData, setUserData] = useState({});
 	const [page, setPage] = React.useState(1);
 	const [totalRecords, setTotalRecords] = useState(-1);
 	const [size, setSize] = useState(5);
+	const [oldTotalRecords, setOldTotalRecords] = useState(-1);
+	//search state
 	const [bookingid, setBookingid] = useState('');
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
+	//loading
 	const [isLoading, setIsLoading] = useState(false);
 
+	//modal state
+	const [openUpdateRecord, setOpenUpdateRecord] = useState(false);
 	const [openEmailModal, setOpenEmailModal] = useState(false);
 	const [viewEmail, setViewEmail] = useState(false);
 	const [openLogModal, setOpenLogModal] = useState(false);
@@ -96,7 +100,7 @@ export default function SearchRecord() {
 
 	const addLog = async (ticketId) => {
 		axios
-			.post(BASEURL + '/log', {
+			.post(BASEURL + '/log/viewed', {
 				ticket: ticketId,
 			})
 			.then((response) => {
@@ -274,7 +278,6 @@ export default function SearchRecord() {
 														<IconButton
 															aria-label='update'
 															onClick={() => {
-																setViewData(true);
 																setUserData(row);
 																setOpenUpdateRecord(true);
 																addLog(row._id);

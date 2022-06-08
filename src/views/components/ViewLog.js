@@ -60,6 +60,20 @@ const ViewLog = ({id}) => {
 				return <VisibilityIcon />;
 		}
 	}
+	function LogMessage(action) {
+		switch (action) {
+			case 'viewed':
+				return `Viewed This Record `;
+			case 'viewed card details':
+				return 'Viewed Card Details of This Record';
+			case 'updated':
+				return 'Update Values  of This Record ';
+
+			default:
+				// throw new Error("Unknown step");
+				return <VisibilityIcon />;
+		}
+	}
 	return (
 		<Card>
 			<Divider />
@@ -81,7 +95,8 @@ const ViewLog = ({id}) => {
 												primary={`${log.agent.firstName} ${log.agent.lastName} (${log.agent.employeeCode})`}
 												secondary={
 													<>
-														{`${log.action} This Record at `}
+														{LogMessage(log.action)}
+
 														<span style={{float: 'right', width: 'fit-content	'}}>
 															{formateDate(log.createdAt)}
 															{/* {log.createdAt.split('T')[0]} {log.createdAt.split('T')[1]} */}

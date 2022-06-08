@@ -40,7 +40,7 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
-const UpdateRecord = ({data, onClose}) => {
+const UpdateRecord = ({data, onClose, readOnly}) => {
 	const {
 		firstName,
 		lastName,
@@ -91,9 +91,14 @@ const UpdateRecord = ({data, onClose}) => {
 	const [inputList, setInputList] = useState([]);
 	const [isCompanyCard, setIsCompanyCard] = useState(isCompanyCCUsed);
 	const [isPaymentVisible, setIsPaymentVisible] = useState(false);
-	const [isDisable, setIsDisable] = useState(false);
-	const [isDisableUpdatebtn, setIsDisableUpdatebtn] = useState(true);
+	const [isDisable, setIsDisable] = useState(() => {
+		return new Date() - new Date(createdAt) < 60000 * 60 * 48 ? false : true;
+	});
+	const [isReadOnly, setIsReadOnly] = useState((createdAt) => {
+		return !isDisable || localStorage.getItem('role') === 'admin' ? true : false;
+	});
 
+	const [disable, setDisable] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const fetchCards = async (id) => {
@@ -133,10 +138,6 @@ const UpdateRecord = ({data, onClose}) => {
 			label: 'LAST 4 DIGITS OF OF COMPANY CC ',
 		},
 	];
-
-	useEffect(() => {
-		new Date() - new Date(createdAt) < 60000 * 60 * 48 ? setIsDisable(false) : setIsDisable(true);
-	}, [0]);
 
 	var err = [];
 
@@ -361,11 +362,7 @@ const UpdateRecord = ({data, onClose}) => {
 		),
 		remarks: Yup.string().required('This field is required'),
 	});
-	const CheckViewUpdate = (createdAt) => {
-		if (new Date() - new Date(createdAt) < 60000 * 60 * 48 || localStorage.getItem('role') == 'admin') {
-			return true;
-		}
-	};
+
 	return (
 		<>
 			<Formik
@@ -449,7 +446,7 @@ const UpdateRecord = ({data, onClose}) => {
 									bgcolor: 'background.paper',
 									borderRadius: 1,
 								}}>
-								<UpdateRecordForm />
+								<UpdateRecordForm isReadOnly={isReadOnly} />
 							</Box>
 							<Grid container spacing={3} sx={{mt: 1}}>
 								{/*  company card  */}
@@ -469,7 +466,7 @@ const UpdateRecord = ({data, onClose}) => {
 											/>
 										}
 										label='COMPANY CC USED ?'
-										disabled={true}
+										disabled={disable}
 									/>
 								</Grid>
 
@@ -484,7 +481,7 @@ const UpdateRecord = ({data, onClose}) => {
 													type='number'
 													label={label}
 													fullWidth
-													disabled={true}
+													disabled={disable}
 													error={touched[name] && errors[name]}
 													helperText={touched[name] && errors[name]}
 													onBlur={handleBlur}
@@ -676,7 +673,7 @@ const UpdateRecord = ({data, onClose}) => {
 										</Card>
 									);
 								})}
-							{CheckViewUpdate && (
+							{isReadOnly && (
 								<Box sx={{py: 1, my: 1, display: 'flex ', justifyContent: 'flex-end'}}>
 									{inputList.length < 2 && (
 										<Button startIcon={<AddIcon fontSize='small' />} onClick={handleAddClick} sx={{mx: 1}}>
@@ -695,7 +692,7 @@ const UpdateRecord = ({data, onClose}) => {
 										</Button>
 									)}
 
-									<Button variant='contained' type='submit' sx={{mx: 1}} disabled={isDisableUpdatebtn}>
+									<Button variant='contained' type='submit' sx={{mx: 1}}>
 										Update
 									</Button>
 								</Box>
@@ -731,7 +728,7 @@ const UpdateRecord = ({data, onClose}) => {
 												);
 											})
 										) : (
-											<Typography variant='h6'>No Logs found!!</Typography>
+											<Typography variant='h6'>No Remarks found!!</Typography>
 										)}
 									</List>
 								</CardContent>

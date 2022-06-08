@@ -14,17 +14,15 @@ import ElderlyIcon from '@mui/icons-material/Elderly';
 // custom Formik field
 import Textfield from '../FormField/Textfield';
 
-export default function UpdateRecordForm() {
+export default function UpdateRecordForm({isReadOnly}) {
 	const {values, handleChange, setFieldValue, touched, handleBlur, errors} = useFormikContext();
 
 	//date
 	const [depDate, setDepDate] = useState(values.departureDate);
 	const [returnDate, setReturnDate] = useState(values.returnDate);
 	const [initialProductType, setInitialProductType] = useState(values.productType);
-	const [isDisable, setIsDisable] = useState(false);
-	// useEffect(() => {
-	// 	setIsDisable(true);
-	// });
+	const [isDisable, setIsDisable] = useState(true);
+	const [isUpdateable, setIsUpdateable] = useState(!isReadOnly);
 
 	const [checkObj, setCheckObj] = useState({});
 	const [checkboxType, setCheckboxType] = useState({
@@ -100,6 +98,7 @@ export default function UpdateRecordForm() {
 		return total;
 	};
 
+	console.log('isReadOnly', isReadOnly);
 	return (
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
@@ -224,21 +223,21 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* alternateEmail EMail Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<Textfield disabled={isDisable} name='alternateEmail' label='ALTERNATIVE EMAIL' fullWidth />
+				<Textfield disabled={isUpdateable} name='alternateEmail' label='ALTERNATIVE EMAIL' fullWidth />
 			</Grid>
 			{/* alternatePhone  Fields */}
 			<Grid item xs={4} md={3} sm={4}>
-				<Textfield disabled={isDisable} type='number' name='alternatePhone' label='ALTERNATIVE PHONE' />
+				<Textfield disabled={isUpdateable} type='number' name='alternatePhone' label='ALTERNATIVE PHONE' />
 			</Grid>
 
 			{/* PNR no. Fields */}
 			<Grid item xs={9} md={6} sm={9}>
-				<Textfield disabled={isDisable} name='pnrNo' label='PNR NO.' />
+				<Textfield disabled={isUpdateable} name='pnrNo' label='PNR NO.' />
 			</Grid>
 			{/* Airline code */}
 			<Grid item xs={3} md={3} sm={3}>
 				<Textfield
-					disabled={isDisable}
+					disabled={isUpdateable}
 					name='airlineLocator'
 					label='AIRLINE Locator '
 					onChange={(e) => {
@@ -527,7 +526,7 @@ export default function UpdateRecordForm() {
 			</Grid>
 			{/* Remarks Field */}
 			<Grid item xs={3} md={3} sm={3}>
-				<Textfield name='remarks' label='REMARKS' multiline rows={4} />
+				<Textfield name='remarks' label='REMARKS' multiline rows={4} disabled={isUpdateable} />
 			</Grid>
 		</Grid>
 	);
