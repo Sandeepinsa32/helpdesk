@@ -340,7 +340,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
                   background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
                   border-radius: 50px 50px 50px 50px;    	
                   padding: 10px 30px; font-family:sans-serif;'
-            href='http://localhost:3000/auth/validateToken'
+            href='https://triphelpdesk.netlify.app/auth/validateToken'
             target='_blank'>
             Authorize
           </a>
