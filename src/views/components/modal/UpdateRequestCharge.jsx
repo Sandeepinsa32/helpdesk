@@ -32,7 +32,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
 function UpdateRequestCharge({formData, onClose}) {
 	const {_id, cardHolderName, cardHolderNumber, remarks, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone, bookingId} = formData;
-	console.log(formData);
+
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();
 	const [disable, setDisable] = useState(true);
@@ -50,44 +50,6 @@ function UpdateRequestCharge({formData, onClose}) {
 		return today;
 	}
 
-	const fetchCards = async (id) => {
-		setIsLoading(true);
-		axios
-			.post(BASEURL + '/ticket/mask/', {
-				id,
-				cardNumber,
-				cvv,
-			})
-			.then((response) => {
-				// setCardDetail(response.data.data);
-				console.log(response.data);
-				setIsLoading(false);
-			})
-			.catch((e) => {
-				console.log(e);
-				setIsLoading(false);
-			});
-	};
-
-	useEffect(() => {
-		fetchCards(bookingId);
-	}, []);
-
-	const INITIAL_FORM_STATE = {
-		// cardHolderName: cardHolderName,
-		cardHolderNumber: phone,
-		cardNumber: cardNumber,
-		cvv: cvv,
-		expiryDate: expiryDate,
-		email: email,
-		phone: phone,
-		amount: amount,
-		address: address,
-		description: remarks,
-		markup: markup,
-		comment: '',
-		status: '',
-	};
 	const FORM_VALIDATION = Yup.object({
 		// cardHolderName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
 		cardHolderNumber: Yup.string().required('phone is required').matches(phoneRegExp, 'Phone number is not valid'),
@@ -122,6 +84,44 @@ function UpdateRequestCharge({formData, onClose}) {
 		status: Yup.string().required('Required'),
 	});
 
+	const fetchCards = async (id) => {
+		setIsLoading(true);
+		axios
+			.post(BASEURL + '/ticket/mask/', {
+				id,
+				cardNumber,
+				cvv,
+			})
+			.then((response) => {
+				setCardDetail(response.data.data['cardNumber']);
+				setIsLoading(false);
+			})
+			.catch((e) => {
+				console.log(e);
+				setIsLoading(false);
+			});
+	};
+
+	useEffect(() => {
+		fetchCards(bookingId);
+	}, []);
+
+	const INITIAL_FORM_STATE = {
+		// cardHolderName: cardHolderName,
+		cardHolderNumber: phone,
+		cardNumber: cardNumber,
+		cvv: cvv,
+		expiryDate: expiryDate,
+		email: email,
+		phone: phone,
+		amount: amount,
+		address: address,
+		description: remarks,
+		markup: markup,
+		comment: '',
+		status: '',
+	};
+
 	return (
 		<>
 			<Formik
@@ -148,7 +148,6 @@ function UpdateRequestCharge({formData, onClose}) {
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
-					console.log(errors);
 					return (
 						<Card>
 							<Form onSubmit={handleSubmit}>
@@ -174,7 +173,7 @@ function UpdateRequestCharge({formData, onClose}) {
 											</Grid>
 											{/* CardNumber Field */}
 											<Grid item xs={4} md={3}>
-												<Textfield name='cardNumber' label='CARD NUMBER' disabled={disable} />
+												<Textfield name='cardNumber' label='CARD NUMBER' disabled={disable} value={cardDetail} />
 											</Grid>
 											{/* CVV Field */}
 											<Grid item xs={4} md={2}>
