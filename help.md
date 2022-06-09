@@ -27,15 +27,15 @@
 
 #### PENDING
 
-3. updating global record page with latest my record pae
-4. docusign card validator
-5. email foramt
-6. Disable submit button if pnr is empty ---pending
-7. email field validation -----pending
-8. remove unused code ----pending
-9. val. err message on type cast
-10. airline locator
-11. making dropdown for cc used:
+1. updating global record page with latest my record pae
+2. docusign
+3. email foramt
+4. Disable submit button if pnr is empty ---pending
+5. email field validation -----pending
+6. remove unused code ----pending
+7. val. err message on type cast
+8. airline locator
+9. making dropdown for cc used:
 
 ### TESTING
 
