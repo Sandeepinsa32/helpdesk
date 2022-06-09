@@ -526,7 +526,7 @@ export default function UpdateRecordForm({isReadOnly}) {
 			</Grid>
 			{/* Remarks Field */}
 			<Grid item xs={3} md={3} sm={3}>
-				<Textfield name='remarks' label='REMARKS' multiline rows={4} disabled={isUpdateable} />
+				<Textfield name='remark' label='REMARKS' multiline rows={4} disabled={isUpdateable} />
 			</Grid>
 		</Grid>
 	);

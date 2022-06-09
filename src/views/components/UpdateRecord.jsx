@@ -210,7 +210,7 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 		//paymentCard
 		card: cards ? cards : inputList,
 		//update
-		remarks: remarks ? remarks : '',
+		remark: remarks ? remarks : '',
 	};
 	const FORM_VALIDATION = Yup.object({
 		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
@@ -360,7 +360,7 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 				expiryDate: Yup.string().required('This field is required').nullable(),
 			})
 		),
-		remarks: Yup.string().required('This field is required'),
+		remark: Yup.string().required('This field is required'),
 	});
 
 	return (

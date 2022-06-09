@@ -61,55 +61,12 @@
 16. modal close on update &&& rest value of field --done
 17. update -admin after 48 hours on global record
 18. CheckViewUpdate --done
+19. Old charges recorded
 
-# {
-
-    "firstName": "alexa",
-    "lastName": "amazon",
-    "email": "alexa@amazone.com",
-    "phone": 9874561230,
-    "alternateEmail": "",
-    "alternatePhone": "",
-    "pnrNo": "1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS",
-    "airlineCode": "DL",
-    "airlineLocator": "H3YKZI",
-    "bookingType": "new",
-    "bookedOn": "trippro",
-    "fareType": "publish",
-    "productType": [
-        {
-            "property": "flight",
-            "propertyMarkup": "10.1"
-        },
-        {
-            "property": "car",
-            "propertyMarkup": "0.2"
-        }
-    ],
-    "mcoNo": 55,
-    "totalInhouseCharge": 20,
-    "adultCount": 2,
-    "childCount": 2,
-    "elderCount": 0,
-    "grandTotal": 2,
-    "childPrice": 2,
-    "adultPrice": 2,
-    "elderPrice": 0,
-    "departureDate": "06/16/2022",
-    "returnDate": "06/23/2022",
-    "isCompanyCCUsed": true,
-    "ccTimes": 2,
-    "ccAmount": 2,
-    "ccDigits": 2323,
-    "card": [
-        {
-            "cardHolderName": "testCard",
-            "cardHolderNumber": "8427175553",
-            "cardNumber": "4263982640269299",
-            "expiryDate": "06/08/2032",
-            "cvv": "123"
-        }
-    ],
-    "totalMarkup": 10.299999999999999
-
-}
+20. Agent status on load --done
+21. Capitalize agent row --done
+22. New agent k time status nhi dikhana --done
+23. Old charges recorded
+24. Logs Ka style
+25. User profile detail card style
+26. Admin ko unmasked card show krne h

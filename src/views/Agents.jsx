@@ -106,6 +106,15 @@ export const AddUser = () => {
 		loadAgents(createQueryString({email, phone, page}));
 	}, [page]);
 
+	function formateDate(date) {
+		let today = new Date(date);
+		let dd = String(today.getDate()).padStart(2, '0');
+		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let yyyy = today.getFullYear();
+
+		today = mm + '/' + dd + '/' + yyyy;
+		return today;
+	}
 	const INITIAL_FORM_STATE_ADD_NEW = {
 		firstName: '',
 		lastName: '',
@@ -119,7 +128,7 @@ export const AddUser = () => {
 	const INITIAL_FORM_STATE_UPDATE = {
 		...selectedRecord,
 		confirmPassword: '',
-		status: 'active',
+		status: selectedRecord.status,
 		oldEmail: selectedRecord.email,
 		oldEmployeeAlias: selectedRecord.employeeAlias,
 		oldStatus: selectedRecord.status,
@@ -258,14 +267,14 @@ export const AddUser = () => {
 												sx={{
 													'&:last-child td, &:last-child th': {border: 0},
 												}}>
-												<TableCell>{row.employeeCode}</TableCell>
+												<TableCell>{row.employeeCode.toUpperCase()}</TableCell>
 												<TableCell>
-													{row.firstName} {row.lastName}
+													{row.firstName.toUpperCase()} {row.lastName.toUpperCase()}
 												</TableCell>
-												<TableCell>{row.email}</TableCell>
-												<TableCell>{row.employeeAlias}</TableCell>
-												<TableCell>{row.createdAt?.substring(0, 10)}</TableCell>
-												<TableCell>{row.role}</TableCell>
+												<TableCell>{row.email.toUpperCase()}</TableCell>
+												<TableCell>{row.employeeAlias.toUpperCase()}</TableCell>
+												<TableCell>{formateDate(row.createdAt)}</TableCell>
+												<TableCell>{row.role.toUpperCase()}</TableCell>
 
 												<TableCell>
 													<Button
@@ -374,11 +383,9 @@ export const AddUser = () => {
 												<Grid item md={6} xs={6}>
 													<Textfield label='Last name' name='lastName' disabled={isDisable} />
 												</Grid>
-
 												<Grid item md={6} xs={6}>
 													<Textfield label='Emp ID' name='employeeCode' disabled={isDisable} />
 												</Grid>
-
 												<Grid item md={6} xs={6}>
 													<Textfield label='Emp Alias' name='employeeAlias' />
 												</Grid>
@@ -391,17 +398,17 @@ export const AddUser = () => {
 												<Grid item md={6} xs={6}>
 													<Textfield label='Confirm Password' type='password' name='confirmPassword' />
 												</Grid>
+												{console.log(values.status)}
 												<Grid item xs={12} sm={6} md={6}>
 													<FormControl fullWidth>
 														<InputLabel id='status-label'>STATUS</InputLabel>
 														<Select
 															labelId='status-label'
 															fullWidth
-															defaultValue='active'
+															defaultValue={values.status}
 															name='status'
 															label='STATUS'
 															error={Boolean(touched.status && errors.status)}
-															value={values.status}
 															onChange={handleChange}>
 															<MenuItem value='active'>ACTIVE</MenuItem>
 															<MenuItem value='inactive'>IN-ACTIVE</MenuItem>
@@ -496,23 +503,6 @@ export const AddUser = () => {
 
 												<Grid item md={6} xs={6}>
 													<Textfield label='Password' name='password' type='password' />
-												</Grid>
-												<Grid item xs={12} sm={6} md={6}>
-													<FormControl fullWidth>
-														<InputLabel id='status-label'>STATUS</InputLabel>
-														<Select
-															labelId='status-label'
-															fullWidth
-															defaultValue='active'
-															name='status'
-															label='STATUS'
-															error={Boolean(touched.status && errors.status)}
-															value={values.status}
-															onChange={handleChange}>
-															<MenuItem value='active'>ACTIVE</MenuItem>
-															<MenuItem value='inactive'>IN-ACTIVE</MenuItem>
-														</Select>
-													</FormControl>
 												</Grid>
 											</Grid>
 										</CardContent>
