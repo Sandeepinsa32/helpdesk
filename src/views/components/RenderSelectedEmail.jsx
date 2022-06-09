@@ -1,74 +1,65 @@
-import React, { useState } from "react";
-import { Grid, Button, Box, Paper } from "@mui/material";
+import React, {useState} from 'react';
+import {Grid, Button, Box, Paper} from '@mui/material';
 // @mat_icon
-import SendIcon from "@mui/icons-material/Send";
-import axios from "axios";
-import { BASEURL, successToast } from "../../utils/Utils";
+import SendIcon from '@mui/icons-material/Send';
+import axios from 'axios';
+import {BASEURL, successToast} from '../../utils/Utils';
 
-const RenderSelectedEmail = ({
-  selectedEmailTemplate,
-  Tabledata,
-  pnrData,
-  recordData,
-  Ticketid,
-  onClose,
-}) => {
-  console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
-  const [isPreviewed, setIsPreviewed] = useState(true);
-  const grandTotal = "100";
-  function renderingEmail() {
-    switch (selectedEmailTemplate) {
-      case "newBooking":
-        return <span dangerouslySetInnerHTML={{ __html: newBooking }} />;
-      case "exchange":
-        return <span dangerouslySetInnerHTML={{ __html: Exchange }} />;
-      case "refund":
-        return <span dangerouslySetInnerHTML={{ __html: Refund }} />;
-      case "futureCredit":
-        return <span dangerouslySetInnerHTML={{ __html: futureCredit }} />;
+const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid, onClose}) => {
+	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
+	const [isPreviewed, setIsPreviewed] = useState(true);
+	const grandTotal = '100';
+	function renderingEmail() {
+		switch (selectedEmailTemplate) {
+			case 'newBooking':
+				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
+			case 'exchange':
+				return <span dangerouslySetInnerHTML={{__html: Exchange}} />;
+			case 'refund':
+				return <span dangerouslySetInnerHTML={{__html: Refund}} />;
+			case 'futureCredit':
+				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
 
-        return <span dangerouslySetInnerHTML={{ __html: newBooking }} />;
-    }
-  }
-  function getSelectedEmail() {
-    switch (selectedEmailTemplate) {
-      case "newBooking":
-        return newBooking;
-      case "exchange":
-        return Exchange;
-      case "refund":
-        return Refund;
-      case "futureCredit":
-        return futureCredit;
-      default:
-        return newBooking;
-    }
-  }
+				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
+		}
+	}
+	function getSelectedEmail() {
+		switch (selectedEmailTemplate) {
+			case 'newBooking':
+				return newBooking;
+			case 'exchange':
+				return Exchange;
+			case 'refund':
+				return Refund;
+			case 'futureCredit':
+				return futureCredit;
+			default:
+				return newBooking;
+		}
+	}
 
-  function currentDate() {
-    let today = new Date();
-    let dd = String(today.getDate()).padStart(2, "0");
-    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-    let yyyy = today.getFullYear();
+	function currentDate() {
+		let today = new Date();
+		let dd = String(today.getDate()).padStart(2, '0');
+		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let yyyy = today.getFullYear();
 
-    today = mm + "/" + dd + "/" + yyyy;
-    return today;
-  }
+		today = mm + '/' + dd + '/' + yyyy;
+		return today;
+	}
 
-  function userTabelData1() {
-    var tableString = "";
-    Tabledata.forEach((x) => {
-      const isEmpty = Object.values(x).every(
-        (obj) => obj === null || obj === ""
-      );
-      console.log(isEmpty);
-      if (isEmpty) {
-        return;
-      }
+	function userTabelData1() {
+		var tableString = '';
+		Tabledata.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+			console.log(isEmpty);
+			if (isEmpty) {
+				return;
+			}
 
-      tableString =
-        tableString +
-        `<tr>
+			tableString =
+				tableString +
+				`<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
@@ -76,82 +67,76 @@ const RenderSelectedEmail = ({
 		  <td>${x.confirmation}</td>
 		  <td>${x.price}</td>
 		</tr>`;
-    });
+		});
 
-    return tableString;
-  }
-  function userTabelData2() {
-    // console.log(Tabledata);
-    var tableString = "";
-    Tabledata.forEach((x) => {
-      const isEmpty = Object.values(x).every(
-        (obj) => obj === null || obj === ""
-      );
-      console.log(isEmpty);
-      if (isEmpty) {
-        return;
-      }
-      tableString =
-        tableString +
-        `<tr>
+		return tableString;
+	}
+	function userTabelData2() {
+		// console.log(Tabledata);
+		var tableString = '';
+		Tabledata.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+			console.log(isEmpty);
+			if (isEmpty) {
+				return;
+			}
+			tableString =
+				tableString +
+				`<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
 		  <td>${x.ticket}</td>
 		  <td>${x.price}</td>
 		</tr>`;
-    });
+		});
 
-    return tableString;
-  }
-  function userTabelData3() {
-    // console.log(Tabledata);
-    var tableString = "";
-    Tabledata.forEach((x) => {
-      const isEmpty = Object.values(x).every(
-        (obj) => obj === null || obj === ""
-      );
-      console.log(isEmpty);
-      if (isEmpty) {
-        return;
-      }
-      tableString =
-        tableString +
-        `<tr>
+		return tableString;
+	}
+	function userTabelData3() {
+		// console.log(Tabledata);
+		var tableString = '';
+		Tabledata.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+			console.log(isEmpty);
+			if (isEmpty) {
+				return;
+			}
+			tableString =
+				tableString +
+				`<tr>
 		  <td class="tableHeading" scope="col" name="firstname">${x.firstName}</td>
 		  <td class="tableHeading" scope="col" name="middlename">${x.middleName}</td>
 		  <td class="tableHeading" scope="col" name="lastname">${x.lastName}</td>
 		  <td class="tableHeading" scope="col" name="refund">${x.refund}</td>
 		</tr>`;
-    });
+		});
 
-    return tableString;
-  }
-  function userTabelData4() {
-    // console.log(Tabledata);
-    var tableString = "";
-    Tabledata.forEach((x) => {
-      const isEmpty = Object.values(x).every(
-        (obj) => obj === null || obj === ""
-      );
-      console.log(isEmpty);
-      if (isEmpty) {
-        return;
-      }
-      // console.log(x);
-      tableString =
-        tableString +
-        `<tr>
+		return tableString;
+	}
+	function userTabelData4() {
+		// console.log(Tabledata);
+		var tableString = '';
+		Tabledata.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+			console.log(isEmpty);
+			if (isEmpty) {
+				return;
+			}
+			// console.log(x);
+			tableString =
+				tableString +
+				`<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
 		  <td>${x.confirmation}</td>
 		</tr>`;
-    });
+		});
 
-    return tableString;
-  }
-  var newBooking = `
+		return tableString;
+	}
+	var newBooking = `
 <div style="background:#ffffff; padding:10px;font-weight:500; text-align:left;  font-family:Calibri, sans-serif;">
 		<style>
        .header-para-12x{
@@ -329,8 +314,8 @@ const RenderSelectedEmail = ({
       <div  style="display:flex;justify-content:center; padding: 15px 0;width: 100% !Important;">
 
       ${
-        isPreviewed
-          ? `
+			isPreviewed
+				? `
           <a
             style='display:inline-block;
           border: 0;cursor: pointer;
@@ -343,12 +328,12 @@ const RenderSelectedEmail = ({
           border-radius: 50px 50px 50px 50px;
             
           padding: 10px 30px; font-family:sans-serif;'
-          href='http://localhost:3000/auth/validateToken'
+          href='http://Thdworkbook.com/auth/validateToken'
 
           >
             Authorize
           </a>`
-          : `	
+				: `	
            <a style='display:inline-block;
                   border: 0;cursor: pointer;
                   color: white;
@@ -358,12 +343,12 @@ const RenderSelectedEmail = ({
                   background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
                   border-radius: 50px 50px 50px 50px;    	
                   padding: 10px 30px; font-family:sans-serif;'
-                  href='http://localhost:3000/auth/validateToken'
+                  href='http://Thdworkbook.com/auth/validateToken'
                   target='_blank'>
             Authorize
           </a>
      `
-      } 
+		} 
 
 
       </div>
@@ -406,7 +391,7 @@ const RenderSelectedEmail = ({
 
 `;
 
-  var Exchange = `<center>
+	var Exchange = `<center>
 		<style>
     table.tableoutter {
 
@@ -642,8 +627,8 @@ Once completed your agent will notify you and you'll be able to access the reser
 
 <div style="display:flex;justify-content:center; padding:15px">
  ${
-   isPreviewed
-     ? `
+		isPreviewed
+			? `
 		<a
 			style='display:inline-block;
     border: 0;cursor: pointer;
@@ -658,7 +643,7 @@ Once completed your agent will notify you and you'll be able to access the reser
     padding: 10px 30px; font-family:sans-serif;'>
 			Authorize
 		</a>`
-     : `	<a
+			: `	<a
 			style='display:inline-block;
             border: 0;cursor: pointer;
             color: white;
@@ -715,7 +700,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-  var futureCredit = `<center>
+	var futureCredit = `<center>
 		<style>
     table.tableoutter {
 
@@ -917,8 +902,8 @@ table.tableoutter th {
      
 <div style="display:flex;justify-content:center; padding:15px">
 ${
-  isPreviewed
-    ? `
+	isPreviewed
+		? `
 		<a
 			style='display:inline-block;
     border: 0;cursor: pointer;
@@ -933,7 +918,7 @@ ${
     padding: 10px 30px; font-family:sans-serif;'>
 			Authorize
 		</a>`
-    : `	<a
+		: `	<a
 			style='display:inline-block;
             border: 0;cursor: pointer;
             color: white;
@@ -1007,7 +992,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-  var Refund = `<center>
+	var Refund = `<center>
 		<style>
     table.tableoutter {
 
@@ -1219,8 +1204,8 @@ table.tableoutter th {
        
 
 ${
-  isPreviewed
-    ? `
+	isPreviewed
+		? `
 		<a
 			style='display:inline-block;
     border: 0;cursor: pointer;
@@ -1235,7 +1220,7 @@ ${
     padding: 10px 30px; font-family:sans-serif;'>
 			Authorize
 		</a>`
-    : `	<a
+		: `	<a
 			style='display:inline-block;
             border: 0;cursor: pointer;
             color: white;
@@ -1311,41 +1296,37 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     </div>
       
     </center >`;
-  const handleSendEmail = async () => {
-    axios
-      .post(BASEURL + "/ticket/email", {
-        data: getSelectedEmail(),
-        ticketId: Ticketid,
-      })
-      .then((res) => {
-        console.log(res);
-        successToast("Email sent Successfully");
-        onClose();
-      })
-      .catch((e) => console.log(e));
-  };
+	const handleSendEmail = async () => {
+		axios
+			.post(BASEURL + '/ticket/email', {
+				data: getSelectedEmail(),
+				ticketId: Ticketid,
+			})
+			.then((res) => {
+				console.log(res);
+				successToast('Email sent Successfully');
+				onClose();
+			})
+			.catch((e) => console.log(e));
+	};
 
-  return (
-    <>
-      <Paper elevation={1}>
-        <Box sx={{ m: 0, p: 2 }}>{renderingEmail()} </Box>
-      </Paper>
+	return (
+		<>
+			<Paper elevation={1}>
+				<Box sx={{m: 0, p: 2}}>{renderingEmail()} </Box>
+			</Paper>
 
-      <Grid container spacing={1} sx={{ m: 0, p: 1 }}>
-        <Grid item xs={6} md={10}></Grid>
+			<Grid container spacing={1} sx={{m: 0, p: 1}}>
+				<Grid item xs={6} md={10}></Grid>
 
-        <Grid item xs={6} md={2} sx={{ mb: 3 }}>
-          <Button
-            onClick={handleSendEmail}
-            variant="contained"
-            endIcon={<SendIcon />}
-          >
-            Send Mail
-          </Button>
-        </Grid>
-      </Grid>
-    </>
-  );
+				<Grid item xs={6} md={2} sx={{mb: 3}}>
+					<Button onClick={handleSendEmail} variant='contained' endIcon={<SendIcon />}>
+						Send Mail
+					</Button>
+				</Grid>
+			</Grid>
+		</>
+	);
 };
 
 export default RenderSelectedEmail;
