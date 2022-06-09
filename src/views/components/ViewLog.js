@@ -75,8 +75,8 @@ const ViewLog = ({id}) => {
 		}
 	}
 	return (
-		<Card>
-			<Divider />
+		<>
+			{/* <Divider /> */}
 			<CardContent>
 				{isLoading ? (
 					<Box sx={{display: 'flex', minHeight: '70vh', justifyContent: 'center', alignItems: 'center'}}>
@@ -114,7 +114,7 @@ const ViewLog = ({id}) => {
 					</List>
 				)}
 			</CardContent>
-		</Card>
+		</>
 	);
 };
 

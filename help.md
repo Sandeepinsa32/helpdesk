@@ -66,7 +66,8 @@
 20. Agent status on load --done
 21. Capitalize agent row --done
 22. New agent k time status nhi dikhana --done
-23. Old charges recorded
-24. Logs Ka style
-25. User profile detail card style
-26. Admin ko unmasked card show krne h
+
+23. Logs Ka style
+24. User profile detail card style
+25. Admin ko unmasked card show krne h
+26. Old charges recorded

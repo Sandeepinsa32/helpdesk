@@ -313,9 +313,9 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
        
       <div  style="display:flex;justify-content:center; padding: 15px 0;width: 100% !Important;">
 
-<!--       ${
-		isPreviewed
-			? `
+      ${
+			isPreviewed
+				? `
           <a
             style='display:inline-block;
           border: 0;cursor: pointer;
@@ -330,7 +330,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
           padding: 10px 30px; font-family:sans-serif;'>
             Authorize
           </a>`
-			: `	 -->
+				: `	
            <a style='display:inline-block;
                   border: 0;cursor: pointer;
                   color: white;
@@ -344,8 +344,8 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
             target='_blank'>
             Authorize
           </a>
-<!--         `
-	} -->
+     `
+		} 
 
 
       </div>

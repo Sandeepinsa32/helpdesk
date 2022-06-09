@@ -409,13 +409,12 @@ export const Transaction = () => {
 
 			{/* open Logs*/}
 			<Modal open={openLog} onClose={handleLogClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={BoxModalStyle}>
+				<Box sx={BoxModalStyle} style={{paddingTop: 0}}>
 					<Card sx={{p: 0, m: 0}}>
 						<CardHeader
-							sx={{py: '0 !important'}}
 							title='Logs:'
 							action={
-								<IconButton onClick={handleLogClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
+								<IconButton onClick={handleLogClose}>
 									<CloseIcon />
 								</IconButton>
 							}
