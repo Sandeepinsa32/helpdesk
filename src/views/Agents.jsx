@@ -423,7 +423,12 @@ export const AddUser = () => {
 												color='primary'
 												variant='contained'
 												type='submit'
-												disabled={values.employeeAlias == selectedRecord.employeeAlias && values.email == selectedRecord.email && values.status == selectedRecord.status}>
+												disabled={
+													values.employeeAlias == selectedRecord.employeeAlias &&
+													values.email == selectedRecord.email &&
+													values.status == selectedRecord.status &&
+													values.confirmPassword == ''
+												}>
 												Update
 											</Button>
 										</CardActions>
