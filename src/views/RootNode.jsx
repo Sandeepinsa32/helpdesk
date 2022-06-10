@@ -94,10 +94,10 @@ const Drawer = styled(MuiDrawer, {
 		'& .MuiDrawer-paper': closedMixin(theme),
 	}),
 }));
-console.log('root-node outside function 0');
+// console.log('root-node outside function 0');
 
 export default function RootNode() {
-	console.log('root-node outside function');
+	// console.log('root-node outside function');
 	const navigate = useNavigate();
 	const goToCustomer = () => {
 		navigate('/agents');
@@ -122,6 +122,10 @@ export default function RootNode() {
 	// useEffect(() => {
 	// 	checkRole();
 	// }, [0]);
+
+	useEffect(() => {
+		console.clear();
+	});
 
 	// useEffect(() => {
 	// 	console.log('@ Rootnode  useEffect run ', isAdmin);

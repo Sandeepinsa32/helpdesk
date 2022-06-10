@@ -137,6 +137,9 @@ const Email = ({Ticketid, id, onClose}) => {
 		}
 	}
 
+	useEffect(() => {
+		console.clear();
+	});
 	return (
 		<>
 			<Box sx={{width: 1, height: 1}}>

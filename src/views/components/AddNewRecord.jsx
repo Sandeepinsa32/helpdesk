@@ -27,12 +27,19 @@ const AddNewRecord = ({isView, data}) => {
 
 	const [inputList, setInputList] = useState([
 		{
-			cardHolderName: 'testCard',
-			cardHolderNumber: '8427175553',
-			cardNumber: '4263982640269299',
+			cardHolderName: '',
+			cardHolderNumber: '',
+			cardNumber: '',
 			expiryDate: null,
-			cvv: '123',
+			cvv: null,
 		},
+		// {
+		// 	cardHolderName: 'testCard',
+		// 	cardHolderNumber: '8427175553',
+		// 	cardNumber: '4263982640269299',
+		// 	expiryDate: null,
+		// 	cvv: '123',
+		// },
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 
@@ -52,77 +59,35 @@ const AddNewRecord = ({isView, data}) => {
 	];
 	var err = [];
 
-	const INITIAL_FORM_STATE = {
-		firstName: 'john',
-		lastName: 'doe',
-		email: 'john@doe.com',
-		phone: 9874561230,
-		//
-		alternateEmail: '',
-		alternatePhone: '',
-		//
-		pnrNo: '1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS',
-		airlineCode: 'DL',
-		airlineLocator: 'H3YKZI',
-		//
-		bookingType: 'new',
-		bookedOn: 'trippro',
-		fareType: 'publish',
-		//
-		productType: '',
-
-		//
-		mcoNo: 55,
-		totalInhouseCharge: 20,
-		adultCount: 2,
-		childCount: 2,
-		elderCount: 0,
-		grandTotal: 2,
-		childPrice: 2,
-		adultPrice: 2,
-		elderPrice: 0,
-		//date
-		departureDate: null,
-		returnDate: null,
-		//companyCard details
-		isCompanyCCUsed: isCompanyCard,
-		ccTimes: '',
-		ccAmount: '',
-		ccDigits: '',
-
-		//paymentCard
-		card: inputList,
-	};
-
 	// const INITIAL_FORM_STATE = {
-	// 	firstName: '',
-	// 	lastName: '',
-	// 	email: '',
-	// 	phone: '',
+	// 	firstName: 'john',
+	// 	lastName: 'doe',
+	// 	email: 'john@doe.com',
+	// 	phone: 9874561230,
 	// 	//
-	// 	alternateEmail: null,
-	// 	alternatePhone: null,
+	// 	alternateEmail: '',
+	// 	alternatePhone: '',
 	// 	//
-	// 	pnrNo: '',
-	// 	airlineCode: '',
-	// 	airlineLocator: '',
+	// 	pnrNo: '1 SS2 5D5D D5JCJHBDC CNCAJNHC CSCS',
+	// 	airlineCode: 'DL',
+	// 	airlineLocator: 'H3YKZI',
 	// 	//
-	// 	bookingType: '',
-	// 	bookedOn: 'web',
-	// 	fareType: '',
+	// 	bookingType: 'new',
+	// 	bookedOn: 'trippro',
+	// 	fareType: 'publish',
 	// 	//
 	// 	productType: '',
 
 	// 	//
-	// 	mcoNo: '',
-	// 	totalInhouseCharge: '',
-	// 	adultCount: '',
-	// 	childCount: '',
-	// 	elderCount: '',
-	// 	grandTotal: '',
-	// 	childPrice: '',
-	// 	adultPrice: '',
-	// 	elderPrice: '',
+	// 	mcoNo: 55,
+	// 	totalInhouseCharge: 20,
+	// 	adultCount: 2,
+	// 	childCount: 2,
+	// 	elderCount: 0,
+	// 	grandTotal: 2,
+	// 	childPrice: 2,
+	// 	adultPrice: 2,
+	// 	elderPrice: 0,
 	// 	//date
 	// 	departureDate: null,
 	// 	returnDate: null,
@@ -134,9 +99,52 @@ const AddNewRecord = ({isView, data}) => {
 
 	// 	//paymentCard
 	// 	card: inputList,
-	// 	//update
-	// 	remarks: '',
 	// };
+
+	const INITIAL_FORM_STATE = {
+		firstName: '',
+		lastName: '',
+		email: '',
+		phone: '',
+		//
+		alternateEmail: null,
+		alternatePhone: null,
+		//
+		pnrNo: '',
+		airlineCode: '',
+		airlineLocator: '',
+		//
+		bookingType: '',
+		bookedOn: 'web',
+		fareType: '',
+		//
+		productType: '',
+
+		//
+		mcoNo: '',
+		totalInhouseCharge: '',
+		adultCount: '',
+		childCount: '',
+		elderCount: '',
+		grandTotal: '',
+		childPrice: '',
+		adultPrice: '',
+		elderPrice: '',
+		//date
+		departureDate: null,
+		returnDate: null,
+		//companyCard details
+		isCompanyCCUsed: isCompanyCard,
+		ccTimes: '',
+		ccAmount: '',
+		ccDigits: '',
+
+		//paymentCard
+		card: inputList,
+		//update
+		remarks: '',
+	};
+
 	const FORM_VALIDATION = Yup.object({
 		//basic
 		firstName: Yup.string().max(15, 'Must be 15 characters or less').required('Required'),
@@ -302,16 +310,24 @@ const AddNewRecord = ({isView, data}) => {
 						.required('card number is required'),
 					// .max(16, 'Must be 16 characters')
 					// .min(15, 'Must be 16 characters')
-					cvv: Yup.number().test(
-						'min 3 && max 4 digit required', // this is used internally by yup
-						'atleat 3 and atmost 4 character should be there', //validation message
-						(value) => value == 0 || value > 0
-					),
+					cvv: Yup.number()
+						.test(
+							'min 3 && max 4 digit required', // this is used internally by yup
+							'atleat 3 and atmost 4 character should be there', //validation message
+							(value) => {
+								return value == null || value.toString().length == 3 || value.toString().length == 4;
+							}
+						)
+						.nullable()
+						.required('required'),
 					expiryDate: Yup.string().nullable().required(' required'),
 				})
 			)
 			.min(1, 'card is >= 1'),
 		remarks: Yup.string(),
+	});
+	useEffect(() => {
+		console.clear();
 	});
 
 	return (
@@ -327,7 +343,7 @@ const AddNewRecord = ({isView, data}) => {
 							cards: inputList,
 						})
 						.then((res) => {
-							console.log(res);
+							//	console.log(res);
 							navigate('/my-records');
 							successToast('Conv. added Successfully');
 						})
@@ -337,7 +353,7 @@ const AddNewRecord = ({isView, data}) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
 
 					// console.log('props', props); // formik object --containg values, err, etc....
-					console.log(errors);
+					//	console.log(errors);
 
 					// handle input change
 					const handleCardInput = (e, index) => {
@@ -464,11 +480,7 @@ const AddNewRecord = ({isView, data}) => {
 															label='CVV'
 															fullWidth
 															autoComplete='cc-csc'
-															onChange={(e) => {
-																console.log(e.target.value);
-
-																handleCardInput(e, i);
-															}}
+															onChange={(e) => handleCardInput(e, i)}
 															value={inputList[i].cvv}
 															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
 															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
@@ -604,5 +616,3 @@ const AddNewRecord = ({isView, data}) => {
 };
 
 export default AddNewRecord;
-
-// console.log('4263982640269299');

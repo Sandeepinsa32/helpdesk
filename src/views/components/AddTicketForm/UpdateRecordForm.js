@@ -98,7 +98,6 @@ export default function UpdateRecordForm({isReadOnly}) {
 		return total;
 	};
 
-	console.log('isReadOnly', isReadOnly);
 	return (
 		<Grid container spacing={3} key={1}>
 			{/*  checkbox label  Fields */}
@@ -232,7 +231,15 @@ export default function UpdateRecordForm({isReadOnly}) {
 
 			{/* PNR no. Fields */}
 			<Grid item xs={9} md={6} sm={9}>
-				<Textfield disabled={isUpdateable} name='pnrNo' label='PNR NO.' />
+				<Textfield
+					disabled={isUpdateable}
+					name='pnrNo'
+					label='PNR NO.'
+					onChange={(e) => {
+						const value = e.target.value || '';
+						setFieldValue('pnrNo', value.toUpperCase());
+					}}
+				/>
 			</Grid>
 			{/* Airline code */}
 			<Grid item xs={3} md={3} sm={3}>

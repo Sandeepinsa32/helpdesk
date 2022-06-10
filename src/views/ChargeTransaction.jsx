@@ -103,6 +103,9 @@ function ChargeTransaction() {
 	useEffect(() => {
 		loadChargeRequests(createQueryString({bookingid, page}));
 	}, [page]);
+	useEffect(() => {
+		console.clear();
+	});
 	return (
 		<>
 			<Box

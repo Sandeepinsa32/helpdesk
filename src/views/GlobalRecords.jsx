@@ -145,6 +145,10 @@ export default function SearchRecord() {
 			return true;
 		}
 	};
+
+	useEffect(() => {
+		console.clear();
+	});
 	return (
 		<>
 			<Box

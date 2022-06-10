@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
 import {Typography} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
@@ -26,6 +26,10 @@ export default function RouteComponent({isAdmin}) {
 	const redirectToDashBoard = () => {
 		navigate('/');
 	};
+
+	useEffect(() => {
+		console.clear();
+	});
 
 	return (
 		<Routes>

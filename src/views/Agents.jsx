@@ -160,6 +160,9 @@ export const AddUser = () => {
 		oldEmployeeAlias: Yup.string(),
 		oldStatus: Yup.string(),
 	});
+	useEffect(() => {
+		console.clear();
+	});
 	return (
 		<>
 			<Box

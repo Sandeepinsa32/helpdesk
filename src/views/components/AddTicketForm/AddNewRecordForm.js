@@ -214,19 +214,6 @@ export default function AddressForm() {
 						setFieldValue('pnrNo', value.toUpperCase());
 					}}
 				/>
-				{/* <TextField
-					id='pnrNo'
-					name='pnrNo'
-					label='PNR NO.'
-					fullWidth
-					error={Boolean(touched.pnrNo && errors.pnrNo)}
-					helperText={(touched.pnrNo && errors.pnrNo) || 'optional'}
-					value={values.pnrNo}
-					onChange={(e) => {
-						const value = e.target.value || '';
-						setFieldValue('pnrNo', value.toUpperCase());
-					}}
-				/> */}
 			</Grid>
 			{/* Airline code */}
 			<Grid item xs={3} sm={3} md={3}>

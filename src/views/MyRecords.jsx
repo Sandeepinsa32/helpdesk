@@ -145,6 +145,10 @@ export const Transaction = () => {
 			return true;
 		}
 	};
+
+	useEffect(() => {
+		console.clear();
+	});
 	return (
 		<>
 			<Box
