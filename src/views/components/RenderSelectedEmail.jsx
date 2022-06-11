@@ -136,261 +136,200 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 
 		return tableString;
 	}
-	var newBooking = `
-<div style="background:#ffffff; padding:10px;font-weight:500; text-align:left;  font-family:Calibri, sans-serif;">
-		<style>
-       .header-para-12x{
-            font-size: 0.875rem !important;
-            line-height: 22px !important;
-        }
-      .valalto-header{
-            font-size: 1rem !important;
-      }
-      
-      
-      @media screen and (max-width: 450px) {
-        table.tableoutter {
-          border: 0;
-        }
-        .header-para-12x{
-        font-size: 6px !important;
-        line-height: 10px !important;
-        font-weight: 400 !important;
-        }
-         .valalto-header{
-            font-size: 8px !important;
-      }
-
-
+	var newBooking = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
   
-  
-        }
-  </style>
-      <p class="header-para-12x" style="font-size:12px; line-height:16px; color:#0B4173; margin:0px;border-radius:3px;padding:10px 5px;  font-family:Calibri, sans-serif;">
-        By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
-      </p>
-      
-	  	<hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
-		  <h1 class=" header-para-12x" style="font-size:14px; text-align:right; line-height:22px; font-weight:normal; color:#0B4173;font-family:sans-serif;">
-			  Trip Help Desk Powered By <b class="valalto-header" style="color: #0B4173;font-size: 16px;">Valalto Inc.</b>	
-        </h1>
-          
-			<div style="display:flex;justify-content:space-between;">
-		
-        <div style="width:50%">
-            <span class=" header-para-12x" style="color: #0B4173;font-size: 16px; line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; "> New Booking   </span>
-           
+    <div class="main"  style="
+    padding:10px;
+    margin: 1rem auto;
+    overflow: hidden;
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
+    0 4px 4px rgba(0, 0, 0, 0.11), 0 6px 8px rgba(0, 0, 0, 0.11),
+    0 8px 16px rgba(0, 0, 0, 0.11);
+    font-family: "Nunito", sans-serif;
+    
+
+    
+">
+      <div
+        style="
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+        "
+      >
+        <div>
+          <img
+
+            src="https://triphelpdesk.com/wp-content/uploads/2022/01/Logo.png"
+            alt=""
+            style="display: block; margin-bottom: 4px;width: 200px;"
+          />
+
+          <p style="margin: 0; padding: 0">164 20th Street</p>
+          <p style="margin: 0; padding: 0">Suite 2B, Brooklyn, NY</p>
+          <p style="margin: 0; padding: 0">11232, USA</p>
         </div>
-        <div style="width:50%">
-            <span class=" header-para-12x" style=" line-height:22px; font-weight:bold;margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px; ">
-                Confirmation :
+
+        <div style="text-align: right">
+          <p style="margin: 0">
+            Phone:
+            <span style="color: black; font-weight: 800">+18662701413</span>
+          </p>
+          <p style="margin: 0">
+            Email:
+            <span style="color: black; font-weight: 800"
+              >info@triphelpdesk.com
             </span>
-            <span  class=" header-para-12x" style="line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px;">
-               THDFRN2203011
-            </span>
-              
-          </div>
-	    </div>
-		
-		 <h1  class=" header-para-12x" style="font-size:14px; line-height:22px; font-weight:bold; color: #0B4173;margin:0;height:fit-content;font-family:sans-serif; ">
-  Wed, May 11, 2022      
-<!--          ${currentDate()} -->
-        </h1>
-		<h1  class=" header-para-12x" style="font-size:14px; line-height:22px; font-weight:normal;  color: #0B4173;font-family: 'sans-serif', font-family:"Calibri, sans-serif"; ">
-        Dear Customer
-        </h1>
-      
-      
-       <p  class="header-para-12x" style="font-size:12px; line-height:16px; color:#0B4173; margin-bottom:30px; font-family: Arial;">
-       Thank you for choosing Triphelpdesk for your travel arrangements. We truly appreciate your business.
-        As per our conversation and agreed, we have processed your reservation under the confirmation code 
-        Your flight is now booked and is in process. Please note that you will receive the E-Ticket confirmation shortly in a separate email once the process is finalized.
-		  If you need any assistance regarding changes, please contact us at <b> +1 866-270-1413</b>  or email at <b>info@triphelpdesk.com</b>
-      </p>
-      
+          </p>
+          <p style="margin: 0">
+            Website:
+            <span style="color: black; font-weight: 800"
+              >www.triphelpdesk.com</span
+            >
+          </p>
+        </div>
+      </div>
+      <hr />
 
-    
-<table class="tableoutter" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
-  
-  
-  <thead class=" tableHead ">
-    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;">
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;" class="tableHeading" scope="col" name="firstname">First Name</th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;"class="tableHeading" scope="col" name="middlename">Middle Name</th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;"class="tableHeading" scope="col" name="lastname" >Last Name</th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;" class="tableHeading" scope="col" name="Ticket">Ticket </th>
-      <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;"scope="col"  class="tableHeading" name="confirmation" >Confirmation</th>
-       <th style="background-color: #fff !important; border: 0px solid #fff !important;font-size: 14px;font-weight:400;text-transform: capitalize;color:#0B4173;" scope="col"  class="tableHeading" name="price">Price</th>
-      
-    </tr>
-  </thead>
-  <tbody id='appendCHildHere' >
-    
-
-<!-- 		${userTabelData1()} -->
-    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
-		  <td style="font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">200</td>
-		</tr>
-<!--  Repeating code 2 more times    -->
-  
-    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
-		  <td style="font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">200</td>
-		</tr>
-    <tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">john</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">D</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">doe</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">2.72136E+11</td>
-		  <td style="font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">KFQHMW</td>
-		  <td style=" font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" name="firstname">200</td>
-		</tr>
-     
-    <!--  Repeating code 2 more times    -->
-
-   
-  
-  </tbody>
-</table>
-
-
-
-
-
-
-     
- <!--         TotalAmount -->
-
-        <p class="header-para-12x" style=" line-height: 18px;  color: #0B4173;font-size: 12px;margin-bottom: 5px; font-weight: 600;font-family:Helvetica;padding: 0 1rem;">Total amount charged $
-    
-             in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
+      <div class="subject">
+        <p
+          style="
+            text-align: center;
+            font-size: 18px;
+            color: black;
+            font-weight: 800;
+          "
+        >
+          Booking Confirmation
         </p>
-              
-         
-       
-
-      <table class="tableoutter" style="margin: 0 auto;padding:1rem;">
-  
- 
-       <tr>
-         <td  class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row" style="font-size: 11px; text-align:unset;">
-         <b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m
-         </td>
-        </tr>
-        <tr>
-           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row" style="font-size: 11px; text-align:unset;">
-       <b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
-       </td>
-         </tr>
-         <tr>
-            <td class="header-para-12x"  style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row" style="font-size: 11px; text-align:unset;">
-            <b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
-            </td>
-         </tr>
-      </table>
-  
-  
-<!--       <table class="tableoutter" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
-       <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row" style="font-size: 11px; text-align:unset;">
-       <b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
-       </td>
-      </table>
-      <table class="tableoutter" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
-            <td class="header-para-12x"  style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row" style="font-size: 11px; text-align:unset;">
-            <b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
-            </td>
-      </table> -->
-        
-       
-      <div  style="display:flex;justify-content:center; padding: 15px 0;width: 100% !Important;">
-
-      ${
-			isPreviewed
-				? `
-          <a
-            style='display:inline-block;
-          border: 0;cursor: pointer;
-          color: white;
-          text-decoration:none;
-
-          font-size: 16px;
-          background-color: transparent;
-          background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
-          border-radius: 50px 50px 50px 50px;
-            
-          padding: 10px 30px; font-family:sans-serif;'
-          href='http://Thdworkbook.com/auth/validateToken'
-
-          >
-            Authorize
-          </a>`
-				: `	
-           <a style='display:inline-block;
-                  border: 0;cursor: pointer;
-                  color: white;
-                  text-decoration:none;
-                  font-size: 16px;
-                  background-color: transparent;
-                  background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
-                  border-radius: 50px 50px 50px 50px;    	
-                  padding: 10px 30px; font-family:sans-serif;'
-                  href='http://Thdworkbook.com/auth/validateToken'
-                  target='_blank'>
-            Authorize
-          </a>
-     `
-		} 
-
-
-      </div>
- 
-
-
-
-
-      <div>
-          <p  class="header-para-12x" style="font-size:12px; line-height:18px; font-weight:500;color: #0B4173;margin-bottom:10px;margin:0px;border-radius:3px;padding:10px 5px; font-family:Calibri, sans-serif;">
-            
-              <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><u><a href="tel:8662701413"> 866-270-1413</a></u></b> or email
-              <b><u><a href = "mailto:info@triphelpdesk.com">info@triphelpdesk.com </a></u></b>
-      <br/>
-      <br/>
-      <b>Changes and Cancellations :  </b>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more.
-      <br/>
-      <br/>
-      <b>24 Hour Cancelation Policy:</b> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
-      <br/>
-      <br/>
-      Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
-            </p>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <p>
+            <span>Ticket Id:</span>
+            <span style="font-weight: 500; color: black">THD457S58</span>
+          </p>
+          <p>May 12, 2022</p>
+        </div>
       </div>
 
-     
-          <hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
-            
-            <p class=" header-para-12x" style=" line-height:18px;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
-              &copy; Copyright 2022
-              <a class=" header-para-12x"  href="https://valalto.com/"
-                style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
-                Valalto Inc.</a>, All Rights Reserved.
-            </p>
-            
-          
-            
-</div>
-      
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
+        praesentium laborum illo sint facere id ipsam consectetur expedita,
+        dolores similique quisquam vero, voluptatem magnam aut! Fuga, dicta?
+        Impedit, deleniti modi.
+      </p>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam
+        blanditiis commodi itaque similique temporibus eius cupiditate nobis
+        quaerat autem recusandae rem, architecto, iure deleniti ad vitae
+        accusantium cumque saepe.
+      </p>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic blanditiis
+        ipsam unde quam eos velit fuga, quibusdam quisquam!
+      </p>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non optio
+        voluptates delectus, facilis laborum ab maxime iste beatae, aliquam eum
+        ipsa, doloribus ea eligendi blanditiis eveniet ducimus ut assumenda
+        dolore aut. Error aspernatur totam repellendus magnam quas impedit odit
+        nesciunt iste, sit autem delectus magni, earum dolore facilis velit.
+      </p>
+      <div class="scrollable-table" style="overflow-x: scroll;
 
-`;
-
+  max-width: 600px;
+  margin-bottom: 20px;">
+        <table style="width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  margin: 10px auto;
+   padding: 4px;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.2);">
+          <tr style=" padding: 4px;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.2);">
+            <th style=" padding: 4px;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.2);" >First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>DOB</th>
+            <th>Ticket</th>
+            <th>Confirmation</th>
+            <th>Price</th>
+          </tr>
+          <tr>
+            <td>Jason</td>
+            <td>Jade</td>
+            <td>Roy</td>
+            <td>19/05/1985</td>
+            <td>35J3GHS7</td>
+            <td>KSOCJ</td>
+            <td>$241.52</td>
+          </tr>
+          <tr>
+            <td style=" padding: 4px;
+  text-align: left;
+  border: 1px solid rgba(0, 0, 0, 0.2);">David</td>
+            <td></td>
+            <td>Malone</td>
+            <td>30/12/1997</td>
+            <td>35J3GHS7</td>
+            <td>KSOCJ</td>
+            <td>$125.79</td>
+          </tr>
+        </table>
+      </div>
+      <button style="background-color: #5171ec;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  border: none;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  display: block;
+  margin: auto auto 20px;
+  outline: none;">Authorize</button>
+      <hr />
+      <div style="text-align: center">
+        <span style="font-size: 18px; font-weight: bold"
+          ><a href="" style="color: black">TripHelpDesk</a>
+        </span>
+        <span style="font-size: 16px; font-weight: bold">
+          powered by Valalto</span
+        >
+      </div>
+      <p>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus odio
+        nesciunt nobis voluptatem natus quidem animi.
+      </p>
+    </div>
+  </body>
+</html>`;
 	var Exchange = `<center>
 		<style>
     table.tableoutter {
@@ -480,7 +419,7 @@ table.tableoutter th {
 
 
 
-</style>
+</>
     
     <div style="width:80vw;background:#ffffff; padding:p-x 10px;font-weight:500; text-align:left;  font-family:Calibri, sans-serif;">
 		
