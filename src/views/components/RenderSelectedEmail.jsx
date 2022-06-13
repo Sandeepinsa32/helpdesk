@@ -139,197 +139,193 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 	var newBooking = `<!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="styles.css" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMail</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    
   </head>
-  <body>
-  
-    <div class="main"  style="
-    padding:10px;
-    margin: 1rem auto;
-    overflow: hidden;
-    background-size: cover;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    color: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
+  <body style="font-family: Calibri, sans-serif;">
+    <div class="main" style="border: 0px solid; margin: 0px auto; overflow: hidden; background-size: cover; max-width: 600px; background-image: linear-gradient(
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.7)
+    ),
+    url('https://i.ibb.co/H7jc6Q7/download.png'); padding: 10px; color: rgba(0, 0, 0, 0.9); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
     0 4px 4px rgba(0, 0, 0, 0.11), 0 6px 8px rgba(0, 0, 0, 0.11),
-    0 8px 16px rgba(0, 0, 0, 0.11);
-    font-family: "Nunito", sans-serif;
-    
+    0 8px 16px rgba(0, 0, 0, 0.11); background-position: bottom; background-repeat: no-repeat;">
+       <img src="https://triphelpdesk.com/wp-content/uploads/2022/01/Logo.png" alt="" style="width: 200px; display: block; margin-bottom: 4px; margin: 0 auto;" width="200">
+      <div style="text-align:center;">
+        
+      
+         
 
-    
-">
-      <div
-        style="
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-        "
-      >
-        <div>
-          <img
-
-            src="https://triphelpdesk.com/wp-content/uploads/2022/01/Logo.png"
-            alt=""
-            style="display: block; margin-bottom: 4px;width: 200px;"
-          />
-
-          <p style="margin: 0; padding: 0">164 20th Street</p>
-          <p style="margin: 0; padding: 0">Suite 2B, Brooklyn, NY</p>
-          <p style="margin: 0; padding: 0">11232, USA</p>
+        
+        <p style="margin: 0">
+            <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
+call
+</span>
+           +18662701413
+          </p>
+          <p style="margin: 0">
+          <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
+alternate_email
+</span>
+           info@triphelpdesk.com
+          </p>
+          <p style="margin: 0">
+         <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
+public
+</span>
+           www.triphelpdesk.com
+          </p>
+          <p style="margin: 0; padding: 0">
+            <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
+location_city
+</span>164 20th Street, Suite 2B, Brooklyn, NY
+          11232, USA</p>
         </div>
-
-        <div style="text-align: right">
-          <p style="margin: 0">
-            Phone:
-            <span style="color: black; font-weight: 800">+18662701413</span>
-          </p>
-          <p style="margin: 0">
-            Email:
-            <span style="color: black; font-weight: 800"
-              >info@triphelpdesk.com
-            </span>
-          </p>
-          <p style="margin: 0">
-            Website:
-            <span style="color: black; font-weight: 800"
-              >www.triphelpdesk.com</span
-            >
-          </p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="subject">
-        <p
-          style="
-            text-align: center;
-            font-size: 18px;
+      <hr>
+       <p style="
+            
             color: black;
-            font-weight: 800;
-          "
-        >
+            font-weight: 600;
+            margin:0px;                 
+          ">
           Booking Confirmation
         </p>
-        <div
-          style="
+
+      <div class="subject">
+       
+        <div style="
             display: flex;
             justify-content: space-between;
             align-items: center;
-          "
-        >
+          ">
+          
           <p>
-            <span>Ticket Id:</span>
+            <b>Ticket id:</b>
             <span style="font-weight: 500; color: black">THD457S58</span>
           </p>
-          <p>May 12, 2022</p>
+          <b>May 12, 2022</b>
         </div>
       </div>
 
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
-        praesentium laborum illo sint facere id ipsam consectetur expedita,
-        dolores similique quisquam vero, voluptatem magnam aut! Fuga, dicta?
-        Impedit, deleniti modi.
+      <p class="para-font" style="font-family: Arial; font-size: 14px;">
+     Thank you for choosing Triphelpdesk for your travel arrangements. We truly appreciate your business.
+        As per our conversation and agreed, we have processed your reservation under the confirmation code 
+        Your flight is now booked and is in process. Please note that you will receive the E-Ticket confirmation shortly in a separate email once the process is finalized.
+		  If you need any assistance regarding changes, please contact us at 
+        <b><a href="tel:8662701413" style=" color:#0B4173;">+1 866-270-1413</a></b> or email
+              <b><a href="mailto:info@triphelpdesk.com" style=" color:#0B4173;">info@triphelpdesk.com </a></b>
+        
+        
+       
+      
+        </p><p class="para-font" style="font-family: Arial; font-size: 14px;">
+        By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
       </p>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam
-        blanditiis commodi itaque similique temporibus eius cupiditate nobis
-        quaerat autem recusandae rem, architecto, iure deleniti ad vitae
-        accusantium cumque saepe.
-      </p>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Hic blanditiis
-        ipsam unde quam eos velit fuga, quibusdam quisquam!
-      </p>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non optio
-        voluptates delectus, facilis laborum ab maxime iste beatae, aliquam eum
-        ipsa, doloribus ea eligendi blanditiis eveniet ducimus ut assumenda
-        dolore aut. Error aspernatur totam repellendus magnam quas impedit odit
-        nesciunt iste, sit autem delectus magni, earum dolore facilis velit.
-      </p>
-      <div class="scrollable-table" style="overflow-x: scroll;
-
-  max-width: 600px;
-  margin-bottom: 20px;">
-        <table style="width: 100%;
-  max-width: 600px;
-  border-collapse: collapse;
-  margin: 10px auto;
-   padding: 4px;
-  text-align: left;
-  border: 1px solid rgba(0, 0, 0, 0.2);">
-          <tr style=" padding: 4px;
-  text-align: left;
-  border: 1px solid rgba(0, 0, 0, 0.2);">
-            <th style=" padding: 4px;
-  text-align: left;
-  border: 1px solid rgba(0, 0, 0, 0.2);" >First Name</th>
-            <th>Middle Name</th>
-            <th>Last Name</th>
-            <th>DOB</th>
-            <th>Ticket</th>
-            <th>Confirmation</th>
-            <th>Price</th>
+      
+      
+    
+      <div class="scrollable-table" style="overflow-x: scroll; max-width: 600px; margin-bottom: 20px;">
+        <table style="width: 100%; max-width: 600px; border-collapse: collapse; margin: 10px auto; padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" width="100%" align="left">
+          <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">First Name</th>
+            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Middle Name</th>
+            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Last Name</th>
+            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">DOB</th>
+            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Ticket</th>
+            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Confirmation</th>
+            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Price</th>
           </tr>
-          <tr>
-            <td>Jason</td>
-            <td>Jade</td>
-            <td>Roy</td>
-            <td>19/05/1985</td>
-            <td>35J3GHS7</td>
-            <td>KSOCJ</td>
-            <td>$241.52</td>
+          <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Jason</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Jade</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Roy</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">19/05/1985</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">35J3GHS7</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">KSOCJ</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">$241.52</td>
           </tr>
-          <tr>
-            <td style=" padding: 4px;
-  text-align: left;
-  border: 1px solid rgba(0, 0, 0, 0.2);">David</td>
-            <td></td>
-            <td>Malone</td>
-            <td>30/12/1997</td>
-            <td>35J3GHS7</td>
-            <td>KSOCJ</td>
-            <td>$125.79</td>
+          <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">David</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left"></td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Malone</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">30/12/1997</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">35J3GHS7</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">KSOCJ</td>
+            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">$125.79</td>
           </tr>
         </table>
       </div>
-      <button style="background-color: #5171ec;
-  padding: 10px 20px;
-  border-radius: 9999px;
-  border: none;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  display: block;
-  margin: auto auto 20px;
-  outline: none;">Authorize</button>
-      <hr />
+      
+         <p class="para-font" style="line-height: 18px; color: #0B4173; font-size: 12px; margin-bottom: 5px; font-weight: 600; font-family: Helvetica; padding: 0 1rem;">Total amount charged $
+    
+             in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
+        </p>
+      
+      <button style="background-color: #5171ec; padding: 10px 20px; border-radius: 9999px; border: none; font-weight: bold; color: white; text-align: center; display: block; margin: auto auto 20px; outline: none;">Authorize</button>
+      
+        <table class="tableoutter" style="width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;" width="100%" align="left">
+  
+ 
+       <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+         <td class="header-para-12x" style="text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;" scope="row" align="left">
+         <b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m
+         </td>
+        </tr>
+        <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+           <td class="header-para-12x" style="text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;" scope="row" align="left">
+       <b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
+       </td>
+         </tr>
+         <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+            <td class="header-para-12x" style="text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;" scope="row" align="left">
+            <b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
+            </td>
+         </tr>
+      </table>
+  
+       
+       <p class="para-font" style="font-family: Arial; font-size: 14px;">
+            
+              <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><a href="tel:8662701413" style="color: #0B4173;"> +1 866-270-1413</a></b> or email              <b><a href="mailto:info@triphelpdesk.com" style="color: #0B4173;">info@triphelpdesk.com </a></b>
+      <br>
+      <br>
+      <b>Changes and Cancellations :  </b>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more.
+      <br>
+      <br>
+      <b>24 Hour Cancelation Policy:</b> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
+      <br>
+      <br>
+      Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
+            </p>
+      
+      <hr>
+      
+      <footer>
       <div style="text-align: center">
-        <span style="font-size: 18px; font-weight: bold"
-          ><a href="" style="color: black">TripHelpDesk</a>
+        <span style="font-size: 18px;font-weight: bold"><a href="" style="color: #0B4173;">TripHelpDesk</a>
         </span>
-        <span style="font-size: 16px; font-weight: bold">
-          powered by Valalto</span
-        >
+        <span style="font-size: 16px; font-weight: bold; color: #0B4173;">
+          powered by Valalto</span>
       </div>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus odio
-        nesciunt nobis voluptatem natus quidem animi.
-      </p>
+      <p style=" line-height:18px;text-align:center;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
+              &copy; Copyright 2022
+              <a href="https://valalto.com/" style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
+                Valalto Inc.</a>, All Rights Reserved.
+            </p>
+      </footer>
     </div>
+      
+      
   </body>
 </html>`;
+
 	var Exchange = `<center>
 		<style>
     table.tableoutter {

@@ -368,8 +368,8 @@ export const Transaction = () => {
 															<PaymentIcon />
 														</IconButton>
 													</Tooltip>
-													{/* airline confirmation*/}
-													<Tooltip title='Airline Confirmation'>
+													{/* AIRLINE CALLING*/}
+													<Tooltip title='AIRLINE CALLING'>
 														<IconButton
 															aria-label='airelineConfirmation'
 															onClick={() => {

@@ -32,14 +32,8 @@ const AddNewRecord = ({isView, data}) => {
 			cardNumber: '',
 			expiryDate: null,
 			cvv: null,
+			billingAddress: '',
 		},
-		// {
-		// 	cardHolderName: 'testCard',
-		// 	cardHolderNumber: '8427175553',
-		// 	cardNumber: '4263982640269299',
-		// 	expiryDate: null,
-		// 	cvv: '123',
-		// },
 	]);
 	const [isCompanyCard, setIsCompanyCard] = useState(false);
 
@@ -123,9 +117,9 @@ const AddNewRecord = ({isView, data}) => {
 		//
 		mcoNo: '',
 		totalInhouseCharge: '',
-		adultCount: '',
-		childCount: '',
-		elderCount: '',
+		adultCount: 1,
+		childCount: 0,
+		elderCount: 0,
 		grandTotal: '',
 		childPrice: '',
 		adultPrice: '',
@@ -270,8 +264,8 @@ const AddNewRecord = ({isView, data}) => {
 		}),
 
 		//date
-		departureDate: Yup.string().nullable().required('required'),
-		returnDate: Yup.string().nullable().required('required'),
+		departureDate: Yup.string().nullable(),
+		returnDate: Yup.string().nullable(),
 
 		//companyCard details
 		isCompanyCCUsed: Yup.bool(),
@@ -321,6 +315,7 @@ const AddNewRecord = ({isView, data}) => {
 						.nullable()
 						.required('required'),
 					expiryDate: Yup.string().nullable().required(' required'),
+					billingAddress: Yup.string().nullable(),
 				})
 			)
 			.min(1, 'card is >= 1'),
@@ -429,7 +424,7 @@ const AddNewRecord = ({isView, data}) => {
 												<Grid container spacing={3}>
 													{/* Card Holder Name field */}
 
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={4}>
 														<TextField
 															name='cardHolderName'
 															label='NAME ON CARD'
@@ -445,7 +440,7 @@ const AddNewRecord = ({isView, data}) => {
 													</Grid>
 
 													{/*  Card Holder Phone no. */}
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={4}>
 														<TextField
 															type='number'
 															name='cardHolderNumber'
@@ -458,22 +453,8 @@ const AddNewRecord = ({isView, data}) => {
 															onBlur={handleBlur}
 														/>
 													</Grid>
-													{/* CardNumber Field */}
-													<Grid item xs={4} md={3}>
-														<TextField
-															type='number'
-															name='cardNumber'
-															label='CARD NUMBER'
-															fullWidth
-															autoComplete='cc-number'
-															onChange={(e) => handleCardInput(e, i)}
-															value={inputList[i].cardNumber}
-															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
-															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
-														/>
-													</Grid>
 													{/* CVV Field */}
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={3}>
 														<TextField
 															type='number'
 															name='cvv'
@@ -486,8 +467,32 @@ const AddNewRecord = ({isView, data}) => {
 															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
 														/>
 													</Grid>
+
+													{inputList.length !== 1 && (
+														<Grid item xs={1} sm={1} md={1}>
+															<IconButton onClick={() => handleRemoveClick(i)} color='error' sx={{mt: 1}}>
+																<DeleteOutlineIcon />
+															</IconButton>
+														</Grid>
+													)}
+
+													{/* CardNumber Field */}
+													<Grid item xs={4} md={4}>
+														<TextField
+															type='number'
+															name='cardNumber'
+															label='CARD NUMBER'
+															fullWidth
+															autoComplete='cc-number'
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cardNumber}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
+														/>
+													</Grid>
+
 													{/* expiry date field */}
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={4}>
 														<LocalizationProvider fullWidth dateAdapter={AdapterDateFns}>
 															<DatePicker
 																fullWidth
@@ -512,6 +517,7 @@ const AddNewRecord = ({isView, data}) => {
 																value={inputList[i].expiryDate}
 																renderInput={(params) => (
 																	<TextField
+																		fullWidth
 																		placeholder='MM/yyyy'
 																		{...params}
 																		error={Boolean(submitCount > 0 && err.length === Number(i + 1) ? true : false)}
@@ -521,14 +527,20 @@ const AddNewRecord = ({isView, data}) => {
 															/>
 														</LocalizationProvider>
 													</Grid>
-
-													{inputList.length !== 1 && (
-														<Grid item xs={1} sm={1} md={1}>
-															<IconButton onClick={() => handleRemoveClick(i)} color='error' sx={{mt: 1}}>
-																<DeleteOutlineIcon />
-															</IconButton>
-														</Grid>
-													)}
+													{/*  billing address Field */}
+													<Grid item xs={6} md={4}>
+														<TextField
+															multiline
+															rows={2}
+															name='billingAddress'
+															label='BILLING ADDRESS'
+															fullWidth
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].billingAddress}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['billingAddress'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['billingAddress'] : null}
+														/>
+													</Grid>
 
 													{/*  add/Remove btn for multiple card */}
 

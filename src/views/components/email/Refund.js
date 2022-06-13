@@ -170,7 +170,7 @@ const Refund = ({inputList3, setInputList3}) => {
 						size='small'
 						required
 						name='totalAmount'
-						label='Grand Total'
+						label='TOTAL VALUE'
 						fullWidth={true}
 						onChange={(e) => {
 							setTotalAmt(e.target.value);

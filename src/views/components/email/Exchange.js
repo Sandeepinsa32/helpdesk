@@ -190,7 +190,7 @@ const Exchange = ({inputList2, setInputList2}) => {
 						size='small'
 						required
 						name='totalAmount'
-						label='Grand Total'
+						label='TOTAL VALUE'
 						fullWidth={true}
 						onChange={(e) => {
 							setTotalAmt(e.target.value);

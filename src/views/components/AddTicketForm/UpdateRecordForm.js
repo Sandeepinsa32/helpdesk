@@ -330,13 +330,13 @@ export default function UpdateRecordForm({isReadOnly}) {
 			<Grid item xs={3} md={3} sm={3}>
 				<Textfield disabled={isDisable} name='airlineCode' label='AIRLINE CODE ' />
 			</Grid>
-			{/* Grand Total Fields */}
+			{/* TOTAL VALUE Fields */}
 			<Grid item xs={3} md={2} sm={3}>
 				<Textfield
 					disabled={isDisable}
 					type='number'
 					name='grandTotal'
-					label='GRAND TOTAL'
+					label='TOTAL VALUE'
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}

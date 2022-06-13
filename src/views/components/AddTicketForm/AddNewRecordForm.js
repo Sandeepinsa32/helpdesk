@@ -293,11 +293,11 @@ export default function AddressForm() {
 				<Textfield name='airlineCode' label='AIRLINE ' />
 			</Grid>
 
-			{/* Grand Total Fields */}
+			{/* TOTAL VALUE Fields */}
 			<Grid item xs={3} sm={3} md={2}>
 				<Textfield
 					name='grandTotal'
-					label='GRAND TOTAL'
+					label='TOTAL VALUE'
 					InputProps={{
 						startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 					}}
