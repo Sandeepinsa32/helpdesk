@@ -6,7 +6,7 @@ import axios from 'axios';
 import {BASEURL, successToast} from '../../utils/Utils';
 
 const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid, onClose}) => {
-	console.log(selectedEmailTemplate, Tabledata, pnrData, recordData);
+	console.log(selectedEmailTemplate, pnrData);
 	const [isPreviewed, setIsPreviewed] = useState(true);
 	const grandTotal = '100';
 	function renderingEmail() {
@@ -52,7 +52,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 		var tableString = '';
 		Tabledata.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
-			console.log(isEmpty);
+
 			if (isEmpty) {
 				return;
 			}
@@ -60,23 +60,22 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 			tableString =
 				tableString +
 				`<tr>
-		  <td >${x.firstName}</td>
-		  <td>${x.middleName}</td>
-		  <td>${x.lastName}</td>
-		  <td>${x.ticket}</td>
-		  <td>${x.confirmation}</td>
-		  <td>${x.price}</td>
+		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" >${x.firstName}</td>
+		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.middleName}</td>
+		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.lastName}</td>
+		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.ticket}</td>
+		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.confirmation}</td>
+		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.price}</td>
 		</tr>`;
 		});
 
 		return tableString;
 	}
 	function userTabelData2() {
-		// console.log(Tabledata);
 		var tableString = '';
 		Tabledata.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
-			console.log(isEmpty);
+
 			if (isEmpty) {
 				return;
 			}
@@ -94,11 +93,10 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 		return tableString;
 	}
 	function userTabelData3() {
-		// console.log(Tabledata);
 		var tableString = '';
 		Tabledata.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
-			console.log(isEmpty);
+
 			if (isEmpty) {
 				return;
 			}
@@ -115,15 +113,14 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 		return tableString;
 	}
 	function userTabelData4() {
-		// console.log(Tabledata);
 		var tableString = '';
 		Tabledata.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
-			console.log(isEmpty);
+
 			if (isEmpty) {
 				return;
 			}
-			// console.log(x);
+
 			tableString =
 				tableString +
 				`<tr>
@@ -150,13 +147,17 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
     
   </head>
   <body style="font-family: Calibri, sans-serif;">
-    <div class="main" style="border: 0px solid; margin: 0px auto; overflow: hidden; background-size: cover; max-width: 600px; background-image: linear-gradient(
+    <div class="main " style="border: 0px solid; margin: 0px auto; overflow: hidden; background-size: cover; max-width: 600px; background-image: linear-gradient(
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.7)
     ),
     url('https://i.ibb.co/H7jc6Q7/download.png'); padding: 10px; color: rgba(0, 0, 0, 0.9); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
     0 4px 4px rgba(0, 0, 0, 0.11), 0 6px 8px rgba(0, 0, 0, 0.11),
-    0 8px 16px rgba(0, 0, 0, 0.11); background-position: bottom; background-repeat: no-repeat;">
+    0 8px 16px rgba(0, 0, 0, 0.11); background-position: bottom; background-repeat: no-repeat; background-color: #efefef;">
+      <div style="
+    background-color: #efefef  !important;
+    margin: -7px;
+">
        <img src="https://triphelpdesk.com/wp-content/uploads/2022/01/Logo.png" alt="" style="width: 200px; display: block; margin-bottom: 4px; margin: 0 auto;" width="200">
       <div style="text-align:center;">
         
@@ -164,142 +165,174 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
          
 
         
-        <p style="margin: 0">
-            <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
-call
-</span>
-           +18662701413
-          </p>
-          <p style="margin: 0">
-          <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
-alternate_email
-</span>
-           info@triphelpdesk.com
-          </p>
-          <p style="margin: 0">
-         <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
-public
-</span>
-           www.triphelpdesk.com
-          </p>
-          <p style="margin: 0; padding: 0">
-            <span class="material-symbols-outlined" style="font-size: 18px; vertical-align: bottom;">
-location_city
-</span>164 20th Street, Suite 2B, Brooklyn, NY
-          11232, USA</p>
-        </div>
-      <hr>
-       <p style="
-            
-            color: black;
-            font-weight: 600;
-            margin:0px;                 
-          ">
-          Booking Confirmation
-        </p>
+        <a href="tel:8662701413" target="_blank" style="margin:4px 0 ;text-decoration:none;color: #0B4173;display:block">
 
-      <div class="subject">
-       
-        <div style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-          ">
-          
-          <p>
-            <b>Ticket id:</b>
-            <span style="font-weight: 500; color: black">THD457S58</span>
-          </p>
-          <b>May 12, 2022</b>
+           +1 8662701413
+          </a>
+          <a href="mailto:info@triphelpdesk.com" target="_blank" style="margin:4px 0 ;text-decoration:none;color: #0B4173;display:block">
+        
+           info@TripHelpDesk.com
+          </a>
+          <a href="https://triphelpdesk.com/" target="_blank" style="margin:4px 0 ;text-decoration:none;color: #0B4173;display:block">
+    
+           www.TripHelpDesk.com
+          </a>
+          <a href="#" target="_blank" style="margin:4px 0 ; padding: 0;text-decoration:none;color: #0B4173;display:block">
+164 20th Street, Suite 2B, Brooklyn, NY
+          11232, USA</a>
         </div>
       </div>
+      <hr>
+     
 
-      <p class="para-font" style="font-family: Arial; font-size: 14px;">
+     <p style="margin:0 ;">
+            Ticket Id:
+            <span style="font-weight: 600;">THD457S58</span>
+          </p>
+
+        <p style="margin:2px 0;  ">
+          ${currentDate()}
+        </p>
+      <p class="para-font" style="font-family: Arial; font-size: 14px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
      Thank you for choosing Triphelpdesk for your travel arrangements. We truly appreciate your business.
         As per our conversation and agreed, we have processed your reservation under the confirmation code 
         Your flight is now booked and is in process. Please note that you will receive the E-Ticket confirmation shortly in a separate email once the process is finalized.
 		  If you need any assistance regarding changes, please contact us at 
-        <b><a href="tel:8662701413" style=" color:#0B4173;">+1 866-270-1413</a></b> or email
-              <b><a href="mailto:info@triphelpdesk.com" style=" color:#0B4173;">info@triphelpdesk.com </a></b>
+        <b><a href="tel:8662701413" style=" color:#0B4173;text-decoration:none;">+1 866-270-1413</a></b> or email
+              <b><a href="mailto:info@triphelpdesk.com" style="text-decoration:none; color:#0B4173;">info@triphelpdesk.com </a></b>
         
         
        
       
-        </p><p class="para-font" style="font-family: Arial; font-size: 14px;">
+        </p><p class="para-font" style="font-family: Arial; font-size: 14px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
         By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
       </p>
       
       
     
       <div class="scrollable-table" style="overflow-x: scroll; max-width: 600px; margin-bottom: 20px;">
-        <table style="width: 100%; max-width: 600px; border-collapse: collapse; margin: 10px auto; padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" width="100%" align="left">
-          <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+        <table style="width: 100%; max-width: 600px; border-collapse: collapse; margin: 10px auto; padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" width="100%"  align="left">
+        <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
             <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">First Name</th>
             <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Middle Name</th>
             <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Last Name</th>
-            <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">DOB</th>
             <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Ticket</th>
             <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Confirmation</th>
             <th style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Price</th>
-          </tr>
-          <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+          </tr> 
+      <!--      <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
+
+
+          
             <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Jason</td>
             <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Jade</td>
             <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Roy</td>
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">19/05/1985</td>
             <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">35J3GHS7</td>
             <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">KSOCJ</td>
             <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">$241.52</td>
           </tr>
-          <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">David</td>
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left"></td>
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">Malone</td>
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">30/12/1997</td>
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">35J3GHS7</td>
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">KSOCJ</td>
-            <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">$125.79</td>
-          </tr>
+           -->
+         ${userTabelData1()}
         </table>
       </div>
       
-         <p class="para-font" style="line-height: 18px; color: #0B4173; font-size: 12px; margin-bottom: 5px; font-weight: 600; font-family: Helvetica; padding: 0 1rem;">Total amount charged $
+         <p class="para-font" style="text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 18px; color: #0B4173; font-size: 12px; margin-bottom: 5px; font-weight: 600; font-family: Helvetica; padding: 0 1rem;">Total amount charged $
     
              in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
         </p>
       
-      <button style="background-color: #5171ec; padding: 10px 20px; border-radius: 9999px; border: none; font-weight: bold; color: white; text-align: center; display: block; margin: auto auto 20px; outline: none;">Authorize</button>
+     <a    href='http://Thdworkbook.com/auth/validateToken'  target='_blank' style="text-decoration:none;"> <button style="background-color: #5171ec; padding: 10px 20px; border-radius: 9999px; border: none; font-weight: bold; color: white; text-align: center; display: block; margin: auto auto 20px; outline: none;">Authorize</button> 
+     </a>
       
-        <table class="tableoutter" style="width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;" width="100%" align="left">
-  
- 
-       <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
-         <td class="header-para-12x" style="text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;" scope="row" align="left">
-         <b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m
-         </td>
-        </tr>
-        <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
-           <td class="header-para-12x" style="text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;" scope="row" align="left">
-       <b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
-       </td>
-         </tr>
-         <tr style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">
-            <td class="header-para-12x" style="text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;" scope="row" align="left">
-            <b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
-            </td>
-         </tr>
-      </table>
+
+
+      
+      ${
+			pnrData.length > 0
+				? `
+				<table
+					class='tableoutter'
+					style='width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;'
+					width='100%'
+					align='left'>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b>Flight:</b> ${pnrData[0].flt.aircraft}  - Operated By  ${pnrData[0].flt.operated_by} -  ${pnrData[0].flt.cabin}-${
+						pnrData[0].flt.duration.hours && pnrData[0].flt.duration.hours + 'h' + ' ' + pnrData[0].flt.duration.minutes + ' m'
+				  }
+						</td>
+					</tr>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b>Departing:</b> ${pnrData[0].dep.airportname} , ${pnrData[0].dep.cityname}  ${pnrData[0].dep.airportcode} at ${pnrData[0].flt.departure.string}
+						</td>
+					</tr>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b> Arriving: </b>${pnrData[0].arr.airportname} , ${pnrData[0].arr.cityname}  ${pnrData[0].arr.airportcode} at ${pnrData[0].flt.arrival.string}
+						</td>
+					</tr>
+				</table>
+			`
+				: `
+				<table
+					class='tableoutter'
+					style='width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;'
+					width='100%'
+					align='left'>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m
+						</td>
+					</tr>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
+						</td>
+					</tr>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
+						</td>
+					</tr>
+				</table>
+			`
+		}
   
        
-       <p class="para-font" style="font-family: Arial; font-size: 14px;">
+       <p class="para-font" style="font-family: Arial; font-size: 14px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
             
-              <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><a href="tel:8662701413" style="color: #0B4173;"> +1 866-270-1413</a></b> or email              <b><a href="mailto:info@triphelpdesk.com" style="color: #0B4173;">info@triphelpdesk.com </a></b>
+              <span class="para-font" style="font-family: Arial; font-size: 14px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px; font-weight: 600;">Note:</span> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><a href="tel:8662701413" style="color: #0B4173;"> +1 866-270-1413</a></b> or email              <b><a href="mailto:info@triphelpdesk.com" style="color: #0B4173;">info@triphelpdesk.com </a></b>
       <br>
       <br>
-      <b>Changes and Cancellations :  </b>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more.
+      <span class="para-font" style="font-family: Arial; font-size: 14px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px; font-weight: 600;">Changes and Cancellations :  </span>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more.
       <br>
       <br>
-      <b>24 Hour Cancelation Policy:</b> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
+      <span class="para-font" style="font-family: Arial; font-size: 14px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px; font-weight: 600;">24 Hour Cancelation Policy:</span> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
       <br>
       <br>
       Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
@@ -314,7 +347,7 @@ location_city
         <span style="font-size: 16px; font-weight: bold; color: #0B4173;">
           powered by Valalto</span>
       </div>
-      <p style=" line-height:18px;text-align:center;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
+      <p style=" line-height:18px;text-align:center;  margin-bottom:0px; color: #0B4173;font-size: 14px;">
               &copy; Copyright 2022
               <a href="https://valalto.com/" style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
                 Valalto Inc.</a>, All Rights Reserved.
@@ -445,7 +478,7 @@ table.tableoutter th {
 		
 		
 		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color: #0B4173;margin:0;height:fit-content;font-family:sans-serif; ">
-<!--    Wed, May 11, 2022      -->
+<!--    Wed, May 11, 2022  -->
          ${currentDate()}
         </h1>
 		<h1 style="font-size:14px; line-height:22px; font-weight:600; color: #0B4173;font-family:Arial; ">
@@ -475,7 +508,7 @@ Once completed your agent will notify you and you'll be able to access the reser
   </thead>
   <tbody id='appendCHildHere' >
     
-<!--     -->
+
     ${userTabelData2()}
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Kelly</td>
