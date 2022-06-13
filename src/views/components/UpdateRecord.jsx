@@ -344,21 +344,21 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 				cardHolderNumber: Yup.string().matches(phoneRegExp, 'Phone number is not valid').required('Phone is required'),
 
 				cardNumber: Yup.string()
-					// 	.test(
-					// 		'test-number', // this is used internally by yup
-					// 		'Credit Card number is invalid', //validation message
-					// 		(value) => valid.number(value).isValid
-					// )
+					.test(
+						'test-number', // this is used internally by yup
+						'Credit Card number is invalid', //validation message
+						(value) => valid.number(value).isValid
+					)
 					// return true false based on validation
-					.required()
-					.max(16, 'Must be 16 characters')
-					.min(16, 'Must be 16 characters'),
+					.required(),
+
 				cvv: Yup.number().test(
 					'min 3 && max 4 digit required', // this is used internally by yup
 					'atleat 3 and atmost 4 character should be there', //validation message
 					(value) => value == 0 || value > 0
 				),
 				expiryDate: Yup.string().required('This field is required').nullable(),
+				billingAddress: Yup.string().nullable(),
 			})
 		),
 		remark: Yup.string().required('This field is required'),
@@ -433,6 +433,8 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 								cardNumber: '',
 								expiryDate: null,
 								cvv: '',
+								billingAddress: '',
+								billingAddress: '',
 							},
 						]);
 						setInputList([
@@ -443,6 +445,7 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 								cardNumber: '',
 								expiryDate: null,
 								cvv: '',
+								billingAddress: '',
 							},
 						]);
 					};
@@ -520,23 +523,23 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 													<CardContent>
 														<Grid container spacing={3} key={i}>
 															{/* Card Holder NAme field */}
-															<Grid item xs={4} md={2}>
+															<Grid item xs={4} md={4}>
 																<TextField name='cardHolderName' label='NAME ON CARD' fullWidth disabled={true} value={alreadyPresentCard[i].cardHolderName} />
 															</Grid>
 															{/*  Card Holder Phone no. */}
-															<Grid item xs={4} md={2}>
+															<Grid item xs={4} md={4}>
 																<TextField name='cardHolderNumber' label='PHONE NO.' fullWidth disabled={true} value={alreadyPresentCard[i].cardHolderNumber} />
 															</Grid>
 															{/* CardNumber Field */}
-															<Grid item xs={4} md={3}>
+															<Grid item xs={4} md={4}>
 																<TextField name='cardNumber' label='CARD NUMBER' fullWidth disabled={true} value={alreadyPresentCard[i].cardNumber} />
 															</Grid>
 															{/* CVV Field */}
-															<Grid item xs={4} md={2}>
+															<Grid item xs={4} md={4}>
 																<TextField name='cvv' label='CVV' fullWidth disabled={true} value={alreadyPresentCard[i].cvv} />
 															</Grid>
 															{/* expiry date field */}
-															<Grid item xs={4} md={3}>
+															<Grid item xs={4} md={4}>
 																<LocalizationProvider fullWidth disabled={isDisable} dateAdapter={AdapterDateFns}>
 																	<DatePicker
 																		fullWidth
@@ -547,9 +550,25 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 																		inputFormat='MM/yyyy'
 																		placeholder='MM/yyyy'
 																		value={alreadyPresentCard[i].expiryDate}
-																		renderInput={(params) => <TextField placeholder='MM/yyyy' {...params} />}
+																		renderInput={(params) => <TextField fullWidth placeholder='MM/yyyy' {...params} />}
 																	/>
 																</LocalizationProvider>
+															</Grid>
+
+															{/*  billing address Field */}
+															<Grid item xs={6} md={4}>
+																<TextField
+																	disabled={true}
+																	multiline
+																	rows={2}
+																	name='billingAddress'
+																	label='BILLING ADDRESS'
+																	fullWidth
+																	onChange={(e) => handleCardInput(e, i)}
+																	value={alreadyPresentCard[i].billingAddress}
+																	error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['billingAddress'] : null)}
+																	helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['billingAddress'] : null}
+																/>
 															</Grid>
 															<Grid item xs={12} md={12}></Grid>
 														</Grid>
@@ -573,7 +592,7 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 												<Grid container spacing={3}>
 													{/* Card Holder Name field */}
 
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={4}>
 														<TextField
 															name='cardHolderName'
 															label='NAME ON CARD'
@@ -590,7 +609,7 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 													</Grid>
 
 													{/*  Card Holder Phone no. */}
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={4}>
 														<TextField
 															type='number'
 															name='cardHolderNumber'
@@ -599,28 +618,12 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 															disabled={isDisable}
 															onChange={(e) => handleCardInput(e, i)}
 															value={inputList[i].cardHolderNumber}
-															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
-															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
-														/>
-													</Grid>
-
-													{/* CardNumber Field */}
-													<Grid item xs={4} md={3}>
-														<TextField
-															type='number'
-															name='cardNumber'
-															label='CARD NUMBER'
-															fullWidth
-															disabled={isDisable}
-															autoComplete='cc-number'
-															onChange={(e) => handleCardInput(e, i)}
-															value={inputList[i].cardNumber}
-															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
-															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderNumber'] : null}
 														/>
 													</Grid>
 													{/* CVV Field */}
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={3}>
 														<TextField
 															name='cvv'
 															label='CVV'
@@ -630,12 +633,36 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 															autoComplete='cc-csc'
 															onChange={(e) => handleCardInput(e, i)}
 															value={inputList[i].cvv}
-															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
-															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null}
 														/>
 													</Grid>
+
+													{inputList.length !== 0 && (
+														<Grid item xs={1} sm={1} md={1}>
+															<IconButton onClick={() => handleRemoveClick(i)} color='error' sx={{mt: 1}}>
+																<DeleteOutlineIcon />
+															</IconButton>
+														</Grid>
+													)}
+													{/* CardNumber Field */}
+													<Grid item xs={4} md={4}>
+														<TextField
+															type='number'
+															name='cardNumber'
+															label='CARD NUMBER'
+															fullWidth
+															disabled={isDisable}
+															autoComplete='cc-number'
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].cardNumber}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null}
+														/>
+													</Grid>
+
 													{/* expiry date field */}
-													<Grid item xs={4} md={2}>
+													<Grid item xs={4} md={4}>
 														<LocalizationProvider fullWidth disabled={isDisable} dateAdapter={AdapterDateFns}>
 															<DatePicker
 																fullWidth
@@ -661,23 +688,31 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 																value={inputList[i].expiryDate}
 																renderInput={(params) => (
 																	<TextField
+																		fullWidth
 																		placeholder='MM/yyyy'
 																		{...params}
-																		error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null)}
-																		helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardHolderName'] : null}
+																		error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['expiryDate'] : null)}
+																		helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['expiryDate'] : null}
 																	/>
 																)}
 															/>
 														</LocalizationProvider>
 													</Grid>
 
-													{inputList.length !== 0 && (
-														<Grid item xs={1} sm={1} md={1}>
-															<IconButton onClick={() => handleRemoveClick(i)} color='error' sx={{mt: 1}}>
-																<DeleteOutlineIcon />
-															</IconButton>
-														</Grid>
-													)}
+													{/*  billing address Field */}
+													<Grid item xs={6} md={3}>
+														<TextField
+															multiline
+															rows={2}
+															name='billingAddress'
+															label='BILLING ADDRESS'
+															fullWidth
+															onChange={(e) => handleCardInput(e, i)}
+															value={inputList[i].billingAddress}
+															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['billingAddress'] : null)}
+															helperText={submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['billingAddress'] : null}
+														/>
+													</Grid>
 												</Grid>
 											</CardContent>
 										</Card>
