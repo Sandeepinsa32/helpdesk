@@ -278,7 +278,15 @@ export const Transaction = () => {
 							<Table sx={{minWidth: 650}} aria-label='simple table'>
 								<TableHead>
 									<TableRow>
-										{['Email', 'Name', 'Booking ID', 'Phone', 'Dep. Date', 'Return Date', 'Payment Status', 'Action'].map((th) => (
+										{[
+											'Email',
+											'Name',
+											'Booking ID',
+											'Phone',
+											//'Dep. Date', 'Return Date',
+											'Payment Status',
+											'Action',
+										].map((th) => (
 											<TableCell sx={{p: 1}} key={th}>
 												{th}
 											</TableCell>
@@ -316,9 +324,9 @@ export const Transaction = () => {
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.bookingId}</TableCell>
 
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.phone}</TableCell>
-
+												{/* 
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{formateDate(row?.departureDate)}</TableCell>
-												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{formateDate(row?.returnDate)}</TableCell>
+												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{formateDate(row?.returnDate)}</TableCell> */}
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.paymentStatus.toUpperCase()}</TableCell>
 
 												<TableCell sx={{p: 0}}>

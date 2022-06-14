@@ -237,8 +237,7 @@ export default function SearchRecord() {
 											'Name',
 											'Booking ID',
 											'Phone',
-											'Dep. Date',
-											'Return Date',
+											//	 'Dep. Date',											'Return Date',
 											'Created Date',
 											'Action',
 										].map((th) => (
@@ -272,8 +271,8 @@ export default function SearchRecord() {
 
 												<TableCell>{row?.phone}</TableCell>
 
-												<TableCell>{formateDate(row?.departureDate)}</TableCell>
-												<TableCell>{formateDate(row?.returnDate)}</TableCell>
+												{/* <TableCell>{formateDate(row?.departureDate)}</TableCell>
+												<TableCell>{formateDate(row?.returnDate)}</TableCell> */}
 												<TableCell>{formateDate(row?.createdAt)}</TableCell>
 
 												<TableCell>

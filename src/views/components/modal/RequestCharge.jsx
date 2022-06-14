@@ -34,7 +34,6 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 // mui Icon
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 function RequestCharge({data, onClose}) {
-	console.log(data);
 	const {bookingId, _id, email, phone} = data;
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();
@@ -116,7 +115,6 @@ function RequestCharge({data, onClose}) {
 				initialValues={{...INITIAL_FORM_STATE}}
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
-					console.log('formik submitted', values, bookingId);
 					axios
 						.post(BASEURL + `/charge/`, {
 							...values,
@@ -124,7 +122,6 @@ function RequestCharge({data, onClose}) {
 							phone: values.cardHolderNumber,
 						})
 						.then((res) => {
-							console.log(res.data);
 							successToast('Request sent to admin');
 							onClose();
 						})
@@ -135,7 +132,7 @@ function RequestCharge({data, onClose}) {
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
-					console.log(errors);
+					console.log(values);
 					return (
 						<Card>
 							<Form onSubmit={handleSubmit}>
@@ -166,12 +163,13 @@ function RequestCharge({data, onClose}) {
 															error={Boolean(touched.cardValue && errors.cardValue)}
 															value={values.cardValue}
 															onChange={(e) => {
-																const {cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate} = e.target.value;
+																const {cardHolderName, cardHolderNumber, cardNumber, cvv, expiryDate, billingAddress} = e.target.value;
 																setFieldValue('cardHolderName', cardHolderName);
 																setFieldValue('cardHolderNumber', cardHolderNumber);
 																setFieldValue('cardNumber', cardNumber);
 																setFieldValue('cvv', cvv);
 																setFieldValue('expiryDate', expiryDate);
+																setFieldValue('address', billingAddress);
 															}}>
 															{cardDetail &&
 																cardDetail.map((x, i) => {
@@ -220,6 +218,11 @@ function RequestCharge({data, onClose}) {
 														/>
 													</LocalizationProvider>
 												</Grid>
+
+												{/* ADDRESS Fields */}
+												<Grid item xs={4} md={4} sm={4}>
+													<Textfield name='address' label='ADDRESS' multiline rows={2} value={values.address} disabled={true} />
+												</Grid>
 												<Grid item xs={12} md={12}></Grid>
 											</Grid>
 
@@ -255,10 +258,6 @@ function RequestCharge({data, onClose}) {
 												{/* remarks Fields */}
 												<Grid item xs={6} md={6} sm={6}>
 													<Textfield name='remarks' label='DESCRIPTION' multiline rows={4} />
-												</Grid>
-												{/* ADDRESS Fields */}
-												<Grid item xs={6} md={6} sm={6}>
-													<Textfield name='address' label='ADDRESS' multiline rows={4} />
 												</Grid>
 											</Grid>
 										</>

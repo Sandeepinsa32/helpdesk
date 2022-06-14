@@ -144,6 +144,15 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+   <style type="text/css">
+
+   :root {
+
+  Color-scheme: light dark;
+    
+  supported-color-schemes:light dark;
+  }
+   </style>
     
   </head>
   <body style="font-family: Calibri, sans-serif;">
@@ -151,12 +160,12 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
       rgba(255, 255, 255, 0.9),
       rgba(255, 255, 255, 0.7)
     ),
-    url('https://i.ibb.co/H7jc6Q7/download.png'); padding: 10px; color: rgba(0, 0, 0, 0.9); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
+    url('https://i.ibb.co/H7jc6Q7/download.png'); padding: 10px 18px; color: rgba(0, 0, 0, 0.9); box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11), 0 2px 2px rgba(0, 0, 0, 0.11),
     0 4px 4px rgba(0, 0, 0, 0.11), 0 6px 8px rgba(0, 0, 0, 0.11),
     0 8px 16px rgba(0, 0, 0, 0.11); background-position: bottom; background-repeat: no-repeat; background-color: #efefef;">
       <div style="
     background-color: #efefef  !important;
-    margin: -7px;
+    margin: -7px;padding:14px;
 ">
        <img src="https://triphelpdesk.com/wp-content/uploads/2022/01/Logo.png" alt="" style="width: 200px; display: block; margin-bottom: 4px; margin: 0 auto;" width="200">
       <div style="text-align:center;">
