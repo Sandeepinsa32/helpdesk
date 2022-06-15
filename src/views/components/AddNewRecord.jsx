@@ -23,7 +23,8 @@ import Textfield from './FormField/Textfield';
 const AddNewRecord = ({isView, data}) => {
 	const navigate = useNavigate();
 
-	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+	// const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+	const phoneRegExp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 
 	const [inputList, setInputList] = useState([
 		{

@@ -13,7 +13,9 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 // mui Icon
 
 function RequestCharge() {
-	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+	// const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+
+	const phoneRegExp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 	const INITIAL_FORM_STATE = {
 		confirmationNo: '',
 		agencyRefNo: '',

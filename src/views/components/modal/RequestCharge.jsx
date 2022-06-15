@@ -40,7 +40,9 @@ function RequestCharge({data, onClose}) {
 
 	const [isLoading, setIsLoading] = useState(false);
 
-	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+	// const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
+
+	const phoneRegExp = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
 	const INITIAL_FORM_STATE = {
 		cardHolderName: '',
 		cardHolderNumber: '',
