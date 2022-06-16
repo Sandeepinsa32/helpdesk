@@ -21,20 +21,20 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
 const Exchange = ({inputList, setInputList}) => {
-	const [totalAmt, setTotalAmt] = useState(0);
+	// const [totalAmt, setTotalAmt] = useState(0);
 
-	const calculateTotalAmount = () => {
-		let Amount = [];
-		inputList.map((x, i) => {
-			Amount.push(inputList[i].price);
-		});
+	// const calculateTotalAmount = () => {
+	// 	let Amount = [];
+	// 	inputList.map((x, i) => {
+	// 		Amount.push(inputList[i].price);
+	// 	});
 
-		var total = 0;
-		for (var i in Amount) {
-			total += Number(Amount[i]);
-		}
-		setTotalAmt(total);
-	};
+	// 	var total = 0;
+	// 	for (var i in Amount) {
+	// 		total += Number(Amount[i]);
+	// 	}
+	// 	setTotalAmt(total);
+	// };
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
@@ -63,12 +63,12 @@ const Exchange = ({inputList, setInputList}) => {
 			},
 		]);
 		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
-		calculateTotalAmount();
+		// calculateTotalAmount();
 	};
 
 	return (
 		<>
-			<Box sx={{mt: 2, p: 1}}>
+			<Box>
 				<TableContainer component={Paper}>
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
@@ -156,7 +156,7 @@ const Exchange = ({inputList, setInputList}) => {
 												}}
 												onChange={(e) => {
 													handleInputChange(e, i);
-													calculateTotalAmount();
+													// calculateTotalAmount();
 												}}
 												value={inputList[i].price}
 											/>
@@ -184,7 +184,7 @@ const Exchange = ({inputList, setInputList}) => {
 					</Grid>
 				)}
 				{/* Total Amount */}
-				<Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
+				{/* <Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
 					<TextField
 						disabled
 						size='small'
@@ -197,7 +197,7 @@ const Exchange = ({inputList, setInputList}) => {
 						}}
 						value={totalAmt}
 					/>
-				</Grid>
+				</Grid> */}
 			</Grid>
 		</>
 	);

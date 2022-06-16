@@ -1,5 +1,4 @@
 import React from 'react';
-import {Box} from '@mui/material';
 
 //  import email template
 import NewBookingFields from './email/NewBookingFields';
@@ -9,25 +8,35 @@ import RefundFields from './email/RefundFields';
 
 function RenderEmailField({data}) {
 	// de-str props
-	const {selectedEmailTemplate, Ticketid, pnrData, onClose, inputList1, setInputList1, inputList2, setInputList2, inputList3, setInputList3, inputList4, setInputList4} = data;
+	const {
+		selectedEmailTemplate,
+		newBookingFieldList,
+		setNewBookingFieldList,
+		exchangeFieldList,
+		setExchangeFieldList,
+		refundFieldList,
+		setRefundFieldList,
+		futureCreditFieldList,
+		setFutureCreditFieldList,
+	} = data;
 
 	function SelectedEmailFields() {
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
-				return <NewBookingFields inputList={inputList1} setInputList={setInputList1} />;
+				return <NewBookingFields inputList={newBookingFieldList} setInputList={setNewBookingFieldList} />;
 			case 'exchange':
-				return <ExchangeFields inputList={inputList2} setInputList={setInputList2} />;
+				return <ExchangeFields inputList={exchangeFieldList} setInputList={setExchangeFieldList} />;
 			case 'refund':
-				return <RefundFields inputList={inputList3} setInputList={setInputList3} />;
+				return <RefundFields inputList={refundFieldList} setInputList={setRefundFieldList} />;
 			case 'futureCredit':
-				return <FutureCreditFields inputList={inputList4} setInputList={setInputList4} />;
+				return <FutureCreditFields inputList={futureCreditFieldList} setInputList={setFutureCreditFieldList} />;
 
 			default:
 				// throw new Error("Unknown step");
-				return <NewBookingFields setInputList1={setInputList1} />;
+				return <NewBookingFields inputList={newBookingFieldList} setInputList1={setNewBookingFieldList} />;
 		}
 	}
-	return <Box sx={{mt: 2, p: 1}}>{SelectedEmailFields()}</Box>;
+	return <>{SelectedEmailFields()}</>;
 }
 
 export default RenderEmailField;

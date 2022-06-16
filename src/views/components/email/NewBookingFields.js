@@ -21,21 +21,20 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
 const NewBooking = ({inputList, setInputList}) => {
-	const [totalAmt, setTotalAmt] = useState(0);
-	const [pnrData, setPnrData] = useState([]);
+	// const [totalAmt, setTotalAmt] = useState(0);
 
-	const calculateTotalAmount = () => {
-		let Amount = [];
-		inputList.map((x, i) => {
-			Amount.push(inputList[i].price);
-		});
+	// const calculateTotalAmount = () => {
+	// 	let Amount = [];
+	// 	inputList.map((x, i) => {
+	// 		Amount.push(inputList[i].price);
+	// 	});
 
-		var total = 0;
-		for (var i in Amount) {
-			total += Number(Amount[i]);
-		}
-		setTotalAmt(total);
-	};
+	// 	var total = 0;
+	// 	for (var i in Amount) {
+	// 		total += Number(Amount[i]);
+	// 	}
+	// 	setTotalAmt(total);
+	// };
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
@@ -64,7 +63,7 @@ const NewBooking = ({inputList, setInputList}) => {
 				price: '',
 			},
 		]);
-		calculateTotalAmount();
+		// calculateTotalAmount();
 	};
 
 	function clean(obj) {
@@ -80,7 +79,7 @@ const NewBooking = ({inputList, setInputList}) => {
 	}
 	return (
 		<>
-			<Box sx={{mt: 2, p: 1}}>
+			<Box>
 				<TableContainer component={Paper}>
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
@@ -181,7 +180,7 @@ const NewBooking = ({inputList, setInputList}) => {
 												}}
 												onChange={(e) => {
 													handleInputChange(e, i);
-													calculateTotalAmount();
+													// calculateTotalAmount();
 												}}
 												value={inputList[i].price}
 											/>
@@ -199,17 +198,17 @@ const NewBooking = ({inputList, setInputList}) => {
 						</TableBody>
 					</Table>
 				</TableContainer>
-			</Box>
-			<Grid container spacing={1} sx={{m: 0, p: 1}}>
-				{inputList.length < 9 && (
-					<Grid item xs={6} md={12} sx={{pr: 1}}>
-						<Button startIcon={<AddIcon fontSize='small' />} fullWidth={true} onClick={handleAddClick} sx={{mr: 1, pr: 1}} variant='outlined'>
-							Add new
-						</Button>
-					</Grid>
-				)}
-				{/* Total Amount */}
-				<Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
+				<Grid container spacing={1} sx={{m: 0, p: 1}}>
+					<Grid item xs={6} md={10} sx={{pr: 1, my: 3}}></Grid>
+					{inputList.length < 9 && (
+						<Grid item xs={6} md={2} sx={{pr: 1}}>
+							<Button startIcon={<AddIcon fontSize='small' />} fullWidth={true} onClick={handleAddClick} sx={{mr: 1, pr: 1}} variant='outlined'>
+								Add new
+							</Button>
+						</Grid>
+					)}
+					{/* Total Amount */}
+					{/* <Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
 					<TextField
 						disabled
 						size='small'
@@ -222,8 +221,9 @@ const NewBooking = ({inputList, setInputList}) => {
 						}}
 						value={totalAmt}
 					/>
+				</Grid> */}
 				</Grid>
-			</Grid>
+			</Box>
 		</>
 	);
 };

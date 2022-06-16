@@ -62,12 +62,12 @@ const Refund = ({inputList, setInputList}) => {
 			},
 		]);
 		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
-		calculateTotalAmount();
+		// calculateTotalAmount();
 	};
 
 	return (
 		<>
-			<Box sx={{mt: 2, p: 1}}>
+			<Box>
 				<TableContainer component={Paper}>
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>

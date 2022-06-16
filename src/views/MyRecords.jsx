@@ -466,10 +466,22 @@ export const Transaction = () => {
 			{/* Open EMail Modal */}
 			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
 				<Box sx={BoxModalStyle} style={{overflowX: ' auto', padding: 4}}>
-					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
-					<Email Ticketid={viewEmail} userData={selectedTicket} onClose={handleEmailClose} />
+					<Card sx={{p: 0, m: 0}}>
+						<CardHeader
+							// sx={{py: '0 !important'}}
+							title='Select Email Template :'
+							action={
+								<IconButton onClick={handleEmailClose}>
+									<CloseIcon />
+								</IconButton>
+							}
+						/>
+						<Divider />
+
+						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
+							<Email Ticketid={viewEmail} userData={selectedTicket} onClose={handleEmailClose} />
+						</CardContent>
+					</Card>
 				</Box>
 			</Modal>
 

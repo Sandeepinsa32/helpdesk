@@ -1,14 +1,30 @@
 import React, {useState} from 'react';
-import {Grid, Button, Box, Paper} from '@mui/material';
+
+import {Grid, Button} from '@mui/material';
 // @mat_icon
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import {BASEURL, successToast} from '../../utils/Utils';
+const RenderSelectedEmail = ({data}) => {
+	const {
+		selectedEmailTemplate,
+		Ticketid,
+		pnrData,
+		onClose,
+		newBookingFieldList,
+		setNewBookingFieldList,
+		exchangeFieldList,
+		setExchangeFieldList,
+		refundFieldList,
+		setRefundFieldList,
+		futureCreditFieldList,
+		setFutureCreditFieldList,
+		userData,
+	} = data;
 
-const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordData, Ticketid, onClose}) => {
-	console.log(selectedEmailTemplate, pnrData);
 	const [isPreviewed, setIsPreviewed] = useState(true);
-	const grandTotal = '100';
+
+	// For Displaying Selected EMail  ---Dangersly setting HTML
 	function renderingEmail() {
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
@@ -19,10 +35,11 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 				return <span dangerouslySetInnerHTML={{__html: Refund}} />;
 			case 'futureCredit':
 				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
-
+			default:
 				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
 		}
 	}
+	//  for get variable ref. of selected email HTML
 	function getSelectedEmail() {
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
@@ -48,9 +65,9 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 		return today;
 	}
 
-	function userTabelData1() {
+	function newBookingFiledValues() {
 		var tableString = '';
-		Tabledata.forEach((x) => {
+		newBookingFieldList.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
 
 			if (isEmpty) {
@@ -71,9 +88,9 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 
 		return tableString;
 	}
-	function userTabelData2() {
+	function newExchangeFieldValues() {
 		var tableString = '';
-		Tabledata.forEach((x) => {
+		exchangeFieldList.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
 
 			if (isEmpty) {
@@ -92,9 +109,9 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 
 		return tableString;
 	}
-	function userTabelData3() {
+	function newRefundFieldValues() {
 		var tableString = '';
-		Tabledata.forEach((x) => {
+		refundFieldList.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
 
 			if (isEmpty) {
@@ -112,9 +129,9 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 
 		return tableString;
 	}
-	function userTabelData4() {
+	function newFutureCreditFieldValues() {
 		var tableString = '';
-		Tabledata.forEach((x) => {
+		futureCreditFieldList.forEach((x) => {
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
 
 			if (isEmpty) {
@@ -133,6 +150,19 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
 
 		return tableString;
 	}
+	const handleSendEmail = async () => {
+		axios
+			.post(BASEURL + '/ticket/email', {
+				data: getSelectedEmail(),
+				ticketId: Ticketid,
+			})
+			.then((res) => {
+				console.log(res);
+				successToast('Email sent Successfully');
+				onClose();
+			})
+			.catch((e) => console.log(e));
+	};
 	var newBooking = `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -241,7 +271,7 @@ const RenderSelectedEmail = ({selectedEmailTemplate, Tabledata, pnrData, recordD
             <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" align="left">$241.52</td>
           </tr>
            -->
-         ${userTabelData1()}
+         ${newBookingFiledValues()}
         </table>
       </div>
       
@@ -1052,7 +1082,7 @@ Once completed your agent will notify you and you'll be able to access the reser
   <tbody id='appendCHildHere' >
     
 
-    ${userTabelData2()}
+    ${newExchangeFieldValues()}
     <tr>
       <td class="tableHeading" scope="col" name="firstname">Kelly</td>
       <td class="tableHeading" scope="col" name="lastname" >D	</td>
@@ -1210,299 +1240,6 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     </div>
       
     </center >`;
-
-	var futureCredit = `<center>
-		<style>
-    table.tableoutter {
-
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  table-layout: fixed;
-     
-}
-
-      
-
-table.tableoutter tr {
-  background-color: #f8f8f8;  
-  padding: .35em;
-  text-align:center;
-}
-
-table.tableoutter tr th{
-  background-color: #fff !important;  
-  border: 0px solid #fff !important;
-}
-table.tableoutter th,
-table.tableoutter td {
-  padding: .625em;
-  font-size:14px;
-  color:#0B4173;
-   font-weight:600;
-
-}
-
-table.tableoutter th {
-  font-size: 14px;
-  color:#0B4173;
-  font-weight:600;
-  text-transform: capitalize;
-}
-
-@media screen and (max-width: 600px) {
-  table.tableoutter {
-    border: 0;
-  }
-
-
-  
-  table.tableoutter thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-  
-  table.tableoutter tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: .625em;
-  }
-  
-  table.tableoutter td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: .8em;
-    text-align: right;
-  }
-  
-  table.tableoutter td::before {
-    /*
-    * aria-label has no advantage, it won't be read inside a table
-    content: attr(aria-label);
-    */
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
-  table.tableoutter td:last-child {
-    border-bottom: 0;
-  }
-}
-
-
-
-</style>
-    
-    <div style="width:80vw;background:#ffffff; padding:p-x 10px;font-weight:500; text-align:left;  font-family:Calibri, sans-serif;">
-		
-      <p style="font-size:13px; line-height:16px; color:#0B4173; margin:0px;border-radius:3px;padding:10px 5px;  font-family:Calibri, sans-serif;">
-        By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
-      </p>
-      
-		<hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
-		  <h1 style="font-size:14px; text-align:right; line-height:22px; font-weight:normal; color:#0B4173;font-family:sans-serif;">
-			  Trip Help Desk Powered By <b style="color: #0B4173;font-size: 16px;">Valalto Inc.</b>	
-         </h1>
-          
-		<div style="display:flex;justify-content:space-between;">
-		
-  
-            <h1 style="color: #0B4173;font-size: 16px; line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; ">
-                Invoice
-              
-            </h1>
-            <h1 style=" line-height:22px; font-weight:bold;margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px; ">
-                Confirmation :
-            </h1>
-            <h1 style="line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px;">
-               THDFRN2203011
-            </h1>
-	    </div>
-		
-		
-		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color: #0B4173;margin:0;height:fit-content;font-family:sans-serif; ">
-<!--    Wed, May 11, 2022      -->
-         ${currentDate()}
-        </h1>
-		<h1 style="font-size:14px; line-height:22px; font-weight:600; color: #0B4173;font-family:Arial; ">
-   Requested Service: Cancellation of Airline Ticket For Credi
-        </h1>
-      
-		
-      
-       <p style="font-size:12px; line-height:16px; color:#0B4173; margin-bottom:30px; font-family: Arial;">
-       Your cancelation for future credit is in process and will be submitted to the airlines to finalize. Once completed, you'll have a credit with the airlines for the amount. (credit and rebooking fees are subject to the ailrine policy). You can contact us or the airlines directly when it's time to use your airline credit - Trip Help Desk is more than happy to help!
-		 
-      </p>
-      
-
-    
-<table class="tableoutter">
-  
-  <thead class=" tableHead ">
-    <tr>
-      <th class="tableHeading" scope="col" name="firstname"> First Name</th>
-       <th class="tableHeading" scope="col" name="middlename"> Middle  Name</th>
-       <th class="tableHeading" scope="col" name="lasstname"> Last Name</th>
-      
-       <th scope="col"  class="tableHeading" name="price">Confirmation</th>
-      
-    </tr>
-  </thead>
-  <tbody id='appendCHildHere' >
-    
-      ${userTabelData4()}
-   
-    <tr>
-      <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
-       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
-       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
-      
-      <td class="tableHeading" scope="col" name="lastname" >DJT2JJ</td>
-       
-       
-      
-    </tr>
-     	
-  
-  </tbody>
-</table>
-
-      
-      
-      <table class="tableoutter" style="margin-top:1rem;display: inline-block;border: 0; ">
-  
-    
-
-   
-    <tr>
-      <td style=""   name="firstname">Airline : 	</td>
-      <td  style=" width:100px"  name="lastname" ></td>
-       
-       
-      
-    </tr>
-          <tr>
-      <td style="" name="firstname">Credit :	</td>
-      <td style="  name="lastname" >$	</td>
-       
-       
-      
-    </tr>  <tr>
-      <td style=""  name="firstname">Valid Till :	</td>
-      <td style=""  name="lastname" ></td>
-       
-       
-      
-    </tr>
-     	
- 
-</table>
-      
-      
-
-     
-<div style="display:flex;justify-content:center; padding:15px">
-${
-	isPreviewed
-		? `
-		<a
-			style='display:inline-block;
-    border: 0;cursor: pointer;
-    color: white;
-    text-decoration:none;
-
-    font-size: 16px;
-    background-color: transparent;
-    background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
-    border-radius: 50px 50px 50px 50px;
-    	
-    padding: 10px 30px; font-family:sans-serif;'>
-			Authorize
-		</a>`
-		: `	<a
-			style='display:inline-block;
-            border: 0;cursor: pointer;
-            color: white;
-            text-decoration:none;
-            font-size: 16px;
-            background-color: transparent;
-            background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
-            border-radius: 50px 50px 50px 50px;    	
-            padding: 10px 30px; font-family:sans-serif;'
-			href='https://triphelpdesk.netlify.app/auth/validateToken'
-			target='_blank'>
-			Authorize
-		</a>`
-}
-</div>
-          
-       
-
-          
-      
-      <p style="font-size:12px; line-height:18px; font-weight:500;color: #0B4173;margin-bottom:10px;margin:0px;border-radius:3px;padding:10px 5px; font-family:Calibri, sans-serif;">
-       
-        <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><u><a href="tel:8662701413"> 866-270-1413</a></u></b> or email 
-        <b><u><a href = "mailto:info@triphelpdesk.com">info@triphelpdesk.com </a></u></b> 
-<br/>
-<br/>
- <b>Changes and Cancellations :  </b>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more. 
-<br/>
-<br/>
-<b>24 Hour Cancelation Policy:</b> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
-<br/>
-<br/>
-Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
-      </p>
-      
-       </div>
-
-
-       <div>
-         
-         
-         
-
-    
-        
-       
-       </div>
-
-
-
-
-
-
-
-
-
-
-
-    <hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
-      
-      <p style=" line-height:18px;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
-        &copy; Copyright 2022 
-        <a href="https://valalto.com/" 
-           style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
-          Valalto Inc.</a>, All Rights Reserved.
-      </p>
-      
-     
-      
-    </div>
-      
-    </center >`;
-
 	var Refund = `<center>
 		<style>
     table.tableoutter {
@@ -1653,7 +1390,7 @@ table.tableoutter th {
   <tbody id='appendCHildHere' >
     
 
-		${userTabelData3()}
+		${newRefundFieldValues()}
 
      <!-- 
     <tr>
@@ -1807,25 +1544,301 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     </div>
       
     </center >`;
-	const handleSendEmail = async () => {
-		axios
-			.post(BASEURL + '/ticket/email', {
-				data: getSelectedEmail(),
-				ticketId: Ticketid,
-			})
-			.then((res) => {
-				console.log(res);
-				successToast('Email sent Successfully');
-				onClose();
-			})
-			.catch((e) => console.log(e));
-	};
+	var futureCredit = `<center>
+		<style>
+    table.tableoutter {
+
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+     
+}
+
+      
+
+table.tableoutter tr {
+  background-color: #f8f8f8;  
+  padding: .35em;
+  text-align:center;
+}
+
+table.tableoutter tr th{
+  background-color: #fff !important;  
+  border: 0px solid #fff !important;
+}
+table.tableoutter th,
+table.tableoutter td {
+  padding: .625em;
+  font-size:14px;
+  color:#0B4173;
+   font-weight:600;
+
+}
+
+table.tableoutter th {
+  font-size: 14px;
+  color:#0B4173;
+  font-weight:600;
+  text-transform: capitalize;
+}
+
+@media screen and (max-width: 600px) {
+  table.tableoutter {
+    border: 0;
+  }
+
+
+  
+  table.tableoutter thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table.tableoutter tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table.tableoutter td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  
+  table.tableoutter td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table.tableoutter td:last-child {
+    border-bottom: 0;
+  }
+}
+
+
+
+</style>
+    
+    <div style="width:80vw;background:#ffffff; padding:p-x 10px;font-weight:500; text-align:left;  font-family:Calibri, sans-serif;">
+		
+      <p style="font-size:13px; line-height:16px; color:#0B4173; margin:0px;border-radius:3px;padding:10px 5px;  font-family:Calibri, sans-serif;">
+        By approving via email you are agreeing to the terms of invoice and authorize Trip Help Desk powered by Valalto to complete your "Requested Service".  Your authorization is for the use of this invoice and for no other purpose. 
+      </p>
+      
+		<hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
+		  <h1 style="font-size:14px; text-align:right; line-height:22px; font-weight:normal; color:#0B4173;font-family:sans-serif;">
+			  Trip Help Desk Powered By <b style="color: #0B4173;font-size: 16px;">Valalto Inc.</b>	
+         </h1>
+          
+		<div style="display:flex;justify-content:space-between;">
+		
+  
+            <h1 style="color: #0B4173;font-size: 16px; line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; ">
+                Invoice
+              
+            </h1>
+            <h1 style=" line-height:22px; font-weight:bold;margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px; ">
+                Confirmation :
+            </h1>
+            <h1 style="line-height:22px; font-weight:bold; margin:0;height:fit-content;font-family: sans-serif; color: #0B4173;font-size: 16px;">
+               THDFRN2203011
+            </h1>
+	    </div>
+		
+		
+		 <h1 style="font-size:14px; line-height:22px; font-weight:bold; color: #0B4173;margin:0;height:fit-content;font-family:sans-serif; ">
+<!--    Wed, May 11, 2022      -->
+         ${currentDate()}
+        </h1>
+		<h1 style="font-size:14px; line-height:22px; font-weight:600; color: #0B4173;font-family:Arial; ">
+   Requested Service: Cancellation of Airline Ticket For Credi
+        </h1>
+      
+		
+      
+       <p style="font-size:12px; line-height:16px; color:#0B4173; margin-bottom:30px; font-family: Arial;">
+       Your cancelation for future credit is in process and will be submitted to the airlines to finalize. Once completed, you'll have a credit with the airlines for the amount. (credit and rebooking fees are subject to the ailrine policy). You can contact us or the airlines directly when it's time to use your airline credit - Trip Help Desk is more than happy to help!
+		 
+      </p>
+      
+
+    
+<table class="tableoutter">
+  
+  <thead class=" tableHead ">
+    <tr>
+      <th class="tableHeading" scope="col" name="firstname"> First Name</th>
+       <th class="tableHeading" scope="col" name="middlename"> Middle  Name</th>
+       <th class="tableHeading" scope="col" name="lasstname"> Last Name</th>
+      
+       <th scope="col"  class="tableHeading" name="price">Confirmation</th>
+      
+    </tr>
+  </thead>
+  <tbody id='appendCHildHere' >
+    
+      ${newFutureCreditFieldValues()}
+   
+    <tr>
+      <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
+       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
+       <td class="tableHeading" scope="col" name="firstname">Keith Hicks	</td>
+      
+      <td class="tableHeading" scope="col" name="lastname" >DJT2JJ</td>
+       
+       
+      
+    </tr>
+     	
+  
+  </tbody>
+</table>
+
+      
+      
+      <table class="tableoutter" style="margin-top:1rem;display: inline-block;border: 0; ">
+  
+    
+
+   
+    <tr>
+      <td style=""   name="firstname">Airline : 	</td>
+      <td  style=" width:100px"  name="lastname" ></td>
+       
+       
+      
+    </tr>
+          <tr>
+      <td style="" name="firstname">Credit :	</td>
+      <td style="  name="lastname" >$	</td>
+       
+       
+      
+    </tr>  <tr>
+      <td style=""  name="firstname">Valid Till :	</td>
+      <td style=""  name="lastname" ></td>
+       
+       
+      
+    </tr>
+     	
+ 
+</table>
+      
+      
+
+     
+<div style="display:flex;justify-content:center; padding:15px">
+${
+	isPreviewed
+		? `
+		<a
+			style='display:inline-block;
+    border: 0;cursor: pointer;
+    color: white;
+    text-decoration:none;
+
+    font-size: 16px;
+    background-color: transparent;
+    background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
+    border-radius: 50px 50px 50px 50px;
+    	
+    padding: 10px 30px; font-family:sans-serif;'>
+			Authorize
+		</a>`
+		: `	<a
+			style='display:inline-block;
+            border: 0;cursor: pointer;
+            color: white;
+            text-decoration:none;
+            font-size: 16px;
+            background-color: transparent;
+            background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
+            border-radius: 50px 50px 50px 50px;    	
+            padding: 10px 30px; font-family:sans-serif;'
+			href='https://triphelpdesk.netlify.app/auth/validateToken'
+			target='_blank'>
+			Authorize
+		</a>`
+}
+</div>
+          
+       
+
+          
+      
+      <p style="font-size:12px; line-height:18px; font-weight:500;color: #0B4173;margin-bottom:10px;margin:0px;border-radius:3px;padding:10px 5px; font-family:Calibri, sans-serif;">
+       
+        <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><u><a href="tel:8662701413"> 866-270-1413</a></u></b> or email 
+        <b><u><a href = "mailto:info@triphelpdesk.com">info@triphelpdesk.com </a></u></b> 
+<br/>
+<br/>
+ <b>Changes and Cancellations :  </b>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more. 
+<br/>
+<br/>
+<b>24 Hour Cancelation Policy:</b> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
+<br/>
+<br/>
+Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
+      </p>
+      
+       </div>
+
+
+       <div>
+         
+         
+         
+
+    
+        
+       
+       </div>
+
+
+
+
+
+
+
+
+
+
+
+    <hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
+      
+      <p style=" line-height:18px;  margin-bottom:10px; color: #0B4173;font-size: 14px;">
+        &copy; Copyright 2022 
+        <a href="https://valalto.com/" 
+           style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
+          Valalto Inc.</a>, All Rights Reserved.
+      </p>
+      
+     
+      
+    </div>
+      
+    </center >`;
 
 	return (
 		<>
-			<Paper elevation={1}>
-				<Box sx={{m: 0, p: 2}}>{renderingEmail()} </Box>
-			</Paper>
+			{renderingEmail()}
 
 			<Grid container spacing={1} sx={{m: 0, p: 1}}>
 				<Grid item xs={6} md={10}></Grid>

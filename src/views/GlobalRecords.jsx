@@ -423,10 +423,22 @@ export default function SearchRecord() {
 						borderRadius: '1rem',
 						p: 4,
 					}}>
-					<IconButton onClick={() => setOpenEmailModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
-						<CloseIcon />
-					</IconButton>
-					<Email Ticketid={viewEmail} userData={userData} />
+					<Card sx={{p: 0, m: 0}}>
+						<CardHeader
+							// sx={{py: '0 !important'}}
+							title='Select Email Template :'
+							action={
+								<IconButton onClick={() => setOpenEmailModal(false)}>
+									<CloseIcon />
+								</IconButton>
+							}
+						/>
+						<Divider />
+
+						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
+							<Email Ticketid={viewEmail} userData={userData} onClose={() => setOpenEmailModal(false)} />
+						</CardContent>
+					</Card>
 				</Box>
 			</Modal>
 		</>
