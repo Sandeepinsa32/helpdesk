@@ -7,6 +7,7 @@ import UpdateRecord from './components/UpdateRecord';
 import ViewLog from './components/ViewLog';
 import RequestCharge from './components/modal/RequestCharge';
 import AirlineConfirmation from './components/modal/AirlineConfirmation';
+import AuthDetail from './components/modal/AuthDetail';
 
 import {BASEURL, createQueryString, successToast, errorToast} from '../utils/Utils';
 import axios from 'axios';
@@ -35,6 +36,7 @@ import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import PaymentIcon from '@mui/icons-material/Payment';
 import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
 
 export const Transaction = () => {
 	const [myRecords, setMyRecords] = useState([]);
@@ -44,6 +46,7 @@ export const Transaction = () => {
 	const [openLog, setOpenLog] = useState(false);
 	const [chargeModelOpen, setChargeModelOpen] = useState(false);
 	const [airlineModelOpen, setAirlineModelOpen] = useState(false);
+	const [authorizeDetailModelOpen, setAuthorizeDetailModelOpen] = useState(false);
 
 	const [openEmail, setOpenEmail] = useState(false);
 	const [viewEmail, setViewEmail] = useState(false);
@@ -388,6 +391,17 @@ export const Transaction = () => {
 															<SupportAgentIcon />
 														</IconButton>
 													</Tooltip>
+													{/* DoucSIgn*/}
+													<Tooltip title='Authorize Detail'>
+														<IconButton
+															aria-label='Authorize Detail'
+															onClick={() => {
+																setSelectedTicket(row);
+																setAuthorizeDetailModelOpen(true);
+															}}>
+															<PlaylistAddCheckCircleIcon />
+														</IconButton>
+													</Tooltip>
 												</TableCell>
 											</TableRow>
 										))
@@ -507,6 +521,27 @@ export const Transaction = () => {
 						<CloseIcon />
 					</IconButton>
 					<AirlineConfirmation Ticketid={viewEmail} id={selectedTicket} onClose={() => setAirlineModelOpen(false)} />
+				</Box>
+			</Modal>
+
+			{/* Open Authorize Detail Modal */}
+			<Modal open={authorizeDetailModelOpen} onClose={() => setAuthorizeDetailModelOpen(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box sx={BoxModalStyle} style={{paddingTop: 0}}>
+					<Card sx={{p: 0, m: 0}}>
+						<CardHeader
+							title='Authorize Detail'
+							action={
+								<IconButton onClick={() => setAuthorizeDetailModelOpen(false)}>
+									<CloseIcon />
+								</IconButton>
+							}
+						/>
+						<Divider />
+
+						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
+							<AuthDetail Ticketid={viewEmail} TicketData={selectedTicket} onClose={() => setAirlineModelOpen(false)} />
+						</CardContent>
+					</Card>
 				</Box>
 			</Modal>
 		</>
