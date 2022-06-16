@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
-import {Box, Grid, TextField, Button, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
+import React, {useEffect, useState} from 'react';
+import {Box, Grid, TextField, Button, InputAdornment, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import RenderSelectedEmail from './components/RenderSelectedEmail';
 import axios from 'axios';
-
+import {useFormik, Formik} from 'formik';
+import * as Yup from 'yup';
 import RenderEmailField from './components/RenderEmailField';
+import Textfield from './components/FormField/Textfield';
 
 import {BASEURL, createQueryString, errorToast, successToast} from '../utils/Utils';
 
@@ -129,6 +131,25 @@ const Email = ({Ticketid, userData, onClose}) => {
 				console.log(e.response.data.message);
 			});
 	};
+	const formik = useFormik({
+		initialValues: {
+			name: '',
+			email: userData.email,
+			ccLastDigit: '',
+			totalAmount: '',
+		},
+
+		validationSchema: Yup.object({
+			//basic
+			name: Yup.string().max(15, 'Must be 15 characters or less'),
+			email: Yup.string().email('Invalid email address'),
+			ccLastDigit: Yup.string('input must consist if number').max(4, 'please enter only last 4 digits of card').min(4, 'please enter only last 4 digits of card'),
+			totalAmount: Yup.number('input must consist if number'),
+		}),
+		onSubmit: () => {
+			console.log(formik.values);
+		},
+	});
 	const data = {
 		selectedEmailTemplate,
 		Ticketid,
@@ -143,75 +164,115 @@ const Email = ({Ticketid, userData, onClose}) => {
 		futureCreditFieldList,
 		setFutureCreditFieldList,
 		userData,
+		formik,
 	};
 
 	return (
 		<>
-			<Grid container spacing={1} sx={{m: 0, p: 1}}>
-				{/*  Email template  */}
-				<Grid item md={4} sx={{pr: 1}}>
-					<FormControl required fullWidth>
-						<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
-						<Select
-							size='small'
-							labelId='Email-template-Dropdown-label	'
-							id='Email-template-Dropdown'
-							value={selectedEmailTemplate}
-							onChange={handleEmailTemplateChange}
-							fullWidth
-							name='emailTemplate'
-							label='Email Template'>
-							<MenuItem value='newBooking'>New Booking Confirmation </MenuItem>
-							<MenuItem value='exchange'>Exchange</MenuItem>
-							<MenuItem value='refund'>Refund</MenuItem>
-							<MenuItem value='futureCredit'>Future Credit</MenuItem>
-							{/* <MenuItem value='5'>Add On </MenuItem> */}
-						</Select>
-					</FormControl>
-				</Grid>
-				<Grid item md={6} sx={{pr: 1}}>
-					<TextField
-						id='outlined-multiline-flexible'
-						multiline
-						maxRows={4}
-						name='PnrConverter'
-						label='PnrConverter'
-						size='small'
-						fullWidth={true}
-						onChange={(e) => {
-							setPnrValue(e.target.value);
-						}}
-						value={pnrValue}
-					/>
-				</Grid>
+			<Formik>
+				<form onSubmit={formik.handleSubmit}>
+					<Grid container spacing={1} sx={{m: 0, p: 1}}>
+						{/*  Email template  */}
+						<Grid item md={4} sx={{pr: 1}}>
+							<FormControl required fullWidth>
+								<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
+								<Select
+									size='small'
+									labelId='Email-template-Dropdown-label	'
+									id='Email-template-Dropdown'
+									value={selectedEmailTemplate}
+									onChange={handleEmailTemplateChange}
+									fullWidth
+									name='emailTemplate'
+									label='Email Template'>
+									<MenuItem value='newBooking'>New Booking Confirmation </MenuItem>
+									<MenuItem value='exchange'>Exchange</MenuItem>
+									<MenuItem value='refund'>Refund</MenuItem>
+									<MenuItem value='futureCredit'>Future Credit</MenuItem>
+									{/* <MenuItem value='5'>Add On </MenuItem> */}
+								</Select>
+							</FormControl>
+						</Grid>
+						<Grid item md={6} sx={{pr: 1}}>
+							<TextField
+								id='outlined-multiline-flexible'
+								multiline
+								maxRows={4}
+								name='PnrConverter'
+								label='PnrConverter'
+								size='small'
+								fullWidth={true}
+								onChange={(e) => {
+									setPnrValue(e.target.value);
+								}}
+								value={pnrValue}
+							/>
+						</Grid>
 
-				<Grid item xs={6} md={2}>
-					<Button onClick={handlePnrConverter} variant='contained'>
-						Convert
-					</Button>
-				</Grid>
+						<Grid item xs={6} md={2}>
+							<Button onClick={handlePnrConverter} variant='contained'>
+								Convert
+							</Button>
+						</Grid>
 
-				<Grid item md={3} sx={{mt: 2}}>
-					<TextField name='email' label='Email' fullWidth={true} value={userData.email} />
-				</Grid>
-				<Grid item md={3} sx={{mt: 2}}>
-					<TextField name='TotalAmount' label='Total Amount' fullWidth={true} />
-				</Grid>
-				<Grid item md={3} sx={{mt: 2}}>
-					<TextField name='cchName' label='Card Holder Name ' fullWidth={true} />
-				</Grid>
-				<Grid item md={3} sx={{mt: 2}}>
-					<TextField name='cLastDigit' label='Card Last Digit' fullWidth={true} />
-				</Grid>
-			</Grid>
-			<Box sx={{p: 1}}>
-				<RenderEmailField data={data} />
-			</Box>
+						<Grid item md={3} sx={{mt: 2}}>
+							<Textfield
+								name='email'
+								label='Email'
+								value={formik.values.email}
+								error={Boolean(formik.touched.email && formik.errors.email)}
+								helperText={formik.touched.email && formik.errors.email}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+							/>
+						</Grid>
+						<Grid item md={3} sx={{mt: 2}}>
+							<Textfield
+								name='totalAmount'
+								label='Total Amount'
+								value={formik.values.totalAmount}
+								error={Boolean(formik.touched.totalAmount && formik.errors.totalAmount)}
+								helperText={formik.touched.totalAmount && formik.errors.totalAmount}
+								onBlur={formik.handleBlur}
+								InputProps={{
+									startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+								}}
+								onChange={formik.handleChange}
+							/>
+						</Grid>
+						<Grid item md={3} sx={{mt: 2}}>
+							<Textfield
+								name='name'
+								label='Card Holder Name '
+								value={formik.values.name}
+								error={Boolean(formik.touched.name && formik.errors.name)}
+								helperText={formik.touched.name && formik.errors.name}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+							/>
+						</Grid>
+						<Grid item md={3} sx={{mt: 2}}>
+							<Textfield
+								name='cLastDigit'
+								label='Card Last Digit'
+								value={formik.values.cLastDigit}
+								error={Boolean(formik.touched.cLastDigit && formik.errors.cLastDigit)}
+								helperText={formik.touched.cLastDigit && formik.errors.cLastDigit}
+								onBlur={formik.handleBlur}
+								onChange={formik.handleChange}
+							/>
+						</Grid>
+					</Grid>
+					<Box sx={{p: 1}}>
+						<RenderEmailField data={data} />
+					</Box>
 
-			{/* <Box sx={{m: 1}}>Genrated Email Preview : {renderEmail()}</Box> */}
-			<Box sx={{m: 1}}>
-				<RenderSelectedEmail data={data} />
-			</Box>
+					{/* <Box sx={{m: 1}}>Genrated Email Preview : {renderEmail()}</Box> */}
+					<Box sx={{m: 1}}>
+						<RenderSelectedEmail data={data} />
+					</Box>
+				</form>
+			</Formik>
 		</>
 	);
 };

@@ -20,7 +20,9 @@ const RenderSelectedEmail = ({data}) => {
 		futureCreditFieldList,
 		setFutureCreditFieldList,
 		userData,
+		formik,
 	} = data;
+	const {submitForm} = formik;
 
 	const [isPreviewed, setIsPreviewed] = useState(true);
 
@@ -151,17 +153,18 @@ const RenderSelectedEmail = ({data}) => {
 		return tableString;
 	}
 	const handleSendEmail = async () => {
-		axios
-			.post(BASEURL + '/ticket/email', {
-				data: getSelectedEmail(),
-				ticketId: Ticketid,
-			})
-			.then((res) => {
-				console.log(res);
-				successToast('Email sent Successfully');
-				onClose();
-			})
-			.catch((e) => console.log(e));
+		alert('send EMail btn is disable');
+		// axios
+		// 	.post(BASEURL + '/ticket/email', {
+		// 		data: getSelectedEmail(),
+		// 		ticketId: Ticketid,
+		// 	})
+		// 	.then((res) => {
+		// 		console.log(res);
+		// 		successToast('Email sent Successfully');
+		// 		onClose();
+		// 	})
+		// 	.catch((e) => console.log(e));
 	};
 	var newBooking = `<!DOCTYPE html>
 <html lang="en">
@@ -1844,7 +1847,13 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
 				<Grid item xs={6} md={10}></Grid>
 
 				<Grid item xs={6} md={2} sx={{mb: 3}}>
-					<Button onClick={handleSendEmail} variant='contained' endIcon={<SendIcon />}>
+					<Button
+						onClick={() => {
+							submitForm();
+							handleSendEmail();
+						}}
+						variant='contained'
+						endIcon={<SendIcon />}>
 						Send Mail
 					</Button>
 				</Grid>
