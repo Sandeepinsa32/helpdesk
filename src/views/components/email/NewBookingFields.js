@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEf} from 'react';
 import {Avatar, Box, Card, CardContent, Grid, InputAdornment, TextField, IconButton, Modal, Button, Paper, FormControl, Select, InputLabel, MenuItem} from '@mui/material';
 import RenderSelectedEmail from '../RenderSelectedEmail';
 import axios from 'axios';
@@ -20,13 +20,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const FutureCredit = ({inputList4, setInputList4}) => {
+const NewBooking = ({inputList, setInputList}) => {
 	const [totalAmt, setTotalAmt] = useState(0);
+	const [pnrData, setPnrData] = useState([]);
 
 	const calculateTotalAmount = () => {
 		let Amount = [];
-		inputList4.map((x, i) => {
-			Amount.push(inputList4[i].price);
+		inputList.map((x, i) => {
+			Amount.push(inputList[i].price);
 		});
 
 		var total = 0;
@@ -38,33 +39,45 @@ const FutureCredit = ({inputList4, setInputList4}) => {
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
-		const list = [...inputList4];
+		const list = [...inputList];
 		list[index][name] = value;
-		setInputList4(list);
+		setInputList(list);
 	};
 
 	// handle click event of the Remove button
 	const handleRemoveClick = (index) => {
-		var list = [...inputList4];
+		var list = [...inputList];
 		list.splice(index, 1);
-		setInputList4(list);
+		setInputList(list);
 	};
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList4([
-			...inputList4,
+		setInputList([
+			...inputList,
 			{
 				firstName: '',
 				middleName: '',
 				lastName: '',
+				ticket: '',
 				confirmation: '',
+				price: '',
 			},
 		]);
-		// setInputList4([...inputList4, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
 		calculateTotalAmount();
 	};
 
+	function clean(obj) {
+		obj.map((x, i) => {
+			for (var propName in x) {
+				if (obj[i][propName] === null || obj[i][propName] === undefined || obj[i][propName] === '') {
+					delete obj[i][propName];
+				}
+			}
+		});
+
+		return obj;
+	}
 	return (
 		<>
 			<Box sx={{mt: 2, p: 1}}>
@@ -72,13 +85,13 @@ const FutureCredit = ({inputList4, setInputList4}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['First Name', 'Middle Name', 'last Name', 'Confirmation', 'Action'].map((th) => (
+								{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Confirmation', 'Price', 'Action'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{inputList4.map((x, i) => {
+							{inputList.map((x, i) => {
 								return (
 									<TableRow
 										key={i}
@@ -96,7 +109,7 @@ const FutureCredit = ({inputList4, setInputList4}) => {
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList4[i].firstName}
+												value={inputList[i].firstName}
 											/>
 										</TableCell>
 										<TableCell>
@@ -110,7 +123,7 @@ const FutureCredit = ({inputList4, setInputList4}) => {
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList4[i].middleName}
+												value={inputList[i].middleName}
 											/>
 										</TableCell>
 										<TableCell>
@@ -124,24 +137,56 @@ const FutureCredit = ({inputList4, setInputList4}) => {
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList4[i].lastName}
+												value={inputList[i].lastName}
+											/>
+										</TableCell>
+										<TableCell>
+											<TextField
+												required
+												name='ticket'
+												label='Ticket'
+												fullWidth
+												size='small'
+												autoComplete='ticket'
+												onChange={(e) => {
+													handleInputChange(e, i);
+												}}
+												value={inputList[i].ticket}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
 												name='confirmation'
+												size='small'
 												label='Confirmation'
 												fullWidth
-												size='small'
+												autoComplete='confirmation'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList4[i].ticket}
+												value={inputList[i].confirmation}
 											/>
 										</TableCell>
-
-										{inputList4.length !== 1 && (
+										<TableCell>
+											<TextField
+												required
+												name='price'
+												size='small'
+												label='Price'
+												fullWidth
+												autoComplete='price'
+												InputProps={{
+													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+												}}
+												onChange={(e) => {
+													handleInputChange(e, i);
+													calculateTotalAmount();
+												}}
+												value={inputList[i].price}
+											/>
+										</TableCell>
+										{inputList.length !== 1 && (
 											<Grid container>
 												<Grid item xs={6} md={2}>
 													<Button startIcon={<DeleteOutlineIcon color='error' fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1, mt: '1.8rem'}}></Button>
@@ -156,7 +201,7 @@ const FutureCredit = ({inputList4, setInputList4}) => {
 				</TableContainer>
 			</Box>
 			<Grid container spacing={1} sx={{m: 0, p: 1}}>
-				{inputList4.length < 9 && (
+				{inputList.length < 9 && (
 					<Grid item xs={6} md={12} sx={{pr: 1}}>
 						<Button startIcon={<AddIcon fontSize='small' />} fullWidth={true} onClick={handleAddClick} sx={{mr: 1, pr: 1}} variant='outlined'>
 							Add new
@@ -183,7 +228,7 @@ const FutureCredit = ({inputList4, setInputList4}) => {
 	);
 };
 
-export default FutureCredit;
+export default NewBooking;
 
 const style = {
 	position: 'absolute',

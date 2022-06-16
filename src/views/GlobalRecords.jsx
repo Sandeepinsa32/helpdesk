@@ -426,7 +426,7 @@ export default function SearchRecord() {
 					<IconButton onClick={() => setOpenEmailModal(false)} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<Email Ticketid={viewEmail} id={userData} />
+					<Email Ticketid={viewEmail} userData={userData} />
 				</Box>
 			</Modal>
 		</>

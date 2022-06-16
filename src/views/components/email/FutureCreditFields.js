@@ -20,13 +20,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const Exchange = ({inputList2, setInputList2}) => {
+const FutureCredit = ({inputList, setInputList}) => {
 	const [totalAmt, setTotalAmt] = useState(0);
 
 	const calculateTotalAmount = () => {
 		let Amount = [];
-		inputList2.map((x, i) => {
-			Amount.push(inputList2[i].price);
+		inputList.map((x, i) => {
+			Amount.push(inputList[i].price);
 		});
 
 		var total = 0;
@@ -38,31 +38,30 @@ const Exchange = ({inputList2, setInputList2}) => {
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
-		const list = [...inputList2];
+		const list = [...inputList];
 		list[index][name] = value;
-		setInputList2(list);
+		setInputList(list);
 	};
 
 	// handle click event of the Remove button
 	const handleRemoveClick = (index) => {
-		var list = [...inputList2];
+		var list = [...inputList];
 		list.splice(index, 1);
-		setInputList2(list);
+		setInputList(list);
 	};
 
 	// handle click event of the Add button
 	const handleAddClick = () => {
-		setInputList2([
-			...inputList2,
+		setInputList([
+			...inputList,
 			{
 				firstName: '',
 				middleName: '',
 				lastName: '',
-				ticket: '',
-				price: '',
+				confirmation: '',
 			},
 		]);
-		// setInputList2([...inputList2, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
+		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
 		calculateTotalAmount();
 	};
 
@@ -73,13 +72,13 @@ const Exchange = ({inputList2, setInputList2}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Price', 'Action'].map((th) => (
+								{['First Name', 'Middle Name', 'last Name', 'Confirmation', 'Action'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
 						</TableHead>
 						<TableBody>
-							{inputList2.map((x, i) => {
+							{inputList.map((x, i) => {
 								return (
 									<TableRow
 										key={i}
@@ -97,7 +96,7 @@ const Exchange = ({inputList2, setInputList2}) => {
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList2[i].firstName}
+												value={inputList[i].firstName}
 											/>
 										</TableCell>
 										<TableCell>
@@ -111,7 +110,7 @@ const Exchange = ({inputList2, setInputList2}) => {
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList2[i].middleName}
+												value={inputList[i].middleName}
 											/>
 										</TableCell>
 										<TableCell>
@@ -125,43 +124,24 @@ const Exchange = ({inputList2, setInputList2}) => {
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList2[i].lastName}
+												value={inputList[i].lastName}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
-												name='ticket'
-												label='Ticket'
+												name='confirmation'
+												label='Confirmation'
 												fullWidth
 												size='small'
-												autoComplete='ticket'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList2[i].ticket}
+												value={inputList[i].ticket}
 											/>
 										</TableCell>
 
-										<TableCell>
-											<TextField
-												required
-												name='price'
-												size='small'
-												label='Price'
-												fullWidth
-												autoComplete='price'
-												InputProps={{
-													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
-												}}
-												onChange={(e) => {
-													handleInputChange(e, i);
-													calculateTotalAmount();
-												}}
-												value={inputList2[i].price}
-											/>
-										</TableCell>
-										{inputList2.length !== 1 && (
+										{inputList.length !== 1 && (
 											<Grid container>
 												<Grid item xs={6} md={2}>
 													<Button startIcon={<DeleteOutlineIcon color='error' fontSize='small' />} onClick={() => handleRemoveClick(i)} sx={{mr: 1, mt: '1.8rem'}}></Button>
@@ -176,7 +156,7 @@ const Exchange = ({inputList2, setInputList2}) => {
 				</TableContainer>
 			</Box>
 			<Grid container spacing={1} sx={{m: 0, p: 1}}>
-				{inputList2.length < 9 && (
+				{inputList.length < 9 && (
 					<Grid item xs={6} md={12} sx={{pr: 1}}>
 						<Button startIcon={<AddIcon fontSize='small' />} fullWidth={true} onClick={handleAddClick} sx={{mr: 1, pr: 1}} variant='outlined'>
 							Add new
@@ -203,7 +183,7 @@ const Exchange = ({inputList2, setInputList2}) => {
 	);
 };
 
-export default Exchange;
+export default FutureCredit;
 
 const style = {
 	position: 'absolute',

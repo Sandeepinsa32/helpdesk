@@ -3,10 +3,7 @@ import {Avatar, Box, Card, CardContent, Grid, InputAdornment, TextField, IconBut
 import RenderSelectedEmail from './components/RenderSelectedEmail';
 import axios from 'axios';
 
-import NewBooking from './components/email/NewBooking';
-import Exchange from './components/email/Exchange';
-import FutureCredit from './components/email/FutureCredit';
-import Refund from './components/email/Refund';
+import RenderEmailField from './components/RenderEmailField';
 
 import {BASEURL, createQueryString, errorToast, successToast} from '../utils/Utils';
 import Table from '@mui/material/Table';
@@ -24,8 +21,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const Email = ({Ticketid, id, onClose}) => {
-	// console.log(id);
+const Email = ({Ticketid, userData, onClose}) => {
+	console.log(userData);
 
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState('newBooking');
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
@@ -86,6 +83,7 @@ const Email = ({Ticketid, id, onClose}) => {
 			},
 		},
 	]);
+
 	const [inputList1, setInputList1] = useState([
 		{
 			firstName: 'john',
@@ -159,44 +157,25 @@ const Email = ({Ticketid, id, onClose}) => {
 			});
 	};
 
-	function renderFields() {
-		console.log(selectedEmailTemplate);
-		switch (selectedEmailTemplate) {
-			case 'newBooking':
-				return <NewBooking inputList1={inputList1} setInputList1={setInputList1} />;
-			case 'exchange':
-				return <Exchange inputList2={inputList2} setInputList2={setInputList2} />;
-			case 'refund':
-				return <Refund inputList3={inputList3} setInputList3={setInputList3} />;
-			case 'futureCredit':
-				return <FutureCredit inputList4={inputList4} setInputList4={setInputList4} />;
-
-			default:
-				// throw new Error("Unknown step");
-				return <NewBooking setInputList1={setInputList1} />;
-		}
-	}
+	const data = {selectedEmailTemplate, Ticketid, pnrData, onClose, inputList1, setInputList1, inputList2, setInputList2, inputList3, setInputList3, inputList4, setInputList4};
 
 	function renderEmail() {
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
-				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
+				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList1} recordData={userData} Ticketid={Ticketid} onClose={onClose} />;
 			case 'exchange':
-				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
+				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList2} recordData={userData} Ticketid={Ticketid} onClose={onClose} />;
 			case 'refund':
-				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
+				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList3} recordData={userData} Ticketid={Ticketid} onClose={onClose} />;
 			case 'futureCredit':
-				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={id} Ticketid={Ticketid} onClose={onClose} />;
+				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={inputList4} recordData={userData} Ticketid={Ticketid} onClose={onClose} />;
 
 			default:
 				// throw new Error("Unknown step");
-				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} recordData={id} onClose={onClose} />;
+				return <RenderSelectedEmail selectedEmailTemplate={selectedEmailTemplate} pnrData={pnrData} Tabledata={[]} recordData={userData} onClose={onClose} />;
 		}
 	}
 
-	// useEffect(() => {
-	// 	console.clear();
-	// });
 	return (
 		<>
 			<Box sx={{width: 1, height: 1}}>
@@ -223,9 +202,9 @@ const Email = ({Ticketid, id, onClose}) => {
 								</Select>
 							</FormControl>
 						</Grid>
-						{/* <Grid item md={6} sx={{pr: 1}}>
-							<TextField required name='ticketId' size='small' label='Booking ID' fullWidth={true} value={Ticketid} disabled={true} />
-						</Grid> */}
+						<Grid item md={3} sx={{pr: 1}}>
+							<TextField required name='email' size='small' label='Email' fullWidth={true} value={userData.email} />
+						</Grid>
 
 						<Grid item md={6} sx={{pr: 1}}>
 							<TextField
@@ -248,7 +227,9 @@ const Email = ({Ticketid, id, onClose}) => {
 							</Button>
 						</Grid>
 					</Grid>
-					<Box sx={{mt: 2, p: 1}}>{renderFields()}</Box>
+					<Box sx={{mt: 2, p: 1}}>
+						<RenderEmailField data={data} />
+					</Box>
 				</>
 			</Box>
 

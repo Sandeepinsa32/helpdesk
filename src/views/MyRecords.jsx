@@ -348,6 +348,7 @@ export const Transaction = () => {
 														<IconButton
 															aria-label='sendEmail'
 															onClick={(e) => {
+																setSelectedTicket(row);
 																setViewEmail(row._id);
 																setOpenEmail(true);
 															}}>
@@ -468,7 +469,7 @@ export const Transaction = () => {
 					<IconButton onClick={handleEmailClose} sx={{position: `absolute`, right: `10px`, top: `10px`}}>
 						<CloseIcon />
 					</IconButton>
-					<Email Ticketid={viewEmail} id={selectedTicket} onClose={handleEmailClose} />
+					<Email Ticketid={viewEmail} userData={selectedTicket} onClose={handleEmailClose} />
 				</Box>
 			</Modal>
 
