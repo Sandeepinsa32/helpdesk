@@ -153,18 +153,17 @@ const RenderSelectedEmail = ({data}) => {
 		return tableString;
 	}
 	const handleSendEmail = async () => {
-		alert('send EMail btn is disable');
-		// axios
-		// 	.post(BASEURL + '/ticket/email', {
-		// 		data: getSelectedEmail(),
-		// 		ticketId: Ticketid,
-		// 	})
-		// 	.then((res) => {
-		// 		console.log(res);
-		// 		successToast('Email sent Successfully');
-		// 		onClose();
-		// 	})
-		// 	.catch((e) => console.log(e));
+		axios
+			.post(BASEURL + '/ticket/email', {
+				data: getSelectedEmail(),
+				ticketId: Ticketid,
+			})
+			.then((res) => {
+				console.log(res);
+				successToast('Email sent Successfully');
+				onClose();
+			})
+			.catch((e) => console.log(e));
 	};
 	var newBooking = `<!DOCTYPE html>
 <html lang="en">

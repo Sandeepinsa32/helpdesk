@@ -168,6 +168,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 								helperText={formik.touched.email && formik.errors.email}
 								onBlur={formik.handleBlur}
 								onChange={formik.handleChange}
+								disabled={true}
 							/>
 						</Grid>
 						<Grid item md={3} sx={{mt: 2}}>
