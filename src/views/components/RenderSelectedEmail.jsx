@@ -290,8 +290,10 @@ const RenderSelectedEmail = ({data}) => {
 
       
       ${
-			pnrData.length > 0
-				? `
+			pnrData !== null && pnrData !== undefined && pnrData !== [] && pnrData.length > 0
+				? pnrData.map(
+						(row, index) =>
+							`
 				<table
 					class='tableoutter'
 					style='width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;'
@@ -303,9 +305,7 @@ const RenderSelectedEmail = ({data}) => {
 							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
 							scope='row'
 							align='left'>
-							<b>Flight:</b> ${pnrData[0].flt.aircraft}  - Operated By  ${pnrData[0].flt.operated_by} -  ${pnrData[0].flt.cabin}-${
-						pnrData[0].flt.duration.hours && pnrData[0].flt.duration.hours + 'h' + ' ' + pnrData[0].flt.duration.minutes + ' m'
-				  }
+							<b>Flight:</b>  Operated By  ${row.flt.operated_by} -  ${row.flt.cabin}-${row.flt.duration.hours && row.flt.duration.hours + 'h' + ' ' + row.flt.duration.minutes + ' m'}
 						</td>
 					</tr>
 					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
@@ -314,7 +314,7 @@ const RenderSelectedEmail = ({data}) => {
 							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
 							scope='row'
 							align='left'>
-							<b>Departing:</b> ${pnrData[0].dep.airportname} , ${pnrData[0].dep.cityname}  ${pnrData[0].dep.airportcode} at ${pnrData[0].flt.departure.string}
+							<b>Departing:</b> ${row.dep.airportname} , ${row.dep.cityname}  ${row.dep.airportcode} at ${row.flt.departure.string}
 						</td>
 					</tr>
 					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
@@ -323,11 +323,13 @@ const RenderSelectedEmail = ({data}) => {
 							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
 							scope='row'
 							align='left'>
-							<b> Arriving: </b>${pnrData[0].arr.airportname} , ${pnrData[0].arr.cityname}  ${pnrData[0].arr.airportcode} at ${pnrData[0].flt.arrival.string}
+							<b> Arriving: </b>${row.arr.airportname} , ${row.arr.cityname}  ${row.arr.airportcode} at ${row.flt.arrival.string}
 						</td>
 					</tr>
 				</table>
+        <br/>
 			`
+				  )
 				: `
 				<table
 					class='tableoutter'
@@ -337,31 +339,16 @@ const RenderSelectedEmail = ({data}) => {
 					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
 						<td
 							class='header-para-12x'
-							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							style='text-align: center; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173;;text-transform:capitalize; font-weight: 400;'
 							scope='row'
-							align='left'>
-							<b>Tue, 26 Apr</b> - Alaska Airlines 2057 - Operated By Subsidiary/Franchise - Economy - 1h 40m
+							align='left'  >
+				       itinerary goes here, please  add pnr for preview
 						</td>
 					</tr>
-					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
-						<td
-							class='header-para-12x'
-							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
-							scope='row'
-							align='left'>
-							<b>Departing:</b> Portland Airport, Oregon (PDX) at 6:15 pm
-						</td>
-					</tr>
-					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
-						<td
-							class='header-para-12x'
-							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
-							scope='row'
-							align='left'>
-							<b> Arriving: </b>San Francisco Oakland Airport, Oakland (OAK) at 7:55 pm
-						</td>
-					</tr>
+					
 				</table>
+        <br/>
+        <br/>
 			`
 		}
   
