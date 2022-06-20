@@ -295,45 +295,47 @@ const RenderSelectedEmail = ({data, values}) => {
       
       ${
 			pnrData !== null && pnrData !== undefined && pnrData !== [] && pnrData.length > 0
-				? pnrData.map(
-						(row, index) =>
-							`
-				<table
-					class='tableoutter'
-					style='width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;'
-					width='100%'
-					align='left'>
-					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
-						<td
-							class='header-para-12x'
-							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
-							scope='row'
-							align='left'>
-							<b>Flight:</b>  Operated By  ${row.flt.operated_by} -  ${row.flt.cabin}-${row.flt.duration.hours && row.flt.duration.hours + 'h' + ' ' + row.flt.duration.minutes + ' m'}
-						</td>
-					</tr>
-					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
-						<td
-							class='header-para-12x'
-							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
-							scope='row'
-							align='left'>
-							<b>Departing:</b> ${row.dep.airportname} , ${row.dep.cityname}  ${row.dep.airportcode} at ${row.flt.departure.string}
-						</td>
-					</tr>
-					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
-						<td
-							class='header-para-12x'
-							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
-							scope='row'
-							align='left'>
-							<b> Arriving: </b>${row.arr.airportname} , ${row.arr.cityname}  ${row.arr.airportcode} at ${row.flt.arrival.string}
-						</td>
-					</tr>
-				</table>
-        <br/>
-			`
-				  )
+				? ` <div class='table-wrapper' style=' border: 1px solid #c9d1dc; overflow: auto;'>
+	<table class='sticky-header' style='border-spacing: 0;'>
+        <thead style='font-size: 12px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);'>
+        	<tr>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'></th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Date</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Airline</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Flight No</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Operated By</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Depart</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>From</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Arrive</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>At</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Duration</th>
+				<th style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc;'>Distance </th>
+			</tr>
+		</thead>
+    <tbody style='font-size: 14px;'>
+         ${pnrData.map(
+				(row, index) =>
+					`<tr>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'> </td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'> ${row.flt.departure.string}</td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.flt.operated_by} </td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.flt.flightNo}  </td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.flt.operated_by}</td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'> ${row.flt.departure.string}</td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.dep.airportname} , ${row.dep.cityname}  ${row.dep.airportcode} (WLG)</td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.flt.arrival.string}</td>
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.arr.airportname} , ${row.arr.cityname}  ${row.arr.airportcode}</td>
+			
+				<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.flt.duration.hours && row.flt.duration.hours + 'h' + ' ' + row.flt.duration.minutes + ' m'}
+        </td>
+        	<td style='padding: 18px 24px; white-space: nowrap; border-bottom: 1px solid #c9d1dc; border: none;'>${row.flt.distance.km} KM</td>
+			</tr>`
+			)}
+		</tbody>
+	</table>
+</div> 
+
+`
 				: `
 				<table
 					class='tableoutter'
