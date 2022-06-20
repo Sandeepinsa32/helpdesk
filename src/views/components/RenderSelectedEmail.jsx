@@ -1,84 +1,86 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 
-import {Grid, Button} from '@mui/material';
+import { Grid, Button } from "@mui/material";
 // @mat_icon
-import SendIcon from '@mui/icons-material/Send';
-import axios from 'axios';
-import {BASEURL, successToast} from '../../utils/Utils';
-const RenderSelectedEmail = ({data}) => {
-	const {
-		selectedEmailTemplate,
-		Ticketid,
-		pnrData,
-		onClose,
-		newBookingFieldList,
-		setNewBookingFieldList,
-		exchangeFieldList,
-		setExchangeFieldList,
-		refundFieldList,
-		setRefundFieldList,
-		futureCreditFieldList,
-		setFutureCreditFieldList,
-		userData,
-		formik,
-	} = data;
-	const {submitForm} = formik;
+import SendIcon from "@mui/icons-material/Send";
+import axios from "axios";
+import { BASEURL, successToast } from "../../utils/Utils";
+const RenderSelectedEmail = ({ data, email }) => {
+  const {
+    selectedEmailTemplate,
+    Ticketid,
+    pnrData,
+    onClose,
+    newBookingFieldList,
+    setNewBookingFieldList,
+    exchangeFieldList,
+    setExchangeFieldList,
+    refundFieldList,
+    setRefundFieldList,
+    futureCreditFieldList,
+    setFutureCreditFieldList,
+    userData,
+    formik,
+  } = data;
+  const { submitForm } = formik;
 
-	const [isPreviewed, setIsPreviewed] = useState(true);
+  const [isPreviewed, setIsPreviewed] = useState(true);
 
-	// For Displaying Selected EMail  ---Dangersly setting HTML
-	function renderingEmail() {
-		switch (selectedEmailTemplate) {
-			case 'newBooking':
-				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
-			case 'exchange':
-				return <span dangerouslySetInnerHTML={{__html: Exchange}} />;
-			case 'refund':
-				return <span dangerouslySetInnerHTML={{__html: Refund}} />;
-			case 'futureCredit':
-				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
-			default:
-				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
-		}
-	}
-	//  for get variable ref. of selected email HTML
-	function getSelectedEmail() {
-		switch (selectedEmailTemplate) {
-			case 'newBooking':
-				return newBooking;
-			case 'exchange':
-				return Exchange;
-			case 'refund':
-				return Refund;
-			case 'futureCredit':
-				return futureCredit;
-			default:
-				return newBooking;
-		}
-	}
+  // For Displaying Selected EMail  ---Dangersly setting HTML
+  function renderingEmail() {
+    switch (selectedEmailTemplate) {
+      case "newBooking":
+        return <span dangerouslySetInnerHTML={{ __html: newBooking }} />;
+      case "exchange":
+        return <span dangerouslySetInnerHTML={{ __html: Exchange }} />;
+      case "refund":
+        return <span dangerouslySetInnerHTML={{ __html: Refund }} />;
+      case "futureCredit":
+        return <span dangerouslySetInnerHTML={{ __html: futureCredit }} />;
+      default:
+        return <span dangerouslySetInnerHTML={{ __html: newBooking }} />;
+    }
+  }
+  //  for get variable ref. of selected email HTML
+  function getSelectedEmail() {
+    switch (selectedEmailTemplate) {
+      case "newBooking":
+        return newBooking;
+      case "exchange":
+        return Exchange;
+      case "refund":
+        return Refund;
+      case "futureCredit":
+        return futureCredit;
+      default:
+        return newBooking;
+    }
+  }
 
-	function currentDate() {
-		let today = new Date();
-		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-		let yyyy = today.getFullYear();
+  function currentDate() {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, "0");
+    let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    let yyyy = today.getFullYear();
 
-		today = mm + '/' + dd + '/' + yyyy;
-		return today;
-	}
+    today = mm + "/" + dd + "/" + yyyy;
+    return today;
+  }
 
-	function newBookingFiledValues() {
-		var tableString = '';
-		newBookingFieldList.forEach((x) => {
-			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+  function newBookingFiledValues() {
+    var tableString = "";
+    newBookingFieldList.forEach((x) => {
+      const isEmpty = Object.values(x).every(
+        (obj) => obj === null || obj === ""
+      );
 
-			if (isEmpty) {
-				return;
-			}
+      if (isEmpty) {
+        return;
+      }
 
-			tableString =
-				tableString +
-				`<tr>
+      tableString =
+        tableString +
+        `<tr>
 		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);" >${x.firstName}</td>
 		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.middleName}</td>
 		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.lastName}</td>
@@ -86,86 +88,93 @@ const RenderSelectedEmail = ({data}) => {
 		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.confirmation}</td>
 		  <td style="padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);">${x.price}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
-	function newExchangeFieldValues() {
-		var tableString = '';
-		exchangeFieldList.forEach((x) => {
-			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+    return tableString;
+  }
+  function newExchangeFieldValues() {
+    var tableString = "";
+    exchangeFieldList.forEach((x) => {
+      const isEmpty = Object.values(x).every(
+        (obj) => obj === null || obj === ""
+      );
 
-			if (isEmpty) {
-				return;
-			}
-			tableString =
-				tableString +
-				`<tr>
+      if (isEmpty) {
+        return;
+      }
+      tableString =
+        tableString +
+        `<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
 		  <td>${x.ticket}</td>
 		  <td>${x.price}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
-	function newRefundFieldValues() {
-		var tableString = '';
-		refundFieldList.forEach((x) => {
-			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+    return tableString;
+  }
+  function newRefundFieldValues() {
+    var tableString = "";
+    refundFieldList.forEach((x) => {
+      const isEmpty = Object.values(x).every(
+        (obj) => obj === null || obj === ""
+      );
 
-			if (isEmpty) {
-				return;
-			}
-			tableString =
-				tableString +
-				`<tr>
+      if (isEmpty) {
+        return;
+      }
+      tableString =
+        tableString +
+        `<tr>
 		  <td class="tableHeading" scope="col" name="firstname">${x.firstName}</td>
 		  <td class="tableHeading" scope="col" name="middlename">${x.middleName}</td>
 		  <td class="tableHeading" scope="col" name="lastname">${x.lastName}</td>
 		  <td class="tableHeading" scope="col" name="refund">${x.refund}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
-	function newFutureCreditFieldValues() {
-		var tableString = '';
-		futureCreditFieldList.forEach((x) => {
-			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+    return tableString;
+  }
+  function newFutureCreditFieldValues() {
+    var tableString = "";
+    futureCreditFieldList.forEach((x) => {
+      const isEmpty = Object.values(x).every(
+        (obj) => obj === null || obj === ""
+      );
 
-			if (isEmpty) {
-				return;
-			}
+      if (isEmpty) {
+        return;
+      }
 
-			tableString =
-				tableString +
-				`<tr>
+      tableString =
+        tableString +
+        `<tr>
 		  <td >${x.firstName}</td>
 		  <td>${x.middleName}</td>
 		  <td>${x.lastName}</td>
 		  <td>${x.confirmation}</td>
 		</tr>`;
-		});
+    });
 
-		return tableString;
-	}
-	const handleSendEmail = async () => {
-		axios
-			.post(BASEURL + '/ticket/email', {
-				data: getSelectedEmail(),
-				ticketId: Ticketid,
-			})
-			.then((res) => {
-				console.log(res);
-				successToast('Email sent Successfully');
-				onClose();
-			})
-			.catch((e) => console.log(e));
-	};
-	var newBooking = `<!DOCTYPE html>
+    return tableString;
+  }
+  const handleSendEmail = async () => {
+    axios
+      .post(BASEURL + "/ticket/email", {
+        data: getSelectedEmail(),
+        ticketId: Ticketid,
+        email,
+      })
+      .then((res) => {
+        console.log(res);
+        successToast("Email sent Successfully");
+        onClose();
+      })
+      .catch((e) => console.log(e));
+  };
+  var newBooking = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <link rel="stylesheet" href="styles.css">
@@ -289,10 +298,13 @@ const RenderSelectedEmail = ({data}) => {
 
       
       ${
-			pnrData !== null && pnrData !== undefined && pnrData !== [] && pnrData.length > 0
-				? pnrData.map(
-						(row, index) =>
-							`
+        pnrData !== null &&
+        pnrData !== undefined &&
+        pnrData !== [] &&
+        pnrData.length > 0
+          ? pnrData.map(
+              (row, index) =>
+                `
 				<table
 					class='tableoutter'
 					style='width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;'
@@ -304,7 +316,14 @@ const RenderSelectedEmail = ({data}) => {
 							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
 							scope='row'
 							align='left'>
-							<b>Flight:</b>  Operated By  ${row.flt.operated_by} -  ${row.flt.cabin}-${row.flt.duration.hours && row.flt.duration.hours + 'h' + ' ' + row.flt.duration.minutes + ' m'}
+							<b>Flight:</b>  Operated By  ${row.flt.operated_by} -  ${row.flt.cabin}-${
+                  row.flt.duration.hours &&
+                  row.flt.duration.hours +
+                    "h" +
+                    " " +
+                    row.flt.duration.minutes +
+                    " m"
+                }
 						</td>
 					</tr>
 					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
@@ -313,7 +332,9 @@ const RenderSelectedEmail = ({data}) => {
 							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
 							scope='row'
 							align='left'>
-							<b>Departing:</b> ${row.dep.airportname} , ${row.dep.cityname}  ${row.dep.airportcode} at ${row.flt.departure.string}
+							<b>Departing:</b> ${row.dep.airportname} , ${row.dep.cityname}  ${
+                  row.dep.airportcode
+                } at ${row.flt.departure.string}
 						</td>
 					</tr>
 					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
@@ -322,14 +343,16 @@ const RenderSelectedEmail = ({data}) => {
 							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
 							scope='row'
 							align='left'>
-							<b> Arriving: </b>${row.arr.airportname} , ${row.arr.cityname}  ${row.arr.airportcode} at ${row.flt.arrival.string}
+							<b> Arriving: </b>${row.arr.airportname} , ${row.arr.cityname}  ${
+                  row.arr.airportcode
+                } at ${row.flt.arrival.string}
 						</td>
 					</tr>
 				</table>
         <br/>
 			`
-				  )
-				: `
+            )
+          : `
 				<table
 					class='tableoutter'
 					style='width: 100%; max-width: 600px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;'
@@ -349,7 +372,7 @@ const RenderSelectedEmail = ({data}) => {
         <br/>
         <br/>
 			`
-		}
+      }
   
 
     
@@ -921,7 +944,7 @@ Revised December 31, 2021 </p>
   </body>
 </html>`;
 
-	var Exchange = `<center>
+  var Exchange = `<center>
 		<style>
     table.tableoutter {
 
@@ -1157,8 +1180,8 @@ Once completed your agent will notify you and you'll be able to access the reser
 
 <div style="display:flex;justify-content:center; padding:15px">
  ${
-		isPreviewed
-			? `
+   isPreviewed
+     ? `
 		<a
 			style='display:inline-block;
     border: 0;cursor: pointer;
@@ -1173,7 +1196,7 @@ Once completed your agent will notify you and you'll be able to access the reser
     padding: 10px 30px; font-family:sans-serif;'>
 			Authorize
 		</a>`
-			: `	<a
+     : `	<a
 			style='display:inline-block;
             border: 0;cursor: pointer;
             color: white;
@@ -1229,7 +1252,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     </div>
       
     </center >`;
-	var Refund = `<center>
+  var Refund = `<center>
 		<style>
     table.tableoutter {
 
@@ -1441,8 +1464,8 @@ table.tableoutter th {
        
 
 ${
-	isPreviewed
-		? `
+  isPreviewed
+    ? `
 		<a
 			style='display:inline-block;
     border: 0;cursor: pointer;
@@ -1457,7 +1480,7 @@ ${
     padding: 10px 30px; font-family:sans-serif;'>
 			Authorize
 		</a>`
-		: `	<a
+    : `	<a
 			style='display:inline-block;
             border: 0;cursor: pointer;
             color: white;
@@ -1533,7 +1556,7 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
     </div>
       
     </center >`;
-	var futureCredit = `<center>
+  var futureCredit = `<center>
 		<style>
     table.tableoutter {
 
@@ -1735,8 +1758,8 @@ table.tableoutter th {
      
 <div style="display:flex;justify-content:center; padding:15px">
 ${
-	isPreviewed
-		? `
+  isPreviewed
+    ? `
 		<a
 			style='display:inline-block;
     border: 0;cursor: pointer;
@@ -1751,7 +1774,7 @@ ${
     padding: 10px 30px; font-family:sans-serif;'>
 			Authorize
 		</a>`
-		: `	<a
+    : `	<a
 			style='display:inline-block;
             border: 0;cursor: pointer;
             color: white;
@@ -1825,27 +1848,28 @@ Trip Help Desk powered by Valalto Inc. is a service provider for all your travel
       
     </center >`;
 
-	return (
-		<>
-			{renderingEmail()}
+  return (
+    <>
+      {renderingEmail()}
 
-			<Grid container spacing={1} sx={{m: 0, p: 1}}>
-				<Grid item xs={6} md={10}></Grid>
+      <Grid container spacing={1} sx={{ m: 0, p: 1 }}>
+        <Grid item xs={6} md={10}></Grid>
 
-				<Grid item xs={6} md={2} sx={{mb: 3}}>
-					<Button
-						onClick={() => {
-							submitForm();
-							handleSendEmail();
-						}}
-						variant='contained'
-						endIcon={<SendIcon />}>
-						Send Mail
-					</Button>
-				</Grid>
-			</Grid>
-		</>
-	);
+        <Grid item xs={6} md={2} sx={{ mb: 3 }}>
+          <Button
+            onClick={() => {
+              submitForm();
+              handleSendEmail();
+            }}
+            variant="contained"
+            endIcon={<SendIcon />}
+          >
+            Send Mail
+          </Button>
+        </Grid>
+      </Grid>
+    </>
+  );
 };
 
 export default RenderSelectedEmail;
