@@ -283,6 +283,7 @@ export const Transaction = () => {
 									<TableRow>
 										{[
 											'Email',
+											'Email Status',
 											'Name',
 											'Booking ID',
 											'Phone',
@@ -323,6 +324,7 @@ export const Transaction = () => {
 														: {}
 												}>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.email.length > 12 ? row?.email.substring(0, 12) + `...` : row?.email}</TableCell>
+												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.status.toUpperCase()}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{`${row?.firstName.toUpperCase()} ${row?.lastName.toUpperCase()}`}</TableCell>
 												<TableCell sx={{padding: ` 16px 0 16px 8px !important`}}>{row?.bookingId}</TableCell>
 
@@ -391,17 +393,18 @@ export const Transaction = () => {
 															<SupportAgentIcon />
 														</IconButton>
 													</Tooltip>
-													{/* DoucSIgn*/}
-													<Tooltip title='Authorize Detail'>
-														<IconButton
-															aria-label='Authorize Detail'
-															onClick={() => {
-																setSelectedTicket(row);
-																setAuthorizeDetailModelOpen(true);
-															}}>
-															<PlaylistAddCheckCircleIcon />
-														</IconButton>
-													</Tooltip>
+													{row.status === 'authorized' && (
+														<Tooltip title='Authorize Detail'>
+															<IconButton
+																aria-label='Authorize Detail'
+																onClick={() => {
+																	setSelectedTicket(row);
+																	setAuthorizeDetailModelOpen(true);
+																}}>
+																<PlaylistAddCheckCircleIcon />
+															</IconButton>
+														</Tooltip>
+													)}
 												</TableCell>
 											</TableRow>
 										))

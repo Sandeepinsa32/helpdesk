@@ -239,6 +239,8 @@ export default function SearchRecord() {
 											'Phone',
 											//	 'Dep. Date',											'Return Date',
 											'Created Date',
+											'Email Status',
+
 											'Action',
 										].map((th) => (
 											<TableCell key={th}>{th}</TableCell>
@@ -262,18 +264,24 @@ export default function SearchRecord() {
 										recordData.map((row, index) => (
 											<TableRow
 												key={index}
-												sx={{
-													'&:last-child td, &:last-child th': {border: 0},
-												}}>
+												// sx={{
+												// 	'&:last-child td, &:last-child th': {border: 0},
+												// }}
+												sx={
+													row.status === 'generate'
+														? {borderLeft: '4px solid #E0021B'}
+														: row.status === 'sent'
+														? {borderLeft: '4px solid #0DC5F4'}
+														: row.status === 'authorized'
+														? {borderLeft: '4px solid #76DF29'}
+														: {}
+												}>
 												{/* <TableCell>{false ? row?.email.substring(0, 12) + `...` : row?.email}</TableCell> */}
 												<TableCell>{`${row?.firstName.toUpperCase()} ${row?.lastName.toUpperCase()}`}</TableCell>
 												<TableCell>{row?.bookingId}</TableCell>
-
 												<TableCell>{row?.phone}</TableCell>
-
-												{/* <TableCell>{formateDate(row?.departureDate)}</TableCell>
-												<TableCell>{formateDate(row?.returnDate)}</TableCell> */}
 												<TableCell>{formateDate(row?.createdAt)}</TableCell>
+												<TableCell>{row?.status.toUpperCase()}</TableCell>
 
 												<TableCell>
 													{/* Update*/}
