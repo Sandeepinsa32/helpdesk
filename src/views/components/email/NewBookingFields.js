@@ -59,6 +59,7 @@ const NewBooking = ({inputList, setInputList}) => {
 				middleName: '',
 				lastName: '',
 				ticket: '',
+				dob: '',
 				confirmation: '',
 				price: '',
 			},
@@ -84,7 +85,7 @@ const NewBooking = ({inputList, setInputList}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Confirmation', 'Price', 'Action'].map((th) => (
+								{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Confirmation', 'DoB', 'Price', 'Action'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
@@ -151,6 +152,19 @@ const NewBooking = ({inputList, setInputList}) => {
 													handleInputChange(e, i);
 												}}
 												value={inputList[i].ticket}
+											/>
+										</TableCell>
+										<TableCell>
+											<TextField
+												required
+												name='dob'
+												label='DOB'
+												fullWidth
+												size='small'
+												onChange={(e) => {
+													handleInputChange(e, i);
+												}}
+												value={inputList[i].dob}
 											/>
 										</TableCell>
 										<TableCell>
