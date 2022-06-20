@@ -18,19 +18,29 @@ import {
 	Button,
 } from '@mui/material';
 import BG from '../../../assets/PDFBG.png';
-import jsPDF from 'jspdf';
+import Pdf from 'react-to-pdf';
 
+const ref = React.createRef();
+
+const options = {
+	orientation: 'landscape',
+	unit: 'in',
+	format: [4, 2],
+};
 function AuthDetail({Ticketid, TicketData, onClose}) {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const pdfGenrater = () => {
-		var doc = new jsPDF('landscape', 'px', 'a4', 'false');
-		doc.html(document.querySelector('#Pdf-Wrapper-card'), {
-			callback: function (doc) {
-				doc.save();
-			},
-		});
-	};
+	// const pdfGenrater = () => {
+	// 	var doc = new jsPDF('landscape', 'px', 'a4', 'false');
+	// 	doc.html(document.querySelector('#Pdf-Wrapper-card'), {
+	// 		callback: function (doc) {
+	// 			doc.save();
+	// 		},
+	// 		x: 10,
+	// 		y: 10,
+	// 		width: 500,
+	// 	});
+	// };
 
 	var EmailHeader = () => {
 		return (
@@ -73,97 +83,106 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
       </footer>`;
 	return (
 		<>
-			<CardContent>
-				{isLoading ? (
-					<Box
-						sx={{
-							display: 'flex',
-							minHeight: '70vh',
-							justifyContent: 'center',
-							alignItems: 'center',
-						}}>
-						<CircularProgress size={30} />
+			{isLoading ? (
+				<Box
+					sx={{
+						display: 'flex',
+						minHeight: '70vh',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}>
+					<CircularProgress size={30} />
+				</Box>
+			) : (
+				<Card
+					ref={ref}
+					id='Pdf-Wrapper-card'
+					style={{
+						backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.6)),url(${BG})`,
+						backgroundPosition: 'bottom',
+						backgroundSize: 'cover',
+						minHeight: '500px',
+					}}>
+					<EmailHeader />
+					<hr />
+					<Box sx={{display: 'flex', flexDirection: 'row', px: 6}}>
+						<CardContent sx={{width: '60%', margin: 'auto', padding: '4rem 0'}}>
+							<Box
+								style={{
+									alignItems: 'center',
+									display: 'flex',
+									justifyContent: 'center',
+								}}>
+								<Typography variant='body1' color='text.secondary' display='inline'>
+									Customer Name: &nbsp;
+								</Typography>
+								<Typography variant='subtitle1'> Mac Miller</Typography>
+							</Box>
+							<Box
+								style={{
+									alignItems: 'center',
+									display: 'flex',
+									justifyContent: 'center',
+								}}>
+								<Typography variant='body1' color='text.secondary' display='inline'>
+									TimeStamp: &nbsp;
+								</Typography>
+								<Typography variant='subtitle1'>05 Jan 2022 - 12:33:52 PM</Typography>
+							</Box>{' '}
+							<Box
+								style={{
+									alignItems: 'center',
+									display: 'flex',
+									justifyContent: 'center',
+								}}>
+								<Typography variant='body1' color='text.secondary' display='inline'>
+									Ticket Id: &nbsp;
+								</Typography>
+								<Typography variant='subtitle1'>THD45SD7</Typography>
+							</Box>{' '}
+							<Box
+								style={{
+									alignItems: 'center',
+									display: 'flex',
+									justifyContent: 'center',
+								}}>
+								<Typography variant='body1' color='text.secondary' display='inline'>
+									Card Number: &nbsp;
+								</Typography>
+								<Typography variant='subtitle1'>XXXX4579</Typography>
+							</Box>
+							<Box
+								style={{
+									alignItems: 'center',
+									display: 'flex',
+									justifyContent: 'center',
+								}}>
+								<Typography variant='body1' color='text.secondary' display='inline'>
+									IP Address: &nbsp;
+								</Typography>
+								<Typography variant='subtitle1'>120.10.25.20</Typography>
+							</Box>
+						</CardContent>
 					</Box>
-				) : (
-					<Card
-						id='Pdf-Wrapper-card'
-						style={{
-							backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.6)),url(${BG})`,
-							backgroundPosition: 'bottom',
-							backgroundSize: 'cover',
-							minHeight: '500px',
-						}}>
-						<EmailHeader />
-						<hr />
-						<Box sx={{display: 'flex', flexDirection: 'row', px: 6}}>
-							<CardContent sx={{width: '60%', margin: 'auto', padding: '4rem 0'}}>
-								<Box
-									style={{
-										alignItems: 'center',
-										display: 'flex',
-										justifyContent: 'center',
-									}}>
-									<Typography variant='body1' color='text.secondary' display='inline'>
-										Customer Name: &nbsp;
-									</Typography>
-									<Typography variant='subtitle1'> Mac Miller</Typography>
-								</Box>
-								<Box
-									style={{
-										alignItems: 'center',
-										display: 'flex',
-										justifyContent: 'center',
-									}}>
-									<Typography variant='body1' color='text.secondary' display='inline'>
-										TimeStamp: &nbsp;
-									</Typography>
-									<Typography variant='subtitle1'>05 Jan 2022 - 12:33:52 PM</Typography>
-								</Box>{' '}
-								<Box
-									style={{
-										alignItems: 'center',
-										display: 'flex',
-										justifyContent: 'center',
-									}}>
-									<Typography variant='body1' color='text.secondary' display='inline'>
-										Ticket Id: &nbsp;
-									</Typography>
-									<Typography variant='subtitle1'>THD45SD7</Typography>
-								</Box>{' '}
-								<Box
-									style={{
-										alignItems: 'center',
-										display: 'flex',
-										justifyContent: 'center',
-									}}>
-									<Typography variant='body1' color='text.secondary' display='inline'>
-										Card Number: &nbsp;
-									</Typography>
-									<Typography variant='subtitle1'>XXXX4579</Typography>
-								</Box>
-								<Box
-									style={{
-										alignItems: 'center',
-										display: 'flex',
-										justifyContent: 'center',
-									}}>
-									<Typography variant='body1' color='text.secondary' display='inline'>
-										IP Address: &nbsp;
-									</Typography>
-									<Typography variant='subtitle1'>120.10.25.20</Typography>
-								</Box>
-							</CardContent>
-						</Box>
-						<hr />
+					<hr />
 
-						<CardMedia sx={{my: 2}} children={<span dangerouslySetInnerHTML={{__html: EmailFooter}} />} />
-					</Card>
-				)}
-			</CardContent>
+					<CardMedia sx={{my: 2}} children={<span dangerouslySetInnerHTML={{__html: EmailFooter}} />} />
+				</Card>
+			)}
+
 			<CardActions>
-				<Button sx={{textTransform: 'capitalize'}} variant='contained' onClick={pdfGenrater}>
-					Download Pdf
-				</Button>
+				<Pdf
+					targetRef={ref}
+					filename='code-example.pdf'
+					options={options}
+					//x={ 0.5} y={0.5} scale={0.8}
+				>
+					{({toPdf}) => (
+						<Button sx={{textTransform: 'capitalize'}} variant='contained' onClick={toPdf}>
+							Download Pdf
+						</Button>
+					)}
+				</Pdf>
 			</CardActions>
 		</>
 	);
