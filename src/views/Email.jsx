@@ -215,7 +215,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 
 					{/* <Box sx={{m: 1}}>Genrated Email Preview : {renderEmail()}</Box> */}
 					<Box sx={{m: 1}}>
-						<RenderSelectedEmail email={formik.values.email} data={data} />
+						<RenderSelectedEmail values={formik.values} data={data} />
 					</Box>
 				</form>
 			</Formik>

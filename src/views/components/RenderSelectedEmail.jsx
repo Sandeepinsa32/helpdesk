@@ -5,7 +5,7 @@ import {Grid, Button} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import {BASEURL, successToast} from '../../utils/Utils';
-const RenderSelectedEmail = ({data, email}) => {
+const RenderSelectedEmail = ({data, values}) => {
 	const {
 		selectedEmailTemplate,
 		Ticketid,
@@ -22,6 +22,7 @@ const RenderSelectedEmail = ({data, email}) => {
 		userData,
 		formik,
 	} = data;
+	const {email} = values;
 	const {submitForm} = formik;
 
 	const [isPreviewed, setIsPreviewed] = useState(true);
