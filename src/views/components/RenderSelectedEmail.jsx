@@ -5,7 +5,7 @@ import {Grid, Button} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import {BASEURL, successToast} from '../../utils/Utils';
-const RenderSelectedEmail = ({data, values}) => {
+const RenderSelectedEmail = ({data, values, setLoader}) => {
 	const {
 		selectedEmailTemplate,
 		Ticketid,
@@ -155,6 +155,7 @@ const RenderSelectedEmail = ({data, values}) => {
 		return tableString;
 	}
 	const handleSendEmail = async () => {
+		setLoader(true);
 		axios
 			.post(BASEURL + '/ticket/email', {
 				data: getSelectedEmail(),
@@ -164,9 +165,13 @@ const RenderSelectedEmail = ({data, values}) => {
 			.then((res) => {
 				console.log(res);
 				successToast('Email sent Successfully');
+				setLoader(false);
 				onClose();
 			})
-			.catch((e) => console.log(e));
+			.catch((e) => {
+				console.log(e);
+				setLoader(false);
+			});
 	};
 	var newBooking = `<!DOCTYPE html>
 <html lang="en">
