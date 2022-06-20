@@ -16,16 +16,24 @@ import {
   Divider,
   CardActions,
   Button,
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
 } from "@mui/material";
 import BG from "../../../assets/PDFBG.png";
 import ReactToPdf from "react-to-pdf";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import ReactToPrint from "react-to-print";
+import { useScreenshot } from "use-screenshot-hook";
 
 function AuthDetail({ Ticketid, TicketData, onClose }) {
+  const { authorizedIps, firstName, lastName, email, bookingId } = TicketData;
   const componentRef = React.useRef();
-
+  console.log(TicketData);
   const [isLoading, setIsLoading] = useState(false);
   const pdfRef = useRef(null);
   const options = {
@@ -33,6 +41,7 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
     unit: "in",
     format: [600, 400],
   };
+  const { image, takeScreenshot } = useScreenshot();
 
   // const pdfGenrater = () => {
   // 	var doc = new jsPDF('landscape', 'px', 'a4', 'false');
@@ -110,7 +119,7 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
       </footer>`;
   return (
     <>
-      {isLoading ? (
+      {isLoading || !TicketData ? (
         <Box
           sx={{
             display: "flex",
@@ -135,9 +144,9 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
           <hr />
           <Box sx={{ display: "flex", flexDirection: "row", px: 6 }}>
             <CardContent
-              sx={{ width: "60%", margin: "auto", padding: "4rem 0" }}
+              sx={{ width: "84%", margin: "auto", padding: "4rem 0" }}
             >
-              <Box
+              <div
                 style={{
                   alignItems: "center",
                   display: "flex",
@@ -151,9 +160,9 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
                 >
                   Customer Name: &nbsp;
                 </Typography>
-                <Typography variant="subtitle1"> Mac Miller</Typography>
-              </Box>
-              <Box
+                <Typography variant="subtitle1">{`${firstName} ${lastName}`}</Typography>
+              </div>
+              <div
                 style={{
                   alignItems: "center",
                   display: "flex",
@@ -165,13 +174,11 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
                   color="text.secondary"
                   display="inline"
                 >
-                  TimeStamp: &nbsp;
+                  Email: &nbsp;
                 </Typography>
-                <Typography variant="subtitle1">
-                  05 Jan 2022 - 12:33:52 PM
-                </Typography>
-              </Box>{" "}
-              <Box
+                <Typography variant="subtitle1">{email}</Typography>
+              </div>{" "}
+              <div
                 style={{
                   alignItems: "center",
                   display: "flex",
@@ -185,9 +192,9 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
                 >
                   Ticket Id: &nbsp;
                 </Typography>
-                <Typography variant="subtitle1">THD45SD7</Typography>
-              </Box>{" "}
-              <Box
+                <Typography variant="subtitle1">{bookingId}</Typography>
+              </div>{" "}
+              <div
                 style={{
                   alignItems: "center",
                   display: "flex",
@@ -202,23 +209,37 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
                   Card Number: &nbsp;
                 </Typography>
                 <Typography variant="subtitle1">XXXX4579</Typography>
-              </Box>
-              <Box
-                style={{
-                  alignItems: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  display="inline"
+              </div>
+              <div style={{ marginTop: "10px" }}>
+                <TableContainer
+                //  component={Paper}
                 >
-                  IP Address: &nbsp;
-                </Typography>
-                <Typography variant="subtitle1">120.10.25.20</Typography>
-              </Box>
+                  <Table aria-label="simple table" size="small">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="left">S.No</TableCell>
+                        <TableCell align="left">Email</TableCell>
+                        <TableCell align="left">IP Address</TableCell>
+                        <TableCell align="left">Timestamp</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {authorizedIps.map((data, index) => (
+                        <TableRow key={data.name}>
+                          <TableCell align="left">{index + 1}</TableCell>
+                          <TableCell align="left">{data.email}</TableCell>
+                          <TableCell align="left">
+                            {data.ipAddress
+                              ? data.ipAddress
+                              : "Response Awaited"}
+                          </TableCell>
+                          <TableCell align="left">{data.timestamp}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
             </CardContent>
           </Box>
           <hr />
@@ -232,8 +253,9 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
         </Card>
       )}
 
-      <CardActions>
+      {/* <CardActions>
         <ReactToPrint
+          pageStyle=" { size: 8in 8in }"
           trigger={() => (
             <Button
               sx={{ textTransform: "capitalize" }}
@@ -256,6 +278,17 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
           )}
           content={() => componentRef.current}
         />
+      </CardActions> */}
+
+      <CardActions>
+        <Button
+          sx={{ textTransform: "capitalize" }}
+          variant="contained"
+          onClick={() => takeScreenshot({ componentRef })}
+        >
+          Download Pdf
+        </Button>
+        {image && <img src={image} />}
       </CardActions>
     </>
   );
