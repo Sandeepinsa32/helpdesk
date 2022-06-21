@@ -22,7 +22,7 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		userData,
 		formik,
 	} = data;
-	const {email} = values;
+	const {email, name, ccLastDigit, totalAmount} = values;
 	const {submitForm} = formik;
 
 	const [isPreviewed, setIsPreviewed] = useState(true);
@@ -287,10 +287,50 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
         </table>
       </div>
       
+
+
+     
          <p class="para-font" style="text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 18px; color: #0B4173; font-size: 12px; margin-bottom: 5px; font-weight: 600; font-family: Helvetica; padding: 0 1rem;">Total amount charged $
     
              in the name of  ending in ""xxxx0092""   (charges may be seen split up between Valalto, THD, suppliers or the airlines directly - total amount charged will equal the above).
         </p>
+
+
+<div style="width: 600px; display:flex;padding:20px;">
+         <table
+					class='tableoutter'
+					style='width: 100%; max-width: 300px; border-collapse: collapse; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); margin: 0 auto; padding: 1rem;'
+					width='100%'
+					align='left'>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b>Card Holder Name: ${name}</b> 
+						</td>
+					</tr>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b>Last 4-Digit:  ${ccLastDigit} </b> 
+						</td>
+					</tr>
+					<tr style='padding: 4px; text-align: left; border: 1px solid rgba(0, 0, 0, 0.2);' align='left'>
+						<td
+							class='header-para-12x'
+							style='text-align: left; border: 1px solid rgba(0, 0, 0, 0.2); padding: .625em; font-size: 14px; color: #0B4173; font-weight: 400;'
+							scope='row'
+							align='left'>
+							<b> Total Amount: ${totalAmount}</b>
+						</td>
+					</tr>
+				</table>
+        </div>
       
      <a    href='https://triphelpdesk.netlify.app/auth/validateToken'  target='_blank' style="text-decoration:none;"> <button style="background-color: #5171ec; padding: 10px 20px; border-radius: 9999px; border: none; font-weight: bold; color: white; text-align: center; display: block; margin: auto auto 20px; outline: none;">Authorize</button> 
      </a>

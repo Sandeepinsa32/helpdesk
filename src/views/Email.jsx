@@ -527,7 +527,17 @@ const Email = ({Ticketid, userData, onClose}) => {
 									Convert
 								</Button>
 							</Grid>
-
+							<Grid item md={3} sx={{mt: 2}}>
+								<Textfield
+									name='name'
+									label='Card Holder Name '
+									value={formik.values.name}
+									error={Boolean(formik.touched.name && formik.errors.name)}
+									helperText={formik.touched.name && formik.errors.name}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+								/>
+							</Grid>
 							<Grid item md={3} sx={{mt: 2}}>
 								<Textfield
 									name='email'
@@ -542,6 +552,17 @@ const Email = ({Ticketid, userData, onClose}) => {
 							</Grid>
 							<Grid item md={3} sx={{mt: 2}}>
 								<Textfield
+									name='ccLastDigit'
+									label='Card Last Digit'
+									value={formik.values.ccLastDigit}
+									error={Boolean(formik.touched.ccLastDigit && formik.errors.ccLastDigit)}
+									helperText={formik.touched.ccLastDigit && formik.errors.ccLastDigit}
+									onBlur={formik.handleBlur}
+									onChange={formik.handleChange}
+								/>
+							</Grid>
+							<Grid item md={3} sx={{mt: 2}}>
+								<Textfield
 									name='totalAmount'
 									label='Total Amount'
 									value={formik.values.totalAmount}
@@ -551,28 +572,6 @@ const Email = ({Ticketid, userData, onClose}) => {
 									InputProps={{
 										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
 									}}
-									onChange={formik.handleChange}
-								/>
-							</Grid>
-							<Grid item md={3} sx={{mt: 2}}>
-								<Textfield
-									name='name'
-									label='Card Holder Name '
-									value={formik.values.name}
-									error={Boolean(formik.touched.name && formik.errors.name)}
-									helperText={formik.touched.name && formik.errors.name}
-									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
-								/>
-							</Grid>
-							<Grid item md={3} sx={{mt: 2}}>
-								<Textfield
-									name='cLastDigit'
-									label='Card Last Digit'
-									value={formik.values.cLastDigit}
-									error={Boolean(formik.touched.cLastDigit && formik.errors.cLastDigit)}
-									helperText={formik.touched.cLastDigit && formik.errors.cLastDigit}
-									onBlur={formik.handleBlur}
 									onChange={formik.handleChange}
 								/>
 							</Grid>

@@ -76,5 +76,3 @@
 28. show loader on email success
 29. fill values in email
 30. re-design email
-31. multiple email
-32. .map value of ip in auth detail modal
