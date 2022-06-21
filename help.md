@@ -72,7 +72,7 @@
 25. Admin ko unmasked card show krne h
 26. Old charges recorded
 
-27. date of expity validate
-28. show loader on email success
-29. fill values in email
+27. date of expity validate --done
+28. show loader on email success --done
+29. fill values in email --done
 30. re-design email

@@ -53,7 +53,7 @@ const AddNewRecord = ({isView, data}) => {
 		},
 	];
 	var err = [];
-
+	const yesterday = new Date(Date.now());
 	// const INITIAL_FORM_STATE = {
 	// 	firstName: 'john',
 	// 	lastName: 'doe',
@@ -315,7 +315,7 @@ const AddNewRecord = ({isView, data}) => {
 						)
 						.nullable()
 						.required('required'),
-					expiryDate: Yup.string().nullable().required(' required'),
+					expiryDate: Yup.date('please Enter valid Date').min(yesterday, 'Date cannot be in the past').nullable().required(' required'),
 					billingAddress: Yup.string().nullable(),
 				})
 			)
@@ -348,6 +348,7 @@ const AddNewRecord = ({isView, data}) => {
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
 
+					console.log(errors);
 					// console.log('props', props); // formik object --containg values, err, etc....
 					//	console.log(errors);
 
