@@ -144,7 +144,7 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
           <hr />
           <Box sx={{ display: "flex", flexDirection: "row", px: 6 }}>
             <CardContent
-              sx={{ width: "84%", margin: "auto", padding: "4rem 0" }}
+              sx={{ width: "90%", margin: "auto", padding: "4rem 0" }}
             >
               <div
                 style={{
@@ -253,7 +253,7 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
         </Card>
       )}
 
-      {/* <CardActions>
+      <CardActions>
         <ReactToPrint
           pageStyle=" { size: 8in 8in }"
           trigger={() => (
@@ -278,9 +278,9 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
           )}
           content={() => componentRef.current}
         />
-      </CardActions> */}
+      </CardActions>
 
-      <CardActions>
+      {/* <CardActions>
         <Button
           sx={{ textTransform: "capitalize" }}
           variant="contained"
@@ -289,7 +289,7 @@ function AuthDetail({ Ticketid, TicketData, onClose }) {
           Download Pdf
         </Button>
         {image && <img src={image} />}
-      </CardActions>
+      </CardActions> */}
     </>
   );
 }
