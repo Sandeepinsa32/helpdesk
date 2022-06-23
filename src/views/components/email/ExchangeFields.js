@@ -20,7 +20,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const Exchange = ({inputList, setInputList}) => {
+const Exchange = ({inputList, setInputList, data}) => {
+	const {selectedCurrency} = data;
 	// const [totalAmt, setTotalAmt] = useState(0);
 
 	// const calculateTotalAmount = () => {
@@ -152,7 +153,7 @@ const Exchange = ({inputList, setInputList}) => {
 												fullWidth
 												autoComplete='price'
 												InputProps={{
-													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+													startAdornment: <InputAdornment position='start'>{selectedCurrency}</InputAdornment>,
 												}}
 												onChange={(e) => {
 													handleInputChange(e, i);

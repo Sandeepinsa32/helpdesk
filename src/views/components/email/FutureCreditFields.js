@@ -20,7 +20,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const FutureCredit = ({inputList, setInputList}) => {
+const FutureCredit = ({inputList, setInputList, data}) => {
+	const {selectedCurrency} = data;
 	// const [totalAmt, setTotalAmt] = useState(0);
 
 	// const calculateTotalAmount = () => {

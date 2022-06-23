@@ -18,18 +18,19 @@ function RenderEmailField({data}) {
 		setRefundFieldList,
 		futureCreditFieldList,
 		setFutureCreditFieldList,
+		selectedCurrency,
 	} = data;
 
 	function SelectedEmailFields() {
 		switch (selectedEmailTemplate) {
 			case 'newBooking':
-				return <NewBookingFields inputList={newBookingFieldList} setInputList={setNewBookingFieldList} />;
+				return <NewBookingFields inputList={newBookingFieldList} setInputList={setNewBookingFieldList} data={data} />;
 			case 'exchange':
-				return <ExchangeFields inputList={exchangeFieldList} setInputList={setExchangeFieldList} />;
+				return <ExchangeFields inputList={exchangeFieldList} setInputList={setExchangeFieldList} data={data} />;
 			case 'refund':
-				return <RefundFields inputList={refundFieldList} setInputList={setRefundFieldList} />;
+				return <RefundFields inputList={refundFieldList} setInputList={setRefundFieldList} data={data} />;
 			case 'futureCredit':
-				return <FutureCreditFields inputList={futureCreditFieldList} setInputList={setFutureCreditFieldList} />;
+				return <FutureCreditFields inputList={futureCreditFieldList} setInputList={setFutureCreditFieldList} data={data} />;
 
 			default:
 				// throw new Error("Unknown step");

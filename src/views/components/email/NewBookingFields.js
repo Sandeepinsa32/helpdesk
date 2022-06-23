@@ -20,7 +20,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const NewBooking = ({inputList, setInputList}) => {
+const NewBooking = ({inputList, setInputList, data}) => {
+	const {selectedCurrency} = data;
 	// const [totalAmt, setTotalAmt] = useState(0);
 
 	// const calculateTotalAmount = () => {
@@ -190,7 +191,7 @@ const NewBooking = ({inputList, setInputList}) => {
 												fullWidth
 												autoComplete='price'
 												InputProps={{
-													startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+													startAdornment: <InputAdornment position='start'>{selectedCurrency}</InputAdornment>,
 												}}
 												onChange={(e) => {
 													handleInputChange(e, i);

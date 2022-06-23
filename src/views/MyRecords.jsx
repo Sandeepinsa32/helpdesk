@@ -482,7 +482,7 @@ export const Transaction = () => {
 
 			{/* Open EMail Modal */}
 			<Modal open={openEmail} onClose={handleEmailClose} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
-				<Box sx={BoxModalStyle} style={{overflowX: ' auto', padding: 4}}>
+				<Box sx={BoxModalStyle} style={{overflow: 'hidden', padding: 4}}>
 					<Card sx={{p: 0, m: 0}}>
 						<CardHeader
 							// sx={{py: '0 !important'}}
@@ -495,7 +495,7 @@ export const Transaction = () => {
 						/>
 						<Divider />
 
-						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
+						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', py: '0', overflowX: ' auto'}}>
 							<Email Ticketid={viewEmail} userData={selectedTicket} onClose={handleEmailClose} />
 						</CardContent>
 					</Card>

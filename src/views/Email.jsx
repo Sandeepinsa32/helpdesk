@@ -11,6 +11,7 @@ import {BASEURL, createQueryString, errorToast, successToast} from '../utils/Uti
 
 const Email = ({Ticketid, userData, onClose}) => {
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState('newBooking');
+	const [selectedCurrency, setSelectedCurrency] = useState('$');
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
 	const [pnrData, setPnrData] = useState([
 		{
@@ -467,6 +468,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 		setFutureCreditFieldList,
 		userData,
 		formik,
+		selectedCurrency,
 	};
 
 	return (
@@ -486,7 +488,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 					<form onSubmit={formik.handleSubmit}>
 						<Grid container spacing={1} sx={{m: 0, p: 1}}>
 							{/*  Email template  */}
-							<Grid item md={4} sx={{pr: 1}}>
+							<Grid item md={3} sx={{pr: 1}}>
 								<FormControl required fullWidth>
 									<InputLabel id='Email-template-Dropdown-label'>Email Template</InputLabel>
 									<Select
@@ -522,7 +524,26 @@ const Email = ({Ticketid, userData, onClose}) => {
 								/>
 							</Grid>
 
-							<Grid item xs={6} md={2}>
+							<Grid item md={2} sx={{pr: 1}}>
+								<FormControl required fullWidth>
+									<InputLabel id='currency-type-Dropdown'>Currency</InputLabel>
+									<Select
+										size='small'
+										labelId='currency-type-Dropdown'
+										value={selectedCurrency}
+										onChange={(e) => {
+											setSelectedCurrency(e.target.value);
+										}}
+										fullWidth
+										name='currency'
+										label='Currency'>
+										<MenuItem value='$'> USD $</MenuItem>
+										<MenuItem value='£'>GBP £</MenuItem>
+										<MenuItem value='€'>EUR €</MenuItem>
+									</Select>
+								</FormControl>
+							</Grid>
+							<Grid item md={1} xs={6}>
 								<Button onClick={handlePnrConverter} variant='contained'>
 									Convert
 								</Button>
@@ -570,7 +591,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 									helperText={formik.touched.totalAmount && formik.errors.totalAmount}
 									onBlur={formik.handleBlur}
 									InputProps={{
-										startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+										startAdornment: <InputAdornment position='start'>{selectedCurrency}</InputAdornment>,
 									}}
 									onChange={formik.handleChange}
 								/>
