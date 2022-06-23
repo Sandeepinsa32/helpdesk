@@ -40,7 +40,7 @@ const NewBooking = ({inputList, setInputList, data}) => {
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
-		list[index][name] = value;
+		list[index][name] = value.toUpperCase();
 		setInputList(list);
 	};
 
@@ -155,19 +155,7 @@ const NewBooking = ({inputList, setInputList, data}) => {
 												value={inputList[i].ticket}
 											/>
 										</TableCell>
-										<TableCell>
-											<TextField
-												required
-												name='dob'
-												label='DOB'
-												fullWidth
-												size='small'
-												onChange={(e) => {
-													handleInputChange(e, i);
-												}}
-												value={inputList[i].dob}
-											/>
-										</TableCell>
+
 										<TableCell>
 											<TextField
 												required
@@ -180,6 +168,19 @@ const NewBooking = ({inputList, setInputList, data}) => {
 													handleInputChange(e, i);
 												}}
 												value={inputList[i].confirmation}
+											/>
+										</TableCell>
+										<TableCell>
+											<TextField
+												required
+												name='dob'
+												label='DOB'
+												fullWidth
+												size='small'
+												onChange={(e) => {
+													handleInputChange(e, i);
+												}}
+												value={inputList[i].dob}
 											/>
 										</TableCell>
 										<TableCell>
