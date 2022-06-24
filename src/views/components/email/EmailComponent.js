@@ -1,5 +1,24 @@
-export const EmailHeader = `
-	<tr>
+export const emailOpenTag = ` <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<div style="background-color:#ffffff;margin:0;padding:0;font-family: 'Roboto', sans-serif;">
+<!-- ./ outter div   -->
+    
+  <table width="100%" bgcolor="#fff" border="0" cellpadding="0" cellspacing="0">
+  
+	<tbody>
+    <tr>
+<!--  ./ whole code in this td      --> 
+		<td align="center" style="padding:15px">
+      
+<!-- ./ OUTTER TABLE'S TABLE DATA       -->
+      
+		<table bgcolor="#ffffff" width="600" align="center" cellpadding="0" cellspacing="0" border="0" style="max-width:100%">
+		<tbody>
+
+      
+<!-- ./ header  -->
+    	<tr>
 		<td>
 			<table
 				width='100%'
@@ -51,7 +70,35 @@ export const EmailHeader = `
 			<hr style='margin:2px;height: 2px;background: #051A2E;border-radius: 10px;' />
 		</td>
 	</tr>
-`;
+      
+      <!--  ./Booking code && date     -->
+<tr><td>       
+  
+  
+  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
+				<tbody>
+          <tr>
+					<td align="left">
+					  <p>
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#000;text-decoration:none;float:left; ">Booking Code :</span>
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif; color:#5171ec;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;  font-family: 'Roboto', sans-serif;; float:left;">THD457S58</span>
+          </p>
+					</td>
+          <td align="right">
+					  <p><span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#555555;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#000;text-decoration:none;width:100%;text-align:right; ">May 12, 2022 </span></p>
+					</td>
+				</tr>
+			</tbody></table>
+        
+        
+        </td></tr> `;
+
+export const emailCloseTag = `</td></tr>
+</tbody>
+</table>
+		</td>
+	</tr>
+</tbody></table></div></link></link></link>`;
 
 export const EmailThanksHeader = `<tr>
    <td align="center" valign="top">
@@ -827,3 +874,20 @@ export const EmailFooter = `<tr><td> <hr style="margin:2px;height: 2px;backgroun
                 Valalto Inc.</a>, All Rights Reserved.
             </p>
       </footer>`;
+
+export const newBookingTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+			<tr>
+				<th style="padding: 18px 24px; white-space: nowrap; ">First Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Middle Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Last Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Ticket</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Confirmation</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">DoB</th>
+        	<th style="padding: 18px 24px; white-space: nowrap; ">Price</th>
+				
+			</tr>
+		</thead>`;
+
+export const BaggageFeeQuote = `<p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
+   * Baggage Fee May Apply . Check with Airlines for the Most Updated Baggage Rule.
+  </p> `;
