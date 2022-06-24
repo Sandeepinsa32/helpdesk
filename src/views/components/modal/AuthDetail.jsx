@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Typography, CardMedia, Box, CircularProgress, Card, CardContent, CardActions, Button, TableContainer, Table, TableHead, TableRow, TableCell, TableBody} from '@mui/material';
 import BG from '../../../assets/PDFBG.png';
 import ReactToPrint from 'react-to-print';
-import {useScreenshot} from 'use-screenshot-hook';
 
 function AuthDetail({Ticketid, TicketData, onClose}) {
 	const {authorizedIps, firstName, lastName, email, bookingId} = TicketData;
