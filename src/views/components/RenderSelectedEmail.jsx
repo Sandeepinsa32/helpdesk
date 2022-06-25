@@ -5,7 +5,19 @@ import {Grid, Button} from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import axios from 'axios';
 import {BASEURL, successToast} from '../../utils/Utils';
-import {emailOpenTag, emailCloseTag, EmailThanksHeader, EmailNoteNCharge, TermNCondition, EmailFooter, EmailAuthBtn, newBookingTableHeading, BaggageFeeQuote} from './email/EmailComponent';
+import {
+	emailOpenTag,
+	emailCloseTag,
+	EmailThanksHeader,
+	refundTableHeading,
+	EmailNoteNCharge,
+	TermNCondition,
+	EmailFooter,
+	EmailAuthBtn,
+	newBookingTableHeading,
+	newFutureCreditTableHeading,
+	BaggageFeeQuote,
+} from './email/EmailComponent';
 const RenderSelectedEmail = ({data, values, setLoader}) => {
 	const {
 		selectedEmailTemplate,
@@ -14,6 +26,7 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		onClose,
 		newBookingFieldList,
 		setNewBookingFieldList,
+
 		exchangeFieldList,
 		setExchangeFieldList,
 		refundFieldList,
@@ -126,11 +139,11 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			}
 			tableString =
 				tableString +
-				`<tr>
-		  <td class="tableHeading" scope="col" name="firstname">${x.firstName}</td>
-		  <td class="tableHeading" scope="col" name="middlename">${x.middleName}</td>
-		  <td class="tableHeading" scope="col" name="lastname">${x.lastName}</td>
-		  <td class="tableHeading" scope="col" name="refund">${x.refund}</td>
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
+	   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
+		   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
+		 <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
+ <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.refund}</td>
 		</tr>`;
 		});
 
@@ -147,11 +160,11 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 
 			tableString =
 				tableString +
-				`<tr>
-		  <td >${x.firstName}</td>
-		  <td>${x.middleName}</td>
-		  <td>${x.lastName}</td>
-		  <td>${x.confirmation}</td>
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
+	   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
+		   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
+		   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
+		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" > ${x.confirmation}</td>
 		</tr>`;
 		});
 
@@ -177,80 +190,7 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			});
 	};
 
-	var newBooking = `
-  <!-- ./ Static EMail OPen Tag   -->
- ${emailOpenTag}
-<!-- ./ small header  -->
- 
-      ${EmailThanksHeader}
-      
-      
-  
-      
-      
-      
-<!--   ./ input field custom table     -->
-<tr>
-  <td>
-      <div class="scrollable-table" style="overflow-x: auto;
-  font-family: 'Roboto', sans-serif;;
-  max-width: 600px;
-  margin: 20px 0px; ">          
-<table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
-  
-  
-  	${newBookingTableHeading}
-
-  <tbody id="appendCHildHere" style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
-
-    ${newBookingFiledValues()}
-    
-    </tbody>
-</table>
-              </div>
-    ${BaggageFeeQuote}
-  </td>
-</tr> 
-   
-   
-<!--    ./ card details    -->
-      <tr> 
-        <td>
-             <table class="tableoutter" align="right" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #ccc;margin:1rem;border-radius:10px;">
-  
- 
-       <tr>
-         <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row">
-        Total Amount Charged :   
-         </td>
-          <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
-          <b> ${selectedCurrency} ${totalAmount && totalAmount + '.00'} </b>
-         </td>
-        </tr>
-        <tr>
-           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row">
-      Name Of Card Holder:  
-       </td>
-           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
-      <b> ${name}</b> 
-       </td>
-         </tr>
-         <tr>
-            <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row">
-         Card Detail :
-           </td>
-                <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
-     xxxx- <b>${ccLastDigit} </b> 
-            </td>
-         </tr>
-      </table>
-      </td></tr>
-
-
-<!--   ./ auth btn      -->      
-      ${EmailAuthBtn}   
-<!--   ./ pnr table     -->
-      <tr><td>
+	const PnrTable = `  <tr><td>
                
          <table class="tableoutter" style="margin: 0 auto;padding:1rem;">
    ${
@@ -299,30 +239,171 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			`
    }
 
-      </td></tr>
-
-      
-
-<!-- ./ Note & charges part  -->
-${EmailNoteNCharge}
-
-
-<!--  ./Term & conditions  -->
+      </td></tr> `;
+	const CardDetail = `  <tr> 
+        <td>
+             <table class="tableoutter" align="right" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #ccc;margin:1rem;border-radius:10px;">
+  
  
-${TermNCondition}
+       <tr>
+         <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row">
+        Total Amount Charged :   
+         </td>
+          <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
+          <b> ${selectedCurrency} ${totalAmount && totalAmount + '.00'} </b>
+         </td>
+        </tr>
+        <tr>
+           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row">
+      Name Of Card Holder:  
+       </td>
+           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
+      <b> ${name}</b> 
+       </td>
+         </tr>
+         <tr>
+            <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:600;" scope="row">
+         Card Detail :
+           </td>
+                <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
+     xxxx- <b>${ccLastDigit} </b> 
+            </td>
+         </tr>
+      </table>
+      </td></tr>`;
 
+	var newBooking = `
+
+  <!-- ./ Static EMail OPen Tag   -->
+		${emailOpenTag}
+<!-- ./ small header  -->
+		${EmailThanksHeader}
+
+<!--   ./ input field custom table     -->
+<tr>
+<td>
+<div class="scrollable-table" style="overflow-x: auto;
+font-family: 'Roboto', sans-serif;;
+max-width: 600px;
+margin: 20px 0px; ">
+<table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+		${newBookingTableHeading}
+<tbody id="appendCHildHere" style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+
+    ${newBookingFiledValues()}
+    
+    </tbody>
+</table>
+</div>
+    ${BaggageFeeQuote}
+</td>
+</tr> 
+   
+   
+<!--    ./ card details    -->
+        ${CardDetail}
+<!--   ./ auth btn      -->
+    	${EmailAuthBtn}		  
+<!--   ./ pnr table     -->
+		${PnrTable}   
+<!-- ./ Note & charges part  -->
+		${EmailNoteNCharge}
+<!--  ./Term & conditions  -->
+		${TermNCondition}
 <!--  ./footer   -->
-${EmailFooter}
-
-
-
+		${EmailFooter}
  <!-- ./ Static EMailCLose Tag   -->
- ${emailCloseTag}
+ 		${emailCloseTag}
 `;
 
-	var Exchange,
-		Refund,
-		futureCredit = '';
+	var Exchange = `<!-- ./ Static EMail OPen Tag   -->
+		${emailOpenTag}
+<!-- ./ small header  -->
+		${EmailThanksHeader}
+
+<!-- ./		Note & charges part  -->
+		${EmailNoteNCharge}
+<!--  ./Term & conditions  -->
+		${TermNCondition}
+<!--  ./footer   -->
+		${EmailFooter}
+ <!-- ./ Static EMailCLose Tag   -->
+ 		${emailCloseTag}
+`;
+
+	var Refund = `<!-- ./ Static EMail OPen Tag   -->
+		${emailOpenTag}
+<!-- ./ small header  -->
+		${EmailThanksHeader}
+
+
+		 <tr>
+<td>
+<div class="scrollable-table" style="overflow-x: auto;
+font-family: 'Roboto', sans-serif;;
+max-width: 600px;
+margin: 20px 0px; ">
+<table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+		
+			${refundTableHeading}
+  <tbody id='appendCHildHere' >
+    
+
+		${newRefundFieldValues()}	
+  </tbody>
+</table>
+</td></tr>
+
+
+<!-- ./ Card Detial  -->
+${CardDetail}
+
+<!-- ./		Note & charges part  -->
+		${EmailNoteNCharge}
+<!--  ./Term & conditions  -->
+		${TermNCondition}
+<!--  ./footer   -->
+		${EmailFooter}
+ <!-- ./ Static EMailCLose Tag   -->
+ 		${emailCloseTag}
+`;
+
+	var futureCredit = `<!-- ./ Static EMail OPen Tag   -->
+		${emailOpenTag}
+<!-- ./ small header  -->
+		${EmailThanksHeader}
+
+
+		 <tr>
+<td>
+<div class="scrollable-table" style="overflow-x: auto;
+font-family: 'Roboto', sans-serif;;
+max-width: 600px;
+margin: 20px 0px; ">
+<table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+		
+			${newFutureCreditTableHeading}
+  <tbody id='appendCHildHere' >
+    
+
+		${newFutureCreditFieldValues()}	
+  </tbody>
+</table>
+</td></tr>
+
+
+<!-- ./ Card Detial  -->
+${CardDetail}
+
+<!-- ./		Note & charges part  -->
+		${EmailNoteNCharge}
+<!--  ./Term & conditions  -->
+		${TermNCondition}
+<!--  ./footer   -->
+		${EmailFooter}
+ <!-- ./ Static EMailCLose Tag   -->
+ 		${emailCloseTag}
+`;
 	return (
 		<>
 			{renderingEmail()}

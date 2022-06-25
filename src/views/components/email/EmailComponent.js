@@ -888,6 +888,24 @@ export const newBookingTableHeading = `	<thead style="font-size: 10px; line-heig
 			</tr>
 		</thead>`;
 
+export const refundTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+			<tr>
+				<th style="padding: 18px 24px; white-space: nowrap; ">First Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Middle Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Last Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Refund</th>
+				
+			</tr>
+		</thead>`;
+export const newFutureCreditTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+			<tr>
+				<th style="padding: 18px 24px; white-space: nowrap; ">First Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Middle Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Last Name</th>
+				<th style="padding: 18px 24px; white-space: nowrap; ">Confirmation</th>
+				
+			</tr>
+		</thead>`;
 export const BaggageFeeQuote = `<p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
    * Baggage Fee May Apply . Check with Airlines for the Most Updated Baggage Rule.
   </p> `;
