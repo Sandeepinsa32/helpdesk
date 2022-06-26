@@ -174,7 +174,7 @@ const NewBooking = ({inputList, setInputList, data}) => {
 											<TextField
 												required
 												name='dob'
-												label='DOB'
+												label='Date'
 												fullWidth
 												size='small'
 												onChange={(e) => {

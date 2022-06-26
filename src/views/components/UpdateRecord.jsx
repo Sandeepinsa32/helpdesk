@@ -87,6 +87,7 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 		_id,
 	} = data;
 
+	const yesterday = new Date(Date.now());
 	const phoneRegExp = /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/;
 	const [alreadyPresentCard, setAlreadyPresentCard] = useState([]);
 	const [inputList, setInputList] = useState([]);
@@ -357,7 +358,7 @@ const UpdateRecord = ({data, onClose, readOnly}) => {
 					'atleat 3 and atmost 4 character should be there', //validation message
 					(value) => value == 0 || value > 0
 				),
-				expiryDate: Yup.string().required('This field is required').nullable(),
+				expiryDate: Yup.date('please Enter valid Date').min(yesterday, 'Date cannot be in the past').required('This field is required').nullable(),
 				billingAddress: Yup.string().nullable(),
 			})
 		),
