@@ -31,7 +31,7 @@ export const emailOpenTag = ` <link rel="preconnect" href="https://fonts.googlea
 				<tbody>
 					<tr>
 						<td align='left' class='wrapper-header-logo'>
-							<a href='https://triphelpdesk.netlify.app/' target='_blank' style='text-decoration:none;'>
+							<a target="_blank" " href=' https://triphelpdesk.com/' target='_blank' style='text-decoration:none;'>
 								<img
 									alt='Logo'
 									class='header-logo'
@@ -50,15 +50,15 @@ export const emailOpenTag = ` <link rel="preconnect" href="https://fonts.googlea
 							style="font-family: 'Roboto', sans-serif;
     color: #0B4173;">
 							<div style='' class=' header-Address'>
-								<a href='mailto:info@triphelpdesk.com' target='_blank' style='margin:4px 0 ;text-decoration:none;color: #0B4173;'>
+								<a target="_blank" " href='mailto:info@triphelpdesk.com' target='_blank' style='margin:4px 0 ;text-decoration:none;color: #0B4173;'>
 									info@TripHelpDesk.com
 								</a>
 								<br />
-								<a href='https://triphelpdesk.com/' target='_blank' style='margin:4px 0 ;text-decoration:none;color: #0B4173;'>
+								<a target="_blank" " href='https://triphelpdesk.com/' target='_blank' style='margin:4px 0 ;text-decoration:none;color: #0B4173;'>
 									www.TripHelpDesk.com
 								</a>
 								<br />
-								<a href='tel:8662701413' target='_blank' style='margin:4px 0 ;text-decoration:none;color: #0B4173;'>
+								<a target="_blank" " href='tel:8662701413' target='_blank' style='margin:4px 0 ;text-decoration:none;color: #0B4173;'>
 									+1 8662701413
 								</a>
 								<br />
@@ -70,28 +70,7 @@ export const emailOpenTag = ` <link rel="preconnect" href="https://fonts.googlea
 			<hr style='margin:2px;height: 2px;background: #051A2E;border-radius: 10px;' />
 		</td>
 	</tr>
-      
-      <!--  ./Booking code && date     -->
-<tr><td>       
-  
-  
-  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
-				<tbody>
-          <tr>
-					<td align="left">
-					  <p>
-            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#000;text-decoration:none;float:left; ">Booking Code :</span>
-            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif; color:#5171ec;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;  font-family: 'Roboto', sans-serif;; float:left;">THD457S58</span>
-          </p>
-					</td>
-          <td align="right">
-					  <p><span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#555555;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#000;text-decoration:none;width:100%;text-align:right; ">May 12, 2022 </span></p>
-					</td>
-				</tr>
-			</tbody></table>
-        
-        
-        </td></tr> `;
+`;
 
 export const emailCloseTag = `</td></tr>
 </tbody>
@@ -124,10 +103,8 @@ export const EmailThanksHeader = `<tr>
 									<td align="left" style="font-family: 'Roboto', sans-serif;font-size:14px;line-height:22px;color:#000000">
 								
 		  <p style="  margin:0px; font-family: 'Roboto', sans-serif;">
-       Thank you for choosing Triphelpdesk for your travel arrangements. We truly appreciate your business.
-        As per our conversation and agreed, we have processed your reservation under the confirmation code 
-        Your flight is now booked and is in process. Please note that you will receive the E-Ticket confirmation shortly in a separate email once the process is finalized.
-		  If you need any assistance regarding changes, please contact us at <b style=" color:#5171ec;"> +1 866-270-1413</b>  or email at  <a href="https://www.polygon.com/2017/3/1/14773542/nintendo-switch-review?utm_medium=email&amp;utm_campaign=Switch&amp;utm_content=Switch+Version+A+CID_f9389cd333fb2704f038bc138f229aa9&amp;utm_source=cm_email&amp;utm_term=Nintendo%20Switch%20review" style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#ff0052;text-decoration:none;" target="_blank"><b style=" color:#5171ec;">info@triphelpdesk.com</b> </a>
+       
+      Thank you for choosing Triphelpdesk for your travel arrangements. We truly appreciate your business. As per our conversation and agreed, we have processed your reservation under the confirmation code Your flights are now being booked and you will receive a confirmation email with all the details once confirmed and completed. If you need any assistance regarding changes, please contact us at  <b style=" color:#5171ec;"> +1 866-270-1413</b>  or email at  <a target="_blank" " href='mailto:info@triphelpdesk.com' style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#ff0052;text-decoration:none;" target="_blank"><b style=" color:#5171ec;">info@triphelpdesk.com</b> </a>
       </p>
                                        
 									</td>
@@ -158,13 +135,13 @@ export const EmailAuthBtn = `<tr>
                   <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
 				<tbody><tr>
 					<td align="center">
-             <p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
-   * Baggage Fee May Apply . Check with Airlines for the Most Updated Baggage Rule.
-   </p>
+         <p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
+   * Please reply here with "I AGREE" to authorize the booking of the itineraries below and issuance of tickets for all passengers attached to each flight, the charge to your below mentioned card (may be seen in several separate charges), and to accept our terms and conditions found below. 
+   </p> 
 					<p>
            
 
-           <a style="
+           <a target="_blank" " style="
                   border: 0;cursor: pointer;
                   color: white;
                   text-decoration:none;
@@ -214,14 +191,15 @@ export const EmailNoteNCharge = `<tr><td>
              <div>
           <p class="header-para-12x" style="font-size:12px; line-height:18px; font-weight:500;color: #0B4173;margin-bottom:10px;margin:0px;border-radius:3px;padding:10px 5px; font-family: 'Roboto', sans-serif;">
             
-              <b>Note:</b> Charges will show up as Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><u><a href="tel:8662701413"> 866-270-1413</a></u></b> or email
-              <b><u><a href="mailto:info@triphelpdesk.com">info@triphelpdesk.com </a></u></b>
+              <b>Note:</b> Charges will show up as Valalto / Triphelpdesk. on your credit card statement (for the same or lesser the Charge For Processing amount Per airline/travel agency request, in some cases there will be multiple charges on your statement, but all equaling the total Charge For Processing  amount. While reviewing your statement, if you have any questions on your charges do not hesitate to reach out to your agent or our help desk @<b><u><a target="_blank" " href="tel:8662701413"> 866-270-1413</a></u></b> or email
+              <b><u><a target="_blank" " href="mailto:info@triphelpdesk.com">info@triphelpdesk.com </a></u></b>
       <br/>
       <br/>
       <b>Changes and Cancellations :  </b>are subject to airline change fee if any / fare difference if any / service fee if any.  Please consult your agent at time of booking to find out more.
       <br/>
       <br/>
-      <b>24 Hour Cancelation Policy:</b> From time of booking you can cancel your ticket within 24 hours for a full refund (travel inside 48 hours will not allow for a full refund and subject to fees and THD/Airline Policy)
+      Any Service Fee charged by Valalto / Triphelpdesk will be non-refundable after 24 Hours of the booking.
+
       <br/>
       <br/>
       Trip Help Desk powered by Valalto Inc. is a service provider for all your travel needs. We're happy to help on new bookings, old bookings, and any service imaginable in the travel industry. If you need help, we're here!
@@ -275,16 +253,16 @@ export const TermNCondition = `<tr>
   <div class="Term-condtion-Div" style="height: 400px; max-height: 100%; overflow-y: auto !important;"> 
       
     
-     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px; font-weight: 600; text-align: center !important;"><a href="#" style="color: #0B4173;">
+     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px; font-weight: 600; text-align: center !important;"><a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;">
     Welcome to www.TripHelpDesk.com </a></p> <br/>
     
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
-    The  <a href="#" style="color: #0B4173;">www.TripHelpDesk.com </a>      website (the "Site") is comprised of various web pages operated by TripHelpDesk,Inc. ("THD").  <a href="#" style="color: #0B4173;">www.TripHelpDesk.com</a>   is offered to you conditioned on your acceptance without modification of the terms, conditions, and notices contained herein (the "Terms"). Your use of <a href="#" style="color: #0B4173;"> www.TripHelpDesk.com</a>    constitutes your agreement to all such Terms. Please read these terms carefully, and keep a copy of them for your reference.  
+    The  <a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;">www.TripHelpDesk.com </a>      website (the "Site") is comprised of various web pages operated by TripHelpDesk,Inc. ("THD").  <a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;">www.TripHelpDesk.com</a>   is offered to you conditioned on your acceptance without modification of the terms, conditions, and notices contained herein (the "Terms"). Your use of <a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;"> www.TripHelpDesk.com</a>    constitutes your agreement to all such Terms. Please read these terms carefully, and keep a copy of them for your reference.  
       </p>
 
     
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px; font-weight: 600; text-align: center !important;">
-      PLEASE READ THIS TERMS OF SERVICE AGREEMENT CAREFULLY. BY USING THE <a href="#" style="color: #0B4173;">HTTPS://WWW.TRIPHELPDESK.COM </a> WEBSITE AND RELATED WEB PAGES, YOU AGREE THAT THIS AGREEMENT IS ENFORCEABLE LIKE ANY WRITTEN CONTRACT SIGNED BY YOU. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, CLICK ON THE BUTTON THAT INDICATES THAT YOU DO NOT AGREE TO ACCEPT THE TERMS OF THIS AGREEMENT AND DO NOT USE THE SITE.
+      PLEASE READ THIS TERMS OF SERVICE AGREEMENT CAREFULLY. BY USING THE <a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;">HTTPS://WWW.TRIPHELPDESK.COM </a> WEBSITE AND RELATED WEB PAGES, YOU AGREE THAT THIS AGREEMENT IS ENFORCEABLE LIKE ANY WRITTEN CONTRACT SIGNED BY YOU. IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, CLICK ON THE BUTTON THAT INDICATES THAT YOU DO NOT AGREE TO ACCEPT THE TERMS OF THIS AGREEMENT AND DO NOT USE THE SITE.
     </p>
      
     
@@ -292,7 +270,7 @@ export const TermNCondition = `<tr>
 </p>
     
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
-      1.1 ABOUT TRIP HELP DESK.<a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a> is an E-Commerce Travel Agency whose goal is to provide great service and discounted fares to our customers for all means of travel, logging.<br/> <br/>
+      1.1 ABOUT TRIP HELP DESK.<a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a> is an E-Commerce Travel Agency whose goal is to provide great service and discounted fares to our customers for all means of travel, logging.<br/> <br/>
 1.2 RESPONSIBILITIES. Valatlo.com acts only as an agent for the airlines and other suppliers of travel services shown on your itinerary. These suppliers may include, without limitation, the airlines, hotels, rental car companies and other suppliers that provide travel or other services through this Site (such third parties collectively referred to as the "Suppliers"). We are not responsible for the acts or omissions of such Suppliers or their subcontractors or their failure to provide services, adhere to their own schedules, or honor their contracts. Nor are we responsible for any omissions, delays, failures to make connections, re-routings, or acts of any governmental authority, or for damage and/or delay due to causes beyond our control such as labor disputes, bankruptcy, defaults, mechanical breakdowns, pandemics, epidemics, quarantines, government restraints, weather problems, volcanic activity, earthquakes, terrorism, or threat of terrorism. Each Supplier has its own terms and conditions that are applicable to your particular arrangements in addition to this Agreement. When using our services, you are also agreeing to the Supplier’s terms and conditions as well so please review them carefully. 
 
     </p>
@@ -322,7 +300,7 @@ Portion or feature of our Services at any time in our sole discretion and withou
 </p>
     
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
-      3.1 Visiting <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a>or sending emails to THD constitutes electronic communications. You consent to receive electronic communications and you agree that all agreements, notices, disclosures and other communications that we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communications be in writing.
+      3.1 Visiting <a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a>or sending emails to THD constitutes electronic communications. You consent to receive electronic communications and you agree that all agreements, notices, disclosures and other communications that we provide to you electronically, via email and on the Site, satisfy any legal requirement that such communications be in writing.
     </p>
     
     
@@ -451,7 +429,7 @@ Section 6 - Credit Card Payment Processing
     
       
 12.2 Free cancellation up to 24 hours after booking. To cancel simply Email 
-<a href="#" style="color: #0B4173;">info@TripHelpDesk.com</a> with your order number and we will process the cancellation right away.  Some countries may also require a visa and/or health card. It is the passenger's responsibility to have all necessary travel documents in possession at check-in. Please note, Airline tickets, hotels and car rentals are subject to the published conditions of carriage and rules, including but not limited to cancellation policies, of the applicable airline, hotel or car rental service. Airlines retain the right to adjust flight times and schedules at any time - schedule changes can result in an itinerary that falls outside of contractual agreements. Airlines may also in their discretion change or cancel flights or itineraries. Please review the applicable Supplier’s Terms of Use. THD will make no refund in the event of any delay, cancellation, overbooking, strike, force majeure or other causes beyond our direct control, and THD has no responsibility for any additional expenses, omissions, delays, re-routing or acts of any government or authority.   <br/><br/>
+<a target="_blank" " href='mailto:info@triphelpdesk.com' style="color: #0B4173;">info@TripHelpDesk.com</a> with your order number and we will process the cancellation right away.  Some countries may also require a visa and/or health card. It is the passenger's responsibility to have all necessary travel documents in possession at check-in. Please note, Airline tickets, hotels and car rentals are subject to the published conditions of carriage and rules, including but not limited to cancellation policies, of the applicable airline, hotel or car rental service. Airlines retain the right to adjust flight times and schedules at any time - schedule changes can result in an itinerary that falls outside of contractual agreements. Airlines may also in their discretion change or cancel flights or itineraries. Please review the applicable Supplier’s Terms of Use. THD will make no refund in the event of any delay, cancellation, overbooking, strike, force majeure or other causes beyond our direct control, and THD has no responsibility for any additional expenses, omissions, delays, re-routing or acts of any government or authority.   <br/><br/>
 12.3 Orders which are not canceled within 24 hours will not be refundable. If an order has not been canceled within 24 hours, you may be eligible for a Travel Credit. This Travel Credit and any transportation covered by it are subject to the applicable tariffs, conditions of carriage, and rules and regulations of the Airlines effective at the time of ticket issuance. 
 
  
@@ -469,10 +447,10 @@ Section 6 - Credit Card Payment Processing
       
       
       
-      13.1 <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a> may contain links to other websites ("Linked Sites"). The Linked Sites are not under the control of THD and THD is not responsible for the contents of any Linked Site, including without limitation any link contained in a Linked Site, or any changes or updates to a Linked Site. THD is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement by THD of the site or any association with its operators.  
+      13.1 <a target="_blank" " href='https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a> may contain links to other websites ("Linked Sites"). The Linked Sites are not under the control of THD and THD is not responsible for the contents of any Linked Site, including without limitation any link contained in a Linked Site, or any changes or updates to a Linked Site. THD is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement by THD of the site or any association with its operators.  
 
       <br/> <br/>
-      13.2 Certain services made available via <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a> are delivered by third party sites and organizations. By using any product, service or functionality originating from the www.TripHelpDesk.com domain, you hereby acknowledge and consent that THD may share such information and data with any third party with whom THD has a contractual relationship to provide the requested product, service or functionality on behalf of <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a> users and customers. For more information about information collected and shared by THD, please review our Privacy Policy found <a href="#" style="color: #0B4173;"> here.  </a>
+      13.2 Certain services made available via <a target="_blank" " href=' https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a> are delivered by third party sites and organizations. By using any product, service or functionality originating from the www.TripHelpDesk.com domain, you hereby acknowledge and consent that THD may share such information and data with any third party with whom THD has a contractual relationship to provide the requested product, service or functionality on behalf of <a target="_blank" " href='https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a> users and customers. For more information about information collected and shared by THD, please review our Privacy Policy found <a target="_blank" " href='https://triphelpdesk.com/terms-and-conditions/' style="color: #0B4173;"> here.  </a>
 
       
 
@@ -522,7 +500,7 @@ Section 6 - Credit Card Payment Processing
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
       
       16.1 You are granted a non-exclusive, non-transferable, revocable license to access and use 
-      <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a>  strictly in accordance with these terms of use. As a condition of your use of the Site, you warrant to THD that you will not use the Site for any purpose that is unlawful or prohibited by these Terms. You may not use the Site in any manner which could damage, disable, overburden, or impair the Site or interfere with any other party's use and enjoyment of the Site. You may not obtain or attempt to obtain any materials or information through any means not intentionally made available or provided for through the Site.  
+      <a target="_blank" " href='https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a>  strictly in accordance with these terms of use. As a condition of your use of the Site, you warrant to THD that you will not use the Site for any purpose that is unlawful or prohibited by these Terms. You may not use the Site in any manner which could damage, disable, overburden, or impair the Site or interfere with any other party's use and enjoyment of the Site. You may not obtain or attempt to obtain any materials or information through any means not intentionally made available or provided for through the Site.  
 
     
       
@@ -555,7 +533,7 @@ Section 18 - International Users
       
       
       
-      18.1 The Service is controlled, operated and administered by THD from our offices within the USA. If you access the Service from a location outside the USA, you are responsible for compliance with all local laws. You agree that you will not use the THD Content accessed through <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a>  in any country or in any manner prohibited by any applicable laws, restrictions or regulations.  
+      18.1 The Service is controlled, operated and administered by THD from our offices within the USA. If you access the Service from a location outside the USA, you are responsible for compliance with all local laws. You agree that you will not use the THD Content accessed through <a target="_blank" " href='https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a>  in any country or in any manner prohibited by any applicable laws, restrictions or regulations.  
 
   
       
@@ -570,10 +548,9 @@ Section 18 - International Users
     
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
       
-      <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a> 
       
-      19.1 We have no special knowledge regarding foreign entry requirements, unsafe conditions, terrorism, health hazards, weather hazards, supplier bankruptcies, or the suitability for a disabled person of any portion of any trip. For information concerning possible dangers at destinations, we recommend going to the State Department travel website at   <a href="#" style="color: #0B4173;"> www.travel.state.gov.</a>  For information about passports and visas, and possible dangers at your destinations, go to:  
-  <a href="#" style="color: #0B4173;">https://travel.state.gov/content/travel.html</a>  click on "Find International travel Information” then click on "Country Information", and fill in the name of the destination country. For medical and health information, we recommend contacting the Centers for Disease Control at (877) FYI-TRIP or   <a href="#" style="color: #0B4173;">www.cdc.gov/travel.</a>  You assume full and complete responsibility for checking and verifying any and all passport, visa, vaccination, or other entry requirements of your destination and your connecting points, and all conditions regarding health, safety, security, political stability, and labor or civil unrest at such destination. Many countries require your passport to be valid for six months beyond the date of entry. 
+      19.1 We have no special knowledge regarding foreign entry requirements, unsafe conditions, terrorism, health hazards, weather hazards, supplier bankruptcies, or the suitability for a disabled person of any portion of any trip. For information concerning possible dangers at destinations, we recommend going to the State Department travel website at   <a target="_blank" " href="https://www.travel.state.gov" style="color: #0B4173;"> www.travel.state.gov.</a>  For information about passports and visas, and possible dangers at your destinations, go to:  
+  <a target="_blank" "  href="https://travel.state.gov/content/travel.html" style="color: #0B4173;">https://travel.state.gov/content/travel.html</a>  click on "Find International travel Information” then click on "Country Information", and fill in the name of the destination country. For medical and health information, we recommend contacting the Centers for Disease Control at (877) FYI-TRIP or   <a target="_blank" " href="https://www.cdc.gov/travel" style="color: #0B4173;">www.cdc.gov/travel.</a>  You assume full and complete responsibility for checking and verifying any and all passport, visa, vaccination, or other entry requirements of your destination and your connecting points, and all conditions regarding health, safety, security, political stability, and labor or civil unrest at such destination. Many countries require your passport to be valid for six months beyond the date of entry. 
 
       
       <br/> <br/>
@@ -710,7 +687,7 @@ User and THD with respect to the Site. A printed version of this agreement and o
     
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
       
-      <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a> 
+      <a target="_blank" " href='https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a> 
       
       
       <br/> <br/>
@@ -726,7 +703,7 @@ User and THD with respect to the Site. A printed version of this agreement and o
     <p class="para-font" style="font-family: 'Roboto', sans-serif; ;font-size: 12px; text-align: justify; text-rendering: optimizespeed; text-transform: capitalize; line-height: 20px;">
       
     
-      27.1 Your use of   <a href="#" style="color: #0B4173;"> www.Triphelpdesk.com </a>  is subject to THD's Privacy Policy. For more information about THD’s privacy practices, please read our Privacy Policy, which is incorporated by reference in this Agreement and can be accessed <a href="#" style="color: #0B4173;"> here</a>. The Privacy Policy outlines what information we collect, how we collect the information, and how we use the information. By accessing or using the Site, you agree to the use of your information as delineated in the Privacy Policy. 
+      27.1 Your use of   <a target="_blank" " href='https://triphelpdesk.com/' style="color: #0B4173;"> www.Triphelpdesk.com </a>  is subject to THD's Privacy Policy. For more information about THD’s privacy practices, please read our Privacy Policy, which is incorporated by reference in this Agreement and can be accessed <a target="_blank" " href='https://triphelpdesk.com/terms-and-conditions/' style="color: #0B4173;"> here</a>. The Privacy Policy outlines what information we collect, how we collect the information, and how we use the information. By accessing or using the Site, you agree to the use of your information as delineated in the Privacy Policy. 
 
       
       <br/> <br/>
@@ -818,10 +795,12 @@ Revised December 31, 2021 </p>
 </td>
                         </tr>`;
 
-export const EmailFooter = `<tr><td> <hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/>
+export const EmailFooter = `<tr><td>
+<!-- <hr style="margin:2px;height: 2px;background: #051A2E;border-radius: 10px;"/> -->
             
              <footer style="
   padding:10px;
+  padding-top:25px;
   background-size: cover;
   background-image: linear-gradient(
       rgba(255, 255, 255, 0.9),
@@ -836,7 +815,7 @@ export const EmailFooter = `<tr><td> <hr style="margin:2px;height: 2px;backgroun
                <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="responsive-table" style="max-width:600px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse !important;">
                 <tbody><tr>
                     <td align="center" class="wrapper-header-logo">
-     <a href="https://triphelpdesk.netlify.app/" target="_blank" style="text-decoration:none;">
+     <a target="_blank" " href=" https://triphelpdesk.com/" target="_blank" style="text-decoration:none;">
                         <img alt="Logo" class="header-logo" src="https://i.ibb.co/0t2DwRt/Logo.png" width="270" border="0" style="width:100%;max-width:270px;height:auto;-ms-interpolation-mode:bicubic;border-width:0;line-height:100%;outline-style:none;text-decoration:none;"/> </a>
                           
                       
@@ -849,7 +828,7 @@ export const EmailFooter = `<tr><td> <hr style="margin:2px;height: 2px;backgroun
                 <td align="center" valign="top" class="wrapper-header-address" style="font-family: 'Roboto', sans-serif;
     color: #0B4173;">     
                  
-                       <a href="#" target="_blank" style="margin:4px 0 ; padding: 0;text-decoration:none;color: #0B4173;">
+                       <a target="_blank" " href='https://triphelpdesk.com/' target="_blank" style="margin:4px 0 ; padding: 0;text-decoration:none;color: #0B4173;">
 164 20th Street, Suite 2B, Brooklyn, NY
           11232, USA</a>
 
@@ -863,46 +842,46 @@ export const EmailFooter = `<tr><td> <hr style="margin:2px;height: 2px;backgroun
     
   </table>
       <div style="text-align: center">
-        <span style="font-size: 18px;font-weight: bold"><a href="" style="color: #0B4173;">TripHelpDesk</a>
+        <span style="font-size: 18px;font-weight: bold"><a target="_blank" " href="" style="color: #0B4173;">TripHelpDesk</a>
         </span>
         <span style="font-size: 16px; font-weight: bold; color: #0B4173;">
           powered by Valalto</span>
       </div>
       <p style=" line-height:18px;text-align:center;  margin-bottom:0px; color: #0B4173;font-size: 14px;">
               &copy; Copyright 2022
-              <a href="https://valalto.com/" style="line-height:18px;color: #0B4173;font-size: 14px; font-weight:bold;">
-                Valalto Inc.</a>, All Rights Reserved.
+             
+                Valalto Inc., All Rights Reserved.
             </p>
       </footer>`;
 
 export const newBookingTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
 			<tr>
-				<th style="padding: 18px 24px; white-space: nowrap; ">First Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Middle Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Last Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Ticket</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Confirmation</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">DoB</th>
-        	<th style="padding: 18px 24px; white-space: nowrap; ">Price</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">First Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Middle Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Last Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Ticket</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Confirmation</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">DoB</th>
+        	<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Price</th>
 				
 			</tr>
 		</thead>`;
 
 export const refundTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
 			<tr>
-				<th style="padding: 18px 24px; white-space: nowrap; ">First Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Middle Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Last Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Refund</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">First Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Middle Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Last Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Refund</th>
 				
 			</tr>
 		</thead>`;
 export const newFutureCreditTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
 			<tr>
-				<th style="padding: 18px 24px; white-space: nowrap; ">First Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Middle Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Last Name</th>
-				<th style="padding: 18px 24px; white-space: nowrap; ">Confirmation</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">First Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Middle Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Last Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Confirmation</th>
 				
 			</tr>
 		</thead>`;

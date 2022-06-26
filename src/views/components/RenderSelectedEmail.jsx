@@ -37,6 +37,7 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		formik,
 		selectedCurrency,
 	} = data;
+	console.log(userData);
 	const {email, name, ccLastDigit, totalAmount} = values;
 	const {submitForm} = formik;
 
@@ -74,12 +75,14 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 	}
 
 	function currentDate() {
+		const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 		let today = new Date();
 		let dd = String(today.getDate()).padStart(2, '0');
-		let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		let mm = String(monthNames[today.getMonth()]);
+
 		let yyyy = today.getFullYear();
 
-		today = mm + '/' + dd + '/' + yyyy;
+		today = mm + ' ' + dd + ', ' + yyyy;
 		return today;
 	}
 
@@ -94,15 +97,15 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 
 			tableString =
 				tableString +
-				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
-	   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
-		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
-		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
-		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.ticket}</td>
-		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.confirmation}</td>
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.firstName}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.middleName}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.lastName}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.ticket}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.confirmation}</td>
       
-		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.dob}</td>
-		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${selectedCurrency} ${x.price && x.price + '.00'}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.dob}</td>
+		  <td style=" padding: 10px;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" > ${' '} ${selectedCurrency}${x.price && x.price + '.00'}</td>
 		</tr>`;
 		});
 
@@ -139,11 +142,11 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			}
 			tableString =
 				tableString +
-				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
-	   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
-		   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
-		 <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
- <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.refund}</td>
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
+		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.refund}</td>
 		</tr>`;
 		});
 
@@ -160,11 +163,11 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 
 			tableString =
 				tableString +
-				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:center;border: 1px solid #fff !important;">
-	   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
-		   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
-		   <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
-		  <td style=" padding: 18px 24px;font-size:14px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" > ${x.confirmation}</td>
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" > ${x.confirmation}</td>
 		</tr>`;
 		});
 
@@ -199,18 +202,18 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 					(row, index) =>
 						`
               <tr>
-		  <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
+		  <td class="header-para-12x" style=" padding: 0;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
 
 			<b>Tue, 26 Apr </b> Operated By ${row.flt.operated_by}-${row.flt.duration.hours && row.flt.duration.hours + 'h' + ' ' + row.flt.duration.minutes + ' m'}
 		</td>
 	</tr>
 	 <tr>
-           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
+           <td class="header-para-12x" style=" padding:0;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
 			<b>Departing:</b> ${row.dep.airportname} , ${row.dep.cityname} ${row.dep.airportcode} at ${row.flt.departure.string}
 		</td>
 	</tr>
 	 <tr>
-           <td class="header-para-12x" style=" padding: .625em;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
+           <td class="header-para-12x" style=" padding: 0;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
 			<b> Arriving: </b>${row.arr.airportname} , ${row.arr.cityname} ${row.arr.airportcode} at ${row.flt.arrival.string}
 	<hr/>	</td>
       
@@ -271,11 +274,37 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
          </tr>
       </table>
       </td></tr>`;
+	const BookingCode = `      
+<tr><td>       
+  
+  
+  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
+				<tbody>
+          <tr>
+					<td align="left">
+					  <p>
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#000;text-decoration:none;float:left; ">Booking Code :</span>
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif; color:#5171ec;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;  font-family: 'Roboto', sans-serif;; float:left;">${
+				userData.bookingId
+			}</span>
+          </p>
+					</td>
+          <td align="right">
+					  <p><span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#555555;font-size:16px;line-height:24px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#000;text-decoration:none;width:100%;text-align:right; ">${currentDate()}</span></p>
+					</td>
+				</tr>
+			</tbody></table>
+        
+        
+        </td></tr> `;
 
 	var newBooking = `
 
   <!-- ./ Static EMail OPen Tag   -->
 		${emailOpenTag}
+		
+      <!--  ./Booking code && date     -->
+	  ${BookingCode}
 <!-- ./ small header  -->
 		${EmailThanksHeader}
 
