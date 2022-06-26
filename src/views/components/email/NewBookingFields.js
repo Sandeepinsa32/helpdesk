@@ -86,7 +86,7 @@ const NewBooking = ({inputList, setInputList, data}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Confirmation', 'DoB', 'Price', 'Action'].map((th) => (
+								{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Confirmation', 'Date of Birth', 'Price', 'Action'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
