@@ -198,9 +198,10 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
          <table class="tableoutter" style="margin: 0 auto;padding:1rem;">
    ${
 		pnrData !== null && pnrData !== undefined && pnrData !== [] && pnrData.length > 0
-			? pnrData.map(
-					(row, index) =>
-						`
+			? pnrData
+					.map(
+						(row, index) =>
+							`
               <tr>
 		  <td class="header-para-12x" style=" padding: 0;font-size:14px;color:#0B4173;font-weight:400;" scope="row">
 
@@ -219,7 +220,8 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
       
 	</tr> 
   `
-			  )
+					)
+					.join('')
 			: `
 				<table
 					class='tableoutter'
