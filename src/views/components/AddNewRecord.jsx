@@ -109,9 +109,9 @@ const AddNewRecord = ({isView, data}) => {
 		airlineCode: '',
 		airlineLocator: '',
 		//
-		bookingType: '',
+		bookingType: null,
 		bookedOn: 'web',
-		fareType: '',
+		fareType: null,
 		//
 		productType: '',
 
@@ -166,18 +166,19 @@ const AddNewRecord = ({isView, data}) => {
 		productType: Yup.array()
 			.of(
 				Yup.object().shape({
-					property: Yup.string().oneOf(['flight', 'car', 'hotel', 'insurance', 'addon'], 'Invalid Product type Please Refresh page').required('Required'),
+					bookingType: null,
+					property: Yup.string().oneOf(['flight', 'car', 'hotel', 'insurance', 'addon', null], 'Invalid Product type Please Refresh page').required('Required'),
 					propertyMarkup: Yup.number('invalid Markup'),
 				})
 			)
 			.min(1, 'please Choose at-least one Product type'),
 
 		//dropdown
-		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy'], 'Fare Type Value is diffrent '),
+		fareType: Yup.string().oneOf(['publish', 'private', 'fxl', 'dummy', null], 'Fare Type Value is diffrent ').nullable(),
 		//.required('This field is Required'),
-		bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'void', 'addon'], 'input should be one of below value'),
+		bookingType: Yup.string().oneOf(['new', 'exchange', 'refund', 'void', 'addon', null], 'input should be one of below value').nullable(),
 		//.required('This field is Required'),
-		bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso'], 'input should be one of below value'),
+		bookedOn: Yup.string().oneOf(['web', 'trippro', 'skybird', 'picasso', null], 'input should be one of below value').nullable(),
 		//.required('This field is Required'),
 
 		//currency
