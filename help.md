@@ -76,3 +76,10 @@
 28. show loader on email success --done
 29. fill values in email --done
 30. re-design email
+
+28/06/22
+
+1. expiry date
+2. alternativve date remove auto file and validation remove
+3. value null
+4. email
