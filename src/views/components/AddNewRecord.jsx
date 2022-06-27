@@ -149,12 +149,12 @@ const AddNewRecord = ({isView, data}) => {
 
 		alternateEmail: Yup.string()
 			.email('Invalid email address')
-			.notOneOf([Yup.ref('email')], 'alternative Email should be unique')
+			//.notOneOf([Yup.ref('email')], 'alternative Email should be unique')
 			.nullable(),
 
 		alternatePhone: Yup.string()
 			.matches(phoneRegExp, 'Phone number is not valid')
-			.notOneOf([Yup.ref('phone')], 'alternative phone should be unique')
+			//.notOneOf([Yup.ref('phone')], 'alternative phone should be unique')
 			.nullable(),
 
 		pnrNo: Yup.string().max(255),
@@ -317,7 +317,7 @@ const AddNewRecord = ({isView, data}) => {
 					)
 					.nullable()
 					.required('required'),
-				expiryDate: Yup.date('please Enter valid Date').min(yesterday, 'Date cannot be in the past').nullable().required(' required'),
+				expiryDate: Yup.date('please Enter valid Date').min(yesterday, 'Date cannot be in the past').nullable().required(' required').default(undefined),
 				billingAddress: Yup.string().nullable(),
 			})
 		),
@@ -433,7 +433,6 @@ const AddNewRecord = ({isView, data}) => {
 															name='cardHolderName'
 															label='NAME ON CARD'
 															fullWidth
-															autoComplete='cc-name'
 															onChange={(e) => {
 																handleCardInput(e, i);
 															}}
@@ -464,7 +463,6 @@ const AddNewRecord = ({isView, data}) => {
 															name='cvv'
 															label='CVV'
 															fullWidth
-															autoComplete='cc-csc'
 															onChange={(e) => handleCardInput(e, i)}
 															value={inputList[i].cvv}
 															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cvv'] : null)}
@@ -487,7 +485,6 @@ const AddNewRecord = ({isView, data}) => {
 															name='cardNumber'
 															label='CARD NUMBER'
 															fullWidth
-															autoComplete='cc-number'
 															onChange={(e) => handleCardInput(e, i)}
 															value={inputList[i].cardNumber}
 															error={Boolean(submitCount > 0 && err.length > 0 && err[i] !== (undefined && null) ? err[i]['cardNumber'] : null)}

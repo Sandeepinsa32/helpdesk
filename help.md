@@ -80,6 +80,4 @@
 28/06/22
 
 1. expiry date
-2. alternativve date remove auto file and validation remove
-3. value null
-4. email
+2. email

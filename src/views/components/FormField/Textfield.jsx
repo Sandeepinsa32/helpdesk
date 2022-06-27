@@ -16,6 +16,7 @@ const TextfieldWrapper = ({name, currenyField, ...otherProps}) => {
 		...field,
 		...otherProps,
 		fullWidth: true,
+		autoComplete: 'off',
 		variant: 'outlined',
 	};
 
