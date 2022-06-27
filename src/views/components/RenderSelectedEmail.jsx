@@ -17,6 +17,10 @@ import {
 	newBookingTableHeading,
 	newFutureCreditTableHeading,
 	BaggageFeeQuote,
+	ExchangeHeading,
+	ExchangeWelcomeHeader,
+	ExchangeTableHeading,
+	IAgreeQuote,
 } from './email/EmailComponent';
 const RenderSelectedEmail = ({data, values, setLoader}) => {
 	const {
@@ -121,12 +125,16 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			}
 			tableString =
 				tableString +
-				`<tr>
-		  <td >${x.firstName}</td>
-		  <td>${x.middleName}</td>
-		  <td>${x.lastName}</td>
-		  <td>${x.ticket}</td>
-		  <td>${x.price}</td>
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.firstName}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.middleName}</td>
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.lastName}</td>
+		  
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.dob}</td>
+		 
+		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '}${x.confirmation}</td>
+      
+		  <td style=" padding: 10px;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" > ${' '} ${selectedCurrency}${x.price && x.price + '.00'}</td>
 		</tr>`;
 		});
 
@@ -349,9 +357,47 @@ margin: 20px 0px; ">
 
 	var Exchange = `<!-- ./ Static EMail OPen Tag   -->
 		${emailOpenTag}
-<!-- ./ small header  -->
-		${EmailThanksHeader}
+		  <!--  ./Booking code && date     -->
+	  ${BookingCode}
 
+	<!--  ./Exchange Heading     -->
+${ExchangeHeading}		
+
+<!-- ./ small header  -->
+		${ExchangeWelcomeHeader}
+
+
+<!--   ./ input field custom table     -->
+<tr>
+<td>
+<div class="scrollable-table" style="overflow-x: auto;
+font-family: 'Roboto', sans-serif;;
+max-width: 600px;
+margin: 20px 0px; ">
+<table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+		${ExchangeTableHeading}
+<tbody id="appendCHildHere" style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+
+    ${newExchangeFieldValues()}
+    
+    </tbody>
+</table>
+</div>
+    ${BaggageFeeQuote}
+	<br/>
+<br/>
+</td>
+</tr>
+		
+
+<!--    ./  I Agree Quote    -->
+${IAgreeQuote}
+
+
+<!--    ./ card details    -->
+        ${CardDetail}
+		<!--   ./ pnr table     -->
+		${PnrTable}   
 <!-- ./		Note & charges part  -->
 		${EmailNoteNCharge}
 <!--  ./Term & conditions  -->

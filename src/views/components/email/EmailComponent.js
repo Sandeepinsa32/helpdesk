@@ -163,6 +163,25 @@ export const EmailAuthBtn = `<tr>
                   </div>
         </td></tr>`;
 
+export const IAgreeQuote = `<tr>
+        <td>
+             
+
+
+                  <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+				<tbody><tr>
+					<td align="center">
+         <p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
+   * Please reply here with "I AGREE" to authorize the booking of the itineraries below and issuance of tickets for all passengers attached to each flight, the charge to your below mentioned card (may be seen in several separate charges), and to accept our terms and conditions found below. 
+   </p> 
+					
+					</td>
+				</tr>
+			</tbody></table>
+     
+                  </div>
+        </td></tr>`;
+
 export const EmailNoteNCharge = `<tr><td>
   	<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
 				<tbody><tr>
@@ -888,3 +907,81 @@ export const newFutureCreditTableHeading = `	<thead style="font-size: 10px; line
 export const BaggageFeeQuote = `<p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
    * Baggage Fee May Apply . Check with Airlines for the Most Updated Baggage Rule.
   </p> `;
+
+//  exchange email componet stat
+export const ExchangeHeading = `<tr><td>       
+  
+  
+  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
+				<tbody>
+          <tr>
+					<td align="left">
+					
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;color:#000;text-decoration:none;float:left; ">Exchange Request !</span>
+      
+					</td>
+         
+				</tr>
+			</tbody></table>
+        
+        
+        </td></tr>`;
+
+export const ExchangeWelcomeHeader = `<tr>
+   <td align="center" valign="top">
+
+			<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+				<tbody><tr>
+					<td align="center" style="padding-top:10px">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+						<tbody><tr>
+							<td bgcolor="#ffffff" align="center" style="border-radius:10px;padding:15px;border:2px solid #efefef;
+      background-size: cover;
+      background-image: linear-gradient(
+      rgba(239, 239, 239, 0.9),
+                                  
+      rgba(239, 239, 239, 0.7)
+    ),
+    url('https://i.ibb.co/H7jc6Q7/download.png');
+      background-position: 50% 59%;
+      background-repeat: no-repeat;
+      ">
+							<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+								<tbody><tr>
+									<td align="left" style="font-family: 'Roboto', sans-serif;font-size:14px;line-height:22px;color:#000000">
+								
+		  <p style="  margin:0px; font-family: 'Roboto', sans-serif;">
+       
+      Per your request, Trip Help Desk will be changing your original itinerary to the new details mentioned below.
+Once completed your agent will notify you and you'll be able to access the reservation on the airlines website to view and manage your new flight.
+If you need any assistance regarding additional changes, please contact us at  <b style=" color:#5171ec;"> +1 866-270-1413</b>  or email at  <a target="_blank" " href='mailto:info@triphelpdesk.com' style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#ff0052;text-decoration:none;" target="_blank"><b style=" color:#5171ec;">info@triphelpdesk.com</b> </a>
+      </p>
+                                       
+									</td>
+								</tr>
+							
+							</tbody></table>
+                                
+
+
+							</td>
+						</tr>
+					</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+			
+</td>
+</tr> `;
+
+export const ExchangeTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+			<tr>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">First Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Middle Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Last Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">DOB</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Confirmation</th>
+        	<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Price</th>
+				
+			</tr>
+		</thead>`;
