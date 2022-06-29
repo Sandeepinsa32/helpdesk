@@ -26,7 +26,7 @@ const SeatFields = ({inputList, setInputList, data}) => {
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
-		list[index][name] = value;
+		list[index][name] = value.toUpperCase();
 		setInputList(list);
 	};
 
@@ -116,6 +116,9 @@ const SeatFields = ({inputList, setInputList, data}) => {
 												name='price'
 												label='Price'
 												size='small'
+												InputProps={{
+													startAdornment: <InputAdornment position='start'>{selectedCurrency}</InputAdornment>,
+												}}
 												fullWidth
 												onChange={(e) => {
 													handleInputChange(e, i);

@@ -26,7 +26,7 @@ const PetFields = ({inputList, setInputList, data}) => {
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
-		list[index][name] = value;
+		list[index][name] = value.toUpperCase();
 		setInputList(list);
 	};
 
@@ -131,6 +131,9 @@ const PetFields = ({inputList, setInputList, data}) => {
 												label='Price'
 												fullWidth
 												size='small'
+												InputProps={{
+													startAdornment: <InputAdornment position='start'>{selectedCurrency}</InputAdornment>,
+												}}
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}

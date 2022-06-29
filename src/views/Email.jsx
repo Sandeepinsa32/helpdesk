@@ -17,58 +17,58 @@ const Email = ({Ticketid, userData, onClose}) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [newBookingFieldList, setNewBookingFieldList] = useState([
 		{
-			firstName: 'john',
-			middleName: 'D',
-			lastName: 'doe',
-			ticket: '2.72136E+11',
+			firstName: '',
+			middleName: '',
+			lastName: '',
+			ticket: '',
 			dob: '',
-			confirmation: 'KFQHMW',
-			price: '200',
+			confirmation: '',
+			price: '',
 		},
 	]);
 	const [exchangeFieldList, setExchangeFieldList] = useState([
 		{
-			firstName: 'john',
-			middleName: 'D',
-			lastName: 'doe',
-			dob: '2.72136E+11',
-			confirmation: '200',
-			price: '200',
+			firstName: '',
+			middleName: '',
+			lastName: '',
+			dob: '',
+			confirmation: '',
+			price: '',
 		},
 	]);
 	const [refundFieldList, setRefundFieldList] = useState([
 		{
-			fullname: 'john',
-			airline: 'D',
-			refund: 'doe',
-			validTill: '2',
-			feeIssued: '2',
+			fullname: '',
+			airline: '',
+			refund: '',
+			validTill: '',
+			feeIssued: '',
 		},
 	]);
 	const [futureCreditFieldList, setFutureCreditFieldList] = useState([
 		{
-			fullname: 'john',
-			airline: 'D',
-			credit: 'doe',
-			validTill: '2.72136',
-			feeIssued: '2.72136',
+			fullname: '',
+			airline: '',
+			credit: '',
+			validTill: '',
+			feeIssued: '',
 		},
 	]);
 	const [petFieldList, setPetFieldList] = useState([
 		{
-			pet: 'pet',
-			cabin: 'cabin',
-			weight: 'weight',
-			age: 'age',
-			price: 'price',
+			pet: '',
+			cabin: '',
+			weight: '',
+			age: '',
+			price: '',
 		},
 	]);
 	const [seatFieldList, setSeatFieldList] = useState([
 		{
-			fullname: 'fullname',
-			airline: 'airline',
-			credit: 'credit',
-			price: 'price',
+			fullname: '',
+			airline: '',
+			credit: '',
+			price: '',
 		},
 	]);
 
@@ -172,9 +172,8 @@ const Email = ({Ticketid, userData, onClose}) => {
 										<MenuItem value='exchange'>Exchange</MenuItem>
 										<MenuItem value='refund'>Refund</MenuItem>
 										<MenuItem value='futureCredit'>Future Credit</MenuItem>
-										<MenuItem value='pet'>Pet Email</MenuItem>
-										<MenuItem value='seat'>Seat Email</MenuItem>
-										{/* <MenuItem value='5'>Add On </MenuItem> */}
+										{/* <MenuItem value='pet'>Pet Email</MenuItem>
+										<MenuItem value='seat'>Seat Email</MenuItem> */}
 									</Select>
 								</FormControl>
 							</Grid>

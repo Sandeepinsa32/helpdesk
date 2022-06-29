@@ -177,7 +177,9 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
 		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.refund}</td>
  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >
+			 ${' '} ${selectedCurrency}${x.feeIssued && x.feeIssued + '.00'}
+ </td>
 		</tr>`;
 		});
 
@@ -199,7 +201,9 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
 		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${' '} ${selectedCurrency}${
+					x.feeIssued && x.feeIssued + '.00'
+				}</td>
 		</tr>`;
 		});
 
@@ -221,7 +225,9 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.cabin}</td>
 		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.weight}</td>
  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.age}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.price}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >
+ ${' '} ${selectedCurrency}${x.price && x.price + '.00'}
+ </td>
 		</tr>`;
 		});
 
@@ -242,7 +248,7 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fullname}</td>
 		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
 		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.price}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" > ${' '} ${selectedCurrency}${x.price && x.price + '.00'}</td>
 		</tr>`;
 		});
 

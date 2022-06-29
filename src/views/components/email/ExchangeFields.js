@@ -40,7 +40,7 @@ const Exchange = ({inputList, setInputList, data}) => {
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
 		const list = [...inputList];
-		list[index][name] = value;
+		list[index][name] = value.toUpperCase();
 		setInputList(list);
 	};
 

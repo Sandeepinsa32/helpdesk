@@ -22,20 +22,6 @@ import {lightGreen} from '@mui/material/colors';
 
 const NewBooking = ({inputList, setInputList, data}) => {
 	const {selectedCurrency} = data;
-	// const [totalAmt, setTotalAmt] = useState(0);
-
-	// const calculateTotalAmount = () => {
-	// 	let Amount = [];
-	// 	inputList.map((x, i) => {
-	// 		Amount.push(inputList[i].price);
-	// 	});
-
-	// 	var total = 0;
-	// 	for (var i in Amount) {
-	// 		total += Number(Amount[i]);
-	// 	}
-	// 	setTotalAmt(total);
-	// };
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
@@ -196,7 +182,6 @@ const NewBooking = ({inputList, setInputList, data}) => {
 												}}
 												onChange={(e) => {
 													handleInputChange(e, i);
-													// calculateTotalAmount();
 												}}
 												value={inputList[i].price}
 											/>
