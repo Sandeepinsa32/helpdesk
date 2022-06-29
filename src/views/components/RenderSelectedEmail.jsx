@@ -21,6 +21,16 @@ import {
 	ExchangeWelcomeHeader,
 	ExchangeTableHeading,
 	IAgreeQuote,
+	refundHeading,
+	refundWelcomeHeader,
+	futureCreditHeading,
+	futureCreditHeader,
+	futureCreditTableHeading,
+	petHeading,
+	petHeader,
+	seatHeading,
+	petTableHeading,
+	seatTableHeading,
 } from './email/EmailComponent';
 const RenderSelectedEmail = ({data, values, setLoader}) => {
 	const {
@@ -58,6 +68,10 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 				return <span dangerouslySetInnerHTML={{__html: Refund}} />;
 			case 'futureCredit':
 				return <span dangerouslySetInnerHTML={{__html: futureCredit}} />;
+			case 'pet':
+				return <span dangerouslySetInnerHTML={{__html: pet}} />;
+			case 'seat':
+				return <span dangerouslySetInnerHTML={{__html: seat}} />;
 			default:
 				return <span dangerouslySetInnerHTML={{__html: newBooking}} />;
 		}
@@ -73,6 +87,10 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 				return Refund;
 			case 'futureCredit':
 				return futureCredit;
+			case 'pet':
+				return pet;
+			case 'seat':
+				return seat;
 			default:
 				return newBooking;
 		}
@@ -151,10 +169,54 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			tableString =
 				tableString +
 				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
-	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
-		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
-		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.refund}</td>
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
+		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.refund}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
+		</tr>`;
+		});
+
+		return tableString;
+	}
+	function petFiledValues() {
+		var tableString = '';
+		futureCreditFieldList.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+
+			if (isEmpty) {
+				return;
+			}
+
+			tableString =
+				tableString +
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
+		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
+		</tr>`;
+		});
+
+		return tableString;
+	}
+	function seatFiledValues() {
+		var tableString = '';
+		futureCreditFieldList.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+
+			if (isEmpty) {
+				return;
+			}
+
+			tableString =
+				tableString +
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
+		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
 		</tr>`;
 		});
 
@@ -172,15 +234,17 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			tableString =
 				tableString +
 				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
-	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.firstName}</td>
-		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.middleName}</td>
-		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.lastName}</td>
-		  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" > ${x.confirmation}</td>
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
+		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
 		</tr>`;
 		});
 
 		return tableString;
 	}
+
 	const handleSendEmail = async () => {
 		setLoader(true);
 		axios
@@ -393,6 +457,9 @@ margin: 20px 0px; ">
 <!--    ./  I Agree Quote    -->
 ${IAgreeQuote}
 
+<!--    ./  auth btn  -->
+${EmailAuthBtn}
+
 
 <!--    ./ card details    -->
         ${CardDetail}
@@ -410,8 +477,16 @@ ${IAgreeQuote}
 
 	var Refund = `<!-- ./ Static EMail OPen Tag   -->
 		${emailOpenTag}
+
+			  <!--  ./Booking code && date     -->
+	  ${BookingCode}
+
+	<!--  ./Refund Heading     -->
+${refundHeading}		
+
 <!-- ./ small header  -->
-		${EmailThanksHeader}
+		${refundWelcomeHeader}
+
 
 
 		 <tr>
@@ -432,6 +507,12 @@ margin: 20px 0px; ">
 </td></tr>
 
 
+
+
+<!--    ./  auth btn  -->
+${EmailAuthBtn}
+
+
 <!-- ./ Card Detial  -->
 ${CardDetail}
 
@@ -447,8 +528,16 @@ ${CardDetail}
 
 	var futureCredit = `<!-- ./ Static EMail OPen Tag   -->
 		${emailOpenTag}
+
+			  <!--  ./Booking code && date     -->
+	  ${BookingCode}
+
+	<!--  ./future crdit Heading     -->
+${futureCreditHeading}		
+
 <!-- ./ small header  -->
-		${EmailThanksHeader}
+		${futureCreditHeader}
+
 
 
 		 <tr>
@@ -459,7 +548,7 @@ max-width: 600px;
 margin: 20px 0px; ">
 <table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
 		
-			${newFutureCreditTableHeading}
+			${futureCreditTableHeading}
   <tbody id='appendCHildHere' >
     
 
@@ -467,6 +556,10 @@ margin: 20px 0px; ">
   </tbody>
 </table>
 </td></tr>
+
+
+<!--    ./  auth btn  -->
+${EmailAuthBtn}
 
 
 <!-- ./ Card Detial  -->
@@ -481,6 +574,106 @@ ${CardDetail}
  <!-- ./ Static EMailCLose Tag   -->
  		${emailCloseTag}
 `;
+	var pet = `<!-- ./ Static EMail OPen Tag   -->
+		${emailOpenTag}
+
+			  <!--  ./Booking code && date     -->
+	  ${BookingCode}
+			  <!--  ./Booking code && date     -->
+	  ${petHeading}
+			  <!--  ./Booking code && date     -->
+	  ${petHeader}
+
+	  <!--   ./ input field custom table     -->
+<tr>
+<td>
+<div class="scrollable-table" style="overflow-x: auto;
+font-family: 'Roboto', sans-serif;;
+max-width: 600px;
+margin: 20px 0px; ">
+<table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+		${petTableHeading}
+<tbody id="appendCHildHere" style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+
+    ${petFiledValues()}
+    
+    </tbody>
+</table>
+</div>
+    ${BaggageFeeQuote}
+</td>
+</tr> 
+   
+   
+
+	  
+<!--    ./  auth btn  -->
+${EmailAuthBtn}
+
+<!-- ./ Card Detial  -->
+${CardDetail}
+
+<!-- ./		Note & charges part  -->
+		${EmailNoteNCharge}
+<!--  ./Term & conditions  -->
+		${TermNCondition}
+<!--  ./footer   -->
+		${EmailFooter}
+ <!-- ./ Static EMailCLose Tag   -->
+ 		${emailCloseTag}
+
+`;
+
+	var seat = `<!-- ./ Static EMail OPen Tag   -->
+		${emailOpenTag}
+
+			  <!--  ./Booking code && date     -->
+	  ${BookingCode}
+			  <!--  ./Booking code && date     -->
+	  ${seatHeading}
+			  <!--  ./Booking code && date     -->
+	  ${petHeader}
+
+	  <!--   ./ input field custom table     -->
+<tr>
+<td>
+<div class="scrollable-table" style="overflow-x: auto;
+font-family: 'Roboto', sans-serif;;
+max-width: 600px;
+margin: 20px 0px; ">
+<table class="tableoutter-fields-Data-Table" style="border-collapse: collapse;margin: 0;padding: 0;width: 100%;table-layout: fixed;">
+		${seatTableHeading}
+<tbody id="appendCHildHere" style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+
+    ${seatFiledValues()}
+    
+    </tbody>
+</table>
+</div>
+    ${BaggageFeeQuote}
+</td>
+</tr> 
+   
+   
+
+	  
+<!--    ./  auth btn  -->
+${EmailAuthBtn}
+
+<!-- ./ Card Detial  -->
+${CardDetail}
+
+<!-- ./		Note & charges part  -->
+		${EmailNoteNCharge}
+<!--  ./Term & conditions  -->
+		${TermNCondition}
+<!--  ./footer   -->
+		${EmailFooter}
+ <!-- ./ Static EMailCLose Tag   -->
+ 		${emailCloseTag}
+
+`;
+
 	return (
 		<>
 			{renderingEmail()}

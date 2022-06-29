@@ -886,24 +886,6 @@ export const newBookingTableHeading = `	<thead style="font-size: 10px; line-heig
 			</tr>
 		</thead>`;
 
-export const refundTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
-			<tr>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">First Name</th>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Middle Name</th>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Last Name</th>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Refund</th>
-				
-			</tr>
-		</thead>`;
-export const newFutureCreditTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
-			<tr>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">First Name</th>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Middle Name</th>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Last Name</th>
-				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Confirmation</th>
-				
-			</tr>
-		</thead>`;
 export const BaggageFeeQuote = `<p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
    * Baggage Fee May Apply . Check with Airlines for the Most Updated Baggage Rule.
   </p> `;
@@ -982,6 +964,311 @@ export const ExchangeTableHeading = `	<thead style="font-size: 10px; line-height
 				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">DOB</th>
 				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Confirmation</th>
         	<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Price</th>
+				
+			</tr>
+		</thead>`;
+
+//  refund
+
+export const refundHeading = `<tr><td>       
+  
+  
+  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
+				<tbody>
+          <tr>
+					<td align="left">
+					
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;color:#000;text-decoration:none;float:left; ">Requested Service: 		Refund</span>
+      
+					</td>
+         
+				</tr>
+			</tbody></table>
+        
+        
+        </td></tr>`;
+
+export const refundWelcomeHeader = `<tr>
+   <td align="center" valign="top">
+
+			<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+				<tbody><tr>
+					<td align="center" style="padding-top:10px">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+						<tbody><tr>
+							<td bgcolor="#ffffff" align="center" style="border-radius:10px;padding:15px;border:2px solid #efefef;
+      background-size: cover;
+      background-image: linear-gradient(
+      rgba(239, 239, 239, 0.9),
+                                  
+      rgba(239, 239, 239, 0.7)
+    ),
+    url('https://i.ibb.co/H7jc6Q7/download.png');
+      background-position: 50% 59%;
+      background-repeat: no-repeat;
+      ">
+							<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+								<tbody><tr>
+									<td align="left" style="font-family: 'Roboto', sans-serif;font-size:14px;line-height:22px;color:#000000">
+								
+		  <p style="  margin:0px; font-family: 'Roboto', sans-serif;">
+       
+      Your refund is in process and will be submitted to the airlines to finalize. Once approved, you'll receive a refund from the airlines for the amount quoted below.<br/>
+If you need any additional assistance , please contact us at <b style=" color:#5171ec;"> +1 866-270-1413</b>  or email at  <a target="_blank" " href='mailto:info@triphelpdesk.com' style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#ff0052;text-decoration:none;" target="_blank"><b style=" color:#5171ec;">info@triphelpdesk.com</b> </a>
+      </p>
+                                       
+									</td>
+								</tr>
+							
+							</tbody></table>
+                                
+
+
+							</td>
+						</tr>
+					</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+			
+</td>
+</tr> `;
+
+export const refundTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+			<tr>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Full Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Airline</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Refund</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Valid Till</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Fee to issue Refund</th>
+				
+			</tr>
+		</thead>`;
+
+//  future credit
+
+export const futureCreditHeading = `<tr><td>       
+  
+  
+  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
+				<tbody>
+          <tr>
+					<td align="left">
+					
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;color:#000;text-decoration:none;float:left; ">Requested Service:  Cancellation of Airline Ticket For Credit</span>
+      
+					</td>
+         
+				</tr>
+			</tbody></table>
+        
+        
+        </td></tr>`;
+
+export const futureCreditHeader = `<tr>
+   <td align="center" valign="top">
+
+			<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+				<tbody><tr>
+					<td align="center" style="padding-top:10px">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+						<tbody><tr>
+							<td bgcolor="#ffffff" align="center" style="border-radius:10px;padding:15px;border:2px solid #efefef;
+      background-size: cover;
+      background-image: linear-gradient(
+      rgba(239, 239, 239, 0.9),
+                                  
+      rgba(239, 239, 239, 0.7)
+    ),
+    url('https://i.ibb.co/H7jc6Q7/download.png');
+      background-position: 50% 59%;
+      background-repeat: no-repeat;
+      ">
+							<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+								<tbody><tr>
+									<td align="left" style="font-family: 'Roboto', sans-serif;font-size:14px;line-height:22px;color:#000000">
+								
+		  <p style="  margin:0px; font-family: 'Roboto', sans-serif;">
+       
+      Your cancelation for future credit is in process and will be submitted to the airlines to finalize. Once completed, you'll have a credit with the airlines for the amount. (credit and rebooking fees are subject to the ailrine policy). You can contact us or the airlines directly when it's time to use your airline credit - Trip Help Desk is more than happy to help! 
+      <br/>
+If you need any assistance , please contact us at  <b style=" color:#5171ec;"> +1 866-270-1413</b>  or email at  <a target="_blank" " href='mailto:info@triphelpdesk.com' style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#ff0052;text-decoration:none;" target="_blank"><b style=" color:#5171ec;">info@triphelpdesk.com</b> </a>
+      </p>
+                                       
+									</td>
+								</tr>
+							
+							</tbody></table>
+                                
+
+
+							</td>
+						</tr>
+					</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+			
+</td>
+</tr> `;
+
+export const futureCreditTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+			<tr>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Full Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Airline</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Credit</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Valid Till</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Fee to issue Credit</th>
+				
+			</tr>
+		</thead>`;
+
+//pet
+
+export const petHeading = `<tr><td>       
+  
+  
+  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
+				<tbody>
+          <tr>
+					<td align="left">
+					
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;color:#000;text-decoration:none;float:left; ">Requested Service: 		PET</span>
+      
+					</td>
+         
+				</tr>
+			</tbody></table>
+        
+        
+        </td></tr>`;
+
+export const petHeader = `<tr>
+   <td align="center" valign="top">
+
+			<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+				<tbody><tr>
+					<td align="center" style="padding-top:10px">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+						<tbody><tr>
+							<td bgcolor="#ffffff" align="center" style="border-radius:10px;padding:15px;border:2px solid #efefef;
+      background-size: cover;
+      background-image: linear-gradient(
+      rgba(239, 239, 239, 0.9),
+                                  
+      rgba(239, 239, 239, 0.7)
+    ),
+    url('https://i.ibb.co/H7jc6Q7/download.png');
+      background-position: 50% 59%;
+      background-repeat: no-repeat;
+      ">
+							<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+								<tbody><tr>
+									<td align="left" style="font-family: 'Roboto', sans-serif;font-size:14px;line-height:22px;color:#000000">
+								
+		  <p style="  margin:0px; font-family: 'Roboto', sans-serif;">
+       
+    Thank you for choosing Triphelpdesk for your travel arrangements. We truly appreciate your business. <br/>
+If you need any additional assistance , please contact us at <b style=" color:#5171ec;"> +1 866-270-1413</b>  or email at  <a target="_blank" " href='mailto:info@triphelpdesk.com' style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#ff0052;text-decoration:none;" target="_blank"><b style=" color:#5171ec;">info@triphelpdesk.com</b> </a>
+      </p>
+                                       
+									</td>
+								</tr>
+							
+							</tbody></table>
+                                
+
+
+							</td>
+						</tr>
+					</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+			
+</td>
+</tr> `;
+
+export const petTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+			<tr>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">PET</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">CABIN / CARGO</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">WEIGHT</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">AGE</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">PRICE</th>
+				
+			</tr>
+		</thead>`;
+//seat
+
+export const seatHeading = `<tr><td>       
+  
+  
+  <table width="100%" align="center" cellpadding="6" cellspacing="0" border="0">
+				<tbody>
+          <tr>
+					<td align="left">
+					
+            <span style="padding-bottom:0;padding-right:0;padding-left:0;font-family: 'Roboto', sans-serif;color:#000;font-size:16px;line-height:24px;color:#000;text-decoration:none;float:left; ">Requested Service: 		Refund</span>
+      
+					</td>
+         
+				</tr>
+			</tbody></table>
+        
+        
+        </td></tr>`;
+
+export const seatHeader = `<tr>
+   <td align="center" valign="top">
+
+			<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+				<tbody><tr>
+					<td align="center" style="padding-top:10px">
+					<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+						<tbody><tr>
+							<td bgcolor="#ffffff" align="center" style="border-radius:10px;padding:15px;border:2px solid #efefef;
+      background-size: cover;
+      background-image: linear-gradient(
+      rgba(239, 239, 239, 0.9),
+                                  
+      rgba(239, 239, 239, 0.7)
+    ),
+    url('https://i.ibb.co/H7jc6Q7/download.png');
+      background-position: 50% 59%;
+      background-repeat: no-repeat;
+      ">
+							<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+								<tbody><tr>
+									<td align="left" style="font-family: 'Roboto', sans-serif;font-size:14px;line-height:22px;color:#000000">
+								
+		  <p style="  margin:0px; font-family: 'Roboto', sans-serif;">    
+Your refund is in process and will be submitted to the airlines to finalize. Once approved, you'll receive a refund from the airlines for the amount quoted below.<br/>
+If you need any additional assistance , please contact us at<b style=" color:#5171ec;"> +1 866-270-1413</b>  or email at  <a target="_blank" " href='mailto:info@triphelpdesk.com' style="-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#ff0052;text-decoration:none;" target="_blank"><b style=" color:#5171ec;">info@triphelpdesk.com</b> </a>
+      </p>
+    </td>
+								</tr>
+							
+							</tbody></table>
+                                
+
+
+							</td>
+						</tr>
+					</tbody></table>
+					</td>
+				</tr>
+			</tbody></table>
+			
+</td>
+</tr> `;
+
+export const seatTableHeading = `	<thead style="font-size: 10px; line-height: 16px; letter-spacing: 0.05em; text-transform: uppercase; position: sticky; top: 0; z-index: 1; background: #f5f5f5; ">
+				<tr>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Full Name</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Airline</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Seats</th>
+				<th style="padding:10px 2px;box-sizing: border-box ;white-space: nowrap; ">Price</th>
 				
 			</tr>
 		</thead>`;

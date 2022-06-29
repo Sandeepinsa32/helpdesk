@@ -31,6 +31,10 @@ function RenderEmailField({data}) {
 				return <RefundFields inputList={refundFieldList} setInputList={setRefundFieldList} data={data} />;
 			case 'futureCredit':
 				return <FutureCreditFields inputList={futureCreditFieldList} setInputList={setFutureCreditFieldList} data={data} />;
+			case 'pet':
+				return <NewBookingFields inputList={newBookingFieldList} setInputList={setNewBookingFieldList} data={data} />;
+			case 'seat':
+				return <NewBookingFields inputList={newBookingFieldList} setInputList={setNewBookingFieldList} data={data} />;
 
 			default:
 				// throw new Error("Unknown step");
