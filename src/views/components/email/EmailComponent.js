@@ -27,7 +27,7 @@ export const emailOpenTag = ` <link rel="preconnect" href="https://fonts.googlea
 				cellpadding='0'
 				align='center'
 				class='responsive-table'
-				style='max-width:600px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse !important;'>
+				style='max-width:800px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse !important;'>
 				<tbody>
 					<tr>
 						<td align='left' class='wrapper-header-logo'>
@@ -831,7 +831,7 @@ export const EmailFooter = `<tr><td>
     background-position: 50% 70%;
 
   background-repeat: no-repeat;">
-               <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="responsive-table" style="max-width:600px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse !important;">
+               <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="responsive-table" style="max-width:800px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse !important;">
                 <tbody><tr>
                     <td align="center" class="wrapper-header-logo">
      <a target="_blank" " href=" https://triphelpdesk.com/" target="_blank" style="text-decoration:none;">

@@ -10,7 +10,7 @@ import Textfield from './components/FormField/Textfield';
 import {BASEURL, createQueryString, errorToast, successToast} from '../utils/Utils';
 
 const Email = ({Ticketid, userData, onClose}) => {
-	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState('pet');
+	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState('newBooking');
 	const [selectedCurrency, setSelectedCurrency] = useState('$');
 	const [pnrValue, setPnrValue] = useState('1 VS8020 M 15JAN 2 BOMLHR HK1 2 235A 700A 77W E0 R');
 	const [pnrData, setPnrData] = useState();
