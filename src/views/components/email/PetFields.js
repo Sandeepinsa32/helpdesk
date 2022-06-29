@@ -20,22 +20,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const Refund = ({inputList, setInputList, data}) => {
+const PetFields = ({inputList, setInputList, data}) => {
 	const {selectedCurrency} = data;
-	const [totalAmt, setTotalAmt] = useState(0);
-
-	const calculateTotalAmount = () => {
-		let Amount = [];
-		inputList.map((x, i) => {
-			Amount.push(inputList[i].price);
-		});
-
-		var total = 0;
-		for (var i in Amount) {
-			total += Number(Amount[i]);
-		}
-		setTotalAmt(total);
-	};
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
@@ -56,13 +42,12 @@ const Refund = ({inputList, setInputList, data}) => {
 		setInputList([
 			...inputList,
 			{
-				fullname: '',
-				airline: '',
-				refund: '',
-				validTill: '',
-				feeIssued: '',
+				pet: '',
+				cabin: '',
+				weight: '',
+				age: '',
+				price: '',
 			},
-			,
 		]);
 	};
 
@@ -73,7 +58,7 @@ const Refund = ({inputList, setInputList, data}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['Full Name', 'Airline', 'Refund', 'Valid Till', 'Fee'].map((th) => (
+								{['Pet', 'Cabin', 'Weight', 'Age', 'Price'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
@@ -90,68 +75,69 @@ const Refund = ({inputList, setInputList, data}) => {
 											<TextField
 												required
 												size='small'
-												name='fullname'
-												label='Full Name'
+												name='pet'
+												label='Pet'
 												fullWidth
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].fullname}
+												value={inputList[i].pet}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
 												size='small'
-												name='airline'
-												label='Airline'
+												name='cabin'
+												label='Cabin'
 												fullWidth
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].airline}
+												value={inputList[i].cabin}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
-												name='refund'
-												label='Refund'
+												name='weight'
+												label='Weight'
 												size='small'
 												fullWidth
-												autoComplete='refund'
+												autoComplete='weight'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].refund}
+												value={inputList[i].weight}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
-												name='validTill'
-												label='Valid Till'
+												name='age'
+												label='Age'
 												size='small'
 												fullWidth
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].validTill}
+												value={inputList[i].age}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
-												name='feeIssued'
-												label='Fee'
+												name='price'
+												label='Price'
 												fullWidth
 												size='small'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].feeIssued}
+												value={inputList[i].price}
 											/>
 										</TableCell>
+
 										{inputList.length !== 1 && (
 											<Grid container>
 												<Grid item xs={6} md={2}>
@@ -175,7 +161,7 @@ const Refund = ({inputList, setInputList, data}) => {
 					</Grid>
 				)}
 				{/* Total Amount */}
-				<Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
+				{/* <Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
 					<TextField
 						disabled
 						size='small'
@@ -188,13 +174,13 @@ const Refund = ({inputList, setInputList, data}) => {
 						}}
 						value={totalAmt}
 					/>
-				</Grid>
+				</Grid> */}
 			</Grid>
 		</>
 	);
 };
 
-export default Refund;
+export default PetFields;
 
 const style = {
 	position: 'absolute',

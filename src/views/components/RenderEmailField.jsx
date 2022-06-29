@@ -5,6 +5,8 @@ import NewBookingFields from './email/NewBookingFields';
 import ExchangeFields from './email/ExchangeFields';
 import FutureCreditFields from './email/FutureCreditFields';
 import RefundFields from './email/RefundFields';
+import PetFields from './email/PetFields';
+import SeatFields from './email/SeatFields';
 
 function RenderEmailField({data}) {
 	// de-str props
@@ -18,6 +20,10 @@ function RenderEmailField({data}) {
 		setRefundFieldList,
 		futureCreditFieldList,
 		setFutureCreditFieldList,
+		petFieldList,
+		setPetFieldList,
+		seatFieldList,
+		setSeatFieldList,
 		selectedCurrency,
 	} = data;
 
@@ -32,9 +38,9 @@ function RenderEmailField({data}) {
 			case 'futureCredit':
 				return <FutureCreditFields inputList={futureCreditFieldList} setInputList={setFutureCreditFieldList} data={data} />;
 			case 'pet':
-				return <NewBookingFields inputList={newBookingFieldList} setInputList={setNewBookingFieldList} data={data} />;
+				return <PetFields inputList={petFieldList} setInputList={setPetFieldList} data={data} />;
 			case 'seat':
-				return <NewBookingFields inputList={newBookingFieldList} setInputList={setNewBookingFieldList} data={data} />;
+				return <SeatFields inputList={seatFieldList} setInputList={setSeatFieldList} data={data} />;
 
 			default:
 				// throw new Error("Unknown step");

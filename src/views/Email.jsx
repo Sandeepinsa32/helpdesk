@@ -31,24 +31,44 @@ const Email = ({Ticketid, userData, onClose}) => {
 			firstName: 'john',
 			middleName: 'D',
 			lastName: 'doe',
-			ticket: '2.72136E+11',
+			dob: '2.72136E+11',
+			confirmation: '200',
 			price: '200',
 		},
 	]);
 	const [refundFieldList, setRefundFieldList] = useState([
 		{
-			firstName: 'john',
-			middleName: 'D',
-			lastName: 'doe',
-			refund: '2',
+			fullname: 'john',
+			airline: 'D',
+			refund: 'doe',
+			validTill: '2',
+			feeIssued: '2',
 		},
 	]);
 	const [futureCreditFieldList, setFutureCreditFieldList] = useState([
 		{
-			firstName: 'john',
-			middleName: 'D',
-			lastName: 'doe',
-			confirmation: '2.72136',
+			fullname: 'john',
+			airline: 'D',
+			credit: 'doe',
+			validTill: '2.72136',
+			feeIssued: '2.72136',
+		},
+	]);
+	const [petFieldList, setPetFieldList] = useState([
+		{
+			pet: 'pet',
+			cabin: 'cabin',
+			weight: 'weight',
+			age: 'age',
+			price: 'price',
+		},
+	]);
+	const [seatFieldList, setSeatFieldList] = useState([
+		{
+			fullname: 'fullname',
+			airline: 'airline',
+			credit: 'credit',
+			price: 'price',
 		},
 	]);
 
@@ -113,6 +133,10 @@ const Email = ({Ticketid, userData, onClose}) => {
 		userData,
 		formik,
 		selectedCurrency,
+		petFieldList,
+		setPetFieldList,
+		seatFieldList,
+		setSeatFieldList,
 	};
 
 	return (

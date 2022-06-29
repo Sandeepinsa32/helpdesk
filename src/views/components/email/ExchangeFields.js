@@ -59,12 +59,11 @@ const Exchange = ({inputList, setInputList, data}) => {
 				firstName: '',
 				middleName: '',
 				lastName: '',
-				ticket: '',
+				dob: '',
+				confirmation: '',
 				price: '',
 			},
 		]);
-		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
-		// calculateTotalAmount();
 	};
 
 	return (
@@ -74,7 +73,7 @@ const Exchange = ({inputList, setInputList, data}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['First Name', 'Middle Name', 'last Name', 'Ticket', 'Price', 'Action'].map((th) => (
+								{['First Name', 'Middle Name', 'last Name', 'Date of Birth', 'Confirmation', 'Price', 'Action'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
@@ -132,15 +131,27 @@ const Exchange = ({inputList, setInputList, data}) => {
 										<TableCell>
 											<TextField
 												required
-												name='ticket'
-												label='Ticket'
+												name='dob'
+												label='DOB'
 												fullWidth
 												size='small'
-												autoComplete='ticket'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].ticket}
+												value={inputList[i].dob}
+											/>
+										</TableCell>
+										<TableCell>
+											<TextField
+												required
+												name='confirmation'
+												label='Confirmation'
+												fullWidth
+												size='small'
+												onChange={(e) => {
+													handleInputChange(e, i);
+												}}
+												value={inputList[i].confirmation}
 											/>
 										</TableCell>
 

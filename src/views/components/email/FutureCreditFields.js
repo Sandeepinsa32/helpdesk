@@ -22,20 +22,6 @@ import {lightGreen} from '@mui/material/colors';
 
 const FutureCredit = ({inputList, setInputList, data}) => {
 	const {selectedCurrency} = data;
-	// const [totalAmt, setTotalAmt] = useState(0);
-
-	// const calculateTotalAmount = () => {
-	// 	let Amount = [];
-	// 	inputList.map((x, i) => {
-	// 		Amount.push(inputList[i].price);
-	// 	});
-
-	// 	var total = 0;
-	// 	for (var i in Amount) {
-	// 		total += Number(Amount[i]);
-	// 	}
-	// 	setTotalAmt(total);
-	// };
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
@@ -56,14 +42,13 @@ const FutureCredit = ({inputList, setInputList, data}) => {
 		setInputList([
 			...inputList,
 			{
-				firstName: '',
-				middleName: '',
-				lastName: '',
-				confirmation: '',
+				fullname: '',
+				airline: '',
+				credit: '',
+				validTill: '',
+				feeIssued: '',
 			},
 		]);
-		// setInputList([...inputList, {firstName: 'john', middleName: 'D', lastName: 'doe', ticket: '2.72136E+11', confirmation: 'KFQHMW', price: '200'}]);
-		// calculateTotalAmount();
 	};
 
 	return (
@@ -73,7 +58,7 @@ const FutureCredit = ({inputList, setInputList, data}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['First Name', 'Middle Name', 'last Name', 'Confirmation', 'Action'].map((th) => (
+								{['Full Name', 'Airline', 'Credit', 'Valid Till', 'Fee'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
@@ -90,55 +75,66 @@ const FutureCredit = ({inputList, setInputList, data}) => {
 											<TextField
 												required
 												size='small'
-												name='firstName'
-												label='First Name'
+												name='fullname'
+												label='Full Name'
 												fullWidth
-												autoComplete='firstName'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].firstName}
+												value={inputList[i].fullname}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
 												size='small'
-												name='middleName'
-												label='Middle Name'
+												name='airline'
+												label='Airline'
 												fullWidth
-												autoComplete='middleName'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].middleName}
+												value={inputList[i].airline}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
-												name='lastName'
-												label='Last Name'
+												name='credit'
+												label='Credit'
 												size='small'
 												fullWidth
-												autoComplete='lastName'
+												autoComplete='credit'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].lastName}
+												value={inputList[i].credit}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
-												name='confirmation'
-												label='Confirmation'
+												name='validTill'
+												label='Valid Till'
+												size='small'
+												fullWidth
+												onChange={(e) => {
+													handleInputChange(e, i);
+												}}
+												value={inputList[i].validTill}
+											/>
+										</TableCell>
+										<TableCell>
+											<TextField
+												required
+												name='feeIssued'
+												label='Fee'
 												fullWidth
 												size='small'
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].ticket}
+												value={inputList[i].feeIssued}
 											/>
 										</TableCell>
 

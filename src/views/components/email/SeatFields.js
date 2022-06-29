@@ -20,22 +20,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {lightGreen} from '@mui/material/colors';
 
-const Refund = ({inputList, setInputList, data}) => {
+const SeatFields = ({inputList, setInputList, data}) => {
 	const {selectedCurrency} = data;
-	const [totalAmt, setTotalAmt] = useState(0);
-
-	const calculateTotalAmount = () => {
-		let Amount = [];
-		inputList.map((x, i) => {
-			Amount.push(inputList[i].price);
-		});
-
-		var total = 0;
-		for (var i in Amount) {
-			total += Number(Amount[i]);
-		}
-		setTotalAmt(total);
-	};
 
 	const handleInputChange = (e, index) => {
 		const {name, value} = e.target;
@@ -58,11 +44,9 @@ const Refund = ({inputList, setInputList, data}) => {
 			{
 				fullname: '',
 				airline: '',
-				refund: '',
-				validTill: '',
-				feeIssued: '',
+				credit: '',
+				price: '',
 			},
-			,
 		]);
 	};
 
@@ -73,7 +57,7 @@ const Refund = ({inputList, setInputList, data}) => {
 					<Table sx={{minWidth: 650}} aria-label='simple table'>
 						<TableHead>
 							<TableRow>
-								{['Full Name', 'Airline', 'Refund', 'Valid Till', 'Fee'].map((th) => (
+								{['Fullname', 'Airline', 'Credit', 'Price'].map((th) => (
 									<TableCell key={th}>{th}</TableCell>
 								))}
 							</TableRow>
@@ -112,46 +96,34 @@ const Refund = ({inputList, setInputList, data}) => {
 												value={inputList[i].airline}
 											/>
 										</TableCell>
+
 										<TableCell>
 											<TextField
 												required
-												name='refund'
-												label='Refund'
-												size='small'
-												fullWidth
-												autoComplete='refund'
-												onChange={(e) => {
-													handleInputChange(e, i);
-												}}
-												value={inputList[i].refund}
-											/>
-										</TableCell>
-										<TableCell>
-											<TextField
-												required
-												name='validTill'
-												label='Valid Till'
+												name='credit'
+												label='Credit'
 												size='small'
 												fullWidth
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].validTill}
+												value={inputList[i].credit}
 											/>
 										</TableCell>
 										<TableCell>
 											<TextField
 												required
-												name='feeIssued'
-												label='Fee'
-												fullWidth
+												name='price'
+												label='Price'
 												size='small'
+												fullWidth
 												onChange={(e) => {
 													handleInputChange(e, i);
 												}}
-												value={inputList[i].feeIssued}
+												value={inputList[i].price}
 											/>
 										</TableCell>
+
 										{inputList.length !== 1 && (
 											<Grid container>
 												<Grid item xs={6} md={2}>
@@ -175,7 +147,7 @@ const Refund = ({inputList, setInputList, data}) => {
 					</Grid>
 				)}
 				{/* Total Amount */}
-				<Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
+				{/* <Grid item xs={6} md={12} sx={{pr: 1, my: 3}}>
 					<TextField
 						disabled
 						size='small'
@@ -188,13 +160,13 @@ const Refund = ({inputList, setInputList, data}) => {
 						}}
 						value={totalAmt}
 					/>
-				</Grid>
+				</Grid> */}
 			</Grid>
 		</>
 	);
 };
 
-export default Refund;
+export default SeatFields;
 
 const style = {
 	position: 'absolute',

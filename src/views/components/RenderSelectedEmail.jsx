@@ -47,6 +47,10 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		setRefundFieldList,
 		futureCreditFieldList,
 		setFutureCreditFieldList,
+		petFieldList,
+		setPetFieldList,
+		seatFieldList,
+		setSeatFieldList,
 		userData,
 		formik,
 		selectedCurrency,
@@ -169,54 +173,11 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			tableString =
 				tableString +
 				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
-	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fullname}</td>
 		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
 		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.refund}</td>
  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
-		</tr>`;
-		});
-
-		return tableString;
-	}
-	function petFiledValues() {
-		var tableString = '';
-		futureCreditFieldList.forEach((x) => {
-			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
-
-			if (isEmpty) {
-				return;
-			}
-
-			tableString =
-				tableString +
-				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
-	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
-		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
-		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
-		</tr>`;
-		});
-
-		return tableString;
-	}
-	function seatFiledValues() {
-		var tableString = '';
-		futureCreditFieldList.forEach((x) => {
-			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
-
-			if (isEmpty) {
-				return;
-			}
-
-			tableString =
-				tableString +
-				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
-	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
-		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
-		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
- <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
 		</tr>`;
 		});
 
@@ -234,11 +195,54 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 			tableString =
 				tableString +
 				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
-	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fulname}</td>
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fullname}</td>
 		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
 		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.validTill}</td>
  <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.feeIssued}</td>
+		</tr>`;
+		});
+
+		return tableString;
+	}
+	function petFiledValues() {
+		var tableString = '';
+		petFieldList.forEach((x) => {
+			console.log(x);
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+
+			if (isEmpty) {
+				return;
+			}
+			tableString =
+				tableString +
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.pet}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.cabin}</td>
+		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.weight}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.age}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.price}</td>
+		</tr>`;
+		});
+
+		return tableString;
+	}
+	function seatFiledValues() {
+		var tableString = '';
+		seatFieldList.forEach((x) => {
+			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
+
+			if (isEmpty) {
+				return;
+			}
+
+			tableString =
+				tableString +
+				`<tr style="background-color: #f8f8f8;padding: 0.35em;text-align:left;border: 1px solid #fff !important;">
+	   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.fullname}</td>
+		   <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.airline}</td>
+		 <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.credit}</td>
+ <td style=" padding:10px 4px;box-sizing: border-box;font-size:10px;color:#0B4173;font-weight:400;" class="tableHeading" scope="col" >${x.price}</td>
 		</tr>`;
 		});
 
