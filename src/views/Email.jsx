@@ -225,7 +225,11 @@ const Email = ({Ticketid, userData, onClose}) => {
 									error={Boolean(formik.touched.name && formik.errors.name)}
 									helperText={formik.touched.name && formik.errors.name}
 									onBlur={formik.handleBlur}
-									onChange={formik.handleChange}
+									// onChange={formik.handleChange}
+									onChange={(e) => {
+										const value = e.target.value || '';
+										formik.setFieldValue('name', value.toUpperCase());
+									}}
 								/>
 							</Grid>
 							<Grid item md={3} sx={{mt: 2}}>
@@ -237,6 +241,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 									helperText={formik.touched.email && formik.errors.email}
 									onBlur={formik.handleBlur}
 									onChange={formik.handleChange}
+
 									// disabled={true}
 								/>
 							</Grid>
