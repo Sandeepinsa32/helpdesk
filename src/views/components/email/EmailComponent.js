@@ -149,7 +149,7 @@ export const EmailAuthBtn = `<tr>
                   background-color: transparent;
                   background-image: linear-gradient(140deg, #1882E5 0%, #01BDFE 100%);
                   border-radius: 50px 50px 50px 50px;    	
-                  padding: 10px 30px; font-family: 'Roboto', sans-serif;" href="http://localhost:3000/auth/validateToken" target="_blank">
+                  padding: 10px 30px; font-family: 'Roboto', sans-serif;" href="http://thdworkbook.com/auth/validateToken" target="_blank">
         
                
                Authorize

@@ -6,7 +6,7 @@ import ReactToPrint from 'react-to-print';
 function AuthDetail({Ticketid, TicketData, onClose}) {
 	const {authorizedIps, firstName, lastName, email, bookingId} = TicketData;
 	const componentRef = React.useRef();
-	console.log(TicketData);
+	console.log(TicketData, Ticketid);
 	const [isLoading, setIsLoading] = useState(false);
 
 	var EmailHeader = () => {

@@ -542,7 +542,7 @@ export const Transaction = () => {
 						<Divider />
 
 						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
-							<AuthDetail Ticketid={viewEmail} TicketData={selectedTicket} onClose={() => setAirlineModelOpen(false)} />
+							<AuthDetail Ticketid={viewEmail} TicketData={selectedTicket} onClose={() => setAuthorizeDetailModelOpen(false)} />
 						</CardContent>
 					</Card>
 				</Box>

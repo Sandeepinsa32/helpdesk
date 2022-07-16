@@ -35,6 +35,7 @@ import {
 import UpdateRecord from './components/UpdateRecord';
 import ViewLog from './components/ViewLog';
 import Email from './Email';
+import AuthDetail from './components/modal/AuthDetail';
 
 //icon
 import CloseIcon from '@mui/icons-material/Close';
@@ -43,6 +44,7 @@ import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
 import EditIcon from '@mui/icons-material/Edit';
 import ForwardToInboxIcon from '@mui/icons-material/ForwardToInbox';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import PlaylistAddCheckCircleIcon from '@mui/icons-material/PlaylistAddCheckCircle';
 
 export default function SearchRecord() {
 	//fetch state & pagination
@@ -66,6 +68,8 @@ export default function SearchRecord() {
 	const [openEmailModal, setOpenEmailModal] = useState(false);
 	const [viewEmail, setViewEmail] = useState(false);
 	const [openLogModal, setOpenLogModal] = useState(false);
+
+	const [authorizeDetailModelOpen, setAuthorizeDetailModelOpen] = useState(false);
 	//Handler's
 
 	const handleChange = (event, value) => {
@@ -321,6 +325,19 @@ export default function SearchRecord() {
 															<ReceiptLongIcon />
 														</IconButton>
 													</Tooltip>
+
+													{row.status === 'authorized' && localStorage.getItem('role') == 'admin' && (
+														<Tooltip title='Authorize Detail'>
+															<IconButton
+																aria-label='Authorize Detail'
+																onClick={() => {
+																	setUserData(row);
+																	setAuthorizeDetailModelOpen(true);
+																}}>
+																<PlaylistAddCheckCircleIcon />
+															</IconButton>
+														</Tooltip>
+													)}
 												</TableCell>
 											</TableRow>
 										))
@@ -449,6 +466,26 @@ export default function SearchRecord() {
 					</Card>
 				</Box>
 			</Modal>
+			{/* Open Authorize Detail Modal */}
+			<Modal open={authorizeDetailModelOpen} onClose={() => setAuthorizeDetailModelOpen(false)} size='xs' aria-labelledby='modal-modal-title' aria-describedby='modal-modal-description'>
+				<Box sx={BoxModalStyle} style={{paddingTop: 0}}>
+					<Card sx={{p: 0, m: 0}}>
+						<CardHeader
+							title='Authorize Detail'
+							action={
+								<IconButton onClick={() => setAuthorizeDetailModelOpen(false)}>
+									<CloseIcon />
+								</IconButton>
+							}
+						/>
+						<Divider />
+
+						<CardContent sx={{minHeight: '80vh', maxHeight: '85vh', overflowX: ' auto'}}>
+							<AuthDetail Ticketid={viewEmail} TicketData={userData} onClose={() => setAuthorizeDetailModelOpen(false)} />
+						</CardContent>
+					</Card>
+				</Box>
+			</Modal>
 		</>
 	);
 }
@@ -468,4 +505,20 @@ const style = {
 	boxShadow: 24,
 	borderRadius: '1rem',
 	p: 4,
+};
+
+const BoxModalStyle = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	minWidth: '70vw',
+	width: 'auto',
+	height: 'auto',
+	maxWidth: '80vw',
+	maxHeight: '90vh !important',
+	bgcolor: 'background.paper',
+	boxShadow: 24,
+	borderRadius: '1rem',
+	pt: 2,
 };

@@ -318,7 +318,7 @@ const AddNewRecord = ({isView, data}) => {
 					.nullable()
 					.required('required'),
 				expiryDate: Yup.date('please Enter valid Date').min(yesterday, 'Date cannot be in the past').nullable().required(' required').default(undefined),
-				billingAddress: Yup.string().nullable(),
+				billingAddress: Yup.string().nullable().required('card number is required'),
 			})
 		),
 		// .min(1, 'card is >= 1'),
