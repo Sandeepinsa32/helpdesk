@@ -2,9 +2,10 @@ import React, {useState, useEffect, useRef} from 'react';
 import {Typography, CardMedia, Box, CircularProgress, Card, CardContent, CardActions, Button, TableContainer, Table, TableHead, TableRow, TableCell, TableBody} from '@mui/material';
 import BG from '../../../assets/PDFBG.png';
 import ReactToPrint from 'react-to-print';
+import {array} from 'yup';
 
 function AuthDetail({Ticketid, TicketData, onClose}) {
-	const {authorizedIps, firstName, lastName, email, bookingId} = TicketData;
+	const {authorizedIps, firstName, lastName, email, bookingId, comments} = TicketData;
 	const componentRef = React.useRef();
 	console.log(TicketData, Ticketid);
 	const [isLoading, setIsLoading] = useState(false);
@@ -35,6 +36,32 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
 		);
 	};
 
+	// comments.forEach(function (value) {
+	// 	const componentRef = React.useRef();
+	// });
+
+	//  searching : agent
+	// const loadAgents = async (search) => {
+	// 	setIsLoading(true);
+	// 	axios
+	// 		.get(BASEURL + `/agent/all${search}`)
+	// 		.then((response) => {
+	// 			setAgentsList(response.data.data.agents);
+	// 			setTotalRecords(response.data.data.total);
+
+	// 			if (search === '?page=1') setPreviousData(response.data.data);
+	// 			setTimeout(() => {
+	// 				setIsLoading(false);
+	// 			}, 500);
+	// 		})
+	// 		.catch((e) => {
+	// 			console.log(e);
+	// 			setIsLoading(false);
+
+	// 			errorToast(e.response.data.message);
+	// 		});
+	// };
+
 	var EmailFooter = `   <footer>
       <div style="text-align: center">
         <span style="font-size: 18px;font-weight: bold"><a href="" style="color: #0B4173;">TripHelpDesk</a>
@@ -61,107 +88,111 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
 					<CircularProgress size={30} />
 				</Box>
 			) : (
-				<Card
-					ref={componentRef}
-					style={{
-						backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.6)),url(${BG})`,
-						backgroundPosition: 'bottom',
-						backgroundSize: 'cover',
-						minHeight: '500px',
-					}}>
-					<EmailHeader />
-					<hr />
-					<Box sx={{display: 'flex', flexDirection: 'row', px: 6}}>
-						<CardContent sx={{width: '90%', margin: 'auto', padding: '4rem 0'}}>
-							<div
+				<Box ref={componentRef}>
+					{comments.map((row, index) => (
+						<Card sx={{marginBottom: '20px'}}>
+							<Box
 								style={{
-									alignItems: 'center',
-									display: 'flex',
-									justifyContent: 'center',
+									backgroundImage: `linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.6)),url(${BG})`,
+									backgroundPosition: 'bottom',
+									backgroundSize: 'cover',
+									minHeight: '500px',
 								}}>
-								<Typography variant='body1' color='text.secondary' display='inline'>
-									Customer Name: &nbsp;
-								</Typography>
-								<Typography variant='subtitle1'>{`${firstName} ${lastName}`}</Typography>
-							</div>
-							<div
-								style={{
-									alignItems: 'center',
-									display: 'flex',
-									justifyContent: 'center',
-								}}>
-								<Typography variant='body1' color='text.secondary' display='inline'>
-									Email: &nbsp;
-								</Typography>
-								<Typography variant='subtitle1'>{email}</Typography>
-							</div>{' '}
-							<div
-								style={{
-									alignItems: 'center',
-									display: 'flex',
-									justifyContent: 'center',
-								}}>
-								<Typography variant='body1' color='text.secondary' display='inline'>
-									Ticket Id: &nbsp;
-								</Typography>
-								<Typography variant='subtitle1'>{bookingId}</Typography>
-							</div>{' '}
-							<div
-								style={{
-									alignItems: 'center',
-									display: 'flex',
-									justifyContent: 'center',
-								}}>
-								<Typography variant='body1' color='text.secondary' display='inline'>
-									Card Number: &nbsp;
-								</Typography>
-								<Typography variant='subtitle1'>XXXX4579</Typography>
-							</div>
-							<div style={{marginTop: '10px'}}>
-								<TableContainer
-								//  component={Paper}
-								>
-									<Table aria-label='simple table' size='small'>
-										<TableHead>
-											<TableRow>
-												<TableCell align='left'>S.No</TableCell>
-												<TableCell align='left'>Email</TableCell>
-												<TableCell align='left'>IP Address</TableCell>
-												<TableCell align='left'>Timestamp</TableCell>
-											</TableRow>
-										</TableHead>
-										<TableBody>
-											{authorizedIps.map((data, index) => (
-												<TableRow key={data.name}>
-													<TableCell align='left'>{index + 1}</TableCell>
-													<TableCell align='left'>{data.email}</TableCell>
-													<TableCell align='left'>{data.ipAddress ? data.ipAddress : 'Response Awaited'}</TableCell>
-													<TableCell align='left'>{data.timestamp}</TableCell>
-												</TableRow>
-											))}
-										</TableBody>
-									</Table>
-								</TableContainer>
-							</div>
-						</CardContent>
-					</Box>
-					<hr />
+								<EmailHeader />
+								<hr />
+								<Box sx={{display: 'flex', flexDirection: 'row', px: 6}}>
+									<CardContent sx={{width: '90%', margin: 'auto', padding: '4rem 0'}} ref={componentRef}>
+										<div
+											style={{
+												alignItems: 'center',
+												display: 'flex',
+												justifyContent: 'center',
+											}}>
+											<Typography variant='body1' color='text.secondary' display='inline'>
+												Customer Name: &nbsp;
+											</Typography>
+											<Typography variant='subtitle1'>{`${firstName} ${lastName}`}</Typography>
+										</div>
+										<div
+											style={{
+												alignItems: 'center',
+												display: 'flex',
+												justifyContent: 'center',
+											}}>
+											<Typography variant='body1' color='text.secondary' display='inline'>
+												Email: &nbsp;
+											</Typography>
+											<Typography variant='subtitle1'>{email}</Typography>
+										</div>{' '}
+										<div
+											style={{
+												alignItems: 'center',
+												display: 'flex',
+												justifyContent: 'center',
+											}}>
+											<Typography variant='body1' color='text.secondary' display='inline'>
+												Ticket Id: &nbsp;
+											</Typography>
+											<Typography variant='subtitle1'>{bookingId}</Typography>
+										</div>{' '}
+										<div
+											style={{
+												alignItems: 'center',
+												display: 'flex',
+												justifyContent: 'center',
+											}}>
+											<Typography variant='body1' color='text.secondary' display='inline'>
+												Card Number: &nbsp;
+											</Typography>
+											<Typography variant='subtitle1'>XXXX4579</Typography>
+										</div>
+										<div style={{marginTop: '10px'}}>
+											<TableContainer
+											//  component={Paper}
+											>
+												<Table aria-label='simple table' size='small'>
+													<TableHead>
+														<TableRow>
+															<TableCell align='left'>S.No</TableCell>
+															<TableCell align='left'>Email</TableCell>
+															<TableCell align='left'>IP Address</TableCell>
+															<TableCell align='left'>Timestamp</TableCell>
+														</TableRow>
+													</TableHead>
+													<TableBody>
+														{authorizedIps.map((data, index) => (
+															<TableRow key={data.name}>
+																<TableCell align='left'>{index + 1}</TableCell>
+																<TableCell align='left'>{data.email}</TableCell>
+																<TableCell align='left'>{data.ipAddress ? data.ipAddress : 'Response Awaited'}</TableCell>
+																<TableCell align='left'>{data.timestamp}</TableCell>
+															</TableRow>
+														))}
+													</TableBody>
+												</Table>
+											</TableContainer>
+										</div>
+									</CardContent>
+								</Box>
+								<hr />
 
-					<CardMedia sx={{my: 2}} children={<span dangerouslySetInnerHTML={{__html: EmailFooter}} />} />
-				</Card>
+								<CardMedia sx={{my: 2}} children={<span dangerouslySetInnerHTML={{__html: EmailFooter}} />} />
+							</Box>
+						</Card>
+					))}
+					<CardActions sx={{display: 'flex', justifyContent: 'end', padding: '20px  '}}>
+						<ReactToPrint
+							pageStyle=' { size: 8in 8in }'
+							trigger={() => (
+								<Button sx={{textTransform: 'capitalize'}} variant='contained'>
+									Download Pdf
+								</Button>
+							)}
+							content={() => componentRef.current}
+						/>
+					</CardActions>
+				</Box>
 			)}
-
-			<CardActions>
-				<ReactToPrint
-					pageStyle=' { size: 8in 8in }'
-					trigger={() => (
-						<Button sx={{textTransform: 'capitalize'}} variant='contained'>
-							Download Pdf
-						</Button>
-					)}
-					content={() => componentRef.current}
-				/>
-			</CardActions>
 		</>
 	);
 }

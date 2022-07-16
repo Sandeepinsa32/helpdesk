@@ -306,6 +306,6 @@ const items = [
 	{
 		href: '/all',
 		icon: <SearchIcon fontSize='small' />,
-		title: 'All Transaction',
+		title: 'All Records',
 	},
 ];

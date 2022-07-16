@@ -164,7 +164,7 @@ export default function SearchRecord() {
 				}}>
 				<Container maxWidth={false} sx={{p: `0 !important`}}>
 					<Typography sx={{m: 1}} variant='h6'>
-						All Transaction
+						All Records
 					</Typography>
 
 					{/* Start : Search Component */}
