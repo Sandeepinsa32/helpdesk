@@ -91,7 +91,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 				}
 			)
 			.then((response) => {
-				console.log(response.data.flightData.flights);
+				// console.log(response.data.flightData.flights);
 				setPnrData(response.data.flightData.flights);
 			})
 			.catch((e) => {
@@ -114,7 +114,7 @@ const Email = ({Ticketid, userData, onClose}) => {
 			totalAmount: Yup.number('input must consist if number'),
 		}),
 		onSubmit: () => {
-			console.log(formik.values);
+			// console.log(formik.values);
 		},
 	});
 	const data = {

@@ -68,7 +68,7 @@ function ChargeTransaction() {
 		axios
 			.get(BASEURL + '/charge/all' + search)
 			.then((response) => {
-				console.log(response.data.data);
+				// console.log(response.data.data);
 				if (search === '?page=1') {
 					setOldTotalRecords(response.data.data.totalRecords);
 					setAllRecords(response.data.data.requests);

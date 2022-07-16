@@ -12,7 +12,7 @@ import ModeEditOutlinedIcon from '@mui/icons-material/ModeEditOutlined';
 
 const ViewLog = ({id}) => {
 	id = id._id;
-	console.log(id);
+	// console.log(id);
 
 	const [isLoading, setIsLoading] = useState(true);
 	const [ticketLogs, setTicketLogs] = useState([]);

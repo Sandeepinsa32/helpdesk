@@ -66,15 +66,15 @@ function RequestCharge() {
 				initialValues={{...INITIAL_FORM_STATE}}
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
-					console.log('formik submitted', values);
-					console.log(CreateEmailHTML(values));
+					// console.log('formik submitted', values);
+					// console.log(CreateEmailHTML(values));
 
 					axios
 						.post(BASEURL + `/ticket/confirmation`, {
 							data: CreateEmailHTML(values),
 						})
 						.then((res) => {
-							console.log(res.data);
+							// console.log(res.data);
 							successToast('Email sent successfully!');
 						})
 						.catch((e) => {
@@ -84,7 +84,9 @@ function RequestCharge() {
 				}}>
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
-					console.log(errors);
+					{
+						/* console.log(errors); */
+					}
 					return (
 						<Card>
 							<CardHeader title='AIRLINE CALLING' />

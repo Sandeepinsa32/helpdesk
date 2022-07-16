@@ -334,7 +334,7 @@ const AddNewRecord = ({isView, data}) => {
 				initialValues={{...INITIAL_FORM_STATE}}
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
-					console.log(values, inputList);
+					// console.log(values, inputList);
 					axios
 						.post(BASEURL + '/ticket/raise', {
 							data: values,
@@ -350,7 +350,9 @@ const AddNewRecord = ({isView, data}) => {
 				{(props) => {
 					const {errors, setFieldValue, touched, handleBlur, handleChange, values, submitCount, handleSubmit} = props;
 
-					console.log(errors);
+					{
+						/* console.log(errors); */
+					}
 					// console.log('props', props); // formik object --containg values, err, etc....
 					//	console.log(errors);
 

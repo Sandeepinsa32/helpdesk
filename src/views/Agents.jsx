@@ -337,7 +337,7 @@ export const AddUser = () => {
 							if (employeeAlias !== oldEmployeeAlias) updateValues.employeeAlias = employeeAlias;
 							if (status !== oldStatus) updateValues.status = status;
 
-							console.log('update record', updateValues);
+							// console.log('update record', updateValues);
 
 							axios
 								.put(BASEURL + '/agent/reset', updateValues)
@@ -401,7 +401,6 @@ export const AddUser = () => {
 												<Grid item md={6} xs={6}>
 													<Textfield label='Confirm Password' type='password' name='confirmPassword' />
 												</Grid>
-												{console.log(values.status)}
 												<Grid item xs={12} sm={6} md={6}>
 													<FormControl fullWidth>
 														<InputLabel id='status-label'>STATUS</InputLabel>

@@ -130,7 +130,7 @@ function UpdateRequestCharge({formData, onClose}) {
 				initialValues={{...INITIAL_FORM_STATE}}
 				validationSchema={FORM_VALIDATION}
 				onSubmit={(values) => {
-					console.log('formik submitted', values, bookingId);
+					// console.log('formik submitted', values, bookingId);
 					setIsLoading(true);
 					axios
 						.put(BASEURL + `/ticket/payment/${bookingId}`, {

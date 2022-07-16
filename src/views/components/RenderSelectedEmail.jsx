@@ -55,7 +55,7 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 		formik,
 		selectedCurrency,
 	} = data;
-	console.log(userData);
+	// console.log(userData);
 	const {email, name, ccLastDigit, totalAmount} = values;
 	const {submitForm} = formik;
 
@@ -212,7 +212,7 @@ const RenderSelectedEmail = ({data, values, setLoader}) => {
 	function petFiledValues() {
 		var tableString = '';
 		petFieldList.forEach((x) => {
-			console.log(x);
+			// console.log(x);
 			const isEmpty = Object.values(x).every((obj) => obj === null || obj === '');
 
 			if (isEmpty) {

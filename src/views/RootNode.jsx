@@ -109,7 +109,7 @@ export default function RootNode() {
 	const [modalopen, setModalopen] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(() => {
 		const role = localStorage.getItem('role');
-		console.log('check log');
+		// console.log('check log');
 		return role === 'admin' ? true : false;
 	});
 
