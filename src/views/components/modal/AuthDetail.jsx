@@ -94,7 +94,7 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
 					{chargeRequests == null || chargeRequests.length == 0 ? (
 						<Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 							<Typography variant='h4' gutterBottom component='div'>
-								No Charge request found
+								No Request found
 							</Typography>
 						</Box>
 					) : (
@@ -127,7 +127,7 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
 													</Typography>
 													<Typography variant='subtitle1'>{`${firstName} ${lastName}`}</Typography>
 												</div>
-												<div
+												{/* <div
 													style={{
 														alignItems: 'center',
 														display: 'flex',
@@ -137,7 +137,7 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
 														Amount: &nbsp;
 													</Typography>
 													<Typography variant='subtitle1'>$ {amount}</Typography>
-												</div>
+												</div> */}
 												<div
 													style={{
 														alignItems: 'center',
