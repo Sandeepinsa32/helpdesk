@@ -326,7 +326,7 @@ export default function SearchRecord() {
 														</IconButton>
 													</Tooltip>
 
-													{row.status === 'authorized' && localStorage.getItem('role') == 'admin' && (
+													{localStorage.getItem('role') == 'admin' && (
 														<Tooltip title='Authorize Detail'>
 															<IconButton
 																aria-label='Authorize Detail'

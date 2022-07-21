@@ -54,8 +54,8 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
 				setIsLoading(false);
 			})
 			.catch((e) => {
-				console.log(e);
-				errorToast(e.response.data.message);
+				console.log(e.response);
+				// errorToast(e.response.data.message);
 				setIsLoading(false);
 			});
 	};
@@ -77,6 +77,13 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
                 Valalto Inc.</a>, All Rights Reserved.
             </p>
       </footer>`;
+
+	const getEstTime = (date) => {
+		var reqDate = new Date(date);
+		var reqDate = reqDate.getTime();
+
+		return new Date(reqDate + -300 * 60 * 1000).toLocaleDateString;
+	};
 	return (
 		<>
 			{isLoading ? (
@@ -190,7 +197,14 @@ function AuthDetail({Ticketid, TicketData, onClose}) {
 																		<TableCell align='left'>{index + 1}</TableCell>
 																		<TableCell align='left'>{data.email}</TableCell>
 																		<TableCell align='left'>{data.ipAddress ? data.ipAddress : 'Response Awaited'}</TableCell>
-																		<TableCell align='left'>{data.timestamp}</TableCell>
+																		<TableCell align='left'>
+																			{console.log(' indian  ', new Date(data.timestamp).toLocaleString())}
+																			{console.log(new Date(data.timestamp).toLocaleString('en-US', {timeZone: 'America/New_York'}))}
+
+																			{/* {new Date(new Date(data.timestamp).getTime() + -300 * 60 * 1000).toString()} */}
+
+																			{new Date(data.timestamp).toLocaleString('en-US', {timeZone: 'America/New_York'})}
+																		</TableCell>
 																	</TableRow>
 																))}
 															</TableBody>
