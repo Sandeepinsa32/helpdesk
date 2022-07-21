@@ -32,6 +32,7 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 
 function UpdateRequestCharge({formData, onClose}) {
 	const {_id, cardHolderName, cardHolderNumber, remarks, cardNumber, cvv, expiryDate, amount, address, description, markup, email, phone, bookingId} = formData;
+	console.log('formData', formData);
 
 	const [cardDetail, setCardDetail] = useState();
 	const [selectedCard, setSelectedCard] = useState();

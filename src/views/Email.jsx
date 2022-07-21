@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import RenderEmailField from './components/RenderEmailField';
 import Textfield from './components/FormField/Textfield';
 
-import {BASEURL, createQueryString, errorToast, successToast} from '../utils/Utils';
+import {BASEURL, createQueryString, errorToast, successToast, publicAppkey, privateAppKey, pnrUrl} from '../utils/Utils';
 
 const Email = ({Ticketid, userData, onClose}) => {
 	const [selectedEmailTemplate, setSelectedEmailTemplate] = useState('newBooking');
@@ -78,15 +78,15 @@ const Email = ({Ticketid, userData, onClose}) => {
 		e.preventDefault();
 		axios
 			.post(
-				`https://api.pnrconverter.com/api`,
+				pnrUrl,
 				{
 					pnr: pnrValue,
 				},
 				{
 					headers: {
 						ContentType: 'application/x-www-form-urlencoded',
-						PUBLIC_APP_KEY: 'c73d43e41af0b1489a5d4f011937a1b63060f2babd0e78ad8d3b952d3847c350',
-						PRIVATE_APP_KEY: '6GkMehxBBgUEeMY72blU9hiymI5YEre2lYR',
+						PUBLIC_APP_KEY: publicAppkey,
+						PRIVATE_APP_KEY: privateAppKey,
 					},
 				}
 			)

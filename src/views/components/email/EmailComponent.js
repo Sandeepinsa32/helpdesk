@@ -168,18 +168,17 @@ export const IAgreeQuote = `<tr>
              
 
 
-                  <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+        <table width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
 				<tbody><tr>
 					<td align="center">
-         <p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
-   * Please reply here with "I AGREE" to authorize the booking of the itineraries below and issuance of tickets for all passengers attached to each flight, the charge to your below mentioned card (may be seen in several separate charges), and to accept our terms and conditions found below. 
-   </p> 
+                <p style="  color: #0B4173;font-size: 12px;margin: 0px; font-weight: 600;font-family: 'Roboto', sans-serif;padding: 0;text-align:center;">
+        * Please reply here with "I AGREE" to authorize the booking of the itineraries below and issuance of tickets for all passengers attached to each flight, the charge to your below mentioned card (may be seen in several separate charges), and to accept our terms and conditions found below. 
+        </p> 
 					
 					</td>
-				</tr>
-			</tbody></table>
+				</tr></tbody></table>
      
-                  </div>
+      
         </td></tr>`;
 
 export const EmailNoteNCharge = `<tr><td>

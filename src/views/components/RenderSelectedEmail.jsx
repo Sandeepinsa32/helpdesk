@@ -464,8 +464,7 @@ margin: 20px 0px; ">
 </tr>
 		
 
-<!--    ./  I Agree Quote    -->
-${IAgreeQuote}
+
 
 <!--    ./  auth btn  -->
 ${EmailAuthBtn}
